@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>imfde.ai — 面向 FDE 的开源共创平台</title>
+<meta name="description" content="企业抛出真实需求，FDE 认领组队、开源协作交付，收益按贡献分配，全过程公开可验证。">
+<style>
+  :root{
+    --bg:#fafaf9; --surface:#ffffff; --text:#18181b; --muted:#71717a;
+    --border:#e4e4e7; --accent:#4f46e5; --accent-dark:#4338ca; --accent-soft:#eef2ff;
+    --green:#16a34a; --green-soft:#f0fdf4; --amber:#d97706; --amber-soft:#fffbeb;
+    --blue:#2563eb; --blue-soft:#eff6ff; --purple:#9333ea; --purple-soft:#faf5ff;
+    --gray:#57534e; --gray-soft:#f5f5f4; --radius:12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{font-weight:700;font-size:17px;display:flex;align-items:center;gap:8px}
+  .logo-mark{width:26px;height:26px;border-radius:7px;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  .logo em{font-style:normal;color:var(--accent)}
+  .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+  .nav-links a:hover{color:var(--text)}
+  .btn{display:inline-flex;align-items:center;gap:6px;border-radius:9px;padding:8px 16px;font-size:14px;font-weight:500;cursor:pointer;border:1px solid transparent;transition:background .15s ease,border-color .15s ease}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-dark)}
+  .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-sm{padding:6px 12px;font-size:13px}
+
+  /* hero */
+  .hero{padding:76px 0 56px;text-align:center;background:linear-gradient(180deg,#f4f4fd 0%,var(--bg) 100%)}
+  .hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:500;padding:5px 14px;border-radius:99px;margin-bottom:22px}
+  .hero h1{font-size:42px;line-height:1.25;font-weight:700;letter-spacing:-.5px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p{max-width:640px;margin:18px auto 30px;color:var(--muted);font-size:17px}
+  .hero-cta{display:flex;gap:12px;justify-content:center}
+  .btn-lg{padding:11px 24px;font-size:15px}
+  .hero-stats{display:flex;justify-content:center;gap:56px;margin-top:52px}
+  .stat b{display:block;font-size:24px;font-weight:700}
+  .stat span{font-size:13px;color:var(--muted)}
+
+  /* sections */
+  section{padding:64px 0}
+  .sec-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:26px}
+  .sec-head h2{font-size:24px;font-weight:700}
+  .sec-head .sub{color:var(--muted);font-size:14px;margin-top:4px}
+  .sec-head a.more{color:var(--accent);font-size:14px;font-weight:500}
+
+  /* filter tabs */
+  .tabs{display:flex;gap:8px;margin-bottom:20px}
+  .tab{padding:6px 16px;border-radius:99px;border:1px solid var(--border);background:var(--surface);font-size:13px;color:var(--muted);cursor:pointer}
+  .tab.active{background:var(--text);color:#fff;border-color:var(--text)}
+
+  /* demand cards */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color .15s ease,transform .15s ease}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card-top{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px}
+  .chip{font-size:12px;font-weight:500;padding:3px 10px;border-radius:99px}
+  .chip-open{background:var(--green-soft);color:var(--green)}
+  .chip-claiming{background:var(--amber-soft);color:var(--amber)}
+  .chip-teamed{background:var(--blue-soft);color:var(--blue)}
+  .chip-building{background:var(--purple-soft);color:var(--purple)}
+  .chip-done{background:var(--gray-soft);color:var(--gray)}
+  .card h3{font-size:16px;font-weight:600;margin-bottom:8px}
+  .card .desc{color:var(--muted);font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .card-meta{display:flex;gap:16px;margin-top:14px;font-size:13px;color:var(--muted);align-items:center;flex-wrap:wrap}
+  .budget{color:var(--accent);font-weight:600}
+  .ind{background:var(--gray-soft);padding:2px 9px;border-radius:6px;font-size:12px}
+
+  /* timeline inside project card */
+  .stage{display:flex;gap:0;margin-top:16px}
+  .step{flex:1;text-align:center;position:relative;font-size:12px;color:var(--muted)}
+  .step::before{content:"";position:absolute;top:6px;left:0;right:0;height:2px;background:var(--border)}
+  .step:first-child::before{left:50%}
+  .step:last-child::before{right:50%}
+  .step.done::before{background:var(--accent)}
+  .step i{display:block;width:14px;height:14px;border-radius:50%;background:var(--border);border:2px solid var(--surface);margin:0 auto 5px;position:relative;z-index:1}
+  .step.done i{background:var(--accent)}
+  .step.cur{color:var(--accent);font-weight:600}
+
+  /* payout banner */
+  .payout{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:18px;flex-wrap:wrap}
+  .payout .amt{font-size:22px;font-weight:700;color:var(--accent)}
+  .payout .note{font-size:13px;color:var(--muted)}
+  .pay-list{display:flex;gap:14px;flex-wrap:wrap;font-size:13px}
+  .pay-item{background:var(--accent-soft);color:var(--accent-dark);padding:5px 12px;border-radius:8px}
+
+  /* mechanism */
+  .mech{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .mech .card h3{font-size:15px}
+  .mech .num{width:34px;height:34px;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px}
+
+  /* archive */
+  .archive .card{border-left:3px solid var(--border)}
+  .lesson{margin-top:12px;background:var(--gray-soft);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--gray)}
+  .lesson b{display:block;margin-bottom:4px}
+
+  /* cta */
+  .cta-band{background:var(--text);border-radius:16px;color:#fff;padding:48px 40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .cta-band h2{font-size:24px;font-weight:700;margin-bottom:8px}
+  .cta-band p{color:#a1a1aa;font-size:14px}
+  .cta-band .btn-ghost{border-color:#3f3f46;color:#fff}
+  .cta-band .btn-ghost:hover{border-color:#fff;color:#fff}
+
+  /* footer */
+  footer{border-top:1px solid var(--border);padding:36px 0;margin-top:40px;color:var(--muted);font-size:13px}
+  .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px}
+  .foot a{color:var(--muted)}
+  .foot a:hover{color:var(--text)}
+
+  .empty-tip{grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:20px 0}
+</style>
+</head>
+<body>
+
+<!-- 导航 -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#"><span class="logo-mark">iF</span>imfde<em>.ai</em></a>
+    <nav class="nav-links">
+      <a href="#demands">企业需求池</a>
+      <a href="#projects">进行中交付</a>
+      <a href="#cases">明星案例</a>
+      <a href="#archive">归档复盘</a>
+      <a href="#mech">平台机制</a>
+    </nav>
+    <div style="display:flex;gap:10px">
+      <a class="btn btn-ghost btn-sm" href="#" title="MVP 期通过需求说明页联系我们">提交企业需求</a>
+      <a class="btn btn-primary btn-sm" href="https://github.com/">GitHub 登录</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="wrap">
+    <span class="hero-tag">面向 FDE 的开源共创平台 · 内测中</span>
+    <h1>真实企业需求 · 开源协作交付<br>让 FDE 在场景中<em>练级、交付、赚钱</em></h1>
+    <p>企业把脱敏后的真实业务需求放进需求池，FDE 认领需求、组队共创、开源交付；收益按贡献分配，全过程数据公开可验证。</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary btn-lg" href="#demands">浏览需求池</a>
+      <a class="btn btn-ghost btn-lg" href="#mech">了解平台机制</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>4</b><span>需求池在挂需求</span></div>
+      <div class="stat"><b>2</b><span>进行中交付项目</span></div>
+      <div class="stat"><b>¥18,600</b><span>已公示分账收益</span></div>
+      <div class="stat"><b>100%</b><span>交付过程公开</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 企业需求池 -->
+<section id="demands">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>企业需求池</h2>
+        <div class="sub">真实业务需求已脱敏发布 · 预算区间公开 · 认领即锁定协议与分账</div>
+      </div>
+      <a class="more" href="#">如何提交企业需求 →</a>
+    </div>
+    <div class="tabs" id="demandTabs">
+      <button class="tab active" data-f="all">全部</button>
+      <button class="tab" data-f="open">待认领</button>
+      <button class="tab" data-f="claiming">认领中</button>
+      <button class="tab" data-f="teamed">已组队</button>
+    </div>
+    <div class="grid" id="demandGrid">
+
+      <div class="card" data-s="open">
+        <div class="card-top"><span class="chip chip-open">待认领</span><span class="ind">离散制造</span></div>
+        <h3>设备巡检 AI 报告工具（私有化部署）</h3>
+        <p class="desc">工厂巡检员用手机记录设备状态，系统自动生成结构化巡检报告与异常预警，需对接现有 MES 系统，支持离线使用。</p>
+        <div class="card-meta"><span class="budget">¥30,000 – 50,000</span><span>交付周期 4 周</span><span>3 人报名方案中</span></div>
+      </div>
+
+      <div class="card" data-s="claiming">
+        <div class="card-top"><span class="chip chip-claiming">认领中</span><span class="ind">跨境电商</span></div>
+        <h3>多平台库存同步看板</h3>
+        <p class="desc">聚合 Amazon / Shopee / TikTok Shop 库存数据，超卖预警与自动调拨建议，需支持多店铺多仓库视图。</p>
+        <div class="card-meta"><span class="budget">¥20,000 – 35,000</span><span>交付周期 3 周</span><span>2 个方案投票中</span></div>
+      </div>
+
+      <div class="card" data-s="open">
+        <div class="card-top"><span class="chip chip-open">待认领</span><span class="ind">法律服务</span></div>
+        <h3>律所合同审查助手（数据不出域）</h3>
+        <p class="desc">基于本地化大模型做合同风险条款初筛与批注，所有数据留在律所内网，需提供审计日志与权限体系。</p>
+        <div class="card-meta"><span class="budget">¥50,000 – 80,000</span><span>交付周期 6 周</span><span>1 人报名方案中</span></div>
+      </div>
+
+      <div class="card" data-s="teamed">
+        <div class="card-top"><span class="chip chip-teamed">已组队</span><span class="ind">连锁零售</span></div>
+        <h3>连锁门店巡店小程序</h3>
+        <p class="desc">督导按 checklist 巡店拍照打分，总部看板汇总整改闭环，已组队 4 人（FDE ×1、前端 ×1、后端 ×2）。</p>
+        <div class="card-meta"><span class="budget">¥15,000 – 25,000</span><span>交付周期 3 周</span><span>已进入开发</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 进行中交付 -->
+<section id="projects" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>进行中交付</h2>
+        <div class="sub">每个项目的孵化进度、贡献记录全程公开</div>
+      </div>
+      <a class="more" href="#">全部项目 →</a>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-top"><span class="chip chip-building">开发中</span><span class="ind">连锁零售</span></div>
+        <h3>连锁门店巡店小程序</h3>
+        <p class="desc">需求源自华南某连锁茶饮品牌。内核将开源为通用 checklist 巡检引擎，场景定制部分商业授权。</p>
+        <div class="stage">
+          <div class="step done"><i></i>需求认领</div>
+          <div class="step done"><i></i>组队</div>
+          <div class="step cur"><i></i>开发中</div>
+          <div class="step"><i></i>交付验收</div>
+          <div class="step"><i></i>分账公示</div>
+        </div>
+        <div class="card-meta"><span>贡献者 4 人</span><span>PR 12</span><span>协议 Apache-2.0</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><span class="chip chip-claiming">方案投票中</span><span class="ind">跨境电商</span></div>
+        <h3>多平台库存同步看板</h3>
+        <p class="desc">两个 FDE 方案竞标中，社区投票决定采纳方案。落选方案的开源部分将并入内核仓库。</p>
+        <div class="stage">
+          <div class="step done"><i></i>需求认领</div>
+          <div class="step cur"><i></i>组队</div>
+          <div class="step"><i></i>开发中</div>
+          <div class="step"><i></i>交付验收</div>
+          <div class="step"><i></i>分账公示</div>
+        </div>
+        <div class="card-meta"><span>方案 2 份</span><span>投票 23 票</span><span>协议 MIT</span></div>
+      </div>
+
+    </div>
+
+    <!-- 分账公示 -->
+    <div class="payout">
+      <div>
+        <div class="amt">¥18,600 · 已公示</div>
+        <div class="note">明星案例「ERP 数据迁移工具包」企业回款，按立项分账表完成分配（2026-08）</div>
+      </div>
+      <div class="pay-list">
+        <span class="pay-item">FDE 主理人 40%</span>
+        <span class="pay-item">开发 2 人 35%</span>
+        <span class="pay-item">测试/文档 15%</span>
+        <span class="pay-item">平台撮合 10%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 明星案例 -->
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>明星案例</h2>
+        <div class="sub">通过企业验收与市场验证的交付，内核全部开源</div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-top"><span class="chip chip-done">已交付 · 验证通过</span><span class="ind">企业服务</span></div>
+        <h3>ERP 数据迁移工具包</h3>
+        <p class="desc">为某制造企业完成 12 年历史数据迁移，通用引擎开源后已被 3 个项目复用，二次交付成本降低 60%。</p>
+        <div class="card-meta"><span class="budget">回款 ¥20,667</span><span>贡献者 5 人</span><span>GitHub ★ 128</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="chip chip-done">已交付 · 持续观察</span><span class="ind">医疗信息化</span></div>
+        <h3>诊所预约与随访系统</h3>
+        <p class="desc">交付上线 30 天，UV 342、预约转化 21%。行业模板部分因合规要求仅展示不开源，通用内核开源。</p>
+        <div class="card-meta"><span class="budget">回款 ¥32,000</span><span>贡献者 3 人</span><span>观察期至 10-02</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 归档复盘 -->
+<section id="archive" class="archive" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>归档复盘</h2>
+        <div class="sub">失败与未验收项目公开归档——这是平台最有价值的部分</div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-top"><span class="chip chip-done">未通过验收 · 已归档</span><span class="ind">餐饮 SaaS</span></div>
+        <h3>智能点餐推荐模块</h3>
+        <p class="desc">企业中途调整验收标准，双方协议终止，按阶段交付退回 40% 款项并完成分账。</p>
+        <div class="lesson"><b>复盘三条</b>① 需求验收标准必须在认领时逐条量化锁定；② 甲方关键人变更风险要在方案中约定；③ 阶段验收比终验更保护双方。</div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="chip chip-done">验证未达标 · 已归档</span><span class="ind">教育</span></div>
+        <h3>AI 口语陪练 Demo</h3>
+        <p class="desc">上线 30 天 UV 89、次周留存 4%，未达验证基线。通用语音评测内核开源，被后续项目复用。</p>
+        <div class="lesson"><b>复盘三条</b>① B 端需求不能用 C 端增长指标验证；② 冷启动渠道应在开发期锁定；③ 交付≠有人用，验证基线要先谈好。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 平台机制 -->
+<section id="mech">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>平台机制</h2>
+        <div class="sub">写进规则、不可中途更改的四条底线</div>
+      </div>
+    </div>
+    <div class="mech">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>协议锁定</h3>
+        <p class="desc">立项时选定 MIT / Apache-2.0 / AGPL 并锁定，项目做火后不可改为闭源。</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>分账前置</h3>
+        <p class="desc">认领方案必须包含收益分配表，投票通过即生效，公开可查、回款即公示。</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>贡献全记账</h3>
+        <p class="desc">代码走 PR 自动同步，需求梳理 / 测试 / 文案 / 设计同样记账并参与分账。</p>
+      </div>
+      <div class="card">
+        <div class="num">04</div>
+        <h3>分层开源</h3>
+        <p class="desc">通用内核开源进档案库复用，场景定制层由企业付费——开源是成本结构，不是情怀。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>有真实需求？或者想成为 FDE？</h2>
+        <p>企业提交场景与预算，平台 48 小时内完成脱敏与上架；工程师用 GitHub 登录即可认领。</p>
+      </div>
+      <div style="display:flex;gap:12px">
+        <a class="btn btn-primary btn-lg" href="#">提交企业需求</a>
+        <a class="btn btn-ghost btn-lg" href="#">FDE 共创指南</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 imfde.ai · 面向 FDE 的开源共创平台（内测）</div>
+    <div style="display:flex;gap:22px">
+      <a href="#">关于</a>
+      <a href="#">FDE 共创指南</a>
+      <a href="#">开源协议说明</a>
+      <a href="#">企业需求提交说明</a>
+      <a href="https://github.com/">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 需求池状态筛选
+  const tabs=document.getElementById('demandTabs');
+  tabs.addEventListener('click',e=>{
+    const btn=e.target.closest('.tab'); if(!btn)return;
+    tabs.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.f;
+    document.querySelectorAll('#demandGrid .card').forEach(c=>{
+      c.style.display=(f==='all'||c.dataset.s===f)?'':'none';
+    });
+  });
+</script>
+</body>
+</html>
