@@ -1,0 +1,32 @@
+# .vercelignore —— 阻断私密与 Python 源码进入 Vercel 部署
+# 仓库源文件 .gitignore 已经处理；但 Vercel 部署时不读 .gitignore，需要独立配置。
+
+# 数据库（含 682 道题库答案，RECEIVING_AGENT 硬约束：答案不公开）
+portal/fde.db
+
+# Python 服务源码与中间产物
+portal/site/*.py
+portal/site/__pycache__/
+portal/*.py
+portal/*.sql
+portal/*.sh
+portal/*.md
+portal/*.txt
+
+# 中间数据 JSON（仅保留静态导出用的 cases.json）
+portal/companies.json
+portal/world_sources.json
+portal/source_dates.json
+portal/world_ingest_report.json
+portal/world_state.json
+portal/build_report.json
+portal/_*.json
+portal/_*.py
+portal/_*.txt
+
+# 必须保留的（保留白名单用 ! 反选虽然 .vercelignore 支持，但更稳妥是上列黑名单已排除一切非服务文件）
+
+# 让以下保留（默认行为已允许 .html/.css/.js/.json/.svg）
+# portal/案例.html / portal/世界动态.html / portal/落地.html / portal/现场.html / portal/方法.html / portal/world3d.html
+# portal/cases.json
+# portal/site/static/**
