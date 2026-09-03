@@ -1,6 +1,5 @@
 .workbuddy/
 portal/site/__pycache__/
 *.pyc
-# 唯一私密数据：题库答案库不入仓（fde.db 含 682 道题库答案，硬约束禁止公开）
+# 私密完整库（682 道题答案）不入仓；线上用剥离答案的 fde-public.db
 portal/fde.db
-# 静态导出 HTML 由 portal/build_static.py 生成，入库供 Vercel 部署

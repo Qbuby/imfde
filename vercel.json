@@ -1,18 +1,12 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "headers": [
+  "builds": [
     {
-      "source": "/portal/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
-      ]
+      "src": "api/portal.py",
+      "use": "@vercel/python"
     }
+  ],
+  "routes": [
+    { "src": "/portal/(.*)", "dest": "/api/portal/$1" },
+    { "src": "/api/portal/(.*)", "dest": "/api/portal/$1" }
   ]
 }

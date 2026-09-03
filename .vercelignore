@@ -1,27 +1,14 @@
-# .vercelignore —— Vercel 静态部署只上静态产物；
-# Python 服务源码与数据留仓（供 Vercel 之外的部署/本地运行），但不进 Vercel 包。
+# .vercelignore —— Vercel 部署包含完整 Python 服务 + 公开库 + 静态产物。
 
-# 数据库（含题库答案，禁止公开）
+# 私密完整库（含答案）绝不进 Vercel
 portal/fde.db
 
-# Python 服务与维护脚本（Vercel 静态部署用不到）
-portal/site/*.py
-portal/site/__pycache__/
-portal/*.py
-portal/*.sh
-
-# 数据与配置 JSON（站点运行不需要；cases.json 是静态导出的一部分保留）
-portal/companies.json
-portal/topics.json
-portal/index.json
-portal/source_dates.json
-portal/world_sources.json
-portal/world_ingest_report.json
-portal/world_state.json
-portal/*.sql
-portal/*.txt
-portal/*.md
+# 抓取与维护管线（服务运行不需要）
+portal/ingest_world.py
+portal/clean_pass.py
+portal/daily_world.sh
 portal/tables/
 
 # 中间产物
 portal/_*
+portal/*.csv

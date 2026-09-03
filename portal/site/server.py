@@ -36,7 +36,10 @@ IM_FDE_PORTAL_URL = (__import__("os").environ.get("IMFDE_PORTAL_URL") or "").str
 SITE_DIR = Path(__file__).resolve().parent
 PORTAL_DIR = SITE_DIR.parent
 AI_DIR = PORTAL_DIR.parent
+# 完整库（含题库答案）只在本地/私有部署存在；线上用剥离答案的公开库。
 DB_PATH = PORTAL_DIR / "fde.db"
+if not DB_PATH.is_file():
+    DB_PATH = PORTAL_DIR / "fde-public.db"
 STATIC_DIR = SITE_DIR / "static"
 CSS_PATH = STATIC_DIR / "home.css"
 SNAPSHOT_PATH = AI_DIR / "FDE门户.html"
