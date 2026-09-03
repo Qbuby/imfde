@@ -95,7 +95,82 @@ if any(t["t"].startswith("附录") for t in toc):
 else:
     toc = final
 
-# ---------- 4. 页面模板 ----------
+# ---------- 3.5 按章切块（分章阅读视图） ----------
+# 把正文按 lvl0(部) / lvl1(章) 切成块；每块一章（部标题并入其第一章块）。
+# 渲染后由前端做"一章一页"切换。
+CHUNK_RE = re.compile(
+    r'(<h1 id="s-\d+" class="part">.*?</h1>|<h2 id="s-\d+".*?</h2>)',
+    flags=re.S,
+)
+parts_split = CHUNK_RE.split(body)
+# parts_split: [前言块, 标题1, 块1, 标题2, 块2, ...]
+chunks: list = []
+if parts_split[0].strip():
+    chunks.append({"head": "", "body": parts_split[0], "toc": toc[:0]})
+i = 1
+while i < len(parts_split) - 1:
+    head, seg = parts_split[i], parts_split[i + 1]
+    m_id = re.search(r'id="(s-\d+)"', head)
+    hid = m_id.group(1) if m_id else ""
+    chunks.append({"head": head, "body": seg, "id": hid})
+    i += 2
+
+# 把 chunk 映射回 toc 项（章=lvl1 或 部=lvl0 的第一项）
+toc_index = {t["id"]: t for t in toc if t["id"]}
+for ch in chunks:
+    hid = ch.get("id", "")
+    item = toc_index.get(hid)
+    if item:
+        ch["title"] = item["t"]
+        ch["level"] = item["l"]
+        # 部标题块：把它后面直到下一 lvl1 的所有 lvl2 小节也归入这个块的目录范围
+        ch["toc_item"] = item
+    else:
+        ch["title"] = "前言"
+        ch["level"] = 1
+        ch["toc_item"] = None
+
+# 前言块（文档标题+开场前的内容）没有 id——查 toc 中第一个有 id 前的内容
+if chunks and "id" not in chunks[0]:
+    chunks[0]["title"] = "开场"
+
+# 部标题（lvl0）块与紧随其后的第一章块合并：部标题单独显示太空
+merged: list = []
+skip_next = False
+for idx, ch in enumerate(chunks):
+    if skip_next:
+        skip_next = False
+        continue
+    if ch["level"] == 0 and idx + 1 < len(chunks) and chunks[idx + 1]["level"] == 1:
+        merged.append({
+            "head": ch["head"] + chunks[idx + 1]["head"],
+            "body": ch["body"] + chunks[idx + 1]["body"],
+            "title": chunks[idx + 1]["title"],
+            "level": 1,
+            "first_id": re.search(r'id="(s-\d+)"', ch["head"]).group(1),
+            "sec_id": chunks[idx + 1].get("id", ""),
+        })
+        skip_next = True
+    else:
+        ch["first_id"] = ch.get("id", "")
+        merged.append(ch)
+chunks = merged
+
+# ---------- 4. 页面模板：分章渲染块 ----------
+chunks_html = []
+for idx, ch in enumerate(chunks):
+    hidden = "" if idx == 0 else ' hidden'
+    head_html = ch.get("head", "")
+    chunks_html.append(
+        f'<section class="chunk" data-idx="{idx}" data-first="{ch.get("first_id","")}"{hidden}>'
+        f'{head_html}{ch["body"]}</section>'
+    )
+chunks_body = "\n".join(chunks_html)
+chunks_json = json.dumps(
+    [{"title": c["title"], "first": c.get("first_id", ""), "level": c["level"]} for c in chunks],
+    ensure_ascii=False,
+)
+
 TEMPLATE = r"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -219,9 +294,9 @@ TEMPLATE = r"""<!DOCTYPE html>
   <div class="article">
     <div class="doc-title-block">
       <h1 style="font-size:27px;letter-spacing:-.3px;margin-bottom:6px">FDE 从知道到入门</h1>
-      <p class="sub">Forward Deployed Engineer 的认知、方法与实践手册 · v2 结构重排稿</p>
+      <p class="sub">Forward Deployed Engineer 的认知、方法与实践手册 · v2 结构重排稿 · 分章阅读</p>
     </div>
-    <!--ARTICLE-->
+    <!--CHUNKS-->
   </div>
   <div class="chapter-nav" id="chapterNav">
     <a id="navPrev" href="javascript:void(0)"><span class="dir">← 上一章</span><span class="name"></span></a>
@@ -232,21 +307,23 @@ TEMPLATE = r"""<!DOCTYPE html>
 <button class="to-top" id="toTop" title="回到顶部">↑</button>
 
 <script>
-/* ====== 目录数据（构建时生成）====== */
-const TOC=__TOC__;
+/* ====== 构建时数据 ====== */
+const TOC=__TOC__;        // 侧栏目录（全量）
+const CHUNKS=__CHUNKS__;  // [{title, first, level}] 与 .chunk 一一对应
 
 const $=id=>document.getElementById(id);
 const tocEl=$('toc'), chNow=$('chNow'), progBar=$('progBar');
-let spyLock=false, curIdx=-1;
+const chunkEls=[...document.querySelectorAll('.chunk')];
+let curChunk=0, curTocIdx=-1;
 
-/* ====== 构建侧栏目录 ====== */
+/* ====== 侧栏目录 ====== */
 function buildTOC(){
   const frag=document.createDocumentFragment();
   TOC.forEach((item,i)=>{
     const a=document.createElement('a');
-    a.className='lvl'+item.l; a.dataset.i=i; a.dataset.id=item.id;
+    a.className='lvl'+item.l; a.dataset.i=i; a.dataset.id=item.id||'';
     a.textContent=item.t;
-    a.addEventListener('click',()=>{ if(!item.id)return; jump(item.id); spyLock=true; setActive(i); if(innerWidth<=860) closeSide(); });
+    if(item.id) a.addEventListener('click',()=>{ goToId(item.id); if(innerWidth<=860) closeSide(); });
     frag.appendChild(a);
   });
   tocEl.appendChild(frag);
@@ -271,50 +348,47 @@ $('tocFilter').addEventListener('input',e=>{
   $('tocEmpty').style.display=n?'none':'block';
 });
 
-/* ====== 跳转与滚动定位 ====== */
-function jump(id){ const el=document.getElementById(id); if(el) el.scrollIntoView({block:'start'}); }
-function topOf(el){ return el.getBoundingClientRect().top+scrollY-76; }
-
-let raf=0;
-addEventListener('scroll',()=>{ if(raf)return; raf=requestAnimationFrame(()=>{ raf=0; onScroll(); }); },{passive:true});
-function onScroll(){
-  renderProgress();
-  const line=scrollY+96;
-  let best=-1;
-  for(let i=0;i<TOC.length;i++){
-    const el=TOC[i].id?document.getElementById(TOC[i].id):null;
-    if(!el) continue;
-    if(topOf(el)<=line) best=i; else break;
-  }
-  if(best!==curIdx){ curIdx=best; updateCur(); }
-  if(spyLock&&curIdx>=0){
-    const el=document.getElementById(TOC[curIdx].id||'');
-    if(!el||Math.abs(scrollY-topOf(el))<60) spyLock=false;
-  }
-  $('toTop').classList.toggle('show',scrollY>600);
+/* ====== 分章切换 ====== */
+function showChunk(idx, noScroll){
+  idx=Math.max(0,Math.min(CHUNKS.length-1,idx));
+  chunkEls.forEach((el,i)=>{ el.hidden=(i!==idx); });
+  curChunk=idx;
+  if(!noScroll) scrollTo({top:0,behavior:'auto'});
+  const first=CHUNKS[idx].first;
+  const ti=TOC.findIndex(t=>t.id===first);
+  if(ti>=0){ curTocIdx=ti; setActive(ti); const t=TOC[ti].t; chNow.textContent=t.length>20?t.slice(0,20)+'…':t; }
+  updateNav(); renderProgress();
+  history.replaceState(null,'',first?'#'+first:'#');
 }
-function updateCur(){
-  if(curIdx<0){ chNow.textContent=''; return; }
-  chNow.textContent=TOC[curIdx].t.length>18?TOC[curIdx].t.slice(0,18)+'…':TOC[curIdx].t;
-  if(!spyLock) setActive(curIdx);
+function goToId(id){
+  const idx=chunkEls.findIndex(el=>el.dataset.first===id || el.querySelector('#'+CSS.escape(id)));
+  if(idx<0) return;
+  const changed=idx!==curChunk;
+  chunkEls.forEach((el,i)=>{ el.hidden=(i!==idx); });
+  curChunk=idx;
+  const ti=TOC.findIndex(t=>t.id===id);
+  if(ti>=0){ curTocIdx=ti; setActive(ti); const t=TOC[ti].t; chNow.textContent=t.length>20?t.slice(0,20)+'…':t; }
   updateNav();
+  requestAnimationFrame(()=>{
+    const el=document.getElementById(id);
+    if(el) scrollTo({top:el.getBoundingClientRect().top+scrollY-76,behavior:changed?'auto':'smooth'});
+  });
+  history.replaceState(null,'','#'+id);
+  renderProgress();
 }
 function updateNav(){
-  const chapters=TOC.map((x,i)=>({...x,i})).filter(x=>x.l===1);
-  let cur=chapters.findIndex(c=>c.i===curIdx);
-  if(cur<0) cur=chapters.findIndex(c=>c.i>curIdx);
-  const prev=cur>0?chapters[cur-1]:null;
-  const next=cur>=0&&cur<chapters.length-1?chapters[cur+1]:(cur<0?chapters[0]:null);
-  const set=(el,item)=>{ if(item){ el.style.visibility=''; el.querySelector('.name').textContent=item.t; el.onclick=()=>{ jump(item.id); spyLock=true; }; } else el.style.visibility='hidden'; };
-  set($('navPrev'),prev); set($('navNext'),next);
+  const set=(el,item)=>{ if(item){ el.style.visibility=''; el.querySelector('.name').textContent=item.title; el.onclick=()=>showChunk(CHUNKS.indexOf(item)); } else el.style.visibility='hidden'; };
+  set($('navPrev'),CHUNKS[curChunk-1]);
+  set($('navNext'),CHUNKS[curChunk+1]);
 }
-$('prevBtn').addEventListener('click',()=>{ if(curIdx>0){ jump(TOC[curIdx-1].id); spyLock=true; } });
-$('nextBtn').addEventListener('click',()=>{ if(curIdx<TOC.length-1){ jump(TOC[curIdx+1].id); spyLock=true; } });
+$('prevBtn').addEventListener('click',()=>showChunk(curChunk-1));
+$('nextBtn').addEventListener('click',()=>showChunk(curChunk+1));
 
 function renderProgress(){
   const h=document.documentElement.scrollHeight-innerHeight;
   progBar.style.width=(h>0?Math.min(100,scrollY/h*100):0)+'%';
 }
+addEventListener('scroll',()=>renderProgress(),{passive:true});
 
 /* ====== 侧栏开合（窄屏） ====== */
 $('menuBtn').addEventListener('click',()=>document.body.classList.toggle('side-open'));
@@ -322,17 +396,32 @@ $('backdrop').addEventListener('click',closeSide);
 function closeSide(){ document.body.classList.remove('side-open'); }
 $('toTop').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 
-/* ====== 启动 ====== */
+/* ====== 启动：深链 #s-N 定位到所在章 ====== */
 buildTOC();
+if(location.hash){
+  const id=decodeURIComponent(location.hash.slice(1));
+  const owner=chunkEls.findIndex(el=>el.dataset.first===id || el.querySelector('#'+CSS.escape(id)));
+  if(owner>=0){
+    chunkEls.forEach((el,i)=>{ el.hidden=(i!==owner); });
+    curChunk=owner;
+    const first=CHUNKS[owner].first;
+    const ti=TOC.findIndex(t=>t.id===(id||first));
+    if(ti>=0){ curTocIdx=ti; setActive(ti); const t=TOC[ti].t; chNow.textContent=t.length>20?t.slice(0,20)+'…':t; }
+    updateNav();
+    requestAnimationFrame(()=>{ const el=document.getElementById(id); if(el) scrollTo({top:el.getBoundingClientRect().top+scrollY-76,behavior:'auto'}); });
+  } else showChunk(0,true);
+} else showChunk(0,true);
 renderProgress();
-if(location.hash){ const t=document.getElementById(location.hash.slice(1)); if(t) setTimeout(()=>scrollTo({top:topOf(t),behavior:'auto'}),60); }
 </script>
 </body>
 </html>
 """
 
-html = TEMPLATE.replace("<!--ARTICLE-->", body).replace(
-    "__TOC__", json.dumps(toc, ensure_ascii=False)
+html = (
+    TEMPLATE
+    .replace("<!--CHUNKS-->", chunks_body)
+    .replace("__TOC__", json.dumps(toc, ensure_ascii=False))
+    .replace("__CHUNKS__", chunks_json)
 )
 OUT.write_text(html, encoding="utf-8")
-print(f"OK  {OUT.name}  {OUT.stat().st_size//1024} KB  目录项 {len(toc)}")
+print(f"OK  {OUT.name}  {OUT.stat().st_size//1024} KB  目录项 {len(toc)}  分章 {len(chunks)}")
