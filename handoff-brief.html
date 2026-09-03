@@ -153,6 +153,18 @@
         <li><b>代价：</b>需与 dapingzui 确认——他明写「不是企业 AI 改造服务」，合并等于改变产品性质，需要他同意；且必须保留他的 10 条数据硬约束</li>
       </ul>
 
+      <h3 style="margin-top:18px;font-size:14px">内容层接入实施清单</h3>
+      <ol style="padding-left:20px;font-size:13.5px;color:var(--muted)">
+        <li><b>拉代码</b>：<code>git clone --depth 1 --single-branch --branch handoff/imfde-ai-2026-09-03</code>（浅克隆避开完整历史，体积大幅下降）— 后台执行中</li>
+        <li><b>核数据</b>：<code>cases=559 / world_events=529 / 轴上≈140</code>，对不上说明动态层缺失</li>
+        <li><b>起服务</b>：<code>python3 portal/site/server.py</code> → http://127.0.0.1:8850</li>
+        <li><b>浏览器验证</b>：桌面 1440 与手机 390 双宽；顶栏五条齐全；切 7/30/90 导语与默认节点同步换；点卡进落地/现场/案例/方法/world3d</li>
+        <li><b>视觉对齐</b>：把 <code>assets/style.css</code> 的设计 token 同步进交接仓库的 <code>tokens.css</code></li>
+        <li><b>部署子站</b>：<code>learn.imfde.ai</code>（Python 服务，非静态托管）</li>
+        <li><b>接链接</b>：<code>learn.html</code> 四张板块卡 href 指向子站对应路由</li>
+        <li><b>并待办</b>：交接方 6 项待办并入本期迭代（身份条、提问条、页脚口径、链路、议题、不重开案例墙）</li>
+      </ol>
+
       <h3 style="margin-top:18px;font-size:14px">集成架构（MVP 阶段）</h3>
       <table class="conflict">
         <thead><tr><th style="width:110px">层</th><th style="width:40%">做法</th><th>约束</th></tr></thead>
