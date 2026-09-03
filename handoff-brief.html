@@ -201,9 +201,38 @@
     <div class="note"><b>为什么推荐 A：</b>《MVP目标》是你自己写的战略，而它第三步要的「课程 + 案例 + 复盘」在交接仓库里已经存在且质量高（含严格的数据口径约束）。两个产品不是竞争关系，是同一产品的「学」与「赚」两半——这正是你最初定 imfde 时说的「开源 + 赚钱 + 全过程见证」。</div>
   </div>
 
+  <!-- 数据核验 -->
+  <div class="panel" id="verify">
+    <h2>五、数据核验（已下载 fde.db 实测，非仅凭文档）</h2>
+    <div class="sub">下载方式：raw 直链 + 断点续传（4.6 MB，绕开 149 MB 全量克隆）</div>
+    <table class="conflict">
+      <thead><tr><th style="width:180px">指标</th><th style="width:120px">文档声称</th><th style="width:120px">实测</th><th>结论</th></tr></thead>
+      <tbody>
+        <tr><td>cases</td><td>559</td><td>559</td><td class="no">一致</td></tr>
+        <tr><td>world_events</td><td>529</td><td>529</td><td class="no">一致</td></tr>
+        <tr><td>轴上 dated</td><td>≈140</td><td>140</td><td class="no">一致</td></tr>
+        <tr><td>questions</td><td>606 开放 + 76 MCQ</td><td>682</td><td class="no">一致</td></tr>
+        <tr><td>world_sources</td><td>89</td><td>89</td><td class="no">一致</td></tr>
+        <tr><td>90 天窗</td><td>52</td><td>52</td><td class="no">一致</td></tr>
+      </tbody>
+    </table>
+    <div class="note green" style="margin-bottom:14px">交接文档诚实——六项核心数字全部对得上，可以放心按它接手。</div>
+
+    <h3>文档没写、实测才看出来的三件事</h3>
+    <table class="conflict">
+      <thead><tr><th style="width:180px">发现</th><th>数据</th><th>对学习板块的影响</th></tr></thead>
+      <tbody>
+        <tr><td><b>四轨极不均衡</b></td><td>deploy 83 · method 30 · people 17 · <b>company 仅 10</b></td><td>内容以"部署证据"为主干；公司动作稀缺，印证硬约束「7 天公司轨允许空，不要拿库存案例填」</td></tr>
+        <tr><td><b>弱信号占 76%</b></td><td>weak 406 · hard 123</td><td>印证「岗位是弱信号」；学习板块若做"每日速览"必须过滤 weak，否则全是招聘信息</td></tr>
+        <tr><td><b>⚠️ 行业字段未归一化</b></td><td>429 个不同取值（Software & Technology 46 / Technology 9 / 软件·协作生产力 2 混排，中英夹杂）</td><td>「落地」板块按行业切面前，<b>必须先做行业归一化</b>（429 → 约 20 个标准行业），否则筛选形同虚设</td></tr>
+      </tbody>
+    </table>
+    <div class="note">四段中文文案完整度：happened 100% / why 100% / 企业段 95% / 从业者段 97%——可直接对外展示，不用补写就能接。</div>
+  </div>
+
   <!-- 交接方待办 -->
   <div class="panel">
-    <h2>五、交接方留下的 6 项待办（路线 B 直接照做，路线 A 需并入）</h2>
+    <h2>六、交接方留下的 6 项待办（需并入本期迭代）</h2>
     <ol style="padding-left:20px;font-size:14px;color:var(--muted)">
       <li>身份条补一句：开源 FDE 学习社区 + 快照日（现在偏情报台）</li>
       <li>提问条降为轴上筛选；图例收到口径 / <code>i</code>，不要占首屏</li>
