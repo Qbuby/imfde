@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K. 的 FDE 主页 · imfde.ai</title>
+<meta name="description" content="FDE 人才池主页样例：登记履历、分级认证、联系方式可达（线上能联系、线下能找到）、项目履历公开。">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* 页面专属 */
+  .avatar{width:64px;height:64px;border-radius:50%;background:var(--accent);color:#fff;font-size:26px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+  .head-flex{display:flex;gap:18px;align-items:center}
+  .lvl{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 11px;border-radius:99px;background:var(--accent);color:#fff}
+  .lvl-soft{background:var(--accent-soft);color:var(--accent-dark)}
+  .contact{display:flex;flex-direction:column;gap:10px;font-size:13.5px}
+  .contact .row{display:flex;gap:10px;align-items:baseline}
+  .contact .k{flex:none;width:76px;color:var(--muted);font-size:12.5px}
+  .ok{color:var(--green);font-weight:600}
+  .chk{list-style:none;padding:0;font-size:13.5px}
+  .chk li{padding:5px 0;color:var(--muted)}
+  .chk li::before{content:"✓";color:var(--green);font-weight:700;margin-right:8px}
+  .chk li.todo{color:#a1a1aa}
+  .chk li.todo::before{content:"○";color:#c4c4c0}
+  .bar{height:6px;border-radius:99px;background:var(--gray-soft);overflow:hidden;margin-top:10px}
+  .bar i{display:block;height:100%;background:var(--accent);border-radius:99px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="logo-badge">ImFDE</span></a>
+    <nav class="nav-links">
+      <a href="index.html#demands">企业需求池</a>
+      <a href="index.html#grow">FDE 成长</a>
+      <a href="index.html#enterprise">企业合作</a>
+      <a href="learn.html">认证与课程</a>
+    </nav>
+    <div style="display:flex;gap:10px">
+      <a class="btn btn-primary btn-sm" href="https://github.com/">GitHub 登录</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html#grow">FDE 成长路径</a><span class="sep">/</span>K. 的主页（样例）</div>
+
+  <!-- 主页头部 -->
+  <div class="detail-head">
+    <div class="head-flex">
+      <div class="avatar">K</div>
+      <div>
+        <h1 style="font-size:24px;font-weight:700">K. <span style="font-size:14px;font-weight:400;color:var(--muted)">（化名 · 实名信息仅向已认证企业开放）</span></h1>
+        <div class="chips" style="margin-top:10px">
+          <span class="lvl">L2 · 正式 FDE</span>
+          <span class="ind">离散制造 / 连锁零售</span>
+          <span class="ind">杭州</span>
+          <span class="ind">可驻场</span>
+        </div>
+      </div>
+    </div>
+    <div class="meta">
+      <span>已交付项目 <b>2</b> 个 · 进行中 1 个</span>
+      <span>累计分账 <b>¥9,400</b></span>
+      <span>入驻于 2026-06</span>
+    </div>
+  </div>
+
+  <div class="detail-grid">
+    <!-- 主栏 -->
+    <div class="main">
+
+      <div class="panel">
+        <h2>个人履历</h2>
+        <div class="sub">向企业介绍自己——这是 FDE 在人才池里的门面</div>
+        <p>7 年后端与交付经验，主导过 MES 对接与门店数字化项目。<b>习惯用一页规格收窄需求、用评测集先于构建验证方案</b>，交付口径对齐《FDE：从知道到入门》。</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">私有化部署</span><span class="tag">MES 集成</span><span class="tag">checklist 引擎</span>
+        </div>
+      </div>
+
+      <!-- 项目履历：完成的需求录入履历 -->
+      <div class="panel">
+        <h2>项目履历 · 公开可查</h2>
+        <div class="sub">完成的每笔客单自动录入，企业可见、可核验</div>
+        <table class="tbl">
+          <thead><tr><th>项目</th><th>角色</th><th>状态</th><th style="text-align:right">分账占比</th></tr></thead>
+          <tbody>
+            <tr><td><a href="project.html" style="color:var(--accent)">连锁门店巡店小程序</a></td><td>FDE 主理人</td><td><span class="tag">开发中</span></td><td class="num" style="text-align:right"><span class="pct">40%</span></td></tr>
+            <tr><td>诊所预约与随访系统</td><td>后端 / 需求梳理</td><td><span class="tag tag-doc">已交付</span></td><td class="num" style="text-align:right"><span class="pct">18%</span></td></tr>
+            <tr><td>设备数据采集脚本集（内核贡献）</td><td>社区贡献者</td><td><span class="tag tag-code">已合入</span></td><td class="num" style="text-align:right">—</td></tr>
+          </tbody>
+        </table>
+        <div class="note blue">非代码贡献（需求梳理、测试、文档）同样记入履历并参与分账。</div>
+      </div>
+
+    </div>
+
+    <!-- 侧栏 -->
+    <aside class="aside">
+
+      <!-- 联系方式：线上能联系、线下能找到 -->
+      <div class="panel">
+        <h2>联系方式 · 双通道可达</h2>
+        <div class="contact">
+          <div class="row"><span class="k">线上联系</span><span class="ok">可联系</span></div>
+          <div class="row"><span class="k">邮箱</span>k@example.dev</div>
+          <div class="row"><span class="k">GitHub</span>@k-fde</div>
+          <div class="row"><span class="k">线下找到</span><span class="ok">已核验</span></div>
+          <div class="row"><span class="k">常驻城市</span>杭州</div>
+          <div class="row"><span class="k">驻场范围</span>浙江省内，48h 响应</div>
+        </div>
+        <div class="note">实名信息与微信仅向<b>已认证企业</b>开放；平台核验线下可达性后才授予接单资格。</div>
+      </div>
+
+      <!-- 认证进度 -->
+      <div class="panel">
+        <h2>认证进度</h2>
+        <div class="sub">分级 FDE 认证 · 按交付记录晋升</div>
+        <ul class="chk">
+          <li>L1 见习 · 组队完成 1 次交付</li>
+          <li>L2 正式 · 主理 1 个已验收项目</li>
+          <li class="todo">L3 资深 · 主理 3 个已验收项目（2/3）</li>
+          <li class="todo">L3 资深 · 公开 1 份失败复盘</li>
+        </ul>
+        <div class="bar"><i style="width:67%"></i></div>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:8px">L3 进度 67% · <a href="learn.html" style="color:var(--accent)">认证规则 →</a></p>
+      </div>
+
+      <a class="btn btn-primary btn-lg" href="https://github.com/" style="justify-content:center;width:100%">用 GitHub 登记我的履历</a>
+    </aside>
+  </div>
+
+  <!-- 底部 CTA -->
+  <div class="cta-band">
+    <div>
+      <h2>想让百万浙商企业找到你？</h2>
+      <p>登记履历、通过核验、获得认证——第一步只是填一份主页。</p>
+    </div>
+    <div style="display:flex;gap:12px">
+      <a class="btn btn-primary btn-lg" href="learn.html">了解认证体系</a>
+      <a class="btn btn-ghost btn-lg" href="index.html#demands">浏览需求池</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 imfde.ai · 面向浙商企业与 FDE 的开源共创平台（内测）</div>
+    <div style="display:flex;gap:22px">
+      <a href="index.html#mech">平台机制</a>
+      <a href="docs/index.html">FDE 入门指南</a>
+      <a href="index.html#demands">企业需求池</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

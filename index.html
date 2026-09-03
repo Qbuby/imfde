@@ -99,6 +99,10 @@
   .mech{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
   .mech .card h3{font-size:15px}
   .mech .num{width:34px;height:34px;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px}
+  .path3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .path3 .card h3{font-size:15px}
+  .path3 .num{width:34px;height:34px;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px}
+  .path3 .go{display:inline-block;margin-top:10px;color:var(--accent);font-size:13px;font-weight:500}
 
   /* archive */
   .archive .card{border-left:3px solid var(--border)}
@@ -130,8 +134,8 @@
     <nav class="nav-links">
       <a href="#demands">企业需求池</a>
       <a href="#projects">进行中交付</a>
-      <a href="#cases">明星案例</a>
-      <a href="#archive">归档复盘</a>
+      <a href="#grow">FDE 成长</a>
+      <a href="#enterprise">企业合作</a>
       <a href="#mech">平台机制</a>
     </nav>
     <div style="display:flex;gap:10px">
@@ -144,9 +148,9 @@
 <!-- Hero -->
 <div class="hero">
   <div class="wrap">
-    <span class="hero-tag">面向 FDE 的开源共创平台 · 内测中</span>
+    <span class="hero-tag">面向浙商企业与 FDE 的开源共创平台 · 内测中</span>
     <h1>真实企业需求 · 开源协作交付<br>让 FDE 在场景中<em>练级、交付、赚钱</em></h1>
-    <p>企业把脱敏后的真实业务需求放进需求池，FDE 认领需求、组队共创、开源交付；收益按贡献分配，全过程数据公开可验证。</p>
+    <p>百万浙商企业把脱敏后的真实业务需求放进需求池，FDE 登记履历、获得认证、认领需求、组队共创；收益按贡献分配，全过程数据公开可验证。</p>
     <div class="hero-cta">
       <a class="btn btn-primary btn-lg" href="#demands">浏览需求池</a>
       <a class="btn btn-ghost btn-lg" href="docs/index.html">FDE 入门指南</a>
@@ -182,28 +186,28 @@
         <div class="card-top"><span class="chip chip-open">待认领</span><span class="ind">离散制造</span></div>
         <h3><a href="demand.html">设备巡检 AI 报告工具（私有化部署）</a></h3>
         <p class="desc">工厂巡检员用手机记录设备状态，系统自动生成结构化巡检报告与异常预警，需对接现有 MES 系统，支持离线使用。</p>
-        <div class="card-meta"><span class="budget">¥30,000 – 50,000</span><span>交付周期 4 周</span><span>3 人报名方案中</span></div>
+        <div class="card-meta"><span class="budget">¥30,000 – 50,000</span><span>难度 A</span><span>要求 L2 · 3 人</span><span>交付周期 4 周</span><span>3 人报名方案中</span></div>
       </div>
 
       <div class="card" data-s="claiming">
         <div class="card-top"><span class="chip chip-claiming">认领中</span><span class="ind">跨境电商</span></div>
         <h3><a href="demand.html">多平台库存同步看板</a></h3>
         <p class="desc">聚合 Amazon / Shopee / TikTok Shop 库存数据，超卖预警与自动调拨建议，需支持多店铺多仓库视图。</p>
-        <div class="card-meta"><span class="budget">¥20,000 – 35,000</span><span>交付周期 3 周</span><span>2 个方案投票中</span></div>
+        <div class="card-meta"><span class="budget">¥20,000 – 35,000</span><span>难度 B</span><span>要求 L1 · 2 人</span><span>交付周期 3 周</span><span>2 个方案投票中</span></div>
       </div>
 
       <div class="card" data-s="open">
         <div class="card-top"><span class="chip chip-open">待认领</span><span class="ind">法律服务</span></div>
         <h3><a href="demand.html">律所合同审查助手（数据不出域）</a></h3>
         <p class="desc">基于本地化大模型做合同风险条款初筛与批注，所有数据留在律所内网，需提供审计日志与权限体系。</p>
-        <div class="card-meta"><span class="budget">¥50,000 – 80,000</span><span>交付周期 6 周</span><span>1 人报名方案中</span></div>
+        <div class="card-meta"><span class="budget">¥50,000 – 80,000</span><span>难度 S</span><span>要求 L3 · 2 人</span><span>交付周期 6 周</span><span>1 人报名方案中</span></div>
       </div>
 
       <div class="card" data-s="teamed">
         <div class="card-top"><span class="chip chip-teamed">已组队</span><span class="ind">连锁零售</span></div>
         <h3><a href="demand.html">连锁门店巡店小程序</a></h3>
         <p class="desc">督导按 checklist 巡店拍照打分，总部看板汇总整改闭环，已组队 4 人（FDE ×1、前端 ×1、后端 ×2）。</p>
-        <div class="card-meta"><span class="budget">¥15,000 – 25,000</span><span>交付周期 3 周</span><span>已进入开发</span></div>
+        <div class="card-meta"><span class="budget">¥15,000 – 25,000</span><span>难度 B</span><span>要求 L2 · 4 人</span><span>交付周期 3 周</span><span>已进入开发</span></div>
       </div>
 
     </div>
@@ -320,6 +324,69 @@
   </div>
 </section>
 
+<!-- FDE 成长路径 -->
+<section id="grow">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>FDE 成长路径</h2>
+        <div class="sub">三步走：先让人能被找到，再让人能接到单，最后让人持续变强</div>
+      </div>
+      <a class="more" href="learn.html">认证体系与课程 →</a>
+    </div>
+    <div class="path3">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>登记履历 · 获得认证</h3>
+        <p class="desc">GitHub 登录后登记履历与联系方式——线上能联系、线下能找到；按交付记录获得分级 FDE 认证，向百万浙商企业证明自己。</p>
+        <a class="go" href="fde.html">看一份 FDE 主页样例 →</a>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>接真实客单 · 组队交付</h3>
+        <p class="desc">浏览不同难度、不同价格的需求，接取后提案立项（可组队）；项目进度、验收交付全程公开，完成的订单录入项目履历。</p>
+        <a class="go" href="demand.html">浏览需求池 →</a>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>课程 · 案例 · 复盘</h3>
+        <p class="desc">系统化公开的 FDE 课程、真实实操案例与失败复盘——普通程序员也能在平台成长为 FDE 并获得认证。</p>
+        <a class="go" href="learn.html">开始学习 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 企业合作 -->
+<section id="enterprise" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>企业如何合作</h2>
+        <div class="sub">认证入驻 → 发布需求 → 验收打款 → 归档沉淀，预算与分账规则前置公开</div>
+      </div>
+      <a class="more" href="#">提交企业需求 →</a>
+    </div>
+    <div class="path3">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>认证入驻</h3>
+        <p class="desc">填写主营业务领域、官网、联系方式，平台核验后开通企业账号，建立企业档案。</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>发布需求</h3>
+        <p class="desc">写清难度、预算、技术领域、FDE 级别与人数要求、分账规则；审核通过后进入需求池向所有 FDE 公开。</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>验收打款 · 归档</h3>
+        <p class="desc">项目完成企业验收打款，按立项锁定的分账表分账并公示；需求归档进入企业档案，持续积累交付信誉。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 平台机制 -->
 <section id="mech">
   <div class="wrap">
@@ -360,11 +427,11 @@
     <div class="cta-band">
       <div>
         <h2>有真实需求？或者想成为 FDE？</h2>
-        <p>企业提交场景与预算，平台 48 小时内完成脱敏与上架；工程师用 GitHub 登录即可认领。</p>
+        <p>企业提交场景与预算，平台 48 小时内完成脱敏与上架；工程师用 GitHub 登录登记履历，即可认领真实客单。</p>
       </div>
       <div style="display:flex;gap:12px">
         <a class="btn btn-primary btn-lg" href="#">提交企业需求</a>
-        <a class="btn btn-ghost btn-lg" href="#">FDE 共创指南</a>
+        <a class="btn btn-ghost btn-lg" href="learn.html">成为 FDE</a>
       </div>
     </div>
   </div>

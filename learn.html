@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FDE 认证与课程 · 在平台成长为 FDE | imfde.ai</title>
+<meta name="description" content="分级 FDE 认证体系（L1 见习 / L2 正式 / L3 资深）、系统化公开课程、实操案例与失败复盘——普通程序员也能成长为 FDE。">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* 页面专属 */
+  .path3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+  .lvl-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .lvl-badge{font-size:13px;font-weight:700;padding:4px 12px;border-radius:9px;color:#fff}
+  .lv1{background:#64748b}.lv2{background:var(--accent)}.lv3{background:var(--accent-dark)}
+  .req{list-style:none;padding:0;font-size:13.5px;color:var(--muted);margin-top:6px}
+  .req li{padding:4px 0;border-bottom:1px dashed var(--border)}
+  .req li:last-child{border:none}
+  .req b{color:var(--text)}
+  .perm{margin-top:12px;background:var(--green-soft);color:var(--green);border-radius:8px;padding:9px 12px;font-size:12.5px}
+  .curr{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start}
+  .part{border-left:3px solid var(--accent-soft);padding:2px 0 2px 18px;margin-bottom:22px}
+  .part h3{font-size:15px;font-weight:700}
+  .part .en{font-size:12.5px;color:var(--muted);font-weight:400;margin-left:8px}
+  .part ul{list-style:none;padding:0;margin-top:8px}
+  .part li{font-size:13.5px;color:var(--muted);padding:3px 0}
+  @media (max-width:920px){.path3,.curr{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="logo-badge">ImFDE</span></a>
+    <nav class="nav-links">
+      <a href="index.html#demands">企业需求池</a>
+      <a href="index.html#grow">FDE 成长</a>
+      <a href="index.html#enterprise">企业合作</a>
+      <a href="fde.html">FDE 主页样例</a>
+    </nav>
+    <div style="display:flex;gap:10px">
+      <a class="btn btn-primary btn-sm" href="https://github.com/">GitHub 登录</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html#grow">FDE 成长路径</a><span class="sep">/</span>认证与课程</div>
+
+  <div class="detail-head">
+    <div class="chips"><span class="chip chip-teamed">学习成长</span><span class="ind">公开课 · 免费</span></div>
+    <h1>在平台上，成长为 FDE</h1>
+    <div class="meta"><span>分级认证按<b>真实交付记录</b>晋升，不发参与证书</span><span>课程与复盘全部公开</span></div>
+  </div>
+
+  <!-- 认证体系 -->
+  <section style="padding:30px 0 10px">
+    <div class="sec-head"><div><h2>分级 FDE 认证</h2><div class="sub">认证回答一个问题：企业凭什么把真实客单交给你</div></div></div>
+    <div class="path3">
+      <div class="panel">
+        <div class="lvl-head"><span class="lvl-badge lv1">L1 · 见习 FDE</span></div>
+        <ul class="req">
+          <li><b>组队</b>完成 1 次平台项目交付（开发 / 测试 / 文档角色均可）</li>
+          <li>登记完整履历 + 联系方式核验通过</li>
+        </ul>
+        <div class="perm">权益：可浏览并报名全部 B 类及以下需求</div>
+      </div>
+      <div class="panel" style="border-color:var(--accent)">
+        <div class="lvl-head"><span class="lvl-badge lv2">L2 · 正式 FDE</span></div>
+        <ul class="req">
+          <li><b>主理</b> 1 个已通过验收的项目（方案 + 里程碑 + 交付）</li>
+          <li>通过认证答辩：一页规格 + 评测集各 1 份</li>
+        </ul>
+        <div class="perm">权益：可提案立项、组队、竞标 A 类需求；主页向企业展示</div>
+      </div>
+      <div class="panel">
+        <div class="lvl-head"><span class="lvl-badge lv3">L3 · 资深 FDE</span></div>
+        <ul class="req">
+          <li><b>主理</b> ≥3 个已验收项目，累计回款公示无争议</li>
+          <li>公开 1 份失败复盘，进入平台归档库</li>
+        </ul>
+        <div class="perm">权益：可竞标 S 类需求、带教见习团队、参与分账规则修订</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 课程 -->
+  <section style="padding:30px 0 10px">
+    <div class="sec-head"><div><h2>系统化公开课</h2><div class="sub">课程主干来自《FDE：从知道到入门》· 116 页在线阅读</div></div><a class="more" href="docs/index.html">进入阅读 →</a></div>
+    <div class="curr">
+      <div>
+        <div class="part">
+          <h3>第一部 · 现场，先看见，再命名<span class="en">行为先于头衔</span></h3>
+          <ul>
+            <li>第 1–2 章 · 一个 FDE 的一天 / 六个动作循环</li>
+            <li>第 3–5 章 · FDE 是什么、不是什么 / 能力地图与自我定位</li>
+          </ul>
+        </div>
+        <div class="part">
+          <h3>第二部 · 墙与回路<span class="en">这门编制为什么存在</span></h3>
+          <ul>
+            <li>第 6–7 章 · 软件在哪造、价值在哪发生 / 用服务换护城河的一笔账</li>
+            <li>第 8 章 · 编制：一个账户几个人，回路怎么转</li>
+          </ul>
+        </div>
+        <div class="part">
+          <h3>第三部 · 手艺（上），从问题到原型<span class="en">先量，再建</span></h3>
+          <ul>
+            <li>第 9 章 · 现场提问与收窄：把一句话写成一页规格（附模板）</li>
+            <li>第 10 章 · 评测先于构建（附评测集模板）</li>
+            <li>第 11–12 章 · 把模型接到遗留系统 / 生产里的失败模式</li>
+          </ul>
+        </div>
+        <div class="part">
+          <h3>第四部 · 手艺（下），从原型到生产<span class="en">上线不是终点，能被看见才是</span></h3>
+          <ul>
+            <li>第 13–16 章 · 现场数据与 SQL / 交付与验证 / 观察期 / 复盘归档</li>
+          </ul>
+        </div>
+      </div>
+      <aside class="aside" style="position:static">
+        <div class="panel">
+          <h2>实操案例</h2>
+          <p style="font-size:13px">跟着真实项目学：立项方案、里程碑、验收标准全程公开。</p>
+          <a class="btn btn-ghost btn-sm" href="project.html" style="width:100%;justify-content:center;margin-top:8px">看进行中的项目 →</a>
+          <a class="btn btn-ghost btn-sm" href="index.html#cases" style="width:100%;justify-content:center;margin-top:8px">明星案例 →</a>
+        </div>
+        <div class="panel">
+          <h2>失败案例复盘</h2>
+          <p style="font-size:13px">失败与未验收项目公开归档——这是平台最有价值的部分，也是 L3 认证的必修课。</p>
+          <a class="btn btn-ghost btn-sm" href="index.html#archive" style="width:100%;justify-content:center;margin-top:8px">归档复盘库 →</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 底部 CTA -->
+  <div class="cta-band">
+    <div>
+      <h2>从普通程序员到 FDE，第一步是登记履历</h2>
+      <p>GitHub 登录 → 填主页 → 核验联系方式 → 从 L1 见习开始接单。</p>
+    </div>
+    <div style="display:flex;gap:12px">
+      <a class="btn btn-primary btn-lg" href="https://github.com/">登记履历</a>
+      <a class="btn btn-ghost btn-lg" href="fde.html">看主页样例</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 imfde.ai · 面向浙商企业与 FDE 的开源共创平台（内测）</div>
+    <div style="display:flex;gap:22px">
+      <a href="index.html#mech">平台机制</a>
+      <a href="docs/index.html">FDE 入门指南</a>
+      <a href="index.html#demands">企业需求池</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
