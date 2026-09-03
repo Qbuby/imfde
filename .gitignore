@@ -1,14 +1,16 @@
 .workbuddy/
 portal/site/__pycache__/
 *.pyc
-portal/*.html
-# 内容服务数据与源码不入仓（曾误入，已清）
+# 私密数据与 Python 源码不入仓（fde.db 含 682 道题库答案）
 portal/fde.db
 portal/site/*.py
 portal/*.py
 portal/*.sql
-portal/*.md
 portal/*.sh
+portal/*.md
 portal/*.json
 !portal/cases.json
+# 中间产物
+portal/_*
+
 
