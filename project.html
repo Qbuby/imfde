@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>连锁门店巡店小程序 · 项目详情 | imfde.ai</title>
+<meta name="description" content="孵化全程公开：五阶段进度、贡献记账、锁定分账表、开源内核。需求源自华南某连锁茶饮品牌（已脱敏）。">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* 页面专属 */
+  .repo-card{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .repo-name{font-weight:700;font-size:15px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .repo-name::before{content:"⌥";margin-right:6px;color:var(--muted)}
+  .badge{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--accent-soft);color:var(--accent-dark);font-weight:500}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="logo-badge">ImFDE</span></a>
+    <nav class="nav-links">
+      <a href="index.html#demands">企业需求池</a>
+      <a href="index.html#projects">进行中交付</a>
+      <a href="index.html#mech">平台机制</a>
+    </nav>
+    <div style="display:flex;gap:10px">
+      <a class="btn btn-ghost btn-sm" href="#" title="MVP 期通过需求说明页联系我们">提交企业需求</a>
+      <a class="btn btn-primary btn-sm" href="https://github.com/">GitHub 登录</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html#projects">进行中交付</a><span class="sep">/</span>连锁门店巡店小程序</div>
+
+  <!-- 项目头部 -->
+  <div class="detail-head">
+    <div class="chips"><span class="chip chip-building">开发中</span><span class="ind">连锁零售</span><span class="badge">Apache-2.0 · 立项锁定</span></div>
+    <h1>连锁门店巡店小程序</h1>
+    <div class="meta">
+      <span>预算 <b>¥15,000 – 25,000</b></span>
+      <span>客户：华南连锁茶饮品牌（脱敏）</span>
+      <span>团队 4 人</span>
+      <span>PR 12</span>
+      <span>立项于 2026-08-28</span>
+    </div>
+  </div>
+
+  <!-- 五阶段见证 -->
+  <div class="panel" style="margin-top:26px">
+    <h2>孵化进度 · 全程公开</h2>
+    <div class="sub">每一步都有记录可查 —— 认领、组队、开发、验收、分账，一个都不跳过</div>
+    <div class="stage-lg">
+      <div class="step done"><i></i>需求认领<span class="d">08-23</span></div>
+      <div class="step done"><i></i>组队<span class="d">08-28</span></div>
+      <div class="step cur"><i></i>开发中<span class="d">08-31 起</span></div>
+      <div class="step"><i></i>交付验收<span class="d">预计 09-14</span></div>
+      <div class="step"><i></i>分账公示<span class="d">回款后 72h</span></div>
+    </div>
+  </div>
+
+  <div class="detail-grid" style="grid-template-columns:1fr 340px">
+    <!-- 主栏 -->
+    <div class="main" style="margin-top:28px">
+
+      <div class="panel">
+        <h2>项目背景</h2>
+        <div class="sub">需求源自华南某连锁茶饮品牌 · 320 家门店 · 督导 12 人</div>
+        <p>现状：巡店靠微信群发照片，整改无闭环，总部看不到真实执行率。期望：督导按 checklist 巡店拍照打分，总部看板汇总整改闭环。</p>
+        <p><b>开源策略：</b>内核开源为通用 checklist 巡检引擎（可复用于设备巡检、安全检查等场景），门店 UI 与品牌定制部分商业授权。</p>
+        <table class="tbl" style="margin-top:12px">
+          <thead><tr><th style="width:44px">编号</th><th>验收标准（立项锁定）</th><th style="width:200px">验证方式</th></tr></thead>
+          <tbody>
+            <tr><td class="num" style="font-weight:700;color:var(--accent)">V1</td><td>督导单店巡检完成时长 ≤ 8 分钟（checklist 22 项 + 拍照）</td><td>现场实测 5 家门店</td></tr>
+            <tr><td class="num" style="font-weight:700;color:var(--accent)">V2</td><td>整改闭环率 ≥ 90%（发现问题 → 复查通过）</td><td>上线 2 周看板数据</td></tr>
+            <tr><td class="num" style="font-weight:700;color:var(--accent)">V3</td><td>弱网 / 断网环境可用，照片与评分不丢失</td><td>断网实测</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 贡献记账：机制03 落地 -->
+      <div class="panel">
+        <h2>贡献记账 · 实时同步</h2>
+        <div class="sub">代码走 PR 自动同步，需求梳理 / 测试 / 文档同样记账 —— 都算贡献，都参与分账</div>
+        <table class="tbl">
+          <thead><tr><th>贡献者</th><th>角色</th><th>贡献类型</th><th>记录</th><th style="width:80px;text-align:right">锁定占比</th></tr></thead>
+          <tbody>
+            <tr><td>K.（化名）</td><td>FDE 主理人</td><td><span class="tag tag-req">需求梳理</span> <span class="tag tag-code">代码</span></td><td>方案 1 份 · 里程碑 4 份 · PR 5</td><td class="num" style="text-align:right"><span class="pct">40%</span></td></tr>
+            <tr><td>阿禾</td><td>前端</td><td><span class="tag tag-code">代码</span></td><td>PR 4 · 门店端 checklist 页 / 离线缓存</td><td class="num" style="text-align:right"><span class="pct">18%</span></td></tr>
+            <tr><td>老周</td><td>后端</td><td><span class="tag tag-code">代码</span></td><td>PR 2 · 总部看板 API</td><td class="num" style="text-align:right"><span class="pct">16%</span></td></tr>
+            <tr><td>小北</td><td>后端 · 兼测试/文档</td><td><span class="tag tag-code">代码</span> <span class="tag tag-doc">测试/文档</span></td><td>PR 1 · 测试用例 24 条 · 部署文档</td><td class="num" style="text-align:right"><span class="pct">16%</span></td></tr>
+            <tr class="hl"><td>平台</td><td>撮合 / 托管</td><td>—</td><td>需求脱敏、回款代收</td><td class="num" style="text-align:right"><span class="pct">10%</span></td></tr>
+          </tbody>
+        </table>
+        <div class="note">占比在<b>立项时锁定</b>，开发期新增贡献经团队确认后微调并公示，回款即按表分配。</div>
+      </div>
+
+      <!-- 里程碑日志 -->
+      <div class="panel">
+        <h2>里程碑日志</h2>
+        <div class="sub">倒序 · 全部公开可查</div>
+        <ul class="log">
+          <li><span class="dt">09-02</span><div><b>内核仓库开源</b><span>checklist-engine 推送 GitHub：README + 快速上手 + 3 个示例模板，供后续项目复用</span></div></li>
+          <li><span class="dt">08-31</span><div><b>首个 PR 合并</b><span>巡检 checklist 数据模型（K.），打标签 v0.1</span></div></li>
+          <li><span class="dt">08-28</span><div><b>组队完成，立项锁定</b><span>4 人到齐，分账表社区投票通过并锁定（Apache-2.0）</span></div></li>
+          <li><span class="dt">08-26</span><div><b>方案投票结束</b><span>两份方案竞标，方案 A（离线优先架构）以 61% 得票胜出；落选方案的开源部分并入内核仓库</span></div></li>
+          <li><span class="dt">08-23</span><div><b>需求上架，K. 提交认领方案</b><span>含技术方案、4 周里程碑、分账表</span></div></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- 侧栏 -->
+    <aside class="aside">
+
+      <!-- 开源仓库 -->
+      <div class="panel">
+        <h2>开源内核</h2>
+        <div class="repo-card">
+          <div>
+            <div class="repo-name">imfde/checklist-engine</div>
+            <p style="font-size:13px;color:var(--muted);margin:6px 0 0">通用 checklist 巡检引擎 · 开源后可被后续项目直接复用</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <span class="badge">Apache-2.0</span><span class="tag">★ 12</span><span class="tag">v0.1</span><span class="tag">TypeScript</span>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="#" style="margin-top:12px;width:100%;justify-content:center">前往仓库 →</a>
+      </div>
+
+      <!-- 锁定分账表 -->
+      <div class="panel">
+        <h2>分账表 · 已锁定</h2>
+        <div class="sub">2026-08-28 投票通过后锁定，不可更改</div>
+        <table class="tbl">
+          <tbody>
+            <tr><td>FDE 主理人</td><td class="num" style="text-align:right"><span class="pct">40%</span></td></tr>
+            <tr><td>前端开发</td><td class="num" style="text-align:right"><span class="pct">18%</span></td></tr>
+            <tr><td>后端开发</td><td class="num" style="text-align:right"><span class="pct">16%</span></td></tr>
+            <tr><td>后端 · 兼测试文档</td><td class="num" style="text-align:right"><span class="pct">16%</span></td></tr>
+            <tr class="hl"><td>平台撮合</td><td class="num" style="text-align:right"><span class="pct">10%</span></td></tr>
+          </tbody>
+        </table>
+        <div class="note green">企业回款后 <b>72 小时内</b>在此公示到账记录。</div>
+      </div>
+
+      <!-- 参与入口 -->
+      <div class="panel">
+        <h2>参与这个项目</h2>
+        <ul>
+          <li>剩余角色：<b>测试 / 文档</b>（记账参与分账）</li>
+          <li>提 PR 修复内核 issue，同样记贡献</li>
+          <li>落选方案可并入内核仓库</li>
+        </ul>
+        <a class="btn btn-primary btn-sm" href="https://github.com/" style="width:100%;justify-content:center;margin-top:10px">GitHub 登录 · 申请加入</a>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- 底部 CTA -->
+  <div class="cta-band">
+    <div>
+      <h2>你的企业也有类似场景？</h2>
+      <p>巡店 / 巡检 / 安全检查通用内核已开源，场景定制 3–4 周交付，预算区间公开。</p>
+    </div>
+    <div style="display:flex;gap:12px">
+      <a class="btn btn-primary btn-lg" href="index.html#demands">提交企业需求</a>
+      <a class="btn btn-ghost btn-lg" href="index.html#projects">看其他项目</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 imfde.ai · 面向 FDE 的开源共创平台（内测）</div>
+    <div style="display:flex;gap:22px">
+      <a href="index.html#mech">平台机制</a>
+      <a href="docs/index.html">FDE 入门指南</a>
+      <a href="index.html#demands">企业需求池</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

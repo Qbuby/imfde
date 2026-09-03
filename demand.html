@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设备巡检 AI 报告工具（私有化部署）· 需求详情 | imfde.ai</title>
+<meta name="description" content="企业真实需求（已脱敏）：巡检报告自动生成、异常预警、MES 对接、离线可用。认领即锁定协议与分账。">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* 页面专属：验收标准编号列 */
+  .tbl td.code{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;width:44px}
+  .kv{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;font-size:14px;margin-top:4px}
+  .kv dt{color:var(--muted)}
+  .kv dd{color:var(--text)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="logo-badge">ImFDE</span></a>
+    <nav class="nav-links">
+      <a href="index.html#demands">企业需求池</a>
+      <a href="index.html#projects">进行中交付</a>
+      <a href="index.html#mech">平台机制</a>
+    </nav>
+    <div style="display:flex;gap:10px">
+      <a class="btn btn-primary btn-sm" href="https://github.com/">GitHub 登录认领</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html#demands">企业需求池</a><span class="sep">/</span>设备巡检 AI 报告工具</div>
+
+  <!-- 需求头部 -->
+  <div class="detail-head">
+    <div class="chips"><span class="chip chip-open">待认领</span><span class="ind">离散制造</span><span class="ind">私有化部署</span></div>
+    <h1>设备巡检 AI 报告工具（私有化部署）</h1>
+    <div class="meta">
+      <span>预算 <b>¥30,000 – 50,000</b></span>
+      <span>交付周期 <b>4 周</b></span>
+      <span>3 人报名 · 方案中</span>
+      <span>上架于 2026-08-28</span>
+    </div>
+  </div>
+
+  <div class="detail-grid">
+    <!-- 主栏 -->
+    <div class="main">
+
+      <div class="panel">
+        <h2>需求背景</h2>
+        <div class="sub">企业真实业务需求，已按平台规范脱敏发布</div>
+        <p>华南某离散制造企业（<b>已脱敏，代称 M 厂</b>），两条产线共 <b>120 台</b>关键设备，巡检员 8 人。现状：纸质表单 + 手机拍照零散存于个人微信，月度报告靠人工汇总，异常发现平均滞后 <b>3 天</b>。</p>
+        <p>期望：巡检员用手机记录设备状态，系统自动生成结构化巡检报告与异常预警；数据留在厂内，可对接现有 MES 系统，支持离线巡检。</p>
+        <div class="note blue"><b>为什么脱敏：</b>企业名、产线参数、MES 字段名以代称发布，认领并签署 NDA 后开放完整需求包（含现场照片样例、MES 接口文档）。</div>
+      </div>
+
+      <div class="panel">
+        <h2>验收标准（逐条量化，认领即锁定）</h2>
+        <div class="sub">按平台规则，验收标准在立项时锁定，中途不得单方面调整 —— 保护双方</div>
+        <table class="tbl">
+          <thead><tr><th style="width:44px">编号</th><th>验收标准</th><th style="width:220px">验证方式</th></tr></thead>
+          <tbody>
+            <tr><td class="code">A1</td><td>拍照 + 语音备注自动生成结构化巡检报告（设备 / 部位 / 状态 / 照片 / 维护建议），单份生成 ≤ 60 秒</td><td>现场实测 20 份，抽查合格率 ≥ 90%</td></tr>
+            <tr><td class="code">A2</td><td>识别 3 类预设异常（渗漏 / 异响 / 温升）并推送责任人，误报率 ≤ 10%</td><td>标注测试集 200 条回放</td></tr>
+            <tr><td class="code">A3</td><td>MES 对接：读取设备台账与工单字段，字段映射可配置，无需改 MES 侧代码</td><td>联调环境出验收单</td></tr>
+            <tr><td class="code">A4</td><td>离线可用：无网环境完成巡检并本地暂存，恢复网络后自动同步，不丢数据</td><td>断网实测 + 数据完整性核对</td></tr>
+            <tr><td class="code">A5</td><td>三级权限（巡检员 / 主管 / 管理员），操作日志保留 ≥ 180 天</td><td>后台演示 + 日志抽样</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h2>数据与合规边界</h2>
+        <ul>
+          <li><b>数据不出域：</b>模型私有化部署于厂内 GPU 服务器（企业已备 2×4090），禁止任何外网推理调用</li>
+          <li><b>分层开源约定：</b>通用报告引擎开源（协议认领时从 MIT / Apache-2.0 / AGPL 三选一锁定）；MES 连接器等场景定制层商业授权给企业</li>
+          <li><b>现场约束：</b>交付期累计驻场 ≤ 5 人日，其余远程；进厂需提前 3 天报备</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>交付物清单</h2>
+        <ul>
+          <li>可运行系统 1 套（含部署脚本与回滚方案）</li>
+          <li>开源内核仓库 1 个（通用报告引擎，含 README 与快速上手）</li>
+          <li>运维手册 + 巡检员使用手册各 1 份</li>
+          <li>验收演示 1 场（对照 A1–A5 逐条验证）</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- 侧栏 -->
+    <aside class="aside">
+
+      <div class="panel">
+        <h2>认领流程</h2>
+        <ul class="flow">
+          <li><span class="n">1</span><div><b>提交方案（48 小时内）</b><span>技术方案 + 里程碑 + 分账表，缺一不可</span></div></li>
+          <li><span class="n">2</span><div><b>社区投票（72 小时）</b><span>社区投票 + 企业双确认，胜出方案公示</span></div></li>
+          <li><span class="n">3</span><div><b>开放组队</b><span>胜出主理人组队 2–5 人，角色与占比写入分账表</span></div></li>
+          <li><span class="n">4</span><div><b>立项锁定</b><span>协议 + 分账表 + 验收标准写入项目页，不可更改</span></div></li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>方案必填清单</h2>
+        <ul>
+          <li><b>技术方案</b>（1 页）：架构、模型选型、离线方案</li>
+          <li><b>里程碑</b>：4 周拆到周，每周有可演示物</li>
+          <li><b>分账表</b>：用下方模板，投票通过即锁定</li>
+          <li><b>风险清单</b>：至少 3 条（含 MES 联调依赖）</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>分账表模板</h2>
+        <div class="sub">可按团队实际调整，投票通过后锁定，回款 72 小时内公示到账</div>
+        <table class="tbl">
+          <tbody>
+            <tr><td>FDE 主理人</td><td class="num" style="text-align:right"><span class="pct">40%</span></td></tr>
+            <tr><td>开发 2–3 人</td><td class="num" style="text-align:right"><span class="pct">35%</span></td></tr>
+            <tr><td>测试 / 文档</td><td class="num" style="text-align:right"><span class="pct">15%</span></td></tr>
+            <tr class="hl"><td>平台撮合</td><td class="num" style="text-align:right"><span class="pct">10%</span></td></tr>
+          </tbody>
+        </table>
+        <div class="note green">需求梳理、测试、文档等<b>非代码贡献同样记账</b>，按记录参与分账。</div>
+      </div>
+
+      <a class="btn btn-primary btn-lg" href="https://github.com/" style="justify-content:center;width:100%">GitHub 登录 · 提交认领方案</a>
+    </aside>
+  </div>
+
+  <!-- 底部 CTA -->
+  <div class="cta-band">
+    <div>
+      <h2>这个需求适合你？48 小时内提交方案</h2>
+      <p>方案被采纳即成为项目主理人；落选方案的开源部分可并入内核仓库，同样记贡献。</p>
+    </div>
+    <div style="display:flex;gap:12px">
+      <a class="btn btn-primary btn-lg" href="index.html#demands">浏览其他需求</a>
+      <a class="btn btn-ghost btn-lg" href="docs/index.html">FDE 入门指南</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 imfde.ai · 面向 FDE 的开源共创平台（内测）</div>
+    <div style="display:flex;gap:22px">
+      <a href="index.html#mech">平台机制</a>
+      <a href="docs/index.html">FDE 入门指南</a>
+      <a href="index.html#demands">企业需求池</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

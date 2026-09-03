@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FDE 入门指南 · 从知道到入门 | imfde.ai</title>
+<meta name="description" content="《FDE：从知道到入门》在线阅读 — 左侧目录导航，共 116 页。">
+<style>
+  :root{
+    --bg:#fafaf9; --surface:#ffffff; --text:#18181b; --muted:#71717a;
+    --border:#e4e4e7; --accent:#4f46e5; --accent-dark:#4338ca; --accent-soft:#eef2ff;
+    --page-bg:#e7e7e4; --topbar-h:56px; --sidebar-w:302px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--page-bg);color:var(--text);line-height:1.6;font-size:15px}
+  a{text-decoration:none;color:inherit}
+  button{font-family:inherit}
+
+  /* ===== 顶栏 ===== */
+  .topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;padding:0 16px}
+  .tb-back{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--text);white-space:nowrap}
+  .tb-back:hover{color:var(--accent)}
+  .tb-back .logo-badge{background:var(--accent);color:#fff;font-weight:700;font-size:13px;padding:5px 10px;border-radius:8px}
+  .tb-title{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tb-title b{color:var(--text);font-weight:600}
+  .tb-spacer{flex:1}
+  .tb-group{display:flex;align-items:center;gap:4px}
+  .tb-btn{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:8px;padding:5px 10px;font-size:13px;cursor:pointer;transition:border-color .15s,color .15s;white-space:nowrap}
+  .tb-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .tb-btn.icon{padding:5px 9px}
+  #pageNow{font-size:13px;color:var(--muted);min-width:86px;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+  #zoomPct{font-size:12px;color:var(--muted);min-width:42px;text-align:center;font-variant-numeric:tabular-nums}
+  .tb-menu{display:none}
+
+  /* ===== 侧栏目录 ===== */
+  .sidebar{position:fixed;top:var(--topbar-h);left:0;bottom:0;width:var(--sidebar-w);background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:90}
+  .side-filter{padding:12px 14px;border-bottom:1px solid var(--border)}
+  .side-filter input{width:100%;border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:13px;outline:none;background:var(--bg);color:var(--text)}
+  .side-filter input:focus{border-color:var(--accent);background:#fff}
+  .toc{flex:1;overflow-y:auto;padding:10px 8px 20px;overscroll-behavior:contain}
+  .toc a{display:block;border-radius:7px;padding:5px 10px;font-size:13.5px;color:var(--text);cursor:pointer;line-height:1.45;margin-bottom:1px}
+  .toc a:hover{background:var(--accent-soft);color:var(--accent-dark)}
+  .toc a.active{background:var(--accent);color:#fff;font-weight:600}
+  .toc a.lvl0{font-weight:600;margin-top:10px;color:var(--text)}
+  .toc a.lvl0.active{color:#fff}
+  .toc a.lvl1{padding-left:24px}
+  .toc a.lvl2{padding-left:38px;font-size:12.5px;color:var(--muted)}
+  .toc a.lvl2:hover{color:var(--accent-dark)}
+  .toc a .pg{float:right;font-size:11px;color:#a1a1aa;font-variant-numeric:tabular-nums;margin-top:2px}
+  .toc a.active .pg{color:rgba(255,255,255,.75)}
+  .toc-empty{padding:16px 12px;font-size:13px;color:var(--muted);display:none}
+  .side-foot{border-top:1px solid var(--border);padding:10px 14px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+  .side-foot a{color:var(--accent)}
+  .side-foot a:hover{text-decoration:underline}
+  .backdrop{display:none;position:fixed;inset:0;top:var(--topbar-h);background:rgba(24,24,27,.4);z-index:85}
+
+  /* ===== 内容区 ===== */
+  .viewer{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);padding:20px 0 60px}
+  .pages{display:flex;flex-direction:column;align-items:center;gap:14px}
+  .page{position:relative;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.14),0 0 1px rgba(0,0,0,.1);overflow:hidden}
+  .page canvas{display:block}
+  .page .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#b9b9b4;font-size:13px;background:repeating-linear-gradient(45deg,#fbfbfa,#fbfbfa 12px,#f4f4f2 12px,#f4f4f2 24px)}
+  .pagenum{font-size:12px;color:var(--muted);margin-top:-9px;margin-bottom:2px;font-variant-numeric:tabular-nums;user-select:none}
+
+  /* 加载 / 错误浮层 */
+  .overlay{position:fixed;inset:0;top:var(--topbar-h);z-index:80;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;background:var(--page-bg)}
+  .overlay .spin{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .overlay .msg{font-size:14px;color:var(--muted)}
+  .overlay.err .spin{display:none}
+  .overlay.err .msg{color:var(--text);max-width:420px;text-align:center;line-height:1.8}
+  .overlay.err a{color:var(--accent);font-weight:600}
+
+  @media (max-width:860px){
+    .sidebar{transform:translateX(-100%);transition:transform .22s ease;box-shadow:4px 0 20px rgba(0,0,0,.08)}
+    body.side-open .sidebar{transform:none}
+    body.side-open .backdrop{display:block}
+    .viewer{margin-left:0}
+    .tb-title{display:none}
+    .tb-menu{display:inline-flex}
+    #zoomPct{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶栏 -->
+<header class="topbar">
+  <a class="tb-back" href="../index.html"><span class="logo-badge">ImFDE</span><span>← 返回首页</span></a>
+  <div class="tb-title"><b>FDE 入门指南</b> · 从知道到入门</div>
+  <div class="tb-spacer"></div>
+  <div class="tb-group">
+    <span id="pageNow">加载中…</span>
+    <button class="tb-btn icon" id="prevBtn" title="上一页">↑</button>
+    <button class="tb-btn icon" id="nextBtn" title="下一页">↓</button>
+  </div>
+  <div class="tb-group">
+    <button class="tb-btn icon" id="zoomOut" title="缩小">−</button>
+    <span id="zoomPct">100%</span>
+    <button class="tb-btn icon" id="zoomIn" title="放大">＋</button>
+    <button class="tb-btn" id="zoomFit" title="适应宽度">适宽</button>
+  </div>
+  <button class="tb-menu tb-btn icon" id="menuBtn" title="目录">☰ 目录</button>
+</header>
+
+<!-- 侧栏目录 -->
+<aside class="sidebar">
+  <div class="side-filter"><input id="tocFilter" type="text" placeholder="筛选目录标题…" autocomplete="off"></div>
+  <nav class="toc" id="toc"></nav>
+  <div class="toc-empty" id="tocEmpty">没有匹配的目录项</div>
+  <div class="side-foot"><span>共 116 页 · 1.9 MB</span><a href="fde-guide.pdf" download="FDE从知道到入门.pdf">下载 PDF</a></div>
+</aside>
+<div class="backdrop" id="backdrop"></div>
+
+<!-- 内容区 -->
+<main class="viewer" id="viewer">
+  <div class="pages" id="pages"></div>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="spin"></div>
+  <div class="msg" id="ovMsg">正在加载 PDF… 0%</div>
+</div>
+
+<script src="../assets/pdfjs/pdf.min.js"></script>
+<script>
+/* ====== 目录数据（来自 PDF 书签，p 为 1 起始页码）====== */
+const TOC=[{"t":"开场 · 先看一单活儿","p":5,"l":0},{"t":"如何阅读这本书","p":7,"l":0},{"t":"一张可以跳着读的表","p":7,"l":1},{"t":"第一部 · 现场，先看见，再命名 · 行为先于头衔","p":10,"l":0},{"t":"第 1 章 · 一个 FDE 的一天","p":11,"l":1},{"t":"第 2 章 · 六个动作，理解、建造、验证、观察、修改、反馈","p":14,"l":1},{"t":"六个动作","p":14,"l":2},{"t":"循环","p":15,"l":2},{"t":"第 3 章 · FDE 到底是什么","p":19,"l":1},{"t":"第 4 章 · FDE 不是什么 · 各家怎么叫","p":22,"l":1},{"t":"4.1 FDE 不是什么","p":22,"l":2},{"t":"4.2 各家怎么叫，以及为什么头衔证明不了编制","p":24,"l":2},{"t":"第 5 章 · 能力地图与自我定位","p":26,"l":1},{"t":"技术","p":26,"l":2},{"t":"产品","p":26,"l":2},{"t":"客户","p":27,"l":2},{"t":"工程","p":27,"l":2},{"t":"判断","p":27,"l":2},{"t":"自我定位","p":28,"l":2},{"t":"第二部 · 墙与回路，这门编制为什么存在 · 墙还在，人能过去，路要修回","p":31,"l":0},{"t":"第 6 章 · 墙，软件在哪造，价值在哪发生","p":32,"l":1},{"t":"把人送过墙","p":33,"l":2},{"t":"碎石路、本体、以及一条产线","p":34,"l":2},{"t":"把过去做成可以复制的几天","p":35,"l":2},{"t":"演示变便宜之后，最后一公里变稀缺","p":36,"l":2},{"t":"第 7 章 · 一笔账，用服务换护城河","p":40,"l":1},{"t":"用毛利率换深度","p":40,"l":2},{"t":"几天内能跑，是成交的一种激活","p":42,"l":2},{"t":"交接是账本，不是赠品","p":42,"l":2},{"t":"对结果负责，可以写进合同，但本书不把它写成价目","p":43,"l":2},{"t":"只有一种生意真的需要这门编制","p":43,"l":2},{"t":"第 8 章 · 编制，一个账户几个人，回路怎么转","p":45,"l":1},{"t":"第三部 · 手艺（上），从问题到原型 · 先量，再建","p":48,"l":0},{"t":"第 9 章 · 现场提问与收窄，把一句话写成一页规格","p":49,"l":1},{"t":"范围是什么","p":49,"l":2},{"t":"如何问","p":50,"l":2},{"t":"如何写成可测目标","p":50,"l":2},{"t":"对话作为工程步骤","p":51,"l":2},{"t":"本章带走 · 一页规格模板","p":53,"l":2},{"t":"第 10 章 · 评测先于构建","p":54,"l":1},{"t":"评测集从哪里来","p":54,"l":2},{"t":"把「准确」收成代价","p":55,"l":2},{"t":"本章带走 · 评测集模板","p":56,"l":2},{"t":"第 11 章 · 系统设计，把模型接到遗留系统","p":57,"l":1},{"t":"信任边界","p":57,"l":2},{"t":"集成契约","p":58,"l":2},{"t":"易混淆之处","p":59,"l":2},{"t":"出域、隔离网，以及第一周就该列的那张清单","p":59,"l":2},{"t":"第 12 章 · 检索、智能体与模型，生产里的失败模式","p":60,"l":1},{"t":"权限","p":60,"l":2},{"t":"脏输入与幻觉","p":61,"l":2},{"t":"工具调用与人在回路","p":61,"l":2},{"t":"架构与持续改进","p":62,"l":2},{"t":"第四部 · 手艺（下），从原型到生产 · 上线不是终点，能被看见才是","p":63,"l":0},{"t":"第 13 章 · 现场的数据与 SQL","p":64,"l":1},{"t":"访问与质量","p":64,"l":2},{"t":"现场会用到的查询","p":65,"l":2},{"t":"现场的机器学习判断","p":66,"l":2},{"t":"第 14 章 · 生产工程、观测与运行手册","p":68,"l":1},{"t":"部署与观测","p":68,"l":2},{"t":"失败与运行手册","p":69,"l":2},{"t":"上线与采用","p":70,"l":2},{"t":"延迟预算，先量再换","p":70,"l":2},{"t":"本章带走 · 运行手册骨架","p":71,"l":2},{"t":"第 15 章 · 成本、配额与何时该停","p":72,"l":1},{"t":"先预测，再节省","p":72,"l":2},{"t":"回路与停止规则","p":73,"l":2},{"t":"配额与自建的真实成本账","p":73,"l":2},{"t":"第 16 章 · 治理与合规","p":75,"l":1},{"t":"第 17 章 · 企业知识库，先用客户语言建实体","p":77,"l":1},{"t":"冲突、切块、权限","p":77,"l":2},{"t":"本体工作","p":78,"l":2},{"t":"第五部 · 从一次交付到一种能力 · 能力留下，不让人留下","p":79,"l":0},{"t":"第 18 章 · 碎石路怎么变成公路，现场到产品的回路","p":80,"l":1},{"t":"碎石路本该粗糙","p":80,"l":2},{"t":"回路不是一句口号","p":81,"l":2},{"t":"冲突要留着，不要抹平","p":81,"l":2},{"t":"十家客户的反馈，不能直接变成路线图","p":81,"l":2},{"t":"现场与遥测冲突时，两边都可能对","p":81,"l":2},{"t":"什么时候该带回研究，不是加十条提示词","p":81,"l":2},{"t":"防止退化的三条判据","p":82,"l":2},{"t":"第 19 章 · 一个完整案例，从发现到交接的九十天","p":83,"l":1},{"t":"第 20 章 · 进入这行，岗位辨识、面试与作品集","p":85,"l":1},{"t":"编码，在脏系统里写可交接的集成","p":85,"l":2},{"t":"如何辨认这份工作","p":86,"l":2},{"t":"面试、作品集与入行路径","p":87,"l":2},{"t":"第 21 章 · 三十天路线与第一个项目","p":89,"l":1},{"t":"第一周，认识","p":89,"l":2},{"t":"第二周，发现","p":90,"l":2},{"t":"第三周，构建","p":90,"l":2},{"t":"第四周，生产","p":90,"l":2},{"t":"第一个项目怎么选","p":91,"l":2},{"t":"本章带走 · 交接清单","p":93,"l":2},{"t":"尾声 · 头衔会漂，墙还在","p":94,"l":0},{"t":"现在在变什么","p":95,"l":1},{"t":"收束，十二条可以带走的原则","p":96,"l":1},{"t":"后记","p":99,"l":1},{"t":"为什么会有这本书","p":99,"l":2},{"t":"材料是怎么来的","p":99,"l":2},{"t":"这本书不解答什么","p":100,"l":2},{"t":"致谢","p":100,"l":2},{"t":"最后","p":100,"l":2},{"t":"关于下一步","p":101,"l":2},{"t":"附录 A · 现场工具箱","p":102,"l":1},{"t":"附录 B · 现场失败模式目录","p":103,"l":1},{"t":"附录 C · 术语表与来源","p":106,"l":1},{"t":"术语表","p":106,"l":2},{"t":"来源","p":108,"l":2},{"t":"附录 D · 自检题四十道","p":110,"l":1},{"t":"第一部 · 现场（第 1 至 5 章）","p":110,"l":2},{"t":"第二部 · 墙与闭环（第 6 至 8 章）","p":111,"l":2},{"t":"第三部 · 手艺（上），从问题到原型（第 9 至 12 章）","p":111,"l":2},{"t":"第四部 · 手艺（下），从原型到生产（第 13 至 17 章）","p":112,"l":2},{"t":"第五部 · 从一次交付到一种能力（第 18 至 21 章）","p":113,"l":2},{"t":"判分","p":113,"l":2},{"t":"附录 E · 证据分级与读法","p":114,"l":1},{"t":"判断用问题，不用计数","p":115,"l":2}];
+
+/* ====== 基础引用 ====== */
+const $=id=>document.getElementById(id);
+const pagesEl=$('pages'), tocEl=$('toc'), overlay=$('overlay'), ovMsg=$('ovMsg'), pageNow=$('pageNow'), zoomPct=$('zoomPct');
+pdfjsLib.GlobalWorkerOptions.workerSrc='../assets/pdfjs/pdf.worker.min.js';
+
+const PDF_URL='fde-guide.pdf';
+const ZOOMS=[0.5,0.67,0.8,1,1.25,1.5,2,2.5,3];
+let pdf=null, TOTAL=0, baseW=612, baseH=792;
+let scale=1, fitScale=1, zoomIdx=3, fitMode=true;
+let pageEls=[], rendered=new Set(), queue=[], running=0;
+let curPage=0, spyLock=false;
+
+/* ====== 构建目录 ====== */
+function buildTOC(){
+  const frag=document.createDocumentFragment();
+  TOC.forEach((item,i)=>{
+    const a=document.createElement('a');
+    a.className='lvl'+item.l; a.dataset.p=item.p; a.dataset.i=i;
+    a.innerHTML=`<span class="pg">${item.p}</span>${item.t}`;
+    a.addEventListener('click',()=>{ goTo(item.p); spyLock=true; setActive(i); if(innerWidth<=860) closeSide(); });
+    frag.appendChild(a);
+  });
+  tocEl.appendChild(frag);
+}
+function setActive(i){
+  tocEl.querySelectorAll('a.active').forEach(x=>x.classList.remove('active'));
+  const el=tocEl.querySelector(`a[data-i="${i}"]`);
+  if(el){ el.classList.add('active');
+    const r=el.getBoundingClientRect(), cr=tocEl.getBoundingClientRect();
+    if(r.top<cr.top+8||r.bottom>cr.bottom-8) el.scrollIntoView({block:'nearest'});
+  }
+}
+
+/* 目录筛选 */
+$('tocFilter').addEventListener('input',e=>{
+  const q=e.target.value.trim().toLowerCase();
+  let n=0;
+  tocEl.querySelectorAll('a').forEach(a=>{
+    const hit=!q||a.textContent.toLowerCase().includes(q);
+    a.style.display=hit?'':'none'; if(hit)n++;
+  });
+  $('tocEmpty').style.display=n?'none':'block';
+});
+
+/* ====== 页面容器 ====== */
+function buildPages(){
+  pagesEl.innerHTML=''; pageEls=[]; rendered.clear(); queue.length=0; running=0;
+  for(let n=1;n<=TOTAL;n++){
+    const wrap=document.createElement('div');
+    const d=document.createElement('div');
+    d.className='page'; d.dataset.n=n;
+    d.style.width=Math.round(baseW*scale)+'px';
+    d.style.height=Math.round(baseH*scale)+'px';
+    d.innerHTML='<div class="ph">第 '+n+' 页</div>';
+    const label=document.createElement('div');
+    label.className='pagenum'; label.textContent=n+' / '+TOTAL;
+    wrap.appendChild(d); wrap.appendChild(label);
+    pagesEl.appendChild(wrap); pageEls.push(d);
+  }
+}
+
+/* ====== 懒渲染 ====== */
+function renderPage(n){
+  if(rendered.has(n)||running>=3){ if(!rendered.has(n)&&!queue.includes(n))queue.push(n); return; }
+  running++;
+  pdf.getPage(n).then(page=>{
+    const vp=page.getViewport({scale:scale*devicePixelRatio});
+    const d=pageEls[n-1], ph=d.querySelector('.ph');
+    const canvas=document.createElement('canvas');
+    canvas.width=Math.floor(vp.width); canvas.height=Math.floor(vp.height);
+    canvas.style.width=Math.round(vp.width/devicePixelRatio)+'px';
+    canvas.style.height=Math.round(vp.height/devicePixelRatio)+'px';
+    return page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise.then(()=>{
+      if(!d.isConnected)return;
+      const old=d.querySelector('canvas'); if(old)old.remove();
+      d.appendChild(canvas);
+      if(ph)ph.remove();
+      d.style.height=canvas.style.height; d.style.width=canvas.style.width;
+      rendered.add(n);
+    });
+  }).catch(()=>{}).finally(()=>{
+    running--;
+    const nx=queue.shift();
+    if(nx)renderPage(nx);
+  });
+}
+function renderVisible(){
+  const vh=innerHeight, top=scrollY;
+  pageEls.forEach(d=>{
+    const t=d.offsetTop, b=t+d.offsetHeight;
+    if(b>top-700&&t<top+vh+700){
+      const n=+d.dataset.n;
+      if(!rendered.has(n)&&!queue.includes(n))renderPage(n);
+    }else{
+      const c=d.querySelector('canvas'), n=+d.dataset.n;
+      if(c&&(b<top-vh*1.5||t>top+vh+vhh()*1.5)){
+        const w=Math.round(parseFloat(c.style.width)), h=Math.round(parseFloat(c.style.height));
+        d.style.width=w+'px'; d.style.height=h+'px';
+        c.remove(); d.insertAdjacentHTML('beforeend','<div class="ph">第 '+n+' 页</div>');
+        rendered.delete(n);
+      }
+    }
+  });
+}
+const vhh=()=>vh0||innerHeight; let vh0=0;
+
+let ioStarted=false;
+function startObserver(){ if(ioStarted)return; ioStarted=true;
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onResize);
+}
+
+/* ====== 缩放 ====== */
+function applyScale(s,fit){
+  scale=Math.min(3,Math.max(0.4,s)); fitMode=!!fit;
+  if(!fit){ zoomIdx=Math.max(0,ZOOMS.findIndex(z=>Math.abs(z-scale)<1e-6)); if(zoomIdx<0)zoomIdx=ZOOMS.findIndex(z=>z>scale); }
+  zoomPct.textContent=Math.round(scale*100)+'%';
+  rendered.clear(); queue.length=0; running=0;
+  pageEls.forEach(d=>{
+    d.style.width=Math.round(baseW*scale)+'px';
+    d.style.height=Math.round(baseH*scale)+'px';
+    const c=d.querySelector('canvas'); if(c)c.remove();
+    if(!d.querySelector('.ph'))d.insertAdjacentHTML('beforeend','<div class="ph">第 '+(+d.dataset.n)+' 页</div>');
+  });
+  const keep=curPage||1;
+  requestAnimationFrame(()=>{ renderVisible(); if(keep>1)jumpTo(keep,true); });
+}
+$('zoomIn').addEventListener('click',()=>{ zoomIdx=Math.min(ZOOMS.length-1,(fitMode?ZOOMS.findIndex(z=>z>=scale):zoomIdx)+1); applyScale(ZOOMS[zoomIdx],false); });
+$('zoomOut').addEventListener('click',()=>{ zoomIdx=Math.max(0,(fitMode?ZOOMS.findIndex(z=>z>=scale):zoomIdx)-1); applyScale(ZOOMS[zoomIdx],false); });
+$('zoomFit').addEventListener('click',()=>{ fitScale=Math.max(.4,Math.min(3,(viewerWidth()-40)/baseW)); applyScale(fitScale,true); });
+const viewerWidth=()=>document.querySelector('.viewer').clientWidth;
+
+/* ====== 跳转 / 滚动监听 ====== */
+function pageTop(n){ return pageEls[n-1]?pageEls[n-1].offsetTop-8:0; }
+function jumpTo(n,smooth){
+  n=Math.min(TOTAL,Math.max(1,n));
+  scrollTo({top:pageTop(n),behavior:smooth?'auto':'smooth'});
+  history.replaceState(null,'','#p'+n);
+}
+function goTo(n){ jumpTo(n); }
+$('prevBtn').addEventListener('click',()=>jumpTo(Math.max(1,curPage-1)));
+$('nextBtn').addEventListener('click',()=>jumpTo(Math.min(TOTAL,curPage+1)));
+
+let raf=0;
+function onScroll(){ if(raf)return; raf=requestAnimationFrame(()=>{ raf=0;
+  renderVisible();
+  const top=scrollY+90; let cur=1;
+  for(let n=1;n<=TOTAL;n++){ if(pageEls[n-1].offsetTop<=top)cur=n; else break; }
+  if(cur!==curPage){ curPage=cur; pageNow.textContent='第 '+cur+' / '+TOTAL+' 页'; history.replaceState(null,'','#p'+cur); updateSpy(); }
+});}
+function updateSpy(){
+  if(spyLock){ if(scrollY<50)spyLock=false; else return; }
+  let best=0;
+  for(let i=0;i<TOC.length;i++){ if(TOC[i].p<=curPage)best=i; else break; }
+  const el=tocEl.querySelector(`a[data-i="${best}"]`);
+  if(el&&!el.classList.contains('active'))setActive(best);
+}
+function onResize(){
+  if(fitMode){ fitScale=Math.max(.4,Math.min(3,(viewerWidth()-40)/baseW)); applyScale(fitScale,true); }
+  else renderVisible();
+}
+
+/* ====== 侧栏开合（窄屏） ====== */
+$('menuBtn').addEventListener('click',()=>document.body.classList.toggle('side-open'));
+$('backdrop').addEventListener('click',()=>closeSide());
+function closeSide(){ document.body.classList.remove('side-open'); }
+
+/* ====== 主流程 ====== */
+function showError(){
+  overlay.className='overlay err';
+  ovMsg.innerHTML='PDF 加载失败。直接双击打开本页（file:// 协议）会被浏览器拦截，请通过 HTTP 访问<br>（如 <code>python -m http.server</code> 或部署到 GitHub Pages），<br>或 <a href="'+PDF_URL+'" download>下载 PDF</a> 后本地阅读。';
+}
+buildTOC();
+const loadingTask=pdfjsLib.getDocument({url:PDF_URL});
+loadingTask.onProgress=({loaded,total})=>{
+  if(total)ovMsg.textContent='正在加载 PDF… '+Math.min(100,Math.round(loaded/total*100))+'%';
+  else ovMsg.textContent='正在加载 PDF… '+(loaded/1024/1024).toFixed(1)+' MB';
+};
+loadingTask.promise.then(doc=>{
+  pdf=doc; TOTAL=doc.numPages;
+  return pdf.getPage(1).then(p1=>{
+    const vp=p1.getViewport({scale:1});
+    baseW=vp.width; baseH=vp.height;
+    fitScale=Math.max(.4,Math.min(3,(viewerWidth()-40)/baseW));
+    scale=fitScale; zoomPct.textContent=Math.round(scale*100)+'%';
+    buildPages();
+    overlay.style.display='none';
+    pageNow.textContent='第 1 / '+TOTAL+' 页';
+    updateSpy();
+    /* 深链 #p{n} */
+    const m=location.hash.match(/^#p(\d+)$/);
+    if(m){ jumpTo(+m[1],true); curPage=+m[1]; }
+    renderVisible(); startObserver();
+    vh0=innerHeight;
+  });
+}).catch(err=>{ console.error(err); showError(); });
+</script>
+</body>
+</html>
