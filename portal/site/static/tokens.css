@@ -1,0 +1,134 @@
+/* =============================================================
+   tokens.css — OpenFDE 设计令牌（OKLCH）
+   在 home.css / world.css 之前加载。
+   任何主题切换只改这一层的 :root。
+   ============================================================= */
+
+:root {
+  /* Primitive scale */
+  --paper-50:  oklch(98.5% 0.006 80);
+  --paper-100: oklch(96%   0.008 80);
+  --paper-200: oklch(92%   0.010 80);
+  --paper-300: oklch(85%   0.012 80);
+
+  --ink-700: oklch(28% 0.008 70);  /* body emphasis */
+  --ink-600: oklch(38% 0.008 70);  /* secondary text */
+  --ink-500: oklch(52% 0.008 70);  /* tertiary / muted */
+  --ink-400: oklch(65% 0.008 70);
+
+  --teal-700: oklch(40% 0.08  195);
+  --teal-600: oklch(50% 0.09  195);
+  --teal-500: oklch(62% 0.10  195);
+  --teal-100: oklch(94% 0.025 195);
+
+  --lane-company: oklch(50% 0.085 195);
+  --lane-deploy:  oklch(48% 0.090 250);
+  --lane-people:  oklch(55% 0.105  65);
+  --lane-method:  oklch(50% 0.105 295);
+
+  /* Soft lane backgrounds — same hue, very high lightness, low chroma */
+  --lane-company-bg: oklch(96% 0.018 195);
+  --lane-deploy-bg:  oklch(96% 0.018 250);
+  --lane-people-bg:  oklch(96% 0.020  65);
+  --lane-method-bg:  oklch(96% 0.020 295);
+
+  --ok-700:    oklch(40% 0.07  155);
+  --ok-100:    oklch(95% 0.025 155);
+  --warn-700:  oklch(42% 0.13   25);
+  --warn-100:  oklch(95% 0.030  25);
+  --goal-700:  oklch(45% 0.075  85);
+  --goal-100:  oklch(95% 0.030  85);
+  --proj-700:  oklch(45% 0.080  55);
+  --proj-100:  oklch(95% 0.030  55);
+  --sys-700:   oklch(50% 0.005  70);
+  --sys-100:   oklch(94% 0.005  70);
+  --hero-700:  oklch(42% 0.13   20);
+  --hero-100:  oklch(95% 0.030  20);
+
+  /* Dark landing (homepage) — Ink / Cyan / Coral */
+  --ink-950: #020a12;
+  --ink-900: #07131e;
+  --ink-850: #0c1b27;
+  --ink-800: #122634;
+  --cyan-500: #1fc5e4;
+  --cyan-300: #8eeaff;
+  --amber-500: #f2a718;
+  --coral-500: #f06045;
+  --coral-400: #ff765b;
+  --white: #f7fafb;
+
+  /* Semantic — 主题切换只改这里 */
+  --bg:           var(--paper-50);
+  --surface:      #ffffff;
+  --surface-2:    var(--paper-100);
+  --fg:           var(--ink-700);
+  --fg-soft:      var(--ink-600);
+  --mut:          var(--ink-500);
+  --line:         oklch(89% 0.010 80);
+  --line-soft:    oklch(93% 0.008 80);
+  --acc:          var(--teal-600);
+  --acc-ink:      var(--teal-700);
+  --acc-soft:     var(--teal-100);
+  --warn:         var(--warn-700);
+  --ok:           var(--ok-700);
+
+  /* Aliases used by home.css / world.css */
+  --paper:        var(--paper-100);
+  --card:         var(--surface);
+  --ink-soft:     var(--fg-soft);
+
+  /* Type */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino,
+                "Source Serif 4", "Songti SC", "STSong", Georgia, serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "Cascadia Code",
+               Menlo, Consolas, monospace;
+
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.84rem);
+  --step-0:  clamp(0.94rem, 0.92rem + 0.2vw, 1.00rem);
+  --step-1:  clamp(1.13rem, 1.05rem + 0.5vw, 1.30rem);
+  --step-2:  clamp(1.35rem, 1.20rem + 0.8vw, 1.62rem);
+  --step-3:  clamp(1.62rem, 1.40rem + 1.2vw, 2.05rem);
+  --step-4:  clamp(2.05rem, 1.65rem + 2.0vw, 2.85rem);
+
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem;
+  --s-5: 1.5rem;  --s-6: 2rem;  --s-7: 3rem;   --s-8: 4rem;
+
+  --r-1: 8px; --r-2: 12px; --r-3: 16px; --r-pill: 999px;
+
+  --shadow-1: 0 1px 0 rgba(28, 28, 26, 0.04);
+  --shadow-2: 0 6px 24px -8px rgba(28, 28, 26, 0.12);
+
+  --container: 1180px;
+  --gutter: clamp(16px, 4vw, 28px);
+
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+  --motion-slow: 380ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        oklch(16% 0.010 80);
+    --surface:   oklch(20% 0.010 80);
+    --surface-2: oklch(24% 0.010 80);
+    --fg:        oklch(94% 0.008 80);
+    --fg-soft:   oklch(80% 0.008 80);
+    --mut:       oklch(62% 0.008 80);
+    --line:      oklch(28% 0.010 80);
+    --line-soft: oklch(25% 0.010 80);
+    --acc-soft:  oklch(30% 0.06 195);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,1 +1,5 @@
 .workbuddy/
+portal/site/__pycache__/
+*.pyc
+portal/*.html
+
