@@ -1,12 +1,12 @@
 {
-  "builds": [
-    {
-      "src": "api/portal.py",
-      "use": "@vercel/python"
+  "functions": {
+    "api/portal.py": {
+      "memory": 1024,
+      "maxDuration": 30
     }
-  ],
-  "routes": [
-    { "src": "/portal/(.*)", "dest": "/api/portal/$1" },
-    { "src": "/api/portal/(.*)", "dest": "/api/portal/$1" }
+  },
+  "rewrites": [
+    { "source": "/portal/static/:file*", "destination": "/api/portal?__path=/static/:file*" },
+    { "source": "/portal/:path*", "destination": "/api/portal?__path=/:path*" }
   ]
 }
