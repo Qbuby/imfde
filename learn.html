@@ -17,7 +17,7 @@
   .req li:last-child{border:none}
   .req b{color:var(--text)}
   .perm{margin-top:12px;background:var(--green-soft);color:var(--green);border-radius:8px;padding:9px 12px;font-size:12.5px}
-  .mod{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:border-color .15s ease}
+  .mod{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:border-color .15s ease;display:block;color:inherit;text-decoration:none}
   .mod:hover{border-color:var(--accent)}
   .mod .n{font-size:20px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
   .mod h3{font-size:15px;font-weight:600;margin:4px 0 6px}
@@ -72,44 +72,44 @@
 
   <!-- 学习内容 -->
   <section style="padding:34px 0 10px">
-    <div class="sec-head"><div><h2>学什么 · 四大内容板块</h2><div class="sub">全部来自可核对的公开材料，每一条都能链回原文</div></div></div>
+    <div class="sec-head"><div><h2>学什么 · 四大内容板块</h2><div class="sub">全部来自可核对的公开材料，每一条都能链回原文 · 点击进入内容服务</div></div></div>
     <div class="path4">
-      <div class="mod">
+      <a class="mod" href="/portal/落地">
         <div class="n">559</div>
         <h3>落地</h3>
         <p>给负责人/决策者的读法：按行业、厂商、证据等级切分，判断这事儿能不能落到自己企业。</p>
         <div class="rt">/落地</div>
-      </div>
-      <div class="mod">
+      </a>
+      <a class="mod" href="/portal/现场">
         <div class="n">559</div>
         <h3>现场</h3>
         <p>给从业者的读法：部署现场怎么推进、卡在哪、怎么绕过去。</p>
         <div class="rt">/现场</div>
-      </div>
-      <div class="mod">
+      </a>
+      <a class="mod" href="/portal/案例">
         <div class="n">503</div>
         <h3>案例（部署证据）</h3>
         <p>逐条筛选分页的案例库。可核对原文，不夸大——其中原文自称 FDE 的仅约 6.8%。</p>
         <div class="rt">/案例</div>
-      </div>
-      <div class="mod">
+      </a>
+      <a class="mod" href="/portal/方法">
         <div class="n">17</div>
         <h3>方法</h3>
         <p>方法论原文：六个动作循环、一页规格、评测先于构建，配套 606 道开放题自测。</p>
         <div class="rt">/方法</div>
-      </div>
+      </a>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px">
-      <div class="mod">
+      <a class="mod" href="/portal/世界动态">
         <h3>世界动态 · 每日观察</h3>
         <p>529 条观察事件按 7 / 30 / 90 天分窗上轴（90 天窗 52 条），四轨并行：部署 83 · 方法 30 · 人才 17 · 公司动作 10。上轴只要原文 published 或页上 modified，采集时间永不上轴——这是"数据快照"，不是实时新闻。</p>
         <div class="rt">/世界动态 · 快照 2026-09-02</div>
-      </div>
+      </a>
       <div class="mod">
-        <h3>开放题自测 · 606 道</h3>
-        <p>真实开放题，用来测自己的判断力。<b>答案不在站内展示</b>——许可是引用与链接，不是搬运，请回到原页核对。</p>
-        <div class="rt">/方法 · 配套题库</div>
+        <h3>立体沙盘 · 3D</h3>
+        <p>同一份世界动态数据的三维沙盘视图：公司塔 / 部署落点 / 人物信号灯 / 方法轨道。拖动旋转、滚轮缩放、点选看证据。</p>
+        <div class="rt"><a href="/portal/world3d" style="color:var(--accent)">/world3d</a></div>
       </div>
     </div>
   </section>

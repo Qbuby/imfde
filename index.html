@@ -123,6 +123,19 @@
   .foot a:hover{color:var(--text)}
 
   .empty-tip{grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:20px 0}
+
+  /* 内容·学 导航带 */
+  .content-band{background:var(--text);border-radius:18px;color:#fff;padding:32px 34px;margin-top:52px}
+  .content-band .cb-head{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+  .content-band h2{font-size:21px;font-weight:700}
+  .content-band .cb-sub{color:#a1a1aa;font-size:13px;margin-top:4px}
+  .content-band .cb-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .content-band a.cb{display:block;background:rgba(255,255,255,.06);border:1px solid #2d2d33;border-radius:12px;padding:14px 16px;transition:background .15s ease,border-color .15s ease}
+  .content-band a.cb:hover{background:rgba(255,255,255,.12);border-color:#52525b}
+  .content-band .cb-name{font-weight:600;font-size:14px}
+  .content-band .cb-desc{color:#a1a1aa;font-size:12px;margin-top:4px;line-height:1.5}
+  .content-band .cb-tag{display:inline-block;font-size:11px;color:#8eeaff;margin-top:8px}
+  @media (max-width:920px){.content-band .cb-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -133,7 +146,7 @@
     <a class="logo" href="#"><span class="logo-badge">ImFDE</span></a>
     <nav class="nav-links">
       <a href="#demands">企业需求池</a>
-      <a href="#projects">进行中交付</a>
+      <a href="#content">内容·学</a>
       <a href="#grow">FDE 成长</a>
       <a href="#enterprise">企业合作</a>
       <a href="#mech">平台机制</a>
@@ -163,6 +176,48 @@
     </div>
   </div>
 </div>
+
+<!-- 内容 · 学（学习社区，Python 内容服务已并入） -->
+<section id="content" style="padding:0 0 8px">
+  <div class="wrap">
+    <div class="content-band">
+      <div class="cb-head">
+        <div>
+          <h2>内容 · 学 —— 看懂 FDE 怎么发生</h2>
+          <div class="cb-sub">学习社区（已并入内容服务）：559 条部署证据 · 529 条世界观察 · 606 道开放题 · 全部可链回原文</div>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="learn.html" style="border-color:#3f3f46;color:#fff">进入内容中枢（静态）→</a>
+      </div>
+      <div class="cb-grid">
+        <a class="cb" href="/portal/世界动态">
+          <div class="cb-name">世界动态</div>
+          <div class="cb-desc">529 条观察 · 7/30/90 天分窗</div>
+          <div class="cb-tag">首页观察沙盘</div>
+        </a>
+        <a class="cb" href="/portal/案例">
+          <div class="cb-name">部署证据</div>
+          <div class="cb-desc">559 条案例 · 逐条可核对原文</div>
+          <div class="cb-tag">给要核原文的人</div>
+        </a>
+        <a class="cb" href="/portal/落地">
+          <div class="cb-name">落地</div>
+          <div class="cb-desc">给负责人/决策者的读法</div>
+          <div class="cb-tag">能落到自己企业吗</div>
+        </a>
+        <a class="cb" href="/portal/现场">
+          <div class="cb-name">现场</div>
+          <div class="cb-desc">给从业者的读法</div>
+          <div class="cb-tag">推进与卡点</div>
+        </a>
+        <a class="cb" href="/portal/world3d">
+          <div class="cb-name">立体沙盘</div>
+          <div class="cb-desc">同一数据的 3D 视图</div>
+          <div class="cb-tag">拖动 · 缩放 · 点选</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- 企业需求池 -->
 <section id="demands">

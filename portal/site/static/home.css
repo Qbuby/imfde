@@ -53,6 +53,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .mast nav a:hover,.mast nav a.on{color:var(--acc);text-decoration:none}
 .mast nav a.on{font-weight:650}
 .mast nav a.gh{color:var(--fg)}
+.mast nav a.back-to-portal{color:var(--acc);font-weight:650}
+.mast nav a.back-to-portal:hover{color:var(--acc);text-decoration:none}
 
 .hero{padding:36px 0 8px}
 .hero .k{

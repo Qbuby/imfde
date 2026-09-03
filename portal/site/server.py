@@ -30,6 +30,9 @@ SITE_DOMAIN = "imfde.ai"
 SITE_ORIGIN = "https://imfde.ai"
 SITE_NAME = "imfde.ai"
 SITE_TAGLINE = "The Open Framework for Forward-Deployed AI"
+# imfde 交易门户首页。内容服务（本 portal）作为「学习成长」子区迁入 imfde 平台后，
+# 提供返回平台门户的导航。部署时设为门户实际地址；留空则不显示。
+IM_FDE_PORTAL_URL = (__import__("os").environ.get("IMFDE_PORTAL_URL") or "").strip()
 SITE_DIR = Path(__file__).resolve().parent
 PORTAL_DIR = SITE_DIR.parent
 AI_DIR = PORTAL_DIR.parent
@@ -686,6 +689,8 @@ def mast(active: str, gh_url: str = "") -> str:
             f'<a class="gh" href="{esc(gh_url)}" target="_blank" rel="noopener noreferrer">'
             '<img class="mast-gh-icon" src="/static/icons/github-small.svg" alt="" aria-hidden="true"/>GitHub</a>'
         )
+    if IM_FDE_PORTAL_URL:
+        links.append(f'<a class="back-to-portal" href="{esc(IM_FDE_PORTAL_URL)}">imfde 门户 →</a>')
     brand = brand_mark()
     return f"""<div class="mast"><div class="mast-in">
   <a class="brand" href="/" aria-label="{esc(SITE_NAME)} — {esc(SITE_TAGLINE)}">
