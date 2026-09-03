@@ -766,6 +766,20 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
     }
 
 
+# 屏蔽来源：这些 host 的事件不上世界动态轴 / 3D 沙盘（平台运营决策 2026-09-03）。
+# 只影响展示出口（worldview.load_world），原始库与 ingest 不动。
+EXCLUDED_HOSTS = (
+    "fdeinterviews.com",
+    "databricks.com",
+    "job-boards.greenhouse.io/databricks",
+)
+
+
+def _host_excluded(host: str | None) -> bool:
+    h = (host or "").lower()
+    return any(h == x or h.endswith("." + x) or x in h for x in EXCLUDED_HOSTS)
+
+
 def load_world_from_events(cur) -> list[dict]:
     start = window_start(90)
     rows = list(
@@ -780,6 +794,7 @@ def load_world_from_events(cur) -> list[dict]:
             (start, S.SNAPSHOT),
         )
     )
+    rows = [r for r in rows if not _host_excluded(r["host"])]
     case_ids = [r["source_case_id"] for r in rows if r["source_case_id"]]
     cases = {}
     if case_ids:
