@@ -1,0 +1,422 @@
+{
+  "generated_at": "2026-08-29T11:16:11+08:00",
+  "aifde": [
+    {
+      "id": "discovery",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 客户发现",
+        "en": "L1 Customer Discovery",
+        "ja": "L1 顧客発見"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "scoping",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 方案范围",
+        "en": "L1 Solution Scoping",
+        "ja": "L1 ソリューション・スコーピング"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "evaluation",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 评测与安全",
+        "en": "L1 Evaluation and Safety",
+        "ja": "L1 評価と安全性"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "adoption",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 上线与采用",
+        "en": "L1 Rollout and Adoption",
+        "ja": "L1 展開と定着"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "data-integration",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 数据与集成",
+        "en": "L1 Data and Integration",
+        "ja": "L1 データと統合"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "prototype-iteration",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 原型与迭代",
+        "en": "L1 Prototyping and Iteration",
+        "ja": "L1 プロトタイピングと反復"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "production-engineering",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 生产工程",
+        "en": "L1 Production Engineering",
+        "ja": "L1 本番エンジニアリング"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "field-productization",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 反馈与产品化",
+        "en": "L1 Feedback and Productization",
+        "ja": "L1 フィードバックとプロダクト化"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "loop-engineering",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 Loop Engineering",
+        "en": "L1 Loop Engineering",
+        "ja": "L1 ループ・エンジニアリング"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "token-cost-control",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 控制 Token 成本",
+        "en": "L1 Token Cost Control",
+        "ja": "L1 Token コスト管理"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "enterprise-knowledge-base",
+      "taxonomy": "aifde",
+      "level": "L1",
+      "names": {
+        "zh": "L1 企业知识库搭建",
+        "en": "L1 Enterprise Knowledge Base",
+        "ja": "L1 エンタープライズ・ナレッジベース"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "strategic-framing",
+      "taxonomy": "aifde",
+      "level": "L2",
+      "names": {
+        "zh": "L2 战略问题定义",
+        "en": "L2 Strategic Problem Framing",
+        "ja": "L2 戦略的課題設定"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "portfolio-prioritization",
+      "taxonomy": "aifde",
+      "level": "L2",
+      "names": {
+        "zh": "L2 组合与优先级",
+        "en": "L2 Portfolio and Prioritization",
+        "ja": "L2 ポートフォリオと優先順位付け"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "enterprise-architecture",
+      "taxonomy": "aifde",
+      "level": "L2",
+      "names": {
+        "zh": "L2 企业架构与平台",
+        "en": "L2 Enterprise Architecture and Platforms",
+        "ja": "L2 エンタープライズ・アーキテクチャとプラットフォーム"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "governance-risk",
+      "taxonomy": "aifde",
+      "level": "L2",
+      "names": {
+        "zh": "L2 治理、安全与合规",
+        "en": "L2 Governance, Security, and Compliance",
+        "ja": "L2 ガバナンス、セキュリティ、コンプライアンス"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "economics-commercial",
+      "taxonomy": "aifde",
+      "level": "L2",
+      "names": {
+        "zh": "L2 商业模型与经济性",
+        "en": "L2 Commercial Model and Economics",
+        "ja": "L2 商業モデルとユニットエコノミクス"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "fde-operating-model",
+      "taxonomy": "aifde",
+      "level": "L2",
+      "names": {
+        "zh": "L2 FDE 组织与授权",
+        "en": "L2 FDE Operating Model and Empowerment",
+        "ja": "L2 FDE 運営モデルと権限設計"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "change-scale-adoption",
+      "taxonomy": "aifde",
+      "level": "L2",
+      "names": {
+        "zh": "L2 变革与规模采用",
+        "en": "L2 Change and Scaled Adoption",
+        "ja": "L2 変革とスケール導入"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    },
+    {
+      "id": "field-product-strategy",
+      "taxonomy": "aifde",
+      "level": "L2",
+      "names": {
+        "zh": "L2 现场洞察与产品战略",
+        "en": "L2 Field Insight and Product Strategy",
+        "ja": "L2 現場インサイトとプロダクト戦略"
+      },
+      "n_questions_unique": 4,
+      "n_questions_rows": 12
+    }
+  ],
+  "fdeinterviews": [
+    {
+      "id": "ai-security-governance",
+      "taxonomy": "fdeinterviews",
+      "name": "AI Security, Privacy & Governance",
+      "path": "/c/ai-security-governance",
+      "local": "fdeinterviews.com/c/ai-security-governance/index.html",
+      "canonical": "https://fdeinterviews.com/c/ai-security-governance",
+      "page_title": "AI Security & Prompt Engineering Interview Questions (2026)",
+      "n_questions": 45
+    },
+    {
+      "id": "behavioral-customer",
+      "taxonomy": "fdeinterviews",
+      "name": "Behavioral & Customer Scenarios",
+      "path": "/c/behavioral-customer",
+      "local": "fdeinterviews.com/c/behavioral-customer/index.html",
+      "canonical": "https://fdeinterviews.com/c/behavioral-customer",
+      "page_title": "Behavioral & Customer Interview Questions for FDEs (2026)",
+      "n_questions": 74
+    },
+    {
+      "id": "coding-dsa",
+      "taxonomy": "fdeinterviews",
+      "name": "Coding & DSA",
+      "path": "/c/coding-dsa",
+      "local": "fdeinterviews.com/c/coding-dsa/index.html",
+      "canonical": "https://fdeinterviews.com/c/coding-dsa",
+      "page_title": "Coding & DSA Interview Questions for AI Engineers (2026)",
+      "n_questions": 93
+    },
+    {
+      "id": "llm-genai",
+      "taxonomy": "fdeinterviews",
+      "name": "LLM & GenAI Fundamentals",
+      "path": "/c/llm-genai",
+      "local": "fdeinterviews.com/c/llm-genai/index.html",
+      "canonical": "https://fdeinterviews.com/c/llm-genai",
+      "page_title": "LLM & Generative AI Interview Questions & Answers (2026)",
+      "n_questions": 56
+    },
+    {
+      "id": "ml-data-science",
+      "taxonomy": "fdeinterviews",
+      "name": "Machine Learning & Data Science",
+      "path": "/c/ml-data-science",
+      "local": "fdeinterviews.com/c/ml-data-science/index.html",
+      "canonical": "https://fdeinterviews.com/c/ml-data-science",
+      "page_title": "Machine Learning & Data Science Interview Questions (2026)",
+      "n_questions": 69
+    },
+    {
+      "id": "ml-infrastructure",
+      "taxonomy": "fdeinterviews",
+      "name": "ML Infrastructure & GPUs",
+      "path": "/c/ml-infrastructure",
+      "local": "fdeinterviews.com/c/ml-infrastructure/index.html",
+      "canonical": "https://fdeinterviews.com/c/ml-infrastructure",
+      "page_title": "ML Infrastructure & GPU Interview Questions (2026)",
+      "n_questions": 46
+    },
+    {
+      "id": "ml-system-design",
+      "taxonomy": "fdeinterviews",
+      "name": "ML System Design (Product)",
+      "path": "/c/ml-system-design",
+      "local": "fdeinterviews.com/c/ml-system-design/index.html",
+      "canonical": "https://fdeinterviews.com/c/ml-system-design",
+      "page_title": "ML System Design Interview Questions & Answers (2026)",
+      "n_questions": 12
+    },
+    {
+      "id": "mlops",
+      "taxonomy": "fdeinterviews",
+      "name": "MLOps & ML Engineering",
+      "path": "/c/mlops",
+      "local": "fdeinterviews.com/c/mlops/index.html",
+      "canonical": "https://fdeinterviews.com/c/mlops",
+      "page_title": "MLOps & ML Engineering Interview Questions & Answers (2026)",
+      "n_questions": 40
+    },
+    {
+      "id": "rag-agents",
+      "taxonomy": "fdeinterviews",
+      "name": "RAG & Agent System Design",
+      "path": "/c/rag-agents",
+      "local": "fdeinterviews.com/c/rag-agents/index.html",
+      "canonical": "https://fdeinterviews.com/c/rag-agents",
+      "page_title": "RAG & AI Agent Interview Questions & Answers (2026)",
+      "n_questions": 54
+    },
+    {
+      "id": "sql-data-engineering",
+      "taxonomy": "fdeinterviews",
+      "name": "SQL & Data Engineering",
+      "path": "/c/sql-data-engineering",
+      "local": "fdeinterviews.com/c/sql-data-engineering/index.html",
+      "canonical": "https://fdeinterviews.com/c/sql-data-engineering",
+      "page_title": "SQL & Data Engineering Interview Questions & Answers (2026)",
+      "n_questions": 47
+    },
+    {
+      "id": "system-design",
+      "taxonomy": "fdeinterviews",
+      "name": "System Design & Production Engineering",
+      "path": "/c/system-design",
+      "local": "fdeinterviews.com/c/system-design/index.html",
+      "canonical": "https://fdeinterviews.com/c/system-design",
+      "page_title": "System Design Interview Questions for AI & ML (2026)",
+      "n_questions": 70
+    }
+  ],
+  "crosswalk": [
+    {
+      "aifde_id": "discovery",
+      "fdei_id": "behavioral-customer",
+      "note": "Frontline shadowing and customer-discovery loops map to behavioral / customer scenarios."
+    },
+    {
+      "aifde_id": "scoping",
+      "fdei_id": "ml-system-design",
+      "note": "Solution scoping (constraints, success criteria, MVP cut) maps to product ML system design."
+    },
+    {
+      "aifde_id": "evaluation",
+      "fdei_id": "ai-security-governance",
+      "note": "Eval sets, risk thresholds, and safety gates sit with AI security & governance."
+    },
+    {
+      "aifde_id": "adoption",
+      "fdei_id": "behavioral-customer",
+      "note": "Rollout, workflow friction, and user adoption are customer/behavioral questions."
+    },
+    {
+      "aifde_id": "data-integration",
+      "fdei_id": "sql-data-engineering",
+      "note": "Enterprise data sources, permissions, and pipelines map to SQL / data engineering."
+    },
+    {
+      "aifde_id": "prototype-iteration",
+      "fdei_id": "ml-system-design",
+      "note": "Field prototypes and iteration loops are product ML system-design work."
+    },
+    {
+      "aifde_id": "production-engineering",
+      "fdei_id": "system-design",
+      "note": "Production reliability, serving, and ops map to system design & production engineering."
+    },
+    {
+      "aifde_id": "loop-engineering",
+      "fdei_id": "rag-agents",
+      "note": "Agent / tool loops and recovery paths map to RAG & agent system design."
+    },
+    {
+      "aifde_id": "token-cost-control",
+      "fdei_id": "llm-genai",
+      "note": "Token budgets, caching, and routing are LLM / GenAI fundamentals."
+    },
+    {
+      "aifde_id": "enterprise-knowledge-base",
+      "fdei_id": "rag-agents",
+      "note": "Enterprise KB build-out is the retrieval / RAG category."
+    },
+    {
+      "aifde_id": "governance-risk",
+      "fdei_id": "ai-security-governance",
+      "note": "L2 governance, security, and compliance map 1:1 onto /c/ai-security-governance."
+    },
+    {
+      "aifde_id": "enterprise-architecture",
+      "fdei_id": "system-design",
+      "note": "Platform and enterprise architecture map to system-design questions."
+    },
+    {
+      "aifde_id": "change-scale-adoption",
+      "fdei_id": "behavioral-customer",
+      "note": "Scaled change management is a behavioral / customer topic."
+    },
+    {
+      "aifde_id": "fde-operating-model",
+      "fdei_id": "behavioral-customer",
+      "note": "FDE org design and empowerment show up as behavioral / customer scenarios."
+    },
+    {
+      "aifde_id": "field-productization",
+      "fdei_id": "ml-system-design",
+      "note": "Turning field wins into product surfaces is ML system design (product)."
+    }
+  ]
+}

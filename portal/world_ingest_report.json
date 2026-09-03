@@ -1,0 +1,183 @@
+{
+  "written_at": "2026-09-02T09:30:42Z",
+  "snapshot": "2026-09-02",
+  "since_day": "2026-08-27",
+  "increment": {
+    "scanned": 39,
+    "fde_hits": 4,
+    "already_in_db": 25,
+    "stale": 2,
+    "added_axis": 0,
+    "collected": 0,
+    "review": 0
+  },
+  "n_events": 529,
+  "n_axis": 140,
+  "n_review": 0,
+  "new_axis_this_run": 0,
+  "by_lane_axis": {
+    "company": 10,
+    "deploy": 83,
+    "method": 30,
+    "people": 17
+  },
+  "n_links": 97,
+  "migrate": {
+    "migrated": 0,
+    "axis": 0,
+    "collected_only": 0
+  },
+  "folded_locale": 0,
+  "fetch": {
+    "ok": 2,
+    "blocked": 0,
+    "err": 0,
+    "axis": 2,
+    "collected": 0
+  },
+  "fetch_details": [
+    {
+      "id": "washtech-fde-talent-2026-09-01",
+      "url": "https://www.washingtontechnology.com/companies/2026/09/subset-tech-talent-supply-crunch-watch-out/415572/",
+      "fetch": "ok",
+      "day": "2026-09-01",
+      "date_kind": "published",
+      "status": "in_db"
+    },
+    {
+      "id": "plank-fde-brief-august-2026",
+      "url": "https://joinplank.com/fde-news/august-2026",
+      "fetch": "ok",
+      "day": "2026-08-06",
+      "date_kind": "published",
+      "status": "in_db"
+    }
+  ],
+  "feeds": {
+    "rss": {
+      "feeds": 3,
+      "hits": 4,
+      "added": 0,
+      "already": 2,
+      "stale": 2,
+      "details": [
+        {
+          "id": "fdepod",
+          "status": "ok",
+          "items": 4,
+          "fde": 4,
+          "added": 0,
+          "already": 2,
+          "stale": 2
+        },
+        {
+          "id": "pragmatic-engineer",
+          "status": "ok",
+          "items": 15,
+          "fde": 0,
+          "added": 0,
+          "already": 0,
+          "stale": 0
+        },
+        {
+          "id": "latent-space",
+          "status": "ok",
+          "items": 20,
+          "fde": 0,
+          "added": 0,
+          "already": 0,
+          "stale": 0
+        }
+      ]
+    },
+    "youtube": {
+      "feeds": 1,
+      "hits": 0,
+      "added": 0,
+      "details": [
+        {
+          "id": "ai-engineer-youtube",
+          "status": "ok",
+          "atom": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLKPca3kwwd-B59HNr-_lvA",
+          "added": 0
+        }
+      ]
+    },
+    "ats": {
+      "boards": 11,
+      "jobs": 185,
+      "added": 0,
+      "fresh": 0,
+      "details": [
+        {
+          "id": "palantir-lever",
+          "status": "dup",
+          "n": 42
+        },
+        {
+          "id": "anthropic-greenhouse",
+          "status": "dup",
+          "n": 8
+        },
+        {
+          "id": "databricks-greenhouse",
+          "status": "dup",
+          "n": 41
+        },
+        {
+          "id": "scale-greenhouse",
+          "status": "dup",
+          "n": 16
+        },
+        {
+          "id": "xai-greenhouse",
+          "status": "ok",
+          "n": 0
+        },
+        {
+          "id": "openai-ashby",
+          "status": "dup",
+          "n": 34
+        },
+        {
+          "id": "cohere-ashby",
+          "status": "dup",
+          "n": 19
+        },
+        {
+          "id": "replit-ashby",
+          "status": "dup",
+          "n": 1
+        },
+        {
+          "id": "perplexity-ashby",
+          "status": "dup",
+          "n": 1
+        },
+        {
+          "id": "cursor-ashby",
+          "status": "dup",
+          "n": 5
+        },
+        {
+          "id": "elevenlabs-ashby",
+          "status": "dup",
+          "n": 18
+        }
+      ]
+    }
+  },
+  "cs_hubs": {},
+  "peek": {
+    "indexes": 0,
+    "candidates": 0,
+    "added": 0,
+    "details": []
+  },
+  "vendor_cs_recrawl": false,
+  "crawl_paused_file_left_in_place": true,
+  "openai_dates_corrected": {
+    "introducing-openai-frontier": "2026-02-05",
+    "openai-launches-the-deployment-company": "2026-05-11"
+  }
+}

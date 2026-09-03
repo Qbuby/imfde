@@ -1,0 +1,109 @@
+entity,raw_text,count,suggested_slug,reason
+company,,20,unknown,empty
+company,某 1000+ 人的 AI 产品公司（匿名，明确非 Palantir、非创业公司）,1,unknown,anonymous
+company,某工业数据采集与可视化软件创业公司（OP 未点名）,1,unknown,anonymous
+company,某提供 FDSE 服务的公司（匿名未具名）,1,unknown,anonymous
+company,9fin,1,9fin,extra_from_commentary
+company,Accenture Federal Services,1,accenture-federal-services,extra_from_commentary
+company,Air Canada,1,air-canada,extra_from_commentary
+company,Aircall,1,aircall,extra_from_commentary
+company,Alternative Payments,1,alternative-payments,extra_from_commentary
+company,Ameriprise,1,ameriprise,extra_from_commentary
+company,Applied Materials,1,applied-materials,extra_from_commentary
+company,Aptean,1,aptean,extra_from_commentary
+company,Attio,1,attio,extra_from_commentary
+company,Baseten,1,baseten,extra_from_commentary
+company,Charlie Health,1,charlie-health,extra_from_commentary
+company,Cisco,1,cisco,extra_from_commentary
+company,Comcast,1,comcast,extra_from_commentary
+company,CrossCountry,1,crosscountry,extra_from_commentary
+company,Cummins,1,cummins,extra_from_commentary
+company,Disney,1,disney,extra_from_commentary
+company,Eve,1,eve,extra_from_commentary
+company,Everpure,1,everpure,extra_from_commentary
+company,Fortreum,1,fortreum,extra_from_commentary
+company,Galaxy,1,galaxy,extra_from_commentary
+company,Gecko Robotics,1,gecko-robotics,extra_from_commentary
+company,Hex,1,hex,extra_from_commentary
+company,Huron,1,huron,extra_from_commentary
+company,Hyro,1,hyro,extra_from_commentary
+company,Inriver,1,inriver,extra_from_commentary
+company,Leidos,1,leidos,extra_from_commentary
+company,Lenovo,1,lenovo,extra_from_commentary
+company,Lindy,1,lindy,extra_from_commentary
+company,Maybern,1,maybern,extra_from_commentary
+company,Modal,1,modal,extra_from_commentary
+company,MongoDB,1,mongodb,extra_from_commentary
+company,Optimizely,1,optimizely,extra_from_commentary
+company,PERMUTE,1,permute,extra_from_commentary
+company,Parloa,1,parloa,extra_from_commentary
+company,Propela Tech,1,propela-tech,extra_from_commentary
+company,Redapt,1,redapt,extra_from_commentary
+company,Reevo,1,reevo,extra_from_commentary
+company,RingCentral,1,ringcentral,extra_from_commentary
+company,Salient,1,salient,extra_from_commentary
+company,ServiceNow,1,servicenow,extra_from_commentary
+company,Snorkel AI,1,snorkel-ai,extra_from_commentary
+company,Tabs,1,tabs,extra_from_commentary
+company,Tenex,1,tenex,extra_from_commentary
+company,Tennr,1,tennr,extra_from_commentary
+company,Thesis Care,1,thesis-care,extra_from_commentary
+company,Toma,1,toma,extra_from_commentary
+company,Tomoro,1,tomoro,extra_from_commentary
+company,Viam,1,viam,extra_from_commentary
+company,Vitol,1,vitol,extra_from_commentary
+company,WPP,1,wpp,extra_from_commentary
+company,Windsurf,1,windsurf,extra_from_commentary
+company,Workday,1,workday,extra_from_commentary
+company,a16z Build,1,a16z-build,extra_from_commentary
+customer,Airbus 等（前 FDE Anjor Kanekar 曾在 Airbus 总装线现场）；制造业客户（未具名）,1,,anonymous
+customer,Composite organization (4 anonymized Foundry customers),1,,anonymous
+customer,Large European Insurer (anonymized),1,,anonymous
+customer,Major U.S. Government agency (anonymized),1,,anonymous
+customer,OpenAI 的最具战略性客户（未点名）,1,,anonymous
+customer,Rippling 最大、最具战略意义的客户（覆盖 HR、Finance、IT，未具名）,1,,anonymous
+customer,a voice customer（未具名语音客户）,1,,anonymous
+customer,一家财富 500 强消费品公司（CPG，未具名）,1,,anonymous
+customer,一家财富 500 强航空公司（未具名）,1,,anonymous
+customer,使用采购软件的客户（匿名未具名）,1,,anonymous
+customer,匿名客户（Cohere 客户）,1,,anonymous
+customer,匿名客户（全球投资公司）,1,,anonymous
+customer,匿名客户（制造业）,1,,anonymous
+customer,匿名客户（大型制造企业）,1,,anonymous
+customer,匿名客户（大型能源生产商）,1,,anonymous
+customer,匿名客户（生命科学）,1,,anonymous
+customer,匿名客户（硬件公司，原文仅称 hardware tests）,1,,anonymous
+customer,匿名客户（能源业）,1,,anonymous
+customer,匿名客户（通信业）,1,,anonymous
+customer,匿名客户（银行业）,1,,anonymous
+customer,某军事情报/分析单位（匿名，未具名）,1,,anonymous
+customer,零售企业、以及波兰与马萨诸塞州的客户（均匿名未具名）,1,,anonymous
+industry,AI 模型厂商、数据与 AI 平台、企业 SaaS、客服 AI、国防与情报（Scale AI 的 DHS/DOJ 岗位）、英国公共部门（Cohere）、法律服务（OpenAI Legal FDE）,1,,composite_or_job_index
+industry,"Construction / engineering (page). McCarthy Holding Companies, Inc., holding company of McCarthy Building Companies. ~4,000 salaried employees; hospitals, data centers, government facilities; jobs from under $1M to over $1B; nearly every U.S. state.",1,,composite_or_job_index
+industry,Consumer Services (page). Home security / alarm monitoring; Dallas-Fort Worth HQ; over 1 million people; US and Puerto Rico; in-house + BPO agents; Alarm Response Center.,1,,composite_or_job_index
+industry,"Consumer Services (page). Smart home security; 2 million customers across the US. National inbound sales; ~60,000 calls/week; two-step sale: phone then technician install.",1,,composite_or_job_index
+industry,"Defense / military aviation sustainment. Rapid Sustainment Office (RSO); Condition-Based Maintenance Plus (CBM+) program office. Aircraft platforms named: B-1B, C-5, KC-135; 16 platforms / 3,110 aircraft.",1,,composite_or_job_index
+industry,"Federal contracting / enterprise IT (page). Tribally owned federal prime contractor, Oklahoma City. IT, cybersecurity, R&D, professional services to Air Force, Army, Navy, State, CDC, FAA. 70+ active prime contracts; 2025 Inc. 5000.",1,,composite_or_job_index
+industry,"Financial Services (page). Consumer financing (home improvement, water treatment, power recreational vehicles). Portfolio just under $7 billion. SVP Servicing Operations; collections, customer care; onshore, offshore, bilingual agents.",1,,composite_or_job_index
+industry,"Financial Services (page). Personal loans, credit cards, savings tools; California HQ; millions of members. Sales environment first; collections expansion planned.",1,,composite_or_job_index
+industry,"Financial Services (page). Propel Holdings (TSX: PRL); multiple lending brands; Customer Service, Loan Origination, Payment Solutions / Collections. Public since 2021.",1,,composite_or_job_index
+industry,"Financial services / consumer savings app (page + index). SuperCash card, travel/shopping deals; 5 million+ customers; $150M+ customer savings to date (company scale, not a Glean KPI).",1,,composite_or_job_index
+industry,Financial services / fintech (page). Leading finance app in the Philippines (page spelling: Phillippines). Nearly 100 million users; 20+ years digital financial inclusion.,1,,composite_or_job_index
+industry,"IT Services, Consulting, Software Engineering, Government (Ashburn, VA; JavaScript, TypeScript, Python, React, .NET, AWS, Azure; 50,000+ developers organization-wide)",1,,composite_or_job_index
+industry,"Insurance (page). US HQ; ~120 years; Medicare Supplement, life, long-term care, annuities; group life, disability, 401(k). Seasonal + ongoing agent population; brokers.",1,,composite_or_job_index
+industry,"Integrated academic health system (University of Vermont Health Network) serving over one million people across Vermont and northern New York. Page: 1,100 clinicians; headquarters Vermont.",1,,composite_or_job_index
+industry,"Major electric and gas distribution utility headquartered in New York City (page). $13B annual revenue; 4.4M customers in Manhattan and the NYC metro area; 15,000 employees; 5.3M AMI meter deployment.",1,,composite_or_job_index
+industry,"Multi-state health system anchored in rural communities (West Virginia, Pennsylvania, Ohio, Maryland). Headquarters Morgantown, WV. Page: 4,000+ clinicians; 5.6+ million annual visits.",1,,composite_or_job_index
+industry,"Pediatric health system (page: nationally recognized pediatric healthcare delivery center). Specialties named: gastroenterology, cardiology, psychiatry; 22 pediatric specialties.",1,,composite_or_job_index
+industry,"Physical-operations / fleet AI (page). ~100,000 customers across transportation, construction, energy, field service, agriculture, manufacturing, F&B, retail, waste, public sector.",1,,composite_or_job_index
+industry,SaaS (page). Top global SaaS provider; services to over 700 million users worldwide. Business and Consumer Sales; subscriptions / storage packages / complimentary products.,1,,composite_or_job_index
+industry,"Software Development / technology transformation (e-commerce, web, logistics; San Francisco; PHP, JavaScript, CSS). Header team size 28; About section: approximately 80 engineers across U.S., Singapore, and India.",1,,composite_or_job_index
+industry,Software and technology (index chip). Page body also contains the sentence 'Pure Storage needed a solution...' in the challenge section — on-page inconsistency; customer name on title/hero/rest of body is Everpure.,1,,composite_or_job_index
+industry,Software and technology / marketing services (index). Anonymous marketing consulting firm founded 2010; 70+ clients; fully remote; experiment-led marketing / martech due diligence.,1,,composite_or_job_index
+industry,"Telecommunications (page). Largest wireless carrier in the United States with 120.9 million subscribers; wireless, home internet, TV, digital voice. Thousands of CSRs plus several BPO partners. Fiber-optic home internet / TV / digital voice division first.",1,,composite_or_job_index
+industry,Travel and Hospitality (page). Direct Sales and Marketing of a timeshare / world-class vacations brand. Contact center tracks timeshare points sold to new and existing customers. Remote agents.,1,,composite_or_job_index
+industry,"Travel and Hospitality (page). Holiday Inn Club Vacations -- resort, real estate and travel; 28 resorts in the US. Sales team on voice and chat. Contact-center training / Tour & Travel marketing.",1,,composite_or_job_index
+industry,"Travel and Hospitality (page). Largest operator of lodges/restaurants/concessions in U.S. national parks; Greenwood Village, CO. Brands include Yellowstone, Grand Canyon, Death Valley, Rocky Mountain, Mount Rushmore, Glacier; also Windstar Cruises, Country Walkers, VBT, Holiday Vacations. Four contact centers; Central Reservations for lodging/park guests.",1,,composite_or_job_index
+industry,Travel and Hospitality (page). Small-ship cruise line. President Chris Prelog; Sr. Director Guest Services Jaymi Fiveash; Outbound Sales Manager Shahaab Razak. Contact center is one of the first AI spaces at Windstar.,1,,composite_or_job_index
+industry,国防与情报（Leidos $105K–$190K、Fortreum Cleared Senior FDE $180K–$260K、Accenture Federal Services 的 Palantir Foundry 岗 $126K–$243K、Deloitte Cyber FDE）／医疗健康（Commure、Hippocratic AI、Thesis Care、Charlie Health、Deloitte Data Studio Revenue Cycle）／金融服务与加密（9fin 的 Forward Deployed Banker / Investor、Ameriprise VP FDE $242K–$333K、Alternative Payments $200K–$250K、Maybern、Galaxy VP FDE）／咨询与专业服务（Deloitte 32 个、Huron $120K–$171K、Cognizant $103K–$162K、CrossCountry）／半导体与硬件（Applied Materials $77K–$106K、NVIDIA Senior Staff FDE $224K–$356K、Lenovo Director $280K–$330K）／媒体娱乐与广告（Disney $118K–$158K、YouTube GenAI $155K–$269K、WPP $130K–$180K）／能源与物流（Vitol、Cummins）／公共部门与教育（Google Public Sector $152K–$221K、OpenAI Applied AI Architect - EDU）／云与开发者工具（Google Customer Engineer 系列 $152K–$267K、Databricks $182K–$250K、Datadog $244K–$305K、Everpure Portworx $208K–$305K、MongoDB、Snowflake $118K–$220K）,1,,composite_or_job_index
+industry,金融（fintech FDE 常有金融/银行背景）、医疗、国防,1,,composite_or_job_index

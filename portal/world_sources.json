@@ -1,0 +1,1514 @@
+{
+  "version": 1,
+  "updated": "2026-09-02",
+  "snapshot": "2026-08-29",
+  "crawl_paused": false,
+  "do_not_recrawl_vendor_case_studies": false,
+  "do_not_start_a_new_vendor": true,
+  "deploy_per_host_cap": 4,
+  "cs_per_hub_per_run": 2,
+  "homepage_still_reads": "world_events",
+  "target_ddl": "portal/world_schema.sql",
+  "note": "Dynamics + bounded case-study hubs. No new vendor, no unbounded mine_loop. Homepage reads world_events.",
+  "date_policy": {
+    "axis": [
+      "published",
+      "modified"
+    ],
+    "collected_label": "仅收录",
+    "never_axis": [
+      "sitemap_lastmod",
+      "collected"
+    ],
+    "dedupe": "title + day + lane; fold locale mirrors (zh/en OpenAI Frontier) into one event"
+  },
+  "event_definition": {
+    "unit": "一条事件 = 一份可核对的官方原文 URL。不是新闻簇，不是稿里点到的每一个客户名。",
+    "axis_requires": "published 或页上 modified。collected 与 sitemap lastmod 永不上轴。",
+    "lane_frozen_at_write": true,
+    "company_accept": [
+      "新成立或正式编制的部署组织 / JV / 运营公司，职责是把工程师嵌进客户现场",
+      "命名的部署产品线（Frontier、Deployment Company）",
+      "股东信或财报口径把 FDE 写成经营模型",
+      "该动作的官方系统记录（官方博客/新闻室/SEC exhibit）"
+    ],
+    "company_reject": [
+      "系统集成商扩合作、认证劳动力，但没有新的部署载体",
+      "组织公告里点到的客户名（不拆成部署节点）",
+      "同一天媒体转写或第二份官方镜像",
+      "只招几个 FDE、没有组织宣布"
+    ],
+    "same_act": "同一主体 + 同一公历日 + 同一沟通动作 → 轴上一条；其它 URL 只做 same_org 链，不当第二条变化",
+    "people_accept": "有日期、作者或受访者标个人的文章/访谈/演讲。公司新闻室代笔不进人物轨。",
+    "method_accept": "如何做 FDE、角色定义、有 publishedAt 的单岗、一篇普查。招聘板本身不当事件。",
+    "deploy_accept": "已在 cases 里、具名客户、原文 published 或 modified。不重开厂商案例墙。",
+    "system_of_record": "厂商官方页或 SEC。TechCrunch / CNBC / Channel Dive / 职业 SEO 不当 SoR。"
+  },
+  "lanes": [
+    {
+      "id": "company",
+      "zh": "公司动作",
+      "en": "Company Moves"
+    },
+    {
+      "id": "people",
+      "zh": "人物与观点",
+      "en": "People & Perspectives"
+    },
+    {
+      "id": "method",
+      "zh": "方法与岗位",
+      "en": "Methods & Roles"
+    },
+    {
+      "id": "deploy",
+      "zh": "真实部署",
+      "en": "Real Deployments"
+    }
+  ],
+  "info_kinds": [
+    {
+      "id": "org_announcement",
+      "lane": "company",
+      "zh": "组织公告",
+      "en": "Organization announcement",
+      "accept": "成立部署业务、扩编制、独立产品公司、官方组织说明",
+      "reject": "普通产品发布、客户故事、招聘板首页"
+    },
+    {
+      "id": "product_line",
+      "lane": "company",
+      "zh": "部署产品线",
+      "en": "Deployment product line",
+      "accept": "命名的部署平台/产品（Frontier、Deployment Company）且官方宣布",
+      "reject": "功能点更新、定价页、无事件日的营销页（可收录为 collected）"
+    },
+    {
+      "id": "earnings_letter",
+      "lane": "company",
+      "zh": "股东信/财报口径",
+      "en": "Shareholder letter / earnings",
+      "accept": "官方股东信、财报新闻稿、官方 webcast 里点名 FDE 的段落",
+      "reject": "Seeking Alpha / Channel Dive 转写当系统记录；用官方信/SEC exhibit 做 SoR"
+    },
+    {
+      "id": "press_release",
+      "lane": "company",
+      "zh": "官方新闻稿",
+      "en": "Official press release",
+      "accept": "组织级合作、FDE 编制、部署业务新闻稿",
+      "reject": "一客一页 impact / customer story"
+    },
+    {
+      "id": "named_essay",
+      "lane": "people",
+      "zh": "具名文章",
+      "en": "Named essay",
+      "accept": "作者身份标个人的博客/长文",
+      "reject": "公司新闻室代笔、把个人文标成 Palantir 官方"
+    },
+    {
+      "id": "interview",
+      "lane": "people",
+      "zh": "访谈",
+      "en": "Interview / Q&A",
+      "accept": "有日期、有具名受访者的访谈",
+      "reject": "fdeinterviews 题库答题页（许可是引用+链接，不进动态轴）"
+    },
+    {
+      "id": "conference_talk",
+      "lane": "people",
+      "zh": "会议演讲",
+      "en": "Conference talk",
+      "accept": "有发布日的演讲页或官方录像",
+      "reject": "无日期的 Twitter 口播、议程索引页"
+    },
+    {
+      "id": "podcast_episode",
+      "lane": "people",
+      "zh": "播客期",
+      "en": "Podcast episode",
+      "accept": "有发布日的单期",
+      "reject": "播客首页 / archive 索引"
+    },
+    {
+      "id": "discussion",
+      "lane": "people",
+      "zh": "公开讨论",
+      "en": "Public discussion",
+      "accept": "Reddit 等公开帖，一帖一条",
+      "reject": "同一帖拆成多行；无发布日则 collected，不上轴"
+    },
+    {
+      "id": "methodology",
+      "lane": "method",
+      "zh": "方法/手册",
+      "en": "Methodology / playbook",
+      "accept": "如何做 FDE、角色定义、交付生命周期",
+      "reject": "招聘广告伪装成指南（可改标 job_posting）"
+    },
+    {
+      "id": "engineering_blog",
+      "lane": "method",
+      "zh": "工程博客",
+      "en": "Engineering blog",
+      "accept": "工程团队写怎么建 FDE 组，有日期",
+      "reject": "客户案例墙、SEO 职业指南合集"
+    },
+    {
+      "id": "job_posting",
+      "lane": "method",
+      "zh": "单条招聘",
+      "en": "Job posting",
+      "accept": "官方 ATS 上有 publishedAt 的 FDE/FDSE/Applied AI/Deployed Engineer 岗位",
+      "reject": "把 300 条岗位铺满时间轴；无日期则 collected"
+    },
+    {
+      "id": "hiring_board",
+      "lane": "method",
+      "zh": "招聘板",
+      "en": "Hiring board index",
+      "accept": "ATS 索引本身作为观察源，抽「我们在建 FDE 团队」的官方页",
+      "reject": "索引页当事件；LinkedIn 无日期转发"
+    },
+    {
+      "id": "hiring_census",
+      "lane": "method",
+      "zh": "岗位普查",
+      "en": "Labor-market census",
+      "accept": "有明确采集日的公开普查（一篇一篇进方法轨）",
+      "reject": "无方法说明的 SEO 薪资文"
+    },
+    {
+      "id": "dated_case_study",
+      "lane": "deploy",
+      "zh": "有日期的交付故事",
+      "en": "Dated customer story",
+      "accept": "已在 cases 里、原文 published 或页上 modified 的 customer story",
+      "reject": "再 mine 一轮案例墙；sitemap lastmod；无日期 CS 留 /案例"
+    }
+  ],
+  "exclude_rules": [
+    "vendor case-study recrawl / new vendor mine_loop",
+    "sitemap lastmod as event day",
+    "index/home/platform pages (palantir.com, AIP, fdepulse.com, Cohere home)",
+    "paywalled republish as system of record",
+    "fdeinterviews.com question dumps",
+    "Twitter/X without a dated canonical page",
+    "aggregator rewrite (Channel Dive, Seeking Alpha) as SoR",
+    "SEO career roundups (GSDC, Dexity, jobsbyculture salary lists)",
+    "Shopify / Netflix / Duolingo names with no public official page",
+    "same-vendor successive CS as causal chain"
+  ],
+  "entities": [
+    {
+      "slug": "openai",
+      "kind": "org",
+      "name": "OpenAI",
+      "host": "openai.com"
+    },
+    {
+      "slug": "palantir",
+      "kind": "org",
+      "name": "Palantir",
+      "host": "palantir.com"
+    },
+    {
+      "slug": "anthropic",
+      "kind": "org",
+      "name": "Anthropic",
+      "host": "anthropic.com"
+    },
+    {
+      "slug": "cognition",
+      "kind": "org",
+      "name": "Cognition",
+      "host": "cognition.ai"
+    },
+    {
+      "slug": "databricks",
+      "kind": "org",
+      "name": "Databricks",
+      "host": "databricks.com"
+    },
+    {
+      "slug": "cohere",
+      "kind": "org",
+      "name": "Cohere",
+      "host": "cohere.com"
+    },
+    {
+      "slug": "aws",
+      "kind": "org",
+      "name": "AWS",
+      "host": "aws.amazon.com"
+    },
+    {
+      "slug": "google-cloud",
+      "kind": "org",
+      "name": "Google Cloud",
+      "host": "cloud.google.com"
+    },
+    {
+      "slug": "microsoft",
+      "kind": "org",
+      "name": "Microsoft",
+      "host": "microsoft.com"
+    },
+    {
+      "slug": "scale-ai",
+      "kind": "org",
+      "name": "Scale AI",
+      "host": "scale.com"
+    },
+    {
+      "slug": "sierra",
+      "kind": "org",
+      "name": "Sierra",
+      "host": "sierra.ai"
+    },
+    {
+      "slug": "xai",
+      "kind": "org",
+      "name": "xAI",
+      "host": "x.ai"
+    },
+    {
+      "slug": "replit",
+      "kind": "org",
+      "name": "Replit",
+      "host": "replit.com"
+    },
+    {
+      "slug": "perplexity",
+      "kind": "org",
+      "name": "Perplexity",
+      "host": "perplexity.ai"
+    },
+    {
+      "slug": "cursor",
+      "kind": "org",
+      "name": "Cursor",
+      "host": "cursor.com"
+    },
+    {
+      "slug": "elevenlabs",
+      "kind": "org",
+      "name": "ElevenLabs",
+      "host": "elevenlabs.io"
+    },
+    {
+      "slug": "plank",
+      "kind": "org",
+      "name": "Plank",
+      "host": "joinplank.com"
+    },
+    {
+      "slug": "ross-wilkers",
+      "kind": "person",
+      "name": "Ross Wilkers",
+      "host": "washingtontechnology.com"
+    },
+    {
+      "slug": "posthog",
+      "kind": "org",
+      "name": "PostHog",
+      "host": "posthog.com"
+    },
+    {
+      "slug": "vannevar",
+      "kind": "org",
+      "name": "Vannevar Labs",
+      "host": "vannevarlabs.com"
+    },
+    {
+      "slug": "a16z",
+      "kind": "org",
+      "name": "Andreessen Horowitz",
+      "host": "a16z.com"
+    },
+    {
+      "slug": "nabeel-qureshi",
+      "kind": "person",
+      "name": "Nabeel Qureshi",
+      "host": "nabeelqu.co"
+    },
+    {
+      "slug": "barry-mccardel",
+      "kind": "person",
+      "name": "Barry McCardel",
+      "host": "barry.ooo"
+    },
+    {
+      "slug": "ted-mabrey",
+      "kind": "person",
+      "name": "Ted Mabrey",
+      "host": "linkedin.com"
+    },
+    {
+      "slug": "bob-mcgrew",
+      "kind": "person",
+      "name": "Bob McGrew",
+      "host": "youtube.com"
+    },
+    {
+      "slug": "marty-cagan",
+      "kind": "person",
+      "name": "Marty Cagan",
+      "host": "svpg.com"
+    },
+    {
+      "slug": "natalie-meurer",
+      "kind": "person",
+      "name": "Natalie Meurer",
+      "host": "sierra.ai"
+    },
+    {
+      "slug": "kevin-bai",
+      "kind": "person",
+      "name": "Kevin Bai",
+      "host": "zkevinbai.com"
+    },
+    {
+      "slug": "gergely-orosz",
+      "kind": "person",
+      "name": "Gergely Orosz",
+      "host": "pragmaticengineer.com"
+    },
+    {
+      "slug": "alex-karp",
+      "kind": "person",
+      "name": "Alex Karp",
+      "host": "palantir.com"
+    },
+    {
+      "slug": "shyam-sankar",
+      "kind": "person",
+      "name": "Shyam Sankar",
+      "host": "palantir.com"
+    },
+    {
+      "slug": "colin-jarvis",
+      "kind": "person",
+      "name": "Colin Jarvis",
+      "host": "newsletter.eng-leadership.com"
+    },
+    {
+      "slug": "blend360",
+      "kind": "org",
+      "name": "Blend360",
+      "host": "blend360.com"
+    }
+  ],
+  "feeds": [
+    {
+      "id": "openai-index",
+      "url": "https://openai.com/index/",
+      "host": "openai.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement",
+        "product_line"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 1,
+      "entity_slug": "openai",
+      "notes": "只要 Deployment / Frontier / FDE 组织；不要每条产品更新"
+    },
+    {
+      "id": "openai-careers",
+      "url": "https://openai.com/careers/",
+      "host": "openai.com",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting",
+        "hiring_board"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "openai",
+      "notes": "单条有 publishedAt 才进轴；板本身不当事件"
+    },
+    {
+      "id": "palantir-newsroom",
+      "url": "https://www.palantir.com/newsroom/",
+      "host": "palantir.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement",
+        "press_release"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 1,
+      "entity_slug": "palantir",
+      "notes": "不要 /impact 案例墙。首页与 AIP 平台页已标 unusable"
+    },
+    {
+      "id": "palantir-letters",
+      "url": "https://www.palantir.com/newsroom/letters",
+      "host": "palantir.com",
+      "lane": "company",
+      "info_kinds": [
+        "earnings_letter"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 1,
+      "entity_slug": "palantir",
+      "notes": "股东信列表。单期用官方信 URL，不用转载"
+    },
+    {
+      "id": "palantir-investors",
+      "url": "https://investors.palantir.com/",
+      "host": "investors.palantir.com",
+      "lane": "company",
+      "info_kinds": [
+        "earnings_letter",
+        "press_release"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "palantir",
+      "notes": "IR 入口；事件日用信/新闻稿页上的日期"
+    },
+    {
+      "id": "palantir-lever",
+      "url": "https://jobs.lever.co/palantir",
+      "host": "jobs.lever.co",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting",
+        "hiring_board"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "palantir",
+      "notes": "FDSE / Forward Deployed AI Engineer。弱信号"
+    },
+    {
+      "id": "anthropic-news",
+      "url": "https://www.anthropic.com/news",
+      "host": "anthropic.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement",
+        "press_release"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 1,
+      "entity_slug": "anthropic",
+      "notes": "组织/部署能力公告才收；不要模型发布当公司动作"
+    },
+    {
+      "id": "anthropic-greenhouse",
+      "url": "https://job-boards.greenhouse.io/anthropic",
+      "host": "job-boards.greenhouse.io",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "anthropic",
+      "notes": "Forward Deployed Engineer / Applied AI。publishedAt 弱信号"
+    },
+    {
+      "id": "cognition-blog",
+      "url": "https://cognition.ai/blog",
+      "host": "cognition.ai",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement",
+        "engineering_blog"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "cognition",
+      "notes": "组织/角色说明进公司或方法；Devin 客户页仍走部署轨且不新抓"
+    },
+    {
+      "id": "databricks-blog",
+      "url": "https://www.databricks.com/blog",
+      "host": "databricks.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement",
+        "engineering_blog"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "databricks",
+      "notes": "只要 FDE/部署组织，不要普通产品发布"
+    },
+    {
+      "id": "databricks-greenhouse",
+      "url": "https://job-boards.greenhouse.io/databricks",
+      "host": "job-boards.greenhouse.io",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting",
+        "hiring_census"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "databricks",
+      "notes": "AI FDE / Sr. Manager AI-FDE。板上 100+ 岗，只作普查 + 近 7 天新发布的单岗（每次最多 4 条）"
+    },
+    {
+      "id": "microsoft-blog",
+      "url": "https://blogs.microsoft.com/blog/",
+      "host": "blogs.microsoft.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 1,
+      "entity_slug": "microsoft",
+      "notes": "只要部署编制/Frontier Company；不要每条 Copilot 产品更新"
+    },
+    {
+      "id": "cohere-blog",
+      "url": "https://cohere.com/blog",
+      "host": "cohere.com",
+      "lane": "people",
+      "info_kinds": [
+        "named_essay",
+        "org_announcement"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 1,
+      "entity_slug": "cohere",
+      "notes": "已有 2026-08-27 FDE 文；新闻室新公告继续收"
+    },
+    {
+      "id": "aws-news",
+      "url": "https://aws.amazon.com/blogs/",
+      "host": "aws.amazon.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement",
+        "engineering_blog"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 1,
+      "entity_slug": "aws",
+      "notes": "FDE 组织/伙伴运动才收。$1B 编制是公司动作，不是客户案例"
+    },
+    {
+      "id": "google-cloud-blog",
+      "url": "https://cloud.google.com/blog",
+      "host": "cloud.google.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 3,
+      "entity_slug": "google-cloud",
+      "notes": "PE 提到 2026-05 GTM 内 AI 组织招 FDE。没有官方页就空着"
+    },
+    {
+      "id": "scale-greenhouse",
+      "url": "https://job-boards.greenhouse.io/scaleai",
+      "host": "job-boards.greenhouse.io",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 3,
+      "entity_slug": "scale-ai",
+      "notes": "Forward Deployed AI Engineer。无组织公告则不要升到公司轨"
+    },
+    {
+      "id": "xai-greenhouse",
+      "url": "https://job-boards.greenhouse.io/xai",
+      "host": "job-boards.greenhouse.io",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 3,
+      "entity_slug": "xai",
+      "notes": "X Developer Platform FDE。弱信号"
+    },
+    {
+      "id": "openai-ashby",
+      "url": "https://jobs.ashbyhq.com/openai",
+      "host": "jobs.ashbyhq.com",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting",
+        "hiring_census"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 1,
+      "entity_slug": "openai",
+      "notes": "OpenAI 招聘在 Ashby。FDE / Applied AI Engineer 用 publishedAt；板本身不当事件"
+    },
+    {
+      "id": "cohere-ashby",
+      "url": "https://jobs.ashbyhq.com/cohere",
+      "host": "jobs.ashbyhq.com",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting",
+        "hiring_census"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 1,
+      "entity_slug": "cohere",
+      "notes": "Cohere FDE 岗在 Ashby。同角色不同地区折成一条"
+    },
+    {
+      "id": "replit-ashby",
+      "url": "https://jobs.ashbyhq.com/replit",
+      "host": "jobs.ashbyhq.com",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "replit",
+      "notes": "FDE 岗用 Ashby publishedAt。聚合站日期不当事件日"
+    },
+    {
+      "id": "perplexity-ashby",
+      "url": "https://jobs.ashbyhq.com/perplexity",
+      "host": "jobs.ashbyhq.com",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 3,
+      "entity_slug": "perplexity",
+      "notes": "Forward Deployed Engineer, Perplexity Computer"
+    },
+    {
+      "id": "cursor-ashby",
+      "url": "https://jobs.ashbyhq.com/cursor",
+      "host": "jobs.ashbyhq.com",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 3,
+      "entity_slug": "cursor",
+      "notes": "FDE / Forward Deployed Strategist。弱信号"
+    },
+    {
+      "id": "elevenlabs-ashby",
+      "url": "https://jobs.ashbyhq.com/elevenlabs",
+      "host": "jobs.ashbyhq.com",
+      "lane": "method",
+      "info_kinds": [
+        "job_posting"
+      ],
+      "fetch_mode": "ats_api",
+      "status": "watch",
+      "priority": 3,
+      "entity_slug": "elevenlabs",
+      "notes": "地区变体折成一条。弱信号"
+    },
+    {
+      "id": "fdeinterviews-blog",
+      "url": "https://www.fdeinterviews.com/blog",
+      "host": "fdeinterviews.com",
+      "lane": "method",
+      "info_kinds": [
+        "methodology"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 2,
+      "notes": "博客/指南可收。题库 /q /c 不进动态"
+    },
+    {
+      "id": "fdepod",
+      "url": "https://fdepod.substack.com/",
+      "host": "fdepod.substack.com",
+      "lane": "people",
+      "info_kinds": [
+        "podcast_episode",
+        "named_essay"
+      ],
+      "fetch_mode": "rss",
+      "status": "watch",
+      "priority": 2,
+      "notes": "单期有日期才进；首页不当事件"
+    },
+    {
+      "id": "pragmatic-engineer",
+      "url": "https://blog.pragmaticengineer.com/",
+      "host": "blog.pragmaticengineer.com",
+      "lane": "people",
+      "info_kinds": [
+        "named_essay"
+      ],
+      "fetch_mode": "rss",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "gergely-orosz",
+      "notes": "newsletter 镜像与 blog 折一条"
+    },
+    {
+      "id": "a16z",
+      "url": "https://a16z.com/",
+      "host": "a16z.com",
+      "lane": "people",
+      "info_kinds": [
+        "named_essay"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "a16z",
+      "notes": "enterprise AI / FDE 主题。services-led-growth 已在库"
+    },
+    {
+      "id": "latent-space",
+      "url": "https://www.latent.space/",
+      "host": "latent.space",
+      "lane": "people",
+      "info_kinds": [
+        "interview",
+        "conference_talk"
+      ],
+      "fetch_mode": "rss",
+      "status": "watch",
+      "priority": 2,
+      "notes": "AIEWF / FDE 访谈。作者标个人"
+    },
+    {
+      "id": "svpg",
+      "url": "https://www.svpg.com/",
+      "host": "svpg.com",
+      "lane": "people",
+      "info_kinds": [
+        "named_essay"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "marty-cagan"
+    },
+    {
+      "id": "ai-engineer-youtube",
+      "url": "https://www.youtube.com/@aiDotEngineer",
+      "host": "youtube.com",
+      "lane": "people",
+      "info_kinds": [
+        "conference_talk"
+      ],
+      "fetch_mode": "youtube",
+      "status": "watch",
+      "priority": 2,
+      "notes": "AIEWF FDE track。用视频发布日"
+    },
+    {
+      "id": "fdejobslist",
+      "url": "https://fdejobslist.com/",
+      "host": "fdejobslist.com",
+      "lane": "method",
+      "info_kinds": [
+        "hiring_board"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 3,
+      "notes": "Lever/Ashby/Greenhouse 聚合。不要把 300 条岗位铺上轴；只作发现，回链官方 ATS"
+    },
+    {
+      "id": "plank-census",
+      "url": "https://joinplank.com/fde-job-market",
+      "host": "joinplank.com",
+      "lane": "method",
+      "info_kinds": [
+        "hiring_census"
+      ],
+      "fetch_mode": "single_page",
+      "status": "watch",
+      "priority": 3,
+      "notes": "2026-07-04 普查可作一篇方法事件，不是 1206 条岗位"
+    },
+    {
+      "id": "shopify-news",
+      "url": "https://news.shopify.com/",
+      "host": "news.shopify.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 4,
+      "notes": "稿面示意。没有 FDE 公开页就空着，不写假节点"
+    },
+    {
+      "id": "netflix-jobs",
+      "url": "https://jobs.netflix.com/",
+      "host": "jobs.netflix.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement",
+        "job_posting"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 4,
+      "notes": "稿面示意。没有公开页就空着"
+    },
+    {
+      "id": "duolingo-careers",
+      "url": "https://careers.duolingo.com/",
+      "host": "careers.duolingo.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement",
+        "job_posting"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 4,
+      "notes": "稿面示意。没有公开页就空着"
+    },
+    {
+      "id": "blend360-news",
+      "url": "https://www.blend360.com/news",
+      "host": "blend360.com",
+      "lane": "company",
+      "info_kinds": [
+        "org_announcement",
+        "press_release"
+      ],
+      "fetch_mode": "list_index",
+      "status": "watch",
+      "priority": 2,
+      "entity_slug": "blend360",
+      "notes": "AI 服务商，FDE 编制 500→750 是组织级扩编。只收编制/组织公告，客户名不拆节点"
+    }
+  ],
+  "seeds": [
+    {
+      "id": "openai-deployment-company",
+      "url": "https://openai.com/index/openai-launches-the-deployment-company/",
+      "lane": "company",
+      "info_kind": "org_announcement",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "openai",
+      "date_hint": "2026-05-11",
+      "notes": "原文 publicationDate 2026-05-11。90 天窗（快照 2026-08-29）外。不要用侧栏 <time>。"
+    },
+    {
+      "id": "openai-frontier",
+      "url": "https://openai.com/index/introducing-openai-frontier",
+      "lane": "company",
+      "info_kind": "product_line",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "openai",
+      "date_hint": "2026-02-05",
+      "notes": "原文 publicationDate 2026-02-05。侧栏 <time> 2026-08-28 不当事件日。中英多行折成一条"
+    },
+    {
+      "id": "openai-frontier-product",
+      "url": "https://openai.com/business/frontier/",
+      "lane": "company",
+      "info_kind": "product_line",
+      "status": "in_db",
+      "priority": 2,
+      "entity_slug": "openai",
+      "notes": "产品页可能无事件日 → collected，不要当第二节点"
+    },
+    {
+      "id": "cohere-fde-capability",
+      "url": "https://cohere.com/blog/forward-deployed-engineers-capability-building",
+      "lane": "people",
+      "info_kind": "named_essay",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "cohere",
+      "date_hint": "2026-08-27",
+      "notes": "应进 30 天人物轨；作者标 Cohere 观点，不是交付故事"
+    },
+    {
+      "id": "a16z-services-led",
+      "url": "https://a16z.com/services-led-growth/",
+      "lane": "people",
+      "info_kind": "named_essay",
+      "status": "in_db",
+      "priority": 2,
+      "entity_slug": "a16z",
+      "date_hint": "2025-06",
+      "notes": "窗口外，90 天可见"
+    },
+    {
+      "id": "pe-heats-up",
+      "url": "https://blog.pragmaticengineer.com/the-pulse-forward-deployed-engineering-heats-up-again/",
+      "lane": "people",
+      "info_kind": "named_essay",
+      "status": "in_db",
+      "priority": 2,
+      "entity_slug": "gergely-orosz",
+      "date_hint": "2026-05",
+      "notes": "newsletter 镜像折一条"
+    },
+    {
+      "id": "pe-what-are-fdes",
+      "url": "https://newsletter.pragmaticengineer.com/p/forward-deployed-engineers",
+      "lane": "people",
+      "info_kind": "named_essay",
+      "status": "in_db",
+      "priority": 2,
+      "entity_slug": "gergely-orosz"
+    },
+    {
+      "id": "fdei-how-fdes-work",
+      "url": "https://www.fdeinterviews.com/blog/how-forward-deployed-engineers-work",
+      "lane": "method",
+      "info_kind": "methodology",
+      "status": "in_db",
+      "priority": 2
+    },
+    {
+      "id": "fdei-day-in-life",
+      "url": "https://www.fdeinterviews.com/blog/day-in-the-life-forward-deployed-engineer",
+      "lane": "method",
+      "info_kind": "methodology",
+      "status": "in_db",
+      "priority": 2
+    },
+    {
+      "id": "fdepod-101",
+      "url": "https://fdepod.substack.com/p/fde-101",
+      "lane": "method",
+      "info_kind": "podcast_episode",
+      "status": "in_db",
+      "priority": 2
+    },
+    {
+      "id": "openai-fde-seattle",
+      "url": "https://openai.com/careers/forward-deployed-engineer-(fde)-seattle-seattle/",
+      "lane": "method",
+      "info_kind": "job_posting",
+      "status": "in_db",
+      "priority": 2,
+      "entity_slug": "openai",
+      "notes": "常无发布日 → collected"
+    },
+    {
+      "id": "reddit-levels",
+      "url": "https://www.reddit.com/r/levels_fyi/comments/1qczm99/whats_a_forward_deployed_engineer/",
+      "lane": "people",
+      "info_kind": "discussion",
+      "status": "in_db",
+      "priority": 3,
+      "notes": "4 帖去重为 4 条，不要 10 行。无发布日 → collected"
+    },
+    {
+      "id": "reddit-openings",
+      "url": "https://www.reddit.com/r/ExperiencedDevs/comments/1u1ytv7/i_keep_seeing_forward_deployed_engineer_openings/",
+      "lane": "people",
+      "info_kind": "discussion",
+      "status": "in_db",
+      "priority": 3
+    },
+    {
+      "id": "reddit-role",
+      "url": "https://www.reddit.com/r/ExperiencedDevs/comments/1qxtynq/forward_deployed_engineer_role/",
+      "lane": "people",
+      "info_kind": "discussion",
+      "status": "in_db",
+      "priority": 3
+    },
+    {
+      "id": "reddit-scam",
+      "url": "https://www.reddit.com/r/cscareerquestions/comments/1vxnrie/forward_deployed_engineer_roles_seem_like_a_scam/",
+      "lane": "people",
+      "info_kind": "discussion",
+      "status": "in_db",
+      "priority": 3
+    },
+    {
+      "id": "nabeel-reflections",
+      "url": "https://nabeelqu.co/reflections-on-palantir",
+      "lane": "people",
+      "info_kind": "named_essay",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "nabeel-qureshi",
+      "date_hint": "2024-10",
+      "notes": "作者站日期为 SoR。Pirate Wires 2025-02 转载不当系统记录。作者标个人，不标 Palantir 官方"
+    },
+    {
+      "id": "barry-fde-culture",
+      "url": "https://www.barry.ooo/posts/fde-culture",
+      "lane": "people",
+      "info_kind": "named_essay",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "barry-mccardel",
+      "notes": "FDE Culture。作者标个人"
+    },
+    {
+      "id": "ted-mabrey-linkedin",
+      "url": "https://www.linkedin.com/posts/ted-mabrey_sorry-that-isnt-an-fde-activity-7242923007172640768-L10X",
+      "lane": "people",
+      "info_kind": "named_essay",
+      "status": "blocked",
+      "priority": 1,
+      "entity_slug": "ted-mabrey",
+      "date_hint": "2024-09-20",
+      "notes": "若找到作者博客 canonical 再用博客。LinkedIn 可能 blocked"
+    },
+    {
+      "id": "bob-mcgrew-yc",
+      "url": "https://www.youtube.com/watch?v=Zyw-YA0k3xo",
+      "lane": "people",
+      "info_kind": "conference_talk",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "bob-mcgrew",
+      "date_hint": "2025-09-08",
+      "notes": "YC《The FDE Playbook for AI Startups》"
+    },
+    {
+      "id": "marty-cagan-fde",
+      "url": "https://www.svpg.com/forward-deployed-engineers/",
+      "lane": "people",
+      "info_kind": "named_essay",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "marty-cagan",
+      "date_hint": "2025-09-17",
+      "notes": "产品发现视角，作者标个人"
+    },
+    {
+      "id": "natalie-meurer-latent",
+      "url": "https://www.latent.space/p/forward-deployed-engineers-aiewf",
+      "lane": "people",
+      "info_kind": "interview",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "natalie-meurer",
+      "date_hint": "2026-07-01",
+      "notes": "Sierra Head of Agent Engineering。作者/受访者标个人，不把 Sierra 客户故事写进部署轨"
+    },
+    {
+      "id": "natalie-meurer-aiewf",
+      "url": "https://www.youtube.com/watch?v=Byv311hdoHE",
+      "lane": "people",
+      "info_kind": "conference_talk",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "natalie-meurer",
+      "date_hint": "2026-07-28",
+      "notes": "The Dirty Secret of Forward Deployed Engineering。与 Latent Space 文可链，不折成一条除非标题+日相同"
+    },
+    {
+      "id": "kevin-bai-aiewf",
+      "url": "https://www.youtube.com/watch?v=KwhgfwOSToQ",
+      "lane": "people",
+      "info_kind": "conference_talk",
+      "status": "in_db",
+      "priority": 2,
+      "entity_slug": "kevin-bai",
+      "date_hint": "2026-06",
+      "notes": "Forward Deployed Engineering 101，AIEWF。台上数字不当审计测量"
+    },
+    {
+      "id": "palantir-q2-2026-letter",
+      "url": "https://www.palantir.com/q2-2026-letter/en/",
+      "lane": "company",
+      "info_kind": "earnings_letter",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "palantir",
+      "date_hint": "2026-08-03",
+      "notes": "Karp 股东信。落在快照 30 天窗。SoR=官方信，不是 Channel Dive。Sankar「only Palantir has FDEs」在 webcast，信与稿分开收录"
+    },
+    {
+      "id": "palantir-q2-2026-pr",
+      "url": "https://www.sec.gov/Archives/edgar/data/1321655/000132165526000039/a2026q2ex991pressrelease.htm",
+      "lane": "company",
+      "info_kind": "press_release",
+      "status": "blocked",
+      "priority": 2,
+      "entity_slug": "palantir",
+      "date_hint": "2026-08-03",
+      "notes": "SEC exhibit 99.1 佐证。与股东信同一天，链 same_org，不要两条都当独立变化"
+    },
+    {
+      "id": "aws-fde-partners",
+      "url": "https://aws.amazon.com/blogs/apn/introducing-forward-deployed-engineering-for-partners-winning-the-future-of-enterprise-ai/",
+      "lane": "company",
+      "info_kind": "org_announcement",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "aws",
+      "date_hint": "2026-06-30",
+      "notes": "官方宣布 FDE 组织 + $1B。90 天窗。不要用 Business Insider 当 SoR。客户名（NFL 等）出现在稿里也不要拆成部署节点"
+    },
+    {
+      "id": "aws-fde-computerworld",
+      "url": "https://www.computerworld.com/article/4184226/qa-a-look-at-forward-deployed-engineers-aws-style.html",
+      "lane": "people",
+      "info_kind": "interview",
+      "status": "in_db",
+      "priority": 3,
+      "entity_slug": "aws",
+      "date_hint": "2026-06-12",
+      "notes": "Taimur Rashid Q&A。次于官方 APN 文。受访者标个人/AWS 高管"
+    },
+    {
+      "id": "posthog-wtf-fde",
+      "url": "https://posthog.com/blog/forward-deployed-engineer",
+      "lane": "method",
+      "info_kind": "engineering_blog",
+      "status": "in_db",
+      "priority": 2,
+      "entity_slug": "posthog",
+      "date_hint": "2026-02-11",
+      "notes": "工程博客，有日期"
+    },
+    {
+      "id": "vannevar-fde",
+      "url": "https://vannevarlabs.com/blog/forward-deployed-engineering/",
+      "lane": "method",
+      "info_kind": "engineering_blog",
+      "status": "in_db",
+      "priority": 2,
+      "entity_slug": "vannevar",
+      "notes": "防务场景怎么建 FDE 组"
+    },
+    {
+      "id": "a16z-fde-fellowship",
+      "url": "https://build.a16z.com/fellowships/fde",
+      "lane": "method",
+      "info_kind": "methodology",
+      "status": "in_db",
+      "priority": 3,
+      "entity_slug": "a16z",
+      "notes": "fellowship 页。无事件日则 collected"
+    },
+    {
+      "id": "plank-fde-census-2026-07-04",
+      "url": "https://joinplank.com/fde-job-market",
+      "lane": "method",
+      "info_kind": "hiring_census",
+      "status": "in_db",
+      "priority": 3,
+      "date_hint": "2026-07-04",
+      "notes": "一篇普查，不是 1206 条岗位事件"
+    },
+    {
+      "id": "anthropic-fde-gh",
+      "url": "https://job-boards.greenhouse.io/anthropic/jobs/4985877008",
+      "lane": "method",
+      "info_kind": "job_posting",
+      "status": "in_db",
+      "priority": 3,
+      "entity_slug": "anthropic",
+      "notes": "示例岗位。只在有 publishedAt 时上轴；不要为每个城市复制一行"
+    },
+    {
+      "id": "palantir-fdai-lever",
+      "url": "https://jobs.lever.co/palantir/636fc05c-d348-4a06-be51-597cb9e07488",
+      "lane": "method",
+      "info_kind": "job_posting",
+      "status": "in_db",
+      "priority": 3,
+      "entity_slug": "palantir",
+      "notes": "Forward Deployed AI Engineer · New York。弱信号"
+    },
+    {
+      "id": "xai-fde-xapi",
+      "url": "https://job-boards.greenhouse.io/xai/jobs/5136287007",
+      "lane": "method",
+      "info_kind": "job_posting",
+      "status": "in_db",
+      "priority": 3,
+      "entity_slug": "xai",
+      "notes": "X Developer Platform FDE。弱信号，不当公司动作"
+    },
+    {
+      "id": "scale-fde-enterprise",
+      "url": "https://job-boards.greenhouse.io/scaleai/jobs/4597399005",
+      "lane": "method",
+      "info_kind": "job_posting",
+      "status": "in_db",
+      "priority": 3,
+      "entity_slug": "scale-ai"
+    },
+    {
+      "id": "databricks-fde-org",
+      "url": "https://www.databricks.com/blog/forward-deployed-engineering-delivering-business-outcomes-ai",
+      "lane": "company",
+      "info_kind": "org_announcement",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "databricks",
+      "date_hint": "2026-06-11",
+      "notes": "官方宣布 FDE 组织。90 天窗。稿里 Fox / JPMC / Qualcomm 不拆成部署节点"
+    },
+    {
+      "id": "microsoft-frontier-company",
+      "url": "https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/",
+      "lane": "company",
+      "info_kind": "org_announcement",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "microsoft",
+      "date_hint": "2026-07-02",
+      "notes": "Microsoft Frontier Company，$2.5B / 6000 人嵌入客户。自称 beyond FDE，仍是部署编制宣布。90 天窗"
+    },
+    {
+      "id": "deployco-northslope",
+      "url": "https://deploy.co/news/the-openai-deployment-company-to-acquire-northslope",
+      "lane": "company",
+      "info_kind": "org_announcement",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "openai",
+      "date_hint": "2026-07-08",
+      "notes": "OpenAI Deployment Company 收购 Northslope，扩 FDE 编制。90 天窗。不是客户故事"
+    },
+    {
+      "id": "colin-jarvis-eng-leadership",
+      "url": "https://newsletter.eng-leadership.com/p/inside-openais-forward-deployed-engineer",
+      "lane": "people",
+      "info_kind": "interview",
+      "status": "in_db",
+      "priority": 1,
+      "date_hint": "2026-08-15",
+      "notes": "Gregor Ojstersek 访谈 Colin Jarvis。30 天人物轨。付费墙但有 datePublished",
+      "entity_slug": "colin-jarvis"
+    },
+    {
+      "id": "washtech-fde-talent-2026-09-01",
+      "url": "https://www.washingtontechnology.com/companies/2026/09/subset-tech-talent-supply-crunch-watch-out/415572/",
+      "lane": "people",
+      "info_kind": "named_essay",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "ross-wilkers",
+      "date_hint": "2026-09-01",
+      "notes": "Ross Wilkers 署名。datePublished 2026-09-01。引用 C&T 研究，不当公司动作，不当普查拆条"
+    },
+    {
+      "id": "plank-fde-brief-august-2026",
+      "url": "https://joinplank.com/fde-news/august-2026",
+      "lane": "method",
+      "info_kind": "methodology",
+      "status": "in_db",
+      "priority": 2,
+      "entity_slug": "plank",
+      "date_hint": "2026-08-06",
+      "notes": "月刊一篇。发布日 2026-08-06，进 30 天方法轨。不要拆成多条新闻"
+    },
+    {
+      "id": "anthropic-enterprise-services",
+      "url": "https://www.anthropic.com/news/enterprise-ai-services-company",
+      "lane": "company",
+      "info_kind": "org_announcement",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "anthropic",
+      "date_hint": "2026-05-04",
+      "notes": "与 Blackstone / H&F / GS 成立企业 AI 服务公司。90 天从 6-01 起，本条不上轴，公司轨仍应收录"
+    },
+    {
+      "id": "blend360-fde-750",
+      "url": "https://www.blend360.com/news/blend-to-grow-forward-deployed-ai-engineering-force-to-750-by-2027",
+      "lane": "company",
+      "info_kind": "org_announcement",
+      "status": "in_db",
+      "priority": 1,
+      "entity_slug": "blend360",
+      "date_hint": "2026-08-20",
+      "notes": "官方新闻页 + PRNewswire 同日稿。FDE 编制 500→750。页面只有可见日期，无 meta，用 date_hint。落在 30 天公司轨"
+    }
+  ],
+  "exclude": [
+    {
+      "id": "palantir-home",
+      "url": "https://www.palantir.com/",
+      "reason": "index / unusable"
+    },
+    {
+      "id": "palantir-aip",
+      "url": "https://www.palantir.com/platforms/aip/",
+      "reason": "platform page, not an event"
+    },
+    {
+      "id": "palantir-impact",
+      "url": "https://www.palantir.com/impact/",
+      "reason": "customer-story hub; stay in /案例; do not recrawl"
+    },
+    {
+      "id": "cohere-home",
+      "url": "https://cohere.com/",
+      "reason": "index"
+    },
+    {
+      "id": "fdepulse-home",
+      "url": "https://www.fdepulse.com/",
+      "reason": "index, not an event"
+    },
+    {
+      "id": "channel-dive-palantir-q2",
+      "url": "https://www.channeldive.com/news/palantir-forward-deployed-engineers-ai-revenue-spike/827139/",
+      "reason": "aggregator rewrite; use official letter"
+    },
+    {
+      "id": "aws-aboutamazon-fde-2026-06-30",
+      "url": "https://www.aboutamazon.com/news/aws/aws-1-billion-forward-deployed-ai-engineers",
+      "reason": "same act as aws-fde-partners on 2026-06-30; APN post is SoR"
+    },
+    {
+      "id": "anthropic-cognizant-2026-07-27",
+      "url": "https://www.anthropic.com/news/cognizant-anthropic",
+      "reason": "SI partnership expansion, not a new deployment vehicle"
+    },
+    {
+      "id": "techcrunch-aws-fde",
+      "url": "https://techcrunch.com/2026/06/30/amazon-launches-new-1-billion-fde-org-following-openai-and-anthropic/",
+      "reason": "aggregator rewrite; use AWS APN post"
+    },
+    {
+      "id": "intercom-cs-wall",
+      "url": "https://www.intercom.com/customers",
+      "reason": "hub only; recrawl via cs_hubs with per-host cap"
+    },
+    {
+      "id": "writer-cs-wall",
+      "url": "https://writer.com/customers",
+      "reason": "hub only; recrawl via cs_hubs with per-host cap"
+    }
+  ],
+  "cs_hubs": [
+    {
+      "id": "writer-customers",
+      "url": "https://writer.com/customers/",
+      "entity_slug": "writer",
+      "host": "writer.com"
+    },
+    {
+      "id": "intercom-customers",
+      "url": "https://www.intercom.com/customers",
+      "entity_slug": "intercom",
+      "host": "intercom.com"
+    },
+    {
+      "id": "glean-stories",
+      "url": "https://www.glean.com/resources/customer-stories",
+      "entity_slug": "glean",
+      "host": "glean.com"
+    },
+    {
+      "id": "sierra-customers",
+      "url": "https://sierra.ai/customers",
+      "entity_slug": "sierra",
+      "host": "sierra.ai"
+    },
+    {
+      "id": "cresta-stories",
+      "url": "https://www.cresta.com/customer-stories",
+      "entity_slug": "cresta",
+      "host": "cresta.com"
+    },
+    {
+      "id": "factory-customers",
+      "url": "https://factory.ai/customers",
+      "entity_slug": "factory",
+      "host": "factory.ai"
+    },
+    {
+      "id": "augment-customers",
+      "url": "https://www.augmentcode.com/customers",
+      "entity_slug": "augment",
+      "host": "augmentcode.com"
+    },
+    {
+      "id": "harvey-customers",
+      "url": "https://www.harvey.ai/customers",
+      "entity_slug": "harvey",
+      "host": "harvey.ai"
+    },
+    {
+      "id": "devin-customers",
+      "url": "https://devin.ai/customers",
+      "entity_slug": "devin",
+      "host": "devin.ai"
+    },
+    {
+      "id": "moveworks-customers",
+      "url": "https://www.moveworks.com/us/en/customers",
+      "entity_slug": "moveworks",
+      "host": "moveworks.com"
+    },
+    {
+      "id": "sourcegraph-studies",
+      "url": "https://sourcegraph.com/case-studies",
+      "entity_slug": "sourcegraph",
+      "host": "sourcegraph.com"
+    },
+    {
+      "id": "cohere-stories",
+      "url": "https://cohere.com/customer-stories",
+      "entity_slug": "cohere",
+      "host": "cohere.com"
+    },
+    {
+      "id": "palantir-impact",
+      "url": "https://www.palantir.com/impact/",
+      "entity_slug": "palantir",
+      "host": "palantir.com"
+    }
+  ],
+  "execution_order": [
+    "Inventory URLs: dedupe, fill published/modified/collected, freeze lane. People lane should show Cohere 2026-08-27 inside 30d.",
+    "Named essays + talks: Nabeel, Barry, Ted, Bob McGrew, Marty Cagan, Natalie Meurer.",
+    "In-window company missing: Palantir Q2 2026 letter (2026-08-03), AWS FDE org (2026-06-30, 90d).",
+    "Newsrooms: Palantir / Anthropic / Cognition / Databricks — org only.",
+    "Shopify / Netflix / Duolingo: official page or leave empty.",
+    "Hiring boards as weak method signals; never explode onto the axis.",
+    "Do not fetch until this catalog is accepted and CRAWL_PAUSED is lifted for the dynamics pipeline."
+  ],
+  "last_ingest": "2026-09-02T09:30:42Z",
+  "ats_fresh_policy": {
+    "fresh_days": 7,
+    "per_board_per_run": 2,
+    "fold": "同岗多城市折一条",
+    "bulk_republish": "同一天 >6 个新岗视为整板重发，不当事件",
+    "axis": "first_published 在 7 天内的单岗上方法轨，signal=weak"
+  },
+  "snapshot_policy": "快照日 = ingest 运行日（--snapshot 可覆盖），站点从 world_ingest_report.json 读取；7 天窗必须有上轴事件，靠 ATS 新岗 + 新闻室 + RSS 三路保底"
+}

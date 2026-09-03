@@ -1,0 +1,68 @@
+case_id,flag,reason
+4,system_scale_not_kpi,"9400+ clinicians / 4M+ visits are overview scale, not a measured Abridge-user count (mine_loop_20260829_abridge)."
+5,goal,Abridge Inside by year-end is a goal (mine_loop_20260829_abridge).
+5,system_scale_not_kpi,600 clinicians is system size.
+7,hub_kpi_not_on_page,Customers-hub 11 percent wRVU chip is not on the Riverside case-study body and was not recorded as an outcome (mine_loop_20260829_abridge).
+28,system_scale_not_kpi,350+ is Intercom engineering size; 200 PRs / 90-95 percent are one engineer (mine_loop_20260829_augment).
+44,hero_only,3x ROI on hero/summary; method not published (mine_loop_20260829_cresta).
+50,projected,30-40 percent contact-volume growth with minimal headcount is forecasted (mine_loop_20260829_cresta).
+55,projected,Over 5M is forecasted for a planned org-wide deploy (mine_loop_20260829_cresta).
+106,hero_only,100+ RFP hours and 1000+ users are hero chips; 1000+ vs 1500 both printed (mine_loop_20260829_glean).
+106,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+107,hero_only,"50 percent IT / 9 MCP / 20-minute PR / 90 percent adoption are hero plus AI summary, not restated in the narrative (mine_loop_20260829_glean)."
+107,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+108,hero_only,Hero 92.5 percent vs body 92 percent; 58 monthly search hours and 22-to-1 / 95.5 percent are hero chips (mine_loop_20260829_glean).
+108,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+109,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+110,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+111,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+112,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+113,goal,"50 percent productivity boost is a goal, not a result (mine_loop_20260829_glean)."
+113,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+114,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+115,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+115,system_scale_not_kpi,"51 million is TIME audience, not a Glean KPI (mine_loop_20260829_glean)."
+116,goal,"At least one agent per business unit and IT ticket TAT are aims, not results."
+116,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+116,system_scale_not_kpi,"100 million users is GCash scale, not a Glean KPI (mine_loop_20260829_glean)."
+117,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+117,system_scale_not_kpi,14000 employees is title scale; 500k surveys is future (mine_loop_20260829_glean).
+118,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+119,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+120,hero_only,15k hours and +13 percent support satisfaction are title/hero; 13 percent not restated in narrative (mine_loop_20260829_glean).
+120,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+120,projected,Go Links thousands of dollars annually is projected.
+121,hero_only,89 percent brief-time cut is hero; body says seconds (mine_loop_20260829_glean).
+121,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+336,projected,Hero 7 hours/month Estimated; 3900 hours Projected first-year (mine_loop_20260829_sourcegraph).
+343,projected,"1200 hours / 276k printed as estimated/predicted / up-to / six months, not a confirmed trailing-year actual (mine_loop_20260829_sourcegraph)."
+377,projected,"700000 is projected year-one, not a closed actual (mine_loop_20260829_writer)."
+385,projected,"Quantitative gains anticipated, not published, on the DX Quorum page (mine_loop_20260829_augment)."
+392,goal,"Index-card 3x velocity is an explicit two-year goal, not a delivered result (mine_loop_20260829_augment)."
+394,goal,"20 percent coding-time line is opportunity framing, not a measured Augment delta (mine_loop_20260829_augment)."
+397,goal,Bradshaw Coach quote is going-to-be / can-really-help; not a completed KPI (mine_loop_20260829_cresta).
+411,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+412,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+413,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+414,hero_only,+39 satisfaction is title-only; 30+ min and 5-min app are hero chips (mine_loop_20260829_glean).
+414,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+415,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+416,hero_only,300+ hours/month and 65 percent usage are title/hero; 65 percent not restated in narrative (mine_loop_20260829_glean).
+416,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+417,hero_only,17x ROI is a hero chip only; method unpublished (mine_loop_20260829_glean).
+417,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+417,system_scale_not_kpi,"5 million customers / 150M saved are Super.com consumer metrics, not Glean outcomes."
+418,hero_only,98 percent and 1.03M are hero; body only restates over 1M (mine_loop_20260829_glean).
+418,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+419,hero_only,92 percent / 2k hours / 1.2M are title/hero chips not restated in the narrative (mine_loop_20260829_glean).
+419,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+420,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+421,leftover_template,"Glean hero chip '1.5+ hours saved / search time saved per employee, weekly' repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean)."
+438,system_scale_not_kpi,"10K employees / 12 agents are operational facts, not outcome KPIs (mine_loop_20260829_moveworks)."
+462,system_scale_not_kpi,"300 developers / 15M LOC are scale, not Sourcegraph results (mine_loop_20260829_sourcegraph)."
+465,system_scale_not_kpi,"900000 members is SoFi scale, not a Sourcegraph result (mine_loop_20260829_sourcegraph)."
+477,system_scale_not_kpi,"Marketplace scale is Handshake, not a Writer KPI (mine_loop_20260829_writer)."
+478,system_scale_not_kpi,30+ designers / 7000+ employees / 177000+ customers are HubSpot scale (mine_loop_20260829_writer).
+479,hero_only,SCAN body is early-stage; no SCAN-measured hours or percent.
+479,leftover_template,Hero strip still says KPMG end users / thousands of hours / 60-80 percent leftover template (mine_loop_20260829_writer).
+481,system_scale_not_kpi,"40000 agents / 5M assets / 1M saved replies / 50k articles are estate size, not Writer results (mine_loop_20260829_writer)."

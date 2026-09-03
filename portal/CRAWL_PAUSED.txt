@@ -1,0 +1,14 @@
+CRAWL RESUMED (bounded)
+written_at: 2026-09-02
+lifted: vendor case-study hubs already in the library
+still_true:
+  do_not_start_a_new_vendor: true
+  no_unbounded_mine_loop: true
+  axis_requires_published_or_modified: true
+  deploy_per_host_cap: 4 per 90-day window
+  max_new_cs_per_hub_per_run: 2
+notes:
+  Dynamics feeds keep running via ingest_world.py --daily.
+  Case-study walls are fetched from catalog cs_hubs only.
+  New URLs with a strong date enter world_events lane=deploy.
+  Full cases-table field extraction is not reopened as mine_loop.

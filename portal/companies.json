@@ -1,0 +1,5249 @@
+{
+  "generated_at": "2026-08-29T11:16:11+08:00",
+  "n": 200,
+  "n_site": 99,
+  "n_extra": 101,
+  "companies": [
+    {
+      "slug": "openai",
+      "name": "OpenAI",
+      "aliases": [
+        "OpenAI",
+        "OpenAI（57）",
+        "OpenAI（The OpenAI Deployment Company）"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/openai/index.html",
+        "canonical": "https://fdeinterviews.com/company/openai"
+      },
+      "n_questions": 240,
+      "n_cases": 41,
+      "question_ids": [
+        "a-pattern-across-customers-that-changed-how-your-team-worked",
+        "ab-testing-conversational-agents",
+        "adoption-is-twelve-percent-after-ninety-days",
+        "agent-architecture-single-loop-vs-multi-agent",
+        "agent-eval-harness-offline-online",
+        "agent-improvement-flywheel-prompt-ops",
+        "agent-incident-might-go-viral-first-24-hours",
+        "agent-side-effects-idempotency-compensation",
+        "ai-incident-response-first-24-hours",
+        "ai-safety-views-what-would-you-refuse",
+        "alone-on-site-out-of-scope-ask",
+        "api-rate-limits-quotas-tiered-plans",
+        "arena-style-elo-pairwise-human-eval",
+        "at-least-once-vs-exactly-once-delivery",
+        "automated-red-teaming-rl-adversarial-llm",
+        "behav-first-30-60-90-days-plan",
+        "behav-first-fde-traditional-software-culture",
+        "behav-hostile-panel-eng-lead-wants-you-gone",
+        "behav-model-below-target-edge-case-before-launch",
+        "behav-persuade-resistant-team-adopt-practice",
+        "behav-postmortem-to-board-after-public-ai-incident",
+        "behav-salvage-pilot-quietly-missed-its-metric",
+        "behav-values-refusal-under-deal-pressure",
+        "booking-history-personalized-reranker",
+        "build-wc-lite-cli-tool",
+        "cache-invalidation-stampede-caching-llm-results",
+        "cancel-inference-on-client-disconnect",
+        "cd-command-path-resolution",
+        "circuit-breaker-library-half-open-probe",
+        "ciso-ambush-security-objections",
+        "code-aifirst-decompose-vague-spec-for-ai-assistant",
+        "code-aifirst-diagnose-why-ai-produced-wrong-code",
+        "code-aifirst-validating-ai-generated-code-at-scale",
+        "code-aifirst-when-to-trust-vs-review-ai-prs",
+        "code-ann-knn-10m-vectors-no-hosted-service",
+        "code-batch-generator-streaming-inference",
+        "code-cosine-similarity-embeddings",
+        "code-cross-entropy-loss-from-logits",
+        "code-p95-latency-percentile",
+        "code-parse-jsonl-llm-logs-token-aggregate",
+        "code-precision-recall-f1-from-scratch",
+        "code-refactor-testability-extract-and-inject",
+        "code-sliding-window-average-tokens-per-sec",
+        "code-top-p-nucleus-sampling-pure-python",
+        "code-trainable-bpe-tokenizer",
+        "constitutional-ai-style-finetuning-pipeline-production-safe",
+        "continuous-batching-vs-static-batching",
+        "cross-session-agent-memory",
+        "cross-team-technical-disagreement",
+        "custom-cuda-triton-constrained-decoding-kernel",
+        "customer-demands-fine-tuning-trusted-advisor",
+        "customer-handoff-knowledge-transfer",
+        "cut-llm-costs-10x-without-destroying-quality",
+        "data-and-model-poisoning-backdoor-detection",
+        "data-tensor-pipeline-parallelism-compared",
+        "debug-failing-repo-fix-bugs-add-feature",
+        "debug-training-run-loss-flat",
+        "decompose-flight-delay-prediction-perturbation",
+        "decompose-reduce-city-911-response-times",
+        "deep-research-agent-private-corpus-citations",
+        "defend-a-high-stakes-pipeline-against-jailbreaks-and-hallucination",
+        "defend-an-email-reading-refund-agent-against-prompt-injection",
+        "defense-in-depth-against-system-prompt-extraction",
+        "defense-in-depth-agent-with-write-authority",
+        "defining-pilot-success-metrics",
+        "delimiter-safe-serialization",
+        "deploy-computer-use-agent-customer-apps",
+        "design-a-doc-qa-system-that-reliably-says-i-dont-know",
+        "design-for-handoff-runbooks-observability-make-yourself-obsolete",
+        "design-gpu-scheduling-system-shared-cluster",
+        "design-infrastructure-serve-chatgpt-scale",
+        "design-secure-model-access-apis",
+        "design-the-pre-launch-eval-suite-for-a-support-bot",
+        "design-webhook-delivery-system",
+        "diagnose-high-latency-llm-inference-pipeline",
+        "direct-vs-indirect-prompt-injection",
+        "discovery-call-vp-wants-a-chatbot",
+        "do-you-train-on-our-data-zero-data-retention",
+        "doc-qa-that-says-i-dont-know",
+        "document-chunker-embeddings-overlap",
+        "dot-product-vs-cosine-similarity",
+        "double-processing-idempotency-bug",
+        "eval-suite-that-catches-silent-regressions-across-model-upgrades",
+        "eval-suite-under-accuracy-cost-sla",
+        "evaluate-llm-output-quality",
+        "evaluating-rag-before-launch",
+        "excessive-agency-controls-for-ai-agents",
+        "experience-architecting-llm-applications",
+        "experience-ml-infrastructure-distributed-gpu-clusters",
+        "explain-rag-to-chief-legal-officer",
+        "failed-project-whose-fault",
+        "fde-offer-ote-vs-engineering-ladder",
+        "feature-flag-percentage-rollout-bucketing",
+        "fine-tuning-vs-few-shot-prompting",
+        "five-executives-each-certain-their-feature-is-first",
+        "five-levers-to-reduce-llm-latency",
+        "flaky-api-client-retries-backoff-jitter",
+        "gdpr-and-llm-api-calls-personal-data",
+        "gpu-capacity-math-requests-per-second",
+        "gpu-credits-grants-expiry-ledger",
+        "gpu-fleet-capacity-cost-planning-buy-vs-rent",
+        "guaranteed-json-when-the-model-breaks-your-schema",
+        "guardrails-in-the-llm-request-flow",
+        "how-do-you-know-your-ai-system-is-working-well",
+        "how-does-an-llm-actually-generate-text",
+        "how-llms-work-minus-the-heavy-math",
+        "how-prompt-caching-works-and-when-it-pays-off",
+        "hybrid-search-bm25-vectors-reranker",
+        "implement-gpu-credit-calculator",
+        "in-memory-database-ttl-backup-restore",
+        "in-memory-pub-sub-topic-wildcards",
+        "in-memory-sql-table-where-orderby",
+        "incident-runbook-data-leak-via-model",
+        "infection-spread-simulation",
+        "inference-time-compute-process-reward-tree-search",
+        "infra-global-moe-inference-multi-region-service",
+        "intermittent-timeouts-no-access-to-customer-code",
+        "job-queue-long-running-llm-tasks",
+        "keyword-vs-vector-search-when-each",
+        "kv-cache-blowup-long-context-oom-triage",
+        "kv-cache-memory-math-and-mitigations",
+        "langchain-llamaindex-langgraph-which-when",
+        "large-scale-instruct-dataset-generation-mapreduce",
+        "llm-api-metering-and-billing",
+        "llm-capacity-cost-estimation",
+        "llm-cost-capacity-hard-p99-sla-spend-ceiling",
+        "llm-dl-decoder-only-vs-encoder-only-vs-encoder-decoder",
+        "llm-dl-flashattention-io-aware-tiling",
+        "llm-dl-grpo-vs-ppo-rlhf",
+        "llm-dl-kv-caching-autoregressive-decoding",
+        "llm-dl-pre-norm-vs-post-norm-transformers",
+        "llm-dl-prefix-caching-client-and-server-side",
+        "llm-observability-what-to-log",
+        "llm-reward-hacking-winrate-up-accuracy-down",
+        "llm-rlhf-dpo-pipeline-and-objective",
+        "llm-vs-classical-latency-cost-budget-design",
+        "long-running-agent-context-memory-compaction",
+        "lost-in-the-middle-and-chunk-ordering",
+        "mcp-expose-internal-apis-safely",
+        "mechanistic-interpretability-safety-saes",
+        "merge-overlapping-intervals",
+        "mini-spreadsheet-formulas-cycle-detection",
+        "mlds-gradient-descent-intuition-when-to-stop",
+        "mlops-ai-native-observability-platform-hundreds-of-products",
+        "model-quality-vs-latency-cost-tradeoff",
+        "moe-expert-load-balancing-90-10-routing",
+        "most-ambiguous-project-end-to-end",
+        "moving-average-data-stream",
+        "multi-agent-coding-system-plan-code-test-fix",
+        "multi-model-routing-and-cascades-with-a-quality-floor",
+        "multi-region-active-active-stateful-agent-platform",
+        "multi-region-failover-degraded-modes",
+        "openai-five-hour-take-home-video-walkthrough",
+        "p50-p95-p99-tail-latency",
+        "p99-latency-spike-first-30-minutes",
+        "palantir-decomposition-method",
+        "permissions-aware-rag-10m-docs",
+        "pilot-metric-being-gamed",
+        "pilot-succeeded-too-expensive-to-roll-out",
+        "pilot-to-production-999-sla",
+        "pipeline-parallelism-scale-out-network-or-nvlink",
+        "precision-vs-recall-for-a-contract-flagging-classifier",
+        "prefill-vs-decode-bottlenecks-disaggregation",
+        "prompt-injection-hardening-agent-tools",
+        "prompt-plus-docs-exceed-the-context-window",
+        "prompt-versioning-canary-rollback",
+        "prompting-vs-rag-vs-fine-tuning",
+        "rag-accuracy-regressed-in-production-eval-driven-debug",
+        "rag-evaluation-classical-metrics-bridge",
+        "rag-multi-hop-agent-latency-budget-design",
+        "rag-pilot-60-percent-accuracy-diagnosis",
+        "rag-pipeline-end-to-end-walkthrough",
+        "rag-poc-to-production-scale",
+        "ragas-dimensions-when-to-trust-them",
+        "rate-limiter-fixed-sliding-window",
+        "rate-limiting-algorithms-explained",
+        "real-time-collaborative-coding-assistant-streaming-completions",
+        "realtime-moderation-pipeline-50ms-p99",
+        "red-team-a-customer-facing-genai-chatbot",
+        "red-teaming-framework-code-generation-model-malicious-scripts",
+        "reinforcement-learning-fundamentals",
+        "resumable-iterator-getstate-setstate",
+        "reward-modeling-code-agent-execution-feedback",
+        "ring-all-reduce-derive-communication-cost",
+        "rl-environment-tool-using-agent-reward-shaping",
+        "rule-expression-engine-boolean-evaluator",
+        "safety-enforced-llm-api-gateway-policy-engine-streaming",
+        "sandboxing-agent-code-execution",
+        "scaled-dot-product-attention-forward",
+        "serialize-deserialize-binary-tree",
+        "serve-400b-moe-under-latency-sla",
+        "session-aware-kv-cache-prefix-reuse-branching",
+        "shipment-rerouting-agent-and-its-eval-suite",
+        "shipped-in-days-what-should-take-months",
+        "simulation-based-eval-multi-agent-collaboration",
+        "speculative-decoding-when-it-helps",
+        "streaming-ux-long-running-agent",
+        "string-template-engine-nested-conditionals-loops",
+        "structured-output-at-scale-constrained-decoding-vs-retries",
+        "subarray-sum-equals-k-prefix-sums",
+        "support-agent-tool-design",
+        "synchronous-single-gpu-inference-batching",
+        "task-scheduler-dependencies-topo-sort-concurrency",
+        "temperature-top-p-and-when-to-use-temperature-zero",
+        "text-to-sql-exec-safety",
+        "the-ai-platform-is-giving-incorrect-answers-no-details",
+        "the-model-got-worse-and-we-changed-nothing",
+        "three-hallucination-mitigations-and-what-each-costs",
+        "time-based-kv-store-unit-tests-locking",
+        "token-bucket-quota-manager-reserve-refund",
+        "token-metering-billing-idempotency-reconciliation",
+        "tool-call-abuse-and-mcp-tool-poisoning",
+        "tool-calling-failure-modes-in-production",
+        "top-k-frequent-elements-heap",
+        "tracing-multi-step-agent-silent-failures",
+        "train-100b-model-that-does-not-fit-in-memory",
+        "train-7b-from-scratch-64-h100-budget",
+        "user-level-consumption-tracking-abuse-prevention",
+        "values-under-commercial-pressure",
+        "versioned-key-value-store-timestamps",
+        "versioning-and-rolling-out-prompt-changes-like-code",
+        "voice-to-voice-agent-latency-budget",
+        "we-tried-gpt-it-hallucinated",
+        "what-are-embeddings-and-how-does-semantic-search-work",
+        "what-is-a-context-window",
+        "what-is-a-token-and-why-tokenization-matters",
+        "what-model-is-your-team-using-nda",
+        "when-can-you-trust-llm-as-judge",
+        "when-is-an-agent-the-wrong-answer",
+        "when-not-to-build-an-agent",
+        "why-customer-facing-engineering",
+        "why-do-llms-hallucinate",
+        "why-system-prompts-leak-and-what-belongs-in-one",
+        "why-this-company-specifically",
+        "why-vector-search-retrieves-related-but-wrong-results",
+        "worst-production-incident-customer-transparency",
+        "your-customer-needs-a-feature-product-refuses-to-build",
+        "your-executive-champion-just-resigned",
+        "your-model-is-being-deprecated-measuring-regression-before-migrating",
+        "zero-fsdp-and-gradient-checkpointing"
+      ],
+      "case_ids": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        36,
+        37,
+        38,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        55,
+        56,
+        66,
+        67,
+        68,
+        71,
+        72,
+        73,
+        74,
+        85,
+        89,
+        91,
+        92,
+        93,
+        95,
+        96,
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "anthropic",
+      "name": "Anthropic",
+      "aliases": [
+        "Anthropic",
+        "Anthropic（40）",
+        "Anthropic（文中举例）"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/anthropic/index.html",
+        "canonical": "https://fdeinterviews.com/company/anthropic"
+      },
+      "n_questions": 187,
+      "n_cases": 5,
+      "question_ids": [
+        "agent-architecture-single-loop-vs-multi-agent",
+        "agent-eval-harness-offline-online",
+        "agent-improvement-flywheel-prompt-ops",
+        "agent-incident-might-go-viral-first-24-hours",
+        "agent-loop-verifier-gaming-design",
+        "ai-contract-review-workflow",
+        "ai-incident-response-first-24-hours",
+        "ai-safety-views-what-would-you-refuse",
+        "air-gapped-continuously-audited-deployment",
+        "air-gapped-vpc-deployment-what-breaks",
+        "api-rate-limits-quotas-tiered-plans",
+        "arena-style-elo-pairwise-human-eval",
+        "automated-red-teaming-rl-adversarial-llm",
+        "base-vs-instruct-models-and-why-customers-care",
+        "batch-llm-processing-10m-records",
+        "behav-explain-nondeterminism-to-cfo",
+        "behav-first-30-60-90-days-plan",
+        "behav-model-below-target-edge-case-before-launch",
+        "behav-postmortem-to-board-after-public-ai-incident",
+        "behav-values-refusal-under-deal-pressure",
+        "build-a-red-team-program-pyrit-automation",
+        "build-vs-buy-self-host-open-weights-vs-api",
+        "build-wc-lite-cli-tool",
+        "can-it-be-100-percent-accurate",
+        "cancel-inference-on-client-disconnect",
+        "cap-theorem-consistency-models-ai-workflow",
+        "circuit-breaker-library-half-open-probe",
+        "ciso-ambush-security-objections",
+        "code-aifirst-decompose-vague-spec-for-ai-assistant",
+        "code-aifirst-diagnose-why-ai-produced-wrong-code",
+        "code-aifirst-policy-as-code-for-ai-generated-code",
+        "code-aifirst-security-failure-modes-of-generated-code",
+        "code-aifirst-validating-ai-generated-code-at-scale",
+        "code-aifirst-when-to-trust-vs-review-ai-prs",
+        "code-batch-generator-streaming-inference",
+        "code-cross-entropy-loss-from-logits",
+        "code-p95-latency-percentile",
+        "code-parse-jsonl-llm-logs-token-aggregate",
+        "code-precision-recall-f1-from-scratch",
+        "code-refactor-testability-extract-and-inject",
+        "code-sliding-window-average-tokens-per-sec",
+        "code-top-p-nucleus-sampling-pure-python",
+        "code-trainable-bpe-tokenizer",
+        "constitutional-ai-style-finetuning-pipeline-production-safe",
+        "convince-me-claude-over-chatgpt",
+        "cross-session-agent-memory",
+        "custom-cuda-triton-constrained-decoding-kernel",
+        "customer-handoff-knowledge-transfer",
+        "customer-wont-send-pii-to-an-llm-api",
+        "data-residency-rag-vpc-external-llm",
+        "data-residency-vpc-on-prem-deployment-tiers",
+        "data-tensor-pipeline-parallelism-compared",
+        "debug-failing-repo-fix-bugs-add-feature",
+        "debug-training-run-loss-flat",
+        "decompose-container-port-terminal-operations",
+        "decompose-fraud-ring-detection-graph",
+        "deep-research-agent-private-corpus-citations",
+        "defend-a-high-stakes-pipeline-against-jailbreaks-and-hallucination",
+        "defend-an-email-reading-refund-agent-against-prompt-injection",
+        "defense-in-depth-against-system-prompt-extraction",
+        "deploy-computer-use-agent-customer-apps",
+        "design-a-doc-qa-system-that-reliably-says-i-dont-know",
+        "design-for-handoff-runbooks-observability-make-yourself-obsolete",
+        "design-infrastructure-serve-chatgpt-scale",
+        "design-secure-model-access-apis",
+        "design-the-claude-chat-service",
+        "design-the-pre-launch-eval-suite-for-a-support-bot",
+        "disagreed-then-they-were-right",
+        "discovery-call-vp-wants-a-chatbot",
+        "do-you-train-on-our-data-zero-data-retention",
+        "doc-qa-that-says-i-dont-know",
+        "document-chunker-embeddings-overlap",
+        "dot-product-vs-cosine-similarity",
+        "eval-suite-that-catches-silent-regressions-across-model-upgrades",
+        "eval-suite-under-accuracy-cost-sla",
+        "evaluate-llm-output-quality",
+        "evaluating-rag-before-launch",
+        "excessive-agency-controls-for-ai-agents",
+        "explain-rag-to-chief-legal-officer",
+        "extend-context-to-1m-tokens-rope-ring-attention",
+        "failure-domain-blast-radius-training-cluster-design",
+        "flaky-api-client-retries-backoff-jitter",
+        "gdpr-and-llm-api-calls-personal-data",
+        "guaranteed-json-when-the-model-breaks-your-schema",
+        "guardrails-in-the-llm-request-flow",
+        "hallucination-detection-nli-entailment-summaries",
+        "hardware-failures-stragglers-multi-week-training",
+        "how-does-an-llm-actually-generate-text",
+        "how-llms-work-minus-the-heavy-math",
+        "how-pagedattention-works-vllm",
+        "how-prompt-caching-works-and-when-it-pays-off",
+        "inference-time-compute-process-reward-tree-search",
+        "intermittent-timeouts-no-access-to-customer-code",
+        "iso-42001-soc2-gdpr-ai-act-evidence-map",
+        "jailbreak-vs-prompt-injection-whats-the-difference",
+        "job-queue-long-running-llm-tasks",
+        "kv-cache-blowup-long-context-oom-triage",
+        "kv-cache-memory-math-and-mitigations",
+        "layered-guardrails-brand-safe-agent",
+        "llm-api-metering-and-billing",
+        "llm-capacity-cost-estimation",
+        "llm-cost-capacity-hard-p99-sla-spend-ceiling",
+        "llm-dl-decoder-only-vs-encoder-only-vs-encoder-decoder",
+        "llm-dl-grpo-vs-ppo-rlhf",
+        "llm-dl-pre-norm-vs-post-norm-transformers",
+        "llm-dl-prefix-caching-client-and-server-side",
+        "llm-observability-what-to-log",
+        "llm-reward-hacking-winrate-up-accuracy-down",
+        "llm-rlhf-dpo-pipeline-and-objective",
+        "long-context-vs-rag-vs-caching-strategy-and-failure-modes",
+        "long-running-agent-context-memory-compaction",
+        "lost-in-the-middle-and-chunk-ordering",
+        "lru-cache-args-kwargs-persistence",
+        "mcp-expose-internal-apis-safely",
+        "mcp-server-least-privilege-design",
+        "mechanistic-interpretability-safety-saes",
+        "migrating-pytorch-workload-to-tpu",
+        "mini-spreadsheet-formulas-cycle-detection",
+        "mlops-ai-native-observability-platform-hundreds-of-products",
+        "multi-model-llm-serving-autoscaling-cold-start",
+        "multi-model-routing-and-cascades-with-a-quality-floor",
+        "multi-region-active-active-stateful-agent-platform",
+        "multi-region-failover-degraded-modes",
+        "multi-region-llm-provider-outage-failover",
+        "multithreaded-web-crawler-thread-pool",
+        "nccl-hang-triage-multi-node-stuck-collective",
+        "nist-ai-rmf-operationalize-for-customer",
+        "on-prem-privacy-preserving-diarization-summarization-pipeline",
+        "parse-server-logs-top-k-errors",
+        "peer-to-peer-large-file-distribution",
+        "pilot-to-production-999-sla",
+        "profiler-stack-samples-to-trace",
+        "project-deep-dive-every-decision-drilled",
+        "prompt-injection-hardening-agent-tools",
+        "prompt-plus-docs-exceed-the-context-window",
+        "prompt-versioning-canary-rollback",
+        "prompting-vs-rag-vs-fine-tuning",
+        "rag-agent-fleet-failure-recovery-executed-side-effects",
+        "rag-agent-long-horizon-loops-stop-and-eval",
+        "rag-lethal-trifecta-indirect-injection-hardened-tools",
+        "rag-pilot-60-percent-accuracy-diagnosis",
+        "rate-limiter-fixed-sliding-window",
+        "rate-limiting-algorithms-explained",
+        "real-time-collaborative-coding-assistant-streaming-completions",
+        "realtime-moderation-pipeline-50ms-p99",
+        "red-teaming-framework-code-generation-model-malicious-scripts",
+        "reward-modeling-code-agent-execution-feedback",
+        "rl-environment-tool-using-agent-reward-shaping",
+        "safety-enforced-llm-api-gateway-policy-engine-streaming",
+        "sandboxing-agent-code-execution",
+        "scaled-dot-product-attention-forward",
+        "securing-mcp-tool-integration-supply-chain",
+        "securing-multi-agent-system-trust-boundaries",
+        "securing-rag-against-poisoned-context-and-embedding-attacks",
+        "sentence-level-citations-rag",
+        "session-aware-kv-cache-prefix-reuse-branching",
+        "shipment-rerouting-agent-and-its-eval-suite",
+        "simulation-based-eval-multi-agent-collaboration",
+        "streaming-dedup-sliding-window-watermark",
+        "string-template-engine-nested-conditionals-loops",
+        "synchronous-single-gpu-inference-batching",
+        "tag-cited-spans-and-merge-overlaps",
+        "temperature-top-p-and-when-to-use-temperature-zero",
+        "the-ai-platform-is-giving-incorrect-answers-no-details",
+        "the-model-got-worse-and-we-changed-nothing",
+        "three-hallucination-mitigations-and-what-each-costs",
+        "token-bucket-quota-manager-reserve-refund",
+        "token-metering-billing-idempotency-reconciliation",
+        "tool-call-abuse-and-mcp-tool-poisoning",
+        "tool-calling-failure-modes-in-production",
+        "tracing-multi-step-agent-silent-failures",
+        "train-100b-model-that-does-not-fit-in-memory",
+        "training-throughput-collapse-straggler-mfu-triage",
+        "values-under-commercial-pressure",
+        "versioning-and-rolling-out-prompt-changes-like-code",
+        "we-tried-gpt-it-hallucinated",
+        "what-is-a-context-window",
+        "what-is-a-token-and-why-tokenization-matters",
+        "what-model-is-your-team-using-nda",
+        "when-can-you-trust-llm-as-judge",
+        "when-is-an-agent-the-wrong-answer",
+        "when-not-to-build-an-agent",
+        "why-do-llms-hallucinate",
+        "why-system-prompts-leak-and-what-belongs-in-one",
+        "why-this-company-specifically",
+        "your-model-is-being-deprecated-measuring-regression-before-migrating",
+        "zero-fsdp-and-gradient-checkpointing"
+      ],
+      "case_ids": [
+        85,
+        92,
+        93,
+        95,
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "databricks",
+      "name": "Databricks",
+      "aliases": [
+        "Databricks",
+        "Databricks（3）",
+        "Databricks（102）"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/databricks/index.html",
+        "canonical": "https://fdeinterviews.com/company/databricks"
+      },
+      "n_questions": 145,
+      "n_cases": 3,
+      "question_ids": [
+        "a-pattern-across-customers-that-changed-how-your-team-worked",
+        "ab-test-design-sample-size-mde",
+        "active-in-january-but-not-february",
+        "adoption-is-twelve-percent-after-ninety-days",
+        "at-least-once-vs-exactly-once-delivery",
+        "bandit-vs-ab-test-explore-exploit-decision",
+        "batch-llm-processing-10m-records",
+        "batch-vs-streaming-real-time-dashboards",
+        "behav-exec-escalation-scope-and-timeline-both-broke",
+        "behav-hostile-panel-eng-lead-wants-you-gone",
+        "behav-persuade-resistant-team-adopt-practice",
+        "behav-sales-overpromised-customer-holding-you-to-it",
+        "behav-salvage-pilot-quietly-missed-its-metric",
+        "bias-variance-tradeoff-explained-for-deployments",
+        "build-vs-buy-self-host-open-weights-vs-api",
+        "calibration-high-stakes-classifier-auto-decision",
+        "cap-theorem-consistency-models-ai-workflow",
+        "causal-impact-interference-switchback-design",
+        "cdc-from-onprem-postgres-nothing-installed-on-the-server",
+        "cdc-oracle-to-lakehouse-deletes-schema-evolution",
+        "choosing-ml-metrics-with-the-customer",
+        "cohort-retention-matrix-sql",
+        "concurrency-races-deadlocks-optimistic-pessimistic-locking",
+        "consecutive-days-gaps-and-islands",
+        "contextual-bandit-model-routing-cost-quality",
+        "cosine-similarity-embeddings-math",
+        "cost-aware-two-stage-batch-classification-budget",
+        "cross-validation-when-kfold-breaks",
+        "customer-demands-fine-tuning-trusted-advisor",
+        "customers-whose-return-rate-exceeded-thirty-percent",
+        "databricks-top-3-active-users-daily-ties",
+        "dead-letter-queues-poison-messages",
+        "decompose-credit-card-fraud-detection",
+        "decompose-data-platform-500-disparate-sources",
+        "decompose-delivery-truck-routing",
+        "decompose-flight-delay-prediction-perturbation",
+        "decompose-merge-patient-records",
+        "defensive-ingestion-data-quality-alerting",
+        "defining-pilot-success-metrics",
+        "detect-and-fix-overfitting-regularization",
+        "diagnose-slow-query-2-billion-row-table",
+        "dirty-data-timeline-blowup-exec-conversation",
+        "double-processing-idempotency-bug",
+        "dspy-evaluation-driven-prompt-optimization",
+        "end-to-end-mlops-pilot-to-production-design",
+        "engineer-update-to-steering-committee-email",
+        "enterprise-ingestion-40-connectors",
+        "entity-resolution-dedupe-customer-records",
+        "feature-engineering-beats-model-tuning",
+        "feature-store-point-in-time-correctness-failure",
+        "feature-stores-when-customers-need-one",
+        "fifty-notebooks-run-by-hand-and-it-forbids-new-cloud-services",
+        "five-executives-each-certain-their-feature-is-first",
+        "fixing-retrieval-on-internal-jargon",
+        "fraud-labels-across-three-acquired-banks",
+        "hostile-customer-engineer-blocking-integration",
+        "hyperparameter-tuning-efficiently",
+        "idempotent-pipelines-backfills-late-data",
+        "label-definition-proxy-mismatch-debugging",
+        "lakehouse-vs-warehouse-delta-lake-acid",
+        "large-scale-instruct-dataset-generation-mapreduce",
+        "live-db-migration-expand-contract",
+        "llm-cost-capacity-hard-p99-sla-spend-ceiling",
+        "llm-vs-classical-latency-cost-budget-design",
+        "lora-vs-full-fine-tuning-and-when-4-bit-on-prem-makes-sense",
+        "measuring-impact-without-randomization",
+        "minhash-simhash-near-duplicate-dedup",
+        "ml-observability-platform-self-serve-many-teams",
+        "mlds-fund-bayes-base-rates-false-positives",
+        "mlds-fund-choosing-distributions-poisson-normal-bernoulli",
+        "mlds-fund-gradient-boosting-vs-random-forests",
+        "mlds-fund-mle-vs-map-priors",
+        "mlds-fund-optimizers-sgd-adam-schedules",
+        "mlds-fund-svm-kernel-trick-margin",
+        "mlds-gradient-descent-intuition-when-to-stop",
+        "mlds-l1-vs-l2-regularization-sparsity",
+        "mlds-mlvsdl-feature-extraction-compute-data",
+        "mlds-new-dataset-eda-missing-as-signal",
+        "mlds-type1-type2-spam-filter-business-cost",
+        "mlds-validation-set-purpose-leakage-overfitting",
+        "mlflow-purpose-and-four-components",
+        "mlflow-registry-promotion-with-aliases",
+        "mlops-containerize-gpu-pipeline-cuda-driver-matching",
+        "mlops-streaming-data-loader-from-cloud-storage",
+        "model-monitoring-data-drift-concept-drift",
+        "model-retraining-cadence-automation",
+        "modeling-ai-agent-conversation-logs",
+        "multi-lora-kv-cache-pool-thousands-adapters",
+        "multi-model-routing-and-cascades-with-a-quality-floor",
+        "multi-tenant-agent-platform-isolation",
+        "offline-metrics-good-online-metrics-bad",
+        "operating-fleet-of-customer-deployments",
+        "orders-table-does-not-match-the-customers-erp",
+        "panel-presentation-hostile-interruptions",
+        "per-tenant-metrics-across-forty-deployments",
+        "pilot-succeeded-too-expensive-to-roll-out",
+        "pipeline-triage-1-hour-job-takes-9-hours",
+        "place-tenants-in-cells-consistent-hashing",
+        "production-model-degraded-nothing-changed-debugging",
+        "proving-model-business-impact-holdouts",
+        "push-staging-to-production-model-meaning",
+        "pyspark-flatten-json-to-delta",
+        "quality-and-testing-in-mlops-pipelines",
+        "quantization-vs-distillation-to-hit-a-latency-and-cost-budget",
+        "query-planner-index-selection-cost",
+        "queue-between-you-and-their-legacy-system",
+        "rag-agent-platform-per-tenant-credential-isolation",
+        "rag-evaluation-classical-metrics-bridge",
+        "rag-poc-to-production-scale",
+        "reproducibility-in-ml-workflows",
+        "saying-no-to-a-customer",
+        "scd-type-2-implementation-merge",
+        "self-host-open-weights-or-pay-api-fees",
+        "semantic-cache-for-llm-responses",
+        "sessionize-event-stream-sql",
+        "shadow-mode-canary-model-rollouts",
+        "shap-explainability-regulated-customer",
+        "size-their-hardware-before-they-buy",
+        "skeptical-stakeholder-into-champion",
+        "snowflake-variant-lateral-flatten-json",
+        "spark-skewed-join-salting-broadcast-aqe",
+        "spark-small-files-problem-compaction",
+        "spark-wide-vs-narrow-transformations-shuffles",
+        "sql-bitemporal-scd2-retroactive-corrections",
+        "sql-cdc-exactly-once-apply-deletes-gdpr",
+        "sql-idempotent-backfill-late-out-of-order-restatement",
+        "sql-nightly-job-gradual-10x-regression",
+        "sql-petabyte-multiway-skewed-join",
+        "sql-streaming-exactly-once-watermarks-state",
+        "star-schema-ride-sharing",
+        "structured-output-at-scale-constrained-decoding-vs-retries",
+        "text-to-sql-exec-safety",
+        "time-series-forecasting-fundamentals",
+        "top-n-per-group-products-by-region",
+        "top-paired-products-self-join",
+        "train-test-leakage-pilot-to-production-gap",
+        "training-serving-skew-diagnosis-prevention",
+        "travel-and-living-at-customer-sites",
+        "vector-db-capacity-planning-hnsw-ivfpq",
+        "when-classical-ml-beats-llm",
+        "why-customer-facing-engineering",
+        "why-parquet-columnar-storage",
+        "xgboost-vs-linear-vs-neural-tabular-data",
+        "your-customer-needs-a-feature-product-refuses-to-build",
+        "your-executive-champion-just-resigned"
+      ],
+      "case_ids": [
+        95,
+        96,
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "google",
+      "name": "Google",
+      "aliases": [
+        "Google",
+        "Google（20）",
+        "Google Cloud"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/google/index.html",
+        "canonical": "https://fdeinterviews.com/company/google"
+      },
+      "n_questions": 135,
+      "n_cases": 4,
+      "question_ids": [
+        "ab-test-design-sample-size-mde",
+        "active-learning-what-to-label-next",
+        "ad-click-conversion-prediction",
+        "ads-ranking-evaluation-framework",
+        "autoscaling-inference-and-cold-starts",
+        "bandit-vs-ab-test-explore-exploit-decision",
+        "behav-first-fde-traditional-software-culture",
+        "bias-variance-tradeoff-explained-for-deployments",
+        "biased-coin-to-fair-coin",
+        "binary-tree-diameter",
+        "binary-tree-maximum-path-sum",
+        "building-a-model-with-few-labels",
+        "calibration-high-stakes-classifier-auto-decision",
+        "causal-impact-interference-switchback-design",
+        "choosing-ml-metrics-with-the-customer",
+        "class-imbalance-rare-event-modeling",
+        "code-aifirst-decompose-vague-spec-for-ai-assistant",
+        "code-aifirst-diagnose-why-ai-produced-wrong-code",
+        "code-aifirst-policy-as-code-for-ai-generated-code",
+        "code-aifirst-security-failure-modes-of-generated-code",
+        "code-aifirst-validating-ai-generated-code-at-scale",
+        "code-aifirst-when-to-trust-vs-review-ai-prs",
+        "coin-change-minimum-coins",
+        "construct-binary-tree-preorder-inorder",
+        "cosine-similarity-embeddings-math",
+        "cross-team-technical-disagreement",
+        "cross-validation-when-kfold-breaks",
+        "cuda-execution-model-grids-blocks-warps-sms",
+        "cut-llm-costs-10x-without-destroying-quality",
+        "debug-training-run-loss-flat",
+        "demo-breaks-mid-demo",
+        "depth-in-your-ml-specialty",
+        "design-a-doc-qa-system-that-reliably-says-i-dont-know",
+        "design-infrastructure-serve-chatgpt-scale",
+        "detect-and-fix-overfitting-regularization",
+        "disagreed-then-they-were-right",
+        "disagreed-with-your-manager",
+        "discovered-data-leakage",
+        "edit-distance-levenshtein",
+        "end-to-end-mlops-pilot-to-production-design",
+        "eta-prediction-maps",
+        "explain-p-values-to-business-stakeholders",
+        "extend-context-to-1m-tokens-rope-ring-attention",
+        "failed-project-whose-fault",
+        "feature-engineering-beats-model-tuning",
+        "feature-selection-curse-of-dimensionality",
+        "feature-store-point-in-time-correctness-failure",
+        "feature-stores-when-customers-need-one",
+        "fermi-estimate-llm-tokens-support-org",
+        "five-levers-to-reduce-llm-latency",
+        "gpu-bin-packing-and-serving-many-models",
+        "gradient-descent-intuition-learning-rate",
+        "greatest-success-with-impact",
+        "handled-negative-feedback",
+        "house-robber",
+        "how-does-an-llm-actually-generate-text",
+        "how-llms-work-minus-the-heavy-math",
+        "how-prompt-caching-works-and-when-it-pays-off",
+        "hyperparameter-tuning-efficiently",
+        "infection-spread-simulation",
+        "infra-global-moe-inference-multi-region-service",
+        "kmeans-clustering-customer-segmentation",
+        "kmeans-clustering-from-scratch",
+        "label-definition-proxy-mismatch-debugging",
+        "landmark-recognition-system",
+        "linear-regression-gradient-descent-from-scratch",
+        "llm-dl-decoder-only-vs-encoder-only-vs-encoder-decoder",
+        "llm-dl-flashattention-io-aware-tiling",
+        "llm-dl-grpo-vs-ppo-rlhf",
+        "llm-dl-kv-caching-autoregressive-decoding",
+        "llm-dl-pre-norm-vs-post-norm-transformers",
+        "llm-dl-prefix-caching-client-and-server-side",
+        "llm-dl-rope-rotary-position-embeddings",
+        "llm-vs-classical-latency-cost-budget-design",
+        "long-context-vs-rag-vs-caching-strategy-and-failure-modes",
+        "longest-increasing-subsequence",
+        "measuring-impact-without-randomization",
+        "median-of-two-sorted-arrays",
+        "memory-bound-vs-compute-bound-roofline",
+        "mentored-other-engineers",
+        "migrating-pytorch-workload-to-tpu",
+        "mlds-confusion-matrix-accuracy-misleading-imbalance",
+        "mlds-fund-attention-transformers-vs-rnns",
+        "mlds-fund-backpropagation-intuition-gradient-flow",
+        "mlds-fund-bayes-base-rates-false-positives",
+        "mlds-fund-choosing-distributions-poisson-normal-bernoulli",
+        "mlds-fund-cnn-fundamentals-when-cv-matters",
+        "mlds-fund-gradient-boosting-vs-random-forests",
+        "mlds-fund-mle-vs-map-priors",
+        "mlds-fund-optimizers-sgd-adam-schedules",
+        "mlds-fund-svm-kernel-trick-margin",
+        "mlds-gradient-descent-intuition-when-to-stop",
+        "mlds-l1-vs-l2-regularization-sparsity",
+        "mlds-mlvsdl-feature-extraction-compute-data",
+        "mlds-type1-type2-spam-filter-business-cost",
+        "mlds-validation-set-purpose-leakage-overfitting",
+        "mlops-streaming-data-loader-from-cloud-storage",
+        "model-failed-in-production-postmortem",
+        "model-monitoring-data-drift-concept-drift",
+        "model-quality-vs-latency-cost-tradeoff",
+        "model-retraining-cadence-automation",
+        "multi-model-llm-serving-autoscaling-cold-start",
+        "occupancy-and-choosing-thread-block-size",
+        "offline-metrics-good-online-metrics-bad",
+        "on-device-dp-sgd-federated-personalization",
+        "panel-presentation-hostile-interruptions",
+        "peeking-multiple-comparisons-ab-testing-pitfalls",
+        "peer-to-peer-large-file-distribution",
+        "precision-recall-f1-choosing-for-business-problems",
+        "probability-calibration-model-confidence",
+        "production-model-degraded-nothing-changed-debugging",
+        "proving-model-business-impact-holdouts",
+        "quality-and-testing-in-mlops-pipelines",
+        "ranking-metrics-ndcg-mrr-map",
+        "realtime-bot-detection",
+        "realtime-radiology-copilot-recall-priority",
+        "roc-auc-vs-pr-auc-imbalanced-data",
+        "scaled-dot-product-attention-forward",
+        "shadow-deployment-vs-ab-testing-models",
+        "shadow-mode-canary-model-rollouts",
+        "shap-explainability-regulated-customer",
+        "sort-a-nearly-sorted-k-sorted-array",
+        "sparse-vector-dot-product",
+        "synchronous-single-gpu-inference-batching",
+        "time-series-forecasting-fundamentals",
+        "train-100b-model-that-does-not-fit-in-memory",
+        "train-test-leakage-pilot-to-production-gap",
+        "training-serving-skew-diagnosis-prevention",
+        "training-serving-skew-online-offline-parity",
+        "validate-binary-search-tree",
+        "values-under-commercial-pressure",
+        "what-is-a-context-window",
+        "when-classical-ml-beats-llm",
+        "why-should-we-not-hire-you",
+        "xgboost-vs-linear-vs-neural-tabular-data"
+      ],
+      "case_ids": [
+        92,
+        96,
+        98,
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "palantir",
+      "name": "Palantir",
+      "aliases": [
+        "Palantir",
+        "Palantir（107）",
+        "Palantir（角色起源）",
+        "Palantir（作者 Fourth Age 为 Palantir 交付合作方）"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/palantir/index.html",
+        "canonical": "https://fdeinterviews.com/company/palantir"
+      },
+      "n_questions": 133,
+      "n_cases": 40,
+      "question_ids": [
+        "a-pattern-across-customers-that-changed-how-your-team-worked",
+        "active-in-january-but-not-february",
+        "adoption-is-twelve-percent-after-ninety-days",
+        "agent-over-legacy-systems-brittleness",
+        "agent-side-effects-idempotency-compensation",
+        "ai-incident-response-first-24-hours",
+        "air-gapped-continuously-audited-deployment",
+        "air-gapped-on-site-adaptation-of-unseen-data",
+        "air-gapped-vpc-deployment-what-breaks",
+        "alone-on-site-out-of-scope-ask",
+        "assign-analysts-to-investigations-clearances-and-skills",
+        "audit-trails-for-agent-actions",
+        "behav-exec-escalation-scope-and-timeline-both-broke",
+        "behav-first-30-60-90-days-plan",
+        "behav-first-fde-traditional-software-culture",
+        "behav-hostile-panel-eng-lead-wants-you-gone",
+        "behav-model-below-target-edge-case-before-launch",
+        "behav-persuade-resistant-team-adopt-practice",
+        "behav-postmortem-to-board-after-public-ai-incident",
+        "behav-salvage-pilot-quietly-missed-its-metric",
+        "behav-values-refusal-under-deal-pressure",
+        "building-a-model-with-few-labels",
+        "cap-theorem-consistency-models-ai-workflow",
+        "cdc-from-onprem-postgres-nothing-installed-on-the-server",
+        "cdc-oracle-to-lakehouse-deletes-schema-evolution",
+        "code-pdf-folder-entity-json-index-cli",
+        "concurrency-races-deadlocks-optimistic-pessimistic-locking",
+        "consecutive-days-gaps-and-islands",
+        "csv-diff-tool-composite-keys",
+        "customer-handoff-knowledge-transfer",
+        "customers-whose-return-rate-exceeded-thirty-percent",
+        "data-residency-rag-vpc-external-llm",
+        "data-residency-vpc-on-prem-deployment-tiers",
+        "decompose-container-port-terminal-operations",
+        "decompose-credit-card-fraud-detection",
+        "decompose-data-platform-500-disparate-sources",
+        "decompose-delivery-truck-routing",
+        "decompose-disaster-response-system",
+        "decompose-flight-delay-prediction-perturbation",
+        "decompose-fraud-ring-detection-graph",
+        "decompose-hospital-resource-allocation",
+        "decompose-merge-patient-records",
+        "decompose-reduce-city-911-response-times",
+        "decompose-taxi-trips-product-in-one-week",
+        "decompose-uber-eats-driver-order-picking",
+        "defensive-ingestion-data-quality-alerting",
+        "delete-duplicate-rows-keep-latest",
+        "design-a-four-point-pii-redaction-system",
+        "design-for-handoff-runbooks-observability-make-yourself-obsolete",
+        "design-lru-cache",
+        "diagnose-slow-query-2-billion-row-table",
+        "dirty-data-timeline-blowup-exec-conversation",
+        "engineer-update-to-steering-committee-email",
+        "entity-resolution-dedupe-customer-records",
+        "estimate-gas-stations-us-data-check",
+        "etl-vs-elt-when-etl-still-wins",
+        "eu-ai-act-risk-tiers-for-engineers",
+        "failed-project-whose-fault",
+        "fde-offer-ote-vs-engineering-ladder",
+        "fermi-estimate-llm-tokens-support-org",
+        "fifty-notebooks-run-by-hand-and-it-forbids-new-cloud-services",
+        "five-executives-each-certain-their-feature-is-first",
+        "flight-segments-max-simultaneous-passengers",
+        "fraud-labels-across-three-acquired-banks",
+        "friday-evening-hotfix-judgment",
+        "fuzzy-entity-matching-customer-lists",
+        "graph-rag-text-to-cypher-auto-healing",
+        "hipaa-llm-deployments-what-fdes-must-know",
+        "hostile-customer-engineer-blocking-integration",
+        "idempotent-pipelines-backfills-late-data",
+        "insert-interval-sorted-list",
+        "join-fan-out-row-explosion",
+        "learning-a-new-domain-fast",
+        "live-db-migration-expand-contract",
+        "merge-overlapping-intervals",
+        "minhash-simhash-near-duplicate-dedup",
+        "mitre-atlas-mapping-attacks-on-ai-systems",
+        "mlds-new-dataset-eda-missing-as-signal",
+        "most-ambiguous-project-end-to-end",
+        "multi-agent-document-orchestration-100-step-state",
+        "nist-ai-rmf-operationalize-for-customer",
+        "number-of-islands-grid-bfs",
+        "object-modeling-round-design-a-parking-garage",
+        "on-prem-privacy-preserving-diarization-summarization-pipeline",
+        "operating-fleet-of-customer-deployments",
+        "orders-table-does-not-match-the-customers-erp",
+        "owasp-llm-top-10-which-risks-matter-for-enterprise-agents",
+        "palantir-decomposition-method",
+        "palantir-entity-event-document-restaurant",
+        "palantir-tennis-grand-slam-start-time",
+        "parse-server-logs-top-k-errors",
+        "pick-a-feature-p0s-data-model-metrics-exec-narrative",
+        "pilot-metric-being-gamed",
+        "pilot-to-production-999-sla",
+        "pipeline-triage-1-hour-job-takes-9-hours",
+        "query-planner-index-selection-cost",
+        "queue-between-you-and-their-legacy-system",
+        "reconcile-badge-scans-for-impossible-movements",
+        "rule-expression-engine-boolean-evaluator",
+        "scoping-workshop-30-use-cases",
+        "secrets-management-customer-environments",
+        "shipment-rerouting-agent-and-its-eval-suite",
+        "shortest-path-collecting-keys-behind-locked-doors",
+        "shortest-path-grid-obstacles-bfs",
+        "skeptical-stakeholder-into-champion",
+        "snowflake-micro-partitions-clustering-when-bigger-warehouse-fails",
+        "snowflake-style-rbac-masking-row-policies",
+        "snowflake-variant-lateral-flatten-json",
+        "spark-skewed-join-salting-broadcast-aqe",
+        "spark-small-files-problem-compaction",
+        "spark-wide-vs-narrow-transformations-shuffles",
+        "sql-bitemporal-scd2-retroactive-corrections",
+        "sql-cdc-exactly-once-apply-deletes-gdpr",
+        "sql-idempotent-backfill-late-out-of-order-restatement",
+        "sql-nightly-job-gradual-10x-regression",
+        "sql-petabyte-multiway-skewed-join",
+        "sql-streaming-exactly-once-watermarks-state",
+        "star-schema-ride-sharing",
+        "task-scheduler-dependencies-topo-sort-concurrency",
+        "tell-me-about-a-failure-that-genuinely-mattered",
+        "the-ai-platform-is-giving-incorrect-answers-no-details",
+        "top-n-per-group-products-by-region",
+        "travel-and-living-at-customer-sites",
+        "two-sum-hashmap-warmup",
+        "why-customer-facing-engineering",
+        "why-palantir-government-work",
+        "why-parquet-columnar-storage",
+        "why-this-company-specifically",
+        "word-search-grid-backtracking",
+        "work-from-documentation-unfamiliar-api",
+        "worst-production-incident-customer-transparency",
+        "your-customer-needs-a-feature-product-refuses-to-build",
+        "your-executive-champion-just-resigned"
+      ],
+      "case_ids": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        78,
+        81,
+        83,
+        84,
+        90,
+        91,
+        95,
+        96,
+        127
+      ],
+      "notes": []
+    },
+    {
+      "slug": "microsoft",
+      "name": "Microsoft",
+      "aliases": [
+        "Microsoft"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/microsoft/index.html",
+        "canonical": "https://fdeinterviews.com/company/microsoft"
+      },
+      "n_questions": 105,
+      "n_cases": 0,
+      "question_ids": [
+        "agent-over-legacy-systems-brittleness",
+        "air-gapped-continuously-audited-deployment",
+        "air-gapped-vpc-deployment-what-breaks",
+        "audit-trails-for-agent-actions",
+        "azure-ml-devops-pipelines-fit-together",
+        "bias-variance-tradeoff-explained-for-deployments",
+        "build-a-red-team-program-pyrit-automation",
+        "build-vs-buy-self-host-open-weights-vs-api",
+        "cicd-for-ml-experience-probe",
+        "class-imbalance-rare-event-modeling",
+        "construct-binary-tree-preorder-inorder",
+        "cross-validation-when-kfold-breaks",
+        "customer-wont-send-pii-to-an-llm-api",
+        "cut-llm-costs-10x-without-destroying-quality",
+        "data-and-model-poisoning-backdoor-detection",
+        "data-residency-vpc-on-prem-deployment-tiers",
+        "dead-letter-queues-poison-messages",
+        "decompose-credit-card-fraud-detection",
+        "decompose-delivery-truck-routing",
+        "decompose-disaster-response-system",
+        "decompose-merge-patient-records",
+        "design-a-four-point-pii-redaction-system",
+        "design-secure-model-access-apis",
+        "detect-and-fix-overfitting-regularization",
+        "direct-vs-indirect-prompt-injection",
+        "end-to-end-mlops-pilot-to-production-design",
+        "engineer-update-to-steering-committee-email",
+        "enterprise-ingestion-40-connectors",
+        "etl-vs-elt-when-etl-still-wins",
+        "eu-ai-act-risk-tiers-for-engineers",
+        "explain-p-values-to-business-stakeholders",
+        "fermi-estimate-llm-tokens-support-org",
+        "five-levers-to-reduce-llm-latency",
+        "friday-evening-hotfix-judgment",
+        "gdpr-and-llm-api-calls-personal-data",
+        "gpu-bin-packing-and-serving-many-models",
+        "hipaa-llm-deployments-what-fdes-must-know",
+        "hostile-customer-engineer-blocking-integration",
+        "incident-runbook-data-leak-via-model",
+        "iso-42001-soc2-gdpr-ai-act-evidence-map",
+        "jailbreak-vs-prompt-injection-whats-the-difference",
+        "kmeans-clustering-customer-segmentation",
+        "kubernetes-model-deployment-experience-kserve",
+        "lakehouse-vs-warehouse-delta-lake-acid",
+        "left-join-where-clause-null-trap",
+        "llm-capacity-cost-estimation",
+        "longest-increasing-subsequence",
+        "longest-substring-without-repeating-characters",
+        "measuring-impact-without-randomization",
+        "mitre-atlas-mapping-attacks-on-ai-systems",
+        "ml-cicd-vs-traditional-devops",
+        "mlds-confusion-matrix-accuracy-misleading-imbalance",
+        "mlds-type1-type2-spam-filter-business-cost",
+        "mlds-validation-set-purpose-leakage-overfitting",
+        "mlflow-purpose-and-four-components",
+        "mlops-engineer-day-to-day-responsibility",
+        "model-monitoring-data-drift-concept-drift",
+        "model-retraining-cadence-automation",
+        "multi-region-active-active-stateful-agent-platform",
+        "multi-region-failover-degraded-modes",
+        "multi-tenant-ai-isolation-and-audit",
+        "multimodal-rag-over-slide-decks",
+        "nist-ai-rmf-operationalize-for-customer",
+        "nth-highest-salary-per-department",
+        "on-prem-privacy-preserving-diarization-summarization-pipeline",
+        "owasp-llm-top-10-which-risks-matter-for-enterprise-agents",
+        "p50-p95-p99-tail-latency",
+        "p99-latency-spike-first-30-minutes",
+        "palantir-decomposition-method",
+        "per-user-permissions-in-rag",
+        "permissions-aware-rag-10m-docs",
+        "pii-detection-regex-ner-entropy-tradeoffs",
+        "pii-redaction-gateway-vs-application-layer",
+        "pivot-rows-to-columns-conditional-aggregation",
+        "precision-recall-f1-choosing-for-business-problems",
+        "precision-vs-recall-for-a-contract-flagging-classifier",
+        "probability-calibration-model-confidence",
+        "psi-ks-drift-tests-and-thresholds",
+        "push-staging-to-production-model-meaning",
+        "realtime-radiology-copilot-recall-priority",
+        "red-team-a-customer-facing-genai-chatbot",
+        "scaling-api-gateway-for-model-inference",
+        "scd-type-2-implementation-merge",
+        "scoping-workshop-30-use-cases",
+        "search-in-rotated-sorted-array",
+        "secrets-management-customer-environments",
+        "securing-mcp-tool-integration-supply-chain",
+        "securing-multi-agent-system-trust-boundaries",
+        "securing-rag-against-poisoned-context-and-embedding-attacks",
+        "self-host-open-weights-or-pay-api-fees",
+        "shadow-mode-canary-model-rollouts",
+        "shap-explainability-regulated-customer",
+        "skeptical-stakeholder-into-champion",
+        "snowflake-micro-partitions-clustering-when-bigger-warehouse-fails",
+        "snowflake-warehouse-sizing-scale-up-vs-out",
+        "spark-skewed-join-salting-broadcast-aqe",
+        "spark-wide-vs-narrow-transformations-shuffles",
+        "sso-saml-row-level-security-embedded",
+        "the-model-got-worse-and-we-changed-nothing",
+        "training-serving-skew-diagnosis-prevention",
+        "training-serving-skew-online-offline-parity",
+        "valid-parentheses-and-generate",
+        "verifiable-inference-zkml-vs-tee",
+        "worst-production-incident-customer-transparency",
+        "your-model-is-being-deprecated-measuring-regression-before-migrating"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "scale-ai",
+      "name": "Scale AI",
+      "aliases": [
+        "Scale",
+        "Scale AI",
+        "Scale AI（23）"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/scale-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/scale-ai"
+      },
+      "n_questions": 95,
+      "n_cases": 2,
+      "question_ids": [
+        "active-in-january-but-not-february",
+        "active-learning-what-to-label-next",
+        "agent-eval-harness-offline-online",
+        "air-gapped-on-site-adaptation-of-unseen-data",
+        "alone-on-site-out-of-scope-ask",
+        "assign-analysts-to-investigations-clearances-and-skills",
+        "automated-red-teaming-rl-adversarial-llm",
+        "batch-llm-processing-10m-records",
+        "build-a-red-team-program-pyrit-automation",
+        "building-a-model-with-few-labels",
+        "calibration-high-stakes-classifier-auto-decision",
+        "cdc-from-onprem-postgres-nothing-installed-on-the-server",
+        "chunking-contracts-slack-pdf-tables",
+        "class-imbalance-rare-event-modeling",
+        "code-precision-recall-f1-from-scratch",
+        "cosine-similarity-embeddings-math",
+        "cost-aware-two-stage-batch-classification-budget",
+        "csv-diff-tool-composite-keys",
+        "customers-whose-return-rate-exceeded-thirty-percent",
+        "data-and-model-poisoning-backdoor-detection",
+        "decompose-reduce-city-911-response-times",
+        "defend-a-high-stakes-pipeline-against-jailbreaks-and-hallucination",
+        "defining-pilot-success-metrics",
+        "depth-in-your-ml-specialty",
+        "dirty-data-timeline-blowup-exec-conversation",
+        "document-chunker-embeddings-overlap",
+        "document-chunking-strategies-for-rag",
+        "dspy-evaluation-driven-prompt-optimization",
+        "eval-suite-that-catches-silent-regressions-across-model-upgrades",
+        "evaluate-llm-output-quality",
+        "evaluating-rag-before-launch",
+        "fraud-labels-across-three-acquired-banks",
+        "fuzzy-entity-matching-customer-lists",
+        "gradient-descent-intuition-learning-rate",
+        "group-anagrams-canonical-key",
+        "guaranteed-json-when-the-model-breaks-your-schema",
+        "how-do-you-stay-current-on-ai-llms",
+        "in-memory-database-ttl-backup-restore",
+        "jailbreak-vs-prompt-injection-whats-the-difference",
+        "label-definition-proxy-mismatch-debugging",
+        "large-scale-instruct-dataset-generation-mapreduce",
+        "learning-a-new-domain-fast",
+        "llm-reward-hacking-winrate-up-accuracy-down",
+        "llm-rlhf-dpo-pipeline-and-objective",
+        "merge-k-sorted-lists-heap",
+        "minhash-simhash-near-duplicate-dedup",
+        "mitre-atlas-mapping-attacks-on-ai-systems",
+        "mlds-confusion-matrix-accuracy-misleading-imbalance",
+        "mlds-contrastive-vs-triplet-loss-embeddings",
+        "mlds-fund-attention-transformers-vs-rnns",
+        "mlds-fund-backpropagation-intuition-gradient-flow",
+        "mlds-fund-bayes-base-rates-false-positives",
+        "mlds-fund-choosing-distributions-poisson-normal-bernoulli",
+        "mlds-fund-cnn-fundamentals-when-cv-matters",
+        "mlds-fund-mle-vs-map-priors",
+        "mlds-fund-optimizers-sgd-adam-schedules",
+        "mlds-fund-svm-kernel-trick-margin",
+        "mlds-l1-vs-l2-regularization-sparsity",
+        "mlds-mlvsdl-feature-extraction-compute-data",
+        "mlds-new-dataset-eda-missing-as-signal",
+        "most-ambiguous-project-end-to-end",
+        "orders-table-does-not-match-the-customers-erp",
+        "owasp-llm-top-10-which-risks-matter-for-enterprise-agents",
+        "pilot-metric-being-gamed",
+        "precision-recall-f1-choosing-for-business-problems",
+        "precision-vs-recall-for-a-contract-flagging-classifier",
+        "probability-calibration-model-confidence",
+        "production-model-degraded-nothing-changed-debugging",
+        "project-deep-dive-every-decision-drilled",
+        "rag-pilot-60-percent-accuracy-diagnosis",
+        "rag-pipeline-end-to-end-walkthrough",
+        "ragas-dimensions-when-to-trust-them",
+        "reconcile-badge-scans-for-impossible-movements",
+        "red-team-a-customer-facing-genai-chatbot",
+        "roc-auc-vs-pr-auc-imbalanced-data",
+        "scoping-workshop-30-use-cases",
+        "sessionize-event-stream-30-minute-gaps",
+        "shipped-in-days-what-should-take-months",
+        "simulation-based-eval-multi-agent-collaboration",
+        "size-their-hardware-before-they-buy",
+        "soc2-for-engineers-type-1-vs-type-2",
+        "streaming-dedup-sliding-window-watermark",
+        "subarray-sum-equals-k-prefix-sums",
+        "three-hallucination-mitigations-and-what-each-costs",
+        "three-sum-sorted-two-pointer",
+        "train-test-leakage-pilot-to-production-gap",
+        "two-sum-hashmap-warmup",
+        "versioned-key-value-store-timestamps",
+        "versioning-and-rolling-out-prompt-changes-like-code",
+        "we-tried-gpt-it-hallucinated",
+        "what-genai-projects-have-you-done",
+        "when-can-you-trust-llm-as-judge",
+        "when-classical-ml-beats-llm",
+        "why-do-llms-hallucinate",
+        "why-palantir-government-work"
+      ],
+      "case_ids": [
+        95,
+        127
+      ],
+      "notes": []
+    },
+    {
+      "slug": "meta",
+      "name": "Meta",
+      "aliases": [
+        "Meta"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/meta/index.html",
+        "canonical": "https://fdeinterviews.com/company/meta"
+      },
+      "n_questions": 76,
+      "n_cases": 0,
+      "question_ids": [
+        "ab-test-design-sample-size-mde",
+        "ad-click-conversion-prediction",
+        "ads-ranking-evaluation-framework",
+        "anomaly-detection-without-labels",
+        "bandit-vs-ab-test-explore-exploit-decision",
+        "biased-coin-to-fair-coin",
+        "binary-tree-diameter",
+        "binary-tree-maximum-path-sum",
+        "causal-impact-interference-switchback-design",
+        "cohort-retention-matrix-sql",
+        "consecutive-days-gaps-and-islands",
+        "cross-team-technical-disagreement",
+        "data-tensor-pipeline-parallelism-compared",
+        "delete-duplicate-rows-keep-latest",
+        "depth-in-your-ml-specialty",
+        "design-lru-cache",
+        "disagreed-then-they-were-right",
+        "disagreed-with-your-manager",
+        "drove-work-without-team-support",
+        "edit-distance-levenshtein",
+        "explain-p-values-to-business-stakeholders",
+        "failure-domain-blast-radius-training-cluster-design",
+        "feed-ranking-personalized-recommendation",
+        "flight-segments-max-simultaneous-passengers",
+        "funnel-analysis-sql-cohorts",
+        "gpu-memory-hierarchy-registers-shared-global",
+        "gradient-descent-intuition-learning-rate",
+        "group-anagrams-canonical-key",
+        "infiniband-vs-roce-for-gpu-training-clusters",
+        "insert-interval-sorted-list",
+        "join-fan-out-row-explosion",
+        "k-closest-points-to-origin",
+        "kmeans-clustering-from-scratch",
+        "knn-classifier-from-scratch",
+        "left-join-where-clause-null-trap",
+        "linear-regression-gradient-descent-from-scratch",
+        "llm-dl-rope-rotary-position-embeddings",
+        "longest-substring-without-repeating-characters",
+        "memory-coalescing-and-bank-conflicts",
+        "mentored-other-engineers",
+        "merge-k-sorted-lists-heap",
+        "merge-overlapping-intervals",
+        "mlds-fund-attention-transformers-vs-rnns",
+        "mlds-fund-backpropagation-intuition-gradient-flow",
+        "mlds-fund-cnn-fundamentals-when-cv-matters",
+        "model-failed-in-production-postmortem",
+        "model-quality-vs-latency-cost-tradeoff",
+        "nth-highest-salary-per-department",
+        "number-of-islands-grid-bfs",
+        "offline-metrics-good-online-metrics-bad",
+        "optimized-the-wrong-metric",
+        "peeking-multiple-comparisons-ab-testing-pitfalls",
+        "product-of-array-except-self",
+        "rank-vs-dense-rank-vs-row-number",
+        "ranking-metrics-ndcg-mrr-map",
+        "realtime-bot-detection",
+        "reinforcement-learning-fundamentals",
+        "reversed-a-decision-you-made",
+        "ring-all-reduce-derive-communication-cost",
+        "roc-auc-vs-pr-auc-imbalanced-data",
+        "search-in-rotated-sorted-array",
+        "serialize-deserialize-binary-tree",
+        "sessionize-event-stream-sql",
+        "short-video-for-you-ranker",
+        "shortest-path-grid-obstacles-bfs",
+        "sparse-vector-dot-product",
+        "subarray-sum-equals-k-prefix-sums",
+        "three-sum-sorted-two-pointer",
+        "top-k-frequent-elements-heap",
+        "training-throughput-collapse-straggler-mfu-triage",
+        "two-sum-hashmap-warmup",
+        "valid-parentheses-and-generate",
+        "validate-binary-search-tree",
+        "why-should-we-not-hire-you",
+        "word-search-grid-backtracking",
+        "zero-fsdp-and-gradient-checkpointing"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "glean",
+      "name": "Glean",
+      "aliases": [
+        "Glean"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/glean/index.html",
+        "canonical": "https://fdeinterviews.com/company/glean"
+      },
+      "n_questions": 57,
+      "n_cases": 1,
+      "question_ids": [
+        "booking-history-personalized-reranker",
+        "chunking-contracts-slack-pdf-tables",
+        "ciso-ambush-security-objections",
+        "code-ann-knn-10m-vectors-no-hosted-service",
+        "code-cosine-similarity-embeddings",
+        "code-p95-latency-percentile",
+        "code-parse-jsonl-llm-logs-token-aggregate",
+        "corrective-rag-self-correcting-retrieval-loop",
+        "data-residency-rag-vpc-external-llm",
+        "design-a-four-point-pii-redaction-system",
+        "direct-vs-indirect-prompt-injection",
+        "do-you-train-on-our-data-zero-data-retention",
+        "enterprise-ingestion-40-connectors",
+        "exact-word-search-in-vector-database",
+        "fixing-retrieval-on-internal-jargon",
+        "fuzzy-entity-matching-customer-lists",
+        "graph-rag-text-to-cypher-auto-healing",
+        "group-anagrams-canonical-key",
+        "hybrid-search-bm25-vectors-reranker",
+        "incident-runbook-data-leak-via-model",
+        "keyword-vs-vector-search-when-each",
+        "llm-observability-what-to-log",
+        "lost-in-the-middle-and-chunk-ordering",
+        "mcp-expose-internal-apis-safely",
+        "mcp-server-least-privilege-design",
+        "merge-k-sorted-lists-heap",
+        "mlds-contrastive-vs-triplet-loss-embeddings",
+        "moving-average-data-stream",
+        "multi-region-llm-provider-outage-failover",
+        "multi-tenant-ai-isolation-and-audit",
+        "multimodal-rag-over-slide-decks",
+        "per-user-permissions-in-rag",
+        "permissions-aware-rag-10m-docs",
+        "pii-detection-regex-ner-entropy-tradeoffs",
+        "pii-redaction-gateway-vs-application-layer",
+        "place-tenants-in-cells-consistent-hashing",
+        "prompt-plus-docs-exceed-the-context-window",
+        "prompt-versioning-canary-rollback",
+        "rag-accuracy-regressed-in-production-eval-driven-debug",
+        "rag-poc-to-production-scale",
+        "rag-retrieval-quality-monitoring-without-ground-truth",
+        "rate-limiter-fixed-sliding-window",
+        "rate-limiting-algorithms-explained",
+        "securing-rag-against-poisoned-context-and-embedding-attacks",
+        "semantic-cache-for-llm-responses",
+        "sentence-level-citations-rag",
+        "serialize-deserialize-binary-tree",
+        "sessionize-event-stream-30-minute-gaps",
+        "soc2-for-engineers-type-1-vs-type-2",
+        "sso-saml-row-level-security-embedded",
+        "streaming-dedup-sliding-window-watermark",
+        "top-k-frequent-elements-heap",
+        "user-level-consumption-tracking-abuse-prevention",
+        "vector-db-capacity-planning-hnsw-ivfpq",
+        "versioned-key-value-store-timestamps",
+        "what-are-embeddings-and-how-does-semantic-search-work",
+        "why-vector-search-retrieves-related-but-wrong-results"
+      ],
+      "case_ids": [
+        87
+      ],
+      "notes": []
+    },
+    {
+      "slug": "snowflake",
+      "name": "Snowflake",
+      "aliases": [
+        "Snowflake"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/snowflake/index.html",
+        "canonical": "https://fdeinterviews.com/company/snowflake"
+      },
+      "n_questions": 53,
+      "n_cases": 1,
+      "question_ids": [
+        "batch-vs-streaming-real-time-dashboards",
+        "behav-exec-escalation-scope-and-timeline-both-broke",
+        "behav-sales-overpromised-customer-holding-you-to-it",
+        "cdc-oracle-to-lakehouse-deletes-schema-evolution",
+        "choosing-ml-metrics-with-the-customer",
+        "cohort-retention-matrix-sql",
+        "demo-breaks-mid-demo",
+        "diagnose-slow-query-2-billion-row-table",
+        "etl-vs-elt-when-etl-still-wins",
+        "feature-engineering-beats-model-tuning",
+        "feature-store-point-in-time-correctness-failure",
+        "feature-stores-when-customers-need-one",
+        "funnel-analysis-sql-cohorts",
+        "idempotent-pipelines-backfills-late-data",
+        "kmeans-clustering-customer-segmentation",
+        "lakehouse-vs-warehouse-delta-lake-acid",
+        "mlds-fund-gradient-boosting-vs-random-forests",
+        "modeling-ai-agent-conversation-logs",
+        "multi-tenant-ai-isolation-and-audit",
+        "panel-presentation-hostile-interruptions",
+        "peeking-multiple-comparisons-ab-testing-pitfalls",
+        "per-tenant-metrics-across-forty-deployments",
+        "per-user-permissions-in-rag",
+        "pii-detection-regex-ner-entropy-tradeoffs",
+        "pilot-succeeded-too-expensive-to-roll-out",
+        "pipeline-triage-1-hour-job-takes-9-hours",
+        "pivot-rows-to-columns-conditional-aggregation",
+        "place-tenants-in-cells-consistent-hashing",
+        "proving-model-business-impact-holdouts",
+        "query-planner-index-selection-cost",
+        "rank-vs-dense-rank-vs-row-number",
+        "saying-no-to-a-customer",
+        "scd-type-2-implementation-merge",
+        "sessionize-event-stream-sql",
+        "snowflake-ctr-monthly-ratings-sql",
+        "snowflake-micro-partitions-clustering-when-bigger-warehouse-fails",
+        "snowflake-style-rbac-masking-row-policies",
+        "snowflake-variant-lateral-flatten-json",
+        "snowflake-warehouse-sizing-scale-up-vs-out",
+        "spark-small-files-problem-compaction",
+        "sql-bitemporal-scd2-retroactive-corrections",
+        "sql-cdc-exactly-once-apply-deletes-gdpr",
+        "sql-idempotent-backfill-late-out-of-order-restatement",
+        "sql-nightly-job-gradual-10x-regression",
+        "sql-petabyte-multiway-skewed-join",
+        "sql-streaming-exactly-once-watermarks-state",
+        "star-schema-ride-sharing",
+        "text-to-sql-exec-safety",
+        "time-series-forecasting-fundamentals",
+        "top-n-per-group-products-by-region",
+        "travel-and-living-at-customer-sites",
+        "why-parquet-columnar-storage",
+        "xgboost-vs-linear-vs-neural-tabular-data"
+      ],
+      "case_ids": [
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "sierra",
+      "name": "Sierra",
+      "aliases": [
+        "Sierra"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/sierra/index.html",
+        "canonical": "https://fdeinterviews.com/company/sierra"
+      },
+      "n_questions": 36,
+      "n_cases": 0,
+      "question_ids": [
+        "ab-testing-conversational-agents",
+        "agent-architecture-single-loop-vs-multi-agent",
+        "agent-improvement-flywheel-prompt-ops",
+        "agent-incident-might-go-viral-first-24-hours",
+        "agent-mvp-definition-predictable-behavior",
+        "agent-over-legacy-systems-brittleness",
+        "agent-side-effects-idempotency-compensation",
+        "behav-explain-nondeterminism-to-cfo",
+        "can-it-be-100-percent-accurate",
+        "corrective-rag-self-correcting-retrieval-loop",
+        "cross-session-agent-memory",
+        "defend-an-email-reading-refund-agent-against-prompt-injection",
+        "design-the-pre-launch-eval-suite-for-a-support-bot",
+        "discovery-call-vp-wants-a-chatbot",
+        "escalation-routing-for-an-agent-fleet",
+        "gen-ai-vs-agentic-ai-experience",
+        "keeping-llm-inside-designed-scope",
+        "layered-guardrails-brand-safe-agent",
+        "long-running-agent-context-memory-compaction",
+        "multi-region-llm-provider-outage-failover",
+        "multi-tenant-agent-platform-isolation",
+        "paid-work-trial-fde-utilization-questions",
+        "prompt-injection-hardening-agent-tools",
+        "rag-agent-fleet-failure-recovery-executed-side-effects",
+        "rag-agent-long-horizon-loops-stop-and-eval",
+        "rag-agent-platform-per-tenant-credential-isolation",
+        "rag-lethal-trifecta-indirect-injection-hardened-tools",
+        "rag-multi-hop-agent-latency-budget-design",
+        "rl-environment-tool-using-agent-reward-shaping",
+        "saying-no-to-a-customer",
+        "streaming-ux-long-running-agent",
+        "support-agent-tool-design",
+        "tool-calling-failure-modes-in-production",
+        "voice-to-voice-agent-latency-budget",
+        "when-is-an-agent-the-wrong-answer",
+        "when-not-to-build-an-agent"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "cohere",
+      "name": "Cohere",
+      "aliases": [
+        "Cohere",
+        "Cohere（17）"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/cohere/index.html",
+        "canonical": "https://fdeinterviews.com/company/cohere"
+      },
+      "n_questions": 32,
+      "n_cases": 12,
+      "question_ids": [
+        "base-vs-instruct-models-and-why-customers-care",
+        "code-ann-knn-10m-vectors-no-hosted-service",
+        "code-cosine-similarity-embeddings",
+        "constitutional-ai-style-finetuning-pipeline-production-safe",
+        "contextual-bandit-model-routing-cost-quality",
+        "corrective-rag-self-correcting-retrieval-loop",
+        "cost-aware-two-stage-batch-classification-budget",
+        "customer-demands-fine-tuning-trusted-advisor",
+        "document-chunking-strategies-for-rag",
+        "dot-product-vs-cosine-similarity",
+        "exact-word-search-in-vector-database",
+        "experience-architecting-llm-applications",
+        "fine-tuning-vs-few-shot-prompting",
+        "fixing-retrieval-on-internal-jargon",
+        "hallucination-detection-nli-entailment-summaries",
+        "hybrid-search-bm25-vectors-reranker",
+        "keyword-vs-vector-search-when-each",
+        "long-context-vs-rag-vs-caching-strategy-and-failure-modes",
+        "lora-vs-full-fine-tuning-and-when-4-bit-on-prem-makes-sense",
+        "mlds-contrastive-vs-triplet-loss-embeddings",
+        "prompting-vs-rag-vs-fine-tuning",
+        "rag-accuracy-regressed-in-production-eval-driven-debug",
+        "rag-pipeline-end-to-end-walkthrough",
+        "rag-retrieval-quality-monitoring-without-ground-truth",
+        "semantic-cache-for-llm-responses",
+        "temperature-top-p-and-when-to-use-temperature-zero",
+        "train-7b-from-scratch-64-h100-budget",
+        "what-are-embeddings-and-how-does-semantic-search-work",
+        "what-genai-projects-have-you-done",
+        "what-is-a-token-and-why-tokenization-matters",
+        "what-model-is-your-team-using-nda",
+        "why-vector-search-retrieves-related-but-wrong-results"
+      ],
+      "case_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        35,
+        53,
+        75,
+        95,
+        110,
+        111,
+        112
+      ],
+      "notes": []
+    },
+    {
+      "slug": "nvidia",
+      "name": "NVIDIA",
+      "aliases": [
+        "Nvidia",
+        "NVIDIA"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/nvidia/index.html",
+        "canonical": "https://fdeinterviews.com/company/nvidia"
+      },
+      "n_questions": 32,
+      "n_cases": 1,
+      "question_ids": [
+        "autoscaling-inference-and-cold-starts",
+        "choosing-tensor-parallel-degree-serving-70b",
+        "cuda-execution-model-grids-blocks-warps-sms",
+        "custom-cuda-triton-constrained-decoding-kernel",
+        "drove-work-without-team-support",
+        "edge-vlm-realtime-video-jetson",
+        "extend-context-to-1m-tokens-rope-ring-attention",
+        "gpu-bin-packing-and-serving-many-models",
+        "gpu-memory-hierarchy-registers-shared-global",
+        "have-you-worked-on-ml-gpu-workloads",
+        "how-pagedattention-works-vllm",
+        "infra-serve-70b-model-on-one-80gb-gpu",
+        "infra-vllm-tensorrt-llm-tgi-runtime-comparison",
+        "kubernetes-model-deployment-experience-kserve",
+        "kv-cache-memory-math-and-mitigations",
+        "llm-dl-flashattention-io-aware-tiling",
+        "llm-dl-kv-caching-autoregressive-decoding",
+        "memory-bound-vs-compute-bound-roofline",
+        "memory-coalescing-and-bank-conflicts",
+        "mlops-containerize-gpu-pipeline-cuda-driver-matching",
+        "multi-model-llm-serving-autoscaling-cold-start",
+        "nccl-gpudirect-rdma-and-the-100-percent-utilization-trap",
+        "nccl-hang-triage-multi-node-stuck-collective",
+        "occupancy-and-choosing-thread-block-size",
+        "per-tenant-metrics-across-forty-deployments",
+        "pipeline-parallelism-scale-out-network-or-nvlink",
+        "prefill-vs-decode-bottlenecks-disaggregation",
+        "quantization-fp8-int4-gptq-awq-tradeoffs",
+        "realtime-radiology-copilot-recall-priority",
+        "ring-all-reduce-derive-communication-cost",
+        "size-their-hardware-before-they-buy",
+        "warp-divergence-why-it-hurts-performance"
+      ],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "xai",
+      "name": "xAI",
+      "aliases": [
+        "xAI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/xai/index.html",
+        "canonical": "https://fdeinterviews.com/company/xai"
+      },
+      "n_questions": 23,
+      "n_cases": 0,
+      "question_ids": [
+        "design-gpu-scheduling-system-shared-cluster",
+        "design-lru-cache",
+        "experience-ml-infrastructure-distributed-gpu-clusters",
+        "failure-domain-blast-radius-training-cluster-design",
+        "gpu-memory-hierarchy-registers-shared-global",
+        "hardware-failures-stragglers-multi-week-training",
+        "in-memory-database-ttl-backup-restore",
+        "in-memory-pub-sub-topic-wildcards",
+        "infiniband-vs-roce-for-gpu-training-clusters",
+        "memory-coalescing-and-bank-conflicts",
+        "moe-expert-load-balancing-90-10-routing",
+        "nccl-gpudirect-rdma-and-the-100-percent-utilization-trap",
+        "nccl-hang-triage-multi-node-stuck-collective",
+        "number-of-islands-grid-bfs",
+        "pipeline-parallelism-scale-out-network-or-nvlink",
+        "project-deep-dive-every-decision-drilled",
+        "shipped-in-days-what-should-take-months",
+        "shortest-path-grid-obstacles-bfs",
+        "task-scheduler-dependencies-topo-sort-concurrency",
+        "three-sum-sorted-two-pointer",
+        "training-throughput-collapse-straggler-mfu-triage",
+        "warp-divergence-why-it-hurts-performance",
+        "word-search-grid-backtracking"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "salesforce",
+      "name": "Salesforce",
+      "aliases": [
+        "Salesforce"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/salesforce/index.html",
+        "canonical": "https://fdeinterviews.com/company/salesforce"
+      },
+      "n_questions": 22,
+      "n_cases": 4,
+      "question_ids": [
+        "agent-mvp-definition-predictable-behavior",
+        "agentforce-sdr-agent-human-in-loop",
+        "audit-trails-for-agent-actions",
+        "behav-sales-overpromised-customer-holding-you-to-it",
+        "defense-in-depth-against-system-prompt-extraction",
+        "defense-in-depth-agent-with-write-authority",
+        "eu-ai-act-risk-tiers-for-engineers",
+        "excessive-agency-controls-for-ai-agents",
+        "gen-ai-vs-agentic-ai-experience",
+        "guardrails-in-the-llm-request-flow",
+        "hipaa-llm-deployments-what-fdes-must-know",
+        "how-do-you-stay-current-on-ai-llms",
+        "iso-42001-soc2-gdpr-ai-act-evidence-map",
+        "pii-redaction-gateway-vs-application-layer",
+        "securing-multi-agent-system-trust-boundaries",
+        "snowflake-style-rbac-masking-row-policies",
+        "soc2-for-engineers-type-1-vs-type-2",
+        "token-metering-billing-idempotency-reconciliation",
+        "tool-call-abuse-and-mcp-tool-poisoning",
+        "user-level-consumption-tracking-abuse-prevention",
+        "what-genai-projects-have-you-done",
+        "why-system-prompts-leak-and-what-belongs-in-one"
+      ],
+      "case_ids": [
+        85,
+        91,
+        96,
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "harvey",
+      "name": "Harvey",
+      "aliases": [
+        "Harvey"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/harvey/index.html",
+        "canonical": "https://fdeinterviews.com/company/harvey"
+      },
+      "n_questions": 13,
+      "n_cases": 1,
+      "question_ids": [
+        "ai-contract-review-workflow",
+        "behav-explain-nondeterminism-to-cfo",
+        "can-it-be-100-percent-accurate",
+        "chunking-contracts-slack-pdf-tables",
+        "code-pdf-folder-entity-json-index-cli",
+        "doc-qa-that-says-i-dont-know",
+        "document-chunking-strategies-for-rag",
+        "escalation-routing-for-an-agent-fleet",
+        "explain-rag-to-chief-legal-officer",
+        "learning-a-new-domain-fast",
+        "multi-agent-document-orchestration-100-step-state",
+        "sentence-level-citations-rag",
+        "tag-cited-spans-and-merge-overlaps"
+      ],
+      "case_ids": [
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "decagon",
+      "name": "Decagon",
+      "aliases": [
+        "Decagon"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/decagon/index.html",
+        "canonical": "https://fdeinterviews.com/company/decagon"
+      },
+      "n_questions": 8,
+      "n_cases": 3,
+      "question_ids": [
+        "ab-testing-conversational-agents",
+        "escalation-routing-for-an-agent-fleet",
+        "eval-suite-under-accuracy-cost-sla",
+        "gen-ai-vs-agentic-ai-experience",
+        "multi-tenant-agent-platform-isolation",
+        "paid-work-trial-fde-utilization-questions",
+        "rag-agent-platform-per-tenant-credential-isolation",
+        "support-agent-tool-design"
+      ],
+      "case_ids": [
+        69,
+        88,
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "mistral",
+      "name": "Mistral",
+      "aliases": [
+        "Mistral"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/mistral/index.html",
+        "canonical": "https://fdeinterviews.com/company/mistral"
+      },
+      "n_questions": 8,
+      "n_cases": 0,
+      "question_ids": [
+        "base-vs-instruct-models-and-why-customers-care",
+        "customer-wont-send-pii-to-an-llm-api",
+        "fine-tuning-vs-few-shot-prompting",
+        "llm-dl-rope-rotary-position-embeddings",
+        "lora-vs-full-fine-tuning-and-when-4-bit-on-prem-makes-sense",
+        "quantization-vs-distillation-to-hit-a-latency-and-cost-budget",
+        "self-host-open-weights-or-pay-api-fees",
+        "train-7b-from-scratch-64-h100-budget"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "hugging-face",
+      "name": "Hugging Face",
+      "aliases": [
+        "Hugging Face"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/hugging-face/index.html",
+        "canonical": "https://fdeinterviews.com/company/hugging-face"
+      },
+      "n_questions": 6,
+      "n_cases": 0,
+      "question_ids": [
+        "code-batch-generator-streaming-inference",
+        "code-cross-entropy-loss-from-logits",
+        "code-top-p-nucleus-sampling-pure-python",
+        "code-trainable-bpe-tokenizer",
+        "infra-serve-70b-model-on-one-80gb-gpu",
+        "infra-vllm-tensorrt-llm-tgi-runtime-comparison"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "elevenlabs",
+      "name": "ElevenLabs",
+      "aliases": [
+        "ElevenLabs"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/elevenlabs/index.html",
+        "canonical": "https://fdeinterviews.com/company/elevenlabs"
+      },
+      "n_questions": 5,
+      "n_cases": 1,
+      "question_ids": [
+        "behavioral-opener-every-round-format",
+        "elevenlabs-excalidraw-case-study-voice-ai",
+        "file-permissions-hierarchy-timestamps",
+        "voice-dubbing-project-tracker-design",
+        "voice-to-voice-agent-latency-budget"
+      ],
+      "case_ids": [
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "hebbia",
+      "name": "Hebbia",
+      "aliases": [
+        "Hebbia"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/hebbia/index.html",
+        "canonical": "https://fdeinterviews.com/company/hebbia"
+      },
+      "n_questions": 5,
+      "n_cases": 0,
+      "question_ids": [
+        "ai-contract-review-workflow",
+        "code-pdf-folder-entity-json-index-cli",
+        "hallucination-detection-nli-entailment-summaries",
+        "multi-agent-document-orchestration-100-step-state",
+        "multimodal-rag-over-slide-decks"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "adobe",
+      "name": "Adobe",
+      "aliases": [
+        "Adobe"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/adobe/index.html",
+        "canonical": "https://fdeinterviews.com/company/adobe"
+      },
+      "n_questions": 4,
+      "n_cases": 0,
+      "question_ids": [
+        "coin-change-minimum-coins",
+        "edit-distance-levenshtein",
+        "greatest-success-with-impact",
+        "median-of-two-sorted-arrays"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "c3-ai",
+      "name": "C3 AI",
+      "aliases": [
+        "C3 AI",
+        "C3.ai"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/c3-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/c3-ai"
+      },
+      "n_questions": 4,
+      "n_cases": 0,
+      "question_ids": [
+        "c3ai-oa-trapping-rain-water-daily-temperatures",
+        "c3ai-three-hour-ml-case-attack",
+        "linear-regression-assumptions-random-forests",
+        "queue-between-you-and-their-legacy-system"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "cognition",
+      "name": "Cognition",
+      "aliases": [
+        "Cognition"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/cognition/index.html",
+        "canonical": "https://fdeinterviews.com/company/cognition"
+      },
+      "n_questions": 4,
+      "n_cases": 0,
+      "question_ids": [
+        "agent-loop-verifier-gaming-design",
+        "multi-agent-coding-system-plan-code-test-fix",
+        "rag-agent-long-horizon-loops-stop-and-eval",
+        "reward-modeling-code-agent-execution-feedback"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "distyl-ai",
+      "name": "Distyl AI",
+      "aliases": [
+        "Distyl",
+        "Distyl AI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/distyl-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/distyl-ai"
+      },
+      "n_questions": 3,
+      "n_cases": 2,
+      "question_ids": [
+        "fde-offer-ote-vs-engineering-ladder",
+        "how-do-you-stay-current-on-ai-llms",
+        "paid-work-trial-fde-utilization-questions"
+      ],
+      "case_ids": [
+        83,
+        84
+      ],
+      "notes": []
+    },
+    {
+      "slug": "aws",
+      "name": "AWS",
+      "aliases": [
+        "AWS"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/aws/index.html",
+        "canonical": "https://fdeinterviews.com/company/aws"
+      },
+      "n_questions": 3,
+      "n_cases": 0,
+      "question_ids": [
+        "llm-api-metering-and-billing",
+        "mlops-containerize-gpu-pipeline-cuda-driver-matching",
+        "mlops-streaming-data-loader-from-cloud-storage"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "google-deepmind",
+      "name": "Google DeepMind",
+      "aliases": [
+        "Google DeepMind"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/google-deepmind/index.html",
+        "canonical": "https://fdeinterviews.com/company/google-deepmind"
+      },
+      "n_questions": 3,
+      "n_cases": 0,
+      "question_ids": [
+        "inference-time-compute-process-reward-tree-search",
+        "mechanistic-interpretability-safety-saes",
+        "reinforcement-learning-fundamentals"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "anduril",
+      "name": "Anduril",
+      "aliases": [
+        "Anduril"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/anduril/index.html",
+        "canonical": "https://fdeinterviews.com/company/anduril"
+      },
+      "n_questions": 2,
+      "n_cases": 0,
+      "question_ids": [
+        "air-gapped-on-site-adaptation-of-unseen-data",
+        "edge-vlm-realtime-video-jetson"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "deepseek",
+      "name": "DeepSeek",
+      "aliases": [
+        "DeepSeek"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/deepseek/index.html",
+        "canonical": "https://fdeinterviews.com/company/deepseek"
+      },
+      "n_questions": 2,
+      "n_cases": 0,
+      "question_ids": [
+        "infra-global-moe-inference-multi-region-service",
+        "serve-400b-moe-under-latency-sla"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "cursor",
+      "name": "Cursor",
+      "aliases": [
+        "Cursor"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/cursor/index.html",
+        "canonical": "https://fdeinterviews.com/company/cursor"
+      },
+      "n_questions": 1,
+      "n_cases": 2,
+      "question_ids": [
+        "agent-loop-verifier-gaming-design"
+      ],
+      "case_ids": [
+        86,
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "cloudflare",
+      "name": "Cloudflare",
+      "aliases": [
+        "Cloudflare"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/cloudflare/index.html",
+        "canonical": "https://fdeinterviews.com/company/cloudflare"
+      },
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "safety-enforced-llm-api-gateway-policy-engine-streaming"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "cresta",
+      "name": "Cresta",
+      "aliases": [
+        "Cresta"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/cresta/index.html",
+        "canonical": "https://fdeinterviews.com/company/cresta"
+      },
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "keeping-llm-inside-designed-scope"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "perplexity",
+      "name": "Perplexity",
+      "aliases": [
+        "Perplexity"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/perplexity/index.html",
+        "canonical": "https://fdeinterviews.com/company/perplexity"
+      },
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "rag-multi-hop-agent-latency-budget-design"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "writer",
+      "name": "Writer",
+      "aliases": [
+        "Writer"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/writer/index.html",
+        "canonical": "https://fdeinterviews.com/company/writer"
+      },
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "layered-guardrails-brand-safe-agent"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "ramp",
+      "name": "Ramp",
+      "aliases": [
+        "Ramp",
+        "Ramp（3）"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/ramp/index.html",
+        "canonical": "https://fdeinterviews.com/company/ramp"
+      },
+      "n_questions": 0,
+      "n_cases": 4,
+      "question_ids": [],
+      "case_ids": [
+        91,
+        95,
+        96,
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "rippling",
+      "name": "Rippling",
+      "aliases": [
+        "Rippling"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/rippling/index.html",
+        "canonical": "https://fdeinterviews.com/company/rippling"
+      },
+      "n_questions": 0,
+      "n_cases": 3,
+      "question_ids": [],
+      "case_ids": [
+        54,
+        77,
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "commure",
+      "name": "Commure",
+      "aliases": [
+        "Commure"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/commure/index.html",
+        "canonical": "https://fdeinterviews.com/company/commure"
+      },
+      "n_questions": 0,
+      "n_cases": 2,
+      "question_ids": [],
+      "case_ids": [
+        91,
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "deloitte",
+      "name": "Deloitte",
+      "aliases": [
+        "Deloitte",
+        "Deloitte（32 个在招）"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/deloitte/index.html",
+        "canonical": "https://fdeinterviews.com/company/deloitte"
+      },
+      "n_questions": 0,
+      "n_cases": 2,
+      "question_ids": [],
+      "case_ids": [
+        96,
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "asana",
+      "name": "Asana",
+      "aliases": [
+        "Asana"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/asana/index.html",
+        "canonical": "https://fdeinterviews.com/company/asana"
+      },
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "cape",
+      "name": "Cape",
+      "aliases": [
+        "Cape"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/cape/index.html",
+        "canonical": "https://fdeinterviews.com/company/cape"
+      },
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "cognizant",
+      "name": "Cognizant",
+      "aliases": [
+        "Cognizant"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/cognizant/index.html",
+        "canonical": "https://fdeinterviews.com/company/cognizant"
+      },
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "happyrobot",
+      "name": "HappyRobot",
+      "aliases": [
+        "HappyRobot"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/happyrobot/index.html",
+        "canonical": "https://fdeinterviews.com/company/happyrobot"
+      },
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        87
+      ],
+      "notes": []
+    },
+    {
+      "slug": "hippocratic-ai",
+      "name": "Hippocratic AI",
+      "aliases": [
+        "Hippocratic AI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/hippocratic-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/hippocratic-ai"
+      },
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "intercom",
+      "name": "Intercom",
+      "aliases": [
+        "Intercom（8）",
+        "Intercom"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/intercom/index.html",
+        "canonical": "https://fdeinterviews.com/company/intercom"
+      },
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        95
+      ],
+      "notes": []
+    },
+    {
+      "slug": "matta",
+      "name": "Matta",
+      "aliases": [
+        "Matta"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/matta/index.html",
+        "canonical": "https://fdeinterviews.com/company/matta"
+      },
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        91
+      ],
+      "notes": []
+    },
+    {
+      "slug": "akka",
+      "name": "Akka",
+      "aliases": [
+        "Akka"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/akka/index.html",
+        "canonical": "https://fdeinterviews.com/company/akka"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "alibaba",
+      "name": "Alibaba",
+      "aliases": [
+        "Alibaba"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/alibaba/index.html",
+        "canonical": "https://fdeinterviews.com/company/alibaba"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "applied-compute",
+      "name": "Applied Compute",
+      "aliases": [
+        "Applied Compute"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/applied-compute/index.html",
+        "canonical": "https://fdeinterviews.com/company/applied-compute"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "applied-intuition",
+      "name": "Applied Intuition",
+      "aliases": [
+        "Applied Intuition"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/applied-intuition/index.html",
+        "canonical": "https://fdeinterviews.com/company/applied-intuition"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "assort-health",
+      "name": "Assort Health",
+      "aliases": [
+        "Assort Health"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/assort-health/index.html",
+        "canonical": "https://fdeinterviews.com/company/assort-health"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "autogenai",
+      "name": "AutogenAI",
+      "aliases": [
+        "AutogenAI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/autogenai/index.html",
+        "canonical": "https://fdeinterviews.com/company/autogenai"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "baidu",
+      "name": "Baidu",
+      "aliases": [
+        "Baidu"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/baidu/index.html",
+        "canonical": "https://fdeinterviews.com/company/baidu"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "bcg-x",
+      "name": "BCG X",
+      "aliases": [
+        "BCG X"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/bcg-x/index.html",
+        "canonical": "https://fdeinterviews.com/company/bcg-x"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "black-forest-labs",
+      "name": "Black Forest Labs",
+      "aliases": [
+        "Black Forest Labs"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/black-forest-labs/index.html",
+        "canonical": "https://fdeinterviews.com/company/black-forest-labs"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "bytedance",
+      "name": "ByteDance",
+      "aliases": [
+        "ByteDance"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/bytedance/index.html",
+        "canonical": "https://fdeinterviews.com/company/bytedance"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "cartesia",
+      "name": "Cartesia",
+      "aliases": [
+        "Cartesia"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/cartesia/index.html",
+        "canonical": "https://fdeinterviews.com/company/cartesia"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "casca",
+      "name": "Casca",
+      "aliases": [
+        "Casca"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/casca/index.html",
+        "canonical": "https://fdeinterviews.com/company/casca"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "clera",
+      "name": "Clera",
+      "aliases": [
+        "Clera"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/clera/index.html",
+        "canonical": "https://fdeinterviews.com/company/clera"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "clientell-ai",
+      "name": "Clientell AI",
+      "aliases": [
+        "Clientell AI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/clientell-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/clientell-ai"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "crustdata",
+      "name": "Crustdata",
+      "aliases": [
+        "Crustdata"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/crustdata/index.html",
+        "canonical": "https://fdeinterviews.com/company/crustdata"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "deepjudge",
+      "name": "DeepJudge",
+      "aliases": [
+        "DeepJudge"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/deepjudge/index.html",
+        "canonical": "https://fdeinterviews.com/company/deepjudge"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "deployment-inc",
+      "name": "Deployment Inc",
+      "aliases": [
+        "Deployment Inc"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/deployment-inc/index.html",
+        "canonical": "https://fdeinterviews.com/company/deployment-inc"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "distro",
+      "name": "Distro",
+      "aliases": [
+        "Distro"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/distro/index.html",
+        "canonical": "https://fdeinterviews.com/company/distro"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "edra",
+      "name": "Edra",
+      "aliases": [
+        "Edra"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/edra/index.html",
+        "canonical": "https://fdeinterviews.com/company/edra"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "extend",
+      "name": "Extend",
+      "aliases": [
+        "Extend"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/extend/index.html",
+        "canonical": "https://fdeinterviews.com/company/extend"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "ey",
+      "name": "EY",
+      "aliases": [
+        "EY"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/ey/index.html",
+        "canonical": "https://fdeinterviews.com/company/ey"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "fractal",
+      "name": "Fractal",
+      "aliases": [
+        "Fractal"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/fractal/index.html",
+        "canonical": "https://fdeinterviews.com/company/fractal"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "giga-ml",
+      "name": "Giga ML",
+      "aliases": [
+        "Giga ML"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/giga-ml/index.html",
+        "canonical": "https://fdeinterviews.com/company/giga-ml"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "google-gemini",
+      "name": "Google Gemini",
+      "aliases": [
+        "Google Gemini"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/google-gemini/index.html",
+        "canonical": "https://fdeinterviews.com/company/google-gemini"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "greptile",
+      "name": "Greptile",
+      "aliases": [
+        "Greptile"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/greptile/index.html",
+        "canonical": "https://fdeinterviews.com/company/greptile"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "hadrian",
+      "name": "Hadrian",
+      "aliases": [
+        "Hadrian"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/hadrian/index.html",
+        "canonical": "https://fdeinterviews.com/company/hadrian"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "ibm",
+      "name": "IBM",
+      "aliases": [
+        "IBM"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/ibm/index.html",
+        "canonical": "https://fdeinterviews.com/company/ibm"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "istari",
+      "name": "Istari",
+      "aliases": [
+        "Istari"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/istari/index.html",
+        "canonical": "https://fdeinterviews.com/company/istari"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "layerup",
+      "name": "Layerup",
+      "aliases": [
+        "Layerup"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/layerup/index.html",
+        "canonical": "https://fdeinterviews.com/company/layerup"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "lorikeet",
+      "name": "Lorikeet",
+      "aliases": [
+        "Lorikeet"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/lorikeet/index.html",
+        "canonical": "https://fdeinterviews.com/company/lorikeet"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "mckinsey-quantumblack",
+      "name": "McKinsey QuantumBlack",
+      "aliases": [
+        "McKinsey QuantumBlack"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/mckinsey-quantumblack/index.html",
+        "canonical": "https://fdeinterviews.com/company/mckinsey-quantumblack"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "mercor",
+      "name": "Mercor",
+      "aliases": [
+        "Mercor"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/mercor/index.html",
+        "canonical": "https://fdeinterviews.com/company/mercor"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "parallel",
+      "name": "Parallel",
+      "aliases": [
+        "Parallel"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/parallel/index.html",
+        "canonical": "https://fdeinterviews.com/company/parallel"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "peakflo",
+      "name": "Peakflo",
+      "aliases": [
+        "Peakflo"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/peakflo/index.html",
+        "canonical": "https://fdeinterviews.com/company/peakflo"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "postman",
+      "name": "Postman",
+      "aliases": [
+        "Postman"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/postman/index.html",
+        "canonical": "https://fdeinterviews.com/company/postman"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "prime-intellect",
+      "name": "Prime Intellect",
+      "aliases": [
+        "Prime Intellect"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/prime-intellect/index.html",
+        "canonical": "https://fdeinterviews.com/company/prime-intellect"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "reflection-ai",
+      "name": "Reflection AI",
+      "aliases": [
+        "Reflection AI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/reflection-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/reflection-ai"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "relyance-ai",
+      "name": "Relyance AI",
+      "aliases": [
+        "Relyance AI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/relyance-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/relyance-ai"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "sakana-ai",
+      "name": "Sakana AI",
+      "aliases": [
+        "Sakana AI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/sakana-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/sakana-ai"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "sandstone",
+      "name": "Sandstone",
+      "aliases": [
+        "Sandstone"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/sandstone/index.html",
+        "canonical": "https://fdeinterviews.com/company/sandstone"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "sardine",
+      "name": "Sardine",
+      "aliases": [
+        "Sardine"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/sardine/index.html",
+        "canonical": "https://fdeinterviews.com/company/sardine"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "sarvam-ai",
+      "name": "Sarvam AI",
+      "aliases": [
+        "Sarvam AI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/sarvam-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/sarvam-ai"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "shield-ai",
+      "name": "Shield AI",
+      "aliases": [
+        "Shield AI"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/shield-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/shield-ai"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "spacex",
+      "name": "SpaceX",
+      "aliases": [
+        "SpaceX"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/spacex/index.html",
+        "canonical": "https://fdeinterviews.com/company/spacex"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "safe-superintelligence",
+      "name": "SSI (Safe Superintelligence)",
+      "aliases": [
+        "SSI (Safe Superintelligence)"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/safe-superintelligence/index.html",
+        "canonical": "https://fdeinterviews.com/company/safe-superintelligence"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "stanford-ai",
+      "name": "Stanford AI Lab",
+      "aliases": [
+        "Stanford AI Lab"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/stanford-ai/index.html",
+        "canonical": "https://fdeinterviews.com/company/stanford-ai"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "tailscale",
+      "name": "Tailscale",
+      "aliases": [
+        "Tailscale"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/tailscale/index.html",
+        "canonical": "https://fdeinterviews.com/company/tailscale"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "talkdesk",
+      "name": "Talkdesk",
+      "aliases": [
+        "Talkdesk"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/talkdesk/index.html",
+        "canonical": "https://fdeinterviews.com/company/talkdesk"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "tencent",
+      "name": "Tencent",
+      "aliases": [
+        "Tencent"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/tencent/index.html",
+        "canonical": "https://fdeinterviews.com/company/tencent"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "thinking-machines",
+      "name": "Thinking Machines",
+      "aliases": [
+        "Thinking Machines"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/thinking-machines/index.html",
+        "canonical": "https://fdeinterviews.com/company/thinking-machines"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "valdera",
+      "name": "Valdera",
+      "aliases": [
+        "Valdera"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/valdera/index.html",
+        "canonical": "https://fdeinterviews.com/company/valdera"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "vannevar-labs",
+      "name": "Vannevar Labs",
+      "aliases": [
+        "Vannevar Labs"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/vannevar-labs/index.html",
+        "canonical": "https://fdeinterviews.com/company/vannevar-labs"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "whatfix",
+      "name": "Whatfix",
+      "aliases": [
+        "Whatfix"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/whatfix/index.html",
+        "canonical": "https://fdeinterviews.com/company/whatfix"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "workato",
+      "name": "Workato",
+      "aliases": [
+        "Workato"
+      ],
+      "source": "site",
+      "interview_url": {
+        "local": "fdeinterviews.com/company/workato/index.html",
+        "canonical": "https://fdeinterviews.com/company/workato"
+      },
+      "n_questions": 0,
+      "n_cases": 0,
+      "question_ids": [],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "amazon",
+      "name": "Amazon",
+      "aliases": [
+        "Amazon"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 55,
+      "n_cases": 0,
+      "question_ids": [
+        "ad-click-conversion-prediction",
+        "ads-ranking-evaluation-framework",
+        "automated-retraining-pipeline-triggers",
+        "autoscaling-inference-and-cold-starts",
+        "aws-mlops-environment-and-hosting-choice",
+        "bad-model-already-serving-recovery-strategy",
+        "binary-tree-maximum-path-sum",
+        "blue-green-vs-canary-model-deployments",
+        "cicd-for-ml-experience-probe",
+        "coin-change-minimum-coins",
+        "construct-binary-tree-preorder-inorder",
+        "continuous-training-champion-challenger-promotion",
+        "debugging-inconsistent-model-results-incident",
+        "disagreed-with-your-manager",
+        "discovered-data-leakage",
+        "drove-work-without-team-support",
+        "ecommerce-course-recommendation",
+        "feature-selection-curse-of-dimensionality",
+        "greatest-success-with-impact",
+        "handled-negative-feedback",
+        "house-robber",
+        "hyperparameter-tuning-efficiently",
+        "infection-spread-simulation",
+        "k-closest-points-to-origin",
+        "kmeans-clustering-from-scratch",
+        "knn-classifier-from-scratch",
+        "linear-regression-gradient-descent-from-scratch",
+        "longest-substring-without-repeating-characters",
+        "median-of-two-sorted-arrays",
+        "ml-cicd-vs-traditional-devops",
+        "mlflow-purpose-and-four-components",
+        "mlops-engineer-day-to-day-responsibility",
+        "mlops-pipeline-on-aws-sagemaker-codepipeline",
+        "mlops-platform-aws-compliance-constraints",
+        "model-failed-in-production-postmortem",
+        "model-registry-vs-s3-artifacts",
+        "music-recommendation-system",
+        "optimized-the-wrong-metric",
+        "product-of-array-except-self",
+        "product-search-ranking",
+        "production-ml-architecture-end-to-end",
+        "production-ml-triage-three-failures-at-once",
+        "psi-ks-drift-tests-and-thresholds",
+        "push-staging-to-production-model-meaning",
+        "quality-and-testing-in-mlops-pipelines",
+        "ranking-metrics-ndcg-mrr-map",
+        "reproducibility-in-ml-workflows",
+        "reversed-a-decision-you-made",
+        "rolling-back-a-bad-model-in-production",
+        "scaling-api-gateway-for-model-inference",
+        "search-in-rotated-sorted-array",
+        "short-term-sacrifice-long-term-gain",
+        "sort-a-nearly-sorted-k-sorted-array",
+        "valid-parentheses-and-generate",
+        "validate-binary-search-tree"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "retool",
+      "name": "Retool",
+      "aliases": [
+        "Retool"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 40,
+      "n_cases": 0,
+      "question_ids": [
+        "api-design-rest-graphql-versioning-pagination-integration",
+        "at-least-once-vs-exactly-once-delivery",
+        "batch-vs-streaming-real-time-dashboards",
+        "build-wc-lite-cli-tool",
+        "cache-invalidation-stampede-caching-llm-results",
+        "code-refactor-testability-extract-and-inject",
+        "csv-diff-tool-composite-keys",
+        "dead-letter-queues-poison-messages",
+        "debug-failing-repo-fix-bugs-add-feature",
+        "defensive-ingestion-data-quality-alerting",
+        "delete-duplicate-rows-keep-latest",
+        "design-webhook-delivery-system",
+        "double-processing-idempotency-bug",
+        "entity-resolution-dedupe-customer-records",
+        "feature-flag-percentage-rollout-bucketing",
+        "flaky-api-client-retries-backoff-jitter",
+        "friday-evening-hotfix-judgment",
+        "funnel-analysis-sql-cohorts",
+        "in-memory-pub-sub-topic-wildcards",
+        "intermittent-timeouts-no-access-to-customer-code",
+        "job-queue-long-running-llm-tasks",
+        "join-fan-out-row-explosion",
+        "left-join-where-clause-null-trap",
+        "live-db-migration-expand-contract",
+        "mini-spreadsheet-formulas-cycle-detection",
+        "modeling-ai-agent-conversation-logs",
+        "moving-average-data-stream",
+        "nextjs-3-second-ttfb-triage",
+        "nth-highest-salary-per-department",
+        "operating-fleet-of-customer-deployments",
+        "parse-server-logs-top-k-errors",
+        "pivot-rows-to-columns-conditional-aggregation",
+        "rank-vs-dense-rank-vs-row-number",
+        "rule-expression-engine-boolean-evaluator",
+        "sandboxing-agent-code-execution",
+        "secrets-management-customer-environments",
+        "sessionize-event-stream-30-minute-gaps",
+        "snowflake-warehouse-sizing-scale-up-vs-out",
+        "sso-saml-row-level-security-embedded",
+        "string-template-engine-nested-conditionals-loops"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "capital-one",
+      "name": "Capital One",
+      "aliases": [
+        "Capital One"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 18,
+      "n_cases": 0,
+      "question_ids": [
+        "automated-retraining-pipeline-triggers",
+        "aws-mlops-environment-and-hosting-choice",
+        "bad-model-already-serving-recovery-strategy",
+        "blue-green-vs-canary-model-deployments",
+        "continuous-training-champion-challenger-promotion",
+        "discovered-data-leakage",
+        "feature-selection-curse-of-dimensionality",
+        "feature-store-for-real-time-fraud-detection",
+        "feature-store-online-vs-offline",
+        "ml-cicd-vs-traditional-devops",
+        "mlflow-registry-promotion-with-aliases",
+        "mlops-pipeline-on-aws-sagemaker-codepipeline",
+        "mlops-platform-aws-compliance-constraints",
+        "model-registry-vs-s3-artifacts",
+        "point-in-time-correctness-and-leakage",
+        "production-ml-architecture-end-to-end",
+        "rolling-back-a-bad-model-in-production",
+        "shadow-deployment-vs-ab-testing-models"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "together-ai",
+      "name": "Together AI",
+      "aliases": [
+        "Together",
+        "Together AI"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 18,
+      "n_cases": 0,
+      "question_ids": [
+        "choosing-tensor-parallel-degree-serving-70b",
+        "continuous-batching-vs-static-batching",
+        "gpu-capacity-math-requests-per-second",
+        "gpu-fleet-capacity-cost-planning-buy-vs-rent",
+        "have-you-worked-on-ml-gpu-workloads",
+        "how-pagedattention-works-vllm",
+        "infra-serve-70b-model-on-one-80gb-gpu",
+        "infra-vllm-tensorrt-llm-tgi-runtime-comparison",
+        "kv-cache-blowup-long-context-oom-triage",
+        "memory-bound-vs-compute-bound-roofline",
+        "moe-expert-load-balancing-90-10-routing",
+        "multi-lora-kv-cache-pool-thousands-adapters",
+        "prefill-vs-decode-bottlenecks-disaggregation",
+        "quantization-fp8-int4-gptq-awq-tradeoffs",
+        "quantization-vs-distillation-to-hit-a-latency-and-cost-budget",
+        "serve-400b-moe-under-latency-sla",
+        "speculative-decoding-when-it-helps",
+        "structured-output-at-scale-constrained-decoding-vs-retries"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "jpmorgan",
+      "name": "JPMorgan",
+      "aliases": [
+        "JPMorgan"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 17,
+      "n_cases": 0,
+      "question_ids": [
+        "aws-mlops-environment-and-hosting-choice",
+        "azure-ml-devops-pipelines-fit-together",
+        "cicd-for-ml-experience-probe",
+        "debugging-inconsistent-model-results-incident",
+        "feature-store-for-real-time-fraud-detection",
+        "mlflow-registry-promotion-with-aliases",
+        "mlops-engineer-day-to-day-responsibility",
+        "mlops-pipeline-on-aws-sagemaker-codepipeline",
+        "mlops-platform-aws-compliance-constraints",
+        "model-registry-vs-s3-artifacts",
+        "monitoring-and-maintaining-models-program",
+        "monitoring-models-without-ground-truth-labels",
+        "point-in-time-correctness-and-leakage",
+        "psi-ks-drift-tests-and-thresholds",
+        "reproducibility-in-ml-workflows",
+        "rolling-back-a-bad-model-in-production",
+        "silent-model-degradation-postmortem"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "uber",
+      "name": "Uber",
+      "aliases": [
+        "Uber"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 17,
+      "n_cases": 0,
+      "question_ids": [
+        "automated-retraining-pipeline-triggers",
+        "bad-model-already-serving-recovery-strategy",
+        "continuous-training-champion-challenger-promotion",
+        "debugging-inconsistent-model-results-incident",
+        "eta-prediction-maps",
+        "feature-store-for-real-time-fraud-detection",
+        "feature-store-online-vs-offline",
+        "kubernetes-model-deployment-experience-kserve",
+        "ml-observability-platform-self-serve-many-teams",
+        "monitoring-and-maintaining-models-program",
+        "monitoring-models-without-ground-truth-labels",
+        "point-in-time-correctness-and-leakage",
+        "production-ml-architecture-end-to-end",
+        "production-ml-triage-three-failures-at-once",
+        "scaling-api-gateway-for-model-inference",
+        "silent-model-degradation-postmortem",
+        "training-serving-skew-online-offline-parity"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "stripe",
+      "name": "Stripe",
+      "aliases": [
+        "Stripe"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 14,
+      "n_cases": 0,
+      "question_ids": [
+        "anomaly-detection-without-labels",
+        "api-design-rest-graphql-versioning-pagination-integration",
+        "circuit-breaker-library-half-open-probe",
+        "code-aifirst-policy-as-code-for-ai-generated-code",
+        "code-aifirst-security-failure-modes-of-generated-code",
+        "concurrency-races-deadlocks-optimistic-pessimistic-locking",
+        "decompose-fraud-ring-detection-graph",
+        "defense-in-depth-agent-with-write-authority",
+        "feature-flag-percentage-rollout-bucketing",
+        "fraud-detection-model",
+        "optimized-the-wrong-metric",
+        "rag-agent-fleet-failure-recovery-executed-side-effects",
+        "short-term-sacrifice-long-term-gain",
+        "token-bucket-quota-manager-reserve-refund"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "coreweave",
+      "name": "CoreWeave",
+      "aliases": [
+        "CoreWeave"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 13,
+      "n_cases": 0,
+      "question_ids": [
+        "choosing-tensor-parallel-degree-serving-70b",
+        "continuous-batching-vs-static-batching",
+        "cuda-execution-model-grids-blocks-warps-sms",
+        "design-gpu-scheduling-system-shared-cluster",
+        "experience-ml-infrastructure-distributed-gpu-clusters",
+        "gpu-capacity-math-requests-per-second",
+        "gpu-fleet-capacity-cost-planning-buy-vs-rent",
+        "hardware-failures-stragglers-multi-week-training",
+        "have-you-worked-on-ml-gpu-workloads",
+        "implement-gpu-credit-calculator",
+        "infiniband-vs-roce-for-gpu-training-clusters",
+        "nccl-gpudirect-rdma-and-the-100-percent-utilization-trap",
+        "occupancy-and-choosing-thread-block-size"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "vercel",
+      "name": "Vercel",
+      "aliases": [
+        "Vercel"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 10,
+      "n_cases": 0,
+      "question_ids": [
+        "api-design-rest-graphql-versioning-pagination-integration",
+        "api-rate-limits-quotas-tiered-plans",
+        "cache-invalidation-stampede-caching-llm-results",
+        "cancel-inference-on-client-disconnect",
+        "demo-breaks-mid-demo",
+        "design-webhook-delivery-system",
+        "nextjs-3-second-ttfb-triage",
+        "p50-p95-p99-tail-latency",
+        "p99-latency-spike-first-30-minutes",
+        "streaming-ux-long-running-agent"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "netflix",
+      "name": "Netflix",
+      "aliases": [
+        "Netflix"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 9,
+      "n_cases": 0,
+      "question_ids": [
+        "blue-green-vs-canary-model-deployments",
+        "feature-store-online-vs-offline",
+        "ml-observability-platform-self-serve-many-teams",
+        "monitoring-and-maintaining-models-program",
+        "monitoring-models-without-ground-truth-labels",
+        "production-ml-triage-three-failures-at-once",
+        "shadow-deployment-vs-ab-testing-models",
+        "silent-model-degradation-postmortem",
+        "video-watch-time-prediction"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "apple",
+      "name": "Apple",
+      "aliases": [
+        "Apple"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 7,
+      "n_cases": 0,
+      "question_ids": [
+        "knn-classifier-from-scratch",
+        "landmark-recognition-system",
+        "migrating-pytorch-workload-to-tpu",
+        "music-recommendation-system",
+        "on-device-dp-sgd-federated-personalization",
+        "quantization-fp8-int4-gptq-awq-tradeoffs",
+        "speculative-decoding-when-it-helps"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "github",
+      "name": "GitHub",
+      "aliases": [
+        "GitHub"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 5,
+      "n_cases": 0,
+      "question_ids": [
+        "multi-agent-coding-system-plan-code-test-fix",
+        "rag-lethal-trifecta-indirect-injection-hardened-tools",
+        "real-time-collaborative-coding-assistant-streaming-completions",
+        "red-teaming-framework-code-generation-model-malicious-scripts",
+        "securing-mcp-tool-integration-supply-chain"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "datadog",
+      "name": "Datadog",
+      "aliases": [
+        "Datadog"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 3,
+      "n_cases": 1,
+      "question_ids": [
+        "anomaly-detection-without-labels",
+        "code-sliding-window-average-tokens-per-sec",
+        "mlops-ai-native-observability-platform-hundreds-of-products"
+      ],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "youtube",
+      "name": "YouTube",
+      "aliases": [
+        "YouTube"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 2,
+      "n_cases": 1,
+      "question_ids": [
+        "short-video-for-you-ranker",
+        "video-watch-time-prediction"
+      ],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "doordash",
+      "name": "DoorDash",
+      "aliases": [
+        "DoorDash"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 2,
+      "n_cases": 0,
+      "question_ids": [
+        "eta-prediction-maps",
+        "product-search-ranking"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "fireworks",
+      "name": "Fireworks",
+      "aliases": [
+        "Fireworks"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 2,
+      "n_cases": 0,
+      "question_ids": [
+        "multi-lora-kv-cache-pool-thousands-adapters",
+        "session-aware-kv-cache-prefix-reuse-branching"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "langchain",
+      "name": "LangChain",
+      "aliases": [
+        "LangChain"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 2,
+      "n_cases": 0,
+      "question_ids": [
+        "langchain-llamaindex-langgraph-which-when",
+        "tracing-multi-step-agent-silent-failures"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "pinterest",
+      "name": "Pinterest",
+      "aliases": [
+        "Pinterest"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 2,
+      "n_cases": 0,
+      "question_ids": [
+        "feed-ranking-personalized-recommendation",
+        "landmark-recognition-system"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "tesla",
+      "name": "Tesla",
+      "aliases": [
+        "Tesla"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 2,
+      "n_cases": 0,
+      "question_ids": [
+        "active-learning-what-to-label-next",
+        "edge-vlm-realtime-video-jetson"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "a16z-style-fintech",
+      "name": "a16z-style fintech",
+      "aliases": [
+        "a16z-style fintech"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "verifiable-inference-zkml-vs-tee"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "adyen",
+      "name": "Adyen",
+      "aliases": [
+        "Adyen"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "fraud-detection-model"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "coursera",
+      "name": "Coursera",
+      "aliases": [
+        "Coursera"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "ecommerce-course-recommendation"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "discord",
+      "name": "Discord",
+      "aliases": [
+        "Discord"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "realtime-moderation-pipeline-50ms-p99"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "disney-plus",
+      "name": "Disney+",
+      "aliases": [
+        "Disney+"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "video-watch-time-prediction"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "etsy",
+      "name": "Etsy",
+      "aliases": [
+        "Etsy"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "product-search-ranking"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "flexport",
+      "name": "Flexport",
+      "aliases": [
+        "Flexport"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "decompose-container-port-terminal-operations"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "goldman-sachs",
+      "name": "Goldman Sachs",
+      "aliases": [
+        "Goldman Sachs"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "rag-evaluation-classical-metrics-bridge"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "hp",
+      "name": "HP",
+      "aliases": [
+        "HP"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "mentored-other-engineers"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "jetblue",
+      "name": "JetBlue",
+      "aliases": [
+        "JetBlue"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "dspy-evaluation-driven-prompt-optimization"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "linkedin",
+      "name": "LinkedIn",
+      "aliases": [
+        "LinkedIn"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "feed-ranking-personalized-recommendation"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "lmsys",
+      "name": "LMSYS",
+      "aliases": [
+        "LMSYS"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "arena-style-elo-pairwise-human-eval"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "martian",
+      "name": "Martian",
+      "aliases": [
+        "Martian"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "contextual-bandit-model-routing-cost-quality"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "modulus",
+      "name": "Modulus",
+      "aliases": [
+        "Modulus"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "verifiable-inference-zkml-vs-tee"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "neo4j",
+      "name": "Neo4j",
+      "aliases": [
+        "Neo4j"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "graph-rag-text-to-cypher-auto-healing"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "notion",
+      "name": "Notion",
+      "aliases": [
+        "Notion"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "rag-retrieval-quality-monitoring-without-ground-truth"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "paypal",
+      "name": "PayPal",
+      "aliases": [
+        "PayPal"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "fraud-detection-model"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "pinecone",
+      "name": "Pinecone",
+      "aliases": [
+        "Pinecone"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "vector-db-capacity-planning-hnsw-ivfpq"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "roblox",
+      "name": "Roblox",
+      "aliases": [
+        "Roblox"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "realtime-bot-detection"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "samsung",
+      "name": "Samsung",
+      "aliases": [
+        "Samsung"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "on-device-dp-sgd-federated-personalization"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "spotify",
+      "name": "Spotify",
+      "aliases": [
+        "Spotify"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "music-recommendation-system"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "tiktok",
+      "name": "TikTok",
+      "aliases": [
+        "TikTok"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "short-video-for-you-ranker"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "two-sigma",
+      "name": "Two Sigma",
+      "aliases": [
+        "Two Sigma"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "biased-coin-to-fair-coin"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "udemy",
+      "name": "Udemy",
+      "aliases": [
+        "Udemy"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 1,
+      "n_cases": 0,
+      "question_ids": [
+        "ecommerce-course-recommendation"
+      ],
+      "case_ids": [],
+      "notes": []
+    },
+    {
+      "slug": "fde-academy",
+      "name": "FDE Academy（Futurense）",
+      "aliases": [
+        "FDE Academy（Futurense）"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 3,
+      "question_ids": [],
+      "case_ids": [
+        123,
+        124,
+        125
+      ],
+      "notes": []
+    },
+    {
+      "slug": "fourth-age",
+      "name": "Fourth Age",
+      "aliases": [
+        "Fourth Age"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 3,
+      "question_ids": [],
+      "case_ids": [
+        115,
+        116,
+        117
+      ],
+      "notes": []
+    },
+    {
+      "slug": "servicenow",
+      "name": "ServiceNow",
+      "aliases": [
+        "ServiceNow"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 3,
+      "question_ids": [],
+      "case_ids": [
+        85,
+        98,
+        127
+      ],
+      "notes": []
+    },
+    {
+      "slug": "applied-materials",
+      "name": "Applied Materials",
+      "aliases": [
+        "Applied Materials",
+        "Applied Materials（4）"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 2,
+      "question_ids": [],
+      "case_ids": [
+        96,
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "cisco",
+      "name": "Cisco",
+      "aliases": [
+        "Cisco",
+        "Cisco（3）"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 2,
+      "question_ids": [],
+      "case_ids": [
+        96,
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "modal",
+      "name": "Modal",
+      "aliases": [
+        "Modal（圆桌参与者所在公司）",
+        "Modal"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 2,
+      "question_ids": [],
+      "case_ids": [
+        83,
+        84
+      ],
+      "notes": []
+    },
+    {
+      "slug": "reevo",
+      "name": "Reevo",
+      "aliases": [
+        "Reevo",
+        "Reevo（3）"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 2,
+      "question_ids": [],
+      "case_ids": [
+        96,
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "9fin",
+      "name": "9fin",
+      "aliases": [
+        "9fin"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "a16z-build",
+      "name": "a16z Build",
+      "aliases": [
+        "a16z Build"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "accenture-federal-services",
+      "name": "Accenture Federal Services",
+      "aliases": [
+        "Accenture Federal Services"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "aifde",
+      "name": "aifde",
+      "aliases": [
+        "aifde（独立社区项目，声明与 OpenAI/Amazon/Anthropic/Cohere/Palantir/Decagon 无关联）",
+        "aifde"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        70
+      ],
+      "notes": []
+    },
+    {
+      "slug": "air-canada",
+      "name": "Air Canada",
+      "aliases": [
+        "Air Canada"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        86
+      ],
+      "notes": []
+    },
+    {
+      "slug": "aircall",
+      "name": "Aircall",
+      "aliases": [
+        "Aircall"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "alternative-payments",
+      "name": "Alternative Payments",
+      "aliases": [
+        "Alternative Payments"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "ameriprise",
+      "name": "Ameriprise",
+      "aliases": [
+        "Ameriprise"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "aptean",
+      "name": "Aptean",
+      "aliases": [
+        "Aptean"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "attio",
+      "name": "Attio",
+      "aliases": [
+        "Attio"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "baseten",
+      "name": "Baseten",
+      "aliases": [
+        "Baseten（3）",
+        "Baseten"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        95
+      ],
+      "notes": []
+    },
+    {
+      "slug": "box",
+      "name": "Box",
+      "aliases": [
+        "Box（CEO Aaron Levie 观点）",
+        "Box"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        94
+      ],
+      "notes": []
+    },
+    {
+      "slug": "charlie-health",
+      "name": "Charlie Health",
+      "aliases": [
+        "Charlie Health"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "comcast",
+      "name": "Comcast",
+      "aliases": [
+        "Comcast"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "crosscountry",
+      "name": "CrossCountry",
+      "aliases": [
+        "CrossCountry"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "cummins",
+      "name": "Cummins",
+      "aliases": [
+        "Cummins"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "disney",
+      "name": "Disney",
+      "aliases": [
+        "Disney"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "eve",
+      "name": "Eve",
+      "aliases": [
+        "Eve"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        86
+      ],
+      "notes": []
+    },
+    {
+      "slug": "everpure",
+      "name": "Everpure",
+      "aliases": [
+        "Everpure"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "fortreum",
+      "name": "Fortreum",
+      "aliases": [
+        "Fortreum"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "galaxy",
+      "name": "Galaxy",
+      "aliases": [
+        "Galaxy"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "gecko-robotics",
+      "name": "Gecko Robotics",
+      "aliases": [
+        "Gecko Robotics"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        91
+      ],
+      "notes": []
+    },
+    {
+      "slug": "hex",
+      "name": "Hex",
+      "aliases": [
+        "Hex"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        122
+      ],
+      "notes": []
+    },
+    {
+      "slug": "huron",
+      "name": "Huron",
+      "aliases": [
+        "Huron"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "hyro",
+      "name": "Hyro",
+      "aliases": [
+        "Hyro"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "inriver",
+      "name": "Inriver",
+      "aliases": [
+        "Inriver"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "leidos",
+      "name": "Leidos",
+      "aliases": [
+        "Leidos"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "lenovo",
+      "name": "Lenovo",
+      "aliases": [
+        "Lenovo"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "lindy",
+      "name": "Lindy",
+      "aliases": [
+        "Lindy"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        91
+      ],
+      "notes": []
+    },
+    {
+      "slug": "maybern",
+      "name": "Maybern",
+      "aliases": [
+        "Maybern"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "mongodb",
+      "name": "MongoDB",
+      "aliases": [
+        "MongoDB"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "optimizely",
+      "name": "Optimizely",
+      "aliases": [
+        "Optimizely"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "parloa",
+      "name": "Parloa",
+      "aliases": [
+        "Parloa"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "permute",
+      "name": "PERMUTE",
+      "aliases": [
+        "PERMUTE"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "propela-tech",
+      "name": "Propela Tech",
+      "aliases": [
+        "Propela Tech 等",
+        "Propela Tech"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "redapt",
+      "name": "Redapt",
+      "aliases": [
+        "Redapt"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "ringcentral",
+      "name": "RingCentral",
+      "aliases": [
+        "RingCentral"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "salient",
+      "name": "Salient",
+      "aliases": [
+        "Salient"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        86
+      ],
+      "notes": []
+    },
+    {
+      "slug": "snorkel-ai",
+      "name": "Snorkel AI",
+      "aliases": [
+        "Snorkel AI"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "tabs",
+      "name": "Tabs",
+      "aliases": [
+        "Tabs"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "tenex",
+      "name": "Tenex",
+      "aliases": [
+        "Tenex"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "tennr",
+      "name": "Tennr",
+      "aliases": [
+        "Tennr"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        87
+      ],
+      "notes": []
+    },
+    {
+      "slug": "thesis-care",
+      "name": "Thesis Care",
+      "aliases": [
+        "Thesis Care"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "toma",
+      "name": "Toma",
+      "aliases": [
+        "Toma（文中举例）",
+        "Toma"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        86
+      ],
+      "notes": []
+    },
+    {
+      "slug": "tomoro",
+      "name": "Tomoro",
+      "aliases": [
+        "Tomoro"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        93
+      ],
+      "notes": []
+    },
+    {
+      "slug": "viam",
+      "name": "Viam",
+      "aliases": [
+        "Viam"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "vitol",
+      "name": "Vitol",
+      "aliases": [
+        "Vitol"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "windsurf",
+      "name": "Windsurf",
+      "aliases": [
+        "Windsurf"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        127
+      ],
+      "notes": []
+    },
+    {
+      "slug": "workday",
+      "name": "Workday",
+      "aliases": [
+        "Workday"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        85
+      ],
+      "notes": []
+    },
+    {
+      "slug": "wpp",
+      "name": "WPP",
+      "aliases": [
+        "WPP"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 1,
+      "question_ids": [],
+      "case_ids": [
+        98
+      ],
+      "notes": []
+    },
+    {
+      "slug": "unknown",
+      "name": "Unknown / anonymous",
+      "aliases": [
+        "某提供 FDSE 服务的公司（匿名未具名）",
+        "某工业数据采集与可视化软件创业公司（OP 未点名）",
+        "某 1000+ 人的 AI 产品公司（匿名，明确非 Palantir、非创业公司）",
+        "Unknown / anonymous"
+      ],
+      "source": "extra",
+      "interview_url": null,
+      "n_questions": 0,
+      "n_cases": 25,
+      "question_ids": [],
+      "case_ids": [
+        76,
+        79,
+        80,
+        82,
+        97,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        113,
+        114,
+        118,
+        119,
+        120,
+        121,
+        126,
+        128,
+        129
+      ],
+      "notes": [
+        "某 1000+ 人的 AI 产品公司（匿名，明确非 Palantir、非创业公司）",
+        "某工业数据采集与可视化软件创业公司（OP 未点名）",
+        "某提供 FDSE 服务的公司（匿名未具名）"
+      ]
+    }
+  ]
+}

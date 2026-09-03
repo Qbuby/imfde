@@ -1,0 +1,31 @@
+id,taxonomy,level,slug,name_en,name_zh,name_ja,sort
+aifde:discovery,aifde,L1,discovery,L1 Customer Discovery,L1 客户发现,L1 顧客発見,1
+aifde:scoping,aifde,L1,scoping,L1 Solution Scoping,L1 方案范围,L1 ソリューション・スコーピング,2
+aifde:evaluation,aifde,L1,evaluation,L1 Evaluation and Safety,L1 评测与安全,L1 評価と安全性,3
+aifde:adoption,aifde,L1,adoption,L1 Rollout and Adoption,L1 上线与采用,L1 展開と定着,4
+aifde:data-integration,aifde,L1,data-integration,L1 Data and Integration,L1 数据与集成,L1 データと統合,5
+aifde:prototype-iteration,aifde,L1,prototype-iteration,L1 Prototyping and Iteration,L1 原型与迭代,L1 プロトタイピングと反復,6
+aifde:production-engineering,aifde,L1,production-engineering,L1 Production Engineering,L1 生产工程,L1 本番エンジニアリング,7
+aifde:field-productization,aifde,L1,field-productization,L1 Feedback and Productization,L1 反馈与产品化,L1 フィードバックとプロダクト化,8
+aifde:loop-engineering,aifde,L1,loop-engineering,L1 Loop Engineering,L1 Loop Engineering,L1 ループ・エンジニアリング,9
+aifde:token-cost-control,aifde,L1,token-cost-control,L1 Token Cost Control,L1 控制 Token 成本,L1 Token コスト管理,10
+aifde:enterprise-knowledge-base,aifde,L1,enterprise-knowledge-base,L1 Enterprise Knowledge Base,L1 企业知识库搭建,L1 エンタープライズ・ナレッジベース,11
+aifde:strategic-framing,aifde,L2,strategic-framing,L2 Strategic Problem Framing,L2 战略问题定义,L2 戦略的課題設定,12
+aifde:portfolio-prioritization,aifde,L2,portfolio-prioritization,L2 Portfolio and Prioritization,L2 组合与优先级,L2 ポートフォリオと優先順位付け,13
+aifde:enterprise-architecture,aifde,L2,enterprise-architecture,L2 Enterprise Architecture and Platforms,L2 企业架构与平台,L2 エンタープライズ・アーキテクチャとプラットフォーム,14
+aifde:governance-risk,aifde,L2,governance-risk,"L2 Governance, Security, and Compliance",L2 治理、安全与合规,L2 ガバナンス、セキュリティ、コンプライアンス,15
+aifde:economics-commercial,aifde,L2,economics-commercial,L2 Commercial Model and Economics,L2 商业模型与经济性,L2 商業モデルとユニットエコノミクス,16
+aifde:fde-operating-model,aifde,L2,fde-operating-model,L2 FDE Operating Model and Empowerment,L2 FDE 组织与授权,L2 FDE 運営モデルと権限設計,17
+aifde:change-scale-adoption,aifde,L2,change-scale-adoption,L2 Change and Scaled Adoption,L2 变革与规模采用,L2 変革とスケール導入,18
+aifde:field-product-strategy,aifde,L2,field-product-strategy,L2 Field Insight and Product Strategy,L2 现场洞察与产品战略,L2 現場インサイトとプロダクト戦略,19
+fdei:ai-security-governance,fdei,category,ai-security-governance,"AI Security, Privacy & Governance",,,1
+fdei:behavioral-customer,fdei,category,behavioral-customer,Behavioral & Customer Scenarios,,,2
+fdei:coding-dsa,fdei,category,coding-dsa,Coding & DSA,,,3
+fdei:llm-genai,fdei,category,llm-genai,LLM & GenAI Fundamentals,,,4
+fdei:ml-data-science,fdei,category,ml-data-science,Machine Learning & Data Science,,,5
+fdei:ml-infrastructure,fdei,category,ml-infrastructure,ML Infrastructure & GPUs,,,6
+fdei:ml-system-design,fdei,category,ml-system-design,ML System Design (Product),,,7
+fdei:mlops,fdei,category,mlops,MLOps & ML Engineering,,,8
+fdei:rag-agents,fdei,category,rag-agents,RAG & Agent System Design,,,9
+fdei:sql-data-engineering,fdei,category,sql-data-engineering,SQL & Data Engineering,,,10
+fdei:system-design,fdei,category,system-design,System Design & Production Engineering,,,11
