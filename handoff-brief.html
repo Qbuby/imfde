@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>imfde.ai 交接梳理报告 · 2026-09-03</title>
+<meta name="description" content="openfde-community handoff 分支梳理：仓库画像、站点结构、数据层、硬约束与现有产物的定位冲突分析。">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .verdict{background:var(--amber-soft);border:1px solid #fde68a;border-radius:var(--radius);padding:20px 24px;margin:24px 0}
+  .verdict h2{font-size:17px;font-weight:700;color:#92400e;margin-bottom:8px}
+  .verdict p{color:#92400e;font-size:14px;margin-bottom:6px}
+  .conflict{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+  .conflict th{text-align:left;background:var(--bg);border-bottom:1px solid var(--border);padding:9px 12px;font-size:12px;color:var(--muted);font-weight:600}
+  .conflict td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  .conflict tr:last-child td{border-bottom:none}
+  .conflict td.dim{color:var(--muted)}
+  .no{color:var(--green);font-weight:600}
+  .yes{color:var(--amber);font-weight:600}
+  .route{border:1px solid var(--border);border-radius:var(--radius);padding:18px;background:var(--surface);margin-bottom:14px}
+  .route.rec{border-color:var(--accent);background:var(--accent-soft)}
+  .route h3{font-size:15px;font-weight:700;margin-bottom:8px}
+  .route .tagline{font-size:12.5px;color:var(--muted);margin-bottom:10px}
+  .route ul{padding-left:18px;font-size:13.5px;color:var(--muted)}
+  .route ul li{margin-bottom:5px}
+  .route.rec ul,.route.rec .tagline{color:#3730a3}
+  .kv2{display:grid;grid-template-columns:150px 1fr;gap:8px 16px;font-size:14px}
+  .kv2 dt{color:var(--muted)}
+  code{background:var(--gray-soft);padding:1px 6px;border-radius:5px;font-size:12.5px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="logo-badge">ImFDE</span></a>
+    <nav class="nav-links">
+      <a href="#facts">仓库画像</a>
+      <a href="#product">交接内容</a>
+      <a href="#conflict">定位冲突</a>
+      <a href="#routes">路线决策</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="detail-head" style="padding-top:26px">
+    <div class="chips"><span class="chip chip-claiming">工作转交 · 梳理</span><span class="ind">2026-09-03</span><span class="ind">未克隆 · API 只读探测</span></div>
+    <h1>openfde-community · handoff 分支梳理</h1>
+    <div class="meta">
+      <span>分支 <b>handoff/imfde-ai-2026-09-03</b></span>
+      <span>头提交 <b>0abc896</b></span>
+      <span>PR #2 / Issue #1 <b>open</b></span>
+      <span>仓库 149 MB · 未下载</span>
+    </div>
+  </div>
+
+  <!-- 核心结论 -->
+  <div class="verdict">
+    <h2>核心结论：不是二选一，但首页叙事必须二选一</h2>
+    <p><b>① 同名冲突是真的。</b>交接文档把 imfde.ai 定义为「开源 FDE 学习社区的每日入口」，并白纸黑字写着<strong>「不是企业 AI 改造服务」</strong>；而你在 <code>Qbuby/imfde</code> 按《MVP目标》做的是企业发需求 → FDE 接单 → 分账的撮合平台。方向相反，域名只有一个。</p>
+    <p><b>② 但资产高度互补。</b>《MVP目标》第三步要求「系统化课程 + 实操案例 + 失败复盘」，而交接仓库正好是现成的：559 条案例、606 道开放题、529 条世界观察。这恰恰是你缺的内容层。</p>
+    <p><b>③ 我的判断：交易层用你的 5 个页面，内容层直接吃交接仓库的资产</b>——按路线 A 合并（见下）。但域名归属与「不是企业服务」这条硬约束，需要交接方 dapingzui 点头。</p>
+  </div>
+
+  <!-- 仓库画像 -->
+  <div class="panel" id="facts">
+    <h2>一、仓库与分支事实</h2>
+    <div class="sub">全程走 GitHub API 只读探测，未克隆（149 MB 下载慢）</div>
+    <dl class="kv2" style="margin-top:12px">
+      <dt>仓库</dt><dd><code>dapingzui/openfde-community</code> · private · 默认分支 main</dd>
+      <dt>体积 / 推送</dt><dd>149 MB · 2026-09-03 08:38</dd>
+      <dt>分支</dt><dd>共 2 个：<code>main</code>、<code>handoff/imfde-ai-2026-09-03</code></dd>
+      <dt>分支头</dt><dd><code>0abc896</code> · docs: add receiving-agent guide · 09-03 08:38</dd>
+      <dt>相对 main</dt><dd>ahead 2 / behind 0 · 37 文件 · +11,215 / −182</dd>
+      <dt>关联</dt><dd>PR #2 open「feat: imfde.ai 世界动态门户（转交 #1）」· Issue #1 open</dd>
+      <dt>官方名 / 域名</dt><dd><b>imfde.ai</b>（明示不再用 NOW FDE / nowfde.com / OpenFDE 对外）</dd>
+      <dt>快照日</dt><dd>2026-09-02（<code>world_ingest_report.json</code>）</dd>
+    </dl>
+  </div>
+
+  <!-- 交接内容 -->
+  <div class="panel" id="product">
+    <h2>二、交接的是什么产品</h2>
+    <div class="sub">官方定义：开源 FDE 学习社区的每日入口，用可核对的公开材料解释 Forward Deployed 工作怎么发生</div>
+
+    <h3>站点地图（顶栏五条固定）</h3>
+    <table class="tbl">
+      <thead><tr><th style="width:150px">路径</th><th style="width:110px">页面</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td><code>/</code> <code>/世界动态</code></td><td>世界动态（首页）</td><td>有日期的观察沙盘，按 7/30/90 天分窗，不是 503 条案例墙</td></tr>
+        <tr><td><code>/落地</code></td><td>落地</td><td>给负责人/决策者的读法</td></tr>
+        <tr><td><code>/现场</code></td><td>现场</td><td>给从业者的读法</td></tr>
+        <tr><td><code>/案例</code> <code>/案例/&lt;id&gt;</code></td><td>部署证据</td><td>559 条案例目录与详情，可筛选分页</td></tr>
+        <tr><td><code>/方法</code></td><td>方法</td><td>角色与流程</td></tr>
+        <tr><td><code>/world3d</code></td><td>立体沙盘</td><td>同一份 world_events 的 3D 视图（three.js）</td></tr>
+      </tbody>
+    </table>
+
+    <h3>技术栈</h3>
+    <dl class="kv2">
+      <dt>服务端</dt><dd>纯 Python 标准库 <code>portal/site/server.py</code>（1677 行），绑定 0.0.0.0:8850</dd>
+      <dt>数据</dt><dd>SQLite <code>portal/fde.db</code>（已进 Git，二进制）</dd>
+      <dt>首页逻辑</dt><dd><code>worldview.py</code>（分窗导语、三条变化、目录卡）</dd>
+      <dt>3D</dt><dd><code>world3d.py</code> + three.js（vendored）</dd>
+      <dt>抓取</dt><dd><code>ingest_world.py</code>（2406 行）+ <code>daily_world.sh</code></dd>
+      <dt>品牌字标</dt><dd><code>brand_mark()</code> → im + fde + .ai</dd>
+    </dl>
+
+    <h3>数据层（两层，首页只吃动态层）</h3>
+    <table class="tbl">
+      <thead><tr><th style="width:120px">层</th><th style="width:230px">内容</th><th>规模</th></tr></thead>
+      <tbody>
+        <tr><td><b>动态层</b></td><td>world_events（四轨：company / deploy / people / method）</td><td>事件 529 · 上轴 140 · 源 89 · 链接 97</td></tr>
+        <tr><td><b>证据层</b></td><td>cases / questions（不铺首页）</td><td>案例 559（case_study 503）· 开放题 606 + 选择 76</td></tr>
+      </tbody>
+    </table>
+    <div class="note">上轴口径极严：只要原文 <code>published</code> 或页上 <code>modified</code>，<code>collected</code> 与 sitemap lastmod <b>永不</b>上轴；岗位只是弱信号，不能当公司动作。503 条 case_study 里 <code>fde_role</code> 非空仅约 6.8%。</div>
+  </div>
+
+  <!-- 定位冲突 -->
+  <div class="panel" id="conflict">
+    <h2>三、与现有产物（Qbuby/imfde）的定位冲突矩阵</h2>
+    <div class="sub">同名同域名，方向相反 —— 这是必须先定的一件事</div>
+    <table class="conflict">
+      <thead><tr><th style="width:110px">维度</th><th style="width:33%">交接仓库 imfde.ai</th><th style="width:33%">现有产物 Qbuby/imfde</th><th>判定</th></tr></thead>
+      <tbody>
+        <tr><td><b>产品性质</b></td><td>学习社区 · 内容/观察入口</td><td>撮合交易 · 企业需求对接单</td><td class="yes">冲突</td></tr>
+        <tr><td><b>核心价值</b></td><td>看懂 FDE 怎么发生（可核对材料）</td><td>让 FDE 接单赚钱、企业拿到交付</td><td class="yes">冲突</td></tr>
+        <tr><td><b>首页主叙事</b></td><td>有日期的世界观察沙盘</td><td>需求池 + 交付进度 + 分账公示</td><td class="yes">冲突</td></tr>
+        <tr><td><b>用户提供什么</b></td><td>提供内容（读）</td><td>提供需求/技能（交易）</td><td class="yes">冲突</td></tr>
+        <tr><td><b>企业角色</b></td><td class="dim">无（明写「不是企业 AI 改造服务」）</td><td>需求方、验收方、付款方</td><td class="yes">冲突</td></tr>
+        <tr><td><b>课程/案例库</b></td><td>559 案例 + 606 题 + 529 观察，已建成</td><td>仅归档复盘占位，缺内容</td><td class="no">互补</td></tr>
+        <tr><td><b>FDE 认证</b></td><td class="dim">无认证体系</td><td>L1/L2/L3 分级认证（已设计）</td><td class="no">互补</td></tr>
+        <tr><td><b>分账/交易</b></td><td class="dim">无</td><td>分账表、贡献记账（已设计）</td><td class="no">互补</td></tr>
+        <tr><td><b>域名品牌</b></td><td>imfde.ai（官方，已定）</td><td>同样用 imfde.ai</td><td class="yes">冲突</td></tr>
+      </tbody>
+    </table>
+    <div class="note green"><b>结论：</b>5 项冲突集中在「性质、首页、企业角色、域名」，3 项互补集中在「内容资产、认证、交易机制」。<b>互补部分价值很高</b>——交接仓库的内容层正好补上《MVP目标》第三步缺的「课程 + 实操案例 + 失败复盘」。</div>
+  </div>
+
+  <!-- 路线决策 -->
+  <div class="panel" id="routes">
+    <h2>四、三条路线（待你决策）</h2>
+    <div class="sub">我推荐路线 A，理由写在下面</div>
+
+    <div class="route rec">
+      <h3>✅ A · 合并：交易层 + 内容层 —— <span style="color:var(--accent)">已选定（2026-09-03）</span></h3>
+      <div class="tagline">imfde.ai = 撮合交易平台为主，学习社区降级为 MVP 的「学习成长板块」</div>
+      <ul>
+        <li><b>做：</b>以《MVP目标》为主产品（需求池 / 成长 / 认证 / 交付 / 分账），交接仓库的 559 案例 + 606 题 + 529 观察 + 116 页系统课接成「学 · 练 · 证」学习成长板块</li>
+        <li><b>得：</b>内容层不用从零做，直接省掉最重的一块；认证体系（L1/L2/L3）给内容层加了晋升闭环</li>
+        <li><b>代价：</b>需与 dapingzui 确认——他明写「不是企业 AI 改造服务」，合并等于改变产品性质，需要他同意；且必须保留他的 10 条数据硬约束</li>
+      </ul>
+
+      <h3 style="margin-top:18px;font-size:14px">集成架构（MVP 阶段）</h3>
+      <table class="conflict">
+        <thead><tr><th style="width:110px">层</th><th style="width:40%">做法</th><th>约束</th></tr></thead>
+        <tbody>
+          <tr><td><b>交易层</b></td><td>现有 5 个静态页面（Qbuby/imfde），GitHub Pages 托管</td><td>保持现状，D5-7 接 Supabase</td></tr>
+          <tr><td><b>内容层</b></td><td>openfde-community 作为内容子站独立部署（建议 <code>learn.imfde.ai</code>），主门户链接跳转</td><td>共享设计 token，视觉统一</td></tr>
+          <tr><td><b>数据</b></td><td>不动 <code>fde.db</code>，禁止 <code>build_portal_db.py</code> 重建（该脚本会删库）</td><td>硬约束 8</td></tr>
+          <tr><td><b>口径</b></td><td>上轴只要 published / modified；文案写「数据快照」不写实时；题库答案不在站内展示；不伪造社区活跃</td><td>硬约束 2/5/6/7</td></tr>
+          <tr><td><b>入口</b></td><td><code>learn.html</code> 作为板块门户页，四大板块 + 世界动态 + 自测 + 系统课 + 认证</td><td>已落地</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="route">
+      <h3>B · 以交接仓库为主，现有产物降级为草稿</h3>
+      <div class="tagline">照 RECEIVING_AGENT.md 的 6 项待办继续做学习社区</div>
+      <ul>
+        <li><b>做：</b>身份条补社区定义、提问条降为筛选、页脚改快照口径、链路修正等 6 项</li>
+        <li><b>得：</b>完全承接交接方意图，无方向争议，工作量最轻</li>
+        <li><b>代价：</b>《MVP目标》里的撮合/分账/浙商企业方向全部搁置</li>
+      </ul>
+    </div>
+
+    <div class="route">
+      <h3>C · 拆分：撮合平台另起品牌域名</h3>
+      <div class="tagline">imfde.ai 保持学习社区，你的交易产品换域名独立</div>
+      <ul>
+        <li><b>做：</b>现有 5 页面换个品牌名（如 fde.work / imfde.pro）继续做撮合</li>
+        <li><b>得：</b>两个方向互不干扰，不用说服交接方</li>
+        <li><b>代价：</b>内容层要从零积累；两个品牌分散精力</li>
+      </ul>
+    </div>
+
+    <div class="note"><b>为什么推荐 A：</b>《MVP目标》是你自己写的战略，而它第三步要的「课程 + 案例 + 复盘」在交接仓库里已经存在且质量高（含严格的数据口径约束）。两个产品不是竞争关系，是同一产品的「学」与「赚」两半——这正是你最初定 imfde 时说的「开源 + 赚钱 + 全过程见证」。</div>
+  </div>
+
+  <!-- 交接方待办 -->
+  <div class="panel">
+    <h2>五、交接方留下的 6 项待办（路线 B 直接照做，路线 A 需并入）</h2>
+    <ol style="padding-left:20px;font-size:14px;color:var(--muted)">
+      <li>身份条补一句：开源 FDE 学习社区 + 快照日（现在偏情报台）</li>
+      <li>提问条降为轴上筛选；图例收到口径 / <code>i</code>，不要占首屏</li>
+      <li>页脚「持续抓取并由 AI 聚成变化」改成：本期快照由本地动态层生成；AI 只做结构化摘要，证据以原文为准</li>
+      <li>「管理关注列表」不要链到 /案例 全量目录</li>
+      <li>有真实 GitHub Discussion 再做「本期议题」；在此之前首页主动作是：点开一条有日期的观察 → 读四段 → 进落地或方法</li>
+      <li>新动态只补四段和窗内变化稿，不要重开案例墙</li>
+    </ol>
+    <div class="note"><b>10 条硬约束摘关键：</b>不新开厂商（<code>do_not_start_a_new_vendor: true</code>）、上轴只要 published/modified、岗位是弱信号、不许把案例误标成「原文自称 FDE」、题库答案不在站内展示、不许伪造社区活跃、禁止用 <code>build_portal_db.py</code> 重建 fde.db 后不恢复动态层（该脚本会删库）。</div>
+  </div>
+
+  <!-- 底部 CTA -->
+  <div class="cta-band">
+    <div>
+      <h2>下一步等你一句话</h2>
+      <p>选 A / B / C，我按选定方向推进；选定后我再决定是否后台克隆这 149 MB（内容层接入必需要本地代码）。</p>
+    </div>
+    <div style="display:flex;gap:12px">
+      <a class="btn btn-primary btn-lg" href="#routes">回看三条路线</a>
+      <a class="btn btn-ghost btn-lg" href="index.html">现有 5 个页面</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>梳理于 2026-09-03 · 数据源：GitHub API 只读探测（未克隆）</div>
+    <div style="display:flex;gap:22px">
+      <a href="index.html">返回门户</a>
+      <a href="docs/index.html">FDE 入门指南</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

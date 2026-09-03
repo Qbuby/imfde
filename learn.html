@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FDE 认证与课程 · 在平台成长为 FDE | imfde.ai</title>
-<meta name="description" content="分级 FDE 认证体系（L1 见习 / L2 正式 / L3 资深）、系统化公开课程、实操案例与失败复盘——普通程序员也能成长为 FDE。">
+<title>学习成长 · 学 · 练 · 证 | imfde.ai</title>
+<meta name="description" content="FDE 学习成长板块：部署证据案例库、世界观察、开放题自测、系统课程，配合 L1/L2/L3 分级认证形成成长闭环。">
 <link rel="stylesheet" href="assets/style.css">
 <style>
-  /* 页面专属 */
-  .path3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+  .path3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .path4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .lvl-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
   .lvl-badge{font-size:13px;font-weight:700;padding:4px 12px;border-radius:9px;color:#fff}
   .lv1{background:#64748b}.lv2{background:var(--accent)}.lv3{background:var(--accent-dark)}
@@ -17,13 +17,16 @@
   .req li:last-child{border:none}
   .req b{color:var(--text)}
   .perm{margin-top:12px;background:var(--green-soft);color:var(--green);border-radius:8px;padding:9px 12px;font-size:12.5px}
-  .curr{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start}
-  .part{border-left:3px solid var(--accent-soft);padding:2px 0 2px 18px;margin-bottom:22px}
-  .part h3{font-size:15px;font-weight:700}
-  .part .en{font-size:12.5px;color:var(--muted);font-weight:400;margin-left:8px}
-  .part ul{list-style:none;padding:0;margin-top:8px}
-  .part li{font-size:13.5px;color:var(--muted);padding:3px 0}
-  @media (max-width:920px){.path3,.curr{grid-template-columns:1fr}}
+  .mod{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:border-color .15s ease}
+  .mod:hover{border-color:var(--accent)}
+  .mod .n{font-size:20px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+  .mod h3{font-size:15px;font-weight:600;margin:4px 0 6px}
+  .mod p{font-size:13px;color:var(--muted);min-height:42px}
+  .mod .rt{font-size:12px;color:#a1a1aa;font-family:ui-monospace,Menlo,Consolas,monospace;margin-top:8px}
+  .loop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--accent-soft);border-radius:var(--radius);padding:16px 22px;margin:22px 0 0}
+  .loop .s{font-weight:700;color:var(--accent-dark)}
+  .loop .arrow{color:var(--accent)}
+  @media (max-width:920px){.path3,.path4{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -33,8 +36,8 @@
     <a class="logo" href="index.html"><span class="logo-badge">ImFDE</span></a>
     <nav class="nav-links">
       <a href="index.html#demands">企业需求池</a>
+      <a href="index.html#projects">进行中交付</a>
       <a href="index.html#grow">FDE 成长</a>
-      <a href="index.html#enterprise">企业合作</a>
       <a href="fde.html">FDE 主页样例</a>
     </nav>
     <div style="display:flex;gap:10px">
@@ -44,111 +47,150 @@
 </header>
 
 <div class="wrap">
-  <div class="crumb"><a href="index.html#grow">FDE 成长路径</a><span class="sep">/</span>认证与课程</div>
+  <div class="crumb"><a href="index.html#grow">FDE 成长路径</a><span class="sep">/</span>学习成长板块</div>
 
   <div class="detail-head">
-    <div class="chips"><span class="chip chip-teamed">学习成长</span><span class="ind">公开课 · 免费</span></div>
-    <h1>在平台上，成长为 FDE</h1>
-    <div class="meta"><span>分级认证按<b>真实交付记录</b>晋升，不发参与证书</span><span>课程与复盘全部公开</span></div>
+    <div class="chips"><span class="chip chip-teamed">学习成长</span><span class="ind">内容开放 · 免费</span><span class="ind">快照 2026-09-02</span></div>
+    <h1>学 · 练 · 证：普通程序员成长为 FDE 的一条路</h1>
+    <div class="meta">
+      <span>部署证据 <b>559</b> 条</span>
+      <span>开放题 <b>606</b> 道</span>
+      <span>世界观察 <b>529</b> 条 · 上轴 140</span>
+      <span>观察源 <b>89</b> 个</span>
+    </div>
   </div>
 
-  <!-- 认证体系 -->
-  <section style="padding:30px 0 10px">
-    <div class="sec-head"><div><h2>分级 FDE 认证</h2><div class="sub">认证回答一个问题：企业凭什么把真实客单交给你</div></div></div>
+  <!-- 闭环 -->
+  <div class="loop">
+    <span class="s">学</span><span class="arrow">→</span>
+    <span>读案例库与方法，看懂 Forward Deployed 怎么发生</span><span class="arrow">→</span>
+    <span class="s">练</span><span class="arrow">→</span>
+    <span>接真实客单，组队交付，贡献全程记账</span><span class="arrow">→</span>
+    <span class="s">证</span><span class="arrow">→</span>
+    <span>按交付记录晋升 L1 / L2 / L3，主页向企业展示</span>
+  </div>
+
+  <!-- 学习内容 -->
+  <section style="padding:34px 0 10px">
+    <div class="sec-head"><div><h2>学什么 · 四大内容板块</h2><div class="sub">全部来自可核对的公开材料，每一条都能链回原文</div></div></div>
+    <div class="path4">
+      <div class="mod">
+        <div class="n">559</div>
+        <h3>落地</h3>
+        <p>给负责人/决策者的读法：按行业、厂商、证据等级切分，判断这事儿能不能落到自己企业。</p>
+        <div class="rt">/落地</div>
+      </div>
+      <div class="mod">
+        <div class="n">559</div>
+        <h3>现场</h3>
+        <p>给从业者的读法：部署现场怎么推进、卡在哪、怎么绕过去。</p>
+        <div class="rt">/现场</div>
+      </div>
+      <div class="mod">
+        <div class="n">503</div>
+        <h3>案例（部署证据）</h3>
+        <p>逐条筛选分页的案例库。可核对原文，不夸大——其中原文自称 FDE 的仅约 6.8%。</p>
+        <div class="rt">/案例</div>
+      </div>
+      <div class="mod">
+        <div class="n">—</div>
+        <h3>方法</h3>
+        <p>角色与流程：六个动作循环、一页规格、评测先于构建。</p>
+        <div class="rt">/方法</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px">
+      <div class="mod">
+        <h3>世界动态 · 每日观察</h3>
+        <p>529 条观察事件按 7 / 30 / 90 天分窗上轴，四轨并行：公司动作 / 部署 / 人才 / 方法。上轴只要原文 published 或页上 modified，采集时间永不上轴——这是"数据快照"，不是实时新闻。</p>
+        <div class="rt">/世界动态 · 快照 2026-09-02</div>
+      </div>
+      <div class="mod">
+        <h3>开放题自测 · 606 道</h3>
+        <p>真实开放题，用来测自己的判断力。<b>答案不在站内展示</b>——许可是引用与链接，不是搬运，请回到原页核对。</p>
+        <div class="rt">/方法 · 配套题库</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 系统课程 -->
+  <section style="padding:20px 0 10px">
+    <div class="panel">
+      <h2>系统课：《FDE 从知道到入门》</h2>
+      <div class="sub">116 页 · 四部十六章 · 在线免费阅读 —— 系统课是"教材"，案例库是它的"材料"</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:8px">
+        <div>
+          <h3>第一部 · 现场，先看见，再命名</h3>
+          <p>一个 FDE 的一天 / 六个动作循环 / FDE 是什么与不是什么 / 能力地图与自我定位</p>
+        </div>
+        <div>
+          <h3>第二部 · 墙与回路</h3>
+          <p>软件在哪造、价值在哪发生 / 用服务换护城河的一笔账 / 编制与回路怎么转</p>
+        </div>
+        <div>
+          <h3>第三部 · 手艺（上）· 从问题到原型</h3>
+          <p>现场提问与收窄（一页规格模板）/ 评测先于构建（评测集模板）/ 接到遗留系统 / 生产失败模式</p>
+        </div>
+        <div>
+          <h3>第四部 · 手艺（下）· 从原型到生产</h3>
+          <p>现场数据与 SQL / 交付与验证 / 观察期 / 复盘归档</p>
+        </div>
+      </div>
+      <a class="btn btn-ghost btn-sm" href="docs/index.html" style="margin-top:12px">进入阅读 →</a>
+    </div>
+  </section>
+
+  <!-- 认证 -->
+  <section style="padding:20px 0 10px">
+    <div class="sec-head"><div><h2>认证：按真实交付记录晋升</h2><div class="sub">不发参与证书——认证回答的是"企业凭什么把客单交给你"</div></div><a class="more" href="fde.html">看主页样例 →</a></div>
     <div class="path3">
       <div class="panel">
         <div class="lvl-head"><span class="lvl-badge lv1">L1 · 见习 FDE</span></div>
         <ul class="req">
-          <li><b>组队</b>完成 1 次平台项目交付（开发 / 测试 / 文档角色均可）</li>
-          <li>登记完整履历 + 联系方式核验通过</li>
+          <li><b>学：</b>读完「方法」板块 + 系统课第一部</li>
+          <li><b>练：</b>组队完成 1 次平台项目交付（开发/测试/文档角色均可）</li>
+          <li>登记完整履历、联系方式核验通过</li>
         </ul>
         <div class="perm">权益：可浏览并报名全部 B 类及以下需求</div>
       </div>
       <div class="panel" style="border-color:var(--accent)">
         <div class="lvl-head"><span class="lvl-badge lv2">L2 · 正式 FDE</span></div>
         <ul class="req">
-          <li><b>主理</b> 1 个已通过验收的项目（方案 + 里程碑 + 交付）</li>
-          <li>通过认证答辩：一页规格 + 评测集各 1 份</li>
+          <li><b>学：</b>完成「现场 + 落地」两种读法</li>
+          <li><b>练：</b>主理 1 个已通过验收的项目（方案 + 里程碑 + 交付）</li>
+          <li>通过答辩：一页规格 + 评测集各 1 份</li>
         </ul>
         <div class="perm">权益：可提案立项、组队、竞标 A 类需求；主页向企业展示</div>
       </div>
       <div class="panel">
         <div class="lvl-head"><span class="lvl-badge lv3">L3 · 资深 FDE</span></div>
         <ul class="req">
-          <li><b>主理</b> ≥3 个已验收项目，累计回款公示无争议</li>
-          <li>公开 1 份失败复盘，进入平台归档库</li>
+          <li><b>练：</b>主理 ≥3 个已验收项目，累计回款公示无争议</li>
+          <li><b>证：</b>公开 1 份失败复盘，进入归档库反哺社区</li>
         </ul>
         <div class="perm">权益：可竞标 S 类需求、带教见习团队、参与分账规则修订</div>
       </div>
     </div>
-  </section>
-
-  <!-- 课程 -->
-  <section style="padding:30px 0 10px">
-    <div class="sec-head"><div><h2>系统化公开课</h2><div class="sub">课程主干来自《FDE：从知道到入门》· 116 页在线阅读</div></div><a class="more" href="docs/index.html">进入阅读 →</a></div>
-    <div class="curr">
-      <div>
-        <div class="part">
-          <h3>第一部 · 现场，先看见，再命名<span class="en">行为先于头衔</span></h3>
-          <ul>
-            <li>第 1–2 章 · 一个 FDE 的一天 / 六个动作循环</li>
-            <li>第 3–5 章 · FDE 是什么、不是什么 / 能力地图与自我定位</li>
-          </ul>
-        </div>
-        <div class="part">
-          <h3>第二部 · 墙与回路<span class="en">这门编制为什么存在</span></h3>
-          <ul>
-            <li>第 6–7 章 · 软件在哪造、价值在哪发生 / 用服务换护城河的一笔账</li>
-            <li>第 8 章 · 编制：一个账户几个人，回路怎么转</li>
-          </ul>
-        </div>
-        <div class="part">
-          <h3>第三部 · 手艺（上），从问题到原型<span class="en">先量，再建</span></h3>
-          <ul>
-            <li>第 9 章 · 现场提问与收窄：把一句话写成一页规格（附模板）</li>
-            <li>第 10 章 · 评测先于构建（附评测集模板）</li>
-            <li>第 11–12 章 · 把模型接到遗留系统 / 生产里的失败模式</li>
-          </ul>
-        </div>
-        <div class="part">
-          <h3>第四部 · 手艺（下），从原型到生产<span class="en">上线不是终点，能被看见才是</span></h3>
-          <ul>
-            <li>第 13–16 章 · 现场数据与 SQL / 交付与验证 / 观察期 / 复盘归档</li>
-          </ul>
-        </div>
-      </div>
-      <aside class="aside" style="position:static">
-        <div class="panel">
-          <h2>实操案例</h2>
-          <p style="font-size:13px">跟着真实项目学：立项方案、里程碑、验收标准全程公开。</p>
-          <a class="btn btn-ghost btn-sm" href="project.html" style="width:100%;justify-content:center;margin-top:8px">看进行中的项目 →</a>
-          <a class="btn btn-ghost btn-sm" href="index.html#cases" style="width:100%;justify-content:center;margin-top:8px">明星案例 →</a>
-        </div>
-        <div class="panel">
-          <h2>失败案例复盘</h2>
-          <p style="font-size:13px">失败与未验收项目公开归档——这是平台最有价值的部分，也是 L3 认证的必修课。</p>
-          <a class="btn btn-ghost btn-sm" href="index.html#archive" style="width:100%;justify-content:center;margin-top:8px">归档复盘库 →</a>
-        </div>
-      </aside>
-    </div>
+    <div class="note blue">学习社区内容与认证打通：<b>学</b>决定你能不能看懂需求，<b>练</b>决定你能不能拿到认证，<b>证</b>决定企业愿不愿意把客单交给你。</div>
   </section>
 
   <!-- 底部 CTA -->
   <div class="cta-band">
     <div>
       <h2>从普通程序员到 FDE，第一步是登记履历</h2>
-      <p>GitHub 登录 → 填主页 → 核验联系方式 → 从 L1 见习开始接单。</p>
+      <p>GitHub 登录 → 填主页 → 核验联系方式 → 边学边接单，从 L1 见习开始。</p>
     </div>
     <div style="display:flex;gap:12px">
       <a class="btn btn-primary btn-lg" href="https://github.com/">登记履历</a>
-      <a class="btn btn-ghost btn-lg" href="fde.html">看主页样例</a>
+      <a class="btn btn-ghost btn-lg" href="index.html#demands">浏览需求池</a>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="wrap foot">
-    <div>© 2026 imfde.ai · 面向浙商企业与 FDE 的开源共创平台（内测）</div>
+    <div>© 2026 imfde.ai · 面向浙商企业与 FDE 的开源共创平台（内测）· 内容快照 2026-09-02</div>
     <div style="display:flex;gap:22px">
       <a href="index.html#mech">平台机制</a>
       <a href="docs/index.html">FDE 入门指南</a>
