@@ -24,6 +24,27 @@ import server as S  # noqa: E402
 STATIC_DIR = S.STATIC_DIR
 
 
+import re
+
+# 内链前缀改写：页面在 /portal/* 下服务，服务端生成的站内绝对路径需要加 /portal 前缀。
+# 只改站内根相对路径（href="/..."、src="/..."），不动外链（https://）、协议相对（//）、锚点。
+_LINK_RE = re.compile(
+    r'''(href|src|action)=(["'])/(?!/)([^"']*)\2''',
+)
+
+
+def _add_prefix(m: "re.Match") -> str:
+    attr, quote, rest = m.group(1), m.group(2), m.group(3)
+    # 已是 /portal 或 /api 之外的一律加前缀；/static、/案例、/落地、/世界动态 等
+    return f'{attr}={quote}/portal/{rest}{quote}'
+
+
+def _rewrite_links(html: str) -> str:
+    # importmap JSON 内的模块路径（不是 HTML 属性，需单独改写）
+    html = html.replace('"/static/vendor/', '"/portal/static/vendor/')
+    return _LINK_RE.sub(_add_prefix, html)
+
+
 async def _asgi_send(send, status: int, body: bytes, content_type: str, extra_headers: dict | None = None):
     headers = [
         [b"content-type", content_type.encode()],
@@ -107,4 +128,4 @@ async def app(scope, receive, send):  # noqa: ANN001
     if not page:
         await _asgi_send(send, 404, b"not found", "text/plain; charset=utf-8")
         return
-    await _asgi_send(send, 200, page.encode("utf-8"), "text/html; charset=utf-8")
+    await _asgi_send(send, 200, _rewrite_links(page).encode("utf-8"), "text/html; charset=utf-8")
