@@ -54,13 +54,14 @@
 }
 .w3-brand {
   display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
   font-weight: 700;
   font-size: 1.15rem;
   letter-spacing: -0.01em;
 }
+.w3-brand .brand-logo { width: 40px; height: 40px; border-radius: 9px; object-fit: cover; display: block; box-shadow: 0 2px 10px rgba(0,0,0,.35); flex: none; }
 .w3-brand .brand-im { color: var(--w3-fg); }
 .w3-brand .brand-fde { color: var(--w3-acc); }
 .w3-brand .brand-tld { color: var(--w3-mut); font-weight: 650; }
@@ -71,10 +72,11 @@
   color: var(--w3-mut);
   letter-spacing: 0.02em;
 }
-.w3-hud-mid { min-width: 0; }
+.w3-hud-mid { min-width: 0; text-align: left; }
 .w3-title {
   margin: 0;
-  font-size: var(--step-1);
+  font-size: clamp(1rem, 2.2vw, var(--step-1));
+  text-align: left;
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -553,7 +555,7 @@
   .w3-panel { display: none; }
   .w3-fallback { max-width: none; }
   .w3-hud { grid-template-columns: 1fr; gap: 8px; padding: 10px var(--s-4); }
-  .w3-hud-mid { min-width: 0; }
+  .w3-hud-mid { min-width: 0; text-align: left; }
   .w3-title { font-size: var(--step-0); }
   .w3-sub { display: none; }
   .w3-hud-tools { justify-content: flex-start; gap: 8px; }
@@ -626,6 +628,3 @@
 .w3-rp-body .w3-ai-text a { color: var(--w3-accent, #3fc0c0); text-decoration: none; border-bottom: 1px dashed rgba(63,192,192,.4); }
 .w3-rp-body .w3-ai-text a:hover { border-bottom-style: solid; }
 
-/* 帽子 logo 图标（沙盘 HUD 品牌位） */
-.w3-brand .brand-mark { display: inline-flex; align-items: center; gap: 8px; }
-.w3-brand .brand-logo { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; display: block; box-shadow: 0 2px 10px rgba(0,0,0,.35); }

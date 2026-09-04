@@ -30,12 +30,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   display:flex;align-items:center;gap:16px;flex-wrap:wrap;
 }
 .brand{
-  display:flex;flex-direction:column;gap:1px;line-height:1.1;
+  display:flex;flex-direction:row;align-items:center;gap:10px;line-height:1.1;
   font-family:var(--font-serif);
   font-weight:650;letter-spacing:-.02em;color:var(--fg);text-decoration:none;font-size:17px;
 }
 .brand-mark{display:block;white-space:nowrap}
-.brand-mark .brand-logo{width:44px;height:44px;border-radius:10px;object-fit:cover;display:block;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.brand-mark .brand-logo{width:32px;height:32px;border-radius:8px;object-fit:cover;display:block;flex:none}
 .brand-im{color:var(--fg)}
 .brand-fde{color:var(--acc)}
 .brand-tld{color:var(--mut);font-weight:600}
@@ -307,5 +307,4 @@ footer.ft p{margin:6px 0}
 
 /* 帽子 logo 图标（brand_mark 内） */
 .brand-mark{display:inline-flex;align-items:center;gap:8px}
-.brand-mark .brand-logo{width:30px;height:30px;border-radius:7px;object-fit:cover;display:block}
-.brand-mark .brand-logo{width:44px;height:44px;border-radius:10px;object-fit:cover;display:block;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.brand-mark .brand-logo{width:32px;height:32px;border-radius:8px;object-fit:cover;display:block;flex:none}
