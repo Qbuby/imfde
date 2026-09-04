@@ -2,10 +2,15 @@
   "functions": {
     "api/portal.py": {
       "memory": 1024,
-      "maxDuration": 30
+      "maxDuration": 60
+    },
+    "api/ai.py": {
+      "memory": 512,
+      "maxDuration": 60
     }
   },
   "rewrites": [
+    { "source": "/", "destination": "/api/portal?__path=/world3d" },
     { "source": "/portal/static/:file*", "destination": "/api/portal?__path=/static/:file*" },
     { "source": "/portal/:path*", "destination": "/api/portal?__path=/:path*" },
     { "source": "/static/:file*", "destination": "/api/portal?__path=/static/:file*" },
@@ -14,8 +19,8 @@
     { "source": "/落地", "destination": "/api/portal?__path=/落地" },
     { "source": "/现场", "destination": "/api/portal?__path=/现场" },
     { "source": "/方法", "destination": "/api/portal?__path=/方法" },
-    { "source": "/世界动态", "destination": "/api/portal?__path=/世界动态" },
     { "source": "/world3d", "destination": "/api/portal?__path=/world3d" },
-    { "source": "/api/world.json", "destination": "/api/portal?__path=/api/world.json" }
+    { "source": "/api/world.json", "destination": "/api/portal?__path=/api/world.json" },
+    { "source": "/api/ai", "destination": "/api/ai" }
   ]
 }

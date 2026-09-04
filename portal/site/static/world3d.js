@@ -328,7 +328,7 @@ function boot() {
     bg.setAttribute("position", new THREE.BufferAttribute(new Float32Array([-half, 0.04, BASE_Z, half, 0.04, BASE_Z]), 3));
     board.add(track(new THREE.LineSegments(bg, new THREE.LineDashedMaterial({ color: ACCENT, dashSize: 1.6, gapSize: 1.1, transparent: true, opacity: 0.45 }))));
     board.children[board.children.length - 1].computeLineDistances();
-    const bl = groundText(`<b>大本营</b><small>Organisations</small>`, "w3-g-lane", { width: LANE_TEXT_W / GT });
+    const bl = groundText(`<b>公司</b><small>Organisations</small>`, "w3-g-lane", { width: LANE_TEXT_W / GT });
     bl.element.style.setProperty("--c", ACCENT);
     bl.position.set(-half - 2 - LANE_TEXT_W / 2, 0.06, BASE_Z);
     board.add(bl);
@@ -997,6 +997,11 @@ function boot() {
     x.setAttribute("aria-pressed", on ? "true" : "false");
   });
   panel.addEventListener("click", (ev) => {
+    const aiBtn = ev.target.closest("[data-ai-ask]");
+    if (aiBtn) {
+      runAI(aiBtn);
+      return;
+    }
     const pickBtn = ev.target.closest("[data-pick]");
     if (pickBtn) {
       select(Number(pickBtn.dataset.pick), { keepChain: true });
@@ -1040,10 +1045,66 @@ function boot() {
 <h3>为什么值得关注</h3>${fieldCopy(e.why, "当前未提取判断依据。")}
 <h3>${primaryField ? "对 FDE 从业者的影响" : "对企业落地的影响"}</h3>${primaryField ? prac : ent}
 <h3>${primaryField ? "对企业落地的影响" : "对 FDE 从业者的影响"}</h3>${primaryField ? ent : prac}
+${detailBlock(e)}
+${aiBlock(e)}
 <h3>原始来源</h3>
 <p class="w3-p-url"><a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${esc(e.url)}</a></p>
 ${e.lane === "deploy" && e.href && e.href.indexOf("/案例/") === 0 ? `<p><a class="w3-p-more" href="${esc(e.href)}">在部署证据库中查看这条案例 →</a></p>` : ""}
 ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${rel.map((id) => `<li><button type="button" data-pick="${id}"><span>${esc(monthDay(byId[id].day))}</span>${esc(byId[id].title_short || byId[id].title)}</button></li>`).join("")}</ul>` : ""}`;
+  }
+
+  /* 原文结构化字段（cases 表精细抽取） */
+  const DETAIL_ORDER = [
+    "客户", "厂商", "行业", "业务问题", "原工作流", "卡点", "怎么发现的",
+    "为什么用 AI", "核心场景", "数据来源", "集成方式", "模型", "智能体工作流",
+    "人在回路", "评测", "部署形态", "上线周期", "业务指标", "实测结果",
+    "失败与迭代", "产品化", "交接给了谁", "证据说明", "原文自称 FDE",
+    "产品", "证据等级", "上轴日期",
+  ];
+  function detailBlock(e) {
+    const d = e.detail || {};
+    const keys = [
+      ...DETAIL_ORDER.filter((k) => d[k]),
+      ...Object.keys(d).filter((k) => !DETAIL_ORDER.includes(k) && !["原文标题", "原文链接", "条目链接", "原文原标题"].includes(k)),
+    ];
+    if (!keys.length) return "";
+    return `<h3>原文结构化信息</h3><dl class="w3-p-detail">${keys
+      .map((k) => `<div><dt>${esc(k)}</dt><dd>${esc(String(d[k]))}</dd></div>`)
+      .join("")}</div></dl>`;
+  }
+
+  /* AI 解读：走 /api/ai（密钥只在服务端环境变量里） */
+  function aiBlock(e) {
+    return `
+<div class="w3-ai" data-ai-event="${e.id}">
+  <button type="button" class="w3-ai-btn" data-ai-ask>AI 解读这条原文 →</button>
+  <div class="w3-ai-out" hidden></div>
+</div>`;
+  }
+  async function runAI(btn) {
+    const box = btn.closest(".w3-ai");
+    const out = box.querySelector(".w3-ai-out");
+    const e = byId[Number(box.dataset.aiEvent)];
+    if (!e) return;
+    out.hidden = false;
+    out.innerHTML = '<p class="w3-ai-loading">正在解读…</p>';
+    btn.disabled = true;
+    try {
+      const res = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(e),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ("HTTP " + res.status));
+      out.innerHTML = `<div class="w3-ai-text">${esc(data.text || "（模型没有返回内容）")
+        .replace(/\n{2,}/g, "</p><p>")
+        .replace(/\n/g, "<br>")}</div>`;
+    } catch (err) {
+      out.innerHTML = `<p class="w3-ai-err">AI 解读不可用：${esc(String(err.message || err))}</p>`;
+    } finally {
+      btn.disabled = false;
+    }
   }
 
   function panelOverview(activeChain) {
@@ -1077,7 +1138,7 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
 <ol class="w3-changes">${changes}</ol>
 <h2 class="w3-p-h">窗口内实体</h2>
 <ul class="w3-bases">${baseRows || "<li class='w3-empty'>窗口内没有上轴事件。</li>"}</ul>
-<p class="w3-p-note">灰色底行是「大本营」，细线指向它在这段时间里推到前线的每一份原文。</p>`;
+<p class="w3-p-note">灰色底行是「公司」，细线指向它在这段时间里推到前线的每一份原文。</p>`;
   }
 
   function renderPanel(activeChain) {

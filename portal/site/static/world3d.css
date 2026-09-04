@@ -559,3 +559,27 @@
   .w3-hud-tools { justify-content: flex-start; gap: 8px; }
   .w3-range button, .w3-lens button { padding: 5px 10px; }
 }
+
+/* ---------- AI 解读（详情面板内） ---------- */
+.w3-p-detail { margin: 0 0 8px; }
+.w3-p-detail > div { display: grid; grid-template-columns: 88px 1fr; gap: 10px; padding: 7px 0; border-bottom: 1px dashed rgba(255,255,255,.08); }
+.w3-p-detail dt { color: var(--w3-fg-soft, #8fa3b5); font-size: 12px; padding-top: 2px; }
+.w3-p-detail dd { font-size: 13px; line-height: 1.65; margin: 0; word-break: break-word; }
+
+.w3-ai { margin: 16px 0 4px; }
+.w3-ai-btn {
+  width: 100%; padding: 9px 14px; border-radius: 9px; cursor: pointer;
+  border: 1px solid var(--w3-accent, #3fc0c0); background: rgba(63,192,192,.10);
+  color: var(--w3-accent, #3fc0c0); font-size: 13px; font-weight: 600;
+  transition: background .15s ease;
+}
+.w3-ai-btn:hover { background: rgba(63,192,192,.2); }
+.w3-ai-btn:disabled { opacity: .5; cursor: wait; }
+.w3-ai-out { margin-top: 10px; }
+.w3-ai-loading { color: var(--w3-fg-soft, #8fa3b5); font-size: 13px; }
+.w3-ai-err { color: #f06045; font-size: 13px; }
+.w3-ai-text { font-size: 13px; line-height: 1.8; color: var(--w3-fg, #dfe9f2); white-space: normal; }
+.w3-ai-text p { margin: 0 0 10px; }
+
+/* 平台入口（HUD 导航里高亮） */
+.w3-nav .w3-plat { color: var(--w3-accent, #3fc0c0); font-weight: 650; }

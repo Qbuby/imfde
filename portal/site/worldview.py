@@ -763,7 +763,67 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
         "entity_slug": slug,
         "entity_name": name,
         "info_kind": info_kind,
+        "detail": _source_detail(case, row),
     }
+
+
+# 详情面板 / AI 解读用的原文结构化字段（只保留非空项，避免无用噪声）
+_SOURCE_FIELDS = (
+    ("industry", "行业"),
+    ("customer_handoff", "交接给了谁"),
+    ("business_problem", "业务问题"),
+    ("existing_workflow", "原工作流"),
+    ("pain_point", "卡点"),
+    ("discovery_method", "怎么发现的"),
+    ("why_ai", "为什么用 AI"),
+    ("hero_use_case", "核心场景"),
+    ("data_sources", "数据来源"),
+    ("integration", "集成方式"),
+    ("ai_model", "模型"),
+    ("agent_workflow", "智能体工作流"),
+    ("human_in_the_loop", "人在回路"),
+    ("evaluation", "评测"),
+    ("deployment", "部署形态"),
+    ("time_to_production", "上线周期"),
+    ("business_kpi", "业务指标"),
+    ("measured_outcome", "实测结果"),
+    ("failure_iteration", "失败与迭代"),
+    ("productization", "产品化"),
+    ("evidence_note", "证据说明"),
+    ("fde_role", "原文自称 FDE"),
+    ("product", "产品"),
+    ("tier", "证据等级"),
+)
+
+
+def _source_detail(case: dict | None, row) -> dict:
+    """把 cases 表与 world_events 行的原文信息整理成结构化字段。"""
+    out: dict = {}
+    if case:
+        for key, label in _SOURCE_FIELDS:
+            val = clean_text(case.get(key))
+            if val:
+                out[label] = val
+        out["原文标题"] = clean_text(case.get("source_title"))
+        out["原文链接"] = clean_text(case.get("source_url"))
+        if case.get("customer_named"):
+            out["客户"] = clean_text(case.get("customer")) or "（未具名）"
+        else:
+            out["客户"] = "（原文未具名）"
+        if case.get("vendor_names"):
+            out["厂商"] = clean_text(case.get("vendor_names"))
+    src = clean_text(row["title"] if hasattr(row, "keys") and "title" in row.keys() else None)
+    if src and src != out.get("原文标题"):
+        out["原文原标题"] = src
+    day = row["day"] if hasattr(row, "keys") and "day" in row.keys() else None
+    if day:
+        out["上轴日期"] = "%s（%s）" % (
+            day,
+            {"published": "原文发布日", "modified": "页上修改日"}.get(row["date_kind"] or "", row["date_kind"] or ""),
+        )
+    if row["url"] if hasattr(row, "keys") and "url" in row.keys() else None:
+        out["条目链接"] = row["url"]
+    return {k: v for k, v in out.items() if v}
 
 
 # 屏蔽来源：这些 host 的事件不上世界动态轴 / 3D 沙盘（平台运营决策 2026-09-03）。
