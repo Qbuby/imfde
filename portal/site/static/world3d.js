@@ -997,11 +997,6 @@ function boot() {
     x.setAttribute("aria-pressed", on ? "true" : "false");
   });
   panel.addEventListener("click", (ev) => {
-    const reportBtn = ev.target.closest("[data-ai-report-open]");
-    if (reportBtn) {
-      openReport(Number(reportBtn.closest("[data-ai-report]")?.dataset.range) || state.range);
-      return;
-    }
     const aiBtn = ev.target.closest("[data-ai-ask]");
     if (aiBtn) {
       runAI(aiBtn);
@@ -1118,7 +1113,7 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
     fab.id = "w3-report-fab";
     fab.type = "button";
     fab.setAttribute("aria-label", "AI 阶段报告");
-    fab.innerHTML = '<span class="w3-fab-ico">✦</span><span class="w3-fab-t">AI 报告</span>';
+    fab.innerHTML = '<span class="w3-fab-ico">✦</span><span class="w3-fab-t">解读报告</span>';
     document.body.appendChild(fab);
     fab.addEventListener("click", () => openReport(state.range));
   }
@@ -1228,9 +1223,6 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
 <h2 class="w3-p-h">AI 识别的三条变化</h2>
 <p class="w3-p-note">点一条，沙盘只留下它的证据链。</p>
 <ol class="w3-changes">${changes}</ol>
-<div class="w3-ai-report" data-ai-report data-range="${state.range}">
-  <button type="button" class="w3-ai-btn" data-ai-report-open>AI 阶段报告 · 过去 ${state.range} 天 →</button>
-</div>
 <p class="w3-p-note">灰色底行是「机构」，细线指向它在这段时间里推到前线的每一份原文。</p>`;
   }
 
