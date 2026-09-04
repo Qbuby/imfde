@@ -13,8 +13,13 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 import urllib.error
 import urllib.request
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import ai_store  # noqa: E402
 
 AI_BASE_URL = (os.environ.get("AI_BASE_URL") or "https://api.airy.work/v1").rstrip("/")
 AI_API_KEY = (os.environ.get("AI_API_KEY") or "").strip()
@@ -134,9 +139,24 @@ async def app(scope, receive, send):  # noqa: ANN001
     except Exception:
         await _send(send, 400, json.dumps({"error": "请求体不是合法 JSON"}).encode("utf-8"))
         return
+    if not isinstance(item, dict):
+        await _send(send, 400, json.dumps({"error": "请求体应为 JSON 对象"}).encode("utf-8"))
+        return
+
+    # 持久化缓存命中 → 直接返回，零等待
+    ident = str(item.get("id") or item.get("url") or json.dumps(
+        {k: item.get(k) for k in ("title", "day", "lane")}, ensure_ascii=False
+    ))
+    snap = str(item.get("snapshot") or "")
+    hit = ai_store.load("event", ident, snap)
+    if hit and hit.get("text"):
+        await _send(send, 200, json.dumps(
+            {"text": hit["text"], "cached": True}, ensure_ascii=False
+        ).encode("utf-8"))
+        return
 
     try:
-        text = _call_ai(_build_user(item if isinstance(item, dict) else {}))
+        text = _call_ai(_build_user(item))
     except urllib.error.HTTPError as e:
         detail = e.read().decode("utf-8", "replace")[:400]
         await _send(send, 502, json.dumps(
@@ -149,4 +169,10 @@ async def app(scope, receive, send):  # noqa: ANN001
         ).encode("utf-8"))
         return
 
-    await _send(send, 200, json.dumps({"text": text}, ensure_ascii=False).encode("utf-8"))
+    # 生成成功 → 立即持久化（下次秒回）
+    try:
+        ai_store.save("event", ident, snap, {"text": text, "title": item.get("title", "")})
+    except Exception:
+        pass
+
+    await _send(send, 200, json.dumps({"text": text, "cached": False}, ensure_ascii=False).encode("utf-8"))

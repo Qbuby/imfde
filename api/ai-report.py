@@ -22,9 +22,11 @@ from urllib.parse import parse_qsl
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "portal" / "site"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import server as S  # noqa: E402
 from worldview import load_world  # noqa: E402
+import ai_store  # noqa: E402
 
 AI_BASE_URL = (os.environ.get("AI_BASE_URL") or "https://api.airy.work/v1").rstrip("/")
 AI_API_KEY = (os.environ.get("AI_API_KEY") or "").strip()
@@ -103,7 +105,7 @@ def _call_ai(user_content: str) -> str:
     return (data.get("choices") or [{}])[0].get("message", {}).get("content", "").strip()
 
 
-# 进程内缓存：实例存活期内不重复生成
+# 进程内缓存：实例存活期内不重复生成（外层还有 ai_store 的磁盘/仓库持久化）
 _CACHE: dict = {}
 
 
@@ -112,6 +114,7 @@ def _report(days: int) -> dict:
         return _CACHE[days]
     with S.connect() as con:
         data = load_world(con.cursor())
+    snapshot = data.get("snapshot") or ""
     events = _events_for_range(data, days)
     meta = [
         {
@@ -127,9 +130,23 @@ def _report(days: int) -> dict:
         out = {"enabled": False, "range": days, "error": "AI 未配置（缺少 AI_API_KEY）", "events": meta}
         _CACHE[days] = out
         return out
+
+    # 持久化缓存命中（/tmp 实例盘 或 仓库内置）→ 零等待返回
+    hit = ai_store.load("report", str(days), snapshot)
+    if hit and hit.get("text"):
+        out = {"enabled": True, "range": days, "snapshot": snapshot, "total": len(events),
+               "text": hit["text"], "events": meta, "cached": True}
+        _CACHE[days] = out
+        return out
+
     text = _call_ai(_build_user(events, days))
-    out = {"enabled": True, "range": days, "snapshot": data.get("snapshot"), "total": len(events),
+    out = {"enabled": True, "range": days, "snapshot": snapshot, "total": len(events),
            "text": text, "events": meta}
+    # 生成成功 → 立即持久化
+    try:
+        ai_store.save("report", str(days), snapshot, {"text": text, "total": len(events)})
+    except Exception:
+        pass
     _CACHE[days] = out
     return out
 
