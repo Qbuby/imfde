@@ -35,6 +35,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   font-weight:650;letter-spacing:-.02em;color:var(--fg);text-decoration:none;font-size:17px;
 }
 .brand-mark{display:block;white-space:nowrap}
+.brand-mark .brand-logo{width:44px;height:44px;border-radius:10px;object-fit:cover;display:block;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .brand-im{color:var(--fg)}
 .brand-fde{color:var(--acc)}
 .brand-tld{color:var(--mut);font-weight:600}
@@ -307,3 +308,4 @@ footer.ft p{margin:6px 0}
 /* 帽子 logo 图标（brand_mark 内） */
 .brand-mark{display:inline-flex;align-items:center;gap:8px}
 .brand-mark .brand-logo{width:30px;height:30px;border-radius:7px;object-fit:cover;display:block}
+.brand-mark .brand-logo{width:44px;height:44px;border-radius:10px;object-fit:cover;display:block;box-shadow:0 2px 8px rgba(0,0,0,.15)}

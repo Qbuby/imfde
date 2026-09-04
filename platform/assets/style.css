@@ -18,7 +18,7 @@ a{text-decoration:none;color:inherit}
 .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:60px}
 .logo{display:flex;align-items:center}
-.logo-badge{display:block;width:38px;height:38px;border-radius:9px;object-fit:cover;transition:transform .15s ease}
+.logo-badge{display:block;width:48px;height:48px;border-radius:11px;object-fit:cover;transition:transform .15s ease}
 a.logo:hover .logo-badge{transform:scale(1.05)}
 .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
 .nav-links a:hover{color:var(--text)}
