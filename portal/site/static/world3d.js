@@ -1223,6 +1223,23 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
 <h2 class="w3-p-h">AI 识别的三条变化</h2>
 <p class="w3-p-note">点一条，沙盘只留下它的证据链。</p>
 <ol class="w3-changes">${changes}</ol>
+<h2 class="w3-p-h">窗口内实体</h2>
+<ul class="w3-bases">${(() => {
+    const bases = new Map();
+    list.forEach((e) => {
+      const k = baseKeyOf(e);
+      if (!k) return;
+      if (!bases.has(k)) bases.set(k, { name: baseNameOf(e), n: 0, lane: e.lane, ids: [] });
+      bases.get(k).n += 1;
+      bases.get(k).ids.push(e.id);
+    });
+    const rows = [...bases.values()]
+      .sort((a, b) => b.n - a.n || (a.name < b.name ? -1 : 1))
+      .slice(0, 8)
+      .map((b) => `<li><button type="button" data-pick="${b.ids[b.ids.length - 1]}" style="--c:${(LANE_COLOR[b.lane] || LANE_COLOR.company).hi}"><i></i>${esc(b.name)}<span>${b.n}</span></button></li>`)
+      .join("");
+    return rows || "<li class='w3-empty'>窗口内没有上轴事件。</li>";
+  })()}</ul>
 <p class="w3-p-note">灰色底行是「机构」，细线指向它在这段时间里推到前线的每一份原文。</p>`;
   }
 
