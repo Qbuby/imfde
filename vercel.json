@@ -35,7 +35,15 @@
       "destination": "/api/portal?__path=/案例/:path*"
     },
     {
+      "source": "/%E6%A1%88%E4%BE%8B/:path*",
+      "destination": "/api/portal?__path=/案例/:path*"
+    },
+    {
       "source": "/案例",
+      "destination": "/api/portal?__path=/案例"
+    },
+    {
+      "source": "/%E6%A1%88%E4%BE%8B",
       "destination": "/api/portal?__path=/案例"
     },
     {
@@ -43,11 +51,23 @@
       "destination": "/api/portal?__path=/落地"
     },
     {
+      "source": "/%E8%90%BD%E5%9C%B0",
+      "destination": "/api/portal?__path=/落地"
+    },
+    {
       "source": "/现场",
       "destination": "/api/portal?__path=/现场"
     },
     {
+      "source": "/%E7%8E%B0%E5%9C%BA",
+      "destination": "/api/portal?__path=/现场"
+    },
+    {
       "source": "/方法",
+      "destination": "/api/portal?__path=/方法"
+    },
+    {
+      "source": "/%E6%96%B9%E6%B3%95",
       "destination": "/api/portal?__path=/方法"
     },
     {
