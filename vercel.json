@@ -24,8 +24,6 @@
     { "source": "/现场", "destination": "/api/portal?__path=/现场" },
     { "source": "/方法", "destination": "/api/portal?__path=/方法" },
     { "source": "/world3d", "destination": "/api/portal?__path=/world3d" },
-    { "source": "/api/world.json", "destination": "/api/portal?__path=/api/world.json" },
-    { "source": "/api/ai", "destination": "/api/ai" },
-    { "source": "/api/ai-report", "destination": "/api/ai-report" }
+    { "source": "/api/world.json", "destination": "/api/portal?__path=/api/world.json" }
   ]
 }
