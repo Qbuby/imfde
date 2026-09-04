@@ -83,7 +83,7 @@ def render_world3d(cur) -> str:
 
   <footer class="w3-legend" id="w3-legend" aria-label="沙盘图例">
     <span class="w3-lg-k">形体</span>
-    <span title="公司动作：组织自己发布的官方动作"><i class="w3-gl w3-gl-tower"></i>塔 · 公司</span>
+    <span title="公司动作：组织自己发布的官方动作"><i class="w3-gl w3-gl-tower"></i>塔 · 机构</span>
     <span title="真实部署：公司射向客户前线的落点"><i class="w3-gl w3-gl-landing"></i>落点 · 部署</span>
     <span title="人物与观点：悬在轨道上空的信号灯"><i class="w3-gl w3-gl-beacon"></i>信号灯 · 人物</span>
     <span title="方法与岗位：铺在地面上的轨道"><i class="w3-gl w3-gl-rail"></i>轨道 · 方法</span>
@@ -94,7 +94,7 @@ def render_world3d(cur) -> str:
     <span class="w3-lg-sep"></span>
     <span><i class="w3-ln w3-ln-direct"></i>直接</span>
     <span><i class="w3-ln w3-ln-indirect"></i>间接</span>
-    <span><i class="w3-ln w3-ln-base"></i>公司 → 前线</span>
+    <span><i class="w3-ln w3-ln-base"></i>机构 → 前线</span>
     <span class="w3-lg-snap">快照 {snapshot} · 仅 published / modified 上轴 · <a href="/落地">落地</a> · <a href="/现场">现场</a> · <a href="/案例">部署证据</a> · <a href="/方法">方法</a></span>
   </footer>
 

@@ -328,7 +328,7 @@ function boot() {
     bg.setAttribute("position", new THREE.BufferAttribute(new Float32Array([-half, 0.04, BASE_Z, half, 0.04, BASE_Z]), 3));
     board.add(track(new THREE.LineSegments(bg, new THREE.LineDashedMaterial({ color: ACCENT, dashSize: 1.6, gapSize: 1.1, transparent: true, opacity: 0.45 }))));
     board.children[board.children.length - 1].computeLineDistances();
-    const bl = groundText(`<b>公司</b><small>Organisations</small>`, "w3-g-lane", { width: LANE_TEXT_W / GT });
+    const bl = groundText(`<b>机构</b><small>Organisations</small>`, "w3-g-lane", { width: LANE_TEXT_W / GT });
     bl.element.style.setProperty("--c", ACCENT);
     bl.position.set(-half - 2 - LANE_TEXT_W / 2, 0.06, BASE_Z);
     board.add(bl);
@@ -997,6 +997,11 @@ function boot() {
     x.setAttribute("aria-pressed", on ? "true" : "false");
   });
   panel.addEventListener("click", (ev) => {
+    const reportBtn = ev.target.closest("[data-ai-report-open]");
+    if (reportBtn) {
+      openReport(Number(reportBtn.closest("[data-ai-report]")?.dataset.range) || state.range);
+      return;
+    }
     const aiBtn = ev.target.closest("[data-ai-ask]");
     if (aiBtn) {
       runAI(aiBtn);
@@ -1097,9 +1102,7 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || ("HTTP " + res.status));
-      out.innerHTML = `<div class="w3-ai-text">${esc(data.text || "（模型没有返回内容）")
-        .replace(/\n{2,}/g, "</p><p>")
-        .replace(/\n/g, "<br>")}</div>`;
+      out.innerHTML = `<div class="w3-ai-text">${mdLite(data.text || "（模型没有返回内容）")}</div>`;
     } catch (err) {
       out.innerHTML = `<p class="w3-ai-err">AI 解读不可用：${esc(String(err.message || err))}</p>`;
     } finally {
@@ -1107,21 +1110,110 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
     }
   }
 
+  /* ---------- AI 阶段报告（7/30/90 天，服务端预生成+缓存） ---------- */
+  const reportCache = new Map(); // range → {text, events, total}
+  function ensureFloatBtn() {
+    if (document.getElementById("w3-report-fab")) return;
+    const fab = document.createElement("button");
+    fab.id = "w3-report-fab";
+    fab.type = "button";
+    fab.setAttribute("aria-label", "AI 阶段报告");
+    fab.innerHTML = '<span class="w3-fab-ico">✦</span><span class="w3-fab-t">AI 报告</span>';
+    document.body.appendChild(fab);
+    fab.addEventListener("click", () => openReport(state.range));
+  }
+  function reportLink(t) {
+    // 把 markdown 链接 [标题](url) 映射回沙盘事件（按 url 匹配），点击选中对应形体
+    const raw = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) => {
+      const ev = (DATA.events || []).find(
+        (x) => x.url === url || (x.detail && x.detail["原文链接"] === url)
+      );
+      return ev
+        ? `<a href="javascript:void(0)" data-report-pick="${ev.id}">${esc(label)}</a>`
+        : `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+    });
+    return raw;
+  }
+  function mdLite(t) {
+    let h = esc(t);
+    h = reportLink(h);
+    h = h.replace(/^### (.+)$/gm, "<h4>$1</h4>");
+    h = h.replace(/^## (.+)$/gm, "<h3>$1</h3>");
+    h = h.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+    h = h.replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>");
+    return `<p>${h}</p>`;
+  }
+  async function openReport(range) {
+    let overlay = document.getElementById("w3-report-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "w3-report-overlay";
+      overlay.innerHTML = `
+<div class="w3-rp" role="dialog" aria-label="AI 阶段报告">
+  <header class="w3-rp-h">
+    <h2>AI 阶段报告</h2>
+    <div class="w3-range" role="radiogroup" aria-label="报告时间窗">
+      <button type="button" data-rp-range="7">7 天</button>
+      <button type="button" data-rp-range="30" class="on">30 天</button>
+      <button type="button" data-rp-range="90">90 天</button>
+    </div>
+    <button type="button" class="w3-rp-x" data-rp-close aria-label="关闭">×</button>
+  </header>
+  <div class="w3-rp-meta" id="w3-rp-meta"></div>
+  <div class="w3-rp-body" id="w3-rp-body"></div>
+</div>`;
+      document.body.appendChild(overlay);
+      overlay.addEventListener("click", (ev) => {
+        const pick = ev.target.closest("[data-report-pick]");
+        if (pick) {
+          closeReport();
+          select(Number(pick.dataset.reportPick), { fly: true });
+          return;
+        }
+        const rbtn = ev.target.closest("[data-rp-range]");
+        if (rbtn) {
+          openReport(Number(rbtn.dataset.rpRange));
+          return;
+        }
+        if (ev.target.closest("[data-rp-close]") || ev.target === overlay) closeReport();
+      });
+    }
+    overlay.hidden = false;
+    overlay.querySelectorAll("[data-rp-range]").forEach((b) => {
+      const on = Number(b.dataset.rpRange) === Number(range);
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    const metaEl = overlay.querySelector("#w3-rp-meta");
+    const bodyEl = overlay.querySelector("#w3-rp-body");
+    if (reportCache.has(range)) {
+      const rep = reportCache.get(range);
+      bodyEl.innerHTML = `<div class="w3-ai-text">${mdLite(rep.text)}</div>`;
+      metaEl.textContent = `快照 ${rep.snapshot} · 窗口内 ${rep.total} 条上轴 · 已生成并缓存`;
+      return;
+    }
+    metaEl.textContent = `正在生成过去 ${range} 天的阶段报告…（首次约需 1-2 分钟，生成后即缓存）`;
+    bodyEl.innerHTML = '<p class="w3-ai-loading">✦ 生成中…</p>';
+    try {
+      const res = await fetch(`/api/ai-report?range=${range}`, { method: range ? "GET" : "GET" });
+      const rep = await res.json();
+      if (!res.ok || !rep.enabled) throw new Error(rep.error || ("HTTP " + res.status));
+      reportCache.set(range, rep);
+      bodyEl.innerHTML = `<div class="w3-ai-text">${mdLite(rep.text)}</div>`;
+      metaEl.textContent = `快照 ${rep.snapshot} · 窗口内 ${rep.total} 条上轴 · 已生成并缓存`;
+    } catch (err) {
+      bodyEl.innerHTML = `<p class="w3-ai-err">报告不可用：${esc(String(err.message || err))}</p>`;
+      metaEl.textContent = "";
+    }
+  }
+  function closeReport() {
+    const overlay = document.getElementById("w3-report-overlay");
+    if (overlay) overlay.hidden = true;
+  }
+  ensureFloatBtn();
+
   function panelOverview(activeChain) {
     const list = windowEvents();
-    const bases = new Map();
-    list.forEach((e) => {
-      const k = baseKeyOf(e);
-      if (!k) return;
-      if (!bases.has(k)) bases.set(k, { name: baseNameOf(e), n: 0, lane: e.lane, ids: [] });
-      bases.get(k).n += 1;
-      bases.get(k).ids.push(e.id);
-    });
-    const baseRows = [...bases.values()]
-      .sort((a, b) => b.n - a.n || (a.name < b.name ? -1 : 1))
-      .slice(0, 8)
-      .map((b) => `<li><button type="button" data-pick="${b.ids[b.ids.length - 1]}" style="--c:${(LANE_COLOR[b.lane] || LANE_COLOR.company).hi}"><i></i>${esc(b.name)}<span>${b.n}</span></button></li>`)
-      .join("");
     const changes = (DATA.changes || [])
       .map(
         (ch, i) => `<li class="${activeChain === i ? "on" : ""}"><button type="button" data-chain="${i}"><b>${esc(ch.num)}</b><span><strong>${esc(ch.title)}</strong><small>${esc(ch.body)}</small></span></button>${
@@ -1136,9 +1228,10 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
 <h2 class="w3-p-h">AI 识别的三条变化</h2>
 <p class="w3-p-note">点一条，沙盘只留下它的证据链。</p>
 <ol class="w3-changes">${changes}</ol>
-<h2 class="w3-p-h">窗口内实体</h2>
-<ul class="w3-bases">${baseRows || "<li class='w3-empty'>窗口内没有上轴事件。</li>"}</ul>
-<p class="w3-p-note">灰色底行是「公司」，细线指向它在这段时间里推到前线的每一份原文。</p>`;
+<div class="w3-ai-report" data-ai-report data-range="${state.range}">
+  <button type="button" class="w3-ai-btn" data-ai-report-open>AI 阶段报告 · 过去 ${state.range} 天 →</button>
+</div>
+<p class="w3-p-note">灰色底行是「机构」，细线指向它在这段时间里推到前线的每一份原文。</p>`;
   }
 
   function renderPanel(activeChain) {
