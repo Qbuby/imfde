@@ -53,9 +53,13 @@ async def app(scope, receive, send):  # noqa: ANN001
         return
 
     # 2. 逐窗口刷新报告（ai-report 内部会读 ai_store 持久化缓存；数据变了报告重生成）
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
     try:
-        import ai_report as R
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "ai_report_impl", Path(__file__).resolve().parent / "ai-report.py"
+        )
+        R = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(R)
         R._CACHE.clear()  # 强制重新生成（数据可能已更新）
         for days in (7, 30, 90):
             try:
