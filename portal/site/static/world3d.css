@@ -625,3 +625,7 @@
 .w3-rp-body .w3-ai-text h4 { margin: 18px 0 6px; font-size: 14px; color: var(--w3-fg, #dfe9f2); }
 .w3-rp-body .w3-ai-text a { color: var(--w3-accent, #3fc0c0); text-decoration: none; border-bottom: 1px dashed rgba(63,192,192,.4); }
 .w3-rp-body .w3-ai-text a:hover { border-bottom-style: solid; }
+
+/* 帽子 logo 图标（沙盘 HUD 品牌位） */
+.w3-brand .brand-mark { display: inline-flex; align-items: center; gap: 8px; }
+.w3-brand .brand-logo { width: 30px; height: 30px; border-radius: 7px; object-fit: cover; display: block; }

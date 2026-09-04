@@ -303,3 +303,7 @@ footer.ft p{margin:6px 0}
   .card,.door,.col{break-inside:avoid}
   .skip,.filters{display:none}
 }
+
+/* 帽子 logo 图标（brand_mark 内） */
+.brand-mark{display:inline-flex;align-items:center;gap:8px}
+.brand-mark .brand-logo{width:30px;height:30px;border-radius:7px;object-fit:cover;display:block}

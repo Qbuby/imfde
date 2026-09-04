@@ -22,7 +22,7 @@
   .topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;padding:0 16px}
   .tb-back{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--text);white-space:nowrap}
   .tb-back:hover{color:var(--accent);text-decoration:none}
-  .tb-back .logo-badge{background:var(--accent);color:#fff;font-weight:700;font-size:13px;padding:5px 10px;border-radius:8px}
+  .tb-back .logo-badge{display:block;width:28px;height:28px;border-radius:7px;object-fit:cover}
   .tb-title{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .tb-title b{color:var(--text);font-weight:600}
   .tb-spacer{flex:1}
@@ -97,7 +97,7 @@
 <body>
 
 <header class="topbar">
-  <a class="tb-back" href="../index.html"><span class="logo-badge">ImFDE</span><span>← 返回门户</span></a>
+  <a class="tb-back" href="../index.html"><img class="logo-badge" src="../assets/img/logo-mark-64.png" alt="imfde.ai"/><span>← 返回门户</span></a>
   <div class="tb-title"><b>FDE 从知道到入门</b> · 学习成长</div>
   <div class="tb-spacer"></div>
   <div style="display:flex;gap:4px">

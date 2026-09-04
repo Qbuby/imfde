@@ -24,7 +24,9 @@
   .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:60px}
   .logo{display:flex;align-items:center}
-  .logo-badge{background:var(--accent);color:#fff;font-weight:700;font-size:15px;letter-spacing:.5px;padding:7px 14px;border-radius:9px;transition:background .15s ease}
+  .logo-badge{display:block;width:38px;height:38px;border-radius:9px;object-fit:cover;transition:transform .15s ease}
+  a.logo:hover .logo-badge{transform:scale(1.05)}
+
   .logo-badge:hover{background:var(--accent-dark)}
   .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
   .nav-links a:hover{color:var(--text)}
@@ -143,7 +145,7 @@
 <!-- 导航 -->
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="#"><span class="logo-badge">ImFDE</span></a>
+    <a class="logo" href="#"><img class="logo-badge" src="assets/img/logo-mark-64.png" alt="imfde.ai"/></a>
     <nav class="nav-links">
       <a href="#demands">企业需求池</a>
       <a href="#content">内容·学</a>

@@ -664,9 +664,10 @@ def industry_chips(base, current) -> str:
 
 
 def brand_mark() -> str:
-    """Official wordmark: imfde.ai"""
+    """Official mark: cap-logo image + imfde.ai wordmark."""
     return (
         '<span class="brand-mark">'
+        '<img class="brand-logo" src="/static/icons/logo-mark.png" alt="imfde.ai"/>'
         '<span class="brand-im">im</span>'
         '<span class="brand-fde">fde</span>'
         '<span class="brand-tld">.ai</span>'
