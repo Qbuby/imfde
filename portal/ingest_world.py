@@ -291,6 +291,66 @@ EVENT_COPY = {
         "enterprise": "防务场景里如何建 FDE 组。约束（权限、驻场、交付物）与商业 SaaS 不同。",
         "practitioner": "方法信号。防务现场的节奏和合规，不能当成普通企业 AI 驻场。",
     },
+    "pe-heats-up": {
+        "happened": "Pragmatic Engineer Pulse 记录 Forward Deployed Engineering 再次升温，以及哪些公司在招。",
+        "enterprise": "这是行业通讯，不是组织宣布。可当「岗位变热」的旁证，不能当成某家已经建好编制。",
+        "practitioner": "看哪些公司被点名在招。具体要求仍要回官方 JD，通讯不是投递清单。",
+    },
+    "pe-what-are-fdes": {
+        "enterprise": "解释 FDE 为何抢手。企业可读成需求叙事，不是某一单交付证明。",
+        "practitioner": "用来建立角色地图：现场写生产代码、又要面对客户。不是面试题答案。",
+    },
+    "ted-mabrey-linkedin": {
+        "enterprise": "公开区分真 FDE 和被误标的岗位。买驻场前要问：人是不是在客户现场写生产代码并 own 结果。",
+        "practitioner": "头衔通胀的一线判断。简历上的 FDE 三个字母，不等于这份工作。",
+    },
+    "bob-mcgrew-yc": {
+        "enterprise": "面向 AI 创业公司：何时该组 FDE、现场怎么交付。台上数字不当审计，也不是客户 KPI。",
+        "practitioner": "入门手册口径。用来想「要不要组这支队伍」，不是某一家的入职培训。",
+    },
+    "marty-cagan-fde": {
+        "enterprise": "从产品发现谈 FDE。企业若把驻场只当交付外包，会漏掉发现问题和定义范围。",
+        "practitioner": "产品人视角。用来对照自己是在发现，还是只在客户现场赶工。",
+    },
+    "a16z-fde-fellowship": {
+        "happened": "a16z 公开 FDE Fellowship 页，说明他们怎么培养现场部署人才。无事件日则只收录。",
+        "enterprise": "培养项目页，不是某家客户上线。不能当成编制已经进买方组织。",
+        "practitioner": "看他们如何定义前线 FDE 和部门负责人的搭配。申请条件要回原页。",
+    },
+    "a16z-services-led": {
+        "enterprise": "把 FDE 放进「用服务换增长、用毛利换护城河」的叙事。这是投资人框架，不是客户结果。",
+        "practitioner": "理解为什么这个角色被写成增长杠杆。职业路径仍取决于你进的是哪家现场。",
+    },
+    "openai-frontier-product": {
+        "happened": "OpenAI Frontier 产品页，把部署现场能力写成命名产品线。可能没有单独事件日。",
+        "enterprise": "产品页上的规模数字（如资本开支）要回原文核对口径，不能当某一单客户 KPI。",
+        "practitioner": "页上写与 Forward Deployed Engineers 结对。职责以产品页为准，不是招聘承诺。",
+    },
+    "reddit-levels": {
+        "happened": "r/levels_fyi 讨论什么是 Forward Deployed Engineer。公开帖，无可靠发布日则不上轴。",
+        "enterprise": "不能当组织宣布或客户结果。最多说明这个头衔已经进入职业讨论。",
+        "practitioner": "帖里把 FDE 写成部署项目上的「CTO」：写生产代码并 own 结果。匿名讨论，不当录用标准。",
+    },
+    "reddit-openings": {
+        "happened": "r/ExperiencedDevs 讨论到处可见的 FDE 岗位，以及典型背景。",
+        "enterprise": "岗位变多不等于编制已经落地。这是从业者见闻，不是官方扩编。",
+        "practitioner": "匿名总结常见画像（数年 SWE、能进陌生代码库）。用来对照，不是准入门槛。",
+    },
+    "reddit-role": {
+        "happened": "r/ExperiencedDevs 讨论 Forward Deployed Engineer 这个岗位实际在干什么。",
+        "enterprise": "一线见闻，不是官方组织说明。",
+        "practitioner": "有人写团队几乎都是前 SWE，持续为客户写定制代码、用客户 API 搭 demo。一帖一条，不当行业调查。",
+    },
+    "reddit-scam": {
+        "happened": "r/cscareerquestions 有帖把 Forward Deployed Engineer 岗位说成像坑。公开讨论，不是调查结论。",
+        "enterprise": "头衔争议进入职业论坛。不能据此否定或肯定某家的编制。",
+        "practitioner": "用来听对出差、售前伪装、头衔通胀的抱怨。回官方 JD 和现场范围，不要只看帖标题。",
+    },
+    "cohere-home": {
+        "happened": "Cohere 站点首页。证据弱，只作入口，不当进展头条。",
+        "enterprise": "营销壳页，没有可核对的组织宣布或客户结果。",
+        "practitioner": "不要把首页当 FDE 工作说明。能力建设文在博客那条。",
+    },
 }
 
 COPY_BY_NEEDLE = (
@@ -355,6 +415,60 @@ COPY_BY_NEEDLE = (
             "why": WHY_BY_KIND["methodology"],
             "enterprise": "可当筛选清单草稿，不能代替你自己的职级体系和现场范围。",
             "practitioner": "技术门槛写得很具体，用来对照自己缺哪一块。来源是课程站，不是雇主。",
+        },
+    ),
+    (
+        "the-pulse-forward-deployed-engineering",
+        {
+            "happened": "Pragmatic Engineer Pulse 记录 Forward Deployed Engineering 再次升温，以及哪些公司在招。",
+            "why": WHY_BY_KIND["named_essay"],
+            "enterprise": "这是行业通讯，不是组织宣布。可当「岗位变热」的旁证，不能当成某家已经建好编制。",
+            "practitioner": "看哪些公司被点名在招。具体要求仍要回官方 JD，通讯不是投递清单。",
+        },
+    ),
+    (
+        "insights-for-enterprise-ai-builders",
+        {
+            "happened": "a16z 写从 Demo 到成交：有价值的企业 AI 必须理解客户上下文，模型开箱并不具备。",
+            "why": WHY_BY_KIND["named_essay"],
+            "enterprise": "投资人观察：要把工程和实施资源投进客户现场。这不是某一单 KPI，也不是官方编制宣布。",
+            "practitioner": "解释为什么现场要懂企业逻辑。用来理解角色存在的原因，不是入职手册。",
+        },
+    ),
+    (
+        "8-tactical-insights-from-current-former-forward",
+        {
+            "happened": "LinkedIn 圆桌：现任和前任 Palantir 等处 FDE 的 8 条经验。个人文，不标成雇主官方。",
+            "why": WHY_BY_KIND["methodology"],
+            "enterprise": "强调 FDE 应直接贡献产品，而不是孤立地给客户救火。可当组织设计对照，不是客户结果。",
+            "practitioner": "最成功的组里主力是能写代码的现场的人。用来对照自己是不是「业务里的 coding entity」。",
+        },
+    ),
+    (
+        "openai.com/index/replit",
+        {
+            "happened": "OpenAI 客户页写 Replit 与 GPT 的交付故事。本条没有可上轴的发布日，只作收录。",
+            "why": WHY_BY_KIND["dated_case_study"],
+            "enterprise": "页面是产品故事。没有独立发布日则不上时间轴；数字要回原文。",
+            "practitioner": "原文没有写 Forward Deployed 头衔。可核的是客户侧叙述，不是编制样板。",
+        },
+    ),
+    (
+        "professional-network-ai-onboarding",
+        {
+            "happened": "Moveworks 该 URL 标题是职业网络 onboarding，正文对上的是已收录的另一客户故事。CMS 错页，不当第二条部署。",
+            "why": WHY_BY_KIND["dated_case_study"],
+            "enterprise": "不要引用这个 URL 的 KPI。去已核对的客户页。",
+            "practitioner": "原文没有写 Forward Deployed 头衔。这条不能当现场样本。",
+        },
+    ),
+    (
+        "fde.academy/",
+        {
+            "happened": "FDE Academy 课程首页。证据弱，不是一篇方法文，也不是官方 JD。",
+            "why": WHY_BY_KIND["methodology"],
+            "enterprise": "课程站壳页，不能当编制或交付证明。",
+            "practitioner": "若要看怎么招，用站内那篇 How to Hire，不要把首页当工作说明。",
         },
     ),
 )
@@ -2176,6 +2290,69 @@ def write_links(db) -> int:
     return n
 
 
+ENTITY_NAME_ZH = {
+    "a16z": "Andreessen Horowitz",
+    "abridge": "Abridge",
+    "anthropic": "Anthropic",
+    "augment": "Augment",
+    "aws": "AWS",
+    "blend360": "Blend360",
+    "c3-ai": "C3 AI",
+    "cognition": "Cognition",
+    "cohere": "Cohere",
+    "cresta": "Cresta",
+    "cursor": "Cursor",
+    "databricks": "Databricks",
+    "decagon": "Decagon",
+    "elevenlabs": "ElevenLabs",
+    "factory": "Factory",
+    "glean": "Glean",
+    "google-cloud": "Google Cloud",
+    "harvey": "Harvey",
+    "hebbia": "Hebbia",
+    "intercom": "Intercom",
+    "microsoft": "微软",
+    "moveworks": "Moveworks",
+    "openai": "OpenAI",
+    "palantir": "Palantir",
+    "perplexity": "Perplexity",
+    "plank": "Plank",
+    "posthog": "PostHog",
+    "replit": "Replit",
+    "rippling": "Rippling",
+    "scale-ai": "Scale AI",
+    "sierra": "Sierra",
+    "sourcegraph": "Sourcegraph",
+    "vannevar": "Vannevar Labs",
+    "writer": "Writer",
+    "xai": "xAI",
+    "alex-karp": "Alex Karp",
+    "barry-mccardel": "Barry McCardel",
+    "bob-mcgrew": "Bob McGrew",
+    "colin-jarvis": "Colin Jarvis",
+    "gergely-orosz": "Gergely Orosz",
+    "kevin-bai": "Kevin Bai",
+    "marty-cagan": "Marty Cagan",
+    "nabeel-qureshi": "Nabeel Qureshi",
+    "natalie-meurer": "Natalie Meurer",
+    "ross-wilkers": "Ross Wilkers",
+    "shyam-sankar": "Shyam Sankar",
+    "ted-mabrey": "Ted Mabrey",
+}
+
+
+def fill_entity_names(db) -> int:
+    n = 0
+    for slug, name_zh in ENTITY_NAME_ZH.items():
+        cur = db.execute(
+            "UPDATE world_entities SET name_zh=? WHERE slug=? AND (name_zh IS NULL OR name_zh='')",
+            (name_zh, slug),
+        )
+        n += cur.rowcount or 0
+    db.commit()
+    return n
+
+
 def apply_editorial_copy(db) -> int:
     """Fill happened/why/enterprise/practitioner for existing events. Safe to re-run."""
     seed_by_url = {norm_url(r["url"]): r["id"] for r in db.execute("SELECT id, url FROM world_sources")}
@@ -2195,8 +2372,17 @@ def apply_editorial_copy(db) -> int:
         if row["info_kind"] == "dated_case_study" and not pack.get("practitioner"):
             pack["practitioner"] = DEPLOY_NO_FDE
         happened = pack["happened"]
-        if _is_stub_happened(happened, row["title"] or "", row["title_zh"] or "") and not EVENT_COPY.get(seed_id):
-            happened = row["happened_zh"] or happened
+        old_hap = row["happened_zh"] or ""
+        keep_old = (
+            _is_stub_happened(happened, row["title"] or "", row["title_zh"] or "")
+            and not EVENT_COPY.get(seed_id)
+            and not pack_from_needle(url)
+            and old_hap
+            and not _is_stub_happened(old_hap, row["title"] or "", row["title_zh"] or "")
+            and "…" not in old_hap
+        )
+        if keep_old:
+            happened = old_hap
         new = (
             happened,
             pack["why"],
@@ -2213,6 +2399,7 @@ def apply_editorial_copy(db) -> int:
             (*new, row["id"]),
         )
         n += 1
+    n += fill_entity_names(db)
     db.commit()
     return n
 

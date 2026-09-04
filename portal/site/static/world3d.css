@@ -32,11 +32,12 @@
   inset: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 372px;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
   grid-template-areas:
     "hud hud"
     "stage panel"
-    "legend panel";
+    "legend panel"
+    "exits panel";
 }
 
 /* ---------- HUD ---------- */
@@ -54,14 +55,13 @@
 }
 .w3-brand {
   display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  align-items: baseline;
+  gap: 2px;
   text-decoration: none;
   font-weight: 700;
   font-size: 1.15rem;
   letter-spacing: -0.01em;
 }
-.w3-brand .brand-logo { width: 40px; height: 40px; border-radius: 9px; object-fit: cover; display: block; box-shadow: 0 2px 10px rgba(0,0,0,.35); flex: none; }
 .w3-brand .brand-im { color: var(--w3-fg); }
 .w3-brand .brand-fde { color: var(--w3-acc); }
 .w3-brand .brand-tld { color: var(--w3-mut); font-weight: 650; }
@@ -72,11 +72,10 @@
   color: var(--w3-mut);
   letter-spacing: 0.02em;
 }
-.w3-hud-mid { min-width: 0; text-align: left; }
+.w3-hud-mid { min-width: 0; }
 .w3-title {
   margin: 0;
-  font-size: clamp(1rem, 2.2vw, var(--step-1));
-  text-align: left;
+  font-size: var(--step-1);
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -129,7 +128,8 @@
   color: var(--w3-mut);
 }
 .w3-nav a { text-decoration: none; }
-.w3-nav a:hover { color: var(--w3-fg); }
+.w3-nav a:hover,
+.w3-nav a.on { color: var(--w3-acc); }
 .w3-nav .w3-gh { color: var(--w3-fg-soft); }
 
 /* ---------- stage ---------- */
@@ -393,6 +393,21 @@
 .w3-p-url a { font-family: var(--font-mono); font-size: 11px; overflow-wrap: anywhere; color: var(--w3-fg-soft); }
 .w3-p-more { color: var(--w3-acc); text-decoration: none; }
 .w3-p-note { color: var(--w3-mut); font-size: 12px; }
+.w3-p-exits { list-style: none; margin: 0; padding: 0; }
+.w3-p-exits li { margin: 0 0 6px; }
+.w3-p-exits a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--w3-line);
+  border-radius: var(--r-1);
+  color: var(--w3-fg);
+  text-decoration: none;
+}
+.w3-p-exits a:hover { border-color: var(--w3-acc); color: var(--w3-fg); }
+.w3-p-exits small { color: var(--w3-mut); font-size: 12px; }
 
 .w3-p-rel,
 .w3-bases,
@@ -479,6 +494,26 @@
 .w3-lg-sep { width: 1px; height: 14px; background: var(--w3-line-2); }
 .w3-lg-snap { margin-left: auto; font-family: var(--font-mono); color: var(--w3-mut); }
 .w3-lg-snap a { color: var(--w3-acc); }
+
+.w3-exits {
+  grid-area: exits;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  padding: 7px var(--s-5);
+  border-top: 1px solid var(--w3-line);
+  background: rgba(7, 19, 30, 0.96);
+  font-size: 13px;
+}
+.w3-exits a {
+  color: var(--w3-fg-soft);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.w3-exits a:hover { color: var(--w3-acc); }
+.w3-exits a span { color: var(--w3-mut); font-size: 12px; }
 .w3-lg-note { color: var(--w3-mut); font-family: var(--font-mono); font-size: 11px; }
 /* lane glyphs, same shapes as the scene */
 .w3-gl { display: inline-block; position: relative; width: 14px; height: 14px; }
@@ -521,7 +556,11 @@
 .w3-flat .w3-stage,
 .w3-flat .w3-panel,
 .w3-flat .w3-legend { display: none; }
-.w3-flat { grid-template-columns: 1fr; grid-template-areas: "hud" "stage" "stage"; }
+.w3-flat {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-areas: "hud" "exits" "stage";
+}
 .w3-fallback h2 { margin: 0 0 var(--s-2); font-size: var(--step-1); }
 .w3-fallback-link { color: var(--w3-acc); }
 .w3-fallback-list { list-style: none; margin: var(--s-4) 0 0; padding: 0; display: grid; gap: 10px; }
@@ -551,80 +590,26 @@
   .w3-hud-tools { grid-column: 1 / -1; justify-content: flex-start; }
 }
 @media (max-width: 767px) {
-  .w3 { grid-template-columns: 1fr; grid-template-areas: "hud" "stage" "legend"; }
+  .w3 {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    grid-template-areas: "hud" "stage" "legend" "exits";
+  }
   .w3-panel { display: none; }
   .w3-fallback { max-width: none; }
   .w3-hud { grid-template-columns: 1fr; gap: 8px; padding: 10px var(--s-4); }
-  .w3-hud-mid { min-width: 0; text-align: left; }
+  .w3-hud-mid { min-width: 0; }
   .w3-title { font-size: var(--step-0); }
   .w3-sub { display: none; }
   .w3-hud-tools { justify-content: flex-start; gap: 8px; }
   .w3-range button, .w3-lens button { padding: 5px 10px; }
+  .w3-exits { padding: 8px var(--s-4); }
+  .w3-flat {
+    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-areas: "hud" "exits" "stage";
+  }
 }
 
-/* ---------- AI 解读（详情面板内） ---------- */
-.w3-p-detail { margin: 0 0 8px; }
-.w3-p-detail > div { display: grid; grid-template-columns: 88px 1fr; gap: 10px; padding: 7px 0; border-bottom: 1px dashed rgba(255,255,255,.08); }
-.w3-p-detail dt { color: var(--w3-fg-soft, #8fa3b5); font-size: 12px; padding-top: 2px; }
-.w3-p-detail dd { font-size: 13px; line-height: 1.65; margin: 0; word-break: break-word; }
-
-.w3-ai { margin: 16px 0 4px; }
-.w3-ai-btn {
-  width: 100%; padding: 9px 14px; border-radius: 9px; cursor: pointer;
-  border: 1px solid var(--w3-accent, #3fc0c0); background: rgba(63,192,192,.10);
-  color: var(--w3-accent, #3fc0c0); font-size: 13px; font-weight: 600;
-  transition: background .15s ease;
-}
-.w3-ai-btn:hover { background: rgba(63,192,192,.2); }
-.w3-ai-btn:disabled { opacity: .5; cursor: wait; }
-.w3-ai-out { margin-top: 10px; }
-.w3-ai-loading { color: var(--w3-fg-soft, #8fa3b5); font-size: 13px; }
-.w3-ai-err { color: #f06045; font-size: 13px; }
-.w3-ai-text { font-size: 13px; line-height: 1.8; color: var(--w3-fg, #dfe9f2); white-space: normal; }
-.w3-ai-text p { margin: 0 0 10px; }
-
-/* 平台入口（HUD 导航里高亮） */
-.w3-nav .w3-plat { color: var(--w3-accent, #3fc0c0); font-weight: 650; }
-
-/* ---------- AI 阶段报告：悬浮按钮 + 全屏浮层 ---------- */
-#w3-report-fab {
-  position: fixed; left: 22px; bottom: 78px; z-index: 60;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 16px; border-radius: 12px; cursor: pointer;
-  border: 1px solid var(--w3-accent, #3fc0c0);
-  background: rgba(2,10,18,.85); color: var(--w3-accent, #3fc0c0);
-  font-size: 13px; font-weight: 650; backdrop-filter: blur(8px);
-  box-shadow: 0 4px 18px rgba(0,0,0,.4);
-  transition: background .15s ease, transform .15s ease;
-}
-#w3-report-fab:hover { background: rgba(63,192,192,.16); transform: translateY(-1px); }
-#w3-report-fab .w3-fab-ico { font-size: 14px; }
-
-#w3-report-overlay {
-  position: fixed; inset: 0; z-index: 120;
-  background: rgba(2,10,18,.72); backdrop-filter: blur(6px);
-  display: flex; align-items: center; justify-content: center; padding: 24px;
-}
-#w3-report-overlay[hidden] { display: none; }
-.w3-rp {
-  width: min(880px, 94vw); max-height: 88vh; display: flex; flex-direction: column;
-  background: #07131e; border: 1px solid rgba(63,192,192,.25); border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.55); overflow: hidden;
-}
-.w3-rp-h { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,.08); }
-.w3-rp-h h2 { margin: 0; font-size: 17px; color: var(--w3-fg, #dfe9f2); flex: 1; }
-.w3-rp-h .w3-range button {
-  padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,.15);
-  background: transparent; color: var(--w3-fg-soft, #8fa3b5); cursor: pointer; font-size: 13px;
-}
-.w3-rp-h .w3-range button.on { background: var(--w3-accent, #3fc0c0); color: #04222a; border-color: var(--w3-accent, #3fc0c0); font-weight: 650; }
-.w3-rp-x { background: none; border: none; color: var(--w3-fg-soft, #8fa3b5); font-size: 22px; cursor: pointer; line-height: 1; padding: 4px 8px; }
-.w3-rp-x:hover { color: var(--w3-fg, #dfe9f2); }
-.w3-rp-meta { padding: 10px 20px; font-size: 12.5px; color: var(--w3-fg-soft, #8fa3b5); border-bottom: 1px dashed rgba(255,255,255,.08); }
-.w3-rp-body { padding: 18px 24px 28px; overflow-y: auto; }
-.w3-rp-body .w3-ai-text { font-size: 14px; line-height: 1.9; color: var(--w3-fg, #dfe9f2); }
-.w3-rp-body .w3-ai-text h3 { margin: 22px 0 8px; font-size: 15.5px; color: var(--w3-accent, #3fc0c0); }
-.w3-rp-body .w3-ai-text h4 { margin: 18px 0 6px; font-size: 14px; color: var(--w3-fg, #dfe9f2); }
-.w3-rp-body .w3-ai-text a { color: var(--w3-accent, #3fc0c0); text-decoration: none; border-bottom: 1px dashed rgba(63,192,192,.4); }
-.w3-rp-body .w3-ai-text a:hover { border-bottom-style: solid; }
-
+/* 帽子 logo 图标（沙盘 HUD 品牌位） */
+.w3-brand .brand-logo{width:40px;height:40px;border-radius:9px;object-fit:cover;display:block;flex:none;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.w3-brand{align-items:center}

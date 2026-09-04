@@ -129,7 +129,7 @@ def main():
 
     # 1. 6 类核心路由（不含案例目录：单独处理）
     for name, _, fn, qs in ROUTES:
-        html = fn(cur, qs) if name in ("落地", "现场") else fn(cur)
+        html = fn(cur, qs) if name in ("落地", "现场", "方法") else fn(cur)
         html = _to_relative_paths(html)
         out = OUT / f"{name}.html"
         out.write_text(html, encoding="utf-8")

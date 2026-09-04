@@ -156,11 +156,20 @@ function showFallback(reason) {
     list.innerHTML = windowEvents()
       .map(
         (e) =>
-          `<li><span class="w3-fb-day">${esc(monthDay(e.day))}</span><span class="w3-fb-lane" data-lane="${esc(e.lane)}">${esc(laneLabel(e.lane))}</span><a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${esc(e.title)}</a><small>${esc(e.host)}</small></li>`
+          `<li><span class="w3-fb-day">${esc(monthDay(e.day))}</span><span class="w3-fb-lane" data-lane="${esc(e.lane)}">${esc(laneLabel(e.lane))}</span><a href="${esc(e.href || "/动态/" + e.id)}">${esc(e.title)}</a><small>${esc(e.host)}</small></li>`
       )
       .join("");
   }
 }
+
+function syncRooms() {
+  const q = "?窗=" + state.range;
+  document.querySelectorAll("[data-room]").forEach((a) => {
+    const key = a.getAttribute("data-room");
+    if (key && key !== "平面" && key !== "方法") a.setAttribute("href", "/" + key + q);
+  });
+}
+syncRooms();
 
 if (!webglOK()) {
   showFallback("此设备不支持 WebGL，已切换到平面列表。数据与 3D 沙盘完全一致。");
@@ -328,7 +337,7 @@ function boot() {
     bg.setAttribute("position", new THREE.BufferAttribute(new Float32Array([-half, 0.04, BASE_Z, half, 0.04, BASE_Z]), 3));
     board.add(track(new THREE.LineSegments(bg, new THREE.LineDashedMaterial({ color: ACCENT, dashSize: 1.6, gapSize: 1.1, transparent: true, opacity: 0.45 }))));
     board.children[board.children.length - 1].computeLineDistances();
-    const bl = groundText(`<b>机构</b><small>Organisations</small>`, "w3-g-lane", { width: LANE_TEXT_W / GT });
+    const bl = groundText(`<b>大本营</b><small>Organisations</small>`, "w3-g-lane", { width: LANE_TEXT_W / GT });
     bl.element.style.setProperty("--c", ACCENT);
     bl.position.set(-half - 2 - LANE_TEXT_W / 2, 0.06, BASE_Z);
     board.add(bl);
@@ -763,12 +772,17 @@ function boot() {
   }
 
   function syncCopy(n) {
-    if (ledeEl) ledeEl.textContent = `过去 ${state.range} 天 · ${n} 条有日期的官方原文上轴 · 塔、落点、信号灯、轨道都可点开核对`;
+    if (ledeEl) {
+      const custom = (DATA.ledes || {})[String(state.range)];
+      ledeEl.textContent =
+        custom || `过去 ${state.range} 天 · ${n} 条有日期的官方原文上轴 · 塔、落点、信号灯、轨道都可点开核对`;
+    }
     document.querySelectorAll("[data-range]").forEach((b) => {
       const on = Number(b.dataset.range) === state.range;
       b.classList.toggle("on", on);
       b.setAttribute("aria-pressed", on ? "true" : "false");
     });
+    syncRooms();
   }
 
   /* ---------- selection / hover / chain ---------- */
@@ -1040,112 +1054,26 @@ function boot() {
 <h3>为什么值得关注</h3>${fieldCopy(e.why, "当前未提取判断依据。")}
 <h3>${primaryField ? "对 FDE 从业者的影响" : "对企业落地的影响"}</h3>${primaryField ? prac : ent}
 <h3>${primaryField ? "对企业落地的影响" : "对 FDE 从业者的影响"}</h3>${primaryField ? ent : prac}
-<h3>原始来源</h3>
-<p class="w3-p-url"><a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${esc(e.url)}</a></p>
-${e.lane === "deploy" && e.href && e.href.indexOf("/案例/") === 0 ? `<p><a class="w3-p-more" href="${esc(e.href)}">在部署证据库中查看这条案例 →</a></p>` : ""}
+${e.orig_href ? `<p class="w3-p-url"><a href="${esc(e.orig_href)}">核对原文（本地备份）· ${esc(e.host || "")}</a></p>` : `<p class="w3-p-url">本地未收录该页备份</p>`}
+${e.case_href && e.lane === "deploy" ? `<p><a class="w3-p-more" href="${esc(e.case_href)}">在部署证据库中查看这条案例 →</a></p>` : ""}
 ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${rel.map((id) => `<li><button type="button" data-pick="${id}"><span>${esc(monthDay(byId[id].day))}</span>${esc(byId[id].title_short || byId[id].title)}</button></li>`).join("")}</ul>` : ""}`;
   }
 
-
-
-  /* ---------- 解读报告（7/30/90 天，服务端预生成+缓存） ---------- */
-  const reportCache = new Map(); // range → {text, events, total}
-  function ensureFloatBtn() {
-    if (document.getElementById("w3-report-fab")) return;
-    const fab = document.createElement("button");
-    fab.id = "w3-report-fab";
-    fab.type = "button";
-    fab.setAttribute("aria-label", "解读报告");
-    fab.innerHTML = '<span class="w3-fab-ico">✦</span><span class="w3-fab-t">解读报告</span>';
-    document.body.appendChild(fab);
-    fab.addEventListener("click", () => openReport(state.range));
-  }
-  function reportLink(t) {
-    // 把 markdown 链接 [标题](url) 映射回沙盘事件（按 url 匹配），点击选中对应形体
-    const raw = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) => {
-      const ev = (DATA.events || []).find(
-        (x) => x.url === url || (x.detail && x.detail["原文链接"] === url)
-      );
-      return ev
-        ? `<a href="javascript:void(0)" data-report-pick="${ev.id}">${esc(label)}</a>`
-        : `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
-    });
-    return raw;
-  }
-  function mdLite(t) {
-    let h = esc(t);
-    h = reportLink(h);
-    h = h.replace(/^### (.+)$/gm, "<h4>$1</h4>");
-    h = h.replace(/^## (.+)$/gm, "<h3>$1</h3>");
-    h = h.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
-    h = h.replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>");
-    return `<p>${h}</p>`;
-  }
-  async function openReport(range) {
-    let overlay = document.getElementById("w3-report-overlay");
-    if (!overlay) {
-      overlay = document.createElement("div");
-      overlay.id = "w3-report-overlay";
-      overlay.innerHTML = `
-<div class="w3-rp" role="dialog" aria-label="解读报告">
-  <header class="w3-rp-h">
-    <h2>解读报告</h2>
-    <div class="w3-range" role="radiogroup" aria-label="报告时间窗">
-      <button type="button" data-rp-range="7">7 天</button>
-      <button type="button" data-rp-range="30" class="on">30 天</button>
-      <button type="button" data-rp-range="90">90 天</button>
-    </div>
-    <button type="button" class="w3-rp-x" data-rp-close aria-label="关闭">×</button>
-  </header>
-  <div class="w3-rp-body" id="w3-rp-body"></div>
-</div>`;
-      document.body.appendChild(overlay);
-      overlay.addEventListener("click", (ev) => {
-        const pick = ev.target.closest("[data-report-pick]");
-        if (pick) {
-          closeReport();
-          select(Number(pick.dataset.reportPick), { fly: true });
-          return;
-        }
-        const rbtn = ev.target.closest("[data-rp-range]");
-        if (rbtn) {
-          openReport(Number(rbtn.dataset.rpRange));
-          return;
-        }
-        if (ev.target.closest("[data-rp-close]") || ev.target === overlay) closeReport();
-      });
-    }
-    overlay.hidden = false;
-    overlay.querySelectorAll("[data-rp-range]").forEach((b) => {
-      const on = Number(b.dataset.rpRange) === Number(range);
-      b.classList.toggle("on", on);
-      b.setAttribute("aria-pressed", on ? "true" : "false");
-    });
-    const bodyEl = overlay.querySelector("#w3-rp-body");
-    if (reportCache.has(range)) {
-      const rep = reportCache.get(range);
-      bodyEl.innerHTML = `<div class="w3-ai-text">${mdLite(rep.text)}</div>`;
-      return;
-    }
-    bodyEl.innerHTML = '<p class="w3-ai-loading">✦ 生成中…</p>';
-    try {
-      const res = await fetch(`/api/ai-report?range=${range}`, { method: range ? "GET" : "GET" });
-      const rep = await res.json();
-      if (!res.ok || !rep.enabled) throw new Error(rep.error || ("HTTP " + res.status));
-      reportCache.set(range, rep);
-      bodyEl.innerHTML = `<div class="w3-ai-text">${mdLite(rep.text)}</div>`;
-    } catch (err) {
-      bodyEl.innerHTML = `<p class="w3-ai-err">报告不可用：${esc(String(err.message || err))}</p>`;
-    }
-  }
-  function closeReport() {
-    const overlay = document.getElementById("w3-report-overlay");
-    if (overlay) overlay.hidden = true;
-  }
-  ensureFloatBtn();
-
   function panelOverview(activeChain) {
     const list = windowEvents();
+    const bases = new Map();
+    list.forEach((e) => {
+      const k = baseKeyOf(e);
+      if (!k) return;
+      if (!bases.has(k)) bases.set(k, { name: baseNameOf(e), n: 0, lane: e.lane, ids: [] });
+      bases.get(k).n += 1;
+      bases.get(k).ids.push(e.id);
+    });
+    const baseRows = [...bases.values()]
+      .sort((a, b) => b.n - a.n || (a.name < b.name ? -1 : 1))
+      .slice(0, 8)
+      .map((b) => `<li><button type="button" data-pick="${b.ids[b.ids.length - 1]}" style="--c:${(LANE_COLOR[b.lane] || LANE_COLOR.company).hi}"><i></i>${esc(b.name)}<span>${b.n}</span></button></li>`)
+      .join("");
     const changes = (DATA.changes || [])
       .map(
         (ch, i) => `<li class="${activeChain === i ? "on" : ""}"><button type="button" data-chain="${i}"><b>${esc(ch.num)}</b><span><strong>${esc(ch.title)}</strong><small>${esc(ch.body)}</small></span></button>${
@@ -1161,23 +1089,16 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
 <p class="w3-p-note">点一条，沙盘只留下它的证据链。</p>
 <ol class="w3-changes">${changes}</ol>
 <h2 class="w3-p-h">窗口内实体</h2>
-<ul class="w3-bases">${(() => {
-    const bases = new Map();
-    list.forEach((e) => {
-      const k = baseKeyOf(e);
-      if (!k) return;
-      if (!bases.has(k)) bases.set(k, { name: baseNameOf(e), n: 0, lane: e.lane, ids: [] });
-      bases.get(k).n += 1;
-      bases.get(k).ids.push(e.id);
-    });
-    const rows = [...bases.values()]
-      .sort((a, b) => b.n - a.n || (a.name < b.name ? -1 : 1))
-      .slice(0, 8)
-      .map((b) => `<li><button type="button" data-pick="${b.ids[b.ids.length - 1]}" style="--c:${(LANE_COLOR[b.lane] || LANE_COLOR.company).hi}"><i></i>${esc(b.name)}<span>${b.n}</span></button></li>`)
-      .join("");
-    return rows || "<li class='w3-empty'>窗口内没有上轴事件。</li>";
-  })()}</ul>
-<p class="w3-p-note">灰色底行是「机构」，细线指向它在这段时间里推到前线的每一份原文。</p>`;
+<ul class="w3-bases">${baseRows || "<li class='w3-empty'>窗口内没有上轴事件。</li>"}</ul>
+<p class="w3-p-note">灰色底行是「大本营」，细线指向它在这段时间里推到前线的每一份原文。</p>
+<h2 class="w3-p-h">读这窗</h2>
+<ul class="w3-p-exits">
+  <li><a href="/落地?窗=${state.range}" data-room="落地">落地 <small>负责人 · 公司与部署</small></a></li>
+  <li><a href="/现场?窗=${state.range}" data-room="现场">现场 <small>从业者 · 评论与方法</small></a></li>
+  <li><a href="/案例?窗=${state.range}" data-room="案例">部署证据 <small>有日期的落点，再翻库存</small></a></li>
+  <li><a href="/方法" data-room="方法">方法 <small>学习资料，不上沙盘</small></a></li>
+  <li><a href="/平面" data-room="平面">平面时间轴 <small>同一份数据的 2D</small></a></li>
+</ul>`;
   }
 
   function renderPanel(activeChain) {

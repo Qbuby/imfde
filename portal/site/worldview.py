@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""OpenFDE world-dynamics homepage.
+"""OpenFDE world-dynamics 2D timeline (/平面).
 
-The page is deliberately a dated snapshot rather than a news reader. The
-timeline is built from the local database and ``source_dates.json``; an item
-is eligible only when its source has an explicit publication or modification
-date. Sitemap touch dates and collection dates never become event dates.
+Secondary view of the same snapshot as the 3D homepage. The page is a dated
+snapshot rather than a news reader. An item is eligible only when its source
+has an explicit publication or modification date. Sitemap touch dates and
+collection dates never become event dates.
 """
 from __future__ import annotations
 
@@ -98,6 +98,22 @@ OFFICIAL_HOSTS = {
     "blogs.microsoft.com",
 }
 ALLOWED_DOC_TYPES = frozenset({"case_study", "methodology", "opinion", "job_posting"})
+LEARNING_HOSTS = frozenset({
+    "fdeinterviews.com",
+    "fourthage.substack.com",
+    "fde.academy",
+})
+
+
+def is_learning_event(event) -> bool:
+    """Guides and handbooks. They are not industry-pace signals."""
+    host = (event.get("host") or "").lower().replace("www.", "")
+    url = (event.get("url") or event.get("source_url") or "").lower()
+    if host in LEARNING_HOSTS:
+        return True
+    return any(h in url for h in LEARNING_HOSTS)
+
+
 BAD_VENDOR_KEYS = frozenset({"unknown", "anonymous", "unknown-anonymous", "other"})
 
 # These are translations of titles that exist in the local source list. They
@@ -397,6 +413,13 @@ def explanation_for(row, lane: str) -> dict:
     }
 
 
+def _orig_href(kind, ident, url):
+    fn = getattr(S, "orig_href", None)
+    if callable(fn):
+        return fn(kind, ident, url)
+    return ""
+
+
 def event_from_row(row, lane: str, day: str, kind: str) -> dict:
     explanation = explanation_for(row, lane)
     entity_key, entity_name = entity_for(row, lane)
@@ -413,6 +436,7 @@ def event_from_row(row, lane: str, day: str, kind: str) -> dict:
         "sub": summary_for(row, lane),
         "host": source_host(row),
         "url": row.get("source_url") or "",
+        "orig_href": _orig_href("案例", row["id"], row.get("source_url") or ""),
         "doc_type": row.get("doc_type") or "",
         "doc_label": DOC_LABEL.get(row.get("doc_type") or "", row.get("doc_type") or ""),
         "vendor": clean_text(S.vendor_name(row)) if vendor_slug and vendor_slug not in BAD_VENDOR_KEYS else "",
@@ -426,6 +450,7 @@ def event_from_row(row, lane: str, day: str, kind: str) -> dict:
         "product": clean_text(row.get("product")),
         "quote": S.trunc(clean_text(row.get("quote")), 200),
         "href": "/案例/%s" % row["id"],
+        "case_href": "/案例/%s" % row["id"],
         "happened": explanation["happened"],
         "why": explanation["why"],
         "enterprise": explanation["enterprise"],
@@ -486,11 +511,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
         jobs = [event for event in win if event.get("info_kind") == "job_posting"]
         company = pick_chain(win, lambda event: event["lane"] == "company", 4)
         deploy = pick_chain(win, lambda event: event["lane"] == "deploy", 5)
-        people = pick_chain(
-            win,
-            lambda event: event["lane"] == "people" or event.get("info_kind") in ("methodology", "engineering_blog", "podcast_episode"),
-            4,
-        )
+        people = pick_chain(win, lambda event: event["lane"] == "people", 4)
         method_jobs = pick_chain(win, lambda event: event.get("info_kind") == "job_posting", 4)
         if days == 7:
             out["7"] = [
@@ -544,9 +565,9 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 },
                 {
                     "num": "3",
-                    "title": "方法从定义角色写到职业周期",
-                    "body": "FDEInterviews 补了退出路径、谈 offer 和九种现场套路。招聘板新岗仍是弱信号，不与这些方法文混成同一条变化。",
-                    "lanes": ["people", "method"],
+                    "title": "公开讨论的是编制稀缺和能力建设",
+                    "body": "Washington Technology 写人才供给；Cohere 写建能力、不制造依赖。学习手册不在沙盘上轴，岗位仍只作弱信号。",
+                    "lanes": ["people"],
                     "chain": people,
                     "n": len(people),
                     "skip_jobs": True,
@@ -574,8 +595,8 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 {
                     "num": "3",
                     "title": "从业者口径从定义角色转向现场脏活",
-                    "body": "Natalie、Kevin Bai、Colin Jarvis 和 Cohere 把驻场里不写进 JD 的部分讲出来。方法轨上的岗位仍只作弱信号。",
-                    "lanes": ["people", "method"],
+                    "body": "Natalie、Kevin Bai、Colin Jarvis 和 Cohere 把驻场里不写进 JD 的部分讲出来。学习手册不在沙盘上轴；岗位仍只作弱信号。",
+                    "lanes": ["people"],
                     "chain": people,
                     "n": len(people),
                     "skip_jobs": True,
@@ -689,6 +710,10 @@ def ui_signal(lane: str, stored: str, host: str, evidence: str, customer_named: 
     return "low"
 
 
+def has_han(text: str | None) -> bool:
+    return bool(re.search(r"[\u4e00-\u9fff]", text or ""))
+
+
 def event_from_world(row, case: dict | None, entity_name: str) -> dict:
     lane = row["lane"]
     host = row["host"] or S.host_of(row["url"] or "")
@@ -707,6 +732,7 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
     outcome = ""
     product = ""
     quote = ""
+    problem = ""
     case_id = row["source_case_id"]
     if case:
         customer = clean_text(case.get("customer"))
@@ -716,6 +742,7 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
         outcome = S.trunc(clean_text(case.get("measured_outcome")), 180)
         product = clean_text(case.get("product"))
         quote = S.trunc(clean_text(case.get("quote")), 200)
+        problem = S.trunc(clean_text(case.get("business_problem")), 180)
         vendor_slug = (S.vendor_slug(case) or "").strip().lower()
         if vendor_slug in BAD_VENDOR_KEYS:
             vendor_slug = ""
@@ -727,7 +754,25 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
     name = entity_name or vendor or HOST_VOICE.get(host) or host
     if info_kind == "job_posting" and not mapped:
         title = job_axis_label(name, row["title"] or title)
-    href = ("/案例/%s" % case_id) if case_id else (row["url"] or "")
+        if "招聘" not in title:
+            title = title.replace("：", "：招聘 ", 1) if "：" in title else ("招聘 " + title if title else title)
+    if not has_han(title):
+        if customer:
+            title = customer
+        elif problem:
+            title = S.trunc(problem, 42)
+    if not has_han(title) and info_kind == "dated_case_study" and title:
+        title = f"{title} · 交付故事"
+    if not has_han(title) and info_kind == "job_posting" and title and "招聘" not in title:
+        title = "招聘 " + title
+    happened = clean_text(row["happened_zh"]) or ""
+    if not has_han(happened):
+        happened = problem or title
+    enterprise = clean_text(row["enterprise_zh"] or "")
+    if not has_han(enterprise):
+        enterprise = outcome
+    href = "/动态/%s" % int(row["id"])
+    case_href = ("/案例/%s" % case_id) if case_id else ""
     doc_type = "case_study" if info_kind == "dated_case_study" else info_kind
     signal = ui_signal(lane, row["signal"] or "", host, evidence, customer_named)
     return {
@@ -739,9 +784,10 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
         "title": title,
         "title_short": short_title_for(title, row["url"] or "", lane, customer),
         "kicker": name,
-        "sub": S.trunc(clean_text(row["happened_zh"]), 96) or "原文摘要当前未提取。",
+        "sub": S.trunc(happened, 96) or "原文摘要当前未提取。",
         "host": host,
         "url": row["url"] or "",
+        "orig_href": _orig_href("动态", int(row["id"]), row["url"] or ""),
         "doc_type": doc_type,
         "doc_label": KIND_LABEL.get(info_kind) or DOC_LABEL.get(doc_type) or info_kind,
         "vendor": vendor,
@@ -755,96 +801,23 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
         "product": product,
         "quote": quote,
         "href": href,
-        "happened": clean_text(row["happened_zh"]) or title,
+        "case_href": case_href,
+        "happened": happened or title,
         "why": clean_text(row["why_zh"]) or "",
-        "enterprise": clean_text(row["enterprise_zh"] or "") or outcome,
+        "enterprise": enterprise or outcome,
         "practitioner": clean_text(row["practitioner_zh"] or ""),
         "entity_key": entity_key,
         "entity_slug": slug,
         "entity_name": name,
         "info_kind": info_kind,
-        "detail": _source_detail(case, row),
     }
-
-
-# 详情面板 / AI 解读用的原文结构化字段（只保留非空项，避免无用噪声）
-_SOURCE_FIELDS = (
-    ("industry", "行业"),
-    ("customer_handoff", "交接给了谁"),
-    ("business_problem", "业务问题"),
-    ("existing_workflow", "原工作流"),
-    ("pain_point", "卡点"),
-    ("discovery_method", "怎么发现的"),
-    ("why_ai", "为什么用 AI"),
-    ("hero_use_case", "核心场景"),
-    ("data_sources", "数据来源"),
-    ("integration", "集成方式"),
-    ("ai_model", "模型"),
-    ("agent_workflow", "智能体工作流"),
-    ("human_in_the_loop", "人在回路"),
-    ("evaluation", "评测"),
-    ("deployment", "部署形态"),
-    ("time_to_production", "上线周期"),
-    ("business_kpi", "业务指标"),
-    ("measured_outcome", "实测结果"),
-    ("failure_iteration", "失败与迭代"),
-    ("productization", "产品化"),
-    ("evidence_note", "证据说明"),
-    ("fde_role", "原文自称 FDE"),
-    ("product", "产品"),
-    ("tier", "证据等级"),
-)
-
-
-def _source_detail(case: dict | None, row) -> dict:
-    """把 cases 表与 world_events 行的原文信息整理成结构化字段。"""
-    out: dict = {}
-    if case:
-        for key, label in _SOURCE_FIELDS:
-            val = clean_text(case.get(key))
-            if val:
-                out[label] = val
-        out["原文标题"] = clean_text(case.get("source_title"))
-        out["原文链接"] = clean_text(case.get("source_url"))
-        if case.get("customer_named"):
-            out["客户"] = clean_text(case.get("customer")) or "（未具名）"
-        else:
-            out["客户"] = "（原文未具名）"
-        if case.get("vendor_names"):
-            out["厂商"] = clean_text(case.get("vendor_names"))
-    src = clean_text(row["title"] if hasattr(row, "keys") and "title" in row.keys() else None)
-    if src and src != out.get("原文标题"):
-        out["原文原标题"] = src
-    day = row["day"] if hasattr(row, "keys") and "day" in row.keys() else None
-    if day:
-        out["上轴日期"] = "%s（%s）" % (
-            day,
-            {"published": "原文发布日", "modified": "页上修改日"}.get(row["date_kind"] or "", row["date_kind"] or ""),
-        )
-    if row["url"] if hasattr(row, "keys") and "url" in row.keys() else None:
-        out["条目链接"] = row["url"]
-    return {k: v for k, v in out.items() if v}
-
-
-# 屏蔽来源：这些 host 的事件不上世界动态轴 / 3D 沙盘（平台运营决策 2026-09-03）。
-# 只影响展示出口（worldview.load_world），原始库与 ingest 不动。
-EXCLUDED_HOSTS = (
-    "fdeinterviews.com",
-    "databricks.com",
-    "job-boards.greenhouse.io/databricks",
-)
-
-
-def _host_excluded(host: str | None) -> bool:
-    h = (host or "").lower()
-    return any(h == x or h.endswith("." + x) or x in h for x in EXCLUDED_HOSTS)
 
 
 def load_world_from_events(cur) -> list[dict]:
     start = window_start(90)
     rows = list(
         cur.execute(
-            """SELECT e.*, ent.name AS entity_name
+            """SELECT e.*, COALESCE(NULLIF(ent.name_zh, ''), ent.name) AS entity_name
                FROM world_events e
                LEFT JOIN world_entities ent ON ent.slug=e.entity_slug
                WHERE e.day IS NOT NULL
@@ -854,7 +827,6 @@ def load_world_from_events(cur) -> list[dict]:
             (start, S.SNAPSHOT),
         )
     )
-    rows = [r for r in rows if not _host_excluded(r["host"])]
     case_ids = [r["source_case_id"] for r in rows if r["source_case_id"]]
     cases = {}
     if case_ids:
@@ -922,6 +894,7 @@ def load_world(cur) -> dict:
     else:
         events, eligible = load_world_from_cases(cur)
 
+    events = [event for event in events if not is_learning_event(event)]
     events.sort(key=lambda event: (event.get("day") or "9999-99-99", LANE_ORDER.get(event["lane"], 9), event["id"]))
     collapsed = []
     seen = set()
@@ -1008,14 +981,12 @@ METHOD_NEEDLES = (
 )
 
 
-def reading_item(row, *, internal=False) -> str:
+def reading_item(row, *, internal=True) -> str:
     title = mapped_title(row)
-    if internal:
-        url = S.href("/案例/%s" % row.get("id"))
-        ext = ""
-    else:
-        url = row.get("source_url") or S.href("/案例/%s" % row.get("id"))
-        ext = ' target="_blank" rel="noopener noreferrer"' if row.get("source_url") else ""
+    url = S.href("/案例/%s" % row.get("id")) if row.get("id") else (row.get("source_url") or "")
+    ext = "" if (url or "").startswith("/") else (
+        ' target="_blank" rel="noopener noreferrer"' if url else ""
+    )
     sub = " · ".join(
         x for x in (row.get("day"), DOC_LABEL.get(row.get("doc_type") or ""), row.get("host")) if x
     )
@@ -1076,7 +1047,7 @@ def reading_layer(cur, counts) -> str:
     <header class="world-more-head">
       <p class="world-more-k">观察站 · 开源学习社区</p>
       <h2 id="world-more-title">这份库对落地意味着什么</h2>
-      <p>上面的时间轴只收录有发布日的公开变化。下面是同一份 {S.esc(S.SNAPSHOT)} 快照上的判断，不是第二套新闻，也不是咨询方案。</p>
+      <p>平面时间轴只收录有发布日的公开变化。下面是同一份 {S.esc(S.SNAPSHOT)} 快照上的判断，不是第二套新闻，也不是咨询方案。</p>
     </header>
     <div class="world-read">
       <article class="wm-col">
@@ -1125,7 +1096,7 @@ def render_world(cur) -> str:
       <section class="world-intro" aria-labelledby="world-title">
         <div class="world-intro-copy">
           <p class="world-tagline">{S.esc(S.SITE_TAGLINE)}</p>
-          <h1 id="world-title">FDE 世界正在发生什么</h1>
+          <h1 id="world-title">平面时间轴 · 行业发展有多快</h1>
           <p class="lede" data-world-lede>过去 30 天，Blend360 给出扩编目标，Cohere 写建能力、不制造依赖；轴上同时出现有发布日的客户故事和官方新岗——岗位仍是弱信号。</p>
         </div>
         <div class="world-intro-tools">
@@ -1134,7 +1105,7 @@ def render_world(cur) -> str:
             <button type="button" data-range="30" class="on" aria-pressed="true">30 天</button>
             <button type="button" data-range="90" aria-pressed="false">90 天</button>
           </div>
-          <p class="world-note"><span class="signal-dot" aria-hidden="true"></span>本期快照 {S.esc(S.SNAPSHOT)} <span class="info-dot" title="无明确日期的材料不进入时间轴">i</span><a class="world-3d-link" href="/world3d" title="同一份数据的立体沙盘">立体视图 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a><a class="world-read-link" href="#world-rooms">其他内容</a></p>
+          <p class="world-note"><span class="signal-dot" aria-hidden="true"></span>本期快照 {S.esc(S.SNAPSHOT)} <span class="info-dot" title="无明确日期的材料不进入时间轴">i</span><a class="world-3d-link" href="/" title="回立体沙盘首页">回沙盘 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a><a class="world-read-link" href="#world-rooms">其他内容</a></p>
         </div>
       </section>
 
@@ -1179,13 +1150,13 @@ def render_world(cur) -> str:
   </div>
 
   <nav class="world-rooms" id="world-rooms" aria-label="站内其他内容">
-    <p class="world-rooms-k">沙盘到此为止。落地、现场、案例、方法从这里进：</p>
+    <p class="world-rooms-k">平面时间轴到此为止。回沙盘首页，或按窗口读落地 / 现场 / 案例 / 方法：</p>
     <div class="world-rooms-list">
-      <a href="/落地"><b>落地</b><span>给负责人：先定范围，再翻样板</span></a>
-      <a href="/现场"><b>现场</b><span>给从业者：有发布日的评论和方法</span></a>
-      <a href="/案例"><b>部署证据</b><span>559 条案例目录，一单两种读法</span></a>
-      <a href="/方法"><b>方法</b><span>FDE 是什么、怎么干活、怎么招</span></a>
-      <a href="/world3d"><b>立体沙盘</b><span>同一份动态数据的 3D 视图，不是另一套库</span></a>
+      <a href="/"><b>立体沙盘</b><span>首页。行业发展有多快，随时在变</span></a>
+      <a href="/落地"><b>落地</b><span>这窗公司动作和真实部署，给负责人</span></a>
+      <a href="/现场"><b>现场</b><span>这窗人物与观点；岗位是弱信号</span></a>
+      <a href="/案例"><b>部署证据</b><span>先看有日期的落点，再翻库存目录</span></a>
+      <a href="/方法"><b>方法</b><span>学习资料，不是动态</span></a>
     </div>
   </nav>
 
@@ -1229,12 +1200,12 @@ def render_world(cur) -> str:
 <script src="/static/world.js" defer></script>
 """
     return S.shell(
-        "世界动态 · %s" % WORLD_BRAND,
-        "世界动态",
+        "平面时间轴 · %s" % WORLD_BRAND,
+        "",
         inner,
         github,
         extra_head='<link rel="stylesheet" href="/static/world.css"/>',
         body_class="world-page",
         skip_wrap=True,
-        page_path="/",
+        page_path="/平面",
     )

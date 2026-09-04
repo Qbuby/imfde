@@ -2,14 +2,15 @@
 """imfde.ai portal. Stdlib only. GET queries fde.db. Bind 0.0.0.0:8850.
 
 Routes:
-  /           world-dynamics homepage (portal/fde.png)
+  /           3D world sandbox (industry pace)
   /世界动态   alias of /
-  /world      alias of /
-  /落地       boss reading of the same snapshot
-  /现场       practitioner reading + dated commentary
-  /案例       item-by-item catalog (nav label: 部署证据)
-  /案例/<id>  case detail (落地读法 / 现场读法)
-  /方法       methodology, opinion, L1 loop
+  /world3d    alias of /
+  /平面       2D timeline of the same snapshot
+  /落地       boss reading of this window's change
+  /现场       practitioner reading of the moving role
+  /案例       dated deploys + catalog
+  /案例/<id>  case detail
+  /方法       methods that are shifting
 """
 from __future__ import annotations
 
@@ -29,7 +30,7 @@ PORT = 8850
 SITE_DOMAIN = "imfde.ai"
 SITE_ORIGIN = "https://imfde.ai"
 SITE_NAME = "imfde.ai"
-SITE_TAGLINE = "The Open Framework for Forward-Deployed AI"
+SITE_TAGLINE = "行业发展有多快 · Forward-Deployed AI"
 # imfde 交易门户首页。内容服务作为「学习成长」子区并入 imfde 平台，
 # 提供返回平台门户的导航。部署时设为门户实际地址；留空则不显示。
 IM_FDE_PORTAL_URL = (__import__("os").environ.get("IMFDE_PORTAL_URL") or "").strip()
@@ -46,6 +47,12 @@ SNAPSHOT_PATH = AI_DIR / "FDE门户.html"
 DATES_PATH = PORTAL_DIR / "source_dates.json"
 
 REPORT_PATH = PORTAL_DIR / "world_ingest_report.json"
+RAW_DIR = PORTAL_DIR / "world_raw"
+CORPUS_RAW = AI_DIR / "fde_corpus" / "raw"
+FDEI_DIR = AI_DIR / "fdeinterviews.com"
+_ORIG_EXTS = (".html", ".json", ".pdf", ".txt")
+_ORIG_FILE_CACHE: dict[str, Path | None] = {}
+_SOURCES_LOCAL_MAP: dict[str, str] | None = None
 
 
 def _snapshot_day() -> str:
@@ -80,6 +87,43 @@ KPI_LABELS = {
     "projected": "预测",
     "system_scale_not_kpi": "系统规模",
 }
+EVIDENCE_ZH = {"high": "证据高", "medium": "证据中", "low": "证据低"}
+DOC_TYPE_ZH = {
+    "case_study": "交付故事",
+    "methodology": "方法",
+    "opinion": "观点",
+    "job_posting": "岗位",
+    "discussion": "讨论",
+    "index": "索引",
+    "unusable": "不可用",
+}
+CASE_ZH_FIELDS = (
+    "source_title",
+    "industry",
+    "business_problem",
+    "existing_workflow",
+    "pain_point",
+    "discovery_method",
+    "why_ai",
+    "hero_use_case",
+    "data_sources",
+    "integration",
+    "ai_model",
+    "agent_workflow",
+    "human_in_the_loop",
+    "evaluation",
+    "deployment",
+    "time_to_production",
+    "business_kpi",
+    "measured_outcome",
+    "failure_iteration",
+    "productization",
+    "customer_handoff",
+    "fde_role",
+    "quote",
+    "evidence_note",
+    "product",
+)
 DIRTY_FLAGS = frozenset({"leftover_template", "hub_kpi_not_on_page"})
 INDUSTRY_BUCKETS = (
     ("医疗健康", ("health", "hospital", "clinic", "medical", "pharma", "pediatric", "physician", "wellness", "life science", "医疗", "医院", "药房", "儿科", "临床", "医生")),
@@ -107,6 +151,18 @@ NAV = (
     ("部署证据", "/案例"),
     ("方法", "/方法"),
 )
+LANE_ZH = {
+    "company": "公司动作",
+    "deploy": "真实部署",
+    "people": "人物与观点",
+    "method": "方法与岗位",
+}
+LANE_SHORT = {
+    "company": "公司",
+    "deploy": "部署",
+    "people": "人物",
+    "method": "方法",
+}
 CASE_FIELDS = """
     x.id, x.source_url, x.source_title, x.tier, x.doc_type,
     x.industry, x.business_problem, x.existing_workflow, x.pain_point,
@@ -116,14 +172,15 @@ CASE_FIELDS = """
     x.measured_outcome, x.failure_iteration, x.productization,
     x.customer_handoff, x.fde_role, x.quote, x.evidence_quality,
     x.evidence_note, x.product, x.kpi_scope, x.raw_company_text,
-    cu.name AS customer, cu.named AS customer_named,
+    cu.name AS customer_en, cu.named AS customer_named,
+    COALESCE(NULLIF(cz.name_zh, ''), cu.name) AS customer,
     (
       SELECT GROUP_CONCAT(c.slug, ',')
       FROM case_companies cc JOIN companies c ON c.slug=cc.company_slug
       WHERE cc.case_id=x.id AND cc.role='vendor'
     ) AS vendor_slugs,
     (
-      SELECT GROUP_CONCAT(c.name, ',')
+      SELECT GROUP_CONCAT(COALESCE(NULLIF(c.name_zh, ''), c.name), ',')
       FROM case_companies cc JOIN companies c ON c.slug=cc.company_slug
       WHERE cc.case_id=x.id AND cc.role='vendor'
     ) AS vendor_names
@@ -178,6 +235,196 @@ def connect():
         con = sqlite3.connect(str(DB_PATH))
     con.row_factory = sqlite3.Row
     return con
+
+
+def url_slug(url: str) -> str:
+    parts = urlparse(url)
+    host = (parts.netloc or "").replace("www.", "")
+    path = (parts.path or "").strip("/").replace("/", "__") or "home"
+    path = re.sub(r"[^A-Za-z0-9_.%-]", "_", path)[:110]
+    return "%s__%s" % (host, path)
+
+
+def _norm_orig_url(url: str) -> str:
+    u = (url or "").strip()
+    u = re.sub(r"^https?://www\.", "https://", u, flags=re.I)
+    u = re.sub(r"^http://", "https://", u, flags=re.I)
+    return u.rstrip("/")
+
+
+def _orig_safe(path: Path) -> Path | None:
+    try:
+        resolved = path.resolve()
+    except OSError:
+        return None
+    if not resolved.is_file():
+        return None
+    for root in (RAW_DIR, CORPUS_RAW, FDEI_DIR, AI_DIR):
+        try:
+            rr = root.resolve()
+        except OSError:
+            continue
+        if resolved == rr or rr in resolved.parents:
+            return resolved
+    return None
+
+
+def _sources_local_map() -> dict[str, str]:
+    global _SOURCES_LOCAL_MAP
+    if _SOURCES_LOCAL_MAP is not None:
+        return _SOURCES_LOCAL_MAP
+    mapping: dict[str, str] = {}
+    try:
+        with connect() as con:
+            for r in con.execute(
+                "SELECT url, local_raw FROM sources "
+                "WHERE local_raw IS NOT NULL AND TRIM(local_raw) != ''"
+            ):
+                rel = str(r["local_raw"] or "").strip()
+                if not rel:
+                    continue
+                nu = _norm_orig_url(r["url"] or "")
+                if nu and nu not in mapping:
+                    mapping[nu] = rel
+    except sqlite3.Error:
+        mapping = {}
+    _SOURCES_LOCAL_MAP = mapping
+    return mapping
+
+
+def find_orig_file(url: str) -> Path | None:
+    key = _norm_orig_url(url)
+    if not key:
+        return None
+    if key in _ORIG_FILE_CACHE:
+        return _ORIG_FILE_CACHE[key]
+    found = _lookup_orig_file(url, key)
+    _ORIG_FILE_CACHE[key] = found
+    return found
+
+
+def _lookup_orig_file(url: str, key: str) -> Path | None:
+    rel = _sources_local_map().get(key)
+    if rel:
+        p = Path(rel)
+        if not p.is_absolute():
+            p = AI_DIR / rel
+        ok = _orig_safe(p)
+        if ok:
+            return ok
+    slug = url_slug(url)
+    for folder in (RAW_DIR, CORPUS_RAW):
+        for ext in _ORIG_EXTS:
+            ok = _orig_safe(folder / (slug + ext))
+            if ok:
+                return ok
+    # slug.* not slug* — comun must not match comun-bank
+    rank = {".html": 0, ".htm": 1, ".json": 2, ".pdf": 3, ".txt": 4}
+    for folder in (RAW_DIR, CORPUS_RAW):
+        if not folder.is_dir():
+            continue
+        try:
+            hits = [p for p in folder.glob(slug + ".*") if p.is_file()]
+        except OSError:
+            hits = []
+        hits.sort(key=lambda p: (rank.get(p.suffix.lower(), 9), p.name))
+        for hit in hits:
+            ok = _orig_safe(hit)
+            if ok:
+                return ok
+    if host_of(url) == "fdeinterviews.com":
+        rel_path = (urlparse(url).path or "").strip("/")
+        cands = []
+        if rel_path:
+            cands.append(FDEI_DIR / rel_path / "index.html")
+            cands.append(FDEI_DIR / rel_path)
+        else:
+            cands.append(FDEI_DIR / "index.html")
+        for cand in cands:
+            ok = _orig_safe(cand)
+            if ok:
+                return ok
+    return None
+
+
+def orig_href(kind, ident, url) -> str:
+    if find_orig_file(url) is None:
+        return ""
+    if kind == "动态":
+        return "/原文/动态/%s" % ident
+    if kind == "案例":
+        return "/原文/案例/%s" % ident
+    return ""
+
+
+_ORIG_BAR_STYLE = (
+    "position:sticky;top:0;z-index:2147483647;background:#111;color:#f5f5f5;"
+    "font:14px/1.4 system-ui,sans-serif;padding:8px 12px;border-bottom:1px solid #333;"
+)
+
+
+def _orig_chrome(back_href: str) -> str:
+    return (
+        f'<div id="imfde-orig-bar" style="{_ORIG_BAR_STYLE}">'
+        f'本地备份 · 核对用 · 不是源站 · '
+        f'<a href="{esc(back_href)}" style="color:#8ec8ff">返回观察</a>'
+        "</div>"
+        "<script>(function(){"
+        'document.addEventListener("click",function(ev){'
+        "var t=ev.target;if(!t||!t.closest)return;"
+        'var a=t.closest("a");if(!a)return;'
+        'var href=a.getAttribute("href")||"";'
+        "if(/^https?:/i.test(href)){ev.preventDefault();ev.stopPropagation();}"
+        "},true);"
+        "})();</script>"
+    )
+
+
+def _inject_orig_bar(html_text: str, back_href: str) -> str:
+    chrome = _orig_chrome(back_href)
+    m = re.search(r"<body[^>]*>", html_text, flags=re.I)
+    if m:
+        return html_text[: m.end()] + chrome + html_text[m.end() :]
+    return chrome + html_text
+
+
+def _wrap_orig_pre(text: str, back_href: str) -> str:
+    return (
+        '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"/>'
+        "<title>本地备份</title></head><body>"
+        + _orig_chrome(back_href)
+        + "<pre>"
+        + esc(text)
+        + "</pre></body></html>"
+    )
+
+
+def _orig_missing_html(kind: str, ident: int) -> bytes:
+    back = "/%s/%s" % (kind, ident)
+    page = (
+        '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"/>'
+        "<title>本地未收录该页备份</title></head><body>"
+        "<p>本地未收录该页备份</p>"
+        f'<p><a href="{esc(back)}">返回观察</a></p>'
+        "</body></html>"
+    )
+    return page.encode("utf-8")
+
+
+def _orig_source_url(kind: str, ident: int) -> str:
+    try:
+        with connect() as con:
+            if kind == "动态":
+                row = con.execute(
+                    "SELECT url FROM world_events WHERE id=?", (ident,)
+                ).fetchone()
+                return (row["url"] if row else "") or ""
+            row = con.execute(
+                "SELECT source_url FROM cases WHERE id=?", (ident,)
+            ).fetchone()
+            return (row["source_url"] if row else "") or ""
+    except sqlite3.Error:
+        return ""
 
 
 def qs_get(qs, *keys, default=""):
@@ -287,10 +534,110 @@ def outcome_ok(row, flags_map) -> bool:
 
 def fetch_cases(cur, where="1=1", args=(), order="x.id"):
     sql = (
-        "SELECT %s FROM cases x LEFT JOIN customers cu ON cu.id=x.customer_id WHERE %s ORDER BY %s"
-        % (CASE_FIELDS, where, order)
+        "SELECT %s FROM cases x "
+        "LEFT JOIN customers cu ON cu.id=x.customer_id "
+        "LEFT JOIN customer_zh cz ON cz.customer_id=cu.id "
+        "WHERE %s ORDER BY %s" % (CASE_FIELDS, where, order)
     )
-    return annotate([dict(r) for r in cur.execute(sql, args)])
+    return attach_case_zh(cur, annotate([dict(r) for r in cur.execute(sql, args)]))
+
+
+def evidence_label(value: str | None) -> str:
+    key = (value or "").strip()
+    return EVIDENCE_ZH.get(key, key)
+
+
+def doc_type_label(value: str | None) -> str:
+    key = (value or "").strip()
+    return DOC_TYPE_ZH.get(key, key)
+
+
+def attach_case_zh(cur, rows: list) -> list:
+    """Overlay Chinese display fields. English stays on the row as _en."""
+    ids = [r.get("id") for r in rows if r.get("id") is not None]
+    if not ids:
+        return rows
+    by_id = {}
+    try:
+        q = ",".join("?" * len(ids))
+        for rec in cur.execute("SELECT * FROM case_zh WHERE case_id IN (%s)" % q, ids):
+            by_id[rec["case_id"]] = dict(rec)
+    except sqlite3.OperationalError:
+        return rows
+    for row in rows:
+        z = by_id.get(row.get("id"))
+        if not z:
+            continue
+        en = dict(row.get("_en") or {})
+        if row.get("customer_en") and row.get("customer") != row.get("customer_en"):
+            en["customer"] = row.get("customer_en")
+        for field in CASE_ZH_FIELDS:
+            zh = (z.get(field) or "").strip()
+            if not zh:
+                continue
+            src = row.get(field)
+            if nonempty(src) and src != zh:
+                en[field] = src
+            row[field] = zh
+        if en:
+            row["_en"] = en
+    return rows
+
+
+def en_archive_html(row: dict, case_id: int) -> str:
+    en = row.get("_en") or {}
+    if not en:
+        src = row.get("source_url") or ""
+        oh = orig_href("案例", case_id, src)
+        if oh:
+            return (
+                f'<p class="hint"><a class="orig" href="{esc(oh)}">核对原文网页（英文存档）</a></p>'
+            )
+        return ""
+    labels = {
+        "customer": "客户",
+        "source_title": "原标题",
+        "industry": "行业",
+        "business_problem": "经营问题",
+        "existing_workflow": "旧流程",
+        "pain_point": "卡点",
+        "discovery_method": "发现方法",
+        "why_ai": "为何用 AI",
+        "hero_use_case": "主场景",
+        "data_sources": "数据",
+        "integration": "集成",
+        "ai_model": "模型",
+        "agent_workflow": "工作流",
+        "human_in_the_loop": "人在环内",
+        "evaluation": "评测",
+        "deployment": "部署",
+        "time_to_production": "上线周期",
+        "business_kpi": "业务指标",
+        "measured_outcome": "结果",
+        "failure_iteration": "失败迭代",
+        "productization": "产品化",
+        "customer_handoff": "交接",
+        "fde_role": "编制",
+        "quote": "引语",
+        "evidence_note": "证据备注",
+        "product": "产品",
+    }
+    body = "".join(dl_row(labels.get(k, k), v) for k, v in en.items() if nonempty(v))
+    src = row.get("source_url") or ""
+    oh = orig_href("案例", case_id, src)
+    orig = (
+        f'<p class="hint"><a class="orig" href="{esc(oh)}">核对原文网页</a></p>'
+        if oh
+        else ""
+    )
+    return f"""
+<details class="fold en-archive">
+  <summary>英文摘录（库内原文，不是网页）</summary>
+  <p class="note">页面正文是译文。数字、日期、产品名按原文保留。完整网页备份走「核对原文」。</p>
+  <dl class="anatomy">{body}</dl>
+  {orig}
+</details>
+"""
 
 
 def pick_peers(rows, n=3):
@@ -507,7 +854,7 @@ def load_vendors(cur):
         dict(r)
         for r in cur.execute(
             """
-        SELECT cc.company_slug AS slug, c.name, COUNT(*) AS n
+        SELECT cc.company_slug AS slug, COALESCE(NULLIF(c.name_zh,''), c.name) AS name, COUNT(*) AS n
         FROM case_companies cc
         JOIN cases x ON x.id=cc.case_id
         JOIN companies c ON c.slug=cc.company_slug
@@ -528,7 +875,7 @@ def load_case(cur, case_id: int):
         dict(r)
         for r in cur.execute(
             """
-            SELECT cc.role, cc.company_slug, c.name
+            SELECT cc.role, cc.company_slug, COALESCE(NULLIF(c.name_zh,''), c.name) AS name
             FROM case_companies cc JOIN companies c ON c.slug=cc.company_slug
             WHERE cc.case_id=? ORDER BY cc.role DESC, c.name
             """,
@@ -549,9 +896,11 @@ def load_case(cur, case_id: int):
             dict(r)
             for r in cur.execute(
                 """
-                SELECT q.id, q.title, q.kind, q.difficulty, q.canonical_url
+                SELECT q.id, q.title, q.kind, q.difficulty,
+                       COALESCE(l.stem, q.title) AS title_zh
                 FROM questions q
                 JOIN question_companies qc ON qc.question_id=q.id
+                LEFT JOIN question_locales l ON l.question_id=q.id AND l.locale='zh'
                 WHERE qc.company_slug=? AND q.kind='open'
                 ORDER BY q.id LIMIT 3
                 """,
@@ -613,7 +962,7 @@ def case_card(row, flags_map, *, lead=False) -> str:
         + (f'<p class="blurb">{esc(blurb)}</p>' if blurb else "")
         + outcome
         + '<div class="meta">'
-        + (f'<span class="tg">{esc(evid)}</span>' if evid else "")
+        + (f'<span class="tg">{esc(evidence_label(evid))}</span>' if evid else "")
         + kpi_span(row.get("kpi_scope"))
         + (f'<span class="host">{esc(host)}</span>' if host else "")
         + fde_flag(row)
@@ -637,11 +986,21 @@ def frame_item(row) -> str:
 
 
 def row_link(row, extra="") -> str:
-    url = row.get("source_url") or href("/案例/%s" % row.get("id"))
+    cid = row.get("id")
+    src = row.get("source_url") or ""
+    url = href("/案例/%s" % cid) if cid else src
     title = row.get("source_title") or row.get("customer") or "条目"
-    host = row.get("host") or extra
+    try:
+        from worldview import title_from_url
+
+        mapped = title_from_url(src or url)
+        if mapped:
+            title = mapped
+    except Exception:
+        pass
+    host = row.get("host") or extra or host_of(src)
     sub = " · ".join(x for x in (row.get("doc_type"), host) if x)
-    ext = ' target="_blank" rel="noopener noreferrer"' if row.get("source_url") else ""
+    ext = "" if url.startswith("/") else (' target="_blank" rel="noopener noreferrer"' if url else "")
     return (
         f'<a class="row" href="{esc(url)}"{ext}>{esc(title)}'
         + (f'<span class="s">{esc(sub)}</span>' if sub else "")
@@ -675,7 +1034,7 @@ def abs_url(path: str = "/") -> str:
     return SITE_ORIGIN + text
 
 
-def mast(active: str, gh_url: str = "") -> str:
+def mast(active: str, gh_url: str = "", tagline: str | None = None) -> str:
     links = []
     for label, path in NAV:
         cls = "on" if active == label else ""
@@ -689,24 +1048,24 @@ def mast(active: str, gh_url: str = "") -> str:
     if IM_FDE_PORTAL_URL:
         links.append(f'<a class="back-to-portal" href="{esc(IM_FDE_PORTAL_URL)}">imfde 门户 →</a>')
     brand = brand_mark()
+    tag = tagline or SITE_TAGLINE
     return f"""<div class="mast"><div class="mast-in">
-  <a class="brand" href="/" aria-label="{esc(SITE_NAME)} — {esc(SITE_TAGLINE)}">
+  <a class="brand" href="/" aria-label="{esc(SITE_NAME)} — {esc(tag)}">
     {brand}
-    <span class="brand-tag">{esc(SITE_TAGLINE)}</span>
+    <span class="brand-tag">{esc(tag)}</span>
   </a>
   <span class="snap">数据快照 {esc(SNAPSHOT)}</span>
   <nav>{''.join(links)}</nav>
 </div></div>"""
 
 
-def footer(gh_url: str, extra="") -> str:
+def footer(gh_url: str, extra="", tagline: str | None = None) -> str:
     gh = ext_link(gh_url, "github.com/Qbuby/imfde") if gh_url else ""
     lib = ""
-    if (AI_DIR / "FDE案例库.html").is_file():
-        lib = f'<a href="/library/{quote("FDE案例库.html")}">案例证据库 HTML</a>'
+    tag = tagline or SITE_TAGLINE
     return f"""<footer class="ft">
-  <p><b>{esc(SITE_NAME)}</b> · {esc(SITE_TAGLINE)}</p>
-  <p>{esc(SITE_DOMAIN)} · 数据快照 {esc(SNAPSHOT)} · 本期收录，不是实时资讯。</p>
+  <p><b>{esc(SITE_NAME)}</b> · {esc(tag)}</p>
+  <p>{esc(SITE_DOMAIN)} · 数据快照 {esc(SNAPSHOT)} · 沙盘随 7/30/90 天窗口切换 · 本期收录，不是实时资讯。</p>
   <p>数字带口径（实测 / 目标 / 预测 / 系统规模 / hero 条）。原文未写 Forward Deployed 头衔的，会标「原文未自称 FDE」。</p>
   <p>{"开源仓库 " + gh if gh else ""}{" · " if gh and lib else ""}{lib}{(" · " + extra) if extra else ""}</p>
   <p>面试题答案不在此站展示。第三方材料仅供私有研究对照，链回原页。从业者怎么读这份库，见 <a href="/现场">现场读法</a>。</p>
@@ -726,13 +1085,17 @@ def shell(
     skip_foot=False,
     home_css=True,
     page_path="/",
+    tagline: str | None = None,
 ) -> str:
     css = '<link rel="stylesheet" href="/static/tokens.css"/>'
     if home_css:
         css += '<link rel="stylesheet" href="/static/home.css"/>'
+        css += '<link rel="stylesheet" href="/static/desk.css"/>'
+        if not body_class:
+            body_class = "desk-page"
     body_attr = f' class="{esc(body_class)}"' if body_class else ""
-    foot = "" if skip_foot else footer(gh_url, extra_foot)
-    mast_html = "" if skip_mast else mast(active, gh_url)
+    foot = "" if skip_foot else footer(gh_url, extra_foot, tagline=tagline)
+    mast_html = "" if skip_mast else mast(active, gh_url, tagline=tagline)
     skip_html = "" if skip_mast else '<a class="skip" href="#main">跳到正文</a>\n'
     if skip_wrap:
         main = inner if skip_foot else f'<div id="main">\n{inner}\n{foot}\n</div>'
@@ -745,11 +1108,11 @@ def shell(
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>{esc(title)}</title>
-<meta name="description" content="{esc(SITE_TAGLINE)}"/>
+<meta name="description" content="{esc(tagline or SITE_TAGLINE)}"/>
 <link rel="canonical" href="{esc(canon)}"/>
 <meta property="og:site_name" content="{esc(SITE_NAME)}"/>
 <meta property="og:title" content="{esc(title)}"/>
-<meta property="og:description" content="{esc(SITE_TAGLINE)}"/>
+<meta property="og:description" content="{esc(tagline or SITE_TAGLINE)}"/>
 <meta property="og:url" content="{esc(canon)}"/>
 {css}
 {extra_head}
@@ -847,6 +1210,122 @@ def catalog_door(href_val, label, note) -> str:
   <a href="{esc(href_val)}">{esc(label)}</a>
   <span>{esc(note)}</span>
 </p>"""
+
+
+def qs_window(qs) -> int:
+    n = qs_int(qs, "窗", "range", default=30)
+    return n if n in (7, 30, 90) else 30
+
+
+def load_pace(cur) -> dict:
+    from worldview import load_world
+
+    return load_world(cur)
+
+
+def win_events(events, days, lanes=None, skip_jobs=True):
+    from worldview import _win
+
+    rows = _win(events, days)
+    if lanes:
+        want = set(lanes)
+        rows = [e for e in rows if e.get("lane") in want]
+    if skip_jobs:
+        rows = [e for e in rows if e.get("info_kind") != "job_posting"]
+    rows.sort(key=lambda e: (e.get("day") or "", e.get("id") or 0), reverse=True)
+    return rows
+
+
+def lane_tally(events, days) -> dict:
+    from worldview import _win
+
+    rows = _win(events, days)
+    jobs = sum(1 for e in rows if e.get("info_kind") == "job_posting")
+    solid = [e for e in rows if e.get("info_kind") != "job_posting"]
+    by = {"company": 0, "deploy": 0, "people": 0, "method": 0}
+    for e in solid:
+        key = e.get("lane")
+        if key in by:
+            by[key] += 1
+    return {"total": len(solid), "jobs": jobs, "by_lane": by}
+
+
+def pace_strip(base, days, events, lanes=None, extra=None) -> str:
+    extra = {k: v for k, v in (extra or {}).items() if v}
+    keys = tuple(lanes) if lanes else ("company", "deploy", "people", "method")
+    cards = []
+    for d in (7, 30, 90):
+        tally = lane_tally(events, d)
+        n = sum(tally["by_lane"].get(k, 0) for k in keys)
+        bits = " · ".join(f"{LANE_SHORT[k]} {tally['by_lane'].get(k, 0)}" for k in keys)
+        if tally["jobs"] and (not lanes or "method" in keys):
+            bits += f" · 岗 {tally['jobs']}（弱）"
+        cls = "on" if d == days else ""
+        url = href(base, 窗=d, **extra)
+        cards.append(
+            f'<a class="{cls}" href="{esc(url)}"><b>{d} 天</b>'
+            f"<strong>{n}</strong><span>{esc(bits)}</span></a>"
+        )
+    return f'<nav class="pace" aria-label="时间窗口">{"".join(cards)}</nav>'
+
+
+def other_windows(base, days, extra=None) -> str:
+    extra = {k: v for k, v in (extra or {}).items() if v}
+    links = [
+        f'<a href="{esc(href(base, 窗=d, **extra))}">{d} 天</a>'
+        for d in (7, 30, 90)
+        if d != days
+    ]
+    return " · ".join(links)
+
+
+def event_card(event, lens="boss") -> str:
+    lane = event.get("lane") or ""
+    day = event.get("day") or ""
+    md = "%d-%s" % (int(day[5:7]), day[8:10]) if len(day) >= 10 else day
+    title = event.get("title") or ""
+    kicker = event.get("kicker") or event.get("entity_name") or ""
+    if lens == "field":
+        body = event.get("practitioner") or event.get("happened") or event.get("sub") or ""
+    else:
+        body = event.get("enterprise") or event.get("why") or event.get("happened") or event.get("sub") or ""
+    page = event.get("href") or (href("/动态/%s" % event["id"]) if event.get("id") else "")
+    heading = f'<a href="{esc(page)}">{esc(title)}</a>' if page else esc(title)
+    meta = f'<time datetime="{esc(day)}">{esc(md)}</time>'
+    meta += f'<span class="lane-dot {esc(lane)}"></span>{esc(LANE_ZH.get(lane, lane))}'
+    if kicker:
+        meta += f" · {esc(kicker)}"
+    body_html = f'<p class="ev-body">{esc(trunc(body, 220))}</p>' if body else ""
+    return (
+        f'<article class="ev" data-lane="{esc(lane)}">'
+        f'<p class="ev-meta">{meta}</p><h3>{heading}</h3>{body_html}</article>'
+    )
+
+
+def event_list(events, lens="boss", empty="这一窗没有可上轴的条目。") -> str:
+    if not events:
+        return f'<p class="empty">{empty}</p>'
+    return '<div class="ev-list">' + "".join(event_card(e, lens) for e in events) + "</div>"
+
+
+def change_cards(changes, lanes=None) -> str:
+    want = set(lanes) if lanes else None
+    picked = []
+    for ch in changes or []:
+        ch_lanes = set(ch.get("lanes") or [])
+        if want and ch_lanes and not (ch_lanes & want):
+            continue
+        picked.append(ch)
+    bits = []
+    for i, ch in enumerate(picked, 1):
+        bits.append(
+            claim_block(
+                str(i),
+                ch.get("title") or "",
+                f"<p>{esc(ch.get('body') or '')}</p>",
+            )
+        )
+    return "".join(bits)
 
 
 def study_pack(rows) -> dict:
@@ -1035,82 +1514,43 @@ def render_home(cur) -> str:
 
 
 def render_deploy(cur, qs) -> str:
-    industry = qs_get(qs, "行业", "industry")
-    valid = {name for name, _ in INDUSTRY_BUCKETS} | {"其他"}
-    if industry not in valid:
-        industry = ""
-    studies = filter_industry(
-        fetch_cases(cur, "x.doc_type='case_study'", (), "x.id"), industry
-    )
+    days = qs_window(qs)
+    world = load_pace(cur)
+    events = world.get("events") or []
+    lede = (world.get("ledes") or {}).get(str(days), "")
+    changes = (world.get("changes_by_range") or {}).get(str(days), [])
+    company = win_events(events, days, lanes=("company",))
+    deploy = win_events(events, days, lanes=("deploy",))
+    studies = fetch_cases(cur, "x.doc_type='case_study'", (), "x.id")
     pack = study_pack(studies)
-    featured = filter_industry(load_featured(cur), industry)
-    flags = load_flags(cur, [r["id"] for r in featured[:8]])
-    peers = pick_peers(featured, 3)
-    role_cases = (
-        [r for r in studies if has_fde_role(r)][:8]
-        if industry
-        else load_fde_role_cases(cur)
-    )
-    gh = github_url(cur)
-    slice_note = f"行业切面「{industry}」" if industry else "全库"
-    n_narr = pack["kpi"].get("narrative", 0)
-    fill = pack["fill"]
-    bucket_txt = mix_line(pack["buckets"].most_common(8), 8)
-    vendor_txt = mix_line(pack["vendors"].most_common(6), 6)
-    peer_cites = "".join(case_cite(r) for r in peers)
-    if not peer_cites:
-        peer_cites = '<p class="empty">这个切面下没有同时满足「具名 · high · 核心厂商 · 有结果」的条目。</p>'
-    role_html = "".join(case_cite(r) for r in role_cases) or '<p class="empty">这个切面下没有写编制的案例。</p>'
-    more_n = max(0, len(featured) - len(peers))
-    more = ""
-    if more_n:
-        more = (
-            f'<p class="hint">同条件还有 {more_n} 单，不在这页摊开。'
-            f'<a href="{esc(href("/案例", 厂商="核心", 证据="high", 行业=industry))}">逐条看</a></p>'
-        )
-    claims = "".join(
-        [
-            claim_block(
-                "01",
-                "先把编制从第一步拿掉",
-                f"<p>{slice_note} {pack['n']} 条交付现场，原文写了现场编制的 "
-                f"<b>{pack['n_fde']}</b> 条（{pct(pack['n_fde'], pack['n'])}）。"
-                "买产品、嵌进旧流程、厂商驻场、自建编制，在公开页上不是同一件事。"
-                "库里几乎没有「如何组建 FDE 团队」的完整样本。</p>",
-            ),
-            claim_block(
-                "02",
-                "能当样板的条件很窄，行业切面改的是这句话里的数字",
-                f"<p>核心厂商 × 具名客户 × 证据 high × 有结果：<b>{len(featured)}</b> 条。"
-                f"切面内厂商：{vendor_txt or '无'}。"
-                f"{'行业分布：' + bucket_txt if not industry else ''}</p>"
-                "<p>下面只留三单作证据，不是本页主菜。</p>",
-                peer_cites + more,
-            ),
-            claim_block(
-                "03",
-                "结果几乎都有，口径和交接才是薄的地方",
-                f"<p>有 measured_outcome 的 {pack['n_outcome']} / {pack['n']}；"
-                f"kpi_scope=实测叙述 {n_narr} 条。"
-                f"集成 {pct(fill['integration'], pack['n'])} 有写，"
-                f"上线周期 {pct(fill['time_to_production'], pack['n'])}，"
-                f"交接 {pct(fill['customer_handoff'], pack['n'])}，"
-                f"失败迭代 {pct(fill['failure_iteration'], pack['n'])}。"
-                "数字带实测 / 目标 / 预测 / 系统规模 / hero 条，点进单条才能核对。</p>",
-            ),
-        ]
+    gh = world.get("github") or github_url(cur)
+    alt = other_windows("/落地", days)
+    empty_co = f"这 {days} 天公司动作轨没有新的组织宣布。{alt} 窗里才有。"
+    empty_dp = (
+        f"这 {days} 天没有带发布日的客户故事上轴。全库 {pack['n']} 条交付现场是库存，"
+        f"不是本周新闻。{alt}"
     )
     inner = f"""
 <section class="desk-lede">
-  <p class="k">落地读法 · 数据快照 {esc(SNAPSHOT)}</p>
-  <h1>实施前先读结构，不要先翻 503 张卡</h1>
-  <p>观察站的判断层，给要落地的负责人。公开交付材料上的结构，不是咨询方案，也不是第二套新闻。</p>
-  {industry_chips("/落地", industry)}
+  <p class="k">落地 · 这 {days} 天行业在变什么 · 快照 {esc(SNAPSHOT)}</p>
+  <h1>窗口里的公司动作和真实部署</h1>
+  <p>{esc(lede)} 给要落地的负责人。沙盘同一份快照，不是咨询方案，也不是 503 条案例墙。</p>
+  {pace_strip("/落地", days, events, lanes=("company", "deploy"))}
 </section>
-<section class="brief">{claims}</section>
+<section class="brief">{change_cards(changes, lanes=("company", "deploy"))}</section>
+<section class="section" id="公司">
+  <h2>公司动作</h2>
+  <p class="note">组织自己发布的官方动作。没有新宣布就空着，不拿库存页顶上。</p>
+  {event_list(company, "boss", empty_co)}
+</section>
+<section class="section" id="部署">
+  <h2>有发布日的部署</h2>
+  <p class="note">只收 published / modified 的具名客户故事。全库 {pack['n']} 条交付现场里，原文写了编制的 {pack['n_fde']} 条（{pct(pack['n_fde'], pack['n'])}）。</p>
+  {event_list(deploy, "boss", empty_dp)}
+</section>
 <section class="section" id="问题">
   <h2>先把问题说清楚</h2>
-  <p class="note">落地页只定范围，不当结果证明。方法全文在目录里。</p>
+  <p class="note">窗口讲变化速度。库存样板在案例目录，不当本周新闻。</p>
   <ol class="scope-q">
     <li>
       <h3>买产品，还是买驻场？</h3>
@@ -1118,95 +1558,63 @@ def render_deploy(cur, qs) -> str:
     </li>
     <li>
       <h3>要不要为此建编制？</h3>
-      <p>库里几乎没有「如何组建 FDE 团队」的完整样本。原文写了现场编制的比例见上面 01。</p>
+      <p>库里几乎没有「如何组建 FDE 团队」的完整样本。岗位变化是弱信号，回沙盘方法轨看。</p>
     </li>
     <li>
       <h3>公开口径能不能当样板？</h3>
       <p>有结果的多，写清实测 / 目标 / 预测 / 交接的少。点进单条才能核对。</p>
     </li>
   </ol>
-  <p class="hint"><a href="/方法">方法目录看全文</a></p>
 </section>
-<section class="section" id="编制">
-  <h2>编制附录</h2>
-  <p class="note">岗位变化是弱信号，只在世界动态的方法轨上轴，这里不重复列表。<a href="/世界动态">看世界动态</a></p>
-  <h3 class="note" style="margin-top:0">原文写了编制的案例</h3>
-  <div class="list">{role_html}</div>
-</section>
-{catalog_door(href("/案例", 厂商="核心", 行业=industry, 证据="high"), "逐条看这个切面的样板", "卡片、筛选、分页都在案例库。产品故事（Intercom / Writer 等）也在那里，默认不当编制样本。")}
+{catalog_door(href("/案例", 窗=days, 厂商="核心", 证据="high"), "库存样板在案例目录", "卡片、筛选、分页都在那里。产品故事默认不当编制样本。")}
+<p class="hint"><a href="/">回沙盘首页</a> · <a href="/方法">方法</a></p>
 """
     return shell("落地 · %s" % SITE_NAME, "落地", inner, gh, page_path="/落地")
 
 
 def render_field(cur, qs) -> str:
-    studies = fetch_cases(cur, "x.doc_type='case_study'", (), "x.id")
-    pack = study_pack(studies)
-    dated, undated = commentary_timeline(cur)
+    days = qs_window(qs)
+    world = load_pace(cur)
+    events = world.get("events") or []
+    lede = (world.get("ledes") or {}).get(str(days), "")
+    changes = (world.get("changes_by_range") or {}).get(str(days), [])
+    people = win_events(events, days, lanes=("people",))
+    tally = lane_tally(events, days)
     discussions = load_discussions(cur)
-    gh = github_url(cur)
-    dates_meta = load_dates()
-    n_sitemap = int(dates_meta.get("n_sitemap") or 0)
-    vendor_txt = mix_line(pack["vendors"].most_common(8), 8)
-    year_txt = year_line(pack["years"])
+    pack = study_pack(fetch_cases(cur, "x.doc_type='case_study'", (), "x.id"))
+    gh = world.get("github") or github_url(cur)
     noise_html = "".join(row_link(r) for r in discussions) or '<p class="empty">没有讨论帖。</p>'
-    undated_html = "".join(row_link(r) for r in undated[:8])
-    first = dated[0] if dated else None
-    last = dated[-1] if dated else None
-    span = ""
-    if first and last:
-        span = f"{first.get('day')} → {last.get('day')}"
-    claims = "".join(
-        [
-            claim_block(
-                "01",
-                "岗位在升温的是评论层，不是客户故事层",
-                f"<p>观点 6 + 方法 17 + 讨论去重后几帖，对比 {pack['n']} 条厂商客户故事。"
-                "近态要读有发布日的评论线，不要把 503 张营销页当成「本周 FDE 动态」。</p>",
-            ),
-            claim_block(
-                "02",
-                "有原文发布日的评论，已经排得成一条线",
-                f"<p>{len(dated)} 条方法/观点回填到了发布日或修改日"
-                f"{'（' + esc(span) + '）' if span else ''}。"
-                "这是从已抓 HTML 补的历史时间线，不是新开厂商抓取。</p>",
-                timeline_html(dated),
-            ),
-            claim_block(
-                "03",
-                "库内密度被产品故事拉开",
-                f"<p>{vendor_txt}。"
-                f"产品故事五家合计 {pack['n_product']} / {pack['n']}；"
-                f"核心厂商 {pack['n_core']} / {pack['n']}。"
-                "多是营销页库存，不是驻场编制排行。</p>",
-            ),
-            claim_block(
-                "04",
-                "客户故事大多本来就没写发布日",
-                f"<p>交付现场有原文 published 的 {pack['n_published']} / {pack['n']}（{year_txt}）。"
-                f"全库任意日期标记 {dates_meta.get('n_with_any_date') or '—'} 条，其中 sitemap lastmod {n_sitemap} 条——触碰时间，不当事件日。"
-                "Sierra / Decagon / Rippling 等本地 HTML 没对上的，以后按 URL 补抓就能再涨一截，不必新开厂商。</p>",
-            ),
-        ]
-    )
+    alt = other_windows("/现场", days)
     inner = f"""
 <section class="desk-lede">
-  <p class="k">现场读法 · 数据快照 {esc(SNAPSHOT)}</p>
-  <h1>近态是时间线，不是 24 张雷达卡</h1>
-  <p>给从业者，用来避免误读这份库。不写「今日」或「刚刚」。发布日从已抓 HTML 回填；没有发布日的，不假装有。</p>
+  <p class="k">现场 · 这 {days} 天公开口径在怎么动 · 快照 {esc(SNAPSHOT)}</p>
+  <h1>近态是有发布日的评论，不是营销页墙</h1>
+  <p>{esc(lede)} 给从业者。不写「今日」或「刚刚」。{pack['n']} 条客户故事大多是库存，不当本周动态。学习手册在方法页，不上这窗。</p>
+  {pace_strip("/现场", days, events, lanes=("people",))}
 </section>
-<section class="brief" id="简报">{claims}</section>
+<section class="brief">{change_cards(changes, lanes=("people",))}</section>
+<section class="section" id="人物">
+  <h2>人物与观点</h2>
+  <p class="note">窗口内有发布日或修改日的访谈、评论、演讲。</p>
+  {event_list(people, "field", f"这 {days} 天人物轨没有新的公开评论。{alt}")}
+</section>
+<section class="section" id="岗位">
+  <h2>岗位变化（弱信号）</h2>
+  <p class="note">这 {days} 天招聘板 {tally['jobs']} 条上轴，只说明还在招现场编制，不是组织已经落地。列表在沙盘方法轨，这里不重复。</p>
+</section>
 <section class="section" id="还在吵">
   <h2>还在吵</h2>
-  <p class="note">Reddit 等讨论去重后 {len(discussions)} 帖，撑不起头条，也不进入上面的时间线。</p>
+  <p class="note">Reddit 等讨论去重后 {len(discussions)} 帖，撑不起头条，也不进入时间轴。</p>
   <div class="list">{noise_html}</div>
 </section>
-{f'<section class="section"><h2>方法/观点未标日期</h2><div class="list">{undated_html}</div></section>' if undated_html else ''}
-{catalog_door("/案例", "逐条看部署现场", "按厂商 / 行业 / 证据筛选、分页。雷达卡不再占现场桌。")}
+{catalog_door(href("/案例", 窗=days), "逐条看部署现场", "按厂商 / 行业 / 证据筛选。雷达卡不再占现场桌。")}
+<p class="hint"><a href="/">回沙盘首页</a> · <a href="/方法">方法目录</a></p>
 """
     return shell("现场 · %s" % SITE_NAME, "现场", inner, gh, page_path="/现场")
 
 
 def render_library(cur, qs) -> str:
+    days = qs_window(qs)
     industry = qs_get(qs, "行业", "industry")
     vendor = qs_get(qs, "厂商", "vendor")
     evidence = qs_get(qs, "证据", "evidence")
@@ -1216,6 +1624,9 @@ def render_library(cur, qs) -> str:
         industry = ""
     if evidence not in ("high", "medium", "low"):
         evidence = ""
+    world = load_pace(cur)
+    events = world.get("events") or []
+    deploy = win_events(events, days, lanes=("deploy",))
     vendors = load_vendors(cur)
     slugs = {v["slug"] for v in vendors}
     vendor_filter = CORE_VENDORS if vendor == "核心" else ((vendor,) if vendor in slugs else None)
@@ -1248,56 +1659,68 @@ def render_library(cur, qs) -> str:
         page = pages
     shown = rows[(page - 1) * per : page * per]
     flags = load_flags(cur, [r["id"] for r in shown])
-    gh = github_url(cur)
+    gh = world.get("github") or github_url(cur)
+    q = {"窗": days, "行业": industry, "证据": evidence}
 
     vchips = [
-        chip(href("/案例", 行业=industry, 证据=evidence), "全部厂商", on=not vendor),
-        chip(href("/案例", 厂商="核心", 行业=industry, 证据=evidence), "核心厂商", on=vendor == "核心"),
+        chip(href("/案例", **q), "全部厂商", on=not vendor),
+        chip(href("/案例", 厂商="核心", **q), "核心厂商", on=vendor == "核心"),
     ]
     for v in vendors[:12]:
         vchips.append(
             chip(
-                href("/案例", 厂商=v["slug"], 行业=industry, 证据=evidence),
+                href("/案例", 厂商=v["slug"], **q),
                 v["name"],
                 on=vendor == v["slug"],
                 n=v["n"],
             )
         )
+    evid_q = {"窗": days, "厂商": vendor, "行业": industry}
     evid_chips = [
-        chip(href("/案例", 厂商=vendor, 行业=industry), "全部证据", on=not evidence),
-        chip(href("/案例", 厂商=vendor, 行业=industry, 证据="high"), "high", on=evidence == "high"),
-        chip(href("/案例", 厂商=vendor, 行业=industry, 证据="medium"), "medium", on=evidence == "medium"),
-        chip(href("/案例", 厂商=vendor, 行业=industry, 证据="low"), "low", on=evidence == "low"),
+        chip(href("/案例", **evid_q), "全部证据", on=not evidence),
+        chip(href("/案例", 证据="high", **evid_q), "high", on=evidence == "high"),
+        chip(href("/案例", 证据="medium", **evid_q), "medium", on=evidence == "medium"),
+        chip(href("/案例", 证据="low", **evid_q), "low", on=evidence == "low"),
     ]
-    base = {"厂商": vendor, "证据": evidence}
+    base = {"窗": days, "厂商": vendor, "证据": evidence}
     ind_chips = [chip(href("/案例", **base), "全部行业", on=not industry)]
     for name, _kws in INDUSTRY_BUCKETS:
         ind_chips.append(chip(href("/案例", 行业=name, **base), name, on=industry == name))
     ind_chips.append(chip(href("/案例", 行业="其他", **base), "其他", on=industry == "其他"))
 
     grid = "".join(case_card(r, flags) for r in shown) or '<p class="empty">没有匹配的案例。</p>'
-    prev_h = href("/案例", 厂商=vendor, 行业=industry, 证据=evidence, 页=page - 1) if page > 1 else ""
-    next_h = href("/案例", 厂商=vendor, 行业=industry, 证据=evidence, 页=page + 1) if page < pages else ""
+    page_q = {"窗": days, "厂商": vendor, "行业": industry, "证据": evidence}
+    prev_h = href("/案例", 页=page - 1, **page_q) if page > 1 else ""
+    next_h = href("/案例", 页=page + 1, **page_q) if page < pages else ""
     pager = f'<div class="pager">{esc(str(page))} / {pages} 页 · 共 {total} 单'
     if prev_h:
         pager += f' · <a href="{esc(prev_h)}">上一页</a>'
     if next_h:
         pager += f' · <a href="{esc(next_h)}">下一页</a>'
     pager += "</div>"
+    alt = other_windows("/案例", days, {"厂商": vendor, "行业": industry, "证据": evidence})
 
     inner = f"""
 <section class="desk-lede">
-  <p class="k">部署证据 · 数据快照 {esc(SNAPSHOT)}</p>
-  <h1>部署证据</h1>
-  <p>共用目录。落地和现场筛过的切面，都可以回到这里看全量。点进一单后有两种读法。</p>
+  <p class="k">部署证据 · 这 {days} 天有日期的落点 · 快照 {esc(SNAPSHOT)}</p>
+  <h1>先看窗口里的部署，再翻库存目录</h1>
+  <p>上面是沙盘部署轨同一批有发布日的客户故事。下面 {total} 单是全库目录，不是本周新闻。点进一单后有两种读法。</p>
+  {pace_strip("/案例", days, events, lanes=("deploy",), extra={"厂商": vendor, "行业": industry, "证据": evidence})}
+</section>
+<section class="section" id="窗口">
+  <h2>这 {days} 天的部署</h2>
+  <p class="note">仅 published / modified。没有日期的营销页不进这一条。</p>
+  {event_list(deploy, "boss", f"这 {days} 天部署轨是空的。{alt}")}
 </section>
 <section class="section">
+  <h2>库存目录</h2>
   <div class="filters">{''.join(vchips)}</div>
   <div class="filters">{''.join(ind_chips)}</div>
   <div class="filters">{''.join(evid_chips)}</div>
   <div class="grid-3">{grid}</div>
   {pager}
 </section>
+<p class="hint"><a href="/">回沙盘首页</a> · <a href="/落地">落地</a></p>
 """
     return shell("部署证据 · %s" % SITE_NAME, "部署证据", inner, gh, page_path="/案例")
 
@@ -1320,6 +1743,16 @@ def render_case(cur, case_id: int, qs) -> str:
     title = row.get("customer") or row.get("source_title") or "案例"
     k = " · ".join(x for x in (vendor_name(row), row.get("bucket"), row.get("product")) if x)
     src = row.get("source_url") or ""
+    oh = orig_href("案例", case_id, src)
+    if oh:
+        src_html = (
+            f'<a class="orig" href="{esc(oh)}">'
+            f"核对原文 · {esc(host_of(src) or src)}</a>"
+        )
+    elif src:
+        src_html = "本地未收录该页备份"
+    else:
+        src_html = "无来源 URL"
     on_d = " on" if view == "落地" else ""
     on_f = " on" if view == "现场" else ""
     flags_html = ""
@@ -1332,15 +1765,11 @@ def render_case(cur, case_id: int, qs) -> str:
     if row.get("related_questions"):
         items = []
         for q in row["related_questions"]:
-            url = q.get("canonical_url") or ""
-            label = q.get("title") or q.get("id")
-            if url:
-                items.append(
-                    f'<a class="row" href="{esc(url)}" target="_blank" rel="noopener noreferrer">'
-                    f"{esc(label)}<span class='s'>开放题 · 答案不在此站展示</span></a>"
-                )
-            else:
-                items.append(f'<div class="row">{esc(label)}<span class="s">开放题</span></div>')
+            label = q.get("title_zh") or q.get("stem_zh") or q.get("title") or q.get("id")
+            items.append(
+                f'<div class="row">{esc(label)}'
+                f'<span class="s">开放题 · 答案不在此站展示</span></div>'
+            )
         related = (
             '<section class="section"><h2>相关开放题</h2>'
             '<p class="note">附录。面试准备用，不是落地依据。</p>'
@@ -1354,13 +1783,13 @@ def render_case(cur, case_id: int, qs) -> str:
   <p class="k">{esc(k)}</p>
   <h1>{esc(title)}</h1>
   <p class="source-line">
-    {ext_link(src, src or "无来源 URL")}
-    · {esc(row.get("doc_type") or "")}
+    {src_html}
+    · {esc(doc_type_label(row.get("doc_type")))}
     · 收录于 {esc(SNAPSHOT)}
   </p>
   <div class="meta" style="display:flex;gap:8px;flex-wrap:wrap">
     {kpi_span(row.get("kpi_scope"))}
-    <span class="tg">{esc(row.get("evidence_quality") or "")}</span>
+    <span class="tg">{esc(evidence_label(row.get("evidence_quality")))}</span>
     {fde_flag(row)}
     <a href="{esc(href("/案例/"+str(case_id), 读法="落地"))}">落地读法</a>
     <a href="{esc(href("/案例/"+str(case_id), 读法="现场"))}">现场读法</a>
@@ -1402,82 +1831,111 @@ def render_case(cur, case_id: int, qs) -> str:
   <p class="note">{esc(row.get("evidence_note") or "无证据备注。")}</p>
   {flags_html or '<p class="hint">没有 clean_flags。</p>'}
 </section>
+{en_archive_html(row, case_id)}
 {related}
-<p class="hint"><a href="/落地">回落地</a> · <a href="/现场">回现场</a> · <a href="/案例">案例目录</a></p>
+<p class="hint"><a href="/">回沙盘</a> · <a href="/落地">回落地</a> · <a href="/现场">回现场</a> · <a href="/案例">案例目录</a></p>
 """
     return shell("%s · %s" % (title, SITE_NAME), "部署证据", inner, gh, page_path="/案例/%s" % case_id)
 
 
-def render_methods(cur) -> str:
-    topics = load_topics(cur)
-    rows = annotate(
-        dedupe_by_url(
-            [
-                dict(r)
-                for r in cur.execute(
-                    """
-            SELECT id, source_url, source_title, business_problem, doc_type
-            FROM cases
-            WHERE doc_type IN ('methodology','opinion')
-            ORDER BY CASE doc_type WHEN 'opinion' THEN 0 ELSE 1 END, id
-            """
-                )
-            ]
-        )
-    )
-    craft = [r for r in rows if is_craft_host(r.get("source_url") or "")]
-    other = [r for r in rows if r not in craft]
-    gh = github_url(cur)
-    l1 = [t for t in topics if t.get("level") == "L1"]
-    l2 = [t for t in topics if t.get("level") == "L2"]
+def load_world_event(cur, event_id: int):
+    from worldview import event_from_world
 
-    def topic_chip(t):
-        zh = (t.get("name_zh") or "").strip()
-        for prefix in ("L1 ", "L2 "):
-            if zh.startswith(prefix):
-                zh = zh[len(prefix):]
-        return f'<span class="chip"><b>{esc(zh or t.get("slug"))}</b><span class="n">{esc(t.get("slug") or "")}</span></span>'
+    row = cur.execute(
+        """SELECT e.*, COALESCE(NULLIF(ent.name_zh, ''), ent.name) AS entity_name
+           FROM world_events e
+           LEFT JOIN world_entities ent ON ent.slug=e.entity_slug
+           WHERE e.id=?""",
+        (event_id,),
+    ).fetchone()
+    if not row:
+        return None
+    case = None
+    cid = row["source_case_id"]
+    if cid:
+        found = fetch_cases(cur, "x.id=?", (int(cid),), "x.id")
+        case = found[0] if found else None
+    event = event_from_world(row, case, row["entity_name"] or "")
+    if event:
+        event["orig_href"] = orig_href("动态", event["id"], event.get("url") or "")
+    return event
+
+
+def render_event(cur, event_id: int) -> str:
+    event = load_world_event(cur, event_id)
+    gh = github_url(cur)
+    if not event:
+        inner = '<section class="desk-lede"><h1>没有这条动态</h1><p><a href="/">回沙盘</a></p></section>'
+        return shell("未找到 · %s" % SITE_NAME, "世界动态", inner, gh, page_path="/动态")
+    lane = event.get("lane") or ""
+    day = event.get("day") or ""
+    src = event.get("url") or ""
+    case_href = event.get("case_href") or ""
+    job = event.get("info_kind") == "job_posting"
+    bits = []
+    if src:
+        oh = event.get("orig_href") or orig_href("动态", event_id, src)
+        if oh:
+            bits.append(
+                f'<a class="orig" href="{esc(oh)}">'
+                f"核对原文 · {esc(event.get('host') or host_of(src))}</a>"
+            )
+        else:
+            bits.append("本地未收录该页备份")
+    if case_href:
+        bits.append(f'<a href="{esc(case_href)}">在部署证据里看这条</a>')
+    extra = (" · ".join(bits)) if bits else ""
+    job_note = (
+        '<p class="note">岗位是弱信号：说明还在招现场编制，不是组织已经落地。</p>'
+        if job
+        else ""
+    )
+
+    def block(title, text, empty):
+        body = text or empty
+        cls = " empty" if not text else ""
+        return f'<section class="section"><h2>{esc(title)}</h2><p class="ev-read{cls}">{esc(body)}</p></section>'
 
     inner = f"""
 <section class="desk-lede">
-  <p class="k">方法 · 数据快照 {esc(SNAPSHOT)}</p>
-  <h1>方法</h1>
-  <p>FDE 怎么工作、业界怎么谈编制。这是薄目录，不是课程首页。岗位变化看世界动态方法轨。</p>
+  <p class="k">{esc(LANE_ZH.get(lane, lane))} · {esc(day)} · 快照 {esc(SNAPSHOT)}</p>
+  <h1>{esc(event.get("title") or "")}</h1>
+  <p>{esc(event.get("kicker") or event.get("entity_name") or "")} · {esc(event.get("doc_label") or "")}</p>
+  {job_note}
 </section>
-<section class="section">
-  <h2>观点与方法</h2>
-  <div class="list">{''.join(row_link(r) for r in other)}</div>
-</section>
-<section class="section">
-  <h2>手艺页</h2>
-  <p class="note">FDEInterviews / FDE Pod 等讲解页。</p>
-  <div class="list">{''.join(row_link(r) for r in craft)}</div>
-</section>
-<section class="section">
-  <h2>L1 循环</h2>
-  <div class="filters">{''.join(topic_chip(t) for t in l1)}</div>
-  <h2 style="margin-top:18px">L2</h2>
-  <div class="filters">{''.join(topic_chip(t) for t in l2)}</div>
-</section>
-<section class="section">
-  <h2>岗位变化</h2>
-  <p class="note">招聘是弱信号，只在世界动态的方法轨上轴，这里不重复列表。<a href="/世界动态">看世界动态</a></p>
-</section>
+{block("发生了什么", event.get("happened"), "当前未提取正文摘要。")}
+{block("为什么值得关注", event.get("why"), "当前未提取判断依据。")}
+{block("对企业落地的影响", event.get("enterprise"), "原文未写可核对的企业影响。")}
+{block("对从业者的影响", event.get("practitioner"), "原文未写可核对的从业者影响。")}
+<p class="hint">{extra}</p>
+<p class="hint"><a href="/">回沙盘</a> · <a href="/落地">落地</a> · <a href="/现场">现场</a> · <a href="/方法">方法</a></p>
 """
-    return shell("方法 · %s" % SITE_NAME, "方法", inner, gh, page_path="/方法")
+    return shell(
+        "%s · %s" % (event.get("title") or "动态", SITE_NAME),
+        "世界动态",
+        inner,
+        gh,
+        page_path="/动态/%s" % event_id,
+    )
+
+
+def render_methods(cur, qs) -> str:
+    from methods import render_home
+
+    return render_home(cur)
 
 
 def render_path(path: str, qs) -> str:
     with connect() as con:
         cur = con.cursor()
-        if path in ("/", "/index.html", "/世界动态", "/world"):
-            from worldview import render_world
-
-            return render_world(cur)
-        if path == "/world3d":
+        if path in ("/", "/index.html", "/世界动态", "/world3d", "/沙盘", "/立体世界"):
             from world3d import render_world3d
 
             return render_world3d(cur)
+        if path in ("/平面", "/时间轴"):
+            from worldview import render_world
+
+            return render_world(cur)
         if path == "/落地":
             return render_deploy(cur, qs)
         if path == "/现场":
@@ -1485,10 +1943,18 @@ def render_path(path: str, qs) -> str:
         if path == "/案例":
             return render_library(cur, qs)
         if path == "/方法":
-            return render_methods(cur)
+            return render_methods(cur, qs)
+        m = re.fullmatch(r"/方法/([a-z0-9-]+)", path)
+        if m:
+            from methods import render_node
+
+            return render_node(cur, m.group(1))
         m = re.fullmatch(r"/案例/(\d+)", path)
         if m:
             return render_case(cur, int(m.group(1)), qs)
+        m = re.fullmatch(r"/动态/(\d+)", path)
+        if m:
+            return render_event(cur, int(m.group(1)))
     return ""
 
 
@@ -1500,8 +1966,9 @@ def normalize_path(path: str) -> str:
         "/method": "/方法",
         "/methods": "/方法",
         "/world": "/世界动态",
-        "/立体世界": "/world3d",
-        "/沙盘": "/world3d",
+        "/立体世界": "/",
+        "/沙盘": "/",
+        "/时间轴": "/平面",
     }
     if path in aliases:
         return aliases[path]
@@ -1521,26 +1988,11 @@ def write_snapshot(dest: Path | None = None) -> Path:
             f"<style>\n{tokens_css}\n</style>",
             1,
         )
-    css = CSS_PATH.read_text(encoding="utf-8") if CSS_PATH.is_file() else ""
-    page = page.replace(
-        '<link rel="stylesheet" href="/static/home.css"/>',
-        f"<style>\n{css}\n</style>",
-        1,
-    )
-    world_css_path = STATIC_DIR / "world.css"
-    if world_css_path.is_file():
-        wcss = world_css_path.read_text(encoding="utf-8")
+    w3_css = STATIC_DIR / "world3d.css"
+    if w3_css.is_file():
         page = page.replace(
-            '<link rel="stylesheet" href="/static/world.css"/>',
-            f"<style>\n{wcss}\n</style>",
-            1,
-        )
-    world_js_path = STATIC_DIR / "world.js"
-    if world_js_path.is_file():
-        wjs = world_js_path.read_text(encoding="utf-8")
-        page = page.replace(
-            '<script src="/static/world.js" defer></script>',
-            f"<script>\n{wjs}\n</script>",
+            '<link rel="stylesheet" href="/static/world3d.css"/>',
+            f"<style>\n{w3_css.read_text(encoding='utf-8')}\n</style>",
             1,
         )
     path = dest or SNAPSHOT_PATH
@@ -1578,6 +2030,25 @@ class Handler(BaseHTTPRequestHandler):
             extra["Cache-Control"] = "no-store"
         self._send(200, path.read_bytes(), ctype, extra)
 
+    def _send_orig(self, kind: str, ident: int):
+        extra = {"Cache-Control": "no-store"}
+        url = _orig_source_url(kind, ident)
+        path = find_orig_file(url) if url else None
+        if path is None:
+            self._send(404, _orig_missing_html(kind, ident), "text/html; charset=utf-8", extra)
+            return
+        back = "/%s/%s" % (kind, ident)
+        suffix = path.suffix.lower()
+        if suffix == ".pdf":
+            self._send(200, path.read_bytes(), "application/pdf", extra)
+            return
+        text = path.read_bytes().decode("utf-8", errors="replace")
+        if suffix in {".html", ".htm"}:
+            page = _inject_orig_bar(text, back)
+        else:
+            page = _wrap_orig_pre(text, back)
+        self._send(200, page.encode("utf-8"), "text/html; charset=utf-8", extra)
+
     def do_GET(self):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
@@ -1609,6 +2080,17 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(403, b"forbidden", "text/plain; charset=utf-8")
                 return
             self._send_file(target)
+            return
+        m = re.fullmatch(r"/原文/(动态|案例)/(\d+)", path)
+        if m:
+            try:
+                self._send_orig(m.group(1), int(m.group(2)))
+            except Exception:
+                self._send(
+                    500,
+                    ("查询失败\n" + traceback.format_exc()).encode("utf-8"),
+                    "text/plain; charset=utf-8",
+                )
             return
         if path == "/api/world.json":
             try:

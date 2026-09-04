@@ -21,21 +21,19 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .wrap{max-width:1180px;margin:0 auto;padding:0 22px 80px}
 .mast{
   position:sticky;top:0;z-index:30;
-  background:rgba(251,250,248,.96);
-  backdrop-filter:blur(8px);
+  background:#fff;
   border-bottom:1px solid var(--line);
 }
 .mast-in{
-  max-width:1240px;margin:0 auto;padding:10px 22px;
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  max-width:none;margin:0;min-height:52px;padding:0 26px;
+  display:flex;align-items:center;gap:18px;
 }
 .brand{
-  display:flex;flex-direction:row;align-items:center;gap:10px;line-height:1.1;
-  font-family:var(--font-serif);
-  font-weight:650;letter-spacing:-.02em;color:var(--fg);text-decoration:none;font-size:17px;
+  display:flex;flex-direction:column;gap:1px;line-height:1;
+  font-family:var(--font-sans);
+  font-weight:700;letter-spacing:-.04em;color:var(--fg);text-decoration:none;font-size:22px;
 }
 .brand-mark{display:block;white-space:nowrap}
-.brand-mark .brand-logo{width:32px;height:32px;border-radius:8px;object-fit:cover;display:block;flex:none}
 .brand-im{color:var(--fg)}
 .brand-fde{color:var(--acc)}
 .brand-tld{color:var(--mut);font-weight:600}
@@ -49,13 +47,14 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .brand:hover{text-decoration:none;color:var(--acc)}
 .brand:hover .brand-tag{color:var(--acc)}
 .snap{color:var(--mut);font-size:13px;font-variant-numeric:tabular-nums}
-.mast nav{margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-.mast nav a{color:var(--mut);font-size:13px}
+.mast nav{margin-left:auto;display:flex;gap:28px;flex-wrap:wrap;align-items:center}
+.mast nav a{color:var(--fg);font-size:14px;font-weight:550;line-height:52px}
 .mast nav a:hover,.mast nav a.on{color:var(--acc);text-decoration:none}
-.mast nav a.on{font-weight:650}
-.mast nav a.gh{color:var(--fg)}
-.mast nav a.back-to-portal{color:var(--acc);font-weight:650}
-.mast nav a.back-to-portal:hover{color:var(--acc);text-decoration:none}
+.mast nav a.on{font-weight:650;position:relative}
+.mast nav a.on::after{
+  content:"";position:absolute;right:0;bottom:0;left:0;height:2px;background:var(--acc);
+}
+.mast nav a.gh{color:var(--fg);font-weight:500}
 
 .hero{padding:36px 0 8px}
 .hero .k{
@@ -175,7 +174,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   background:var(--card);border:1px solid var(--line);color:var(--fg);text-decoration:none;
 }
 .chip:hover{border-color:var(--acc);color:var(--acc);text-decoration:none}
-.chip.on{background:var(--fg);border-color:var(--fg);color:#fbfaf8}
+.chip.on{background:var(--fg);border-color:var(--fg);color:#fff}
 .chip .n{color:var(--mut);font-size:11px;margin-left:6px;font-variant-numeric:tabular-nums}
 .chip.on .n{color:rgba(255,255,255,.8)}
 
@@ -216,7 +215,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 }
 .row{
   display:block;padding:10px 0;
-  border-bottom:1px solid #f0eeea;font-size:14px;line-height:1.45;
+  border-bottom:1px solid var(--line-soft);font-size:14px;line-height:1.45;
   color:var(--fg);
 }
 .row:hover{color:var(--acc);text-decoration:none}
@@ -258,7 +257,7 @@ details.fold .grid-3{margin-top:12px}
   font-size:14.5px;margin:0;
 }
 .anatomy dt{color:var(--mut);font-size:12px;letter-spacing:.04em;text-transform:uppercase;padding-top:6px}
-.anatomy dd{margin:0;padding:6px 0;border-bottom:1px solid #f0eeea;color:var(--ink-soft)}
+.anatomy dd{margin:0;padding:6px 0;border-bottom:1px solid var(--line-soft);color:var(--ink-soft)}
 .anatomy dd.empty{color:#b0aea6}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px}
 .col{
@@ -290,7 +289,9 @@ footer.ft p{margin:6px 0}
 }
 @media (max-width:860px){
   .doors,.split,.pair,.grid-3,.grid-2{grid-template-columns:1fr}
-  .mast nav{margin-left:0}
+  .mast-in{flex-wrap:wrap;height:auto;padding:8px 16px}
+  .mast nav{margin-left:0;gap:14px}
+  .mast nav a{line-height:1.2;padding:6px 0}
   .brand-tag{max-width:16em}
   .hero h1{font-size:28px}
   .anatomy{grid-template-columns:1fr}
@@ -305,6 +306,6 @@ footer.ft p{margin:6px 0}
   .skip,.filters{display:none}
 }
 
-/* 帽子 logo 图标（brand_mark 内） */
-.brand-mark{display:inline-flex;align-items:center;gap:8px}
+/* 帽子 logo 图标（brand_mark：独立图，无文字字样） */
 .brand-mark .brand-logo{width:32px;height:32px;border-radius:8px;object-fit:cover;display:block;flex:none}
+.brand-mark{display:inline-flex;align-items:center}

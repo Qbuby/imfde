@@ -57,18 +57,18 @@
   --coral-400: #ff765b;
   --white: #f7fafb;
 
-  /* Semantic — 主题切换只改这里 */
-  --bg:           var(--paper-50);
+  /* Semantic — 与首页沙盘同一套：白底、海军墨、青绿强调 */
+  --bg:           #ffffff;
   --surface:      #ffffff;
-  --surface-2:    var(--paper-100);
-  --fg:           var(--ink-700);
-  --fg-soft:      var(--ink-600);
-  --mut:          var(--ink-500);
-  --line:         oklch(89% 0.010 80);
-  --line-soft:    oklch(93% 0.008 80);
-  --acc:          var(--teal-600);
-  --acc-ink:      var(--teal-700);
-  --acc-soft:     var(--teal-100);
+  --surface-2:    #f6f8fa;
+  --fg:           #091a3a;
+  --fg-soft:      #324665;
+  --mut:          #60708b;
+  --line:         #d8dfe7;
+  --line-soft:    #e9edf2;
+  --acc:          #087d70;
+  --acc-ink:      #056256;
+  --acc-soft:     #e7f4f1;
   --warn:         var(--warn-700);
   --ok:           var(--ok-700);
 
@@ -111,19 +111,7 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:        oklch(16% 0.010 80);
-    --surface:   oklch(20% 0.010 80);
-    --surface-2: oklch(24% 0.010 80);
-    --fg:        oklch(94% 0.008 80);
-    --fg-soft:   oklch(80% 0.008 80);
-    --mut:       oklch(62% 0.008 80);
-    --line:      oklch(28% 0.010 80);
-    --line-soft: oklch(25% 0.010 80);
-    --acc-soft:  oklch(30% 0.06 195);
-  }
-}
+/* 阅读页不跟系统暗色走。首页沙盘是白底，立体沙盘是单独的深色页。 */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

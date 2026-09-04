@@ -463,18 +463,18 @@
     var relatedInWindow = relatedIds.filter(function (id) { return inWindow(byId[id]); });
     var relatedShow = relatedInWindow.length ? relatedInWindow : relatedIds;
     var relatedPick = relatedShow[0] || 0;
-    var caseHref = event.lane === "deploy" && event.href && event.href.indexOf("/案例/") === 0;
+    var caseHref = event.lane === "deploy" && (event.case_href || (event.href && event.href.indexOf("/案例/") === 0 ? event.href : ""));
     function heading(ico, title) {
       return '<h3 data-ico="' + ico + '">' + esc(title) + "</h3>";
     }
     return (
       '<div class="panel-top"><p class="panel-k">' + esc(monthDay(event.day)) + " · " + esc(laneLabel(event.lane)) +
       '</p><button type="button" class="panel-x" data-close aria-label="关闭详情"><img src="/static/icons/x.svg" alt="" aria-hidden="true"/></button></div>' +
-      '<h2>' + esc(event.title) + ' <a class="panel-external" href="' + esc(event.url) + '" target="_blank" rel="noopener noreferrer" aria-label="打开原始来源"><img src="/static/icons/external-link.svg" alt="" aria-hidden="true"/></a></h2>' +
+      '<h2>' + esc(event.title) + '</h2>' +
       '<dl class="panel-facts">' +
-      '<div><dt>来源</dt><dd><a class="src-pill" data-lane="' + esc(event.lane) + '" href="' + esc(event.url) + '" target="_blank" rel="noopener noreferrer">' +
+      '<div><dt>来源</dt><dd><span class="src-pill" data-lane="' + esc(event.lane) + '">' +
       '<img class="src-pill-logo" src="' + esc(chainLogo(event)) + '" alt="" aria-hidden="true"/>' + esc(sourceName(event)) +
-      '<img class="src-pill-ext" src="/static/icons/external-link.svg" alt="" aria-hidden="true"/></a>' +
+      '</span>' +
       (sourceName(event) !== event.host && event.host ? '<span class="src-host">' + esc(event.host) + '</span>' : '') + '</dd></div>' +
       '<div><dt>原始发布日期</dt><dd>' + esc(event.date_kind === "published" ? event.day : "待补") + "</dd></div>" +
       '<div><dt>收录日期</dt><dd>' + esc(DATA.snapshot) + "</dd></div>" +
@@ -483,13 +483,14 @@
       heading("why", "为什么值得关注") + fieldCopy(event.why, "当前未提取判断依据。") +
       heading(state.lens === "field" ? "person" : "org", primaryTitle) + primaryBody +
       heading(state.lens === "field" ? "org" : "person", secondaryTitle) + secondaryBody +
-      heading("src", "原始来源") +
-      '<a class="src-line" href="' + esc(event.url) + '" target="_blank" rel="noopener noreferrer">' +
-      '<b>' + esc(sourceTitle(event)) + '</b>' +
-      '<span class="src-url">' + esc(shortUrl(event.url)) + '</span>' +
-      '<img src="/static/icons/external-link.svg" alt="" aria-hidden="true"/></a>' +
+      heading("src", "核对原文") +
+      (event.orig_href
+        ? '<a class="src-line" href="' + esc(event.orig_href) + '">' +
+          '<b>核对原文（本地备份）</b>' +
+          '<span class="src-url">' + esc(event.host || "") + '</span></a>'
+        : '<p class="src-line">本地未收录该页备份</p>') +
       (caseHref
-        ? '<a class="panel-bottom-link" href="' + esc(event.href) + '">在部署证据库中查看这条案例 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a>'
+        ? '<a class="panel-bottom-link" href="' + esc(typeof caseHref === "string" ? caseHref : event.href) + '">在部署证据库中查看这条案例 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a>'
         : "") +
       (relatedPick
         ? '<button type="button" class="panel-related" data-pick="' + esc(relatedPick) + '"><img src="/static/icons/share-2.svg" alt="" aria-hidden="true"/>查看相关事件 (' + relatedShow.length + ")</button>"
