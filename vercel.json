@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/daily-refresh",
+      "schedule": "0 16 * * *"
+    }
+  ],
   "functions": {
     "api/portal.py": {
       "memory": 1024,
@@ -11,6 +17,10 @@
     "api/ai-report.py": {
       "memory": 1024,
       "maxDuration": 120
+    },
+    "api/daily-refresh.py": {
+      "memory": 512,
+      "maxDuration": 300
     }
   },
   "rewrites": [
