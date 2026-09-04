@@ -8,22 +8,55 @@
       "memory": 512,
       "maxDuration": 60
     },
-    "api/ai_report.py": {
+    "api/ai-report.py": {
       "memory": 1024,
       "maxDuration": 120
     }
   },
   "rewrites": [
-    { "source": "/", "destination": "/api/portal?__path=/world3d" },
-    { "source": "/portal/static/:file*", "destination": "/api/portal?__path=/static/:file*" },
-    { "source": "/portal/:path*", "destination": "/api/portal?__path=/:path*" },
-    { "source": "/static/:file*", "destination": "/api/portal?__path=/static/:file*" },
-    { "source": "/案例/:path*", "destination": "/api/portal?__path=/案例/:path*" },
-    { "source": "/案例", "destination": "/api/portal?__path=/案例" },
-    { "source": "/落地", "destination": "/api/portal?__path=/落地" },
-    { "source": "/现场", "destination": "/api/portal?__path=/现场" },
-    { "source": "/方法", "destination": "/api/portal?__path=/方法" },
-    { "source": "/world3d", "destination": "/api/portal?__path=/world3d" },
-    { "source": "/api/world.json", "destination": "/api/portal?__path=/api/world.json" }
+    {
+      "source": "/",
+      "destination": "/api/portal?__path=/world3d"
+    },
+    {
+      "source": "/portal/static/:file*",
+      "destination": "/api/portal?__path=/static/:file*"
+    },
+    {
+      "source": "/portal/:path*",
+      "destination": "/api/portal?__path=/:path*"
+    },
+    {
+      "source": "/static/:file*",
+      "destination": "/api/portal?__path=/static/:file*"
+    },
+    {
+      "source": "/案例/:path*",
+      "destination": "/api/portal?__path=/案例/:path*"
+    },
+    {
+      "source": "/案例",
+      "destination": "/api/portal?__path=/案例"
+    },
+    {
+      "source": "/落地",
+      "destination": "/api/portal?__path=/落地"
+    },
+    {
+      "source": "/现场",
+      "destination": "/api/portal?__path=/现场"
+    },
+    {
+      "source": "/方法",
+      "destination": "/api/portal?__path=/方法"
+    },
+    {
+      "source": "/world3d",
+      "destination": "/api/portal?__path=/world3d"
+    },
+    {
+      "source": "/api/world.json",
+      "destination": "/api/portal?__path=/api/world.json"
+    }
   ]
 }
