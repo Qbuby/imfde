@@ -7,6 +7,10 @@
     "api/ai.py": {
       "memory": 512,
       "maxDuration": 60
+    },
+    "api/ai_report.py": {
+      "memory": 1024,
+      "maxDuration": 120
     }
   },
   "rewrites": [
