@@ -1,20 +1,20 @@
 {
-  "written_at": "2026-09-05T20:42:40Z",
+  "written_at": "2026-09-05T21:10:37Z",
   "snapshot": "2026-09-06",
   "since_day": "2026-08-07",
   "increment": {
     "scanned": 20,
     "fde_hits": 0,
-    "already_in_db": 9,
-    "stale": 7,
-    "added_axis": 11,
+    "already_in_db": 20,
+    "stale": 16,
+    "added_axis": 0,
     "collected": 0,
     "review": 0
   },
   "n_events": 531,
   "n_axis": 142,
   "n_review": 0,
-  "new_axis_this_run": 11,
+  "new_axis_this_run": 0,
   "by_lane_axis": {
     "company": 10,
     "deploy": 83,
@@ -77,27 +77,27 @@
     "ats": {
       "boards": 11,
       "jobs": 184,
-      "added": 10,
-      "fresh": 1,
+      "added": 0,
+      "fresh": 0,
       "details": [
         {
           "id": "palantir-lever",
-          "status": "axis",
+          "status": "dup",
           "n": 42
         },
         {
           "id": "anthropic-greenhouse",
-          "status": "axis",
+          "status": "dup",
           "n": 8
         },
         {
           "id": "databricks-greenhouse",
-          "status": "axis",
+          "status": "dup",
           "n": 41
         },
         {
           "id": "scale-greenhouse",
-          "status": "axis",
+          "status": "dup",
           "n": 16
         },
         {
@@ -107,141 +107,38 @@
         },
         {
           "id": "openai-ashby",
-          "status": "axis",
+          "status": "dup",
           "n": 33
         },
         {
           "id": "cohere-ashby",
-          "status": "axis",
+          "status": "dup",
           "n": 19
         },
         {
           "id": "replit-ashby",
-          "status": "axis",
+          "status": "dup",
           "n": 1
         },
         {
           "id": "perplexity-ashby",
-          "status": "axis",
+          "status": "dup",
           "n": 1
         },
         {
           "id": "cursor-ashby",
-          "status": "axis",
+          "status": "dup",
           "n": 5
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "axis",
+          "status": "dup",
           "n": 18
         }
       ]
     }
   },
-  "cs_hubs": {
-    "hubs": 13,
-    "new_links": 20,
-    "added": 0,
-    "no_date": 6,
-    "details": [
-      {
-        "id": "writer-customers",
-        "new_links": 0,
-        "added": 0
-      },
-      {
-        "id": "intercom-customers",
-        "new_links": 0,
-        "added": 0
-      },
-      {
-        "url": "https://www.glean.com/resources/customer-stories/webflow",
-        "skip": "no strong date"
-      },
-      {
-        "url": "https://www.glean.com/resources/customer-stories/databricks",
-        "skip": "no strong date"
-      },
-      {
-        "id": "glean-stories",
-        "new_links": 6,
-        "added": 0
-      },
-      {
-        "id": "sierra-customers",
-        "new_links": 2,
-        "added": 0
-      },
-      {
-        "id": "cresta-stories",
-        "new_links": 0,
-        "added": 0
-      },
-      {
-        "id": "factory-customers",
-        "new_links": 0,
-        "added": 0
-      },
-      {
-        "url": "https://www.augmentcode.com/customers/Pure-storage-scales-2000-engineers",
-        "skip": "no strong date"
-      },
-      {
-        "url": "https://www.augmentcode.com/customers/quorum",
-        "skip": "no strong date"
-      },
-      {
-        "id": "augment-customers",
-        "new_links": 2,
-        "added": 0
-      },
-      {
-        "url": "https://www.harvey.ai/en-US/customers/deutsche-telekom-gleiss-lutz-collaboration",
-        "skip": "no strong date"
-      },
-      {
-        "url": "https://www.harvey.ai/en-US/customers/cms",
-        "skip": "no strong date"
-      },
-      {
-        "id": "harvey-customers",
-        "new_links": 6,
-        "added": 0
-      },
-      {
-        "url": "https://devin.ai/customers/modal",
-        "skip": "no customer name"
-      },
-      {
-        "url": "https://devin.ai/customers/tavrn",
-        "skip": "no customer name"
-      },
-      {
-        "id": "devin-customers",
-        "new_links": 4,
-        "added": 0
-      },
-      {
-        "id": "moveworks-customers",
-        "new_links": 0,
-        "added": 0
-      },
-      {
-        "id": "sourcegraph-studies",
-        "status": "403"
-      },
-      {
-        "id": "cohere-stories",
-        "new_links": 0,
-        "added": 0
-      },
-      {
-        "id": "palantir-impact",
-        "new_links": 0,
-        "added": 0
-      }
-    ]
-  },
+  "cs_hubs": {},
   "peek": {
     "indexes": 15,
     "candidates": 26,
@@ -250,7 +147,7 @@
     "details": [
       {
         "feed": "openai-index",
-        "status": "403"
+        "status": "blocked"
       },
       {
         "feed": "openai-careers",
@@ -266,7 +163,7 @@
       },
       {
         "feed": "microsoft-blog",
-        "status": "403"
+        "status": "404"
       },
       {
         "url": "https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
@@ -294,8 +191,23 @@
         "day": "2026-06-21"
       },
       {
+        "url": "https://www.fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/break-into-fde-without-faang",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
         "feed": "svpg",
-        "status": "403"
+        "status": "blocked"
       }
     ]
   },

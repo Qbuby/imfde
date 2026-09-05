@@ -1758,7 +1758,7 @@ def bump(run, key):
     run["delta"][key] = run["delta"].get(key, 0) + 1
 
 
-def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, entity_slug, note, run):
+def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, entity_slug, note, run, modified: str = ""):
     if CS_PATH_RE.search(urllib.parse.urlsplit(url).path or ""):
         bump(run, "skip_cs")
         return "skip_cs"
@@ -1766,11 +1766,14 @@ def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, e
     if nurl in (run.get("existing_urls") or set()):
         bump(run, "already")
         return "dup"
+    # 上轴日：published 优先，回退页上 modified（date_policy: axis = published|modified）。
+    # 只传 published 的调用点行为不变。
+    day, date_kind = pick_axis(published, modified)
     since = run.get("since") or ""
-    if published and since and published < since:
+    if day and since and day < since:
         bump(run, "stale")
         return "stale"
-    key = axis_title_key(title_zh or title, published, lane)
+    key = axis_title_key(title_zh or title, day, lane)
     if key in run["axis_keys"]:
         bump(run, "already")
         return "dup"
@@ -1779,8 +1782,7 @@ def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, e
         bump(run, "review")
         db.commit()
         return "review"
-    day, date_kind = pick_axis(published, "")
-    upsert_source_date(db, url, published, "", COLLECTED_ON, day or COLLECTED_ON, date_kind if day else "collected", None, None)
+    upsert_source_date(db, url, published, modified, COLLECTED_ON, day or COLLECTED_ON, date_kind if day else "collected", None, None)
     label = title_zh or title or ""
     org, role = "", label
     if "：" in label:
@@ -2274,12 +2276,15 @@ def peek_newsrooms(db, catalog, run, cap: int = 8) -> dict:
             dates = extract_dates(html_art)
             hint = (json_dated.get(norm_url(link)) or (None, None))[1]
             published = valid_day(dates.get("published")) or valid_day(hint)
-            if not published:
+            # 上轴日 = published 优先，回退页上 modified（对齐 date_policy: axis = published|modified）
+            modified = valid_day(dates.get("modified"))
+            if not published and not modified:
                 stats["details"].append({"url": link, "skip": "no strong date"})
                 continue
-            if since and published < since:
+            day = published or modified
+            if since and day < since:
                 bump(run, "stale")
-                stats["details"].append({"url": link, "skip": "stale", "day": published})
+                stats["details"].append({"url": link, "skip": "stale", "day": day})
                 continue
             title = extract_title(html_art) or host
             title_zh = trunc(title, 44)
@@ -2299,6 +2304,7 @@ def peek_newsrooms(db, catalog, run, cap: int = 8) -> dict:
                 entity_slug=feed.get("entity_slug"),
                 note=f"list_index peek from {feed['id']}",
                 run=run,
+                modified=modified,
             )
             existing.add(norm_url(link))
             if st == "review":
