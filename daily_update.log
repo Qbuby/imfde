@@ -90,3 +90,96 @@ OK 案例.html  1293 KB  (cases data 559)
 OK cases.json  559 条
 
 完成。提交 portal/*.html + cases.json 到 git，Vercel 即可直接服务。
+warning: in the working copy of 'portal/world_raw/a16z.com__home.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/augmentcode.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/augmentcode.com__customers__Pure-storage-scales-2000-engineers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/aws.amazon.com__blogs.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/blend360.com__news.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/cognition.ai__blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/cohere.com__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/cresta.com__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/databricks.com__blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/databricks.com__forward-deployed-engineering.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/devin.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/devin.ai__customers__modal.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/devin.ai__customers__tavrn.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/factory.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__anthropic-forward-deployed-engineer-interview-guide.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-coding-interview-not-leetcode.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-interview-prep-mistakes.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-system-design-customer-constraints.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-vs-software-engineer-comparison.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories__databricks.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories__webflow.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__en-US__customers__cms.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__en-US__customers__deutsche-telekom-gleiss-lutz-collaboration.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/intercom.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/moveworks.com__us__en__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/palantir.com__impact.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/palantir.com__newsroom.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/palantir.com__newsroom__letters.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers__chime.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers__gofundme.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies__cody-leidos-maximizing-efficiency-heightened-security-ai-race.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies__nutanix-fixed-log4j-with-sourcegraph.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/svpg.com__home.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/writer.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/youtube.com___aiDotEngineer.html', LF will be replaced by CRLF the next time Git touches it
+[main 13c9e73] daily data refresh 鍛ㄦ棩 2026/09/06  0:07:59.13
+ 57 files changed, 37924 insertions(+), 71 deletions(-)
+ create mode 100644 portal/ai-cache/1d66af61aa682150.json
+ create mode 100644 portal/ai-cache/8d89f487bf90f7dd.json
+ create mode 100644 portal/ai-cache/a9642fb7dced29dc.json
+ create mode 100644 portal/world_raw/a16z.com__home.html
+ create mode 100644 portal/world_raw/anthropic.com__news.html
+ create mode 100644 portal/world_raw/augmentcode.com__customers.html
+ create mode 100644 portal/world_raw/augmentcode.com__customers__Pure-storage-scales-2000-engineers.html
+ create mode 100644 portal/world_raw/augmentcode.com__customers__quorum.html
+ create mode 100644 portal/world_raw/aws.amazon.com__blogs.html
+ create mode 100644 portal/world_raw/blend360.com__news.html
+ create mode 100644 portal/world_raw/cdn.sanity.io__images__4zrzovbb__website__96e0eefdefd7319a54e805514c1b1c9a5aa31488-1600x1600.png.html
+ create mode 100644 portal/world_raw/cognition.ai__blog.html
+ create mode 100644 portal/world_raw/cohere.com__blog.html
+ create mode 100644 portal/world_raw/cohere.com__customer-stories.html
+ create mode 100644 portal/world_raw/cresta.com__customer-stories.html
+ create mode 100644 portal/world_raw/databricks.com__blog.html
+ create mode 100644 portal/world_raw/databricks.com__forward-deployed-engineering.html
+ create mode 100644 portal/world_raw/devin.ai__customers.html
+ create mode 100644 portal/world_raw/devin.ai__customers__modal.html
+ create mode 100644 portal/world_raw/devin.ai__customers__tavrn.html
+ create mode 100644 portal/world_raw/factory.ai__customers.html
+ create mode 100644 portal/world_raw/fdeinterviews.com__blog.html
+ create mode 100644 portal/world_raw/fdeinterviews.com__blog__anthropic-forward-deployed-engineer-interview-guide.html
+ create mode 100644 portal/world_raw/fdeinterviews.com__blog__fde-coding-interview-not-leetcode.html
+ create mode 100644 portal/world_raw/fdeinterviews.com__blog__fde-interview-prep-mistakes.html
+ create mode 100644 portal/world_raw/fdeinterviews.com__blog__fde-system-design-customer-constraints.html
+ create mode 100644 portal/world_raw/fdeinterviews.com__blog__fde-vs-software-engineer-comparison.html
+ create mode 100644 portal/world_raw/glean.com__resources__customer-stories.html
+ create mode 100644 portal/world_raw/glean.com__resources__customer-stories__databricks.html
+ create mode 100644 portal/world_raw/glean.com__resources__customer-stories__webflow.html
+ create mode 100644 portal/world_raw/harvey.ai__customers.html
+ create mode 100644 portal/world_raw/harvey.ai__en-US__customers__cms.html
+ create mode 100644 portal/world_raw/harvey.ai__en-US__customers__deutsche-telekom-gleiss-lutz-collaboration.html
+ create mode 100644 portal/world_raw/intercom.com__customers.html
+ create mode 100644 portal/world_raw/investors.palantir.com__home.html
+ create mode 100644 portal/world_raw/moveworks.com__us__en__customers.html
+ create mode 100644 portal/world_raw/palantir.com__impact.html
+ create mode 100644 portal/world_raw/palantir.com__newsroom.html
+ create mode 100644 portal/world_raw/palantir.com__newsroom__letters.html
+ create mode 100644 portal/world_raw/sierra.ai__customers.html
+ create mode 100644 portal/world_raw/sierra.ai__customers__chime.html
+ create mode 100644 portal/world_raw/sierra.ai__customers__gofundme.html
+ create mode 100644 portal/world_raw/sourcegraph.com__case-studies.html
+ create mode 100644 portal/world_raw/sourcegraph.com__case-studies__cody-leidos-maximizing-efficiency-heightened-security-ai-race.html
+ create mode 100644 portal/world_raw/sourcegraph.com__case-studies__nutanix-fixed-log4j-with-sourcegraph.html
+ create mode 100644 portal/world_raw/svpg.com__home.html
+ create mode 100644 portal/world_raw/writer.com__customers.html
+ create mode 100644 portal/world_raw/youtube.com___aiDotEngineer.html
+To https://github.com/Qbuby/imfde.git
+   c41fb75..13c9e73  main -> main
+[?? 2026/09/06  0:08:06.32] === daily update done === 

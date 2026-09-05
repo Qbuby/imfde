@@ -40,6 +40,12 @@ SNAPSHOT = date.today().isoformat()
 COLLECTED_ON = SNAPSHOT
 MAX_NEW_AXIS = 16
 FRESH_DAYS = 7  # a fresh ATS posting = first_published within this many days
+# 增量回溯窗口：收发布日期不早于 (快照日 - N 天) 的条目。
+# 不能用「上次运行日」当 since——新闻室/博客文章的发布日几乎总早于上次运行，
+# 会被整批判 stale 永久丢失（peek 的 20 个列表源因此长期抓不到东西）。
+# 放宽窗口只是多查一遍，已在库的走 dup 去重，不会重复上轴。
+BACKFILL_DAYS = 30
+PEEK_CANDIDATES = 8  # per list_index source per run: how many candidate links to open and date-check
 FRESH_PER_BOARD = 4  # unique folded titles per board per run; 7-day window needs these weak signals
 
 UA = (
@@ -2254,7 +2260,7 @@ def peek_newsrooms(db, catalog, run, cap: int = 8) -> dict:
             uniq.append(link)
         stats["candidates"] += len(uniq)
         since = run.get("since") or ""
-        for link in uniq[:5]:
+        for link in uniq[:PEEK_CANDIDATES]:
             if added >= cap:
                 break
             print(f"    candidate {link}", flush=True)
@@ -2553,9 +2559,11 @@ def update_catalog_file(catalog: dict, db) -> None:
 def since_day_from(catalog: dict, explicit: str) -> str:
     if explicit and valid_day(explicit):
         return explicit
-    last = str(catalog.get("last_ingest") or "")
-    if re.match(r"\d{4}-\d{2}-\d{2}", last):
-        return last[:10]
+    # 滚动回溯窗口（见 BACKFILL_DAYS 说明）：不用 last_ingest 当天，避免漏抓永久丢失
+    try:
+        return (date.fromisoformat(SNAPSHOT) - timedelta(days=BACKFILL_DAYS)).isoformat()
+    except (ValueError, TypeError):
+        pass
     if STATE_PATH.is_file():
         try:
             day = json.loads(STATE_PATH.read_text(encoding="utf-8")).get("since_day") or ""

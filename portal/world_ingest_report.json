@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-05T16:05:50Z",
+  "written_at": "2026-09-05T20:42:40Z",
   "snapshot": "2026-09-06",
-  "since_day": "2026-09-02",
+  "since_day": "2026-08-07",
   "increment": {
-    "scanned": 24,
-    "fde_hits": 4,
-    "already_in_db": 12,
-    "stale": 11,
-    "added_axis": 1,
+    "scanned": 20,
+    "fde_hits": 0,
+    "already_in_db": 9,
+    "stale": 7,
+    "added_axis": 11,
     "collected": 0,
     "review": 0
   },
-  "n_events": 520,
-  "n_axis": 141,
+  "n_events": 531,
+  "n_axis": 142,
   "n_review": 0,
-  "new_axis_this_run": 1,
+  "new_axis_this_run": 11,
   "by_lane_axis": {
     "company": 10,
     "deploy": 83,
-    "method": 31,
+    "method": 32,
     "people": 17
   },
-  "n_links": 98,
+  "n_links": 99,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -39,19 +39,14 @@
   "feeds": {
     "rss": {
       "feeds": 3,
-      "hits": 4,
+      "hits": 0,
       "added": 0,
-      "already": 2,
-      "stale": 2,
+      "already": 0,
+      "stale": 0,
       "details": [
         {
           "id": "fdepod",
-          "status": "ok",
-          "items": 4,
-          "fde": 4,
-          "added": 0,
-          "already": 2,
-          "stale": 2
+          "status": "<urlopen error Tunnel connection failed: 502 Bad Gateway>"
         },
         {
           "id": "pragmatic-engineer",
@@ -75,36 +70,34 @@
       "details": [
         {
           "id": "ai-engineer-youtube",
-          "status": "ok",
-          "atom": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLKPca3kwwd-B59HNr-_lvA",
-          "added": 0
+          "status": "no channel id"
         }
       ]
     },
     "ats": {
       "boards": 11,
       "jobs": 184,
-      "added": 0,
+      "added": 10,
       "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
-          "status": "dup",
+          "status": "axis",
           "n": 42
         },
         {
           "id": "anthropic-greenhouse",
-          "status": "dup",
+          "status": "axis",
           "n": 8
         },
         {
           "id": "databricks-greenhouse",
-          "status": "dup",
+          "status": "axis",
           "n": 41
         },
         {
           "id": "scale-greenhouse",
-          "status": "dup",
+          "status": "axis",
           "n": 16
         },
         {
@@ -114,32 +107,32 @@
         },
         {
           "id": "openai-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 33
         },
         {
           "id": "cohere-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 19
         },
         {
           "id": "replit-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 1
         },
         {
           "id": "perplexity-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 1
         },
         {
           "id": "cursor-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 5
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 18
         }
       ]
@@ -147,9 +140,9 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 23,
+    "new_links": 20,
     "added": 0,
-    "no_date": 8,
+    "no_date": 6,
     "details": [
       {
         "id": "writer-customers",
@@ -216,6 +209,14 @@
         "added": 0
       },
       {
+        "url": "https://devin.ai/customers/modal",
+        "skip": "no customer name"
+      },
+      {
+        "url": "https://devin.ai/customers/tavrn",
+        "skip": "no customer name"
+      },
+      {
         "id": "devin-customers",
         "new_links": 4,
         "added": 0
@@ -226,17 +227,8 @@
         "added": 0
       },
       {
-        "url": "https://sourcegraph.com/case-studies/cody-leidos-maximizing-efficiency-heightened-security-ai-race",
-        "skip": "no strong date"
-      },
-      {
-        "url": "https://sourcegraph.com/case-studies/nutanix-fixed-log4j-with-sourcegraph",
-        "skip": "no strong date"
-      },
-      {
         "id": "sourcegraph-studies",
-        "new_links": 3,
-        "added": 0
+        "status": "403"
       },
       {
         "id": "cohere-stories",
@@ -274,7 +266,7 @@
       },
       {
         "feed": "microsoft-blog",
-        "status": "404"
+        "status": "403"
       },
       {
         "url": "https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
@@ -300,6 +292,10 @@
         "url": "https://www.fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
         "skip": "stale",
         "day": "2026-06-21"
+      },
+      {
+        "feed": "svpg",
+        "status": "403"
       }
     ]
   },
