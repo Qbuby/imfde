@@ -309,5 +309,5 @@ footer.ft p{margin:6px 0}
   .skip,.filters{display:none}
 }
 
-/* 帽子 logo（brand_mark：仅图一张；尺寸与首页世界动态顶栏 logo 完全一致） */
+/* 帽子 logo（brand_lockup：logo + AI 实战进化社/在现场里进化 两行文字） */
 .brand .brand-logo{width:40px;height:40px;border-radius:9px;object-fit:cover;display:block;flex:none}

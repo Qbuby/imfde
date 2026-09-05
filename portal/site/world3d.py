@@ -40,9 +40,8 @@ def render_world3d(cur) -> str:
     inner = f"""
 <div class="w3" id="w3" data-three="{THREE_VERSION}">
   <header class="w3-hud" role="banner">
-    <a class="w3-brand" href="/" aria-label="{S.esc(WORLD_BRAND)} 世界动态">
-      {S.brand_mark()}
-      <span class="w3-brand-sub">行业发展 · 随时在变</span>
+    <a class="w3-brand" href="/" aria-label="{S.esc(WORLD_BRAND)} {S.esc(S.SITE_CLUB)}">
+      {S.brand_lockup()}
     </a>
     <div class="w3-hud-mid">
       <h1 class="w3-title">用真实交付证据学 FDE</h1>

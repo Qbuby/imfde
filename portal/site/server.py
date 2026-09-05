@@ -1091,8 +1091,14 @@ def brand_mark() -> str:
 
 
 def brand_lockup() -> str:
-    """imfde 定制：锁定组合也只出纯 logo，不带文字。"""
-    return brand_mark()
+    """Cap-logo + community name + slogan（对齐上游品牌锁定，仅字样换帽子 logo）。"""
+    return (
+        f"{brand_mark()}"
+        '<span class="brand-lock">'
+        f'<span class="brand-club">{esc(SITE_CLUB)}</span>'
+        f'<span class="brand-tag">{esc(SITE_SLOGAN)}</span>'
+        "</span>"
+    )
 
 
 def abs_url(path: str = "/") -> str:
@@ -1117,7 +1123,7 @@ def mast(active: str, gh_url: str = "", tagline: str | None = None) -> str:
         links.append(f'<a class="back-to-portal" href="{esc(IM_FDE_PORTAL_URL)}">imfde 门户 →</a>')
     return f"""<div class="mast"><div class="mast-in">
   <a class="brand" href="/" aria-label="{esc(SITE_NAME)} {esc(SITE_CLUB)}">
-    {brand_mark()}
+    {brand_lockup()}
   </a>
   <nav>{''.join(links)}</nav>
 </div></div>"""

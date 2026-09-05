@@ -626,7 +626,7 @@ def render_home(cur) -> str:
 <div class="learn" id="learn">
   <header class="learn-hud" role="banner">
     <a class="learn-brand" href="/" aria-label="{S.esc(S.SITE_NAME)} {S.esc(S.SITE_CLUB)}">
-      {S.brand_mark()}
+      {S.brand_lockup()}
     </a>
     <div class="learn-hud-mid">
       <h1 class="learn-title">现场交付循环</h1>
