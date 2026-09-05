@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-02T09:30:42Z",
-  "snapshot": "2026-09-02",
-  "since_day": "2026-08-27",
+  "written_at": "2026-09-05T16:05:50Z",
+  "snapshot": "2026-09-06",
+  "since_day": "2026-09-02",
   "increment": {
-    "scanned": 39,
+    "scanned": 24,
     "fde_hits": 4,
-    "already_in_db": 25,
-    "stale": 2,
-    "added_axis": 0,
+    "already_in_db": 12,
+    "stale": 11,
+    "added_axis": 1,
     "collected": 0,
     "review": 0
   },
-  "n_events": 529,
-  "n_axis": 140,
+  "n_events": 520,
+  "n_axis": 141,
   "n_review": 0,
-  "new_axis_this_run": 0,
+  "new_axis_this_run": 1,
   "by_lane_axis": {
     "company": 10,
     "deploy": 83,
-    "method": 30,
+    "method": 31,
     "people": 17
   },
-  "n_links": 97,
+  "n_links": 98,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -29,30 +29,13 @@
   },
   "folded_locale": 0,
   "fetch": {
-    "ok": 2,
+    "ok": 0,
     "blocked": 0,
     "err": 0,
-    "axis": 2,
+    "axis": 0,
     "collected": 0
   },
-  "fetch_details": [
-    {
-      "id": "washtech-fde-talent-2026-09-01",
-      "url": "https://www.washingtontechnology.com/companies/2026/09/subset-tech-talent-supply-crunch-watch-out/415572/",
-      "fetch": "ok",
-      "day": "2026-09-01",
-      "date_kind": "published",
-      "status": "in_db"
-    },
-    {
-      "id": "plank-fde-brief-august-2026",
-      "url": "https://joinplank.com/fde-news/august-2026",
-      "fetch": "ok",
-      "day": "2026-08-06",
-      "date_kind": "published",
-      "status": "in_db"
-    }
-  ],
+  "fetch_details": [],
   "feeds": {
     "rss": {
       "feeds": 3,
@@ -72,12 +55,7 @@
         },
         {
           "id": "pragmatic-engineer",
-          "status": "ok",
-          "items": 15,
-          "fde": 0,
-          "added": 0,
-          "already": 0,
-          "stale": 0
+          "status": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl"
         },
         {
           "id": "latent-space",
@@ -105,9 +83,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 185,
+      "jobs": 184,
       "added": 0,
-      "fresh": 0,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
@@ -137,7 +115,7 @@
         {
           "id": "openai-ashby",
           "status": "dup",
-          "n": 34
+          "n": 33
         },
         {
           "id": "cohere-ashby",
@@ -167,12 +145,163 @@
       ]
     }
   },
-  "cs_hubs": {},
-  "peek": {
-    "indexes": 0,
-    "candidates": 0,
+  "cs_hubs": {
+    "hubs": 13,
+    "new_links": 23,
     "added": 0,
-    "details": []
+    "no_date": 8,
+    "details": [
+      {
+        "id": "writer-customers",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "id": "intercom-customers",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "url": "https://www.glean.com/resources/customer-stories/webflow",
+        "skip": "no strong date"
+      },
+      {
+        "url": "https://www.glean.com/resources/customer-stories/databricks",
+        "skip": "no strong date"
+      },
+      {
+        "id": "glean-stories",
+        "new_links": 6,
+        "added": 0
+      },
+      {
+        "id": "sierra-customers",
+        "new_links": 2,
+        "added": 0
+      },
+      {
+        "id": "cresta-stories",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "id": "factory-customers",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "url": "https://www.augmentcode.com/customers/Pure-storage-scales-2000-engineers",
+        "skip": "no strong date"
+      },
+      {
+        "url": "https://www.augmentcode.com/customers/quorum",
+        "skip": "no strong date"
+      },
+      {
+        "id": "augment-customers",
+        "new_links": 2,
+        "added": 0
+      },
+      {
+        "url": "https://www.harvey.ai/en-US/customers/deutsche-telekom-gleiss-lutz-collaboration",
+        "skip": "no strong date"
+      },
+      {
+        "url": "https://www.harvey.ai/en-US/customers/cms",
+        "skip": "no strong date"
+      },
+      {
+        "id": "harvey-customers",
+        "new_links": 6,
+        "added": 0
+      },
+      {
+        "id": "devin-customers",
+        "new_links": 4,
+        "added": 0
+      },
+      {
+        "id": "moveworks-customers",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "url": "https://sourcegraph.com/case-studies/cody-leidos-maximizing-efficiency-heightened-security-ai-race",
+        "skip": "no strong date"
+      },
+      {
+        "url": "https://sourcegraph.com/case-studies/nutanix-fixed-log4j-with-sourcegraph",
+        "skip": "no strong date"
+      },
+      {
+        "id": "sourcegraph-studies",
+        "new_links": 3,
+        "added": 0
+      },
+      {
+        "id": "cohere-stories",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "id": "palantir-impact",
+        "new_links": 0,
+        "added": 0
+      }
+    ]
+  },
+  "peek": {
+    "indexes": 15,
+    "candidates": 26,
+    "added": 0,
+    "review": 0,
+    "details": [
+      {
+        "feed": "openai-index",
+        "status": "403"
+      },
+      {
+        "feed": "openai-careers",
+        "status": "blocked"
+      },
+      {
+        "url": "https://cdn.sanity.io/images/4zrzovbb/website/96e0eefdefd7319a54e805514c1b1c9a5aa31488-1600x1600.png",
+        "skip": "no FDE match"
+      },
+      {
+        "url": "https://www.databricks.com/forward-deployed-engineering",
+        "skip": "no strong date"
+      },
+      {
+        "feed": "microsoft-blog",
+        "status": "404"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/fde-coding-interview-not-leetcode",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/fde-interview-prep-mistakes",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/fde-system-design-customer-constraints",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
+        "skip": "stale",
+        "day": "2026-06-21"
+      }
+    ]
   },
   "vendor_cs_recrawl": false,
   "crawl_paused_file_left_in_place": true,

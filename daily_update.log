@@ -2,3 +2,91 @@
 或批处理文件。
 'ild_static.py' 不是内部或外部命令，也不是可运行的程序
 或批处理文件。
+[?? 2026/09/06  0:00:01.70] === daily update start === 
+== snapshot 2026-09-06 since 2026-09-02
+== feeds rss
+  rss fdepod  https://fdepod.substack.com/feed
+    → items=4 fde=4 added=0 already=2 stale=2
+  rss pragmatic-engineer  https://blog.pragmaticengineer.com/feed
+  rss latent-space  https://www.latent.space/feed
+    → items=20 fde=0 added=0 already=0 stale=0
+== feeds youtube
+  youtube ai-engineer-youtube  https://www.youtube.com/@aiDotEngineer
+    → added 0
+== feeds ats census
+  ats palantir-lever  https://jobs.lever.co/palantir
+    → 42 titles folded, dup
+  ats anthropic-greenhouse  https://job-boards.greenhouse.io/anthropic
+    → 8 titles folded, dup
+  ats databricks-greenhouse  https://job-boards.greenhouse.io/databricks
+    fresh 2026-09-04 Staff Forward Deployed Engineer → axis
+    → 41 titles folded, dup
+  ats scale-greenhouse  https://job-boards.greenhouse.io/scaleai
+    → 16 titles folded, dup
+  ats xai-greenhouse  https://job-boards.greenhouse.io/xai
+  ats openai-ashby  https://jobs.ashbyhq.com/openai
+    → 33 titles folded, dup
+  ats cohere-ashby  https://jobs.ashbyhq.com/cohere
+    → 19 titles folded, dup
+  ats replit-ashby  https://jobs.ashbyhq.com/replit
+    → 1 titles folded, dup
+  ats perplexity-ashby  https://jobs.ashbyhq.com/perplexity
+    → 1 titles folded, dup
+  ats cursor-ashby  https://jobs.ashbyhq.com/cursor
+    → 5 titles folded, dup
+  ats elevenlabs-ashby  https://jobs.ashbyhq.com/elevenlabs
+    → 18 titles folded, dup
+== peek list_index (p1–p2, FDE-only, strong date)
+  peek openai-index  https://openai.com/index/
+  peek openai-careers  https://openai.com/careers/
+  peek palantir-newsroom  https://www.palantir.com/newsroom/
+  peek palantir-letters  https://www.palantir.com/newsroom/letters
+  peek palantir-investors  https://investors.palantir.com/
+  peek anthropic-news  https://www.anthropic.com/news
+    candidate https://cdn.sanity.io/images/4zrzovbb/website/96e0eefdefd7319a54e805514c1b1c9a5aa31488-1600x1600.png
+  peek cognition-blog  https://cognition.ai/blog
+  peek databricks-blog  https://www.databricks.com/blog
+    candidate https://www.databricks.com/forward-deployed-engineering
+  peek microsoft-blog  https://blogs.microsoft.com/blog/
+  peek cohere-blog  https://cohere.com/blog
+  peek aws-news  https://aws.amazon.com/blogs/
+  peek fdeinterviews-blog  https://www.fdeinterviews.com/blog
+    candidate https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide
+    candidate https://www.fdeinterviews.com/blog/fde-coding-interview-not-leetcode
+    candidate https://www.fdeinterviews.com/blog/fde-interview-prep-mistakes
+    candidate https://www.fdeinterviews.com/blog/fde-system-design-customer-constraints
+    candidate https://www.fdeinterviews.com/blog/fde-vs-software-engineer-comparison
+  peek a16z  https://a16z.com/
+  peek svpg  https://www.svpg.com/
+  peek blend360-news  https://www.blend360.com/news
+== case-study hubs (existing vendors, dated only)
+  cs writer-customers  https://writer.com/customers/
+  cs intercom-customers  https://www.intercom.com/customers
+  cs glean-stories  https://www.glean.com/resources/customer-stories
+  cs sierra-customers  https://sierra.ai/customers
+  cs cresta-stories  https://www.cresta.com/customer-stories
+  cs factory-customers  https://factory.ai/customers
+  cs augment-customers  https://www.augmentcode.com/customers
+  cs harvey-customers  https://www.harvey.ai/customers
+  cs devin-customers  https://devin.ai/customers
+  cs moveworks-customers  https://www.moveworks.com/us/en/customers
+  cs sourcegraph-studies  https://sourcegraph.com/case-studies
+  cs cohere-stories  https://cohere.com/customer-stories
+  cs palantir-impact  https://www.palantir.com/impact/
+== editorial copy updated=36
+== increment {"scanned": 24, "fde_hits": 4, "already_in_db": 12, "stale": 11, "added_axis": 1, "collected": 0, "review": 0}
+== done {"n_events": 520, "n_axis": 141, "by_lane_axis": {"company": 10, "deploy": 83, "method": 31, "people": 17}, "n_links": 98}
+快照 2026-09-06 · 事件 42
+[report 7d] 生成并落盘 2738 字，耗时 45s（a9642fb7dced29dc）
+[report 30d] 生成并落盘 2998 字，耗时 37s（1d66af61aa682150）
+[report 90d] 生成并落盘 3842 字，耗时 45s（8d89f487bf90f7dd）
+完成。提交 portal/ai-cache/ 后 push 即随部署分发。
+OK 世界动态.html  88 KB
+OK 落地.html  6 KB
+OK 现场.html  5 KB
+OK 方法.html  17 KB
+OK world3d.html  80 KB
+OK 案例.html  1293 KB  (cases data 559)
+OK cases.json  559 条
+
+完成。提交 portal/*.html + cases.json 到 git，Vercel 即可直接服务。
