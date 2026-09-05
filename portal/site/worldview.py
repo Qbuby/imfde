@@ -1096,7 +1096,7 @@ def render_world(cur) -> str:
             <button type="button" data-range="30" class="on" aria-pressed="true">30 天</button>
             <button type="button" data-range="90" aria-pressed="false">90 天</button>
           </div>
-          <p class="world-note"><span class="signal-dot" aria-hidden="true"></span>观察截止 {S.esc(S.day_zh(S.SNAPSHOT))} <span class="info-dot" title="无明确日期的材料不进入时间轴">i</span><a class="world-3d-link" href="/" title="回世界动态首页">回世界动态 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a><a class="world-read-link" href="#world-rooms">其他内容</a></p>
+          <p class="world-note"><span class="signal-dot" aria-hidden="true"></span>观察截止 {S.esc(S.day_zh(S.SNAPSHOT))} <span class="info-dot" title="无明确日期的材料不进入时间轴">i</span><a class="world-3d-link" href="/world3d" title="回世界动态首页">回世界动态 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a><a class="world-read-link" href="#world-rooms">其他内容</a></p>
         </div>
       </section>
 
@@ -1143,7 +1143,7 @@ def render_world(cur) -> str:
   <nav class="world-rooms" id="world-rooms" aria-label="站内其他内容">
     <p class="world-rooms-k">平面时间轴到此为止。回世界动态首页，或按窗口读落地 / 现场 / 案例 / 方法：</p>
     <div class="world-rooms-list">
-      <a href="/"><b>世界动态</b><span>首页。行业发展有多快，随时在变</span></a>
+      <a href="/world3d"><b>世界动态</b><span>首页。行业发展有多快，随时在变</span></a>
       <a href="/落地"><b>落地</b><span>这窗公司动作和真实部署，给负责人</span></a>
       <a href="/现场"><b>现场</b><span>这窗人物与观点；岗位是弱信号</span></a>
       <a href="/案例"><b>部署证据</b><span>先看有日期的落点，再翻库存目录</span></a>

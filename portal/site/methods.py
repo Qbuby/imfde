@@ -625,7 +625,7 @@ def render_home(cur) -> str:
     inner = f"""
 <div class="learn" id="learn">
   <header class="learn-hud" role="banner">
-    <a class="learn-brand" href="/" aria-label="{S.esc(S.SITE_NAME)} {S.esc(S.SITE_CLUB)}">
+    <a class="learn-brand" href="/world3d" aria-label="{S.esc(S.SITE_NAME)} {S.esc(S.SITE_CLUB)}">
       {S.brand_lockup()}
     </a>
     <div class="learn-hud-mid">
@@ -648,7 +648,7 @@ def render_home(cur) -> str:
     <span class="learn-lg-k">循环外</span>
     <button type="button" class="learn-exit" data-group="eng">现场工程 · {n_eng}/{len(extra)}</button>
     <button type="button" class="learn-exit" data-group="l2">组织与战略 · {n_l2}/{len(l2)}</button>
-    <a href="/">回世界动态</a>
+    <a href="/world3d">回世界动态</a>
   </nav>
 </div>
 {_learn_data_tag(topics, lessons)}
