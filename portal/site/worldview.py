@@ -122,6 +122,7 @@ TITLE_MAP = (
     ("openai.com/index/openai-launches-the-deployment-company", "OpenAI 发布 Deployment Company"),
     ("openai.com/zh-hans-cn/index/introducing-openai-frontier", "OpenAI 发布 Frontier"),
     ("openai.com/index/introducing-openai-frontier", "OpenAI 发布 Frontier"),
+    ("openai.com/business/frontier", "OpenAI Frontier 产品页"),
     ("cohere.com/blog/forward-deployed-engineers-capability-building", "Cohere：FDE 建能力，不制造依赖"),
     ("fdeinterviews.com/blog/how-forward-deployed-engineers-work", "FDE 交付生命周期"),
     ("fdeinterviews.com/blog/day-in-the-life-forward-deployed-engineer", "FDE 的一天"),
@@ -517,8 +518,8 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
             out["7"] = [
                 {
                     "num": "1",
-                    "title": "这 7 天能上轴的主要是新岗",
-                    "body": f"窗口内 {len(win)} 条有日期信号，其中 {len(jobs)} 条是官方招聘板。岗位是弱信号：说明还在招现场编制，不是组织已经落地。",
+                    "title": "这 7 天主要是新岗",
+                    "body": f"窗口里 {len(jobs)} 条是官方招聘。还在招现场编制，不等于组织已经落地。",
                     "lanes": ["method"],
                     "chain": method_jobs,
                     "n": len(jobs),
@@ -557,7 +558,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 {
                     "num": "2",
                     "title": "有日期的客户故事集中在工程产能和客服",
-                    "body": "窗口内部署轨是 Devin / Writer 的具名客户页。全库交付故事仍是库存营销页居多；只有带发布日的才上轴。",
+                    "body": "窗口内部署轨是 Devin / Writer 的具名客户页。全库交付故事仍是库存营销页居多；只有带发布日的才进窗口。",
                     "lanes": ["deploy"],
                     "chain": deploy,
                     "n": len(deploy),
@@ -566,7 +567,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 {
                     "num": "3",
                     "title": "公开讨论的是编制稀缺和能力建设",
-                    "body": "Washington Technology 写人才供给；Cohere 写建能力、不制造依赖。学习手册不在沙盘上轴，岗位仍只作弱信号。",
+                    "body": "Washington Technology 写人才供给；Cohere 写建能力、不制造依赖。",
                     "lanes": ["people"],
                     "chain": people,
                     "n": len(people),
@@ -578,8 +579,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 {
                     "num": "1",
                     "title": "多家把驻场写成独立编制或伙伴运动",
-                    "body": "90 天里 AWS、Microsoft、Databricks 和 OpenAI Deployment Company 收购，都是组织/产品载体宣布。库内 "
-                    f"{n_case_study} 条交付故事中，原文写出 FDE 角色的只有 {n_fde} 条。",
+                    "body": "90 天里 AWS、Microsoft、Databricks 和 OpenAI Deployment Company 收购，都是组织/产品载体宣布。库内交付故事里，原文写出现场编制的很少。",
                     "lanes": ["company"],
                     "chain": company,
                     "n": len(company),
@@ -595,7 +595,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 {
                     "num": "3",
                     "title": "从业者口径从定义角色转向现场脏活",
-                    "body": "Natalie、Kevin Bai、Colin Jarvis 和 Cohere 把驻场里不写进 JD 的部分讲出来。学习手册不在沙盘上轴；岗位仍只作弱信号。",
+                    "body": "Natalie、Kevin Bai、Colin Jarvis 和 Cohere 把驻场里不写进 JD 的部分讲出来。",
                     "lanes": ["people"],
                     "chain": people,
                     "n": len(people),
@@ -606,33 +606,18 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
 
 
 def build_ledes(events: list[dict], window_counts: dict) -> dict:
-    def n_jobs(days):
-        start = window_start(days)
-        return sum(
-            1
-            for event in events
-            if event.get("day")
-            and start <= event["day"] <= S.SNAPSHOT
-            and event.get("info_kind") == "job_posting"
-        )
-
-    c7 = window_counts.get("7") or {}
-    c30 = window_counts.get("30") or {}
-    c90 = window_counts.get("90") or {}
     return {
         "7": (
-            f"过去 7 天，有日期的信号共 {c7.get('total', 0)} 条，其中 {n_jobs(7)} 条是招聘板新岗。"
-            "硬节点是人才短缺报道和 Cohere 的能力建设文；公司动作轨没有新宣布。"
+            "这 7 天几乎没有新的公司宣布。"
+            "公开讨论集中在人才够不够用；招聘板仍有新岗，不等于编制已经落地。"
         ),
         "30": (
-            f"过去 30 天共 {c30.get('total', 0)} 条有日期信号。"
-            "Blend360 给出 2027 年 750 人编制目标，Cohere 写建能力、不制造依赖；"
-            "轴上同时出现有发布日的客户故事和一批官方新岗——岗位仍是弱信号。"
+            "Blend360 把编制目标写到 2027 年 750 人；Cohere 写建能力、不制造依赖。"
+            "招聘还在发生，不等于现场组织已经铺开。"
         ),
         "90": (
-            f"过去 90 天共 {c90.get('total', 0)} 条有日期信号。"
-            "AWS、Microsoft、Databricks 把 FDE 写成组织或伙伴运动；"
-            "人物轨补上现场口径；部署轨只收带发布日的客户故事，不是 503 条案例墙。"
+            "AWS、Microsoft、Databricks 把驻场写成组织或伙伴能力。"
+            "公开评论开始讲现场怎么干活，而不只是定义角色。"
         ),
     }
 
@@ -698,7 +683,9 @@ def _world_event_count(cur) -> int:
         return 0
 
 
-def ui_signal(lane: str, stored: str, host: str, evidence: str, customer_named: bool) -> str:
+def ui_signal(lane: str, stored: str, host: str, evidence: str, customer_named: bool, info_kind: str = "") -> str:
+    if info_kind in ("job_posting", "hiring_census"):
+        return "low"
     if lane == "deploy":
         if evidence == "high" and customer_named:
             return "high"
@@ -774,7 +761,9 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
     href = "/动态/%s" % int(row["id"])
     case_href = ("/案例/%s" % case_id) if case_id else ""
     doc_type = "case_study" if info_kind == "dated_case_study" else info_kind
-    signal = ui_signal(lane, row["signal"] or "", host, evidence, customer_named)
+    signal = ui_signal(lane, row["signal"] or "", host, evidence, customer_named, info_kind)
+    orig_title = clean_text(row["title"] or "")
+    excerpt = S.orig_excerpt(row["url"] or "")
     return {
         "id": int(row["id"]),
         "lane": lane,
@@ -782,6 +771,8 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
         "date_kind": row["date_kind"],
         "signal": signal,
         "title": title,
+        "orig_title": orig_title,
+        "orig_excerpt": excerpt.get("text") or "",
         "title_short": short_title_for(title, row["url"] or "", lane, customer),
         "kicker": name,
         "sub": S.trunc(happened, 96) or "原文摘要当前未提取。",
@@ -1045,15 +1036,15 @@ def reading_layer(cur, counts) -> str:
     return f"""
   <section class="world-more" id="world-more" aria-labelledby="world-more-title">
     <header class="world-more-head">
-      <p class="world-more-k">观察站 · 开源学习社区</p>
+      <p class="world-more-k">{S.esc(S.SITE_CLUB)} · {S.esc(S.SITE_SLOGAN)}</p>
       <h2 id="world-more-title">这份库对落地意味着什么</h2>
-      <p>平面时间轴只收录有发布日的公开变化。下面是同一份 {S.esc(S.SNAPSHOT)} 快照上的判断，不是第二套新闻，也不是咨询方案。</p>
+      <p>平面时间轴只收录有发布日的公开变化。下面是同一窗里的判断，不是第二套新闻，也不是咨询方案。</p>
     </header>
     <div class="world-read">
       <article class="wm-col">
         <p class="k">给负责人</p>
         <h3>落地：先定范围</h3>
-        <p>全库 <b>{n}</b> 条交付现场，原文写了现场编制的 <b>{n_fde}</b> 条（{S.pct(n_fde, n)}）。能当样板的（核心厂商 × 具名客户 × 证据 high × 有结果）<b>{n_feat}</b> 条。</p>
+        <p>全库交付现场里，原文写了现场编制的很少。能当样板的，要核心厂商、具名客户、证据充分、还有结果。</p>
         <ol class="wm-q">
           <li>买产品，还是买驻场？公开页上不是同一件事。</li>
           <li>要不要为此建编制？库里几乎没有完整组队样本。</li>
@@ -1066,14 +1057,14 @@ def reading_layer(cur, counts) -> str:
       <article class="wm-col">
         <p class="k">怎么被写出</p>
         <h3>方法：角色和流程</h3>
-        <p>岗位变化仍在本页方法轨上轴，这里不重复招聘列表。下面是库里已有的讲解页。</p>
+        <p>岗位变化仍在本页方法轨，这里不重复招聘列表。下面是库里已有的讲解页。</p>
         <div class="list">{method_html}</div>
         <p class="wm-go"><a href="/方法">方法目录</a></p>
       </article>
       <article class="wm-col">
         <p class="k">给从业者</p>
         <h3>别把营销页当本周动态</h3>
-        <p>近态要读有发布日的评论线。{counts['n_case_study']} 条客户故事大多是库存营销页，{counts['n_fde']} 条原文自称编制。</p>
+        <p>近态要读有发布日的评论线。客户故事大多是库存营销页，原文自称编制的很少。</p>
         <div class="list">{field_html}</div>
         <p class="wm-go"><a href="/现场">现场读法</a></p>
       </article>
@@ -1095,9 +1086,9 @@ def render_world(cur) -> str:
     <main class="world-main">
       <section class="world-intro" aria-labelledby="world-title">
         <div class="world-intro-copy">
-          <p class="world-tagline">{S.esc(S.SITE_TAGLINE)}</p>
+          <p class="world-tagline">{S.esc(S.SITE_CLUB)} · {S.esc(S.SITE_SLOGAN)}</p>
           <h1 id="world-title">平面时间轴 · 行业发展有多快</h1>
-          <p class="lede" data-world-lede>过去 30 天，Blend360 给出扩编目标，Cohere 写建能力、不制造依赖；轴上同时出现有发布日的客户故事和官方新岗——岗位仍是弱信号。</p>
+          <p class="lede" data-world-lede>Blend360 把编制目标写到 2027 年 750 人；Cohere 写建能力、不制造依赖。招聘还在发生，不等于现场组织已经铺开。</p>
         </div>
         <div class="world-intro-tools">
           <div class="range" role="radiogroup" aria-label="时间窗口">
@@ -1105,7 +1096,7 @@ def render_world(cur) -> str:
             <button type="button" data-range="30" class="on" aria-pressed="true">30 天</button>
             <button type="button" data-range="90" aria-pressed="false">90 天</button>
           </div>
-          <p class="world-note"><span class="signal-dot" aria-hidden="true"></span>本期快照 {S.esc(S.SNAPSHOT)} <span class="info-dot" title="无明确日期的材料不进入时间轴">i</span><a class="world-3d-link" href="/" title="回世界动态首页">回世界动态 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a><a class="world-read-link" href="#world-rooms">其他内容</a></p>
+          <p class="world-note"><span class="signal-dot" aria-hidden="true"></span>观察截止 {S.esc(S.day_zh(S.SNAPSHOT))} <span class="info-dot" title="无明确日期的材料不进入时间轴">i</span><a class="world-3d-link" href="/" title="回世界动态首页">回世界动态 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a><a class="world-read-link" href="#world-rooms">其他内容</a></p>
         </div>
       </section>
 
@@ -1129,14 +1120,14 @@ def render_world(cur) -> str:
           <span class="legend-label">来源状态</span>
           <span><i class="st st-pub"></i>已发布日期</span>
           <span><i class="st st-mod"></i>发布日期待补</span>
-          <span><i class="st st-col"></i>仅收录日期</span>
+          <span><i class="st st-col"></i>仅有日期</span>
         </div>
       </section>
 
-      <section class="world-askbar" aria-label="本地快照提问">
+      <section class="world-askbar" aria-label="查找">
         <form class="ask" id="world-ask" action="#" method="get">
           <label class="ask-q" for="world-q"><img class="ask-spark" src="/static/icons/sparkles.svg" alt="" aria-hidden="true"/><input id="world-q" name="q" maxlength="200" placeholder="问这个世界：例如，哪些公司正在把 FDE 做成长周期组织能力？"/></label>
-          <button type="submit" class="ask-go" aria-label="在本地快照中查找"><img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></button>
+          <button type="submit" class="ask-go" aria-label="查找"><img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></button>
         </form>
         <div class="ask-lens" role="radiogroup" aria-label="AI 解释视角">
           <span class="ask-lens-k">AI 解释视角</span>
@@ -1163,7 +1154,7 @@ def render_world(cur) -> str:
   <section class="world-below">
     <article class="below-col changes">
       <h2>AI 识别的三条变化</h2>
-      <p class="below-note">基于 30 天动态信号的结构化洞察</p>
+      <p class="below-note">基于最近 30 天的判断</p>
       <ol class="change-list" id="world-changes"></ol>
     </article>
     <article class="below-col entities">
@@ -1175,13 +1166,13 @@ def render_world(cur) -> str:
         <button type="button" data-ent="role" role="tab" aria-selected="false">岗位</button>
       </div>
       <div class="ent-list" id="world-entities"></div>
-      <p class="ent-manage"><a href="/案例">管理关注列表 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a></p>
+      <p class="ent-manage"><a href="/案例">浏览部署证据 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a></p>
     </article>
     <article class="below-col cobuild">
       <h2>共同建设 {S.esc(WORLD_BRAND)}</h2>
       <ul class="cobuild-list">
         <li><span class="cobuild-icon ico-submit" aria-hidden="true"><img src="/static/icons/file-plus-2.svg" alt=""/></span><div><b>提交动态来源</b><span>推荐官方页面、实践文章、部署故事、招聘页、视频等。</span></div>{S.ext_link(issue_url, "去提交") if issue_url else '<span class="link-muted">GitHub 地址未配置</span>'}</li>
-        <li><span class="cobuild-icon ico-date" aria-hidden="true"><img src="/static/icons/calendar-days.svg" alt=""/></span><div><b>补充发布日期</b><span>帮助补全缺失的「原始发布日期」与「收录日期」。</span></div>{S.ext_link(issue_url, "去补充") if issue_url else '<span class="link-muted">GitHub 地址未配置</span>'}</li>
+        <li><span class="cobuild-icon ico-date" aria-hidden="true"><img src="/static/icons/calendar-days.svg" alt=""/></span><div><b>补充发布日期</b><span>补上页面上的发布日。</span></div>{S.ext_link(issue_url, "去补充") if issue_url else '<span class="link-muted">GitHub 地址未配置</span>'}</li>
         <li><span class="cobuild-icon ico-fix" aria-hidden="true"><img src="/static/icons/circle-check.svg" alt=""/></span><div><b>纠正实体关系</b><span>修正公司、方法、岗位、人物之间的关系。</span></div>{S.ext_link(issue_url, "去纠正") if issue_url else '<span class="link-muted">GitHub 地址未配置</span>'}</li>
       </ul>
     </article>
@@ -1191,9 +1182,9 @@ def render_world(cur) -> str:
 
   <section class="world-foot" aria-label="来源与边界说明">
     <div class="foot-title"><h2>来源与边界说明</h2></div>
-    <div><h3>当前静态资料库（本地）</h3><p><b>{counts['n_case_study']}</b> 个客户 / 交付故事；仅 <b>{counts['n_fde']}</b> 条明确提及 FDE。</p></div>
-    <div class="foot-dynamic"><img src="/static/icons/share-2.svg" alt="" aria-hidden="true"/><div><h3>动态层（本页）</h3><p>持续抓取官方页面、实践文章、部署故事、招聘页、演讲 / 视频等，并由 AI 聚成有意义的变化与关系。</p></div></div>
-    <div><h3>数据口径</h3><p data-world-window>时间窗口：最近 30 天（{S.esc(data['windows']['30'])} – {S.esc(S.SNAPSHOT)}）<br/>时区：UTC+8<br/><a class="foot-link" href="/落地">落地读法</a> · <a class="foot-link" href="/现场">现场读法</a> · <a class="foot-link" href="/方法">方法目录</a></p></div>
+    <div><h3>资料库</h3><p>客户交付故事以库存为主；原文写明现场编制的很少。</p></div>
+    <div class="foot-dynamic"><img src="/static/icons/share-2.svg" alt="" aria-hidden="true"/><div><h3>动态层（本页）</h3><p>本期快照由本地动态层生成；AI 只做结构化摘要，证据以原文为准。</p></div></div>
+    <div><h3>数据口径</h3><p data-world-window>时间窗口：最近 30 天（{S.esc(S.day_zh(data['windows']['30']))} – {S.esc(S.day_zh(S.SNAPSHOT))}）<br/>北京时间<br/><a class="foot-link" href="/落地">落地读法</a> · <a class="foot-link" href="/现场">现场读法</a> · <a class="foot-link" href="/方法">方法目录</a></p></div>
   </section>
 </div>
 {json_tag(data)}

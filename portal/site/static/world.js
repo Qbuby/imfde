@@ -22,6 +22,17 @@
   var hitEl = document.getElementById("world-hit");
   if (!board || !lanesEl || !panel || !DATA.events) return;
 
+  function dayZh(iso) {
+    var m = String(iso || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return iso || "";
+    return Number(m[1]) + "年" + Number(m[2]) + "月" + Number(m[3]) + "日";
+  }
+  function mdZh(iso) {
+    var m = String(iso || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return iso || "";
+    return Number(m[2]) + "月" + Number(m[3]) + "日";
+  }
+
   var byId = {};
   DATA.events.forEach(function (event) {
     byId[event.id] = event;
@@ -406,7 +417,7 @@
       var last = index === axis.ticks.length - 1;
       var cls = last ? "tick end" : "tick";
       var body = last
-        ? '<span class="tick-d">' + tick.label + '<i class="mark"></i></span><em>快照</em>'
+        ? '<span class="tick-d">' + tick.label + '<i class="mark"></i></span>'
         : '<i class="mark"></i>' + tick.label;
       parts.push(
         '<span class="' + cls + '" style="left:' + (ratio * 100).toFixed(3) + '%">' + body + "</span>"
@@ -446,12 +457,12 @@
     var practitioner = event.practitioner || "";
     var primaryTitle = state.lens === "field" ? "对 FDE 从业者的影响" : "对企业落地的影响";
     var primaryBody = state.lens === "field"
-      ? fieldCopy(practitioner, "原文未写可核对的从业者影响。")
-      : fieldCopy(enterprise, "原文未写可核对的企业影响。");
+      ? fieldCopy(practitioner, "原文没写这一段。")
+      : fieldCopy(enterprise, "原文没写这一段。");
     var secondaryTitle = state.lens === "field" ? "对企业落地的影响" : "对 FDE 从业者的影响";
     var secondaryBody = state.lens === "field"
-      ? fieldCopy(enterprise, "原文未写可核对的企业影响。")
-      : fieldCopy(practitioner, "原文未写可核对的从业者影响。");
+      ? fieldCopy(enterprise, "原文没写这一段。")
+      : fieldCopy(practitioner, "原文没写这一段。");
     var relatedIds = [];
     (DATA.links || []).forEach(function (link) {
       if (Number(link.from) === event.id) relatedIds.push(Number(link.to));
@@ -476,8 +487,7 @@
       '<img class="src-pill-logo" src="' + esc(chainLogo(event)) + '" alt="" aria-hidden="true"/>' + esc(sourceName(event)) +
       '</span>' +
       (sourceName(event) !== event.host && event.host ? '<span class="src-host">' + esc(event.host) + '</span>' : '') + '</dd></div>' +
-      '<div><dt>原始发布日期</dt><dd>' + esc(event.date_kind === "published" ? event.day : "待补") + "</dd></div>" +
-      '<div><dt>收录日期</dt><dd>' + esc(DATA.snapshot) + "</dd></div>" +
+      '<div><dt>日期</dt><dd>' + esc(event.date_kind === "published" ? event.day : ("页上日期 " + event.day)) + "</dd></div>" +
       "</dl>" +
       heading("talk", "发生了什么") + fieldCopy(event.happened, "当前未提取正文摘要。") +
       heading("why", "为什么值得关注") + fieldCopy(event.why, "当前未提取判断依据。") +
@@ -488,7 +498,7 @@
         ? '<a class="src-line" href="' + esc(event.orig_href) + '">' +
           '<b>核对原文（本地备份）</b>' +
           '<span class="src-url">' + esc(event.host || "") + '</span></a>'
-        : '<p class="src-line">本地未收录该页备份</p>') +
+        : '<p class="src-line">没有本地原文</p>') +
       (caseHref
         ? '<a class="panel-bottom-link" href="' + esc(typeof caseHref === "string" ? caseHref : event.href) + '">在部署证据库中查看这条案例 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a>'
         : "") +
@@ -644,7 +654,7 @@
       return;
     }
     entitiesEl.innerHTML = rows.map(function (row) {
-      var label = row.age === 0 ? "快照日" : row.age + " 天前";
+      var label = row.age === 0 ? mdZh(DATA.snapshot) : row.age + " 天前";
       var logo = entityLogo(row.seed);
       return '<button type="button" class="ent-row" data-entkey="' + esc(row.seed.key) + '">' +
         '<span class="av" aria-hidden="true"><img src="' + esc(logo) + '" alt=""/></span>' +
@@ -655,27 +665,18 @@
 
   function updateLede() {
     if (!ledeEl) return;
-    var stats = DATA.window_counts && DATA.window_counts[String(state.range)];
-    var n = stats ? stats.total : currentEvents().length;
-    var method = stats ? stats.by_lane.method : 0;
     var ledes = DATA.ledes || {};
     if (ledes[String(state.range)]) {
       ledeEl.textContent = ledes[String(state.range)];
-    } else if (state.range === 7) {
-      ledeEl.textContent = "过去 7 天，有明确日期的本地来源共有 " + n + " 条；其中方法与岗位信号 " + method + " 条。窗口很窄，结论保持克制。";
-    } else if (state.range === 90) {
-      ledeEl.textContent = "过去 90 天，有明确日期的本地来源共有 " + n + " 条；可以看见部署、观点与岗位材料如何交错出现。";
-    } else {
-      ledeEl.textContent = "过去 30 天，变化最明显的不是岗位数量，而是企业把 FDE 从交付角色变成持续部署机制。";
     }
     var changeNote = document.querySelector(".below-col.changes .below-note");
     if (changeNote) {
-      changeNote.textContent = "基于 " + state.range + " 天动态信号的结构化洞察";
+      changeNote.textContent = "基于最近 " + state.range + " 天的判断";
     }
     var winEl = document.querySelector("[data-world-window]");
     if (winEl && DATA.windows) {
       var start = DATA.windows[String(state.range)] || "";
-      winEl.innerHTML = "时间窗口：最近 " + state.range + " 天（" + esc(start) + " – " + esc(DATA.snapshot) + "）<br/>时区：UTC+8<br/><a class=\"foot-link\" href=\"/落地\">落地读法</a> · <a class=\"foot-link\" href=\"/现场\">现场读法</a> · <a class=\"foot-link\" href=\"/方法\">方法目录</a>";
+      winEl.innerHTML = "时间窗口：最近 " + state.range + " 天（" + esc(dayZh(start)) + " – " + esc(dayZh(DATA.snapshot)) + "）<br/>北京时间<br/><a class=\"foot-link\" href=\"/落地\">落地读法</a> · <a class=\"foot-link\" href=\"/现场\">现场读法</a> · <a class=\"foot-link\" href=\"/方法\">方法目录</a>";
     }
   }
 
@@ -878,7 +879,7 @@
       if (hitEl) {
         hitEl.hidden = !state.query;
         hitEl.textContent = state.query
-          ? "本地快照筛到 " + state.hits.length + " 条有明确日期的来源，已打开第一条。"
+          ? "找到 " + state.hits.length + " 条有日期的来源，已打开第一条。"
           : "";
       }
       paint();

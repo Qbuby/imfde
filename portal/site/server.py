@@ -29,16 +29,18 @@ HOST = "0.0.0.0"
 PORT = 8850
 SITE_DOMAIN = "imfde.ai"
 SITE_ORIGIN = "https://imfde.ai"
-SITE_NAME = "imfde.ai"
-SITE_TAGLINE = "行业发展有多快 · Forward-Deployed AI"
 # imfde 交易门户首页。内容服务作为「学习成长」子区并入 imfde 平台，
 # 提供返回平台门户的导航。部署时设为门户实际地址；留空则不显示。
 IM_FDE_PORTAL_URL = (__import__("os").environ.get("IMFDE_PORTAL_URL") or "").strip()
+SITE_NAME = "imfde.ai"
+SITE_CLUB = "AI 实战进化社"
+SITE_SLOGAN = "在现场里进化"
+SITE_TAGLINE = "AI 实战进化社 · 在现场里进化"
 SITE_DIR = Path(__file__).resolve().parent
 PORTAL_DIR = SITE_DIR.parent
 AI_DIR = PORTAL_DIR.parent
-# 完整库（含题库答案）只在本地/私有部署存在；线上用剥离答案的公开库。
 DB_PATH = PORTAL_DIR / "fde.db"
+# 完整库（含题库答案）只在本地/私有部署存在；线上用剥离答案的公开库。
 if not DB_PATH.is_file():
     DB_PATH = PORTAL_DIR / "fde-public.db"
 STATIC_DIR = SITE_DIR / "static"
@@ -67,6 +69,14 @@ def _snapshot_day() -> str:
 
 
 SNAPSHOT = _snapshot_day()
+
+
+def day_zh(day: str | None) -> str:
+    text = (day or "").strip()
+    m = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", text)
+    if not m:
+        return text
+    return "%d年%d月%d日" % (int(m.group(1)), int(m.group(2)), int(m.group(3)))
 CORE_VENDORS = (
     "palantir",
     "openai",
@@ -82,7 +92,7 @@ CORE_VENDORS = (
 PRODUCT_STORY_VENDORS = ("intercom", "writer", "cresta", "moveworks", "abridge")
 KPI_LABELS = {
     "narrative": "实测结果",
-    "hero_only": "hero 条",
+    "hero_only": "单条叙述",
     "goal": "目标",
     "projected": "预测",
     "system_scale_not_kpi": "系统规模",
@@ -145,7 +155,7 @@ CRAFT_HOSTS = (
     "fde.academy",
 )
 NAV = (
-    ("世界动态", "/world3d"),
+    ("世界动态", "/"),
     ("落地", "/落地"),
     ("现场", "/现场"),
     ("部署证据", "/案例"),
@@ -242,6 +252,14 @@ def url_slug(url: str) -> str:
     host = (parts.netloc or "").replace("www.", "")
     path = (parts.path or "").strip("/").replace("/", "__") or "home"
     path = re.sub(r"[^A-Za-z0-9_.%-]", "_", path)[:110]
+    qs = parse_qs(parts.query or "")
+    extra = []
+    for key in ("gh_jid", "jid", "v", "p", "id"):
+        vals = qs.get(key) or []
+        if vals:
+            extra.append(re.sub(r"[^A-Za-z0-9_.%-]", "_", vals[0])[:48])
+    if extra:
+        path = path + "__" + "__".join(extra)
     return "%s__%s" % (host, path)
 
 
@@ -347,6 +365,94 @@ def _lookup_orig_file(url: str, key: str) -> Path | None:
     return None
 
 
+def strip_html(markup: str) -> str:
+    text = markup or ""
+    text = html.unescape(html.unescape(text))
+    text = re.sub(r"(?is)<script[^>]*>.*?</script>", " ", text)
+    text = re.sub(r"(?is)<style[^>]*>.*?</style>", " ", text)
+    text = re.sub(r"(?is)<br\s*/?>", "\n", text)
+    text = re.sub(r"(?is)</p>", "\n", text)
+    text = re.sub(r"(?is)</h[1-6]>", "\n", text)
+    text = re.sub(r"(?is)<li[^>]*>", "\n• ", text)
+    text = re.sub(r"(?is)<[^>]+>", " ", text)
+    text = html.unescape(text)
+    text = re.sub(r"[ \t]+\n", "\n", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    text = re.sub(r"[ \t]{2,}", " ", text)
+    return text.strip()
+
+
+def extract_article_html(raw: str) -> str:
+    """Prefer article body over nav / cookie / related-story chrome."""
+    raw = raw or ""
+    for cls in (
+        "content-body",
+        "article-body",
+        "entry-content",
+        "post-content",
+        "article__body",
+        "js-article",
+    ):
+        m = re.search(
+            rf'(?is)<([a-z0-9]+)[^>]*class="[^"]*\b{re.escape(cls)}\b[^"]*"[^>]*>',
+            raw,
+        )
+        if m:
+            return raw[m.end() : m.end() + 40000]
+    m = re.search(r"(?is)<article\b[^>]*>(.*)</article>", raw)
+    if m and len(m.group(1)) > 400:
+        return m.group(1)
+    m = re.search(r"(?is)<main\b[^>]*>(.*)</main>", raw)
+    if m and len(m.group(1)) > 400:
+        return m.group(1)
+    return raw
+
+
+def orig_excerpt(url: str, n: int = 900) -> dict:
+    """Plain-text excerpt from the local original backup. Empty if none."""
+    path = find_orig_file(url)
+    if not path:
+        return {}
+    raw = path.read_text(encoding="utf-8", errors="replace")
+    title = ""
+    text = ""
+    if path.suffix.lower() == ".json":
+        try:
+            data = json.loads(raw)
+        except ValueError:
+            data = None
+        if isinstance(data, dict):
+            title = (data.get("title") or data.get("text") or "").strip()
+            blob = data.get("content") or data.get("descriptionPlain") or data.get("descriptionHtml") or ""
+            if isinstance(blob, dict):
+                blob = blob.get("html") or blob.get("plain") or ""
+            text = strip_html(str(blob))
+        if not text:
+            text = trunc(raw, n)
+    else:
+        m = re.search(r"<h1[^>]*>(.*?)</h1>", raw, flags=re.I | re.S)
+        if m:
+            title = strip_html(m.group(1))
+        text = strip_html(extract_article_html(raw))
+        text = re.sub(r"^Local backup of \S+\s*", "", text)
+        if title and text.startswith(title):
+            text = text[len(title) :].lstrip(" \n")
+        # Drop leftover chrome that still sneaks in.
+        for noise in (
+            "Continue to the site",
+            "Skip to Content",
+            "Notice at Collection",
+            "Your Privacy Choices",
+            "Exercise Your Privacy Rights",
+        ):
+            if text.startswith(noise) or text.find(noise) == 0:
+                text = text.replace(noise, " ", 1)
+        text = re.sub(r"^(?:•\s*)+", "", text).strip()
+    if not text:
+        return {"path": str(path)}
+    return {"title": title, "text": trunc(text, n)}
+
+
 def orig_href(kind, ident, url) -> str:
     if find_orig_file(url) is None:
         return ""
@@ -403,8 +509,8 @@ def _orig_missing_html(kind: str, ident: int) -> bytes:
     back = "/%s/%s" % (kind, ident)
     page = (
         '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"/>'
-        "<title>本地未收录该页备份</title></head><body>"
-        "<p>本地未收录该页备份</p>"
+        "<title>没有本地原文</title></head><body>"
+        "<p>没有本地原文</p>"
         f'<p><a href="{esc(back)}">返回观察</a></p>'
         "</body></html>"
     )
@@ -585,59 +691,13 @@ def attach_case_zh(cur, rows: list) -> list:
 
 
 def en_archive_html(row: dict, case_id: int) -> str:
-    en = row.get("_en") or {}
-    if not en:
-        src = row.get("source_url") or ""
-        oh = orig_href("案例", case_id, src)
-        if oh:
-            return (
-                f'<p class="hint"><a class="orig" href="{esc(oh)}">核对原文网页（英文存档）</a></p>'
-            )
-        return ""
-    labels = {
-        "customer": "客户",
-        "source_title": "原标题",
-        "industry": "行业",
-        "business_problem": "经营问题",
-        "existing_workflow": "旧流程",
-        "pain_point": "卡点",
-        "discovery_method": "发现方法",
-        "why_ai": "为何用 AI",
-        "hero_use_case": "主场景",
-        "data_sources": "数据",
-        "integration": "集成",
-        "ai_model": "模型",
-        "agent_workflow": "工作流",
-        "human_in_the_loop": "人在环内",
-        "evaluation": "评测",
-        "deployment": "部署",
-        "time_to_production": "上线周期",
-        "business_kpi": "业务指标",
-        "measured_outcome": "结果",
-        "failure_iteration": "失败迭代",
-        "productization": "产品化",
-        "customer_handoff": "交接",
-        "fde_role": "编制",
-        "quote": "引语",
-        "evidence_note": "证据备注",
-        "product": "产品",
-    }
-    body = "".join(dl_row(labels.get(k, k), v) for k, v in en.items() if nonempty(v))
     src = row.get("source_url") or ""
     oh = orig_href("案例", case_id, src)
-    orig = (
-        f'<p class="hint"><a class="orig" href="{esc(oh)}">核对原文网页</a></p>'
-        if oh
-        else ""
-    )
-    return f"""
-<details class="fold en-archive">
-  <summary>英文摘录（库内原文，不是网页）</summary>
-  <p class="note">页面正文是译文。数字、日期、产品名按原文保留。完整网页备份走「核对原文」。</p>
-  <dl class="anatomy">{body}</dl>
-  {orig}
-</details>
-"""
+    if oh:
+        return (
+            f'<p class="hint"><a class="orig" href="{esc(oh)}">核对原文（英文存档）</a></p>'
+        )
+    return ""
 
 
 def pick_peers(rows, n=3):
@@ -933,7 +993,7 @@ def kpi_span(scope) -> str:
 def fde_flag(row) -> str:
     if has_fde_role(row):
         return '<span class="tg">现场编制</span>'
-    return '<span class="flag">原文未自称 FDE</span>'
+    return ""
 
 
 def case_card(row, flags_map, *, lead=False) -> str:
@@ -995,11 +1055,14 @@ def row_link(row, extra="") -> str:
 
         mapped = title_from_url(src or url)
         if mapped:
-            title = mapped
+            has_han = any("\u4e00" <= ch <= "\u9fff" for ch in title)
+            if not has_han:
+                title = mapped
     except Exception:
         pass
     host = row.get("host") or extra or host_of(src)
-    sub = " · ".join(x for x in (row.get("doc_type"), host) if x)
+    dtype = doc_type_label(row.get("doc_type"))
+    sub = " · ".join(x for x in (dtype, host) if x)
     ext = "" if url.startswith("/") else (' target="_blank" rel="noopener noreferrer"' if url else "")
     return (
         f'<a class="row" href="{esc(url)}"{ext}>{esc(title)}'
@@ -1023,8 +1086,13 @@ def industry_chips(base, current) -> str:
 
 
 def brand_mark() -> str:
-    """Official mark: cap-logo image only."""
+    """Official mark: cap-logo image only (imfde 定制：不放文字字样)."""
     return '<img class="brand-logo" src="/static/icons/logo-mark.png" alt="imfde.ai"/>'
+
+
+def brand_lockup() -> str:
+    """imfde 定制：锁定组合也只出纯 logo，不带文字。"""
+    return brand_mark()
 
 
 def abs_url(path: str = "/") -> str:
@@ -1047,28 +1115,32 @@ def mast(active: str, gh_url: str = "", tagline: str | None = None) -> str:
         )
     if IM_FDE_PORTAL_URL:
         links.append(f'<a class="back-to-portal" href="{esc(IM_FDE_PORTAL_URL)}">imfde 门户 →</a>')
-    brand = brand_mark()
-    tag = tagline or SITE_TAGLINE
     return f"""<div class="mast"><div class="mast-in">
-  <a class="brand" href="/" aria-label="{esc(SITE_NAME)} — {esc(tag)}">
-    {brand}
-    <span class="brand-tag">{esc(tag)}</span>
+  <a class="brand" href="/" aria-label="{esc(SITE_NAME)} {esc(SITE_CLUB)}">
+    {brand_mark()}
   </a>
-  <span class="snap">数据快照 {esc(SNAPSHOT)}</span>
   <nav>{''.join(links)}</nav>
 </div></div>"""
 
 
-def footer(gh_url: str, extra="", tagline: str | None = None) -> str:
+def footer(gh_url: str, extra="", tagline: str | None = None, learn: bool = False) -> str:
     gh = ext_link(gh_url, "github.com/Qbuby/imfde") if gh_url else ""
-    lib = ""
-    tag = tagline or SITE_TAGLINE
+    learn = learn or bool(tagline and "学习资料" in tagline)
+    if learn:
+        line2 = f"{esc(SITE_DOMAIN)} · 学习手册，不是行业动态。"
+        extra_line = "<p>面试答案不在此站展示。</p>"
+    else:
+        line2 = (
+            f"{esc(SITE_DOMAIN)} · 观察截止 {esc(day_zh(SNAPSHOT))}。"
+            "窗口按 7 / 30 / 90 天切换。"
+        )
+        extra_line = ""
+    gh_p = f"<p>{gh}</p>" if gh else ""
     return f"""<footer class="ft">
-  <p><b>{esc(SITE_NAME)}</b> · {esc(tag)}</p>
-  <p>{esc(SITE_DOMAIN)} · 数据快照 {esc(SNAPSHOT)} · 沙盘随 7/30/90 天窗口切换 · 本期收录，不是实时资讯。</p>
-  <p>数字带口径（实测 / 目标 / 预测 / 系统规模 / hero 条）。原文未写 Forward Deployed 头衔的，会标「原文未自称 FDE」。</p>
-  <p>{"开源仓库 " + gh if gh else ""}{" · " if gh and lib else ""}{lib}{(" · " + extra) if extra else ""}</p>
-  <p>面试题答案不在此站展示。第三方材料仅供私有研究对照，链回原页。从业者怎么读这份库，见 <a href="/现场">现场读法</a>。</p>
+  <p><b>{esc(SITE_NAME)}</b> · {esc(SITE_CLUB)}</p>
+  <p>{esc(SITE_SLOGAN)}</p>
+  <p>{line2}</p>
+  {extra_line}{gh_p}
 </footer>"""
 
 
@@ -1086,6 +1158,7 @@ def shell(
     home_css=True,
     page_path="/",
     tagline: str | None = None,
+    learn: bool = False,
 ) -> str:
     css = '<link rel="stylesheet" href="/static/tokens.css"/>'
     if home_css:
@@ -1094,7 +1167,7 @@ def shell(
         if not body_class:
             body_class = "desk-page"
     body_attr = f' class="{esc(body_class)}"' if body_class else ""
-    foot = "" if skip_foot else footer(gh_url, extra_foot, tagline=tagline)
+    foot = "" if skip_foot else footer(gh_url, extra_foot, tagline=tagline, learn=learn)
     mast_html = "" if skip_mast else mast(active, gh_url, tagline=tagline)
     skip_html = "" if skip_mast else '<a class="skip" href="#main">跳到正文</a>\n'
     if skip_wrap:
@@ -1302,7 +1375,7 @@ def event_card(event, lens="boss") -> str:
     )
 
 
-def event_list(events, lens="boss", empty="这一窗没有可上轴的条目。") -> str:
+def event_list(events, lens="boss", empty="这一窗没有条目。") -> str:
     if not events:
         return f'<p class="empty">{empty}</p>'
     return '<div class="ev-list">' + "".join(event_card(e, lens) for e in events) + "</div>"
@@ -1483,8 +1556,8 @@ def render_home(cur) -> str:
 <section class="hero">
   <p class="k">本期观察 · 结构化输出</p>
   <h1>先看这批材料在变什么，逐条翻是另一扇门</h1>
-  <p class="lead">同一份 {esc(SNAPSHOT)} 快照。AI 抽出的是整体结构：编制几乎不出现、岗位讨论有时间线、库内条数被产品故事拉开。不是实时资讯，也不是编制咨询。</p>
-  <p class="meta-line">数据快照 {esc(SNAPSHOT)} · {counts['n_cases']} 条观察 · 本期收录 · 发布日从已抓 HTML 回填</p>
+  <p class="lead">AI 抽出的是整体结构：编制几乎不出现、岗位讨论有时间线、库内条数被产品故事拉开。不是实时资讯，也不是编制咨询。</p>
+  <p class="meta-line">{counts['n_cases']} 条观察 · 发布日从已抓 HTML 回填</p>
   <div class="stats">
     <span><b>{pack['n']}</b> 交付现场</span>
     <span><b>{pack['n_fde']}</b> / {pack['n']} 原文写了编制</span>
@@ -1508,7 +1581,7 @@ def render_home(cur) -> str:
     <a class="go" href="/现场">用现场读法看本期 <span>给从业者</span></a>
   </article>
 </div>
-{catalog_door("/案例", "逐条看案例", "503 条目录、筛选、分页。两种读法的证据都在这里。")}
+{catalog_door("/案例", "逐条看案例", "目录、筛选、分页。两种读法的证据都在这里。")}
 """
     return shell("%s · 本期观察" % SITE_NAME, "", inner, gh, page_path="/")
 
@@ -1525,32 +1598,29 @@ def render_deploy(cur, qs) -> str:
     pack = study_pack(studies)
     gh = world.get("github") or github_url(cur)
     alt = other_windows("/落地", days)
-    empty_co = f"这 {days} 天公司动作轨没有新的组织宣布。{alt} 窗里才有。"
-    empty_dp = (
-        f"这 {days} 天没有带发布日的客户故事上轴。全库 {pack['n']} 条交付现场是库存，"
-        f"不是本周新闻。{alt}"
-    )
+    empty_co = f"这 {days} 天没有新的组织宣布。{alt} 窗里才有。"
+    empty_dp = f"这 {days} 天没有带发布日的客户故事。{alt}"
     inner = f"""
 <section class="desk-lede">
-  <p class="k">落地 · 这 {days} 天行业在变什么 · 快照 {esc(SNAPSHOT)}</p>
+  <p class="k">落地 · 这 {days} 天行业在变什么</p>
   <h1>窗口里的公司动作和真实部署</h1>
-  <p>{esc(lede)} 给要落地的负责人。沙盘同一份快照，不是咨询方案，也不是 503 条案例墙。</p>
+  <p>{esc(lede)}</p>
   {pace_strip("/落地", days, events, lanes=("company", "deploy"))}
 </section>
 <section class="brief">{change_cards(changes, lanes=("company", "deploy"))}</section>
 <section class="section" id="公司">
   <h2>公司动作</h2>
-  <p class="note">组织自己发布的官方动作。没有新宣布就空着，不拿库存页顶上。</p>
+  <p class="note">组织自己发布的官方动作。没有新宣布就空着。</p>
   {event_list(company, "boss", empty_co)}
 </section>
 <section class="section" id="部署">
   <h2>有发布日的部署</h2>
-  <p class="note">只收 published / modified 的具名客户故事。全库 {pack['n']} 条交付现场里，原文写了编制的 {pack['n_fde']} 条（{pct(pack['n_fde'], pack['n'])}）。</p>
+  <p class="note">只收有发布日的具名客户故事。原文写了现场编制的才会标出来。</p>
   {event_list(deploy, "boss", empty_dp)}
 </section>
 <section class="section" id="问题">
   <h2>先把问题说清楚</h2>
-  <p class="note">窗口讲变化速度。库存样板在案例目录，不当本周新闻。</p>
+  <p class="note">窗口讲变化速度。样板在案例目录。</p>
   <ol class="scope-q">
     <li>
       <h3>买产品，还是买驻场？</h3>
@@ -1587,27 +1657,27 @@ def render_field(cur, qs) -> str:
     alt = other_windows("/现场", days)
     inner = f"""
 <section class="desk-lede">
-  <p class="k">现场 · 这 {days} 天公开口径在怎么动 · 快照 {esc(SNAPSHOT)}</p>
-  <h1>近态是有发布日的评论，不是营销页墙</h1>
-  <p>{esc(lede)} 给从业者。不写「今日」或「刚刚」。{pack['n']} 条客户故事大多是库存，不当本周动态。学习手册在方法页，不上这窗。</p>
+  <p class="k">现场 · 这 {days} 天公开口径在怎么动</p>
+  <h1>公开场合里，现场被怎么讲</h1>
+  <p>{esc(lede)}</p>
   {pace_strip("/现场", days, events, lanes=("people",))}
 </section>
 <section class="brief">{change_cards(changes, lanes=("people",))}</section>
 <section class="section" id="人物">
   <h2>人物与观点</h2>
-  <p class="note">窗口内有发布日或修改日的访谈、评论、演讲。</p>
-  {event_list(people, "field", f"这 {days} 天人物轨没有新的公开评论。{alt}")}
+  <p class="note">窗口内的访谈、评论、演讲。</p>
+  {event_list(people, "field", f"这 {days} 天没有新的公开评论。{alt}")}
 </section>
 <section class="section" id="岗位">
   <h2>岗位变化（弱信号）</h2>
-  <p class="note">这 {days} 天招聘板 {tally['jobs']} 条上轴，只说明还在招现场编制，不是组织已经落地。列表在沙盘方法轨，这里不重复。</p>
+  <p class="note">这 {days} 天招聘板 {tally['jobs']} 条，只说明还在招现场编制，不是组织已经落地。列表在沙盘方法轨，这里不重复。</p>
 </section>
 <section class="section" id="还在吵">
   <h2>还在吵</h2>
-  <p class="note">Reddit 等讨论去重后 {len(discussions)} 帖，撑不起头条，也不进入时间轴。</p>
+  <p class="note">公开讨论去重后 {len(discussions)} 帖，撑不起头条。</p>
   <div class="list">{noise_html}</div>
 </section>
-{catalog_door(href("/案例", 窗=days), "逐条看部署现场", "按厂商 / 行业 / 证据筛选。雷达卡不再占现场桌。")}
+{catalog_door(href("/案例", 窗=days), "逐条看部署现场", "按厂商、行业、证据筛选。")}
 <p class="hint"><a href="/">回世界动态首页</a> · <a href="/方法">方法目录</a></p>
 """
     return shell("现场 · %s" % SITE_NAME, "现场", inner, gh, page_path="/现场")
@@ -1702,14 +1772,14 @@ def render_library(cur, qs) -> str:
 
     inner = f"""
 <section class="desk-lede">
-  <p class="k">部署证据 · 这 {days} 天有日期的落点 · 快照 {esc(SNAPSHOT)}</p>
+  <p class="k">部署证据 · 这 {days} 天有日期的落点</p>
   <h1>先看窗口里的部署，再翻库存目录</h1>
-  <p>上面是沙盘部署轨同一批有发布日的客户故事。下面 {total} 单是全库目录，不是本周新闻。点进一单后有两种读法。</p>
+  <p>上面是沙盘部署轨同一批有发布日的客户故事。下面是全库目录，不是本周新闻。点进一单后有两种读法。</p>
   {pace_strip("/案例", days, events, lanes=("deploy",), extra={"厂商": vendor, "行业": industry, "证据": evidence})}
 </section>
 <section class="section" id="窗口">
   <h2>这 {days} 天的部署</h2>
-  <p class="note">仅 published / modified。没有日期的营销页不进这一条。</p>
+  <p class="note">只收有发布日或页上修改日的故事。没有日期的营销页不进这一条。</p>
   {event_list(deploy, "boss", f"这 {days} 天部署轨是空的。{alt}")}
 </section>
 <section class="section">
@@ -1750,7 +1820,7 @@ def render_case(cur, case_id: int, qs) -> str:
             f"核对原文 · {esc(host_of(src) or src)}</a>"
         )
     elif src:
-        src_html = "本地未收录该页备份"
+        src_html = "没有本地原文"
     else:
         src_html = "无来源 URL"
     on_d = " on" if view == "落地" else ""
@@ -1785,7 +1855,6 @@ def render_case(cur, case_id: int, qs) -> str:
   <p class="source-line">
     {src_html}
     · {esc(doc_type_label(row.get("doc_type")))}
-    · 收录于 {esc(SNAPSHOT)}
   </p>
   <div class="meta" style="display:flex;gap:8px;flex-wrap:wrap">
     {kpi_span(row.get("kpi_scope"))}
@@ -1827,9 +1896,9 @@ def render_case(cur, case_id: int, qs) -> str:
 </div>
 {quote}
 <section class="section">
-  <h2>证据与卫生旗</h2>
-  <p class="note">{esc(row.get("evidence_note") or "无证据备注。")}</p>
-  {flags_html or '<p class="hint">没有 clean_flags。</p>'}
+  <h2>证据备注</h2>
+  <p class="note">{esc(row.get("evidence_note") or "没有补充说明。")}</p>
+  {flags_html}
 </section>
 {en_archive_html(row, case_id)}
 {related}
@@ -1881,7 +1950,7 @@ def render_event(cur, event_id: int) -> str:
                 f"核对原文 · {esc(event.get('host') or host_of(src))}</a>"
             )
         else:
-            bits.append("本地未收录该页备份")
+            bits.append("没有本地原文")
     if case_href:
         bits.append(f'<a href="{esc(case_href)}">在部署证据里看这条</a>')
     extra = (" · ".join(bits)) if bits else ""
@@ -1890,6 +1959,7 @@ def render_event(cur, event_id: int) -> str:
         if job
         else ""
     )
+    orig_block = ""
 
     def block(title, text, empty):
         body = text or empty
@@ -1898,11 +1968,12 @@ def render_event(cur, event_id: int) -> str:
 
     inner = f"""
 <section class="desk-lede">
-  <p class="k">{esc(LANE_ZH.get(lane, lane))} · {esc(day)} · 快照 {esc(SNAPSHOT)}</p>
+  <p class="k">{esc(LANE_ZH.get(lane, lane))} · {esc(day_zh(day) or day)}</p>
   <h1>{esc(event.get("title") or "")}</h1>
   <p>{esc(event.get("kicker") or event.get("entity_name") or "")} · {esc(event.get("doc_label") or "")}</p>
   {job_note}
 </section>
+{orig_block}
 {block("发生了什么", event.get("happened"), "当前未提取正文摘要。")}
 {block("为什么值得关注", event.get("why"), "当前未提取判断依据。")}
 {block("对企业落地的影响", event.get("enterprise"), "原文未写可核对的企业影响。")}
@@ -2001,7 +2072,7 @@ def write_snapshot(dest: Path | None = None) -> Path:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "NOW-FDE/1.0"
+    server_version = "imfde.ai/1.0"
 
     def log_message(self, fmt, *args):
         import sys
@@ -2057,6 +2128,10 @@ class Handler(BaseHTTPRequestHandler):
         path = normalize_path(path)
         qs = parse_qs(parsed.query, keep_blank_values=False)
 
+        if path == "/favicon.ico":
+            self.send_response(204)
+            self.end_headers()
+            return
         if path == "/static/home.css":
             self._send_file(CSS_PATH, "text/css; charset=utf-8")
             return

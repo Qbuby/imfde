@@ -8,7 +8,8 @@
   "functions": {
     "api/portal.py": {
       "memory": 1024,
-      "maxDuration": 60
+      "maxDuration": 60,
+      "includeFiles": "portal/site/**"
     },
     "api/ai.py": {
       "memory": 512,
@@ -79,6 +80,22 @@
     {
       "source": "/%E6%96%B9%E6%B3%95",
       "destination": "/api/portal?__path=/方法"
+    },
+    {
+      "source": "/方法/:path*",
+      "destination": "/api/portal?__path=/方法/:path*"
+    },
+    {
+      "source": "/%E6%96%B9%E6%B3%95/:path*",
+      "destination": "/api/portal?__path=/方法/:path*"
+    },
+    {
+      "source": "/原文/:path*",
+      "destination": "/api/portal?__path=/原文/:path*"
+    },
+    {
+      "source": "/%E5%8E%9F%E6%96%87/:path*",
+      "destination": "/api/portal?__path=/原文/:path*"
     },
     {
       "source": "/world3d",

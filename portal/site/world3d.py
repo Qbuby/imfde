@@ -22,11 +22,8 @@ IMPORT_MAP = """<script type="importmap">
 def render_world3d(cur) -> str:
     data = load_world(cur)
     github = data.get("github") or ""
-    snapshot = S.esc(S.SNAPSHOT)
-    lede30 = S.esc(
-        (data.get("ledes") or {}).get("30")
-        or "过去 30 天 · 沙盘上每一个形体都是一份可核对的官方原文"
-    )
+    snapshot = S.esc(S.day_zh(S.SNAPSHOT))
+    n30 = int(((data.get("window_counts") or {}).get("30") or {}).get("total") or 0)
     nav_links = "".join(
         (
             f'<a href="{S.esc(path)}" class="on" aria-current="page">{S.esc(label)}</a>'
@@ -48,8 +45,8 @@ def render_world3d(cur) -> str:
       <span class="w3-brand-sub">行业发展 · 随时在变</span>
     </a>
     <div class="w3-hud-mid">
-      <h1 class="w3-title">行业发展有多快</h1>
-      <p class="w3-sub" data-w3-lede>{lede30}</p>
+      <h1 class="w3-title">用真实交付证据学 FDE</h1>
+      <p class="w3-sub" data-w3-lede>点开观察，读事实与影响，再进入落地或方法 · 过去 30 天 · {n30} 条</p>
     </div>
     <div class="w3-hud-tools">
       <div class="w3-range" role="radiogroup" aria-label="时间窗口">
@@ -69,7 +66,7 @@ def render_world3d(cur) -> str:
     <canvas id="w3-canvas" tabindex="0" aria-describedby="w3-legend"></canvas>
     <div class="w3-labels w3-labels-3d" id="w3-labels-3d" aria-hidden="true"></div>
     <div class="w3-labels" id="w3-labels" aria-hidden="true"></div>
-    <p class="w3-hint" id="w3-hint">拖动旋转 · 滚轮缩放 · 点击任一形体看证据</p>
+    <p class="w3-hint" id="w3-hint">拖动旋转 · 滚轮缩放 · 点开观察读证据，再去落地或方法</p>
   </div>
 
   <aside class="w3-panel" id="w3-panel" aria-label="动态证据详情" aria-live="polite"></aside>
@@ -83,16 +80,16 @@ def render_world3d(cur) -> str:
     <span class="w3-lg-note">高度 / 亮度 = 信号</span>
     <span class="w3-lg-sep"></span>
     <span><i class="w3-dot w3-dot-pub"></i>已发布日期</span>
-    <span><i class="w3-dot w3-dot-mod"></i>页上修改日</span>
+    <span><i class="w3-dot w3-dot-mod"></i>页上日期</span>
     <span class="w3-lg-sep"></span>
     <span><i class="w3-ln w3-ln-direct"></i>直接</span>
     <span><i class="w3-ln w3-ln-indirect"></i>间接</span>
     <span><i class="w3-ln w3-ln-base"></i>大本营 → 前线</span>
-    <span class="w3-lg-snap">快照 {snapshot} · 仅 published / modified 上轴</span>
+    <span class="w3-lg-snap">观察截止 {snapshot}</span>
   </footer>
 
-  <nav class="w3-exits" id="w3-exits" aria-label="离开沙盘读这窗">
-    <span class="w3-lg-k">读这窗</span>
+  <nav class="w3-exits" id="w3-exits" aria-label="接着看">
+    <span class="w3-lg-k">接着看</span>
     <a href="/落地?窗=30" data-room="落地">落地 <span>负责人</span></a>
     <a href="/现场?窗=30" data-room="现场">现场 <span>从业者</span></a>
     <a href="/案例?窗=30" data-room="案例">部署证据</a>
@@ -111,7 +108,7 @@ def render_world3d(cur) -> str:
 <script type="module" src="/static/world3d.js"></script>
 """
     return S.shell(
-        "行业发展有多快 · %s" % WORLD_BRAND,
+        "%s · %s" % (S.SITE_CLUB, WORLD_BRAND),
         "世界动态",
         inner,
         github,

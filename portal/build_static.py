@@ -41,6 +41,9 @@ def _to_relative_paths(html: str) -> str:
     html = html.replace('"three":"/static/vendor/', '"three":"site/static/vendor/')
     html = html.replace('"three/addons/":"/static/vendor/', '"three/addons/":"site/static/vendor/')
     # 路径互引（侧栏导航等）
+    # NAV 首项「世界动态」href="/" 要先于通用 "/" 替换处理，静态导出指到 world3d.html
+    html = html.replace('<a href="/" class="on" aria-current="page">世界动态</a>', '<a href="world3d.html" class="on" aria-current="page">世界动态</a>')
+    html = html.replace('<a class="" href="/">世界动态</a>', '<a class="" href="world3d.html">世界动态</a>')
     html = html.replace('href="/世界动态"',  'href="世界动态.html"')
     html = html.replace('href="/world"',     'href="世界动态.html"')
     html = html.replace('href="/落地"',      'href="落地.html"')

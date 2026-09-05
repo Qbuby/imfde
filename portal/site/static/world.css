@@ -40,8 +40,9 @@ body.world-page .mast .brand {
   line-height: 1;
   font-weight: 700;
   letter-spacing: -0.04em;
-  white-space: nowrap;
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 body.world-page .mast .brand-im {
   color: var(--world-ink);
@@ -53,8 +54,26 @@ body.world-page .mast .brand-tld {
   color: var(--world-muted);
   font-weight: 650;
 }
+body.world-page .mast .brand-lock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+body.world-page .mast .brand-club {
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--world-ink);
+  white-space: nowrap;
+}
 body.world-page .mast .brand-tag {
-  display: none;
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--world-muted);
+  white-space: nowrap;
 }
 body.world-page .mast .snap {
   display: none;

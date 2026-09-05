@@ -308,7 +308,7 @@ function boot() {
       board.add(track(new THREE.LineSegments(eg, new THREE.LineBasicMaterial({ color: c.hi, transparent: true, opacity: 0.42 }))));
 
       const LW = LANE_TEXT_W / GT; // element px width so the text block is LANE_TEXT_W units wide
-      const lbl = groundText(`<b>${esc(laneLabel(lane))}</b><small>${esc(laneEn(lane))}</small>`, "w3-g-lane", { width: LW });
+      const lbl = groundText(`<b>${esc(laneLabel(lane))}</b>`, "w3-g-lane", { width: LW });
       lbl.element.style.setProperty("--c", c.hi);
       lbl.position.set(-half - 2 - LANE_TEXT_W / 2, 0.06, z);
       board.add(lbl);
@@ -324,7 +324,7 @@ function boot() {
       tickPts.push(x, 0.03, BASE_Z - 4, x, 0.03, FRONT_Z);
       const last = tk.t === axis.end;
       // the last tick doubles as the snapshot marker, like the 2D axis does
-      const tl = groundText(last ? `${esc(tk.label)}<em>快照</em>` : esc(tk.label), last ? "w3-g-tick w3-g-tick-end" : "w3-g-tick");
+      const tl = groundText(esc(tk.label), last ? "w3-g-tick w3-g-tick-end" : "w3-g-tick");
       tl.position.set(x, 0.06, FRONT_Z + (last ? 4.2 : 3.2));
       board.add(tl);
     });
@@ -773,9 +773,7 @@ function boot() {
 
   function syncCopy(n) {
     if (ledeEl) {
-      const custom = (DATA.ledes || {})[String(state.range)];
-      ledeEl.textContent =
-        custom || `过去 ${state.range} 天 · ${n} 条有日期的官方原文上轴 · 塔、落点、信号灯、轨道都可点开核对`;
+      ledeEl.textContent = `点开观察，读事实与影响，再进入落地或方法 · 过去 ${state.range} 天 · ${n} 条`;
     }
     document.querySelectorAll("[data-range]").forEach((b) => {
       const on = Number(b.dataset.range) === state.range;
@@ -839,6 +837,7 @@ function boot() {
     state.chain = null;
     applySelectionStyles();
     renderPanel();
+    requestAnimationFrame(() => homeCamera(false));
     history.replaceState(null, "", `?range=${state.range}&lens=${state.lens}`);
   }
 
@@ -872,7 +871,7 @@ function boot() {
       });
     }
     applySelectionStyles();
-    renderPanel(index);
+    renderPanel();
     const box = new THREE.Box3();
     ids.forEach((id) => {
       const n = nodes.get(id);
@@ -1029,8 +1028,8 @@ function boot() {
   const fieldCopy = (v, fb) => (v ? `<p>${esc(v)}</p>` : `<p class="w3-empty">${esc(fb)}</p>`);
   function panelEvent(e) {
     const primaryField = state.lens === "field";
-    const ent = fieldCopy(e.enterprise, "原文未写可核对的企业影响。");
-    const prac = fieldCopy(e.practitioner, "原文未写可核对的从业者影响。");
+    const ent = fieldCopy(e.enterprise, "原文没写这一段。");
+    const prac = fieldCopy(e.practitioner, "原文没写这一段。");
     const related = [];
     (DATA.links || []).forEach((lk) => {
       if (Number(lk.from) === e.id) related.push(Number(lk.to));
@@ -1046,64 +1045,21 @@ function boot() {
 <h2>${esc(e.title)}</h2>
 <dl class="w3-p-facts">
   <div><dt>来源</dt><dd>${esc(e.host || e.kicker)}</dd></div>
-  <div><dt>原始发布日期</dt><dd>${esc(e.date_kind === "published" ? e.day : "待补（页上修改日 " + e.day + "）")}</dd></div>
-  <div><dt>收录快照</dt><dd>${esc(DATA.snapshot)}</dd></div>
+  <div><dt>日期</dt><dd>${esc(e.date_kind === "published" ? e.day : ("页上日期 " + e.day))}</dd></div>
   <div><dt>信号</dt><dd>${esc({ low: "低", mid: "中", high: "高" }[e.signal] || e.signal)}</dd></div>
 </dl>
+${e.orig_href ? `<p class="w3-p-url"><a href="${esc(e.orig_href)}">核对原文 · ${esc(e.host || "")}</a></p>` : `<p class="w3-p-url">没有本地原文</p>`}
 <h3>发生了什么</h3>${fieldCopy(e.happened, "当前未提取正文摘要。")}
 <h3>为什么值得关注</h3>${fieldCopy(e.why, "当前未提取判断依据。")}
 <h3>${primaryField ? "对 FDE 从业者的影响" : "对企业落地的影响"}</h3>${primaryField ? prac : ent}
 <h3>${primaryField ? "对企业落地的影响" : "对 FDE 从业者的影响"}</h3>${primaryField ? ent : prac}
-${e.orig_href ? `<p class="w3-p-url"><a href="${esc(e.orig_href)}">核对原文（本地备份）· ${esc(e.host || "")}</a></p>` : `<p class="w3-p-url">本地未收录该页备份</p>`}
 ${e.case_href && e.lane === "deploy" ? `<p><a class="w3-p-more" href="${esc(e.case_href)}">在部署证据库中查看这条案例 →</a></p>` : ""}
 ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${rel.map((id) => `<li><button type="button" data-pick="${id}"><span>${esc(monthDay(byId[id].day))}</span>${esc(byId[id].title_short || byId[id].title)}</button></li>`).join("")}</ul>` : ""}`;
   }
 
-  function panelOverview(activeChain) {
-    const list = windowEvents();
-    const bases = new Map();
-    list.forEach((e) => {
-      const k = baseKeyOf(e);
-      if (!k) return;
-      if (!bases.has(k)) bases.set(k, { name: baseNameOf(e), n: 0, lane: e.lane, ids: [] });
-      bases.get(k).n += 1;
-      bases.get(k).ids.push(e.id);
-    });
-    const baseRows = [...bases.values()]
-      .sort((a, b) => b.n - a.n || (a.name < b.name ? -1 : 1))
-      .slice(0, 8)
-      .map((b) => `<li><button type="button" data-pick="${b.ids[b.ids.length - 1]}" style="--c:${(LANE_COLOR[b.lane] || LANE_COLOR.company).hi}"><i></i>${esc(b.name)}<span>${b.n}</span></button></li>`)
-      .join("");
-    const changes = (DATA.changes || [])
-      .map(
-        (ch, i) => `<li class="${activeChain === i ? "on" : ""}"><button type="button" data-chain="${i}"><b>${esc(ch.num)}</b><span><strong>${esc(ch.title)}</strong><small>${esc(ch.body)}</small></span></button>${
-          activeChain === i
-            ? `<ol class="w3-chain">${(ch.chain || []).map((c) => `<li><button type="button" data-pick="${c.id}" style="--c:${(LANE_COLOR[c.lane] || LANE_COLOR.company).hi}"><i></i>${esc(c.title)}</button></li>`).join("")}</ol>`
-            : ""
-        }</li>`
-      )
-      .join("");
-    return `
-<div class="w3-p-top"><p class="w3-p-k"><i style="background:${ACCENT}"></i>过去 ${state.range} 天 · ${list.length} 条上轴</p><button type="button" class="w3-p-x" data-home title="回到全景">⌂</button></div>
-<h2 class="w3-p-h">AI 识别的三条变化</h2>
-<p class="w3-p-note">点一条，沙盘只留下它的证据链。</p>
-<ol class="w3-changes">${changes}</ol>
-<h2 class="w3-p-h">窗口内实体</h2>
-<ul class="w3-bases">${baseRows || "<li class='w3-empty'>窗口内没有上轴事件。</li>"}</ul>
-<p class="w3-p-note">灰色底行是「大本营」，细线指向它在这段时间里推到前线的每一份原文。</p>
-<h2 class="w3-p-h">读这窗</h2>
-<ul class="w3-p-exits">
-  <li><a href="/落地?窗=${state.range}" data-room="落地">落地 <small>负责人 · 公司与部署</small></a></li>
-  <li><a href="/现场?窗=${state.range}" data-room="现场">现场 <small>从业者 · 评论与方法</small></a></li>
-  <li><a href="/案例?窗=${state.range}" data-room="案例">部署证据 <small>有日期的落点，再翻库存</small></a></li>
-  <li><a href="/方法" data-room="方法">方法 <small>学习资料，不上沙盘</small></a></li>
-  <li><a href="/平面" data-room="平面">平面时间轴 <small>同一份数据的 2D</small></a></li>
-</ul>`;
-  }
-
-  function renderPanel(activeChain) {
+  function renderPanel() {
     const e = state.selected ? byId[state.selected] : null;
-    panel.innerHTML = e ? panelEvent(e) : panelOverview(activeChain);
+    panel.innerHTML = e ? panelEvent(e) : "";
     panel.scrollTop = 0;
     root.classList.toggle("w3-has-sel", !!e);
   }

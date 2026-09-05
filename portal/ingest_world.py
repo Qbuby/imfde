@@ -158,7 +158,11 @@ HAPPENED_ZH = {
     "anthropic-enterprise-services": "Anthropic 与 Blackstone、Hellman & Friedman、Goldman Sachs 成立企业 AI 服务公司，把 Claude 的现场部署做成独立载体。",
     "deployco-northslope": "OpenAI Deployment Company 宣布收购 Northslope，用来扩大现场部署编制。不是客户交付故事。",
     "colin-jarvis-eng-leadership": "Engineering Leadership 访谈 OpenAI Global Head of FDE Colin Jarvis，讲 FDE 这个岗位实际怎么干活。",
-    "washtech-fde-talent-2026-09-01": "Washington Technology 报道：Christian & Timbers 估计全美约 1.7 万名 FDE 里，能稳定交出企业 AI 回报的大约 2000 人。",
+    "washtech-fde-talent-2026-09-01": (
+        "9 月 1 日 Washington Technology 把 FDE 写成「技术人才短缺里的短缺」。"
+        "引 Christian & Timbers：美国约 1.7 万名 FDE，约 2000 人被称作 Elite（企业 AI 做成有记录回报）。"
+        "扩法是初级跟 Elite 做规模题；国防 / A&D 被写成同一困境。"
+    ),
     "plank-fde-brief-august-2026": "Plank 8 月 FDE 简报：人才供给大约 2000 人、Palantir Q2、以及买方是自建还是外购现场工程师。",
 }
 
@@ -167,20 +171,24 @@ WHY_BY_KIND = {
     "product_line": "这是把部署能力命名成产品线的官方宣布，标志着 FDE 从支持角色走向业务中心。",
     "earnings_letter": "股东信是经营口径。点名 FDE 说明编制已经进入对外叙事，仍需回到原文核对数字。",
     "press_release": "官方新闻稿用来佐证同一天的经营口径，不单独当成第二条变化。",
-    "named_essay": "这是具名个人观点，不是企业部署声明；作者标个人，不标成雇主官方。",
+    "named_essay": "具名评论。先核文中主张、数字口径和说话人身份，不要自动当成雇主官方。",
     "interview": "有日期、有具名受访者的访谈。提供从业者怎么理解 FDE 的语境。",
     "conference_talk": "有发布日的演讲或官方录像。台上数字不当审计测量。",
     "podcast_episode": "有发布日的单期播客，用来理解方法共识，不证明某家客户已照此执行。",
-    "discussion": "公开讨论帖。一帖一条；无发布日则只收录、不上轴。",
+    "discussion": "公开讨论帖。一帖一条；无发布日则只收录、不进窗口。",
     "methodology": "方法或手册材料，帮助理解 FDE 如何工作；不证明某家客户已照此执行。",
     "engineering_blog": "工程团队写怎么建 FDE 组。这是方法信号，不是交付故事。",
     "job_posting": "官方招聘是弱信号：说明有人在建这支队伍，不证明编制已经落地。",
-    "hiring_census": "有采集日的公开普查，一篇一篇进方法轨，不把岗位列表铺上轴。",
+    "hiring_census": "有采集日的公开普查，一篇一篇进方法轨，不把岗位列表铺进窗口。",
     "dated_case_study": "具名客户且原文有发布或修改日，可作为交付现场样本；仍需回到原文核对口径。",
 }
 
-# Homepage panel fields. Keys are world_sources.id or URL needles (see editorial_pack).
-# Do not invent KPIs. If the source did not write a customer result, say so.
+# Homepage four fields. Purpose = 行业发展有多快, not source-hygiene theater.
+# happened: 原文里哪件可核对的事（谁、何时、主张/数字带口径）
+# why: 这条让本窗的「快」多了哪一层，要能和窗内其他形体并读；「不是官方」只能当从句
+# enterprise: 决策者这窗要改的判断（买/建/等）
+# practitioner: 从业者这窗要改的动作（投递/范围/别混岗位）
+# Do not invent KPIs. Hygiene (猎头≠普查) goes in a clause, never as the conclusion.
 DEPLOY_NO_FDE = (
     "原文没有写 Forward Deployed 头衔。可核的是客户侧结果和现场做法，不是编制样板。"
 )
@@ -192,8 +200,27 @@ EVENT_COPY = {
         "practitioner": "信号是现场工程岗位还在扩。工作方式不能自动等同 Palantir 或 OpenAI 的 FDE。",
     },
     "washtech-fde-talent-2026-09-01": {
-        "enterprise": "报道把能稳定交出企业 AI 回报的人估成约 2000，相对约 1.7 万名头衔持有者。不能按招聘板上的 FDE 人数规划产能。",
-        "practitioner": "头衔通胀是公开议题。要比的是能不能把部署做成可核对的回报，不是简历上有没有 FDE。",
+        "happened": (
+            "9 月 1 日 Washington Technology 把 FDE 写成「技术人才短缺里的短缺」。"
+            "引 Christian & Timbers：美国约 1.7 万名 FDE，约 2000 人被称作 Elite（企业 AI 做成有记录回报）。"
+            "JC Christian 给的扩法是初级跟 Elite 做「有把握能赢」的规模题。"
+            "国防承包商被写成同一困境；A&D 更偏政府关系和驱动消费，文中写不一定亲自实施。"
+        ),
+        "why": (
+            "这窗沙盘上同时有厂商在招（Databricks、OpenAI、Cohere）和服务商扩编目标（Blend360 说到 2027 年 750 人）。"
+            "这条是人物轨把「还在招」翻成「能出回报的人很少」。"
+            "公开叙事从「FDE 是什么」转到「Elite 不够用」——这才是它出现在这窗里的理由。"
+            "1.7 万 / 2000 仍是猎头口径，不是普查。"
+        ),
+        "enterprise": (
+            "和这窗扩招、扩编并读：若买方接受「Elite 约 2000」，自己招齐能出回报的人更难，更可能继续买驻场 / 服务商。"
+            "A&D 还被说成关系驱动。买之前问清楚买的是驻场交付还是政府关系。"
+        ),
+        "practitioner": (
+            "这窗岗位从 TPM、经理到初级都在挂。"
+            "文中把「头衔人数」和「能出回报」拆开，晋升叙事是跟 Elite 做规模题。"
+            "投递时对着 JD 分清是写系统还是推消费。"
+        ),
     },
     "cohere-fde-capability": {
         "enterprise": "Cohere 把 FDE 写成帮客户建能力、不制造依赖。买驻场前要问：撤场后自己的人能不能接着跑。",
@@ -248,7 +275,7 @@ EVENT_COPY = {
         "practitioner": "8 月市场速览。岗位热度和自己能不能入职不是同一件事。",
     },
     "plank-fde-census-2026-07-04": {
-        "enterprise": "一篇市场普查，不是把岗位列表铺上轴。不能把列表长度读成需求已兑现。",
+        "enterprise": "一篇市场普查，不是把岗位列表铺进窗口。不能把列表长度读成需求已兑现。",
         "practitioner": "看供给和职级分布，不要把聚合板当投递清单。",
     },
     "fdei-how-fdes-work": {
@@ -327,7 +354,7 @@ EVENT_COPY = {
         "practitioner": "页上写与 Forward Deployed Engineers 结对。职责以产品页为准，不是招聘承诺。",
     },
     "reddit-levels": {
-        "happened": "r/levels_fyi 讨论什么是 Forward Deployed Engineer。公开帖，无可靠发布日则不上轴。",
+        "happened": "r/levels_fyi 讨论什么是 Forward Deployed Engineer。公开帖，无可靠发布日则不进窗口。",
         "enterprise": "不能当组织宣布或客户结果。最多说明这个头衔已经进入职业讨论。",
         "practitioner": "帖里把 FDE 写成部署项目上的「CTO」：写生产代码并 own 结果。匿名讨论，不当录用标准。",
     },
@@ -354,6 +381,7 @@ EVENT_COPY = {
 }
 
 COPY_BY_NEEDLE = (
+    ("subset-tech-talent-supply-crunch-watch-out", EVENT_COPY["washtech-fde-talent-2026-09-01"]),
     (
         "fde-exit-options-career-trajectory",
         {
@@ -447,7 +475,7 @@ COPY_BY_NEEDLE = (
     (
         "openai.com/index/replit",
         {
-            "happened": "OpenAI 客户页写 Replit 与 GPT 的交付故事。本条没有可上轴的发布日，只作收录。",
+            "happened": "OpenAI 客户页写 Replit 与 GPT 的交付故事。本条没有能进窗口的发布日，只作收录。",
             "why": WHY_BY_KIND["dated_case_study"],
             "enterprise": "页面是产品故事。没有独立发布日则不上时间轴；数字要回原文。",
             "practitioner": "原文没有写 Forward Deployed 头衔。可核的是客户侧叙述，不是编制样板。",
@@ -546,10 +574,10 @@ def job_four(org: str, role: str) -> dict:
     org = (org or "该公司").strip() or "该公司"
     role = (role or "FDE").strip() or "FDE"
     return {
-        "happened": f"{org} 在官方招聘板上新挂出「{role}」。这是岗位发布，不是组织宣布。",
+        "happened": f"{org} 在官方招聘板上新挂出「{role}」。这是岗位发布，不是组织宣布。原文标题见本页。",
         "why": WHY_BY_KIND["job_posting"],
         "enterprise": f"只能读成 {org} 仍在招这个方向的现场编制。单岗不能当成交付结果，也不能当成已经扩编落地。",
-        "practitioner": f"标题能看出方向和职级（{role}），具体要求要回官方 JD。有人在招，不证明录用标准已经改写。",
+        "practitioner": f"标题能看出方向和职级（{role}）。具体职责以原文摘录为准。有人在招，不证明录用标准已经改写。",
     }
 
 
@@ -646,6 +674,14 @@ def slugify(url: str) -> str:
     host = (parts.netloc or "").replace("www.", "")
     path = (parts.path or "").strip("/").replace("/", "__") or "home"
     path = re.sub(r"[^A-Za-z0-9_.%-]", "_", path)[:110]
+    qs = urllib.parse.parse_qs(parts.query or "")
+    extra = []
+    for key in ("gh_jid", "jid", "v", "p", "id"):
+        vals = qs.get(key) or []
+        if vals:
+            extra.append(re.sub(r"[^A-Za-z0-9_.%-]", "_", vals[0])[:48])
+    if extra:
+        path = path + "__" + "__".join(extra)
     return f"{host}__{path}"
 
 
@@ -1030,6 +1066,98 @@ def fetch_youtube(url: str) -> dict:
         "html": html,
         "raw_file": watch.get("raw_file") or "",
     }
+
+
+def job_api_url(url: str) -> str:
+    m = re.search(r"[?&]gh_jid=(\d+)", url or "")
+    if m and "databricks" in (url or "").lower():
+        return f"https://boards-api.greenhouse.io/v1/boards/databricks/jobs/{m.group(1)}"
+    m = re.search(r"greenhouse\.io/([^/]+)/jobs/(\d+)", url or "")
+    if m:
+        return f"https://boards-api.greenhouse.io/v1/boards/{m.group(1)}/jobs/{m.group(2)}"
+    m = re.search(r"jobs\.lever\.co/([^/]+)/([0-9a-f-]+)", url or "", re.I)
+    if m:
+        return f"https://api.lever.co/v0/postings/{m.group(1)}/{m.group(2)}"
+    return ""
+
+
+def job_html_page(title: str, content: str, source_url: str) -> bytes:
+    body = H.unescape(H.unescape(content or ""))
+    return (
+        "<!doctype html><html lang='en'><head><meta charset='utf-8'/>"
+        f"<title>{H.escape(title or '')}</title></head><body>"
+        f"<p>Local backup of {H.escape(source_url or '')}</p>"
+        f"<h1>{H.escape(title or '')}</h1>{body}</body></html>"
+    ).encode("utf-8")
+
+
+def capture_missing_job_originals(db) -> int:
+    """Bounded: only job_posting rows already on the axis, missing local raw."""
+    n = 0
+    rows = list(
+        db.execute(
+            "SELECT id, url, title FROM world_events "
+            "WHERE info_kind='job_posting' AND url IS NOT NULL AND url!=''"
+        )
+    )
+    ashby_boards: dict[str, dict] = {}
+    for r in rows:
+        url = r["url"]
+        slug = slugify(url)
+        if (RAW_DIR / (slug + ".html")).is_file() or (RAW_DIR / (slug + ".json")).is_file():
+            continue
+        api = job_api_url(url)
+        data = None
+        if api:
+            body, _, _, err = fetch_bytes(api, tries=2, timeout=25)
+            time.sleep(0.35)
+            if not body:
+                print("  miss", r["id"], err, url[:90], flush=True)
+                continue
+            save_raw(url, body, "application/json")
+            try:
+                data = json.loads(body.decode("utf-8", errors="replace"))
+            except json.JSONDecodeError:
+                data = {}
+        else:
+            m = re.search(r"jobs\.ashbyhq\.com/([^/]+)/([0-9a-f-]+)", url, re.I)
+            if not m:
+                continue
+            board, jid = m.group(1), m.group(2).lower()
+            if board not in ashby_boards:
+                burl = f"https://api.ashbyhq.com/posting-api/job-board/{board}"
+                body, _, _, err = fetch_bytes(burl, tries=2, timeout=25)
+                time.sleep(0.4)
+                if not body:
+                    print("  miss ashby", board, err, flush=True)
+                    ashby_boards[board] = {}
+                    continue
+                try:
+                    ashby_boards[board] = json.loads(body.decode("utf-8", errors="replace"))
+                except json.JSONDecodeError:
+                    ashby_boards[board] = {}
+            payload = ashby_boards.get(board) or {}
+            job = None
+            for item in payload.get("jobs") or []:
+                blob = ((item.get("id") or "") + " " + (item.get("jobUrl") or "")).lower()
+                if jid in blob:
+                    job = item
+                    break
+            if not job:
+                print("  miss ashby job", r["id"], jid, flush=True)
+                continue
+            data = job
+            save_raw(url, json.dumps(job, ensure_ascii=False).encode("utf-8"), "application/json")
+        title = (data.get("title") or data.get("text") or r["title"] or "") if isinstance(data, dict) else (r["title"] or "")
+        content = ""
+        if isinstance(data, dict):
+            content = data.get("content") or data.get("descriptionPlain") or data.get("descriptionHtml") or ""
+            if isinstance(content, dict):
+                content = content.get("html") or content.get("plain") or ""
+        (RAW_DIR / (slug + ".html")).write_bytes(job_html_page(title, str(content or ""), url))
+        n += 1
+        print("  saved", r["id"], (title or "")[:60], flush=True)
+    return n
 
 
 def fetch_ats(url: str) -> dict:
