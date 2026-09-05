@@ -1114,6 +1114,102 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
     }
   }
 
+  /* ---------- 解读报告（7/30/90 天，服务端预生成+缓存） ---------- */
+  const reportCache = new Map(); // range → {text, events, total}
+  function ensureFloatBtn() {
+    if (document.getElementById("w3-report-fab")) return;
+    const fab = document.createElement("button");
+    fab.id = "w3-report-fab";
+    fab.type = "button";
+    fab.setAttribute("aria-label", "解读报告");
+    fab.innerHTML = '<span class="w3-fab-ico">✦</span><span class="w3-fab-t">解读报告</span>';
+    document.body.appendChild(fab);
+    fab.addEventListener("click", () => openReport(state.range));
+  }
+  function reportLink(t) {
+    // 把 markdown 链接 [标题](url) 映射回沙盘事件（按 url 匹配），点击选中对应形体
+    const raw = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) => {
+      const ev = (DATA.events || []).find(
+        (x) => x.url === url || (x.detail && x.detail["原文链接"] === url)
+      );
+      return ev
+        ? `<a href="javascript:void(0)" data-report-pick="${ev.id}">${esc(label)}</a>`
+        : `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+    });
+    return raw;
+  }
+  function mdLite(t) {
+    let h = esc(t);
+    h = reportLink(h);
+    h = h.replace(/^### (.+)$/gm, "<h4>$1</h4>");
+    h = h.replace(/^## (.+)$/gm, "<h3>$1</h3>");
+    h = h.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+    h = h.replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>");
+    return `<p>${h}</p>`;
+  }
+  async function openReport(range) {
+    let overlay = document.getElementById("w3-report-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "w3-report-overlay";
+      overlay.innerHTML = `
+<div class="w3-rp" role="dialog" aria-label="解读报告">
+  <header class="w3-rp-h">
+    <h2>解读报告</h2>
+    <div class="w3-range" role="radiogroup" aria-label="报告时间窗">
+      <button type="button" data-rp-range="7">7 天</button>
+      <button type="button" data-rp-range="30" class="on">30 天</button>
+      <button type="button" data-rp-range="90">90 天</button>
+    </div>
+    <button type="button" class="w3-rp-x" data-rp-close aria-label="关闭">×</button>
+  </header>
+  <div class="w3-rp-body" id="w3-rp-body"></div>
+</div>`;
+      document.body.appendChild(overlay);
+      overlay.addEventListener("click", (ev) => {
+        const pick = ev.target.closest("[data-report-pick]");
+        if (pick) {
+          closeReport();
+          select(Number(pick.dataset.reportPick), { fly: true });
+          return;
+        }
+        const rbtn = ev.target.closest("[data-rp-range]");
+        if (rbtn) {
+          openReport(Number(rbtn.dataset.rpRange));
+          return;
+        }
+        if (ev.target.closest("[data-rp-close]") || ev.target === overlay) closeReport();
+      });
+    }
+    overlay.hidden = false;
+    overlay.querySelectorAll("[data-rp-range]").forEach((b) => {
+      const on = Number(b.dataset.rpRange) === Number(range);
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    const bodyEl = overlay.querySelector("#w3-rp-body");
+    if (reportCache.has(range)) {
+      const rep = reportCache.get(range);
+      bodyEl.innerHTML = `<div class="w3-ai-text">${mdLite(rep.text)}</div>`;
+      return;
+    }
+    bodyEl.innerHTML = '<p class="w3-ai-loading">✦ 生成中…</p>';
+    try {
+      const res = await fetch(`/api/ai-report?range=${range}`, { method: range ? "GET" : "GET" });
+      const rep = await res.json();
+      if (!res.ok || !rep.enabled) throw new Error(rep.error || ("HTTP " + res.status));
+      reportCache.set(range, rep);
+      bodyEl.innerHTML = `<div class="w3-ai-text">${mdLite(rep.text)}</div>`;
+    } catch (err) {
+      bodyEl.innerHTML = `<p class="w3-ai-err">报告不可用：${esc(String(err.message || err))}</p>`;
+    }
+  }
+  function closeReport() {
+    const overlay = document.getElementById("w3-report-overlay");
+    if (overlay) overlay.hidden = true;
+  }
+  ensureFloatBtn();
+
   /* ---------- go ---------- */
   rebuild();
   homeCamera(true);
