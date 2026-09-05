@@ -145,7 +145,7 @@ CRAFT_HOSTS = (
     "fde.academy",
 )
 NAV = (
-    ("立体沙盘", "/world3d"),
+    ("世界动态", "/world3d"),
     ("落地", "/落地"),
     ("现场", "/现场"),
     ("部署证据", "/案例"),
@@ -1558,7 +1558,7 @@ def render_deploy(cur, qs) -> str:
     </li>
     <li>
       <h3>要不要为此建编制？</h3>
-      <p>库里几乎没有「如何组建 FDE 团队」的完整样本。岗位变化是弱信号，回沙盘方法轨看。</p>
+      <p>库里几乎没有「如何组建 FDE 团队」的完整样本。岗位变化是弱信号，回世界动态方法轨看。</p>
     </li>
     <li>
       <h3>公开口径能不能当样板？</h3>
@@ -1567,7 +1567,7 @@ def render_deploy(cur, qs) -> str:
   </ol>
 </section>
 {catalog_door(href("/案例", 窗=days, 厂商="核心", 证据="high"), "库存样板在案例目录", "卡片、筛选、分页都在那里。产品故事默认不当编制样本。")}
-<p class="hint"><a href="/">回沙盘首页</a> · <a href="/方法">方法</a></p>
+<p class="hint"><a href="/">回世界动态首页</a> · <a href="/方法">方法</a></p>
 """
     return shell("落地 · %s" % SITE_NAME, "落地", inner, gh, page_path="/落地")
 
@@ -1608,7 +1608,7 @@ def render_field(cur, qs) -> str:
   <div class="list">{noise_html}</div>
 </section>
 {catalog_door(href("/案例", 窗=days), "逐条看部署现场", "按厂商 / 行业 / 证据筛选。雷达卡不再占现场桌。")}
-<p class="hint"><a href="/">回沙盘首页</a> · <a href="/方法">方法目录</a></p>
+<p class="hint"><a href="/">回世界动态首页</a> · <a href="/方法">方法目录</a></p>
 """
     return shell("现场 · %s" % SITE_NAME, "现场", inner, gh, page_path="/现场")
 
@@ -1720,7 +1720,7 @@ def render_library(cur, qs) -> str:
   <div class="grid-3">{grid}</div>
   {pager}
 </section>
-<p class="hint"><a href="/">回沙盘首页</a> · <a href="/落地">落地</a></p>
+<p class="hint"><a href="/">回世界动态首页</a> · <a href="/落地">落地</a></p>
 """
     return shell("部署证据 · %s" % SITE_NAME, "部署证据", inner, gh, page_path="/案例")
 
@@ -1833,7 +1833,7 @@ def render_case(cur, case_id: int, qs) -> str:
 </section>
 {en_archive_html(row, case_id)}
 {related}
-<p class="hint"><a href="/">回沙盘</a> · <a href="/落地">回落地</a> · <a href="/现场">回现场</a> · <a href="/案例">案例目录</a></p>
+<p class="hint"><a href="/">回世界动态</a> · <a href="/落地">回落地</a> · <a href="/现场">回现场</a> · <a href="/案例">案例目录</a></p>
 """
     return shell("%s · %s" % (title, SITE_NAME), "部署证据", inner, gh, page_path="/案例/%s" % case_id)
 
@@ -1865,7 +1865,7 @@ def render_event(cur, event_id: int) -> str:
     event = load_world_event(cur, event_id)
     gh = github_url(cur)
     if not event:
-        inner = '<section class="desk-lede"><h1>没有这条动态</h1><p><a href="/">回沙盘</a></p></section>'
+        inner = '<section class="desk-lede"><h1>没有这条动态</h1><p><a href="/">回世界动态</a></p></section>'
         return shell("未找到 · %s" % SITE_NAME, "世界动态", inner, gh, page_path="/动态")
     lane = event.get("lane") or ""
     day = event.get("day") or ""
@@ -1908,7 +1908,7 @@ def render_event(cur, event_id: int) -> str:
 {block("对企业落地的影响", event.get("enterprise"), "原文未写可核对的企业影响。")}
 {block("对从业者的影响", event.get("practitioner"), "原文未写可核对的从业者影响。")}
 <p class="hint">{extra}</p>
-<p class="hint"><a href="/">回沙盘</a> · <a href="/落地">落地</a> · <a href="/现场">现场</a> · <a href="/方法">方法</a></p>
+<p class="hint"><a href="/">回世界动态</a> · <a href="/落地">落地</a> · <a href="/现场">现场</a> · <a href="/方法">方法</a></p>
 """
     return shell(
         "%s · %s" % (event.get("title") or "动态", SITE_NAME),

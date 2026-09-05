@@ -29,7 +29,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   display:flex;align-items:center;gap:18px;
 }
 .brand{
-  display:flex;flex-direction:column;gap:1px;line-height:1;
+  display:inline-flex;align-items:center;gap:10px;line-height:1;
   font-family:var(--font-sans);
   font-weight:700;letter-spacing:-.04em;color:var(--fg);text-decoration:none;font-size:22px;
 }
@@ -37,15 +37,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .brand-im{color:var(--fg)}
 .brand-fde{color:var(--acc)}
 .brand-tld{color:var(--mut);font-weight:600}
+.brand-lock{display:flex;flex-direction:column;gap:2px;min-width:0}
+.brand-club{
+  font-size:13px;font-weight:650;letter-spacing:-.02em;color:var(--fg);line-height:1.2;
+}
 .brand-tag{
   display:block;
-  max-width:22em;
   color:var(--mut);
   font-family:var(--font-sans);
-  font-size:10px;font-weight:500;letter-spacing:.01em;line-height:1.25;
+  font-size:11px;font-weight:500;letter-spacing:.04em;line-height:1.2;
 }
 .brand:hover{text-decoration:none;color:var(--acc)}
-.brand:hover .brand-tag{color:var(--acc)}
+.brand:hover .brand-club,.brand:hover .brand-tag{color:var(--acc)}
 .snap{color:var(--mut);font-size:13px;font-variant-numeric:tabular-nums}
 .mast nav{margin-left:auto;display:flex;gap:28px;flex-wrap:wrap;align-items:center}
 .mast nav a{color:var(--fg);font-size:14px;font-weight:550;line-height:52px}
@@ -306,6 +309,5 @@ footer.ft p{margin:6px 0}
   .skip,.filters{display:none}
 }
 
-/* 帽子 logo 图标（brand_mark：独立图，无文字字样） */
-.brand-mark .brand-logo{width:32px;height:32px;border-radius:8px;object-fit:cover;display:block;flex:none}
-.brand-mark{display:inline-flex;align-items:center}
+/* 帽子 logo（brand_mark：仅图一张；尺寸与首页世界动态顶栏 logo 完全一致） */
+.brand .brand-logo{width:40px;height:40px;border-radius:9px;object-fit:cover;display:block;flex:none}

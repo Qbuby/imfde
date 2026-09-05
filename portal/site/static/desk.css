@@ -31,6 +31,8 @@ body.desk-page .mast .brand { color: var(--fg); }
 body.desk-page .mast .brand-im { color: var(--fg); }
 body.desk-page .mast .brand-fde { color: var(--acc); }
 body.desk-page .mast .brand-tld { color: var(--mut); }
+body.desk-page .mast .brand-lock { color: var(--fg); }
+body.desk-page .mast .brand-club { color: var(--fg); }
 body.desk-page .mast .brand-tag { color: var(--mut); }
 body.desk-page .mast .snap { color: var(--mut); }
 body.desk-page .mast nav a { color: var(--fg-soft); }
@@ -353,7 +355,3 @@ a.orig:hover { color: var(--acc); }
 @media (max-width: 860px) {
   .pace { grid-template-columns: 1fr; }
 }
-
-/* 帽子 logo 图标（brand_mark：独立图） */
-.brand-mark .brand-logo{width:32px;height:32px;border-radius:8px;object-fit:cover;display:block;flex:none}
-.brand-mark{display:inline-flex;align-items:center}

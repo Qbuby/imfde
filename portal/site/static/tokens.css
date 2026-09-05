@@ -111,7 +111,7 @@
   color-scheme: light;
 }
 
-/* 阅读页不跟系统暗色走。首页沙盘是白底，立体沙盘是单独的深色页。 */
+/* 阅读页不跟系统暗色走。平面阅读页是白底，世界动态首页是单独的深色页。 */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

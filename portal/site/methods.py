@@ -383,7 +383,7 @@ def render_home(cur) -> str:
 <section class="desk-lede">
   <p class="k">方法 · 学习资料 · 快照 {S.esc(S.SNAPSHOT)}</p>
   <h1>问题和方法织成的学习图谱</h1>
-  <p>骨架是现场交付循环。完整课目前只有「客户发现」；其余节点是目录，不是教程。这不是行业动态，也不展示面试答案。行业变化回沙盘。</p>
+  <p>骨架是现场交付循环。完整课目前只有「客户发现」；其余节点是目录，不是教程。这不是行业动态，也不展示面试答案。行业变化回世界动态。</p>
 </section>
 <section class="learn-start">
   <p class="k">从这里开始</p>
@@ -406,7 +406,7 @@ def render_home(cur) -> str:
   <p class="note">目录。还没有完整课。</p>
   <div class="kg-cycle">{''.join(_node_card(t) for t in l2)}</div>
 </section>
-<p class="hint"><a href="/">回沙盘首页</a></p>
+<p class="hint"><a href="/">回世界动态首页</a></p>
 """
     return _shell("方法 · %s" % S.SITE_NAME, inner, gh, "/方法")
 

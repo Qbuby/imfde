@@ -85,6 +85,30 @@
       "destination": "/api/portal?__path=/world3d"
     },
     {
+      "source": "/世界动态",
+      "destination": "/api/portal?__path=/world3d"
+    },
+    {
+      "source": "/%E4%B8%96%E7%95%8C%E5%8A%A8%E6%80%81",
+      "destination": "/api/portal?__path=/world3d"
+    },
+    {
+      "source": "/平面",
+      "destination": "/api/portal?__path=/平面"
+    },
+    {
+      "source": "/%E5%B9%B3%E9%9D%A2",
+      "destination": "/api/portal?__path=/平面"
+    },
+    {
+      "source": "/动态/:path*",
+      "destination": "/api/portal?__path=/动态/:path*"
+    },
+    {
+      "source": "/%E5%8A%A8%E6%80%81/:path*",
+      "destination": "/api/portal?__path=/动态/:path*"
+    },
+    {
       "source": "/api/world.json",
       "destination": "/api/portal?__path=/api/world.json"
     }
