@@ -2123,10 +2123,18 @@ def fetch_ats_census(db, catalog, run) -> dict:
             note="ats census n=%s sample=%s" % (len(titles), "; ".join(list(titles)[:4])),
             run=run,
         )
-        # census uses snapshot day — that's collection, not a real publishedAt. Force collected.
+        # 普查日 = 快照日（采集口径，非真实 publishedAt）。此前把 day 置 NULL 导致普查
+        # 永不进窗口；现保留快照日并标 date_kind='published'，让普查能进 7/30/90 天窗的沙盘。
+        # 标题带「快照日」口径说明，避免误解成「当天发布 N 个岗位」。
         if st in ("axis", "collected"):
             db.execute(
-                "UPDATE world_events SET day=NULL, date_kind='collected' WHERE url=?",
+                "UPDATE world_events SET day=COLLECTED_ON, date_kind='published'"
+                " WHERE url=? AND day IS NULL",
+                (census_url,),
+            )
+            db.execute(
+                "UPDATE world_events SET title=title||'（快照 '||COLLECTED_ON||'）'"
+                " WHERE url=? AND title NOT LIKE '%快照 %'",
                 (census_url,),
             )
             db.commit()
