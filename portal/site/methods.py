@@ -628,10 +628,6 @@ def render_home(cur) -> str:
     <a class="learn-brand" href="/world3d" aria-label="{S.esc(S.SITE_NAME)} {S.esc(S.SITE_CLUB)}">
       {S.brand_lockup()}
     </a>
-    <div class="learn-hud-mid">
-      <h1 class="learn-title">现场交付循环</h1>
-      <p class="learn-sub">点选看这一步 · {n_ready}/{len(l1)} 课已写成教程</p>
-    </div>
     <div class="learn-hud-tools">
       <nav class="learn-nav" aria-label="站内导航">{_hud_nav(gh)}</nav>
     </div>

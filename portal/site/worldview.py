@@ -1084,12 +1084,7 @@ def render_world(cur) -> str:
 <div class="world">
   <div class="world-layout">
     <main class="world-main">
-      <section class="world-intro" aria-labelledby="world-title">
-        <div class="world-intro-copy">
-          <p class="world-tagline">{S.esc(S.SITE_CLUB)} · {S.esc(S.SITE_SLOGAN)}</p>
-          <h1 id="world-title">平面时间轴 · 行业发展有多快</h1>
-          <p class="lede" data-world-lede>Blend360 把编制目标写到 2027 年 750 人；Cohere 写建能力、不制造依赖。招聘还在发生，不等于现场组织已经铺开。</p>
-        </div>
+      <section class="world-intro" aria-label="平面时间轴工具">
         <div class="world-intro-tools">
           <div class="range" role="radiogroup" aria-label="时间窗口">
             <button type="button" data-range="7" aria-pressed="false">7 天</button>

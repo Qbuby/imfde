@@ -1609,8 +1609,6 @@ def render_deploy(cur, qs) -> str:
     inner = f"""
 <section class="desk-lede">
   <p class="k">落地 · 这 {days} 天行业在变什么</p>
-  <h1>窗口里的公司动作和真实部署</h1>
-  <p>{esc(lede)}</p>
   {pace_strip("/落地", days, events, lanes=("company", "deploy"))}
 </section>
 <section class="brief">{change_cards(changes, lanes=("company", "deploy"))}</section>
@@ -1664,8 +1662,6 @@ def render_field(cur, qs) -> str:
     inner = f"""
 <section class="desk-lede">
   <p class="k">现场 · 这 {days} 天公开口径在怎么动</p>
-  <h1>公开场合里，现场被怎么讲</h1>
-  <p>{esc(lede)}</p>
   {pace_strip("/现场", days, events, lanes=("people",))}
 </section>
 <section class="brief">{change_cards(changes, lanes=("people",))}</section>
@@ -1779,8 +1775,6 @@ def render_library(cur, qs) -> str:
     inner = f"""
 <section class="desk-lede">
   <p class="k">部署证据 · 这 {days} 天有日期的落点</p>
-  <h1>先看窗口里的部署，再翻库存目录</h1>
-  <p>上面是沙盘部署轨同一批有发布日的客户故事。下面是全库目录，不是本周新闻。点进一单后有两种读法。</p>
   {pace_strip("/案例", days, events, lanes=("deploy",), extra={"厂商": vendor, "行业": industry, "证据": evidence})}
 </section>
 <section class="section" id="窗口">

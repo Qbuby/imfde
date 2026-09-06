@@ -43,10 +43,6 @@ def render_world3d(cur) -> str:
     <a class="w3-brand" href="/world3d" aria-label="{S.esc(WORLD_BRAND)} {S.esc(S.SITE_CLUB)}">
       {S.brand_lockup()}
     </a>
-    <div class="w3-hud-mid">
-      <h1 class="w3-title">用真实交付证据学 FDE</h1>
-      <p class="w3-sub" data-w3-lede>点开观察，读事实与影响，再进入落地或方法 · 过去 30 天 · {n30} 条</p>
-    </div>
     <div class="w3-hud-tools">
       <div class="w3-range" role="radiogroup" aria-label="时间窗口">
         <button type="button" data-range="7" aria-pressed="false">7 天</button>
