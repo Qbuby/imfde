@@ -1091,14 +1091,8 @@ def brand_mark() -> str:
 
 
 def brand_lockup() -> str:
-    """Cap-logo + community name + slogan（对齐上游品牌锁定，仅字样换帽子 logo）。"""
-    return (
-        f"{brand_mark()}"
-        '<span class="brand-lock">'
-        f'<span class="brand-club">{esc(SITE_CLUB)}</span>'
-        f'<span class="brand-tag">{esc(SITE_SLOGAN)}</span>'
-        "</span>"
-    )
+    """Cap-logo only（去掉进化社两行文字）。"""
+    return brand_mark()
 
 
 def abs_url(path: str = "/") -> str:
