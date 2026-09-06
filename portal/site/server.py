@@ -1090,9 +1090,20 @@ def brand_mark() -> str:
     return '<img class="brand-logo" src="/static/icons/logo-mark.png" alt="imfde.ai"/>'
 
 
+def brand_wordmark() -> str:
+    """imfde.ai 文字字标：im 主体色、fde 强调色、.ai 灰。"""
+    return (
+        '<span class="brand-mark">'
+        '<span class="brand-im">im</span>'
+        '<span class="brand-fde">fde</span>'
+        '<span class="brand-tld">.ai</span>'
+        "</span>"
+    )
+
+
 def brand_lockup() -> str:
-    """Cap-logo only（去掉进化社两行文字）。"""
-    return brand_mark()
+    """帽子 logo + imfde.ai 字样。"""
+    return f"{brand_mark()}{brand_wordmark()}"
 
 
 def abs_url(path: str = "/") -> str:

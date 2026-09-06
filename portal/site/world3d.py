@@ -42,6 +42,7 @@ def render_world3d(cur) -> str:
   <header class="w3-hud" role="banner">
     <a class="w3-brand" href="/world3d" aria-label="{S.esc(WORLD_BRAND)} {S.esc(S.SITE_CLUB)}">
       {S.brand_lockup()}
+      <span class="brand-lock"><span class="brand-club">全球首个FDE实时情报动态沙盘</span></span>
     </a>
     <div class="w3-hud-tools">
       <div class="w3-range" role="radiogroup" aria-label="时间窗口">
