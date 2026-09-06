@@ -118,6 +118,14 @@
       "destination": "/api/portal?__path=/退出登录"
     },
     {
+      "source": "/oauth/:path*",
+      "destination": "/api/portal?__path=/oauth/:path*"
+    },
+    {
+      "source": "/oauth",
+      "destination": "/api/portal?__path=/oauth"
+    },
+    {
       "source": "/%E9%80%80%E5%87%BA%E7%99%BB%E5%BD%95",
       "destination": "/api/portal?__path=/退出登录"
     },

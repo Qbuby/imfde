@@ -250,6 +250,13 @@ def connect():
     return con
 
 
+def connect_rw():
+    """可写连接（登录 users/oauth_states 表用）。公开读保持只读 connect()。"""
+    con = sqlite3.connect(str(DB_PATH))
+    con.row_factory = sqlite3.Row
+    return con
+
+
 def url_slug(url: str) -> str:
     parts = urlparse(url)
     host = (parts.netloc or "").replace("www.", "")
@@ -2175,8 +2182,16 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
             return
 
-        # /登录 或 /登录/<provider>
-        parts = path.split("/")  # ['', '登录', 'github']
+        # /登录 或 /登录/<provider> 或 /oauth/<provider>/callback
+        # 归一化：/oauth/<p>[/callback] → 当作 provider 路由处理，callback 段与中文"回调"均可
+        m = re.fullmatch(r"/oauth/([A-Za-z0-9]+)(/callback)?", path)
+        if m:
+            provider_hit = m.group(1).lower()
+            is_callback = bool(m.group(2))
+            # 复用统一逻辑：把 path 规范成 /登录/<provider>/回调 或 /登录/<provider>
+            parts = ["", "登录", provider_hit] + (["回调"] if is_callback else [])
+        else:
+            parts = path.split("/")  # ['', '登录', 'github' ...]
         if len(parts) < 3 or not parts[2]:
             page = A.login_page_html((qs.get("next") or ["/"])[0], A.providers_enabled(), base)
             self._send(200, page.encode("utf-8"), "text/html; charset=utf-8")
@@ -2188,36 +2203,33 @@ class Handler(BaseHTTPRequestHandler):
         if not nxt.startswith("/"):
             nxt = "/"
 
-        with connect() as con:
-            if len(parts) < 4 or parts[3] != "回调":
-                # 第一步：发 state 并 302 到授权页
-                if not enabled.get(provider):
-                    self._send(200, A.login_page_html(nxt, enabled, base).encode("utf-8"), "text/html; charset=utf-8")
-                    return
-                state = secrets.token_urlsafe(24)
-                A.put_state(con, state, nxt)
-                redirect_uri = f"{base}/登录/{provider}/回调"
-                self.send_response(302)
-                self.send_header("Location", A.authorize_url(provider, redirect_uri, state))
-                self.end_headers()
+        if len(parts) < 4 or parts[3] != "回调":
+            # 第一步：发 state 并 302 到授权页（state 自包含，无需写库）
+            if not enabled.get(provider):
+                self._send(200, A.login_page_html(nxt, enabled, base).encode("utf-8"), "text/html; charset=utf-8")
                 return
-            # 第二步：回调换用户信息
-            code = (qs.get("code") or [""])[0]
-            state = (qs.get("state") or [""])[0]
-            stored_next = A.pop_state(con, state)
-            if not code or not stored_next:
-                self._send(400, "登录状态失效，请重试".encode("utf-8"), "text/plain; charset=utf-8")
-                return
-            try:
-                info = A.fetch_user(provider, code, f"{base}/登录/{provider}/回调")
-            except Exception:
-                import traceback
+            state = A.make_state(nxt)
+            redirect_uri = A.callback_uri(base, provider)
+            self.send_response(302)
+            self.send_header("Location", A.authorize_url(provider, redirect_uri, state))
+            self.end_headers()
+            return
+        # 第二步：回调换用户信息
+        code = (qs.get("code") or [""])[0]
+        state = (qs.get("state") or [""])[0]
+        stored_next = A.verify_state(state)
+        if not code or not stored_next:
+            self._send(400, "登录状态失效，请重试".encode("utf-8"), "text/plain; charset=utf-8")
+            return
+        try:
+            info = A.fetch_user(provider, code, A.callback_uri(base, provider))
+        except Exception:
+            import traceback
 
-                self._send(500, ("登录失败\n" + traceback.format_exc()).encode("utf-8"), "text/plain; charset=utf-8")
-                return
-            uid = A.upsert_user(con, provider, str(info.get("uid") or ""), info.get("name") or "",
-                                info.get("email") or "", info.get("avatar") or "")
-        token = A.sign_session({"uid": uid, "provider": provider, "name": info.get("name") or "",
+            self._send(500, ("登录失败\n" + traceback.format_exc()).encode("utf-8"), "text/plain; charset=utf-8")
+            return
+        uid = info.get("uid") or ""
+        token = A.sign_session({"uid": str(uid), "provider": provider, "name": info.get("name") or "",
                                 "avatar": info.get("avatar") or "", "exp": time.time() + A.SESSION_TTL})
         self.send_response(302)
         self.send_header("Location", stored_next or "/")
@@ -2237,7 +2249,7 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(204)
             self.end_headers()
             return
-        if path.startswith("/登录") or path == "/退出登录":
+        if path.startswith("/登录") or path == "/退出登录" or path.startswith("/oauth/") or path == "/oauth":
             self._handle_auth(path, parsed.query)
             return
         if path == "/static/home.css":

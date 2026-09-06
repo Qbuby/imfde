@@ -53,6 +53,15 @@ def base_url(host: str = "", scheme: str = "") -> str:
     return "https://imfde.ai"
 
 
+def callback_uri(base: str, provider: str) -> str:
+    """OAuth 回调地址（纯 ASCII，供 Google 等严格要求 redirect_uri 的渠道）。
+
+    Google 不接受含中文或多段路径的重定向 URI，故回调地址统一用 /oauth/<provider>/callback，
+    与用户可见的 /登录/<provider> 入口解耦。回调进来的请求仍由 render_path 路由到 _handle_auth。
+    """
+    return f"{base}/oauth/{provider}/callback"
+
+
 def providers_enabled() -> dict:
     return {
         "github": bool(_env("GITHUB_CLIENT_ID") and _env("GITHUB_CLIENT_SECRET")),
@@ -149,6 +158,28 @@ def pop_state(con: sqlite3.Connection, state: str) -> str | None:
         con.commit()
         return row[0]
     return None
+
+
+# ---------- 自包含 state（Vercel serverless 只读，无法写 oauth_states 表） ----------
+# state = base64url(next) + "." + hmac 签名；回调验签还原 next，不依赖数据库。
+def make_state(nxt: str) -> str:
+    body = _b64e((nxt or "/").encode())
+    mac = hmac.new(_secret_key(), body.encode(), hashlib.sha256).hexdigest()
+    return f"{body}.{mac}"
+
+
+def verify_state(state: str) -> str | None:
+    """返回合法的 next；非法/篡改返回 None。"""
+    if not state or "." not in state:
+        return None
+    body, mac = state.rsplit(".", 1)
+    expect = hmac.new(_secret_key(), body.encode(), hashlib.sha256).hexdigest()
+    if not hmac.compare_digest(mac, expect):
+        return None
+    try:
+        return _b64d(body).decode()
+    except Exception:
+        return None
 
 
 # ---------- 各渠道授权 URL / token / userinfo ----------
