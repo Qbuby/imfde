@@ -98,6 +98,30 @@
       "destination": "/api/portal?__path=/原文/:path*"
     },
     {
+      "source": "/登录",
+      "destination": "/api/portal?__path=/登录"
+    },
+    {
+      "source": "/%E7%99%BB%E5%BD%95",
+      "destination": "/api/portal?__path=/登录"
+    },
+    {
+      "source": "/登录/:path*",
+      "destination": "/api/portal?__path=/登录/:path*"
+    },
+    {
+      "source": "/%E7%99%BB%E5%BD%95/:path*",
+      "destination": "/api/portal?__path=/登录/:path*"
+    },
+    {
+      "source": "/退出登录",
+      "destination": "/api/portal?__path=/退出登录"
+    },
+    {
+      "source": "/%E9%80%80%E5%87%BA%E7%99%BB%E5%BD%95",
+      "destination": "/api/portal?__path=/退出登录"
+    },
+    {
       "source": "/world3d",
       "destination": "/api/portal?__path=/world3d"
     },

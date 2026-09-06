@@ -37,6 +37,7 @@ def render_world3d(cur) -> str:
         if github
         else ""
     )
+    auth_link = S.auth_link("/")
     inner = f"""
 <div class="w3" id="w3" data-three="{THREE_VERSION}">
   <header class="w3-hud" role="banner">
@@ -54,7 +55,7 @@ def render_world3d(cur) -> str:
         <button type="button" data-lens="boss" class="on" aria-pressed="true">决策者</button>
         <button type="button" data-lens="field" aria-pressed="false">从业者</button>
       </div>
-      <nav class="w3-nav" aria-label="站内导航">{nav_links}{gh_link}</nav>
+      <nav class="w3-nav" aria-label="站内导航">{nav_links}{gh_link}{auth_link}</nav>
     </div>
   </header>
 

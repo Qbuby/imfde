@@ -500,6 +500,7 @@ def _hud_nav(gh: str) -> str:
         links.append(
             f'<a class="learn-gh" href="{S.esc(gh)}" target="_blank" rel="noopener noreferrer">GitHub</a>'
         )
+    links.append(S.auth_link("/方法"))
     return "".join(links)
 
 

@@ -106,6 +106,20 @@
 .learn-nav a.on { color: var(--w3-acc); }
 .learn-nav .learn-gh { color: var(--w3-fg-soft); }
 
+/* 登录入口 / 已登录头像（学习 HUD） */
+.learn-nav .auth-entry {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; border-radius: 999px;
+  border: 1px solid var(--w3-line, rgba(143, 178, 196, 0.2));
+  color: var(--w3-fg, #eeebe5);
+  font-size: 13px; font-weight: 600; line-height: 1.5;
+  text-decoration: none; white-space: nowrap;
+}
+.learn-nav .auth-entry:hover { border-color: var(--w3-accent, #3fc0c0); color: var(--w3-accent, #3fc0c0); text-decoration: none; }
+.learn-nav .auth-entry.on { border-color: transparent; padding-left: 6px; }
+.learn-nav .auth-entry .auth-avatar { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; display: block; }
+.learn-nav .auth-entry .auth-name { max-width: 12em; overflow: hidden; text-overflow: ellipsis; }
+
 .learn-stage {
   grid-area: stage;
   position: relative;

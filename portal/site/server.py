@@ -18,8 +18,11 @@ import html
 import json
 import mimetypes
 import re
+import secrets
 import sqlite3
+import time
 import traceback
+import urllib.parse
 from collections import Counter
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -1090,6 +1093,33 @@ def brand_mark() -> str:
     return '<img class="brand-logo" src="/static/icons/logo-mark.png" alt="imfde.ai"/>'
 
 
+_CURRENT_COOKIES: dict = {}
+
+
+def set_request_cookies(cookies: dict | None) -> None:
+    """每个请求渲染前调用：把当次请求的 cookie 交给渲染层（登录头像用）。"""
+    global _CURRENT_COOKIES
+    _CURRENT_COOKIES = cookies or {}
+
+
+def auth_link(next_path: str = "/") -> str:
+    """导航栏右侧的登录入口 / 已登录头像。不做限权，仅身份展示。"""
+    import auth as A
+
+    user = A.current_user_cookie(_CURRENT_COOKIES)
+    if user:
+        name = esc((user.get("name") or "用户")[:18])
+        avatar = esc(user.get("avatar") or "")
+        avatar_html = (
+            f'<img class="auth-avatar" src="{avatar}" alt="" referrerpolicy="no-referrer"/>' if avatar else ""
+        )
+        return (
+            f'<a class="auth-entry on" href="/退出登录?next={esc(next_path)}" title="退出登录">'
+            f'{avatar_html}<span class="auth-name">{name}</span></a>'
+        )
+    return f'<a class="auth-entry" href="/登录?next={esc(next_path)}">登录</a>'
+
+
 def brand_wordmark() -> str:
     """imfde.ai 文字字标：im 主体色、fde 强调色、.ai 灰。"""
     return (
@@ -1126,6 +1156,7 @@ def mast(active: str, gh_url: str = "", tagline: str | None = None) -> str:
         )
     if IM_FDE_PORTAL_URL:
         links.append(f'<a class="back-to-portal" href="{esc(IM_FDE_PORTAL_URL)}">imfde 门户 →</a>')
+    links.append(auth_link("/"))
     return f"""<div class="mast"><div class="mast-in">
   <a class="brand" href="/world3d" aria-label="{esc(SITE_NAME)} {esc(SITE_CLUB)}">
     {brand_lockup()}
@@ -2125,6 +2156,75 @@ class Handler(BaseHTTPRequestHandler):
             page = _wrap_orig_pre(text, back)
         self._send(200, page.encode("utf-8"), "text/html; charset=utf-8", extra)
 
+    def _handle_auth(self, path: str, query: str):
+        """OAuth 登录路由（身份识别，不做内容限权）。"""
+        import auth as A
+
+        host = self.headers.get("Host", "")
+        scheme = "https" if self.headers.get("X-Forwarded-Proto", "") == "https" else "http"
+        base = A.base_url(host, scheme)
+        qs = dict(parse_qs(query, keep_blank_values=True))
+        cookies = A.parse_cookies(self.headers.get("Cookie", ""))
+
+        # 退出登录
+        if path == "/退出登录":
+            nxt = (qs.get("next") or ["/"])[0]
+            self.send_response(302)
+            self.send_header("Location", nxt)
+            self.send_header("Set-Cookie", f"{A.SESSION_COOKIE}=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax")
+            self.end_headers()
+            return
+
+        # /登录 或 /登录/<provider>
+        parts = path.split("/")  # ['', '登录', 'github']
+        if len(parts) < 3 or not parts[2]:
+            page = A.login_page_html((qs.get("next") or ["/"])[0], A.providers_enabled(), base)
+            self._send(200, page.encode("utf-8"), "text/html; charset=utf-8")
+            return
+
+        provider = parts[2].lower()
+        enabled = A.providers_enabled()
+        nxt = (qs.get("next") or ["/"])[0]
+        if not nxt.startswith("/"):
+            nxt = "/"
+
+        with connect() as con:
+            if len(parts) < 4 or parts[3] != "回调":
+                # 第一步：发 state 并 302 到授权页
+                if not enabled.get(provider):
+                    self._send(200, A.login_page_html(nxt, enabled, base).encode("utf-8"), "text/html; charset=utf-8")
+                    return
+                state = secrets.token_urlsafe(24)
+                A.put_state(con, state, nxt)
+                redirect_uri = f"{base}/登录/{provider}/回调"
+                self.send_response(302)
+                self.send_header("Location", A.authorize_url(provider, redirect_uri, state))
+                self.end_headers()
+                return
+            # 第二步：回调换用户信息
+            code = (qs.get("code") or [""])[0]
+            state = (qs.get("state") or [""])[0]
+            stored_next = A.pop_state(con, state)
+            if not code or not stored_next:
+                self._send(400, "登录状态失效，请重试".encode("utf-8"), "text/plain; charset=utf-8")
+                return
+            try:
+                info = A.fetch_user(provider, code, f"{base}/登录/{provider}/回调")
+            except Exception:
+                import traceback
+
+                self._send(500, ("登录失败\n" + traceback.format_exc()).encode("utf-8"), "text/plain; charset=utf-8")
+                return
+            uid = A.upsert_user(con, provider, str(info.get("uid") or ""), info.get("name") or "",
+                                info.get("email") or "", info.get("avatar") or "")
+        token = A.sign_session({"uid": uid, "provider": provider, "name": info.get("name") or "",
+                                "avatar": info.get("avatar") or "", "exp": time.time() + A.SESSION_TTL})
+        self.send_response(302)
+        self.send_header("Location", stored_next or "/")
+        self.send_header("Set-Cookie",
+                         f"{A.SESSION_COOKIE}={urllib.parse.quote(token)}; Path=/; Max-Age={A.SESSION_TTL}; HttpOnly; SameSite=Lax")
+        self.end_headers()
+
     def do_GET(self):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
@@ -2136,6 +2236,9 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/favicon.ico":
             self.send_response(204)
             self.end_headers()
+            return
+        if path.startswith("/登录") or path == "/退出登录":
+            self._handle_auth(path, parsed.query)
             return
         if path == "/static/home.css":
             self._send_file(CSS_PATH, "text/css; charset=utf-8")
