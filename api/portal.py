@@ -28,6 +28,8 @@ STATIC_DIR = S.STATIC_DIR
 
 import re
 
+import auth as A  # 登录（/登录、/oauth）与页脚头像解析共用；放在模块级，避免函数内局部导入的 UnboundLocalError
+
 # 内链前缀改写：页面在 /portal/* 下服务，服务端生成的站内绝对路径需要加 /portal 前缀。
 # 只改站内根相对路径（href="/..."、src="/..."），不动外链（https://）、协议相对（//）、锚点。
 _LINK_RE = re.compile(
@@ -121,8 +123,6 @@ async def app(scope, receive, send):  # noqa: ANN001
 
     # ---- 登录/退出（身份识别，不做限权）----
     if path.startswith("/登录") or path == "/退出登录" or path.startswith("/oauth/") or path == "/oauth":
-        import auth as A
-
         host = ""
         scheme = ""
         for h in scope.get("headers") or []:
