@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-05T21:10:37Z",
-  "snapshot": "2026-09-06",
-  "since_day": "2026-08-07",
+  "written_at": "2026-09-07T02:53:37Z",
+  "snapshot": "2026-09-07",
+  "since_day": "2026-08-08",
   "increment": {
-    "scanned": 20,
-    "fde_hits": 0,
-    "already_in_db": 20,
-    "stale": 16,
-    "added_axis": 0,
+    "scanned": 24,
+    "fde_hits": 4,
+    "already_in_db": 22,
+    "stale": 12,
+    "added_axis": 1,
     "collected": 0,
     "review": 0
   },
-  "n_events": 531,
-  "n_axis": 142,
+  "n_events": 522,
+  "n_axis": 143,
   "n_review": 0,
-  "new_axis_this_run": 0,
+  "new_axis_this_run": 1,
   "by_lane_axis": {
     "company": 10,
     "deploy": 83,
-    "method": 32,
+    "method": 33,
     "people": 17
   },
-  "n_links": 99,
+  "n_links": 100,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -39,14 +39,19 @@
   "feeds": {
     "rss": {
       "feeds": 3,
-      "hits": 0,
+      "hits": 4,
       "added": 0,
-      "already": 0,
-      "stale": 0,
+      "already": 2,
+      "stale": 2,
       "details": [
         {
           "id": "fdepod",
-          "status": "<urlopen error Tunnel connection failed: 502 Bad Gateway>"
+          "status": "ok",
+          "items": 4,
+          "fde": 4,
+          "added": 0,
+          "already": 2,
+          "stale": 2
         },
         {
           "id": "pragmatic-engineer",
@@ -70,15 +75,17 @@
       "details": [
         {
           "id": "ai-engineer-youtube",
-          "status": "no channel id"
+          "status": "ok",
+          "atom": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLKPca3kwwd-B59HNr-_lvA",
+          "added": 0
         }
       ]
     },
     "ats": {
       "boards": 11,
-      "jobs": 184,
+      "jobs": 185,
       "added": 0,
-      "fresh": 0,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
@@ -108,7 +115,7 @@
         {
           "id": "openai-ashby",
           "status": "dup",
-          "n": 33
+          "n": 34
         },
         {
           "id": "cohere-ashby",
@@ -138,7 +145,119 @@
       ]
     }
   },
-  "cs_hubs": {},
+  "cs_hubs": {
+    "hubs": 13,
+    "new_links": 23,
+    "added": 0,
+    "no_date": 8,
+    "details": [
+      {
+        "id": "writer-customers",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "id": "intercom-customers",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "url": "https://www.glean.com/resources/customer-stories/webflow",
+        "skip": "no strong date"
+      },
+      {
+        "url": "https://www.glean.com/resources/customer-stories/databricks",
+        "skip": "no strong date"
+      },
+      {
+        "id": "glean-stories",
+        "new_links": 6,
+        "added": 0
+      },
+      {
+        "id": "sierra-customers",
+        "new_links": 2,
+        "added": 0
+      },
+      {
+        "id": "cresta-stories",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "id": "factory-customers",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "url": "https://www.augmentcode.com/customers/Pure-storage-scales-2000-engineers",
+        "skip": "no strong date"
+      },
+      {
+        "url": "https://www.augmentcode.com/customers/quorum",
+        "skip": "no strong date"
+      },
+      {
+        "id": "augment-customers",
+        "new_links": 2,
+        "added": 0
+      },
+      {
+        "url": "https://www.harvey.ai/en-US/customers/deutsche-telekom-gleiss-lutz-collaboration",
+        "skip": "no strong date"
+      },
+      {
+        "url": "https://www.harvey.ai/en-US/customers/cms",
+        "skip": "no strong date"
+      },
+      {
+        "id": "harvey-customers",
+        "new_links": 6,
+        "added": 0
+      },
+      {
+        "url": "https://devin.ai/customers/modal",
+        "skip": "no customer name"
+      },
+      {
+        "url": "https://devin.ai/customers/tavrn",
+        "skip": "no customer name"
+      },
+      {
+        "id": "devin-customers",
+        "new_links": 4,
+        "added": 0
+      },
+      {
+        "id": "moveworks-customers",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "url": "https://sourcegraph.com/case-studies/cody-leidos-maximizing-efficiency-heightened-security-ai-race",
+        "skip": "no strong date"
+      },
+      {
+        "url": "https://sourcegraph.com/case-studies/nutanix-fixed-log4j-with-sourcegraph",
+        "skip": "no strong date"
+      },
+      {
+        "id": "sourcegraph-studies",
+        "new_links": 3,
+        "added": 0
+      },
+      {
+        "id": "cohere-stories",
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "id": "palantir-impact",
+        "new_links": 0,
+        "added": 0
+      }
+    ]
+  },
   "peek": {
     "indexes": 15,
     "candidates": 26,
@@ -147,7 +266,7 @@
     "details": [
       {
         "feed": "openai-index",
-        "status": "blocked"
+        "status": "403"
       },
       {
         "feed": "openai-careers",
@@ -204,10 +323,6 @@
         "url": "https://www.fdeinterviews.com/blog/break-into-fde-without-faang",
         "skip": "stale",
         "day": "2026-06-21"
-      },
-      {
-        "feed": "svpg",
-        "status": "blocked"
       }
     ]
   },

@@ -186,8 +186,14 @@ def verify_state(state: str) -> str | None:
 def _http_json(url: str, data: dict | None = None, headers: dict | None = None) -> dict:
     req = urllib.request.Request(url, data=urllib.parse.urlencode(data or {}).encode() if data else None,
                                  headers=headers or {"User-Agent": "imfde.ai"})
-    with urllib.request.urlopen(req, timeout=20) as r:
-        return json.loads(r.read().decode("utf-8", "replace"))
+    try:
+        with urllib.request.urlopen(req, timeout=20) as r:
+            return json.loads(r.read().decode("utf-8", "replace"))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", "replace")
+        raise RuntimeError(f"{url} HTTP {e.code}: {body[:300]}") from e
+    except urllib.error.URLError as e:
+        raise RuntimeError(f"{url} 网络错误: {e.reason}") from e
 
 
 def _http_token(url: str, data: dict, auth: tuple | None = None, accept_json: bool = True) -> dict:
@@ -198,12 +204,20 @@ def _http_token(url: str, data: dict, auth: tuple | None = None, accept_json: bo
         headers["Authorization"] = "Basic " + b.b64encode(f"{auth[0]}:{auth[1]}".encode()).decode()
     body = urllib.parse.urlencode(data).encode()
     req = urllib.request.Request(url, data=body, headers=headers)
-    with urllib.request.urlopen(req, timeout=20) as r:
-        text = r.read().decode("utf-8", "replace")
     try:
-        return json.loads(text)
+        with urllib.request.urlopen(req, timeout=20) as r:
+            text = r.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        body_txt = e.read().decode("utf-8", "replace")
+        raise RuntimeError(f"{url} HTTP {e.code}: {body_txt[:300]}") from e
+    try:
+        obj = json.loads(text)
     except ValueError:
-        return dict(urllib.parse.parse_qsl(text))
+        obj = dict(urllib.parse.parse_qsl(text))
+    # GitHub 等换 token 失败时返回 200 + error 字段，不是 HTTP 错误 —— 显式抛出便于定位
+    if isinstance(obj, dict) and obj.get("error"):
+        raise RuntimeError(f"{url} OAuth error: {obj.get('error')}: {obj.get('error_description', '')}")
+    return obj
 
 
 def authorize_url(provider: str, redirect_uri: str, state: str) -> str:
