@@ -123,61 +123,61 @@ async def app(scope, receive, send):  # noqa: ANN001
 
     # ---- 登录/退出（身份识别，不做限权）----
     if path.startswith("/登录") or path == "/退出登录" or path.startswith("/oauth/") or path == "/oauth":
-        host = ""
-        scheme = ""
-        for h in scope.get("headers") or []:
-            name = h[0].decode().lower()
-            if name == "host":
-                host = h[1].decode()
-            elif name == "x-forwarded-proto":
-                scheme = h[1].decode()
-        base = A.base_url(host, scheme)
-        cookies = A.parse_cookies(next((h[1].decode() for h in scope.get("headers") or [] if h[0].decode().lower() == "cookie"), ""))
+        try:
+            host = ""
+            scheme = ""
+            for h in scope.get("headers") or []:
+                name = h[0].decode().lower()
+                if name == "host":
+                    host = h[1].decode()
+                elif name == "x-forwarded-proto":
+                    scheme = h[1].decode()
+            base = A.base_url(host, scheme)
+            cookies = A.parse_cookies(next((h[1].decode() for h in scope.get("headers") or [] if h[0].decode().lower() == "cookie"), ""))
 
-        if path == "/退出登录":
-            nxt = (qs.get("next") or ["/"])[0]
-            await _asgi_send(send, 302, b"", "text/plain; charset=utf-8",
-                             {"Location": nxt, "Set-Cookie": f"{A.SESSION_COOKIE}=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax"})
-            return
+            if path == "/退出登录":
+                nxt = (qs.get("next") or ["/"])[0]
+                await _asgi_send(send, 302, b"", "text/plain; charset=utf-8",
+                                 {"Location": nxt, "Set-Cookie": f"{A.SESSION_COOKIE}=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax"})
+                return
 
-        # 归一化 /oauth/<p>[/callback] → 与 /登录/<p>[/回调] 同等处理
-        m = re.fullmatch(r"/oauth/([A-Za-z0-9]+)(/callback)?", path)
-        if m:
-            provider_hit = m.group(1).lower()
-            is_callback = bool(m.group(2))
-            parts = ["", "登录", provider_hit] + (["回调"] if is_callback else [])
-        else:
-            parts = path.split("/")  # ['', '登录', 'github', '回调']
-        if len(parts) < 3 or not parts[2]:
-            page = A.login_page_html((qs.get("next") or ["/"])[0], A.providers_enabled(), base)
-            await _asgi_send(send, 200, page.encode("utf-8"), "text/html; charset=utf-8")
-            return
-
-        provider = parts[2].lower()
-        enabled = A.providers_enabled()
-        nxt = (qs.get("next") or ["/"])[0]
-        if not nxt.startswith("/"):
-            nxt = "/"
-
-        if len(parts) < 4 or parts[3] != "回调":
-            # 第一步：发 state 并 302 到授权页（state 自包含，无需写库）
-            if not enabled.get(provider):
-                page = A.login_page_html(nxt, enabled, base)
+            # 归一化 /oauth/<p>[/callback] → 与 /登录/<p>[/回调] 同等处理
+            m = re.fullmatch(r"/oauth/([A-Za-z0-9]+)(/callback)?", path)
+            if m:
+                provider_hit = m.group(1).lower()
+                is_callback = bool(m.group(2))
+                parts = ["", "登录", provider_hit] + (["回调"] if is_callback else [])
+            else:
+                parts = path.split("/")  # ['', '登录', 'github', '回调']
+            if len(parts) < 3 or not parts[2]:
+                page = A.login_page_html((qs.get("next") or ["/"])[0], A.providers_enabled(), base)
                 await _asgi_send(send, 200, page.encode("utf-8"), "text/html; charset=utf-8")
                 return
-            state = A.make_state(nxt)
-            redirect_uri = A.callback_uri(base, provider)
-            await _asgi_send(send, 302, b"", "text/plain; charset=utf-8",
-                             {"Location": A.authorize_url(provider, redirect_uri, state)})
-            return
-        # 第二步：回调换用户信息
-        code = (qs.get("code") or [""])[0]
-        state = (qs.get("state") or [""])[0]
-        stored_next = A.verify_state(state)
-        if not code or not stored_next:
-            await _asgi_send(send, 400, "登录状态失效，请重试".encode("utf-8"), "text/plain; charset=utf-8")
-            return
-        try:
+
+            provider = parts[2].lower()
+            enabled = A.providers_enabled()
+            nxt = (qs.get("next") or ["/"])[0]
+            if not nxt.startswith("/"):
+                nxt = "/"
+
+            if len(parts) < 4 or parts[3] != "回调":
+                # 第一步：发 state 并 302 到授权页（state 自包含，无需写库）
+                if not enabled.get(provider):
+                    page = A.login_page_html(nxt, enabled, base)
+                    await _asgi_send(send, 200, page.encode("utf-8"), "text/html; charset=utf-8")
+                    return
+                state = A.make_state(nxt)
+                redirect_uri = A.callback_uri(base, provider)
+                await _asgi_send(send, 302, b"", "text/plain; charset=utf-8",
+                                 {"Location": A.authorize_url(provider, redirect_uri, state)})
+                return
+            # 第二步：回调换用户信息
+            code = (qs.get("code") or [""])[0]
+            state = (qs.get("state") or [""])[0]
+            stored_next = A.verify_state(state)
+            if not code or not stored_next:
+                await _asgi_send(send, 400, "登录状态失效，请重试".encode("utf-8"), "text/plain; charset=utf-8")
+                return
             info = A.fetch_user(provider, code, A.callback_uri(base, provider))
             uid = info.get("uid") or ""
             token = A.sign_session({"uid": str(uid), "provider": provider, "name": info.get("name") or "",
