@@ -16,7 +16,7 @@ import sys
 import time
 from http import HTTPStatus
 from pathlib import Path
-from urllib.parse import parse_qs, unquote, urlparse
+from urllib.parse import parse_qs, quote, unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "portal" / "site"))
@@ -188,7 +188,7 @@ async def app(scope, receive, send):  # noqa: ANN001
             return
         await _asgi_send(send, 302, b"", "text/plain; charset=utf-8",
                          {"Location": stored_next or "/",
-                          "Set-Cookie": f"{A.SESSION_COOKIE}={urllib.parse.quote(token)}; Path=/; Max-Age={A.SESSION_TTL}; HttpOnly; SameSite=Lax"})
+                          "Set-Cookie": f"{A.SESSION_COOKIE}={quote(token)}; Path=/; Max-Age={A.SESSION_TTL}; HttpOnly; SameSite=Lax"})
         return
 
     # ---- 页面渲染（完整 server.py 渲染层）----
