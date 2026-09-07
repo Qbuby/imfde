@@ -3,3 +3,8 @@ portal/site/__pycache__/
 *.pyc
 # 私密完整库（682 道题答案）不入仓；线上用剥离答案的 fde-public.db
 portal/fde.db
+auth_*_result.png
+auth_*_timeout.png
+login_success_check.png
+google_session_check.png
+auth_all_pages_check.png
