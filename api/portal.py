@@ -179,13 +179,13 @@ async def app(scope, receive, send):  # noqa: ANN001
             return
         try:
             info = A.fetch_user(provider, code, A.callback_uri(base, provider))
+            uid = info.get("uid") or ""
+            token = A.sign_session({"uid": str(uid), "provider": provider, "name": info.get("name") or "",
+                                    "avatar": info.get("avatar") or "", "exp": time.time() + A.SESSION_TTL})
         except Exception:
             import traceback
             await _asgi_send(send, 500, ("登录失败\n" + traceback.format_exc()).encode("utf-8"), "text/plain; charset=utf-8")
             return
-        uid = info.get("uid") or ""
-        token = A.sign_session({"uid": str(uid), "provider": provider, "name": info.get("name") or "",
-                                "avatar": info.get("avatar") or "", "exp": time.time() + A.SESSION_TTL})
         await _asgi_send(send, 302, b"", "text/plain; charset=utf-8",
                          {"Location": stored_next or "/",
                           "Set-Cookie": f"{A.SESSION_COOKIE}={urllib.parse.quote(token)}; Path=/; Max-Age={A.SESSION_TTL}; HttpOnly; SameSite=Lax"})

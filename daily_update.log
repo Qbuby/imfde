@@ -354,3 +354,45 @@ OK 案例.html  1293 KB  (cases data 559)
 OK cases.json  559 条
 
 完成。提交 portal/*.html + cases.json 到 git，Vercel 即可直接服务。
+warning: in the working copy of 'daily_update.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/site/auth.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/aws.amazon.com__blogs.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/blend360.com__news.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/cresta.com__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/factory.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__anthropic-forward-deployed-engineer-interview-guide.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__break-into-fde-without-faang.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-coding-interview-not-leetcode.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-interview-prep-mistakes.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-system-design-customer-constraints.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-vs-software-engineer-comparison.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__google-forward-deployed-engineer-interview-guide.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__why-forward-deployed-engineering-answer.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories__databricks.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories__webflow.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__en-US__customers__cms.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__en-US__customers__deutsche-telekom-gleiss-lutz-collaboration.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/intercom.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/moveworks.com__us__en__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers__chime.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers__gofundme.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies__cody-leidos-maximizing-efficiency-heightened-security-ai-race.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies__nutanix-fixed-log4j-with-sourcegraph.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/svpg.com__home.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/writer.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/youtube.com___aiDotEngineer.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/playwright_login_test.py', LF will be replaced by CRLF the next time Git touches it
+[main e42dc6a] daily data refresh 鍛ㄤ竴 2026/09/07 10:54:46.91
+ 47 files changed, 550 insertions(+), 162 deletions(-)
+ create mode 100644 auth_github_result.png
+ create mode 100644 auth_google_result.png
+ create mode 100644 portal/ai-cache/7ce62811505b8be6.json
+ create mode 100644 scripts/playwright_login_test.py
+To https://github.com/Qbuby/imfde.git
+   e7b7cd7..e42dc6a  main -> main
+[?? 2026/09/07 10:54:51.86] === daily update done === 
