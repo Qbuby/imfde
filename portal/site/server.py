@@ -94,20 +94,20 @@ CORE_VENDORS = (
 )
 PRODUCT_STORY_VENDORS = ("intercom", "writer", "cresta", "moveworks", "abridge")
 KPI_LABELS = {
-    "narrative": "实测结果",
-    "hero_only": "单条叙述",
-    "goal": "目标",
-    "projected": "预测",
-    "system_scale_not_kpi": "系统规模",
+    "narrative": "公司自己讲的数字",
+    "hero_only": "只讲了一个例子",
+    "goal": "目标（还没发生）",
+    "projected": "预估",
+    "system_scale_not_kpi": "规模（不是效果）",
 }
-EVIDENCE_ZH = {"high": "证据高", "medium": "证据中", "low": "证据低"}
+EVIDENCE_ZH = {"high": "比较可靠", "medium": "一般", "low": "不太够"}
 DOC_TYPE_ZH = {
-    "case_study": "交付故事",
-    "methodology": "方法",
-    "opinion": "观点",
-    "job_posting": "岗位",
+    "case_study": "客户故事",
+    "methodology": "怎么做",
+    "opinion": "看法",
+    "job_posting": "招聘",
     "discussion": "讨论",
-    "index": "索引",
+    "index": "目录",
     "unusable": "不可用",
 }
 CASE_ZH_FIELDS = (
@@ -159,22 +159,22 @@ CRAFT_HOSTS = (
 )
 NAV = (
     ("世界动态", "/world3d"),
-    ("落地", "/落地"),
-    ("现场", "/现场"),
-    ("部署证据", "/案例"),
-    ("方法", "/方法"),
+    ("负责人", "/落地"),
+    ("从业者", "/现场"),
+    ("案例", "/案例"),
+    ("学习", "/方法"),
 )
 LANE_ZH = {
-    "company": "公司动作",
-    "deploy": "真实部署",
-    "people": "人物与观点",
-    "method": "方法与岗位",
+    "company": "公司",
+    "deploy": "客户故事",
+    "people": "人物",
+    "method": "招聘",
 }
 LANE_SHORT = {
     "company": "公司",
-    "deploy": "部署",
+    "deploy": "客户",
     "people": "人物",
-    "method": "方法",
+    "method": "招聘",
 }
 CASE_FIELDS = """
     x.id, x.source_url, x.source_title, x.tier, x.doc_type,
@@ -588,7 +588,7 @@ def kpi_class(scope) -> str:
 
 
 def kpi_label(scope) -> str:
-    return KPI_LABELS.get(scope) or "未标口径"
+    return KPI_LABELS.get(scope) or "没写数字怎么来的"
 
 
 def vendor_slug(row) -> str:
@@ -705,7 +705,7 @@ def en_archive_html(row: dict, case_id: int) -> str:
     oh = orig_href("案例", case_id, src)
     if oh:
         return (
-            f'<p class="hint"><a class="orig" href="{esc(oh)}">核对原文（英文存档）</a></p>'
+            f'<p class="hint"><a class="orig" href="{esc(oh)}">对照原文（英文存档）</a></p>'
         )
     return ""
 
@@ -1002,7 +1002,7 @@ def kpi_span(scope) -> str:
 
 def fde_flag(row) -> str:
     if has_fde_role(row):
-        return '<span class="tg">现场编制</span>'
+        return '<span class="tg">写了驻场团队</span>'
     return ""
 
 
@@ -1156,11 +1156,6 @@ def mast(active: str, gh_url: str = "", tagline: str | None = None) -> str:
         cls = "on" if active == label else ""
         aria = ' aria-current="page"' if cls else ""
         links.append(f'<a class="{cls}" href="{esc(path)}"{aria}>{esc(label)}</a>')
-    if gh_url:
-        links.append(
-            f'<a class="gh" href="{esc(gh_url)}" target="_blank" rel="noopener noreferrer">'
-            '<img class="mast-gh-icon" src="/static/icons/github-small.svg" alt="" aria-hidden="true"/>GitHub</a>'
-        )
     if IM_FDE_PORTAL_URL:
         links.append(f'<a class="back-to-portal" href="{esc(IM_FDE_PORTAL_URL)}">imfde 门户 →</a>')
     links.append(auth_link("/"))
@@ -1450,6 +1445,145 @@ def change_cards(changes, lanes=None) -> str:
     return "".join(bits)
 
 
+ROOM_HEAD = (
+    '<link rel="stylesheet" href="/static/room.css"/>'
+    '<script defer src="/static/room.js"></script>'
+)
+
+
+def day_md(day: str) -> str:
+    text = day or ""
+    if len(text) >= 10:
+        return "%d-%s" % (int(text[5:7]), text[8:10])
+    return text
+
+
+def room_nav(active: str, gh: str, days: int | None = None) -> str:
+    bits = []
+    for label, path in NAV:
+        url = path
+        if days and path in ("/落地", "/现场", "/案例"):
+            url = href(path, 窗=days)
+        cls = "on" if active == label else ""
+        aria = ' aria-current="page"' if cls else ""
+        bits.append(f'<a class="{cls}" href="{esc(url)}"{aria}>{esc(label)}</a>')
+    bits.append(auth_link("/"))
+    return "".join(bits)
+
+
+def room_range(base: str, days: int, extra: dict | None = None) -> str:
+    extra = {k: v for k, v in (extra or {}).items() if v}
+    btns = []
+    for d in (7, 30, 90):
+        cls = ' class="on"' if d == days else ""
+        url = href(base, 窗=d, **extra)
+        btns.append(f"<a{cls} href=\"{esc(url)}\">{d} 天</a>")
+    return f'<div class="room-seg" role="navigation" aria-label="看多久">{"".join(btns)}</div>'
+
+
+def room_hud(
+    active: str,
+    gh: str,
+    title: str,
+    hint: str,
+    days: int | None = None,
+    range_base: str | None = None,
+    extra: dict | None = None,
+) -> str:
+    tools = ""
+    if range_base and days:
+        tools += room_range(range_base, days, extra)
+    tools += f'<nav class="room-nav" aria-label="站内导航">{room_nav(active, gh, days)}</nav>'
+    return f"""<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="{esc(SITE_NAME)} {esc(SITE_CLUB)}">{brand_lockup()}</a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">{esc(title)}</h1>
+    <p class="room-sub">{esc(hint)}</p>
+  </div>
+  <div class="room-hud-tools">{tools}</div>
+</header>"""
+
+
+def event_payload(e: dict) -> dict:
+    return {
+        "id": e.get("id"),
+        "lane": e.get("lane"),
+        "day": e.get("day"),
+        "title": e.get("title"),
+        "kicker": e.get("kicker") or e.get("entity_name") or "",
+        "host": e.get("host") or "",
+        "doc_label": e.get("doc_label") or "",
+        "happened": e.get("happened") or "",
+        "why": e.get("why") or "",
+        "enterprise": e.get("enterprise") or "",
+        "practitioner": e.get("practitioner") or "",
+        "orig_href": e.get("orig_href") or "",
+        "url": e.get("url") or "",
+        "case_href": e.get("case_href") or "",
+        "info_kind": e.get("info_kind") or "",
+    }
+
+
+def room_data_tag(payload: dict) -> str:
+    raw = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    raw = raw.replace("<", "\\u003c")
+    return f'<script type="application/json" id="room-data">{raw}</script>'
+
+
+def room_event_card(event: dict, selected_id, lens: str) -> str:
+    eid = event.get("id")
+    on = " on" if eid == selected_id else ""
+    pressed = "true" if eid == selected_id else "false"
+    day = event.get("day") or ""
+    if lens == "field":
+        blurb = event.get("practitioner") or event.get("happened") or event.get("sub") or ""
+    else:
+        blurb = event.get("enterprise") or event.get("happened") or event.get("sub") or ""
+    return (
+        f'<button type="button" class="room-card{on}" data-pick="{esc(str(eid))}" '
+        f'aria-pressed="{pressed}">'
+        f'<time datetime="{esc(day)}">{esc(day_md(day))}</time>'
+        f'<strong>{esc(event.get("title") or "")}</strong>'
+        f"<span>{esc(trunc(blurb, 110))}</span></button>"
+    )
+
+
+def room_page(
+    title: str,
+    active: str,
+    gh: str,
+    page_path: str,
+    hud: str,
+    stage: str,
+    panel: str,
+    payload: dict,
+    *,
+    lens: str = "boss",
+    doc: bool = False,
+) -> str:
+    cls = "room room-doc" if doc else "room"
+    inner = f"""<div class="{cls}" id="room" data-lens="{esc(lens)}">
+{hud}
+<div class="room-stage">{stage}</div>
+<aside class="room-panel" id="room-panel">{panel}</aside>
+</div>
+{room_data_tag(payload)}
+"""
+    return shell(
+        title,
+        active,
+        inner,
+        gh,
+        extra_head=ROOM_HEAD,
+        body_class="room-page",
+        skip_wrap=True,
+        skip_mast=True,
+        skip_foot=True,
+        home_css=False,
+        page_path=page_path,
+    )
+
+
 def study_pack(rows) -> dict:
     n = len(rows)
     n_fde = sum(1 for r in rows if has_fde_role(r))
@@ -1618,10 +1752,10 @@ def render_home(cur) -> str:
 <section class="brief">{claims}</section>
 <div class="doors">
   <article class="door">
-    <p class="k">落地读法</p>
+    <p class="k">给负责人</p>
     <h2>要实施，先看结构再看样板</h2>
     <p>编制在原文里有多薄、什么样板算数、结果带什么口径。行业切面改的是这些句子里的数字，不是先铺一墙卡片。</p>
-    <a class="go" href="/落地">用落地读法看本期 <span>给负责人</span></a>
+    <a class="go" href="/落地">给负责人看本期</a>
   </article>
   <article class="door">
     <p class="k">现场读法</p>
@@ -1639,93 +1773,113 @@ def render_deploy(cur, qs) -> str:
     days = qs_window(qs)
     world = load_pace(cur)
     events = world.get("events") or []
-    lede = (world.get("ledes") or {}).get(str(days), "")
-    changes = (world.get("changes_by_range") or {}).get(str(days), [])
     company = win_events(events, days, lanes=("company",))
     deploy = win_events(events, days, lanes=("deploy",))
-    studies = fetch_cases(cur, "x.doc_type='case_study'", (), "x.id")
-    pack = study_pack(studies)
     gh = world.get("github") or github_url(cur)
     alt = other_windows("/落地", days)
-    empty_co = f"这 {days} 天没有新的组织宣布。{alt} 窗里才有。"
-    empty_dp = f"这 {days} 天没有带发布日的客户故事。{alt}"
-    inner = f"""
-<section class="desk-lede">
-  <p class="k">落地 · 这 {days} 天行业在变什么</p>
-  {pace_strip("/落地", days, events, lanes=("company", "deploy"))}
-</section>
-<section class="brief">{change_cards(changes, lanes=("company", "deploy"))}</section>
-<section class="section" id="公司">
-  <h2>公司动作</h2>
-  <p class="note">组织自己发布的官方动作。没有新宣布就空着。</p>
-  {event_list(company, "boss", empty_co)}
-</section>
-<section class="section" id="部署">
-  <h2>有发布日的部署</h2>
-  <p class="note">只收有发布日的具名客户故事。原文写了现场编制的才会标出来。</p>
-  {event_list(deploy, "boss", empty_dp)}
-</section>
-<section class="section" id="问题">
-  <h2>先把问题说清楚</h2>
-  <p class="note">窗口讲变化速度。样板在案例目录。</p>
-  <ol class="scope-q">
-    <li>
-      <h3>买产品，还是买驻场？</h3>
-      <p>公开页上「嵌进旧流程」和「厂商驻场」不是同一件事。别把产品故事当成编制样本。</p>
-    </li>
-    <li>
-      <h3>要不要为此建编制？</h3>
-      <p>库里几乎没有「如何组建 FDE 团队」的完整样本。岗位变化是弱信号，回世界动态方法轨看。</p>
-    </li>
-    <li>
-      <h3>公开口径能不能当样板？</h3>
-      <p>有结果的多，写清实测 / 目标 / 预测 / 交接的少。点进单条才能核对。</p>
-    </li>
-  </ol>
-</section>
-{catalog_door(href("/案例", 窗=days, 厂商="核心", 证据="high"), "库存样板在案例目录", "卡片、筛选、分页都在那里。产品故事默认不当编制样本。")}
-<p class="hint"><a href="/world3d">回世界动态首页</a> · <a href="/方法">方法</a></p>
+    selected = (deploy[0] if deploy else company[0] if company else None)
+    sid = selected.get("id") if selected else None
+    co_html = (
+        "".join(room_event_card(e, sid, "boss") for e in company)
+        or f'<p class="room-empty">这 {days} 天没有新的公司公告。{alt}</p>'
+    )
+    dp_html = (
+        "".join(room_event_card(e, sid, "boss") for e in deploy)
+        or f'<p class="room-empty">这 {days} 天没有带发布日的客户故事。空着就空着。{alt}</p>'
+    )
+    empty = not company and not deploy
+    hud = room_hud(
+        "负责人",
+        gh,
+        "给负责人看",
+        "这几天没有新的公司动作" if empty else "点左边一条，右边告诉你对企业意味着什么",
+        days=days,
+        range_base="/落地",
+    )
+    how = (
+        f'<p class="room-how"><b>这 {days} 天公司没发新东西。</b> 要看客户故事，切 30 天或 90 天。</p>'
+        if empty
+        else '<p class="room-how"><b>你是要拍板的人。</b> 点左边一条，右边告诉你对企业意味着什么。</p>'
+    )
+    stage = f"""
+{how}
+<div class="room-cols">
+  <div class="room-col" data-lane="company"><h2>公司在做什么</h2>{co_html}</div>
+  <div class="room-col" data-lane="deploy"><h2>客户那边发生了什么</h2>{dp_html}</div>
+</div>
 """
-    return shell("落地 · %s" % SITE_NAME, "落地", inner, gh, page_path="/落地")
+    payload = {
+        "kind": "event",
+        "lens": "boss",
+        "items": [event_payload(e) for e in company + deploy],
+    }
+    panel = ""
+    return room_page(
+        "给负责人看 · %s" % SITE_NAME,
+        "负责人",
+        gh,
+        "/落地",
+        hud,
+        stage,
+        panel,
+        payload,
+        lens="boss",
+    )
 
 
 def render_field(cur, qs) -> str:
     days = qs_window(qs)
     world = load_pace(cur)
     events = world.get("events") or []
-    lede = (world.get("ledes") or {}).get(str(days), "")
-    changes = (world.get("changes_by_range") or {}).get(str(days), [])
     people = win_events(events, days, lanes=("people",))
     tally = lane_tally(events, days)
-    discussions = load_discussions(cur)
-    pack = study_pack(fetch_cases(cur, "x.doc_type='case_study'", (), "x.id"))
     gh = world.get("github") or github_url(cur)
-    noise_html = "".join(row_link(r) for r in discussions) or '<p class="empty">没有讨论帖。</p>'
     alt = other_windows("/现场", days)
-    inner = f"""
-<section class="desk-lede">
-  <p class="k">现场 · 这 {days} 天公开口径在怎么动</p>
-  {pace_strip("/现场", days, events, lanes=("people",))}
-</section>
-<section class="brief">{change_cards(changes, lanes=("people",))}</section>
-<section class="section" id="人物">
-  <h2>人物与观点</h2>
-  <p class="note">窗口内的访谈、评论、演讲。</p>
-  {event_list(people, "field", f"这 {days} 天没有新的公开评论。{alt}")}
-</section>
-<section class="section" id="岗位">
-  <h2>岗位变化（弱信号）</h2>
-  <p class="note">这 {days} 天招聘板 {tally['jobs']} 条，只说明还在招现场编制，不是组织已经落地。列表在沙盘方法轨，这里不重复。</p>
-</section>
-<section class="section" id="还在吵">
-  <h2>还在吵</h2>
-  <p class="note">公开讨论去重后 {len(discussions)} 帖，撑不起头条。</p>
-  <div class="list">{noise_html}</div>
-</section>
-{catalog_door(href("/案例", 窗=days), "逐条看部署现场", "按厂商、行业、证据筛选。")}
-<p class="hint"><a href="/world3d">回世界动态首页</a> · <a href="/方法">方法目录</a></p>
+    selected = people[0] if people else None
+    sid = selected.get("id") if selected else None
+    ticks = "".join(
+        (
+            f'<button type="button" class="room-tick{" on" if e.get("id")==sid else ""}" '
+            f'data-pick="{esc(str(e.get("id")))}" aria-pressed="{"true" if e.get("id")==sid else "false"}">'
+            f'<time datetime="{esc(e.get("day") or "")}">{esc(day_md(e.get("day") or ""))}</time>'
+            f'<strong>{esc(e.get("title") or "")}</strong>'
+            f'<span>{esc(trunc(e.get("practitioner") or e.get("happened") or "", 110))}</span>'
+            f"</button>"
+        )
+        for e in people
+    ) or f'<p class="room-empty">这 {days} 天没有新的公开评论。{alt}</p>'
+    hud = room_hud(
+        "从业者",
+        gh,
+        "给干活的人看",
+        "点一条评论，听一线怎么讲这份工",
+        days=days,
+        range_base="/现场",
+    )
+    jobs_n = tally.get("jobs") or 0
+    jobs_note = (
+        f'<p class="room-weak"><a href="{esc(href("/", 窗=days))}">动态上有 {jobs_n} 条招聘</a>。'
+        "只能说明还在招人，不说明事情已经做成了。</p>"
+        if jobs_n
+        else ""
+    )
+    stage = f"""
+<p class="room-how"><b>你在现场干活。</b> 点一条评论，右边听一线怎么讲这份工。</p>
+{jobs_note}
+<div class="room-spine">{ticks}</div>
 """
-    return shell("现场 · %s" % SITE_NAME, "现场", inner, gh, page_path="/现场")
+    payload = {"kind": "event", "lens": "field", "items": [event_payload(e) for e in people]}
+    return room_page(
+        "给干活的人看 · %s" % SITE_NAME,
+        "从业者",
+        gh,
+        "/现场",
+        hud,
+        stage,
+        "",
+        payload,
+        lens="field",
+    )
 
 
 def render_library(cur, qs) -> str:
@@ -1733,6 +1887,7 @@ def render_library(cur, qs) -> str:
     industry = qs_get(qs, "行业", "industry")
     vendor = qs_get(qs, "厂商", "vendor")
     evidence = qs_get(qs, "证据", "evidence")
+    windowed = qs_get(qs, "本窗") not in ("0", "false", "否")
     page = qs_int(qs, "页", "page", default=1)
     valid_ind = {name for name, _ in INDUSTRY_BUCKETS} | {"其他"}
     if industry not in valid_ind:
@@ -1742,6 +1897,12 @@ def render_library(cur, qs) -> str:
     world = load_pace(cur)
     events = world.get("events") or []
     deploy = win_events(events, days, lanes=("deploy",))
+    win_ids = set()
+    for e in deploy:
+        h = e.get("case_href") or ""
+        m = re.fullmatch(r"/案例/(\d+)", h)
+        if m:
+            win_ids.add(int(m.group(1)))
     vendors = load_vendors(cur)
     slugs = {v["slug"] for v in vendors}
     vendor_filter = CORE_VENDORS if vendor == "核心" else ((vendor,) if vendor in slugs else None)
@@ -1767,7 +1928,9 @@ def render_library(cur, qs) -> str:
         ),
         industry,
     )
-    per = 36
+    if windowed:
+        rows = [r for r in rows if r.get("id") in win_ids]
+    per = 18
     total = len(rows)
     pages = max(1, (total + per - 1) // per)
     if page > pages:
@@ -1775,72 +1938,127 @@ def render_library(cur, qs) -> str:
     shown = rows[(page - 1) * per : page * per]
     flags = load_flags(cur, [r["id"] for r in shown])
     gh = world.get("github") or github_url(cur)
-    q = {"窗": days, "行业": industry, "证据": evidence}
-
+    extra = {"行业": industry, "证据": evidence, "厂商": vendor, "本窗": "1" if windowed else "0"}
+    q = {"窗": days, "行业": industry, "证据": evidence, "本窗": "1" if windowed else "0"}
     vchips = [
-        chip(href("/案例", **q), "全部厂商", on=not vendor),
-        chip(href("/案例", 厂商="核心", **q), "核心厂商", on=vendor == "核心"),
+        chip(href("/案例", **q), "全部公司", on=not vendor),
+        chip(href("/案例", 厂商="核心", **q), "主要这几家", on=vendor == "核心"),
     ]
-    for v in vendors[:12]:
+    for v in vendors[:8]:
         vchips.append(
-            chip(
-                href("/案例", 厂商=v["slug"], **q),
-                v["name"],
-                on=vendor == v["slug"],
-                n=v["n"],
-            )
+            chip(href("/案例", 厂商=v["slug"], **q), v["name"], on=vendor == v["slug"], n=v["n"])
         )
-    evid_q = {"窗": days, "厂商": vendor, "行业": industry}
+    evid_q = {"窗": days, "厂商": vendor, "行业": industry, "本窗": "1" if windowed else "0"}
     evid_chips = [
-        chip(href("/案例", **evid_q), "全部证据", on=not evidence),
-        chip(href("/案例", 证据="high", **evid_q), "high", on=evidence == "high"),
-        chip(href("/案例", 证据="medium", **evid_q), "medium", on=evidence == "medium"),
-        chip(href("/案例", 证据="low", **evid_q), "low", on=evidence == "low"),
+        chip(href("/案例", **evid_q), "可靠程度", on=not evidence),
+        chip(href("/案例", 证据="high", **evid_q), "比较可靠", on=evidence == "high"),
+        chip(href("/案例", 证据="medium", **evid_q), "一般", on=evidence == "medium"),
+        chip(href("/案例", 证据="low", **evid_q), "不太够", on=evidence == "low"),
     ]
-    base = {"窗": days, "厂商": vendor, "证据": evidence}
+    base = {"窗": days, "厂商": vendor, "证据": evidence, "本窗": "1" if windowed else "0"}
     ind_chips = [chip(href("/案例", **base), "全部行业", on=not industry)]
     for name, _kws in INDUSTRY_BUCKETS:
         ind_chips.append(chip(href("/案例", 行业=name, **base), name, on=industry == name))
-    ind_chips.append(chip(href("/案例", 行业="其他", **base), "其他", on=industry == "其他"))
+    win_q = {"窗": days, "厂商": vendor, "行业": industry, "证据": evidence}
+    win_chip = chip(href("/案例", 本窗="1", **win_q), "这段时间的", on=windowed, n=len(win_ids))
+    all_win = chip(href("/案例", 本窗="0", **win_q), "全部", on=not windowed)
 
-    grid = "".join(case_card(r, flags) for r in shown) or '<p class="empty">没有匹配的案例。</p>'
-    page_q = {"窗": days, "厂商": vendor, "行业": industry, "证据": evidence}
+    cards = []
+    items = []
+    for r in shown:
+        cid = r.get("id")
+        title = r.get("customer") or r.get("source_title") or "未具名客户"
+        k = " · ".join(x for x in (vendor_name(r), r.get("bucket")) if x)
+        evid = r.get("evidence_quality") or ""
+        blurb = trunc(r.get("business_problem") or r.get("measured_outcome"), 110)
+        on = " on" if cards == [] else ""
+        tags = []
+        if evid:
+            tags.append(f"<i>{esc(evidence_label(evid))}</i>")
+        if r.get("kpi_scope"):
+            tags.append(f"<i>{esc(kpi_label(r.get('kpi_scope')))}</i>")
+        if has_fde_role(r):
+            tags.append("<i>写了驻场团队</i>")
+        cards.append(
+            f'<button type="button" class="room-gcard{on}" data-pick="{esc(str(cid))}">'
+            f'<span class="k">{esc(k)}</span><strong>{esc(title)}</strong>'
+            f'<p>{esc(blurb)}</p><div class="room-tags">{"".join(tags)}</div></button>'
+        )
+        items.append(
+            {
+                "id": cid,
+                "title": title,
+                "vendor": vendor_name(r),
+                "evidence": evidence_label(evid) if evid else "",
+                "kpi": kpi_label(r.get("kpi_scope")),
+                "blurb": blurb,
+                "fde": has_fde_role(r),
+                "href": href("/案例/%s" % cid, 窗=days),
+            }
+        )
+    grid = "".join(cards) or (
+        f'<p class="room-empty">这 {days} 天没有带发布日的客户故事。空着就空着。</p>'
+        if windowed
+        else '<p class="room-empty">没有匹配的案例。</p>'
+    )
+    page_q = {"窗": days, "厂商": vendor, "行业": industry, "证据": evidence, "本窗": "1" if windowed else "0"}
     prev_h = href("/案例", 页=page - 1, **page_q) if page > 1 else ""
     next_h = href("/案例", 页=page + 1, **page_q) if page < pages else ""
-    pager = f'<div class="pager">{esc(str(page))} / {pages} 页 · 共 {total} 单'
+    pager = f'<p class="room-pager">{page} / {pages} 页 · 共 {total} 条'
     if prev_h:
         pager += f' · <a href="{esc(prev_h)}">上一页</a>'
     if next_h:
         pager += f' · <a href="{esc(next_h)}">下一页</a>'
-    pager += "</div>"
-    alt = other_windows("/案例", days, {"厂商": vendor, "行业": industry, "证据": evidence})
-
-    inner = f"""
-<section class="desk-lede">
-  <p class="k">部署证据 · 这 {days} 天有日期的落点</p>
-  {pace_strip("/案例", days, events, lanes=("deploy",), extra={"厂商": vendor, "行业": industry, "证据": evidence})}
-</section>
-<section class="section" id="窗口">
-  <h2>这 {days} 天的部署</h2>
-  <p class="note">只收有发布日或页上修改日的故事。没有日期的营销页不进这一条。</p>
-  {event_list(deploy, "boss", f"这 {days} 天部署轨是空的。{alt}")}
-</section>
-<section class="section">
-  <h2>库存目录</h2>
-  <div class="filters">{''.join(vchips)}</div>
-  <div class="filters">{''.join(ind_chips)}</div>
-  <div class="filters">{''.join(evid_chips)}</div>
-  <div class="grid-3">{grid}</div>
-  {pager}
-</section>
-<p class="hint"><a href="/world3d">回世界动态首页</a> · <a href="/落地">落地</a></p>
+    pager += "</p>"
+    hud = room_hud(
+        "案例",
+        gh,
+        "案例",
+        "点一张卡片看看，再打开全文",
+        days=days,
+        range_base="/案例",
+        extra=extra,
+    )
+    stage = f"""
+<p class="room-how"><b>找客户案例。</b> 默认只看这窗里带发布日的。点一张卡片看摘要，再打开全文对照原文。</p>
+<div class="room-filt">{all_win}{win_chip}{''.join(vchips[:6])}</div>
+<div class="room-filt">{''.join(ind_chips)}</div>
+<div class="room-filt">{''.join(evid_chips)}</div>
+<div class="room-grid">{grid}</div>
+{pager}
 """
-    return shell("部署证据 · %s" % SITE_NAME, "部署证据", inner, gh, page_path="/案例")
+    payload = {"kind": "case", "lens": "boss", "items": items}
+    return room_page(
+        "案例 · %s" % SITE_NAME,
+        "案例",
+        gh,
+        "/案例",
+        hud,
+        stage,
+        "",
+        payload,
+        lens="boss",
+    )
+
+
+_FDE_NOTE = re.compile(
+    r"[^。；;\n]*?(?:FDE/FDSE|forward-deployed|未描述 FDE|无 FDE|未明确 FDE|未自称 FDE|FDE 审阅|FDE 头衔)[^。；;\n]*[。；;]?",
+    re.I,
+)
+
+
+def human_anatomy(value) -> str:
+    text = (value or "").strip()
+    if not text:
+        return ""
+    text = _FDE_NOTE.sub("", text)
+    return re.sub(r"[；;]\s*$", "", text).strip()
 
 
 def dl_row(label, value) -> str:
-    if nonempty(value):
-        return f"<dt>{esc(label)}</dt><dd>{esc(value).replace(chr(10), '<br/>')}</dd>"
+    text = human_anatomy(value) if nonempty(value) else ""
+    if text:
+        return f"<dt>{esc(label)}</dt><dd>{esc(text).replace(chr(10), '<br/>')}</dd>"
     return f'<dt>{esc(label)}</dt><dd class="empty">原文未写</dd>'
 
 
@@ -1849,7 +2067,7 @@ def render_case(cur, case_id: int, qs) -> str:
     gh = github_url(cur)
     if not row:
         inner = '<section class="desk-lede"><h1>没有这条案例</h1><p><a href="/案例">回到案例</a></p></section>'
-        return shell("未找到 · %s" % SITE_NAME, "部署证据", inner, gh, page_path="/案例")
+        return shell("未找到 · %s" % SITE_NAME, "案例", inner, gh, page_path="/案例")
     view = qs_get(qs, "读法", "view")
     if view not in ("落地", "现场"):
         view = ""
@@ -1860,20 +2078,29 @@ def render_case(cur, case_id: int, qs) -> str:
     if oh:
         src_html = (
             f'<a class="orig" href="{esc(oh)}">'
-            f"核对原文 · {esc(host_of(src) or src)}</a>"
+            f"对照原文 · {esc(host_of(src) or src)}</a>"
         )
     elif src:
-        src_html = "没有本地原文"
+        src_html = (
+            f'<a class="orig" href="{esc(src)}" target="_blank" rel="noopener noreferrer">'
+            f"打开原文 · {esc(host_of(src) or src)}</a>"
+        )
     else:
-        src_html = "无来源 URL"
+        src_html = "没有原文链接"
     on_d = " on" if view == "落地" else ""
     on_f = " on" if view == "现场" else ""
     flags_html = ""
     if row.get("flags"):
-        flags_html = "<div class='list' style='margin-top:12px'>" + "".join(
-            f'<div class="row">{esc(f["flag"])}<span class="s">{esc(f["reason"])}</span></div>'
+        kept = [
+            f
             for f in row["flags"]
-        ) + "</div>"
+            if not re.search(r"FDE|forward-deployed", (f.get("flag") or "") + (f.get("reason") or ""), re.I)
+        ]
+        if kept:
+            flags_html = "<div class='list' style='margin-top:12px'>" + "".join(
+                f'<div class="row">{esc(f["flag"])}<span class="s">{esc(f["reason"])}</span></div>'
+                for f in kept
+            ) + "</div>"
     related = ""
     if row.get("related_questions"):
         items = []
@@ -1891,63 +2118,79 @@ def render_case(cur, case_id: int, qs) -> str:
     quote = ""
     if nonempty(row.get("quote")):
         quote = f'<blockquote class="quote">{esc(row["quote"])}</blockquote>'
+    days = qs_window(qs)
+    hud = room_hud("案例", gh, title, "对照原文看完整内容", days=days, range_base=None)
     inner = f"""
-<section class="desk-lede case-top">
-  <p class="k">{esc(k)}</p>
+<div class="room room-doc" id="room">
+{hud}
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="{esc(href("/案例", 窗=days))}">← 回案例</a>
+  <p class="room-kicker">{esc(k)}</p>
   <h1>{esc(title)}</h1>
-  <p class="source-line">
+  <div class="room-meta">
     {src_html}
-    · {esc(doc_type_label(row.get("doc_type")))}
-  </p>
-  <div class="meta" style="display:flex;gap:8px;flex-wrap:wrap">
     {kpi_span(row.get("kpi_scope"))}
     <span class="tg">{esc(evidence_label(row.get("evidence_quality")))}</span>
     {fde_flag(row)}
-    <a href="{esc(href("/案例/"+str(case_id), 读法="落地"))}">落地读法</a>
-    <a href="{esc(href("/案例/"+str(case_id), 读法="现场"))}">现场读法</a>
+    <a class="{ 'on' if view=='落地' else '' }" href="{esc(href("/案例/"+str(case_id), 读法="落地", 窗=days))}">给负责人</a>
+    <a class="{ 'on' if view=='现场' else '' }" href="{esc(href("/案例/"+str(case_id), 读法="现场", 窗=days))}">给现场的人</a>
   </div>
-</section>
-<div class="pair">
-  <section class="col{on_d}" id="落地读法">
-    <h2>落地读法</h2>
-    <dl class="anatomy">
-      {dl_row("经营问题", row.get("business_problem"))}
-      {dl_row("结果", row.get("measured_outcome"))}
-      {dl_row("口径", kpi_label(row.get("kpi_scope")))}
-      {dl_row("集成", row.get("integration"))}
-      {dl_row("数据", row.get("data_sources"))}
-      {dl_row("人在环内", row.get("human_in_the_loop"))}
-      {dl_row("上线周期", row.get("time_to_production"))}
-      {dl_row("交接", row.get("customer_handoff"))}
-      {dl_row("编制", row.get("fde_role"))}
-    </dl>
+  <div class="room-pair">
+    <section class="room-box{on_d}" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        {dl_row("要解决什么", row.get("business_problem"))}
+        {dl_row("结果", row.get("measured_outcome"))}
+        {dl_row("这个数字怎么来的", kpi_label(row.get("kpi_scope")))}
+        {dl_row("接了哪些系统", row.get("integration"))}
+        {dl_row("用了什么数据", row.get("data_sources"))}
+        {dl_row("人还管哪一步", row.get("human_in_the_loop"))}
+        {dl_row("多久上线", row.get("time_to_production"))}
+        {dl_row("怎么交给客户", row.get("customer_handoff"))}
+        {dl_row("有没有驻场团队", row.get("fde_role"))}
+      </dl>
+    </section>
+    <section class="room-box{on_f}" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        {dl_row("主要用在哪", row.get("hero_use_case"))}
+        {dl_row("以前怎么干", row.get("existing_workflow"))}
+        {dl_row("卡在哪", row.get("pain_point"))}
+        {dl_row("用了什么模型", row.get("ai_model"))}
+        {dl_row("事情怎么流转", row.get("agent_workflow"))}
+        {dl_row("怎么验收", row.get("evaluation"))}
+        {dl_row("怎么上线", row.get("deployment"))}
+        {dl_row("失败了怎么改", row.get("failure_iteration"))}
+        {dl_row("能不能复用到下一家", row.get("productization"))}
+      </dl>
+    </section>
+  </div>
+  {quote}
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">{esc(human_anatomy(row.get("evidence_note") or "") or "没有补充说明。")}</p>
+    {flags_html}
   </section>
-  <section class="col{on_f}" id="现场读法">
-    <h2>现场读法</h2>
-    <dl class="anatomy">
-      {dl_row("主场景", row.get("hero_use_case"))}
-      {dl_row("旧流程", row.get("existing_workflow"))}
-      {dl_row("卡点", row.get("pain_point"))}
-      {dl_row("模型", row.get("ai_model"))}
-      {dl_row("工作流", row.get("agent_workflow"))}
-      {dl_row("评测", row.get("evaluation"))}
-      {dl_row("部署", row.get("deployment"))}
-      {dl_row("失败迭代", row.get("failure_iteration"))}
-      {dl_row("产品化", row.get("productization"))}
-    </dl>
-  </section>
+  {en_archive_html(row, case_id)}
+  {related}
 </div>
-{quote}
-<section class="section">
-  <h2>证据备注</h2>
-  <p class="note">{esc(row.get("evidence_note") or "没有补充说明。")}</p>
-  {flags_html}
-</section>
-{en_archive_html(row, case_id)}
-{related}
-<p class="hint"><a href="/world3d">回世界动态</a> · <a href="/落地">回落地</a> · <a href="/现场">回现场</a> · <a href="/案例">案例目录</a></p>
+</div>
+</div>
 """
-    return shell("%s · %s" % (title, SITE_NAME), "部署证据", inner, gh, page_path="/案例/%s" % case_id)
+    return shell(
+        "%s · %s" % (title, SITE_NAME),
+        "案例",
+        inner,
+        gh,
+        extra_head='<link rel="stylesheet" href="/static/room.css"/>',
+        body_class="room-page",
+        skip_wrap=True,
+        skip_mast=True,
+        skip_foot=True,
+        home_css=False,
+        page_path="/案例/%s" % case_id,
+    )
 
 
 def load_world_event(cur, event_id: int):
@@ -1978,7 +2221,7 @@ def render_event(cur, event_id: int) -> str:
     gh = github_url(cur)
     if not event:
         inner = '<section class="desk-lede"><h1>没有这条动态</h1><p><a href="/world3d">回世界动态</a></p></section>'
-        return shell("未找到 · %s" % SITE_NAME, "世界动态", inner, gh, page_path="/动态")
+        return shell("未找到 · %s" % SITE_NAME, "动态", inner, gh, page_path="/动态")
     lane = event.get("lane") or ""
     day = event.get("day") or ""
     src = event.get("url") or ""
@@ -1987,27 +2230,73 @@ def render_event(cur, event_id: int) -> str:
     bits = []
     if src:
         oh = event.get("orig_href") or orig_href("动态", event_id, src)
+        host = event.get("host") or host_of(src)
         if oh:
             bits.append(
                 f'<a class="orig" href="{esc(oh)}">'
-                f"核对原文 · {esc(event.get('host') or host_of(src))}</a>"
+                f"对照原文 · {esc(host)}</a>"
             )
         else:
-            bits.append("没有本地原文")
+            bits.append(
+                f'<a class="orig" href="{esc(src)}" target="_blank" rel="noopener noreferrer">'
+                f"打开原文 · {esc(host)}</a>"
+            )
     if case_href:
-        bits.append(f'<a href="{esc(case_href)}">在部署证据里看这条</a>')
+        bits.append(f'<a href="{esc(case_href)}">看完整案例</a>')
     extra = (" · ".join(bits)) if bits else ""
     job_note = (
-        '<p class="note">岗位是弱信号：说明还在招现场编制，不是组织已经落地。</p>'
+        '<p class="note">岗位是弱信号：说明还在招现场的人，不是组织已经落地。</p>'
         if job
         else ""
     )
     orig_block = ""
 
-    def block(title, text, empty):
-        body = text or empty
-        cls = " empty" if not text else ""
+    def fluff_why(text):
+        t = (text or "").strip()
+        return (not t) or any(
+            m in t
+            for m in (
+                "有名字、有日期",
+                "有日期、有名字",
+                "具名客户且",
+                "可作为交付现场",
+                "这是公开材料",
+                "有名字的人写的评论",
+                "有日期的演讲",
+                "讲怎么干活的材料",
+                "这是公司自己宣布的组织变化",
+            )
+        )
+
+    def fluff_prac(text):
+        t = (text or "").strip()
+        return (not t) or any(
+            m in t
+            for m in (
+                "Forward Deployed 头衔",
+                "驻场工程师这个岗位名",
+                "不是编制样板",
+                "不是怎么组团队",
+                "可核的是客户",
+            )
+        )
+
+    def block(title, text, empty=None):
+        body = (text or "").strip()
+        if not body:
+            if empty is None:
+                return ""
+            body = empty
+        cls = " empty" if not (text or "").strip() else ""
         return f'<section class="section"><h2>{esc(title)}</h2><p class="ev-read{cls}">{esc(body)}</p></section>'
+
+    why_html = "" if fluff_why(event.get("why")) else block("为什么要看", event.get("why"))
+    ent_html = block("对企业意味着什么", event.get("enterprise"))
+    prac_html = (
+        ""
+        if fluff_prac(event.get("practitioner"))
+        else block("对干活的人意味着什么", event.get("practitioner"))
+    )
 
     inner = f"""
 <section class="desk-lede">
@@ -2017,16 +2306,16 @@ def render_event(cur, event_id: int) -> str:
   {job_note}
 </section>
 {orig_block}
-{block("发生了什么", event.get("happened"), "当前未提取正文摘要。")}
-{block("为什么值得关注", event.get("why"), "当前未提取判断依据。")}
-{block("对企业落地的影响", event.get("enterprise"), "原文未写可核对的企业影响。")}
-{block("对从业者的影响", event.get("practitioner"), "原文未写可核对的从业者影响。")}
+{block("发生了什么", event.get("happened"), "还没写出摘要。")}
+{why_html}
+{ent_html}
+{prac_html}
 <p class="hint">{extra}</p>
-<p class="hint"><a href="/world3d">回世界动态</a> · <a href="/落地">落地</a> · <a href="/现场">现场</a> · <a href="/方法">方法</a></p>
+<p class="hint"><a href="/world3d">回世界动态</a> · <a href="/落地">负责人</a> · <a href="/现场">从业者</a> · <a href="/方法">学习</a></p>
 """
     return shell(
         "%s · %s" % (event.get("title") or "动态", SITE_NAME),
-        "世界动态",
+        "动态",
         inner,
         gh,
         page_path="/动态/%s" % event_id,

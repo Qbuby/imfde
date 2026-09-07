@@ -42,8 +42,8 @@
   }
 
   var GROUPS = {
-    eng: { name: "现场工程", brief: "循环之外、驻场里反复出现的工程题。点选看这一课。" },
-    l2: { name: "组织与战略", brief: "编制、治理和商业模型。点选看这一课。" }
+    eng: { name: "现场会碰到的工程题", brief: "驻场时反复出现的工程题。点开看这一课。" },
+    l2: { name: "组织和生意", brief: "人放哪、怎么治理、钱怎么算。点开看这一课。" }
   };
 
   function openGroup(group) {
@@ -61,7 +61,7 @@
       el.setAttribute("aria-pressed", "false");
     });
     var items = members.map(function (n) {
-      var tag = n.ready ? "完整课" : "目录";
+      var tag = n.ready ? "教程" : "还没写成课";
       return (
         '<button type="button" class="learn-p-member" data-node="' +
         esc(n.slug) +
@@ -76,7 +76,7 @@
     var allReady = members.every(function (n) { return n.ready; });
     panel.innerHTML =
       '<div class="learn-p-top"><p class="learn-p-k">' +
-      (allReady ? "方法 · 完整课" : "方法 · 目录") +
+      (allReady ? "学习 · 教程" : "学习 · 还没写成课") +
       "</p>" +
       '<button type="button" class="learn-p-x" data-learn-close aria-label="关闭">×</button></div>' +
       "<h2>" + esc(meta.name) + "</h2>" +
@@ -100,13 +100,13 @@
       el.setAttribute("aria-pressed", on ? "true" : "false");
     });
     var ready = !!n.ready;
-    var kicker = ready ? "方法 · 完整课" : "方法 · 目录";
+    var kicker = ready ? "学习 · 教程" : "学习 · 还没写成课";
     var steps = (n.steps || [])
       .map(function (s) {
         return "<li>" + esc(s) + "</li>";
       })
       .join("");
-    var goLabel = ready ? "进入完整课" : "打开目录";
+    var goLabel = ready ? "开始这一课" : "先看看目录";
     var goal = n.goal
       ? "<p class=\"learn-p-goal\">" + esc(n.goal) + "</p>"
       : n.brief
@@ -115,7 +115,7 @@
     var brief = "";
     var stepBlock = steps
       ? '<h2 class="learn-p-h">这一步</h2><ol class="learn-p-steps">' + steps + "</ol>"
-      : '<p class="learn-p-empty">这一节点还没写成课。目录里有练习情景和方法文。</p>';
+      : '<p class="learn-p-empty">这一步还没写成课。下面有练习情景和阅读材料。</p>';
     panel.hidden = false;
     panel.innerHTML =
       '<div class="learn-p-top"><p class="learn-p-k">' +

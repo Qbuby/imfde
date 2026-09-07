@@ -455,14 +455,16 @@
     if (!event) return '<p class="panel-empty">选择时间轴上的节点，查看来源与影响。</p>';
     var enterprise = event.enterprise || "";
     var practitioner = event.practitioner || "";
-    var primaryTitle = state.lens === "field" ? "对 FDE 从业者的影响" : "对企业落地的影响";
+    var fluffWhy = !event.why || /有名字、有日期|有日期、有名字|具名客户且|可作为交付现场|这是公开材料|有名字的人写的评论|有日期的演讲|有日期的一集播客|公开讨论。一帖一条|讲怎么干活的材料|这是公司自己宣布的组织变化|工程团队写怎么组这支队伍|官方新闻稿，用来对同一天|公司把「帮客户落地」写成|股东信是公司对外讲经营/.test(String(event.why));
+    var fluffPrac = !practitioner || /Forward Deployed 头衔|驻场工程师这个岗位名|不是编制样板|不是怎么组团队|可核的是客户/.test(practitioner);
+    var primaryTitle = state.lens === "field" ? "对干活的人意味着什么" : "对企业意味着什么";
     var primaryBody = state.lens === "field"
-      ? fieldCopy(practitioner, "原文没写这一段。")
-      : fieldCopy(enterprise, "原文没写这一段。");
-    var secondaryTitle = state.lens === "field" ? "对企业落地的影响" : "对 FDE 从业者的影响";
+      ? (fluffPrac ? "" : fieldCopy(practitioner, ""))
+      : (enterprise ? fieldCopy(enterprise, "") : "");
+    var secondaryTitle = state.lens === "field" ? "对企业意味着什么" : "对干活的人意味着什么";
     var secondaryBody = state.lens === "field"
-      ? fieldCopy(enterprise, "原文没写这一段。")
-      : fieldCopy(practitioner, "原文没写这一段。");
+      ? (enterprise ? fieldCopy(enterprise, "") : "")
+      : (fluffPrac ? "" : fieldCopy(practitioner, ""));
     var relatedIds = [];
     (DATA.links || []).forEach(function (link) {
       if (Number(link.from) === event.id) relatedIds.push(Number(link.to));
@@ -487,20 +489,24 @@
       '<img class="src-pill-logo" src="' + esc(chainLogo(event)) + '" alt="" aria-hidden="true"/>' + esc(sourceName(event)) +
       '</span>' +
       (sourceName(event) !== event.host && event.host ? '<span class="src-host">' + esc(event.host) + '</span>' : '') + '</dd></div>' +
-      '<div><dt>日期</dt><dd>' + esc(event.date_kind === "published" ? event.day : ("页上日期 " + event.day)) + "</dd></div>" +
+      '<div><dt>日期</dt><dd>' + esc(event.date_kind === "published" ? event.day : ("页面上写的日期 " + event.day)) + "</dd></div>" +
       "</dl>" +
-      heading("talk", "发生了什么") + fieldCopy(event.happened, "当前未提取正文摘要。") +
-      heading("why", "为什么值得关注") + fieldCopy(event.why, "当前未提取判断依据。") +
-      heading(state.lens === "field" ? "person" : "org", primaryTitle) + primaryBody +
-      heading(state.lens === "field" ? "org" : "person", secondaryTitle) + secondaryBody +
-      heading("src", "核对原文") +
+      heading("talk", "发生了什么") + fieldCopy(event.happened, "还没写出摘要。") +
+      (fluffWhy ? "" : heading("why", "为什么要看") + fieldCopy(event.why, "")) +
+      (primaryBody ? heading(state.lens === "field" ? "person" : "org", primaryTitle) + primaryBody : "") +
+      (secondaryBody ? heading(state.lens === "field" ? "org" : "person", secondaryTitle) + secondaryBody : "") +
+      heading("src", "对照原文") +
       (event.orig_href
         ? '<a class="src-line" href="' + esc(event.orig_href) + '">' +
-          '<b>核对原文（本地备份）</b>' +
+          '<b>对照存下来的原文</b>' +
           '<span class="src-url">' + esc(event.host || "") + '</span></a>'
-        : '<p class="src-line">没有本地原文</p>') +
+        : event.url
+          ? '<a class="src-line" href="' + esc(event.url) + '" target="_blank" rel="noopener noreferrer">' +
+            '<b>打开原文</b>' +
+            '<span class="src-url">' + esc(event.host || "") + '</span></a>'
+          : '<p class="src-line">没有原文链接</p>') +
       (caseHref
-        ? '<a class="panel-bottom-link" href="' + esc(typeof caseHref === "string" ? caseHref : event.href) + '">在部署证据库中查看这条案例 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a>'
+        ? '<a class="panel-bottom-link" href="' + esc(typeof caseHref === "string" ? caseHref : event.href) + '">看完整案例 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a>'
         : "") +
       (relatedPick
         ? '<button type="button" class="panel-related" data-pick="' + esc(relatedPick) + '"><img src="/static/icons/share-2.svg" alt="" aria-hidden="true"/>查看相关事件 (' + relatedShow.length + ")</button>"
@@ -676,7 +682,7 @@
     var winEl = document.querySelector("[data-world-window]");
     if (winEl && DATA.windows) {
       var start = DATA.windows[String(state.range)] || "";
-      winEl.innerHTML = "时间窗口：最近 " + state.range + " 天（" + esc(dayZh(start)) + " – " + esc(dayZh(DATA.snapshot)) + "）<br/>北京时间<br/><a class=\"foot-link\" href=\"/落地\">落地读法</a> · <a class=\"foot-link\" href=\"/现场\">现场读法</a> · <a class=\"foot-link\" href=\"/方法\">方法目录</a>";
+      winEl.innerHTML = "最近 " + state.range + " 天（" + esc(dayZh(start)) + " – " + esc(dayZh(DATA.snapshot)) + "）<br/>北京时间<br/><a class=\"foot-link\" href=\"/落地\">负责人</a> · <a class=\"foot-link\" href=\"/现场\">从业者</a> · <a class=\"foot-link\" href=\"/方法\">学习</a>";
     }
   }
 

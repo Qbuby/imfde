@@ -27,15 +27,10 @@ def render_world3d(cur) -> str:
     nav_links = "".join(
         (
             f'<a href="{S.esc(path)}" class="on" aria-current="page">{S.esc(label)}</a>'
-            if label == "世界动态"
+            if label == "动态"
             else f'<a href="{S.esc(path)}">{S.esc(label)}</a>'
         )
         for label, path in S.NAV
-    )
-    gh_link = (
-        f'<a class="w3-gh" href="{S.esc(github)}" target="_blank" rel="noopener noreferrer">GitHub</a>'
-        if github
-        else ""
     )
     auth_link = S.auth_link("/")
     inner = f"""
@@ -51,53 +46,52 @@ def render_world3d(cur) -> str:
         <button type="button" data-range="30" class="on" aria-pressed="true">30 天</button>
         <button type="button" data-range="90" aria-pressed="false">90 天</button>
       </div>
-      <div class="w3-lens" role="radiogroup" aria-label="AI 解释视角">
-        <button type="button" data-lens="boss" class="on" aria-pressed="true">决策者</button>
-        <button type="button" data-lens="field" aria-pressed="false">从业者</button>
+      <div class="w3-lens" role="radiogroup" aria-label="你想站在谁那边看">
+        <button type="button" data-lens="boss" class="on" aria-pressed="true">负责人</button>
+        <button type="button" data-lens="field" aria-pressed="false">干活的人</button>
       </div>
-      <nav class="w3-nav" aria-label="站内导航">{nav_links}{gh_link}{auth_link}</nav>
+      <nav class="w3-nav" aria-label="站内导航">{nav_links}{auth_link}</nav>
     </div>
   </header>
 
-  <div class="w3-stage" id="w3-stage" aria-label="FDE 世界 3D 沙盘">
+  <div class="w3-stage" id="w3-stage" aria-label="立体图">
     <canvas id="w3-canvas" tabindex="0" aria-describedby="w3-legend"></canvas>
     <div class="w3-labels w3-labels-3d" id="w3-labels-3d" aria-hidden="true"></div>
     <div class="w3-labels" id="w3-labels" aria-hidden="true"></div>
-    <p class="w3-hint" id="w3-hint">拖动旋转 · 滚轮缩放 · 点开观察读证据，再去落地或方法</p>
+    <p class="w3-hint" id="w3-hint">拖一拖、滚一滚。点一个点看说明。</p>
   </div>
 
-  <aside class="w3-panel" id="w3-panel" aria-label="动态证据详情" aria-live="polite"></aside>
+  <aside class="w3-panel" id="w3-panel" aria-label="这条的说明" aria-live="polite"></aside>
 
-  <footer class="w3-legend" id="w3-legend" aria-label="沙盘图例">
-    <span class="w3-lg-k">形体</span>
-    <span title="公司动作：组织自己发布的官方动作"><i class="w3-gl w3-gl-tower"></i>塔 · 公司</span>
-    <span title="真实部署：大本营射向客户前线的落点"><i class="w3-gl w3-gl-landing"></i>落点 · 部署</span>
-    <span title="人物与观点：悬在轨道上空的信号灯"><i class="w3-gl w3-gl-beacon"></i>信号灯 · 人物</span>
-    <span title="方法与岗位：铺在地面上的轨道"><i class="w3-gl w3-gl-rail"></i>轨道 · 方法</span>
-    <span class="w3-lg-note">高度 / 亮度 = 信号</span>
+  <footer class="w3-legend" id="w3-legend" aria-label="图例">
+    <span class="w3-lg-k">图例</span>
+    <span title="公司自己发布的动作"><i class="w3-gl w3-gl-tower"></i>公司</span>
+    <span title="有日期的客户故事"><i class="w3-gl w3-gl-landing"></i>客户故事</span>
+    <span title="人物公开讲的话"><i class="w3-gl w3-gl-beacon"></i>人物</span>
+    <span title="招聘和学习材料"><i class="w3-gl w3-gl-rail"></i>招聘 / 学习</span>
+    <span class="w3-lg-note">亮的是材料比较扎实</span>
     <span class="w3-lg-sep"></span>
-    <span><i class="w3-dot w3-dot-pub"></i>已发布日期</span>
-    <span><i class="w3-dot w3-dot-mod"></i>页上日期</span>
+    <span><i class="w3-dot w3-dot-pub"></i>发布日</span>
+    <span><i class="w3-dot w3-dot-mod"></i>页面上写的日期</span>
     <span class="w3-lg-sep"></span>
-    <span><i class="w3-ln w3-ln-direct"></i>直接</span>
-    <span><i class="w3-ln w3-ln-indirect"></i>间接</span>
-    <span><i class="w3-ln w3-ln-base"></i>大本营 → 前线</span>
-    <span class="w3-lg-snap">观察截止 {snapshot}</span>
+    <span><i class="w3-ln w3-ln-direct"></i>直接有关</span>
+    <span><i class="w3-ln w3-ln-indirect"></i>间接有关</span>
+    <span><i class="w3-ln w3-ln-base"></i>从公司到客户</span>
+    <span class="w3-lg-snap">资料截止 {snapshot}</span>
   </footer>
 
-  <nav class="w3-exits" id="w3-exits" aria-label="接着看">
-    <span class="w3-lg-k">接着看</span>
-    <a href="/落地?窗=30" data-room="落地">落地 <span>负责人</span></a>
-    <a href="/现场?窗=30" data-room="现场">现场 <span>从业者</span></a>
-    <a href="/案例?窗=30" data-room="案例">部署证据</a>
-    <a href="/方法" data-room="方法">方法 <span>学习资料</span></a>
-    <a href="/平面" data-room="平面">平面</a>
+  <nav class="w3-exits" id="w3-exits" aria-label="接下来">
+    <span class="w3-lg-k">接下来</span>
+    <a href="/落地?窗=30" data-room="落地">负责人</a>
+    <a href="/现场?窗=30" data-room="现场">从业者</a>
+    <a href="/案例?窗=30" data-room="案例">案例</a>
+    <a href="/方法" data-room="方法">学习</a>
   </nav>
 
   <section class="w3-fallback" id="w3-fallback" hidden>
-    <h2>已切换到平面列表</h2>
-    <p id="w3-fallback-why">此设备不支持 WebGL，或屏幕较窄。数据与 3D 沙盘完全一致。</p>
-    <p><a class="w3-fallback-link" href="/平面">打开平面时间轴 →</a></p>
+    <h2>改成列表了</h2>
+    <p id="w3-fallback-why">这个屏幕用不了立体图。内容和首页是同一批。</p>
+    <p><a class="w3-fallback-link" href="/平面">打开列表 →</a></p>
     <ol class="w3-fallback-list" id="w3-fallback-list"></ol>
   </section>
 </div>
@@ -106,7 +100,7 @@ def render_world3d(cur) -> str:
 """
     return S.shell(
         "%s · %s" % (S.SITE_CLUB, WORLD_BRAND),
-        "世界动态",
+        "动态",
         inner,
         github,
         extra_head=IMPORT_MAP + '\n<link rel="stylesheet" href="/static/world3d.css"/>',

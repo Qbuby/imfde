@@ -25,6 +25,7 @@ const params = new URLSearchParams(location.search);
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const NARROW = matchMedia("(max-width: 767px)").matches;
 const DAY = 86400000;
+const rangeFromUrl = Number(params.get("窗") || params.get("range"));
 
 /* ---------- palette (dark variants of tokens.css lane hues) ---------- */
 const LANE_COLOR = {
@@ -59,7 +60,7 @@ const laneLabel = (id) => ((DATA.lanes || []).find((l) => l.id === id) || {}).zh
 const laneEn = (id) => ((DATA.lanes || []).find((l) => l.id === id) || {}).en || "";
 
 const state = {
-  range: [7, 30, 90].includes(Number(params.get("range"))) ? Number(params.get("range")) : 30,
+  range: [7, 30, 90].includes(rangeFromUrl) ? rangeFromUrl : 30,
   lens: params.get("lens") === "field" ? "field" : "boss",
   selected: null,
   hovered: null,
@@ -121,8 +122,14 @@ function inWindow(e, range = state.range) {
   const d = parseDay(e.day);
   return !!d && d >= parseDay(DATA.windows[String(range)]) && d <= parseDay(DATA.snapshot);
 }
-const windowEvents = () =>
-  (DATA.events || []).filter((e) => inWindow(e)).sort((a, b) => (a.day !== b.day ? (a.day < b.day ? -1 : 1) : a.id - b.id));
+function windowEvents() {
+  const all = (DATA.events || [])
+    .filter((e) => inWindow(e))
+    .sort((a, b) => (a.day !== b.day ? (a.day < b.day ? -1 : 1) : a.id - b.id));
+  const hasCore = all.some((e) => e.lane === "company" || e.lane === "deploy");
+  if (hasCore) return all;
+  return all.filter((e) => e.info_kind !== "job_posting");
+}
 
 /* Organisations own company/deploy events; people & method group by host,
    mirroring worldview.build_entities so case-layer vendor quirks don't
@@ -200,7 +207,7 @@ function boot() {
   controls.dampingFactor = 0.08;
   controls.maxPolarAngle = Math.PI * 0.47;
   controls.minPolarAngle = Math.PI * 0.12;
-  controls.minDistance = 30;
+  controls.minDistance = 48;
   controls.maxDistance = 320;
   controls.enablePan = true;
   controls.screenSpacePanning = false;
@@ -337,7 +344,7 @@ function boot() {
     bg.setAttribute("position", new THREE.BufferAttribute(new Float32Array([-half, 0.04, BASE_Z, half, 0.04, BASE_Z]), 3));
     board.add(track(new THREE.LineSegments(bg, new THREE.LineDashedMaterial({ color: ACCENT, dashSize: 1.6, gapSize: 1.1, transparent: true, opacity: 0.45 }))));
     board.children[board.children.length - 1].computeLineDistances();
-    const bl = groundText(`<b>大本营</b><small>Organisations</small>`, "w3-g-lane", { width: LANE_TEXT_W / GT });
+    const bl = groundText(`<b>大本营</b><small>公司</small>`, "w3-g-lane", { width: LANE_TEXT_W / GT });
     bl.element.style.setProperty("--c", ACCENT);
     bl.position.set(-half - 2 - LANE_TEXT_W / 2, 0.06, BASE_Z);
     board.add(bl);
@@ -390,6 +397,8 @@ function boot() {
     const beaconGeo = track({ geometry: new THREE.SphereGeometry(0.8, 20, 16) }).geometry;
     const railGeos = {};
     const railEdges = {};
+    const hitGeo = track({ geometry: new THREE.SphereGeometry(2.8, 10, 8) }).geometry;
+    const hitMat = track({ material: new THREE.MeshBasicMaterial({ visible: false }) }).material;
     ["low", "mid", "high"].forEach((sig) => {
       const L = { low: 2.8, mid: 3.6, high: 4.4 }[sig];
       railGeos[sig] = track({ geometry: new THREE.BoxGeometry(L, 0.4, 2.0).translate(0, 0.2, 0) }).geometry;
@@ -531,6 +540,11 @@ function boot() {
       n.main.userData.id = e.id;
       n.hot.userData.id = e.id;
       pickables.push(n.main, n.hot);
+      const hit = new THREE.Mesh(hitGeo, hitMat);
+      hit.position.set(x, Math.max(1.4, Math.min(n.top * 0.45, 3.2)), z);
+      hit.userData.id = e.id;
+      eventsG.add(hit);
+      pickables.push(hit);
       n.hotBase = new THREE.Vector3(1, 1, 1);
 
       const lbl = label(
@@ -707,6 +721,7 @@ function boot() {
       basesG.add(edges);
 
       const lbl = label(`<b>${esc(g.name)}</b><small>${g.events.length}</small>`, "w3-lbl-base");
+      lbl.element.style.pointerEvents = "none";
       lbl.center.set(0.5, 1);
       lbl.position.set(g.x, hb + 0.6, BASE_Z);
       basesG.add(lbl);
@@ -772,8 +787,19 @@ function boot() {
   }
 
   function syncCopy(n) {
+    const counts = ((DATA.window_counts || {})[String(state.range)] || {}).by_lane || {};
+    const emptyCore = !(counts.company || counts.deploy);
+    const canned = (DATA.ledes || {})[String(state.range)] || "";
     if (ledeEl) {
-      ledeEl.textContent = `点开观察，读事实与影响，再进入落地或方法 · 过去 ${state.range} 天 · ${n} 条`;
+      ledeEl.textContent = emptyCore && canned
+        ? canned
+        : `点开观察，读事实与影响，再进入落地或方法 · 过去 ${state.range} 天 · ${n} 条`;
+    }
+    const titleEl = document.querySelector(".w3-title");
+    if (titleEl) {
+      titleEl.textContent = emptyCore && state.range === 7
+        ? "这 7 天没有新的客户故事，还在招人"
+        : "用真实客户故事，看现场怎么干活";
     }
     document.querySelectorAll("[data-range]").forEach((b) => {
       const on = Number(b.dataset.range) === state.range;
@@ -828,8 +854,8 @@ function boot() {
     applySelectionStyles();
     renderPanel();
     const n = nodes.get(id);
-    if (n && !opts.noFly) flyTo(new THREE.Vector3(n.x, n.top * 0.5, n.z), 54);
-    history.replaceState(null, "", `?range=${state.range}&lens=${state.lens}#e=${id}`);
+    if (n && !opts.noFly) flyTo(new THREE.Vector3(n.x, Math.min(n.top * 0.5, 4), n.z), Math.max(100, fitDistance() * 0.42));
+    history.replaceState(null, "", `?窗=${state.range}#e=${id}`);
   }
 
   function clearSelection() {
@@ -838,7 +864,7 @@ function boot() {
     applySelectionStyles();
     renderPanel();
     requestAnimationFrame(() => homeCamera(false));
-    history.replaceState(null, "", `?range=${state.range}&lens=${state.lens}`);
+    history.replaceState(null, "", `?窗=${state.range}`);
   }
 
   function showChain(index) {
@@ -990,7 +1016,7 @@ function boot() {
       rebuild();
       renderPanel();
       homeCamera(false);
-      history.replaceState(null, "", `?range=${state.range}&lens=${state.lens}${keep ? "#e=" + keep : ""}`);
+      history.replaceState(null, "", `?窗=${state.range}${keep ? "#e=" + keep : ""}`);
     })
   );
   document.querySelectorAll("[data-lens]").forEach((b) =>
@@ -1026,10 +1052,19 @@ function boot() {
 
   /* ---------- panel ---------- */
   const fieldCopy = (v, fb) => (v ? `<p>${esc(v)}</p>` : `<p class="w3-empty">${esc(fb)}</p>`);
+  const fluffWhy = (t) => {
+    t = String(t || "").trim();
+    return !t || /有名字、有日期|有日期、有名字|具名客户且|可作为交付现场|这是公开材料|还没写出为什么|有名字的人写的评论|有日期的演讲|有日期的一集播客|公开讨论。一帖一条|讲怎么干活的材料|这是公司自己宣布的组织变化|工程团队写怎么组这支队伍|官方新闻稿，用来对同一天|公司把「帮客户落地」写成|股东信是公司对外讲经营/.test(t);
+  };
+  const fluffPrac = (t) => {
+    t = String(t || "").trim();
+    return !t || /Forward Deployed 头衔|驻场工程师这个岗位名|不是编制样板|不是怎么组团队|可核的是客户/.test(t);
+  };
   function panelEvent(e) {
     const primaryField = state.lens === "field";
-    const ent = fieldCopy(e.enterprise, "原文没写这一段。");
-    const prac = fieldCopy(e.practitioner, "原文没写这一段。");
+    const ent = e.enterprise ? `<h3>对企业意味着什么</h3>${fieldCopy(e.enterprise)}` : "";
+    const prac = fluffPrac(e.practitioner) ? "" : `<h3>对干活的人意味着什么</h3>${fieldCopy(e.practitioner)}`;
+    const why = fluffWhy(e.why) ? "" : `<h3>为什么要看</h3>${fieldCopy(e.why)}`;
     const related = [];
     (DATA.links || []).forEach((lk) => {
       if (Number(lk.from) === e.id) related.push(Number(lk.to));
@@ -1037,23 +1072,26 @@ function boot() {
     });
     const rel = related.filter((id, i) => related.indexOf(id) === i && byId[id]);
     const c = (LANE_COLOR[e.lane] || LANE_COLOR.company).hi;
+    const kindBits = [laneLabel(e.lane), e.doc_label].filter((x, i, a) => x && a.indexOf(x) === i);
     return `
 <div class="w3-p-top">
-  <p class="w3-p-k" style="--c:${c}"><i></i>${esc(monthDay(e.day))} · ${esc(laneLabel(e.lane))} · ${esc(e.doc_label || e.info_kind)}</p>
-  <button type="button" class="w3-p-x" data-close aria-label="关闭详情">×</button>
+  <p class="w3-p-k" style="--c:${c}"><i></i>${esc(monthDay(e.day))} · ${esc(kindBits.join(" · "))}</p>
+  <button type="button" class="w3-p-x" data-close aria-label="关闭">×</button>
 </div>
 <h2>${esc(e.title)}</h2>
 <dl class="w3-p-facts">
   <div><dt>来源</dt><dd>${esc(e.host || e.kicker)}</dd></div>
-  <div><dt>日期</dt><dd>${esc(e.date_kind === "published" ? e.day : ("页上日期 " + e.day))}</dd></div>
-  <div><dt>信号</dt><dd>${esc({ low: "低", mid: "中", high: "高" }[e.signal] || e.signal)}</dd></div>
+  <div><dt>日期</dt><dd>${esc(e.date_kind === "published" ? e.day : ("页面上写的日期 " + e.day))}</dd></div>
 </dl>
-${e.orig_href ? `<p class="w3-p-url"><a href="${esc(e.orig_href)}">核对原文 · ${esc(e.host || "")}</a></p>` : `<p class="w3-p-url">没有本地原文</p>`}
-<h3>发生了什么</h3>${fieldCopy(e.happened, "当前未提取正文摘要。")}
-<h3>为什么值得关注</h3>${fieldCopy(e.why, "当前未提取判断依据。")}
-<h3>${primaryField ? "对 FDE 从业者的影响" : "对企业落地的影响"}</h3>${primaryField ? prac : ent}
-<h3>${primaryField ? "对企业落地的影响" : "对 FDE 从业者的影响"}</h3>${primaryField ? ent : prac}
-${e.case_href && e.lane === "deploy" ? `<p><a class="w3-p-more" href="${esc(e.case_href)}">在部署证据库中查看这条案例 →</a></p>` : ""}
+${e.orig_href
+  ? `<p class="w3-p-url"><a href="${esc(e.orig_href)}">对照存下来的原文 · ${esc(e.host || "")}</a></p>`
+  : e.url
+    ? `<p class="w3-p-url"><a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">打开原文 · ${esc(e.host || "")}</a></p>`
+    : `<p class="w3-p-url">没有原文链接</p>`}
+<h3>发生了什么</h3>${fieldCopy(e.happened, "还没写出摘要。")}
+${why}
+${primaryField ? prac + ent : ent + prac}
+${e.case_href && e.lane === "deploy" ? `<p><a class="w3-p-more" href="${esc(e.case_href)}">看完整案例</a></p>` : ""}
 ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${rel.map((id) => `<li><button type="button" data-pick="${id}"><span>${esc(monthDay(byId[id].day))}</span>${esc(byId[id].title_short || byId[id].title)}</button></li>`).join("")}</ul>` : ""}`;
   }
 

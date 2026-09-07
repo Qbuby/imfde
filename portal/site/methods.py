@@ -47,7 +47,7 @@ NODE_BRIEF = {
     ),
     "evaluation": (
         "上线前先有评测集、风险阈值和人在环内的闸门。"
-        "数字必须带口径：实测、目标、预测、系统规模要分开。"
+        "数字要分开看：测过的、目标、预测、系统规模，不是同一回事。"
     ),
     "adoption": (
         "嵌进旧流程，而不是另开一个没人打开的窗口。"
@@ -101,7 +101,7 @@ NODE_BRIEF = {
     ),
     "fde-operating-model": (
         "编制放在销售、产品还是独立前线，决定人听谁的、赢了归谁。"
-        "库里几乎没有「如何组建 FDE 团队」的完整样本，只能从公开口径里读结构。"
+        "库里几乎没有完整组队样本，只能从公开材料里读结构。"
     ),
     "change-scale-adoption": (
         "一个现场赢了，不等于能铺到所有事业部。"
@@ -273,7 +273,7 @@ NODE_NAME_ZH = {
     "enterprise-architecture": "企业架构与平台",
     "governance-risk": "治理、安全与合规",
     "economics-commercial": "商业模型与经济性",
-    "fde-operating-model": "FDE 组织与授权",
+    "fde-operating-model": "驻场团队怎么挂、听谁的",
     "change-scale-adoption": "变革与规模采用",
     "field-product-strategy": "现场洞察与产品战略",
 }
@@ -281,13 +281,16 @@ NODE_NAME_ZH = {
 
 def _zh_name(topic: dict) -> str:
     slug = topic.get("slug") or ""
+    mapped = NODE_NAME_ZH.get(slug)
+    if mapped:
+        return mapped
     zh = (topic.get("name_zh") or "").strip()
     for prefix in ("L1 ", "L2 "):
         if zh.startswith(prefix):
             zh = zh[len(prefix) :]
     if zh and any("\u4e00" <= ch <= "\u9fff" for ch in zh):
         return zh
-    return NODE_NAME_ZH.get(slug) or zh or slug
+    return zh or slug
 
 
 def _needles_for(slug: str) -> list[str]:
@@ -299,12 +302,25 @@ def _is_complete(slug: str, lessons: dict | None = None) -> bool:
 
 
 def _shell(title: str, inner: str, gh: str, page_path: str, extra_head: str = "") -> str:
+    short = title.split(" · ")[0]
+    hud = S.room_hud("学习", gh, short, "按步骤做完这一课")
+    wrapped = (
+        f'<div class="room room-doc" id="room">{hud}'
+        f'<div class="room-stage"><div class="room-docmain">'
+        f'<a class="room-back" href="/方法">← 回学习</a>'
+        f"{inner}</div></div></div>"
+    )
     return S.shell(
         title,
-        "方法",
-        inner,
+        "学习",
+        wrapped,
         gh,
-        extra_head=extra_head,
+        extra_head='<link rel="stylesheet" href="/static/room.css"/>' + extra_head,
+        body_class="room-page desk-page",
+        skip_wrap=True,
+        skip_mast=True,
+        skip_foot=True,
+        home_css=True,
         page_path=page_path,
         tagline=LEARN_TAGLINE,
         learn=True,
@@ -472,7 +488,7 @@ def _cycle_buttons(nodes: list[dict], current: str | None = None) -> str:
     for i, t in enumerate(nodes):
         ready = t.get("ready") if "ready" in t else _is_complete(t["slug"])
         on = t["slug"] == current
-        status = "完整课" if ready else "目录"
+        status = "教程" if ready else "还没写成课"
         cls = "learn-node" + (" on" if on else "") + ("" if ready else " is-stub")
         parts.append(
             f'<button type="button" class="{cls}" data-node="{S.esc(t["slug"])}" '
@@ -493,13 +509,9 @@ def _exit_buttons(nodes: list[dict]) -> str:
 def _hud_nav(gh: str) -> str:
     links = []
     for label, path in S.NAV:
-        cls = "on" if label == "方法" else ""
+        cls = "on" if label == "学习" else ""
         aria = ' aria-current="page"' if cls else ""
         links.append(f'<a class="{cls}" href="{S.esc(path)}"{aria}>{S.esc(label)}</a>')
-    if gh:
-        links.append(
-            f'<a class="learn-gh" href="{S.esc(gh)}" target="_blank" rel="noopener noreferrer">GitHub</a>'
-        )
     links.append(S.auth_link("/方法"))
     return "".join(links)
 
@@ -594,7 +606,7 @@ def _show_case(cur, lesson: dict) -> str:
   <h3><a href="{S.esc(href)}">{S.esc(title)}</a></h3>
   <p class="note">{S.esc(note)}</p>
   <dl class="anatomy">{body}</dl>
-  <p class="hint"><a href="{S.esc(href)}">打开案例全文</a> · <a class="orig" href="/原文/案例/{cid}">核对原文</a></p>
+  <p class="hint"><a href="{S.esc(href)}">看完整案例</a> · <a class="orig" href="/原文/案例/{cid}">对照原文</a></p>
 </article>
 """
 
@@ -635,23 +647,23 @@ def render_home(cur) -> str:
   </header>
   <div class="learn-stage" id="learn-stage">
     <div class="learn-cycle" role="list">
-      <p class="learn-cycle-core">现场交付循环</p>
+      <p class="learn-cycle-core">做事的步骤</p>
       {_cycle_buttons(l1)}
     </div>
-    <p class="learn-hint">点击任一节点看这一步 · 再进完整课。这不是行业动态。</p>
+    <p class="learn-hint">点一步看说明，再进这一课。这里不是新闻。</p>
   </div>
   <aside class="learn-panel" id="learn-panel" hidden aria-label="这一课" aria-live="polite"></aside>
-  <nav class="learn-exits" aria-label="离开循环">
-    <span class="learn-lg-k">循环外</span>
-    <button type="button" class="learn-exit" data-group="eng">现场工程 · {n_eng}/{len(extra)}</button>
-    <button type="button" class="learn-exit" data-group="l2">组织与战略 · {n_l2}/{len(l2)}</button>
+  <nav class="learn-exits" aria-label="另外还有">
+    <span class="learn-lg-k">另外还有</span>
+    <button type="button" class="learn-exit" data-group="eng">现场会碰到的工程题 · {n_eng}/{len(extra)}</button>
+    <button type="button" class="learn-exit" data-group="l2">组织和生意 · {n_l2}/{len(l2)}</button>
     <a href="/world3d">回世界动态</a>
   </nav>
 </div>
 {_learn_data_tag(topics, lessons)}
 """
     return S.shell(
-        "方法 · %s" % S.SITE_NAME,
+        "学习 · %s" % S.SITE_NAME,
         "方法",
         inner,
         gh,
@@ -686,7 +698,7 @@ def _render_lesson(cur, topic: dict, graph: dict, gh: str, lesson: dict) -> str:
         f"<li><h3>{S.esc(title)}</h3><p>{S.esc(body)}</p></li>"
         for title, body in lesson.get("rubric") or ()
     )
-    nav = ['<a href="/方法">图谱总览</a>']
+    nav = ['<a href="/方法">回学习</a>']
     if prev_t:
         nav.append(f'<a href="/方法/{S.esc(prev_t["slug"])}">上一步 · {S.esc(prev_t["name"])}</a>')
     if next_t:
@@ -701,7 +713,7 @@ def _render_lesson(cur, topic: dict, graph: dict, gh: str, lesson: dict) -> str:
 <aside class="learn-panel" id="learn-panel" hidden aria-label="其他节点" aria-live="polite"></aside>
 {_learn_data_tag(graph["topics"], lessons)}
 <section class="desk-lede">
-  <p class="k">方法 · 完整课</p>
+  <p class="k">学习 · 这一课</p>
   <h1>{S.esc(title)}</h1>
   <p class="learn-goal"><b>学习目标</b>：{S.esc(goal)}</p>
 </section>
@@ -748,7 +760,7 @@ def render_node(cur, slug: str) -> str:
     gh = S.github_url(cur)
     lessons = load_lessons()
     if not topic:
-        inner = '<section class="desk-lede"><h1>没有这个节点</h1><p><a href="/方法">回方法图谱</a></p></section>'
+        inner = '<section class="desk-lede"><h1>没有这一课</h1><p><a href="/方法">回学习</a></p></section>'
         return _shell("未找到 · %s" % S.SITE_NAME, inner, gh, "/方法")
     lesson = lessons.get(slug)
     if lesson:
@@ -765,9 +777,9 @@ def render_node(cur, slug: str) -> str:
         FDEI_ZH.get((x["fdei_id"] or "").split(":")[-1], x["fdei_id"])
         for x in topic.get("fdei") or []
     )
-    nav = ['<a href="/方法">图谱总览</a>']
+    nav = ['<a href="/方法">回学习</a>']
     if "discovery" in lessons:
-        nav.append('<a href="/方法/discovery">先去完整课 · 客户发现</a>')
+        nav.append('<a href="/方法/discovery">先去客户发现这一课</a>')
     if prev_t:
         nav.append(f'<a href="/方法/{S.esc(prev_t["slug"])}">上一步 · {S.esc(prev_t["name"])}</a>')
     if next_t:
@@ -777,10 +789,10 @@ def render_node(cur, slug: str) -> str:
 <aside class="learn-panel" id="learn-panel" hidden aria-label="其他节点" aria-live="polite"></aside>
 {_learn_data_tag(graph["topics"], lessons)}
 <section class="desk-lede">
-  <p class="k">方法 · 目录</p>
+  <p class="k">学习 · 还没写成课</p>
   <h1>{S.esc(topic["name"])}</h1>
   <p>{S.esc(brief)}</p>
-  <p class="note">本页是目录：练习情景和方法文。完整课从图谱点选进入。</p>
+  <p class="note">这一页先列练习和阅读。写成课以后从「学习」点进来。</p>
 </section>
 <section class="section">
   <h2>练习情景</h2>
@@ -788,7 +800,7 @@ def render_node(cur, slug: str) -> str:
   {_stem_list(stems)}
 </section>
 <section class="section">
-  <h2>相关方法文</h2>
+  <h2>相关阅读</h2>
   {_method_list(methods)}
 </section>
 {_fdei_appendix(prompts, fdei_note)}

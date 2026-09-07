@@ -20,34 +20,34 @@ WINDOW_DAYS = (7, 30, 90)
 DEPLOY_HOST_CAP = 4
 WORLD_BRAND = S.SITE_NAME
 LANES = (
-    ("company", "公司动作", "Company Moves"),
-    ("deploy", "真实部署", "Real Deployments"),
-    ("people", "人物与观点", "People & Perspectives"),
-    ("method", "方法与岗位", "Methods & Roles"),
+    ("company", "公司", "Company"),
+    ("deploy", "客户故事", "Customer stories"),
+    ("people", "人物", "People"),
+    ("method", "招聘 / 学习", "Jobs & learning"),
 )
 LANE_ORDER = {key: index for index, (key, _zh, _en) in enumerate(LANES)}
 DOC_LABEL = {
-    "case_study": "交付故事",
-    "methodology": "方法",
-    "opinion": "观点",
-    "job_posting": "岗位",
+    "case_study": "客户故事",
+    "methodology": "怎么做",
+    "opinion": "看法",
+    "job_posting": "招聘",
 }
 KIND_LABEL = {
-    "org_announcement": "组织公告",
-    "product_line": "产品线",
+    "org_announcement": "公司公告",
+    "product_line": "产品",
     "earnings_letter": "股东信",
     "press_release": "新闻稿",
-    "named_essay": "观点",
+    "named_essay": "看法",
     "interview": "访谈",
     "conference_talk": "演讲",
     "podcast_episode": "播客",
     "discussion": "讨论",
-    "methodology": "方法",
+    "methodology": "怎么做",
     "engineering_blog": "工程博客",
-    "job_posting": "岗位",
-    "hiring_board": "招聘板",
-    "hiring_census": "岗位普查",
-    "dated_case_study": "交付故事",
+    "job_posting": "招聘",
+    "hiring_board": "招聘",
+    "hiring_census": "招聘统计",
+    "dated_case_study": "客户故事",
 }
 HOST_VOICE = {
     "openai.com": "OpenAI",
@@ -387,16 +387,13 @@ def explanation_for(row, lane: str) -> dict:
     happened = summary_for(row, lane)
     if lane == "company":
         happened = title + "。这是厂商把部署能力写成独立组织或产品线的公开动作。"
-        why = "这是头部厂商将「部署」作为一条业务的明确信号，标志着 FDE 从支持角色走向战略中心。"
+        why = ""
     elif lane == "deploy":
-        if row.get("customer_named") and row.get("evidence_quality") == "high":
-            why = "具名客户且证据等级为 high，可作为交付现场样本；仍需回到原文核对口径。"
-        else:
-            why = "这是客户交付材料。案例数量不等于 FDE 编制证据，需结合字段和证据等级阅读。"
+        why = ""
     elif lane == "people":
-        why = "这是观点材料，不是企业部署声明；它提供行业参与者如何理解 FDE 的语境。"
+        why = "这是有人公开发表的看法，不是公司官方宣布。用来听现场怎么被讲。"
     else:
-        why = "这是方法或岗位材料，帮助理解 FDE 如何工作、如何招；不证明某家客户已照此执行。"
+        why = "这是讲怎么干活或怎么招人的材料。不证明某家客户已经照做。"
     enterprise = ""
     for field in ("measured_outcome", "deployment", "productization"):
         enterprise = clean_text(row.get(field))
@@ -405,7 +402,7 @@ def explanation_for(row, lane: str) -> dict:
             break
     practitioner = clean_text(row.get("fde_role"))
     if not practitioner and lane == "method":
-        practitioner = "原文讨论 FDE 的工作方式或岗位要求；具体职责需回到原始材料核对。"
+        practitioner = "原文在讲这份工作怎么干、招什么样的人。具体职责要打开原文看。"
     return {
         "happened": happened,
         "why": why,
@@ -451,7 +448,7 @@ def event_from_row(row, lane: str, day: str, kind: str) -> dict:
         "product": clean_text(row.get("product")),
         "quote": S.trunc(clean_text(row.get("quote")), 200),
         "href": "/案例/%s" % row["id"],
-        "case_href": "/案例/%s" % row["id"],
+        "case_href": ("/案例/%s" % row["id"]) if row.get("customer_named") else "",
         "happened": explanation["happened"],
         "why": explanation["why"],
         "enterprise": explanation["enterprise"],
@@ -519,7 +516,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 {
                     "num": "1",
                     "title": "这 7 天主要是新岗",
-                    "body": f"窗口里 {len(jobs)} 条是官方招聘。还在招现场编制，不等于组织已经落地。",
+                    "body": f"窗口里 {len(jobs)} 条是官方招聘。还在招现场的人，不等于组织已经落地。",
                     "lanes": ["method"],
                     "chain": method_jobs,
                     "n": len(jobs),
@@ -528,7 +525,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 {
                     "num": "2",
                     "title": "人才供给被写成公开议题",
-                    "body": "Washington Technology 引用 Christian & Timbers：约 1.7 万名 FDE 里，能稳定交出企业 AI 回报的大约 2000 人。Cohere 同期仍在写「建能力、不制造依赖」。",
+                    "body": "Washington Technology 引用 Christian & Timbers：约 1.7 万名驻场工程师里，能稳定交出企业 AI 回报的大约 2000 人。Cohere 同期仍在写「建能力、不制造依赖」。",
                     "lanes": ["people"],
                     "chain": pick_chain(win, lambda event: event["lane"] == "people", 4),
                     "n": sum(1 for event in win if event["lane"] == "people"),
@@ -549,7 +546,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 {
                     "num": "1",
                     "title": "窗口内的公司动作是服务商扩编",
-                    "body": "Blend360 给出 2027 年 750 人编制目标，这是服务商扩编，不是买方 FDE 组织。Palantir Q2 股东信已滑出这 30 天，见 90 天窗。",
+                    "body": "Blend360 给出 2027 年 750 人的扩编目标，这是服务商扩编，不是买方自己的驻场团队。Palantir Q2 股东信已滑出这 30 天，见 90 天窗。",
                     "lanes": ["company"],
                     "chain": company,
                     "n": len(company),
@@ -566,7 +563,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 },
                 {
                     "num": "3",
-                    "title": "公开讨论的是编制稀缺和能力建设",
+                    "title": "公开讨论的是人手够不够用，以及怎么建能力",
                     "body": "Washington Technology 写人才供给；Cohere 写建能力、不制造依赖。",
                     "lanes": ["people"],
                     "chain": people,
@@ -578,8 +575,8 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
             out["90"] = [
                 {
                     "num": "1",
-                    "title": "多家把驻场写成独立编制或伙伴运动",
-                    "body": "90 天里 AWS、Microsoft、Databricks 和 OpenAI Deployment Company 收购，都是组织/产品载体宣布。库内交付故事里，原文写出现场编制的很少。",
+                    "title": "多家把驻场写成独立团队或伙伴运动",
+                    "body": "90 天里 AWS、Microsoft、Databricks 和 OpenAI Deployment Company 收购，都是组织/产品载体宣布。库里的客户故事里，原文写了驻场团队的很少。",
                     "lanes": ["company"],
                     "chain": company,
                     "n": len(company),
@@ -594,7 +591,7 @@ def build_changes_by_range(events: list[dict], counts: dict, n_fde: int, n_case_
                 },
                 {
                     "num": "3",
-                    "title": "从业者口径从定义角色转向现场脏活",
+                    "title": "从业者的说法从定义角色转向现场脏活",
                     "body": "Natalie、Kevin Bai、Colin Jarvis 和 Cohere 把驻场里不写进 JD 的部分讲出来。",
                     "lanes": ["people"],
                     "chain": people,
@@ -609,10 +606,10 @@ def build_ledes(events: list[dict], window_counts: dict) -> dict:
     return {
         "7": (
             "这 7 天几乎没有新的公司宣布。"
-            "公开讨论集中在人才够不够用；招聘板仍有新岗，不等于编制已经落地。"
+            "公开讨论集中在人才够不够用；招聘板仍有新岗，不等于团队已经建好。"
         ),
         "30": (
-            "Blend360 把编制目标写到 2027 年 750 人；Cohere 写建能力、不制造依赖。"
+            "Blend360 把扩编目标写到 2027 年 750 人；Cohere 写建能力、不制造依赖。"
             "招聘还在发生，不等于现场组织已经铺开。"
         ),
         "90": (
@@ -701,6 +698,88 @@ def has_han(text: str | None) -> bool:
     return bool(re.search(r"[\u4e00-\u9fff]", text or ""))
 
 
+_TITLE_HUMAN = (
+    ("Forward Deployed Engineering", "驻场工程"),
+    ("Forward Deployed Engineer", "驻场工程师"),
+    ("前向部署工程师", "驻场工程师"),
+    ("FDE 编制", "驻场团队"),
+    ("FDE 岗位", "驻场岗位"),
+    ("FDE 人才", "驻场人才"),
+    ("怎么招 FDE", "怎么招驻场"),
+    ("招聘 FDE", "招聘驻场"),
+    ("何时需要编制", "何时需要这支队伍"),
+    ("FDE 101", "驻场入门"),
+    ("FDE 建能力", "驻场建能力"),
+    ("FDE 为何抢手", "驻场为何抢手"),
+    ("FDE 再次升温", "驻场再次升温"),
+    ("FDE 是增长引擎", "驻场是增长引擎"),
+    ("FDE 是什么", "驻场是什么"),
+    ("FDE 的一天", "驻场的一天"),
+    ("FDE 实际在做什么", "驻场实际在做什么"),
+    ("FDE 在做什么", "驻场在做什么"),
+    ("FDE 交付", "驻场交付"),
+    ("FDE 现场", "驻场现场"),
+    ("FDE 的退出", "驻场的退出"),
+    ("FDE 退出", "驻场退出"),
+    ("FDE 九种", "驻场九种"),
+    ("怎么谈 FDE", "怎么谈驻场"),
+    ("谈 FDE ", "谈驻场 "),
+    ("成立 FDE", "成立驻场团队"),
+    ("：FDE ", "：驻场 "),
+    (" FDE ", " 驻场 "),
+    ("FDE，", "驻场，"),
+    ("FDE,", "驻场,"),
+    ("· FDE", "· 驻场"),
+    ("的 FDE", "的驻场"),
+)
+
+
+def humanize_title(text: str | None) -> str:
+    out = text or ""
+    for old, new in _TITLE_HUMAN:
+        out = out.replace(old, new)
+    out = re.sub(r" {2,}", " ", out)
+    return (
+        out.replace("的 驻场", "的驻场")
+        .replace("驻场 的", "驻场的")
+        .replace("驻场 怎么", "驻场怎么")
+        .replace("： 驻场", "：驻场")
+    )
+
+
+_FLUFF_WHY = (
+    "具名客户且",
+    "有名字、有日期",
+    "有日期、有名字",
+    "有名字的人写的评论",
+    "有日期的演讲",
+    "这是公司自己宣布的组织变化",
+    "讲怎么干活的材料",
+    "这是公开材料",
+    "这是动态层收录",
+    "可作为交付现场",
+    "这是公司讲的客户故事。条数多不等于",
+)
+_FLUFF_PRAC = (
+    "Forward Deployed 头衔",
+    "驻场工程师这个岗位名",
+    "不是编制样板",
+    "不是怎么组团队",
+    "不能当成怎么组团队",
+    "可核的是客户",
+)
+
+
+def fluff_why(text: str | None) -> bool:
+    t = (text or "").strip()
+    return (not t) or any(m in t for m in _FLUFF_WHY)
+
+
+def fluff_prac(text: str | None) -> bool:
+    t = (text or "").strip()
+    return (not t) or any(m in t for m in _FLUFF_PRAC)
+
+
 def event_from_world(row, case: dict | None, entity_name: str) -> dict:
     lane = row["lane"]
     host = row["host"] or S.host_of(row["url"] or "")
@@ -748,10 +827,9 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
             title = customer
         elif problem:
             title = S.trunc(problem, 42)
-    if not has_han(title) and info_kind == "dated_case_study" and title:
-        title = f"{title} · 交付故事"
     if not has_han(title) and info_kind == "job_posting" and title and "招聘" not in title:
         title = "招聘 " + title
+    title = humanize_title(title)
     happened = clean_text(row["happened_zh"]) or ""
     if not has_han(happened):
         happened = problem or title
@@ -759,7 +837,11 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
     if not has_han(enterprise):
         enterprise = outcome
     href = "/动态/%s" % int(row["id"])
-    case_href = ("/案例/%s" % case_id) if case_id else ""
+    case_href = (
+        ("/案例/%s" % case_id)
+        if case_id and info_kind == "dated_case_study" and customer_named
+        else ""
+    )
     doc_type = "case_study" if info_kind == "dated_case_study" else info_kind
     signal = ui_signal(lane, row["signal"] or "", host, evidence, customer_named, info_kind)
     orig_title = clean_text(row["title"] or "")
@@ -794,9 +876,9 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
         "href": href,
         "case_href": case_href,
         "happened": happened or title,
-        "why": clean_text(row["why_zh"]) or "",
+        "why": "" if fluff_why(clean_text(row["why_zh"])) else clean_text(row["why_zh"]),
         "enterprise": enterprise or outcome,
-        "practitioner": clean_text(row["practitioner_zh"] or ""),
+        "practitioner": "" if fluff_prac(clean_text(row["practitioner_zh"] or "")) else clean_text(row["practitioner_zh"] or ""),
         "entity_key": entity_key,
         "entity_slug": slug,
         "entity_name": name,
@@ -1026,7 +1108,7 @@ def reading_layer(cur, counts) -> str:
     peer_html = "".join(S.case_cite(r) for r in peers)
     if not peer_html:
         peer_html = '<p class="wm-empty">没有同时满足「具名 · high · 核心厂商 · 有结果」的条目。</p>'
-    method_html = "".join(reading_item(r) for r in methods) or '<p class="wm-empty">方法目录是空的。</p>'
+    method_html = "".join(reading_item(r) for r in methods) or '<p class="wm-empty">这里还没有阅读材料。</p>'
     field_html = "".join(reading_item(r) for r in field) or '<p class="wm-empty">没有带发布日的评论。</p>'
     n = pack["n"]
     n_fde = pack["n_fde"]
@@ -1044,29 +1126,29 @@ def reading_layer(cur, counts) -> str:
       <article class="wm-col">
         <p class="k">给负责人</p>
         <h3>落地：先定范围</h3>
-        <p>全库交付现场里，原文写了现场编制的很少。能当样板的，要核心厂商、具名客户、证据充分、还有结果。</p>
+        <p>全库客户故事里，原文写了驻场团队的很少。能当样板的，要核心厂商、有名字的客户、材料比较扎实、还有结果。</p>
         <ol class="wm-q">
           <li>买产品，还是买驻场？公开页上不是同一件事。</li>
-          <li>要不要为此建编制？库里几乎没有完整组队样本。</li>
-          <li>口径能不能当样板？有结果 {n_out} / {n}，交接只写了 {handoff}。</li>
+          <li>要不要为此组这样一支队伍？库里几乎没有完整组队样本。</li>
+          <li>数字能不能当样板？有结果 {n_out} / {n}，交接只写了 {handoff}。</li>
         </ol>
-        <p class="wm-label">三单样板，点进去核对原文</p>
+        <p class="wm-label">三条样板，点进去对照原文</p>
         <div class="list">{peer_html}</div>
-        <p class="wm-go"><a href="/落地">落地读法全文</a></p>
+        <p class="wm-go"><a href="/落地">给负责人看</a></p>
       </article>
       <article class="wm-col">
         <p class="k">怎么被写出</p>
         <h3>方法：角色和流程</h3>
         <p>岗位变化仍在本页方法轨，这里不重复招聘列表。下面是库里已有的讲解页。</p>
         <div class="list">{method_html}</div>
-        <p class="wm-go"><a href="/方法">方法目录</a></p>
+        <p class="wm-go"><a href="/方法">去学习</a></p>
       </article>
       <article class="wm-col">
         <p class="k">给从业者</p>
         <h3>别把营销页当本周动态</h3>
-        <p>近态要读有发布日的评论线。客户故事大多是库存营销页，原文自称编制的很少。</p>
+        <p>近态要读有发布日的评论线。客户故事大多是库存营销页，原文写了驻场团队的很少。</p>
         <div class="list">{field_html}</div>
-        <p class="wm-go"><a href="/现场">现场读法</a></p>
+        <p class="wm-go"><a href="/现场">给干活的人看</a></p>
       </article>
     </div>
     <p class="world-more-field">社区启动期只走 GitHub 提交来源 / 补日期，不编活跃。题库练习还没做成站内产品。</p>
@@ -1091,12 +1173,12 @@ def render_world(cur) -> str:
             <button type="button" data-range="30" class="on" aria-pressed="true">30 天</button>
             <button type="button" data-range="90" aria-pressed="false">90 天</button>
           </div>
-          <p class="world-note"><span class="signal-dot" aria-hidden="true"></span>观察截止 {S.esc(S.day_zh(S.SNAPSHOT))} <span class="info-dot" title="无明确日期的材料不进入时间轴">i</span><a class="world-3d-link" href="/world3d" title="回世界动态首页">回世界动态 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a><a class="world-read-link" href="#world-rooms">其他内容</a></p>
+          <p class="world-note"><span class="signal-dot" aria-hidden="true"></span>资料截止 {S.esc(S.day_zh(S.SNAPSHOT))} <span class="info-dot" title="没有明确日期的材料不出现在这条线上">i</span><a class="world-3d-link" href="/world3d" title="回世界动态首页">回世界动态 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a><a class="world-read-link" href="#world-rooms">其他内容</a></p>
         </div>
       </section>
 
       <p class="ask-hit" id="world-hit" hidden></p>
-      <section class="world-board-wrap" aria-label="FDE 世界动态时间轴">
+      <section class="world-board-wrap" aria-label="世界动态时间轴">
         <div class="world-board" id="world-board">
           <div class="lanes" id="world-lanes"></div>
           <svg class="world-links" id="world-links" aria-hidden="true"></svg>
@@ -1121,12 +1203,12 @@ def render_world(cur) -> str:
 
       <section class="world-askbar" aria-label="查找">
         <form class="ask" id="world-ask" action="#" method="get">
-          <label class="ask-q" for="world-q"><img class="ask-spark" src="/static/icons/sparkles.svg" alt="" aria-hidden="true"/><input id="world-q" name="q" maxlength="200" placeholder="问这个世界：例如，哪些公司正在把 FDE 做成长周期组织能力？"/></label>
+          <label class="ask-q" for="world-q"><img class="ask-spark" src="/static/icons/sparkles.svg" alt="" aria-hidden="true"/><input id="world-q" name="q" maxlength="200" placeholder="搜一搜：比如 OpenAI、招聘、客户故事"/></label>
           <button type="submit" class="ask-go" aria-label="查找"><img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></button>
         </form>
         <div class="ask-lens" role="radiogroup" aria-label="AI 解释视角">
-          <span class="ask-lens-k">AI 解释视角</span>
-          <button type="button" data-lens="boss" class="on" aria-pressed="true">决策者</button>
+          <span class="ask-lens-k">你想站在谁那边看</span>
+          <button type="button" data-lens="boss" class="on" aria-pressed="true">负责人</button>
           <button type="button" data-lens="field" aria-pressed="false">从业者</button>
         </div>
       </section>
@@ -1136,13 +1218,13 @@ def render_world(cur) -> str:
   </div>
 
   <nav class="world-rooms" id="world-rooms" aria-label="站内其他内容">
-    <p class="world-rooms-k">平面时间轴到此为止。回世界动态首页，或按窗口读落地 / 现场 / 案例 / 方法：</p>
+    <p class="world-rooms-k">列表看到这里。回世界动态首页，或去负责人 / 从业者 / 案例 / 学习：</p>
     <div class="world-rooms-list">
-      <a href="/world3d"><b>世界动态</b><span>首页。行业发展有多快，随时在变</span></a>
-      <a href="/落地"><b>落地</b><span>这窗公司动作和真实部署，给负责人</span></a>
-      <a href="/现场"><b>现场</b><span>这窗人物与观点；岗位是弱信号</span></a>
-      <a href="/案例"><b>部署证据</b><span>先看有日期的落点，再翻库存目录</span></a>
-      <a href="/方法"><b>方法</b><span>学习资料，不是动态</span></a>
+      <a href="/world3d"><b>世界动态</b><span>最近发生了什么</span></a>
+      <a href="/落地"><b>负责人</b><span>公司在做什么、客户那边发生了什么</span></a>
+      <a href="/现场"><b>从业者</b><span>别人怎么讲现场；招聘只是还在招人</span></a>
+      <a href="/案例"><b>案例</b><span>客户故事，对照原文看</span></a>
+      <a href="/方法"><b>学习</b><span>现场怎么干活</span></a>
     </div>
   </nav>
 
@@ -1153,15 +1235,15 @@ def render_world(cur) -> str:
       <ol class="change-list" id="world-changes"></ol>
     </article>
     <article class="below-col entities">
-      <h2>关注实体 <span>（自定义关注与追踪）</span></h2>
-      <div class="ent-tabs" role="tablist" aria-label="关注实体分类">
+      <h2>可以盯着看的 <span>（公司和人）</span></h2>
+      <div class="ent-tabs" role="tablist" aria-label="分类">
         <button type="button" data-ent="company" class="on" role="tab" aria-selected="true">公司</button>
         <button type="button" data-ent="voice" role="tab" aria-selected="false">人物</button>
-        <button type="button" data-ent="method" role="tab" aria-selected="false">方法/框架</button>
-        <button type="button" data-ent="role" role="tab" aria-selected="false">岗位</button>
+        <button type="button" data-ent="method" role="tab" aria-selected="false">做法</button>
+        <button type="button" data-ent="role" role="tab" aria-selected="false">招聘</button>
       </div>
       <div class="ent-list" id="world-entities"></div>
-      <p class="ent-manage"><a href="/案例">浏览部署证据 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a></p>
+      <p class="ent-manage"><a href="/案例">看案例 <img src="/static/icons/arrow-right.svg" alt="" aria-hidden="true"/></a></p>
     </article>
     <article class="below-col cobuild">
       <h2>共同建设 {S.esc(WORLD_BRAND)}</h2>
@@ -1176,17 +1258,17 @@ def render_world(cur) -> str:
 {more_html}
 
   <section class="world-foot" aria-label="来源与边界说明">
-    <div class="foot-title"><h2>来源与边界说明</h2></div>
-    <div><h3>资料库</h3><p>客户交付故事以库存为主；原文写明现场编制的很少。</p></div>
-    <div class="foot-dynamic"><img src="/static/icons/share-2.svg" alt="" aria-hidden="true"/><div><h3>动态层（本页）</h3><p>本期快照由本地动态层生成；AI 只做结构化摘要，证据以原文为准。</p></div></div>
-    <div><h3>数据口径</h3><p data-world-window>时间窗口：最近 30 天（{S.esc(S.day_zh(data['windows']['30']))} – {S.esc(S.day_zh(S.SNAPSHOT))}）<br/>北京时间<br/><a class="foot-link" href="/落地">落地读法</a> · <a class="foot-link" href="/现场">现场读法</a> · <a class="foot-link" href="/方法">方法目录</a></p></div>
+    <div class="foot-title"><h2>这些材料从哪来</h2></div>
+    <div><h3>案例库</h3><p>大多是公司自己讲的客户故事。原文写明驻场团队的很少。</p></div>
+    <div class="foot-dynamic"><img src="/static/icons/share-2.svg" alt="" aria-hidden="true"/><div><h3>这一页</h3><p>这是一份有截止日期的快照。摘要是整理过的，对不对以原文为准。</p></div></div>
+    <div><h3>资料怎么来的</h3><p data-world-window>最近 30 天（{S.esc(S.day_zh(data['windows']['30']))} – {S.esc(S.day_zh(S.SNAPSHOT))}）<br/>北京时间<br/><a class="foot-link" href="/落地">负责人</a> · <a class="foot-link" href="/现场">从业者</a> · <a class="foot-link" href="/方法">学习</a></p></div>
   </section>
 </div>
 {json_tag(data)}
 <script src="/static/world.js" defer></script>
 """
     return S.shell(
-        "平面时间轴 · %s" % WORLD_BRAND,
+        "列表 · %s" % WORLD_BRAND,
         "",
         inner,
         github,

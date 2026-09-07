@@ -173,20 +173,20 @@ HAPPENED_ZH = {
 }
 
 WHY_BY_KIND = {
-    "org_announcement": "这是头部厂商把部署写成独立组织或业务的公开动作，不是客户故事。",
-    "product_line": "这是把部署能力命名成产品线的官方宣布，标志着 FDE 从支持角色走向业务中心。",
-    "earnings_letter": "股东信是经营口径。点名 FDE 说明编制已经进入对外叙事，仍需回到原文核对数字。",
-    "press_release": "官方新闻稿用来佐证同一天的经营口径，不单独当成第二条变化。",
-    "named_essay": "具名评论。先核文中主张、数字口径和说话人身份，不要自动当成雇主官方。",
-    "interview": "有日期、有具名受访者的访谈。提供从业者怎么理解 FDE 的语境。",
-    "conference_talk": "有发布日的演讲或官方录像。台上数字不当审计测量。",
-    "podcast_episode": "有发布日的单期播客，用来理解方法共识，不证明某家客户已照此执行。",
-    "discussion": "公开讨论帖。一帖一条；无发布日则只收录、不进窗口。",
-    "methodology": "方法或手册材料，帮助理解 FDE 如何工作；不证明某家客户已照此执行。",
-    "engineering_blog": "工程团队写怎么建 FDE 组。这是方法信号，不是交付故事。",
-    "job_posting": "官方招聘是弱信号：说明有人在建这支队伍，不证明编制已经落地。",
-    "hiring_census": "有采集日的公开普查，一篇一篇进方法轨，不把岗位列表铺进窗口。",
-    "dated_case_study": "具名客户且原文有发布或修改日，可作为交付现场样本；仍需回到原文核对口径。",
+    "org_announcement": "这是公司自己宣布的组织变化，不是某一家客户的故事。",
+    "product_line": "公司把「帮客户落地」写成一条产品线了。",
+    "earnings_letter": "股东信是公司对外讲经营。点名驻场团队，说明他们开始这么对外讲；数字要打开原文看。",
+    "press_release": "官方新闻稿，用来对同一天的说法。不要单独当成第二条变化。",
+    "named_essay": "有名字的人写的评论。先看他主张什么、数字怎么来的、他是谁。",
+    "interview": "有日期、有名字的访谈。看现场的人怎么理解这份工作。",
+    "conference_talk": "有日期的演讲。台上的数字不是审计结果。",
+    "podcast_episode": "有日期的一集播客。用来听大家怎么说，不证明某家客户已经照做。",
+    "discussion": "公开讨论。一帖一条；没有日期就不上这条时间线。",
+    "methodology": "讲怎么干活的材料。不证明某家客户已经照做。",
+    "engineering_blog": "工程团队写怎么组这支队伍。这是做法，不是客户故事。",
+    "job_posting": "官方在招人。只能说明有人在建这支队伍，不说明已经做成了。",
+    "hiring_census": "别人统计的招聘情况。一篇一篇看，不要把岗位列表铺满屏幕。",
+    "dated_case_study": "",
 }
 
 # Homepage four fields. Purpose = 行业发展有多快, not source-hygiene theater.
@@ -196,14 +196,137 @@ WHY_BY_KIND = {
 # practitioner: 从业者这窗要改的动作（投递/范围/别混岗位）
 # Do not invent KPIs. Hygiene (猎头≠普查) goes in a clause, never as the conclusion.
 DEPLOY_NO_FDE = (
-    "原文没有写 Forward Deployed 头衔。可核的是客户侧结果和现场做法，不是编制样板。"
+    "原文没写驻场工程师这个岗位名。能核对的是客户怎么用、结果怎样，不是怎么组团队。"
 )
+
+_HUMAN_PHRASES = (
+    ("口径是厂商客户故事里的实测叙述，不是第三方审计。", "这是公司自己讲的客户故事，不是第三方审计。"),
+    ("口径是厂商客户故事。", "这是公司自己讲的客户故事。"),
+    ("这是厂商客户故事。", "这是公司自己讲的客户故事。"),
+    ("这是厂商叙述，要回原文看口径。", "这是公司自己讲的，要打开原文看数字怎么来的。"),
+    ("CSAT 与解决率是页面叙述，要回原文看口径。", "满意度和解决率是页面上的说法，要打开原文看数字怎么来的。"),
+    ("要回原文看口径。", "要打开原文看数字怎么来的。"),
+    ("要回原文。", "要打开原文看。"),
+    ("这是厂商叙述。", "这是公司自己讲的。"),
+    ("口径在厂商页上。", "数字写在公司自己的页面上。"),
+    ("不能当这家客户的 KPI。", "不能当成这家客户自己测过的结果。"),
+    ("没有给出全公司吞吐 KPI。", "没有给出全公司的产出数字。"),
+    ("不是某一单 KPI。", "不是某一单客户的结果数字。"),
+    ("原文没有写 Forward Deployed 头衔。可核的是客户侧叙述，不是编制样板。", DEPLOY_NO_FDE),
+    ("原文没有写 Forward Deployed 头衔。这条不能当现场样本。", "原文没写驻场工程师这个岗位名。这条不能当成现场怎么干活的例子。"),
+    ("原文未明确 FDE 职衔。", "原文没写驻场工程师这个岗位名。"),
+    ("不要只看 FDE 头衔。", "不要只看岗位名称。"),
+    ("单岗不能当成交付结果，也不能当成已经扩编落地。", "一个岗位不等于已经做成，也不等于人已经到位。"),
+    ("仍在招这个方向的现场编制。", "还在招这个方向的人。"),
+    ("不能当成某家已经建好编制。", "不能当成某家已经把团队建好了。"),
+    ("不是你这家公司必须建编制的证明。", "不是你这家公司必须组这样一支队伍的证明。"),
+    ("官方 JD", "官方招聘启事"),
+    ("通讯不是投递清单。", "通讯不是拿来投简历的清单。"),
+    ("FDE 职衔", "驻场这个岗位名"),
+    ("FDE 头衔", "驻场这个岗位名"),
+    ("Forward Deployed 头衔", "驻场工程师这个岗位名"),
+    ("现场编制", "现场团队"),
+    ("编制样板", "组团队的例子"),
+    ("入门手册口径。", "入门手册上的说法。"),
+    ("猎头口径", "猎头自己的说法"),
+    ("把 FDE 写成", "把驻场写成"),
+    ("FDE 编制", "驻场团队"),
+    ("讨论何时需要 FDE 编制", "讨论何时需要这样一支驻场队伍"),
+    ("理解 OpenAI FDE", "理解 OpenAI 驻场"),
+    ("对 FDE 日常", "对驻场日常"),
+    ("FDE 一周大部分时间", "驻场的人一周大部分时间"),
+    ("一个 FDE 戴", "驻场的人戴"),
+    ("FDE 被写成", "驻场被写成"),
+    ("FDE 101", "驻场入门"),
+    ("如果把 FDE 当长期编制", "如果把驻场当长期编制"),
+    ("办公室工程师编制估算", "办公室工程师人数估算"),
+    ("不要把普查当编制事实", "不要把统计当成团队已经建好"),
+    ("经营口径", "经营上怎么讲"),
+    ("佐证口径", "对同一天的说法"),
+    ("一线口径", "一线的说法"),
+    ("不是 KPI 证明", "不是结果数字"),
+    ("IT 赋能；业务用户构建 agent。病毒式采用，不是强制。", "IT 搭台，业务自己配流程，没有强制推广。"),
+    ("这窗岗位", "最近这些岗位"),
+    ("和这窗扩招、扩编并读", "和最近这段扩招、扩编并读"),
+    ("这窗沙盘上", "这张图上"),
+    ("用来佐证口径", "用来对同一天的说法"),
+    ("补充口径", "补充说法"),
+    ("仍是部署编制宣布", "仍是把人派到客户现场的宣布"),
+    ("Forward Deployed Engineering 编制", "驻场团队"),
+    ("Forward Deployed Engineering 组织", "驻场团队"),
+    ("伙伴侧会出现 FDE 编制。", "合作伙伴那边也会出现驻场团队。"),
+    ("扩现场编制", "扩现场团队"),
+    ("设 FDE 组", "设驻场组"),
+    ("把 FDE 写进", "把驻场写进"),
+    ("Global Head of FDE", "驻场负责人"),
+    ("用来校准对 FDE 日常的预期", "用来校准对驻场日常的预期"),
+    ("岗位名可能不叫 FDE", "岗位名可能不叫驻场"),
+    ("一线口径，用来理解 OpenAI FDE 的日常", "一线的说法，用来理解 OpenAI 驻场的日常"),
+    ("用来理解 OpenAI 驻场 的日常", "用来理解 OpenAI 驻场的日常"),
+    ("驻场 的日常", "驻场的日常"),
+    ("人物轨把", "这条评论把"),
+    ("公开叙事从「FDE 是什么」", "公开说法从「驻场是什么」"),
+    ("编制从「支持角色」", "团队从「支持角色」"),
+    ("编制在靠并购变大", "团队在靠并购变大"),
+    ("再谈编制", "再谈组这支队伍"),
+    ("伙伴侧会出现驻场团队", "合作伙伴那边也会出现驻场团队"),
+    ("不能当某一单客户 KPI", "不能当成某一家客户的结果"),
+    ("信里的数字要回原文，不能当某一单客户 KPI。", "信里的数字要打开原文看，不能当成某一家客户的结果。"),
+)
+
+
+def humanize_copy(text):
+    if not text:
+        return text
+    out = text
+    for old, new in _HUMAN_PHRASES:
+        out = out.replace(old, new)
+    return out
+
+
+_GENERIC_WHY = (
+    "具名客户且",
+    "有名字、有日期的客户故事",
+    "有日期、有名字的访谈",
+    "有名字的人写的评论",
+    "有日期的演讲",
+    "有日期的一集播客",
+    "这是公开材料",
+    "这是动态层收录",
+    "可作为交付现场样本",
+    "这是公司自己宣布的组织变化",
+    "讲怎么干活的材料",
+    "公开讨论。一帖一条",
+    "工程团队写怎么组这支队伍",
+    "官方新闻稿，用来对同一天",
+    "公司把「帮客户落地」写成",
+    "股东信是公司对外讲经营",
+)
+_GENERIC_PRAC = (
+    "Forward Deployed 头衔",
+    "驻场工程师这个岗位名",
+    "不是编制样板",
+    "不是怎么组团队",
+    "不能当成怎么组团队",
+    "可核的是客户侧",
+    "可核的是客户自己的结果",
+)
+
+
+def is_generic_why(text) -> bool:
+    t = (text or "").strip()
+    return (not t) or any(m in t for m in _GENERIC_WHY)
+
+
+def is_generic_prac(text) -> bool:
+    t = (text or "").strip()
+    return (not t) or any(m in t for m in _GENERIC_PRAC)
 
 EVENT_COPY = {
     "blend360-fde-750": {
-        "happened": "Blend360 宣布把 Forward Deployed AI Engineering 编制扩到 2027 年 750 人，理由是企业要把 AI 嵌进生产。",
-        "enterprise": "这是服务商扩编目标，不是买方自己的 FDE 组织，也还不是已经到岗的人数。",
-        "practitioner": "信号是现场工程岗位还在扩。工作方式不能自动等同 Palantir 或 OpenAI 的 FDE。",
+        "happened": "Blend360 宣布，到 2027 年要把派到客户现场的 AI 工程人员扩到 750 人，理由是企业要把 AI 嵌进生产。",
+        "enterprise": "这是服务商自己的扩编目标，不是买方公司自己的团队，也还不是已经到岗的人数。",
+        "practitioner": "现场工程岗位还在扩。工作方式不能自动当成 Palantir 或 OpenAI 那种驻场。",
     },
     "washtech-fde-talent-2026-09-01": {
         "happened": (
@@ -213,10 +336,10 @@ EVENT_COPY = {
             "国防承包商被写成同一困境；A&D 更偏政府关系和驱动消费，文中写不一定亲自实施。"
         ),
         "why": (
-            "这窗沙盘上同时有厂商在招（Databricks、OpenAI、Cohere）和服务商扩编目标（Blend360 说到 2027 年 750 人）。"
-            "这条是人物轨把「还在招」翻成「能出回报的人很少」。"
-            "公开叙事从「FDE 是什么」转到「Elite 不够用」——这才是它出现在这窗里的理由。"
-            "1.7 万 / 2000 仍是猎头口径，不是普查。"
+            "这张图上同时有公司在招（Databricks、OpenAI、Cohere）和服务商说要扩到 750 人（Blend360）。"
+            "这条评论把「还在招」说成「能做出回报的人很少」。"
+            "公开说法从「驻场是什么」转到「尖子不够用」。"
+            "1.7 万 / 2000 仍是猎头自己的说法，不是普查。"
         ),
         "enterprise": (
             "和这窗扩招、扩编并读：若买方接受「Elite 约 2000」，自己招齐能出回报的人更难，更可能继续买驻场 / 服务商。"
@@ -481,7 +604,7 @@ COPY_BY_NEEDLE = (
     (
         "openai.com/index/replit",
         {
-            "happened": "OpenAI 客户页写 Replit 与 GPT 的交付故事。本条没有能进窗口的发布日，只作收录。",
+            "happened": "OpenAI 客户页写 Replit 与 GPT。本条没有能进窗口的发布日，只作收录。",
             "why": WHY_BY_KIND["dated_case_study"],
             "enterprise": "页面是产品故事。没有独立发布日则不上时间轴；数字要回原文。",
             "practitioner": "原文没有写 Forward Deployed 头衔。可核的是客户侧叙述，不是编制样板。",
@@ -509,91 +632,91 @@ COPY_BY_NEEDLE = (
 
 DEPLOY_COPY = {
     "devin.ai/customers/comun": {
-        "happened": "Común 公开 13 人工程组用 Devin 把后端 PR 从每周约 50 提到约 170 的交付故事。",
+        "happened": "Común 公开 13 人工程组用 Devin 把后端 PR 从每周约 50 提到约 170。",
         "enterprise": "四周内后端产出约 3 倍；页面还写新项目估计 2–3 倍加速。口径是厂商客户故事里的实测叙述，不是第三方审计。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "devin.ai/customers/rohlikgroup": {
-        "happened": "Rohlik Group 公开用 Devin 提高工程吞吐、并加快仓库自动化对接的交付故事。",
+        "happened": "Rohlik Group 公开用 Devin 提高工程吞吐、并加快仓库自动化对接。",
         "enterprise": "页面写工程吞吐约 2 倍，AutoStore 对接 8 个月（对照行业常见 2–3 年）。这是厂商叙述，要回原文看口径。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "devin.ai/customers/compiledhealth": {
-        "happened": "Compiled Health 公开四个人的团队用 Devin 把临床指南编译成可检查软件的交付故事。",
+        "happened": "Compiled Health 公开四个人的团队用 Devin 把临床指南编译成可检查软件。",
         "enterprise": "两周约 430 个计量工程小时、约 17 美元/小时；一个 sprint 17 天大约等于此前九周的量。口径在厂商页上。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "devin.ai/customers/ebanx": {
-        "happened": "EBANX 公开用 Devin 做支付机构对接和平台现代化的交付故事。",
+        "happened": "EBANX 公开用 Devin 做支付机构对接和平台现代化。",
         "enterprise": "核心支付平台约 92% 已合并 PR 由 Devin 创建；一条原估六周的工作流约 12 小时完成。页面另有「150 名工程师产出」的注脚，要回原文。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "devin.ai/customers/geaerospace": {
-        "happened": "GE Aerospace 公开在航司软件上用 Devin 补工程产能的交付故事。",
+        "happened": "GE Aerospace 公开在航司软件上用 Devin 补工程产能。",
         "enterprise": "页面写过去三个月用户故事产出大约 2 倍，对象是此前产能受限的较小团队。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "devin.ai/customers/ahead": {
         "happened": "AHEAD 先把 Devin 用在自己的工程组织，再把手册卖给客户。",
         "enterprise": "8 个生产用例相对手工基线 8x–40x；三条 API 一天完成（对照约四周）。这是厂商客户故事。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "devin.ai/customers/hippo": {
         "happened": "Hippo 的 Devin 客户页讲保险软件在五十州的构建与测试，但没有给出 Hippo 自己的工时或周期数字。",
         "enterprise": "页面没有 Hippo 实测工时或缺陷周期。出现的约 90% 是 McKinsey 行业估计，不能当这家客户的 KPI。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "writer.com/blog/vanguard-customer-story": {
-        "happened": "Vanguard 公开用 Writer 重做营销邮件工作流的交付故事：基线是 37 步、16 次人工交接。",
+        "happened": "Vanguard 公开用 Writer 重做营销邮件工作流：基线是 37 步、16 次人工交接。",
         "enterprise": "早期小组两天做出过去三周的量。页面也写了尚未改变工作方式的桌面用户数，不要只读加速比。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "writer.com/blog/beauty-pie-customer-story": {
-        "happened": "Beauty Pie 公开用 Writer 让业务人员自建 playbook 的交付故事。",
-        "enterprise": "248 个 playbook、38 个活动触发器覆盖五个部门；月活用户增长 135%。口径是厂商客户故事。",
-        "practitioner": DEPLOY_NO_FDE,
+        "happened": "Beauty Pie 公开说，业务人员用 Writer 自己搭 playbook。",
+        "enterprise": "248 个 playbook、38 个自动触发器，覆盖五个部门；月活用户增长 135%。这是 Writer 自己讲的客户故事。",
+        "practitioner": "IT 搭台，业务自己配流程，没有强制推广。",
     },
     "factory.ai/case-studies/comarch": {
-        "happened": "Comarch 公开用 Factory 做内部软件工厂、把迁移和现代化收成 Mission 的交付故事。",
+        "happened": "Comarch 公开用 Factory 做内部软件工厂、把迁移和现代化收成 Mission。",
         "enterprise": "工程师效率约 40%、团队速度约 30–34%；XSLT 现代化从估 1 万人天收到 45 天。这是厂商叙述。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "factory.ai/case-studies/you-com": {
-        "happened": "You.com 公开用 Factory/Droid 诊断跨栈 MCP 超时的交付故事。",
+        "happened": "You.com 公开用 Factory/Droid 诊断跨栈 MCP 超时。",
         "enterprise": "原本可能要数天才能复现的超时，当天下午在隔离环境里定位到客户端原因。没有给出全公司吞吐 KPI。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "decagon.ai/case-studies/ng-cash": {
-        "happened": "NG.CASH 公开用 Decagon agent 做客服自动化的交付故事。",
+        "happened": "NG.CASH 公开用 Decagon agent 做客服自动化。",
         "enterprise": "自主解决率从 13% 到 70%；免雇 35 名以上额外 agent；账户到 600 万未扩支持团队。口径是厂商客户故事。",
-        "practitioner": DEPLOY_NO_FDE,
+
     },
     "decagon.ai/case-studies/fourthwall": {
-        "happened": "Fourthwall 公开用 Decagon 做客服的交付故事：创作者社区、知识库加历史工单。",
+        "happened": "Fourthwall 公开用 Decagon 做客服：创作者社区、知识库加历史工单。",
         "enterprise": "70% 以上工单无需人眼解决。CSAT 与解决率是页面叙述，要回原文看口径。",
-        "practitioner": "Decagon 团队快速处理功能请求（协作式）。原文未明确 FDE 职衔。",
+        "practitioner": "现场会碰到功能要得很快，厂商的人一起改。",
     },
 }
 
 
 def job_four(org: str, role: str) -> dict:
     org = (org or "该公司").strip() or "该公司"
-    role = (role or "FDE").strip() or "FDE"
+    role = (role or "现场工程师").strip() or "现场工程师"
     return {
-        "happened": f"{org} 在官方招聘板上新挂出「{role}」。这是岗位发布，不是组织宣布。原文标题见本页。",
+        "happened": f"{org} 在招聘网站上新挂了「{role}」。这是在招人，不是宣布组织已经建成。",
         "why": WHY_BY_KIND["job_posting"],
-        "enterprise": f"只能读成 {org} 仍在招这个方向的现场编制。单岗不能当成交付结果，也不能当成已经扩编落地。",
-        "practitioner": f"标题能看出方向和职级（{role}）。具体职责以原文摘录为准。有人在招，不证明录用标准已经改写。",
+        "enterprise": f"只能读成 {org} 还在招这个方向的人。一个岗位不等于已经做成，也不等于人已经到位。",
+        "practitioner": f"岗位标题是「{role}」。具体干什么以招聘启事为准。",
     }
 
 
 def census_four(org: str, n: int) -> dict:
     org = (org or "该公司").strip() or "该公司"
     return {
-        "happened": f"{org} 本轮公开板上能识别出 {n} 个 FDE 相关岗位。这是一篇普查，不是 {n} 条事件。",
+        "happened": f"{org} 这轮公开招聘里能认出 {n} 个现场相关岗位。这是一篇统计，不是 {n} 件已经发生的事。",
         "why": WHY_BY_KIND["hiring_census"],
-        "enterprise": "列表长度不能读成需求已兑现，也不能当成组织宣布。",
-        "practitioner": "看供给和方向分布，不要把招聘板索引当投递清单。",
+        "enterprise": "名单长短不能读成需求已经满足，也不能当成公司正式宣布。",
+        "practitioner": "看招的方向和数量分布，不要把招聘列表当成投简历清单。",
     }
 
 
@@ -616,12 +739,25 @@ def editorial_pack(seed_id: str, info_kind: str, title: str, url: str = "", org:
     if info_kind == "hiring_census" and not pack.get("enterprise"):
         pack.update(census_four(org, 0))
     happened = pack.get("happened") or HAPPENED_ZH.get(seed_id) or ((title or "") + "。")
-    why = pack.get("why") or WHY_BY_KIND.get(info_kind) or "这是动态层收录的公开材料，需回到原文核对。"
+    if info_kind == "dated_case_study":
+        why = pack.get("why") or ""
+        if is_generic_why(why):
+            why = ""
+        prac = pack.get("practitioner") or None
+        if is_generic_prac(prac):
+            prac = None
+    else:
+        why = pack.get("why") or ""
+        if info_kind in ("job_posting", "hiring_census") and not why:
+            why = WHY_BY_KIND.get(info_kind) or ""
+        if is_generic_why(why):
+            why = ""
+        prac = pack.get("practitioner") or None
     return {
-        "happened": happened,
-        "why": why,
-        "enterprise": pack.get("enterprise") or None,
-        "practitioner": pack.get("practitioner") or None,
+        "happened": humanize_copy(happened),
+        "why": humanize_copy(why) if why else "",
+        "enterprise": humanize_copy(pack.get("enterprise") or None),
+        "practitioner": humanize_copy(prac) if prac else None,
     }
 
 KIND_FROM_DOC = {
@@ -1329,6 +1465,97 @@ def _is_stub_happened(text: str, title: str, title_zh: str) -> bool:
     return head in ((title or "").strip(), (title_zh or "").strip()) and bool(head)
 
 
+def _has_han(text: str) -> bool:
+    return bool(re.search(r"[\u4e00-\u9fff]", text or ""))
+
+
+def _zh_clip(text: str, n: int) -> str:
+    t = " ".join(str(text or "").split()).strip()
+    if not t:
+        return ""
+    cut = t.split("。", 1)[0].strip()
+    if cut:
+        t = cut + "。"
+    return trunc(t, n)
+
+
+def _useless_zh(text: str) -> bool:
+    t = (text or "").strip()
+    if not t:
+        return True
+    if any(x in t[:24] for x in ("页面未", "未点名", "未给出", "未描述", "未明确")):
+        return True
+    return t in ("无", "无。", "—", "-")
+
+
+def dated_case_fields(db, row, pack: dict, title: str) -> tuple[str, str, str, str]:
+    """Fill case four-fields from curated pack, else case_zh. Never stamp hygiene templates."""
+    cid = row["source_case_id"]
+    zh = None
+    if cid:
+        zh = db.execute("SELECT * FROM case_zh WHERE case_id=?", (int(cid),)).fetchone()
+    title = (title or row["title_zh"] or row["title"] or "").strip()
+    happened = pack.get("happened") or ""
+    if _is_stub_happened(happened, row["title"] or "", row["title_zh"] or "") or not happened:
+        src = ""
+        if zh:
+            for key in ("hero_use_case", "business_problem", "measured_outcome"):
+                cand = (zh[key] or "").strip()
+                if cand and not _useless_zh(cand):
+                    src = cand
+                    break
+        if not src:
+            src = row["happened_zh"] or ""
+        if src and not _is_stub_happened(src, row["title"] or "", row["title_zh"] or ""):
+            happened = trunc(src, 160)
+            if happened and happened[-1] not in "。.!？":
+                happened += "。"
+    why = pack.get("why") or ""
+    if is_generic_why(why):
+        why = ""
+    if not why and zh:
+        hook = ""
+        for key in ("business_problem", "pain_point"):
+            cand = (zh[key] or "").strip()
+            if cand and not _useless_zh(cand):
+                hook = _zh_clip(cand, 72)
+                break
+        if hook:
+            why = f"{title} 要解决的是：{hook}" if title else hook
+            if not why.endswith("。"):
+                why += "。"
+    if is_generic_why(why) or (why and happened and why.rstrip("。") in happened):
+        why = ""
+    ent = pack.get("enterprise") or ""
+    if (not ent or not _has_han(ent)) and zh:
+        mo = (zh["measured_outcome"] or "").strip()
+        if mo and not _useless_zh(mo):
+            ent = trunc(mo, 180)
+    if not ent:
+        ent = row["enterprise_zh"] or ""
+    prac = pack.get("practitioner") or ""
+    if is_generic_prac(prac):
+        prac = ""
+    if not prac and zh:
+        fr = (zh["fde_role"] or "").strip()
+        if (
+            fr
+            and not _useless_zh(fr)
+            and not is_generic_prac(fr)
+            and not any(x in fr for x in ("未明确", "页面无 FDE", "未描述 FDE", "无 FDE"))
+        ):
+            prac = trunc(fr, 160)
+        if not prac:
+            hitl = (zh["human_in_the_loop"] or "").strip()
+            if hitl and _has_han(hitl) and not _useless_zh(hitl):
+                hitl = hitl.split("页面未")[0].strip(" ；;")
+                if hitl:
+                    prac = trunc(hitl, 160)
+    if is_generic_prac(prac):
+        prac = ""
+    return happened, why, ent, prac
+
+
 def signal_for(lane: str, info_kind: str, host: str, date_kind: str) -> str:
     if info_kind in ("job_posting", "discussion", "hiring_census"):
         return "weak"
@@ -1346,8 +1573,19 @@ def upsert_event(db, payload: dict) -> int:
         for key in ("happened_zh", "why_zh", "enterprise_zh", "practitioner_zh", "title_zh"):
             incoming = (payload.get(key) or "").strip()
             stored = (existing[key] or "").strip()
+            if key == "why_zh" and is_generic_why(stored) and is_generic_why(incoming):
+                payload[key] = ""
+                continue
+            if key == "practitioner_zh" and is_generic_prac(stored) and is_generic_prac(incoming):
+                payload[key] = ""
+                continue
             if not incoming and stored:
-                payload[key] = stored
+                if key == "why_zh" and is_generic_why(stored):
+                    payload[key] = ""
+                elif key == "practitioner_zh" and is_generic_prac(stored):
+                    payload[key] = ""
+                else:
+                    payload[key] = stored
             elif key == "happened_zh" and stored and _is_stub_happened(
                 incoming, payload.get("title") or "", payload.get("title_zh") or ""
             ):
@@ -1504,10 +1742,14 @@ def migrate_inventory(db, catalog, dates_idx) -> dict:
         if not enterprise:
             outcome = row["measured_outcome"] or row["deployment"] or ""
             enterprise = trunc(outcome, 180) or None
-        if not practitioner:
-            practitioner = trunc(row["fde_role"] or "", 180) or (DEPLOY_NO_FDE if lane == "deploy" else None)
         if info_kind == "dated_case_study":
             happened = trunc(row["measured_outcome"] or row["hero_use_case"] or row["business_problem"] or title, 160)
+            if is_generic_why(why):
+                why = ""
+            if is_generic_prac(practitioner):
+                practitioner = None
+        elif not practitioner:
+            practitioner = trunc(row["fde_role"] or "", 180) or None
         entity = (seed_by_url.get(key) or {}).get("entity_slug")
         if not entity and lane == "deploy":
             slugs = [s for s in (row["vendor_slugs"] or "").split(",") if s]
@@ -2517,8 +2759,6 @@ def apply_editorial_copy(db) -> int:
         if row["info_kind"] == "hiring_census":
             m = re.search(r"(\d+)\s*个", title)
             pack = census_four(org or row["entity_slug"] or "", int(m.group(1)) if m else 0)
-        if row["info_kind"] == "dated_case_study" and not pack.get("practitioner"):
-            pack["practitioner"] = DEPLOY_NO_FDE
         happened = pack["happened"]
         old_hap = row["happened_zh"] or ""
         keep_old = (
@@ -2531,12 +2771,29 @@ def apply_editorial_copy(db) -> int:
         )
         if keep_old:
             happened = old_hap
-        new = (
-            happened,
-            pack["why"],
-            pack.get("enterprise") or row["enterprise_zh"],
-            pack.get("practitioner") or row["practitioner_zh"],
-        )
+        if (row["info_kind"] or "") == "dated_case_study":
+            happened, why, ent, prac = dated_case_fields(db, row, pack, title)
+            new = (
+                humanize_copy(happened),
+                humanize_copy(why) if why else "",
+                humanize_copy(ent) if ent else "",
+                humanize_copy(prac) if prac else "",
+            )
+        else:
+            why = pack.get("why") or ""
+            if is_generic_why(why):
+                why = ""
+            prac = pack.get("practitioner") or row["practitioner_zh"] or ""
+            if is_generic_prac(prac):
+                prac = pack.get("practitioner") or ""
+                if is_generic_prac(prac):
+                    prac = ""
+            new = (
+                humanize_copy(happened),
+                humanize_copy(why) if why else "",
+                humanize_copy(pack.get("enterprise") or row["enterprise_zh"]),
+                humanize_copy(prac) if prac else "",
+            )
         old = (row["happened_zh"], row["why_zh"], row["enterprise_zh"], row["practitioner_zh"])
         if new == old:
             continue

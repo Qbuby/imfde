@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>imfde.ai</title>
+<style>
+:root{
+  --bg:#020a12; --glass:rgba(7,19,30,.9);
+  --line:rgba(143,178,196,.16); --line2:rgba(143,178,196,.3);
+  --fg:#eeebe5; --soft:#b9c3ca; --mut:#7f8b93; --acc:#3fc0c0;
+  --company:#3fc0c0; --deploy:#6db0f4; --people:#fba952; --method:#b7a1f5;
+  --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:15px/1.5 var(--font);color-scheme:dark}
+body{display:grid;grid-template-rows:auto minmax(0,1fr);grid-template-columns:1fr 372px}
+body.no-panel{grid-template-columns:1fr}
+body.doc{grid-template-columns:1fr}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+
+.hud{
+  grid-column:1/-1;
+  display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:16px;
+  padding:10px 20px;
+  border-bottom:1px solid var(--line);
+  background:rgba(7,19,30,.95);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.02em}
+.mark b{color:var(--acc)} .mark i{color:var(--mut);font-style:normal}
+.lock{display:flex;flex-direction:column;gap:1px;font-size:13px;font-weight:650}
+.lock span{font-size:11px;font-weight:500;color:var(--mut)}
+.mid h1{margin:0;font-size:18px}
+.mid p{margin:2px 0 0;font-size:13px;color:var(--soft)}
+.tools{display:flex;align-items:center;gap:16px}
+.seg{display:inline-flex;padding:3px;border:1px solid var(--line2);border-radius:999px}
+.seg button{border:0;background:transparent;color:var(--soft);padding:5px 12px;border-radius:999px;font-size:13px}
+.seg button.on{background:var(--acc);color:#04141a;font-weight:650}
+.nav{display:flex;gap:18px;font-size:14px;color:var(--mut)}
+.nav a{padding:4px 0}
+.nav a:hover{color:var(--fg)}
+.nav a.on{color:var(--acc);font-weight:650;box-shadow:inset 0 -2px 0 var(--acc)}
+
+.stage{min-height:0;overflow:auto;padding:20px 24px;background:radial-gradient(120% 90% at 50% 110%,#0b1b2a,#020a12 62%)}
+.panel{
+  min-height:0;overflow:auto;padding:18px 18px 28px;
+  border-left:1px solid var(--line);background:var(--glass);
+  font-size:14px;line-height:1.65;color:var(--soft);
+}
+body.no-panel .panel, body.doc .panel{display:none}
+.screen{display:none}
+.screen.on{display:block}
+
+.how{margin:0 0 16px;padding:10px 14px;border-radius:10px;background:rgba(63,192,192,.08);border:1px solid rgba(63,192,192,.25);color:var(--fg);font-size:14px}
+.how b{color:var(--acc)}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.col h2{margin:0 0 10px;font-size:13px;letter-spacing:.06em}
+.col[data-lane=company] h2{color:var(--company)}
+.col[data-lane=deploy] h2{color:var(--deploy)}
+.card,.tick,.gcard{
+  display:block;width:100%;text-align:left;padding:12px 14px;margin:0 0 8px;
+  border:1px solid var(--line);border-radius:10px;background:rgba(12,27,39,.75);
+}
+.card:hover,.tick:hover,.gcard:hover{border-color:var(--acc)}
+.card.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.card time,.tick time{font:12px var(--mono);color:var(--mut)}
+.card strong,.tick strong,.gcard strong{display:block;margin:4px 0 2px;color:var(--fg)}
+.card span,.tick span,.gcard p{color:var(--soft);font-size:13px;margin:0}
+
+.spine{position:relative;padding-left:22px;max-width:680px}
+.spine::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(#fba952,transparent)}
+.tick{position:relative}
+.tick::before{content:"";position:absolute;left:-19px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--people);box-shadow:0 0 0 3px #020a12}
+.tick.on{border-color:var(--people)}
+.weak{display:inline-block;margin:0 0 14px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut);font-size:13px}
+
+.filt{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:rgba(12,27,39,.7);color:var(--soft);border-radius:999px;padding:6px 12px;font-size:13px}
+.pill.on{background:var(--acc);color:#04141a;border-color:var(--acc);font-weight:650}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gcard.on{border-color:var(--acc)}
+.gcard .k{font-size:11px;color:var(--deploy)}
+.tags{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.tags i{font-style:normal;font-size:11px;padding:2px 6px;border-radius:6px;border:1px solid var(--line);color:var(--mut)}
+
+.pk{margin:0;font:12px var(--mono);color:var(--soft);display:flex;align-items:center;gap:8px}
+.pk i{width:8px;height:8px;border-radius:50%;background:var(--deploy)}
+.px{margin-left:auto;width:28px;height:28px;border-radius:50%;border:1px solid var(--line2);background:transparent;color:var(--soft)}
+.panel h2{margin:8px 0 12px;font-size:20px;color:var(--fg)}
+.facts{margin:0 0 12px;padding:8px 12px;border:1px solid var(--line);border-radius:10px}
+.facts div{display:flex;justify-content:space-between;gap:12px;padding:5px 0}
+.facts dt{color:var(--mut);font-size:12px} .facts dd{margin:0;color:var(--fg)}
+.panel h3{margin:16px 0 6px;font-size:13px;color:var(--acc)}
+.panel p{margin:0 0 8px}
+.more{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:8px;background:var(--acc);color:#041016 !important;font-weight:650}
+.more.ghost{background:transparent;color:var(--acc) !important;border:1px solid var(--acc);margin-left:8px}
+
+.world{height:100%;min-height:420px;border-radius:12px;position:relative;overflow:hidden;
+  background:repeating-linear-gradient(90deg,transparent 0 64px,rgba(63,192,192,.07) 64px 65px),
+  radial-gradient(circle at 28% 42%,rgba(109,176,244,.45),transparent 26%),
+  radial-gradient(circle at 62% 38%,rgba(251,169,82,.4),transparent 18%),
+  radial-gradient(circle at 74% 58%,rgba(183,161,245,.3),transparent 16%), #061018}
+.dot{position:absolute;width:14px;height:14px;border-radius:50%;border:0;box-shadow:0 0 0 6px rgba(109,176,244,.15)}
+.dot.on{box-shadow:0 0 0 6px rgba(63,192,192,.35)}
+.lbl{position:absolute;font-size:12px;color:var(--fg);white-space:nowrap}
+
+.cycle{position:relative;width:min(560px,90%);height:min(560px,90%);margin:20px auto}
+.cycle-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--mut);font-size:13px;text-align:center;width:8em}
+.node{position:absolute;left:50%;top:50%;width:120px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:rgba(12,27,39,.92);text-align:left}
+.node b{display:block;font-size:14px} .node span{font-size:12px;color:var(--mut)}
+.node:hover,.node.on{border-color:var(--acc)}
+
+.docmain{display:none;grid-column:1/-1;overflow:auto;padding:28px 40px 80px;max-width:1100px;margin:0 auto;width:100%}
+body.doc .stage, body.doc .panel{display:none}
+body.doc .docmain{display:block}
+.kicker{color:var(--acc);font-size:12px;letter-spacing:.08em;margin:0 0 8px}
+.docmain h1{margin:0 0 10px;font-size:32px;letter-spacing:-.03em}
+.back{display:inline-block;margin:0 0 16px;color:var(--acc)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.box{background:#0c1b27;border:1px solid var(--line);border-radius:14px}
+.box h2{margin:12px 18px;font-size:14px;color:var(--acc)}
+.box dl{margin:0}
+.box dl div{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:10px 18px;border-top:1px solid var(--line)}
+.box dt{color:var(--mut)} .box dd{margin:0}
+.step{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#0c1b27;margin:0 0 10px}
+.step b{display:block;margin-bottom:4px}
+.strip{display:flex;gap:6px;overflow:auto;margin:0 0 18px}
+.strip button{flex:0 0 auto;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--soft);font-size:13px}
+.strip button.on{border-color:var(--acc);color:var(--fg)}
+
+@media (max-width: 767px){
+  body, body.no-panel{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr) auto}
+  .hud{grid-template-columns:1fr;gap:8px}
+  .tools{flex-wrap:wrap}
+  .nav{gap:12px;font-size:13px}
+  .cols,.grid,.pair{grid-template-columns:1fr}
+  .panel{
+    display:block;position:fixed;left:0;right:0;bottom:0;max-height:48vh;z-index:8;
+    border-left:0;border-top:1px solid var(--line);border-radius:16px 16px 0 0;
+  }
+  body.no-panel .panel, body.doc .panel{display:none}
+  .cycle{height:auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .cycle-core{display:none}
+  .node{position:static;transform:none;width:auto}
+}
+</style>
+</head>
+<body>
+<header class="hud">
+  <a class="brand" href="#luodi" data-go="luodi">
+    <span class="mark">im<b>fde</b><i>.ai</i></span>
+    <span class="lock">AI 实战进化社<span>在现场里进化</span></span>
+  </a>
+  <div class="mid">
+    <h1 id="title">落地</h1>
+    <p id="hint">点左边一条，右边告诉你对企业意味着什么</p>
+  </div>
+  <div class="tools">
+    <div class="seg" id="range" role="radiogroup" aria-label="时间">
+      <button type="button" data-range="7">7 天</button>
+      <button type="button" data-range="30" class="on">30 天</button>
+      <button type="button" data-range="90">90 天</button>
+    </div>
+    <nav class="nav" aria-label="房间">
+      <a href="#world" data-go="world">世界动态</a>
+      <a href="#luodi" data-go="luodi" class="on">落地</a>
+      <a href="#xianchang" data-go="xianchang">现场</a>
+      <a href="#cases" data-go="cases">部署证据</a>
+      <a href="#methods" data-go="methods">方法</a>
+    </nav>
+  </div>
+</header>
+
+<div class="stage" id="stage">
+  <section id="world" class="screen">
+    <p class="how">这是<strong>首页</strong>。沙盘上每个点是一条有日期的观察。点一下，右边读它。</p>
+    <div class="world" id="sandbox">
+      <button class="dot" data-pick="blend" style="left:22%;top:36%;background:#3fc0c0"></button>
+      <span class="lbl" style="left:24%;top:30%">Blend360</span>
+      <button class="dot on" data-pick="beauty" style="left:48%;top:44%;background:#6db0f4"></button>
+      <span class="lbl" style="left:50%;top:38%">Beauty Pie</span>
+      <button class="dot" data-pick="ross" style="left:68%;top:28%;background:#fba952"></button>
+      <span class="lbl" style="left:70%;top:22%">Ross · 人才</span>
+    </div>
+  </section>
+
+  <section id="luodi" class="screen on">
+    <p class="how"><b>给负责人。</b>左边是这 30 天的公司动作和真实部署。点一条，右边只讲对企业的影响。空着的窗口就空着。</p>
+    <div class="cols">
+      <div class="col" data-lane="company">
+        <h2>公司动作</h2>
+        <button class="card" data-pick="cohere"><time>8-27</time><strong>Cohere · 建能力</strong><span>官方在写现场能力，不是公布到岗编制。</span></button>
+        <button class="card" data-pick="blend"><time>8-12</time><strong>Blend360 · 750 人目标</strong><span>服务商扩编目标，不是已经到岗。</span></button>
+        <button class="card" data-pick="vanguard"><time>8-05</time><strong>先锋领航</strong><span>组织侧动作，口径要回原文核对。</span></button>
+      </div>
+      <div class="col" data-lane="deploy">
+        <h2>有日期的部署</h2>
+        <button class="card on" data-pick="beauty"><time>8-04</time><strong>Beauty Pie · 交付故事</strong><span>Writer 让业务人自建 playbook。厂商客户故事，不是编制样本。</span></button>
+        <button class="card" data-pick="named"><time>8-01</time><strong>具名客户故事</strong><span>有发布日才上这列。营销页不进。</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="xianchang" class="screen">
+    <p class="how"><b>给从业者。</b>按日点开公开评论。右边告诉你能改什么动作。招聘板只计数，不当主故事。</p>
+    <p class="weak">岗位变化 13 条 · 弱信号 · 只说明还在招</p>
+    <div class="spine">
+      <button class="tick on" data-pick="ross"><time>8-27</time><strong>Ross Wilkers · 人才短缺</strong><span>公开评论：供给跟不上。不是普查。</span></button>
+      <button class="tick" data-pick="frontier"><time>8-19</time><strong>OpenAI Frontier 访谈</strong><span>范围、驻场、别把岗位名当编制。</span></button>
+      <button class="tick" data-pick="pe"><time>8-11</time><strong>Pragmatic Engineer</strong><span>评论时间线上的近态，不当新闻头条。</span></button>
+    </div>
+  </section>
+
+  <section id="cases" class="screen">
+    <p class="how"><b>核对原文。</b>按条件找案例。点一张卡片，先看预览；要看字段，再打开这一单。</p>
+    <div class="filt">
+      <button class="pill on">筛选 · 核心 · 医疗健康 · high</button>
+      <button class="pill">本窗有日期</button>
+      <button class="pill">全部</button>
+    </div>
+    <div class="grid">
+      <button class="gcard on" data-pick="akron"><span class="k">ABRIDGE · 医疗健康</span><strong>阿克伦儿童医院</strong><p>跨专科儿科文书。留存口径要回原文。</p><div class="tags"><i>high</i><i>实测结果</i><i>原文未自称 FDE</i></div></button>
+      <button class="gcard" data-pick="christus"><span class="k">ABRIDGE · 医疗健康</span><strong>CHRISTUS Health</strong><p>减少案头文书与认知负荷。</p><div class="tags"><i>high</i></div></button>
+      <button class="gcard" data-pick="chime"><span class="k">SIERRA · 零售电商</span><strong>Chime</strong><p>客服现场。点开看字段。</p><div class="tags"><i>high</i></div></button>
+    </div>
+  </section>
+
+  <section id="methods" class="screen">
+    <p class="how"><b>学怎么做。</b>点循环上的一步，右边看这一步要交什么；再进入完整课。</p>
+    <div class="grid" style="max-width:720px">
+      <button class="gcard on" data-pick="discovery"><span class="k">第 1 步</span><strong>客户发现</strong><p>90 分钟交一页发现简报</p></button>
+      <button class="gcard" data-pick="scoping"><span class="k">第 2 步</span><strong>方案范围</strong><p>把第一刀范围写死</p></button>
+      <button class="gcard" data-pick="eval"><span class="k">第 3 步</span><strong>评测与安全</strong><p>上线前先有闸门</p></button>
+      <button class="gcard" data-pick="adopt"><span class="k">第 4 步</span><strong>上线与采用</strong><p>嵌进旧流程，不要另开窗口</p></button>
+    </div>
+  </section>
+</div>
+
+<aside class="panel" id="panel"></aside>
+
+<article class="docmain" id="doc"></article>
+
+<script>
+const COPY = {
+  beauty: {
+    k:"8-04 · 真实部署", title:"Beauty Pie · 交付故事",
+    facts:[["来源","writer.com"],["日期","2026-08-04"],["口径","厂商客户故事"]],
+    h3:"对企业落地的影响",
+    body:"248 个 playbook 覆盖五个部门。口径是厂商客户故事，不是驻场编制样本。",
+    q:"这是嵌进旧流程的产品，还是厂商驻场？公开页上这两件事不要混。",
+    go:{label:"打开这一单", to:"case"}
+  },
+  cohere: {
+    k:"8-27 · 公司动作", title:"Cohere · 建能力",
+    facts:[["来源","cohere.com"],["日期","2026-08-27"]],
+    h3:"对企业落地的影响",
+    body:"官方在写现场能力，不是公布到岗编制。不要把「建能力」读成编制已经落地。",
+    q:"买产品、买驻场、自建编制，不是同一件事。"
+  },
+  blend: {
+    k:"8-12 · 公司动作", title:"Blend360 · 750 人目标",
+    facts:[["来源","blend360.com"],["日期","2026-08-12"]],
+    h3:"对企业落地的影响",
+    body:"服务商扩编目标，不是已经到岗。目标不能当产能表。",
+    q:"这是卖方扩编，还是买方自己的 FDE 组织？"
+  },
+  vanguard: {
+    k:"8-05 · 公司动作", title:"先锋领航",
+    facts:[["来源","公开页"],["日期","2026-08-05"]],
+    h3:"对企业落地的影响",
+    body:"组织侧动作。数字和编制都要回原文核对，这里不编。"
+  },
+  named: {
+    k:"8-01 · 真实部署", title:"具名客户故事",
+    facts:[["日期","2026-08-01"],["口径","有发布日"]],
+    h3:"对企业落地的影响",
+    body:"有发布日才上部署列。没有日期的营销页不进这里。"
+  },
+  ross: {
+    k:"8-27 · 人物与观点", title:"Ross Wilkers · 人才短缺",
+    facts:[["来源","washingtontechnology.com"],["日期","2026-08-27"]],
+    h3:"对从业者的影响",
+    body:"这窗公开口径在讲供给紧，不证明你该改投递策略。岗位名不能当编制已经落地。",
+    q:"原文未写可执行的投递建议。不要把评论写成招聘市场普查。",
+    go:{label:"去方法，看编制怎么被讲", to:"methods"}
+  },
+  frontier: {
+    k:"8-19 · 人物与观点", title:"OpenAI Frontier 访谈",
+    facts:[["日期","2026-08-19"]],
+    h3:"对从业者的影响",
+    body:"公开场合里，现场被讲成范围、驻场、别混岗位。先改你怎么划范围，再谈模型。"
+  },
+  pe: {
+    k:"8-11 · 人物与观点", title:"Pragmatic Engineer",
+    facts:[["日期","2026-08-11"]],
+    h3:"对从业者的影响",
+    body:"近态在评论时间线上。不当新闻头条，也不当编制已经铺开。"
+  },
+  akron: {
+    k:"预览 · 还不是完整单", title:"阿克伦儿童医院",
+    facts:[["厂商","Abridge"],["证据","high"],["口径","实测结果"],["编制","原文未自称 FDE"]],
+    h3:"这一单能核对什么",
+    body:"22 个专科儿科文书。结果带口径。交接和编制在原文里薄。",
+    go:{label:"打开完整单", to:"case"}
+  },
+  christus: {
+    k:"预览", title:"CHRISTUS Health",
+    facts:[["厂商","Abridge"],["证据","high"]],
+    h3:"这一单能核对什么",
+    body:"减少案头文书与认知负荷。点打开完整单看字段。",
+    go:{label:"打开完整单", to:"case"}
+  },
+  chime: {
+    k:"预览", title:"Chime",
+    facts:[["厂商","Sierra"],["证据","high"]],
+    h3:"这一单能核对什么",
+    body:"客服现场。完整字段在下一页。",
+    go:{label:"打开完整单", to:"case"}
+  },
+  discovery: {
+    k:"方法 · 完整课", title:"客户发现",
+    facts:[["时长","90 分钟"],["作业","一页发现简报"]],
+    h3:"这一步要交什么",
+    body:"先跟一线把现有流程走一遍：谁在做、卡在哪、什么算做成。没有可检查的成果定义，就不要谈模型。",
+    go:{label:"进入完整课", to:"lesson"}
+  },
+  scoping: {
+    k:"方法 · 完整课", title:"方案范围",
+    facts:[["时长","90 分钟"],["作业","一页范围"]],
+    h3:"这一步要交什么",
+    body:"把约束、数据权限、验收标准和第一刀范围写死。驻场失败多半是范围没切开。",
+    go:{label:"进入完整课", to:"lesson"}
+  },
+  eval: {
+    k:"方法 · 完整课", title:"评测与安全",
+    facts:[["作业","评测闸门"]],
+    h3:"这一步要交什么",
+    body:"上线前先有评测集、风险阈值和人在环内的闸门。实测、目标、预测要分开。",
+    go:{label:"进入完整课", to:"lesson"}
+  },
+  adopt: {
+    k:"方法 · 完整课", title:"上线与采用",
+    facts:[["作业","采用路径"]],
+    h3:"这一步要交什么",
+    body:"嵌进旧流程，而不是另开一个没人打开的窗口。一线怕质量下降时，先并行、再替换。",
+    go:{label:"进入完整课", to:"lesson"}
+  }
+};
+
+const META = {
+  world:{title:"世界动态", hint:"点沙盘上的点，右边读这一条观察", range:true, nav:"world"},
+  luodi:{title:"落地", hint:"点左边一条，右边告诉你对企业意味着什么", range:true, nav:"luodi"},
+  xianchang:{title:"现场", hint:"点一条公开评论，右边告诉从业者能改什么", range:true, nav:"xianchang"},
+  cases:{title:"部署证据", hint:"点一张卡片，先预览；再打开完整单", range:false, nav:"cases"},
+  methods:{title:"方法", hint:"点循环上的一步，再进入完整课", range:false, nav:"methods"},
+  case:{title:"阿克伦儿童医院", hint:"整页读字段，核对原文", range:false, nav:"cases", doc:true},
+  lesson:{title:"客户发现", hint:"按步骤做完这一课", range:false, nav:"methods", doc:true}
+};
+
+function panelHTML(id){
+  const c = COPY[id];
+  if(!c) return "<p>点一条开始读。</p>";
+  const facts = (c.facts||[]).map(function(r){ return "<div><dt>"+r[0]+"</dt><dd>"+r[1]+"</dd></div>"; }).join("");
+  const go = c.go ? '<p><button class="more" data-go="'+c.go.to+'">'+c.go.label+'</button></p>' : "";
+  const q = c.q ? "<h3>先问一句</h3><p>"+c.q+"</p>" : "";
+  return '<p class="pk"><i></i>'+c.k+' <button class="px" data-close aria-label="关闭">×</button></p>'
+    +"<h2>"+c.title+"</h2>"
+    +(facts?'<dl class="facts">'+facts+"</dl>":"")
+    +"<h3>"+c.h3+"</h3><p>"+c.body+"</p>"+q+go;
+}
+
+function show(id){
+  const m = META[id] || META.luodi;
+  document.querySelectorAll(".screen").forEach(function(s){ s.classList.toggle("on", s.id===id); });
+  document.querySelectorAll(".nav a").forEach(function(a){ a.classList.toggle("on", a.dataset.go===m.nav); });
+  document.getElementById("title").textContent = m.title;
+  document.getElementById("hint").textContent = m.hint;
+  document.getElementById("range").style.display = m.range ? "" : "none";
+  document.body.classList.toggle("doc", !!m.doc);
+  document.body.classList.toggle("no-panel", !!m.doc);
+  document.getElementById("doc").style.display = m.doc ? "block" : "none";
+  if(m.doc){
+    document.getElementById("doc").innerHTML = id==="case" ? CASE_DOC : LESSON_DOC;
+  } else {
+    const on = document.querySelector("#"+id+" .on[data-pick]");
+    renderPick(on ? on.dataset.pick : (id==="luodi"?"beauty":id==="xianchang"?"ross":id==="cases"?"akron":id==="methods"?"discovery":"beauty"));
+  }
+  if(location.hash.slice(1)!==id) history.replaceState(null,"","#"+id);
+}
+
+function renderPick(pid){
+  document.body.classList.remove("no-panel");
+  document.getElementById("panel").innerHTML = panelHTML(pid);
+}
+
+const CASE_DOC = '<a class="back" href="#cases" data-go="cases">← 回部署证据</a>'
+  +'<p class="kicker">ABRIDGE · 医疗健康</p><h1>阿克伦儿童医院</h1>'
+  +'<p>左边是落地要核对的字段，右边是现场怎么干活。整页读，不进侧栏。</p>'
+  +'<div class="pair"><section class="box"><h2>落地读法</h2><dl>'
+  +"<div><dt>经营问题</dt><dd>满足 22 个专科的儿科文档需求，同时减少文档工作量。</dd></div>"
+  +"<div><dt>结果</dt><dd>22 个专科中 95% 用户留存（30 份笔记/月定义）。</dd></div>"
+  +"<div><dt>口径</dt><dd>实测结果。不是目标，也不是预测。</dd></div>"
+  +"<div><dt>编制</dt><dd>原文未写。不要把产品故事当成驻场编制样本。</dd></div>"
+  +"</dl></section><section class=\"box\"><h2>现场读法</h2><dl>"
+  +"<div><dt>主场景</dt><dd>跨专科儿科就诊环境式临床文档。</dd></div>"
+  +"<div><dt>旧流程</dt><dd>就诊后编码和收入周期工作。</dd></div>"
+  +"<div><dt>卡点</dt><dd>成人文档平台打开即用，儿科现场要对儿童和照护者说话。</dd></div>"
+  +"<div><dt>人在环内</dt><dd>儿科医生仍是诊室内的临床医生。</dd></div>"
+  +"</dl></section></div>";
+
+const LESSON_DOC = '<a class="back" href="#methods" data-go="methods">← 回方法</a>'
+  +'<div class="strip"><button class="on">客户发现</button><button>方案范围</button><button>评测与安全</button><button>上线与采用</button></div>'
+  +'<p class="kicker">方法 · 完整课</p><h1>客户发现</h1>'
+  +'<p>90 分钟交一页发现简报。按下面三步做完，不要跳到模型。</p>'
+  +'<div class="step"><b>1 · 跟一线走现有流程</b>谁在做每一步、用哪套系统、卡在哪。先问现场怎么干活，不要先问「你们想要什么 AI」。</div>'
+  +'<div class="step"><b>2 · 写下可检查的成果</b>什么叫做成：时长、返工、错误，还是一线负担。</div>'
+  +'<div class="step"><b>3 · 把冲突写进成功标准</b>高管要降本、一线怕质量掉——两边都写进去。</div>'
+  +'<p style="color:var(--mut)">范例、练习题、作业模板都在这一页往下。</p>';
+
+document.addEventListener("click", function(e){
+  const go = e.target.closest("[data-go]");
+  if(go){ e.preventDefault(); show(go.dataset.go); return; }
+  if(e.target.closest("[data-close]")){ e.preventDefault(); document.body.classList.add("no-panel"); return; }
+  const rng = e.target.closest("[data-range]");
+  if(rng){
+    document.querySelectorAll("[data-range]").forEach(function(b){ b.classList.toggle("on", b===rng); });
+    return;
+  }
+  const pick = e.target.closest("[data-pick]");
+  if(pick && pick.closest(".screen.on, .world")){
+    const root = pick.closest(".screen, .world");
+    root.querySelectorAll("[data-pick]").forEach(function(x){ x.classList.remove("on"); });
+    pick.classList.add("on");
+    renderPick(pick.dataset.pick);
+  }
+});
+window.addEventListener("hashchange", function(){
+  const id = location.hash.slice(1);
+  if(META[id]) show(id);
+});
+show(META[location.hash.slice(1)] ? location.hash.slice(1) : "luodi");
+</script>
+</body>
+</html>
