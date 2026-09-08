@@ -28,12 +28,20 @@ const DAY = 86400000;
 const rangeFromUrl = Number(params.get("窗") || params.get("range"));
 
 /* 右侧悬浮手册：封面翻转后指针下的元素会变，纯 :hover 会断链，
-   用容器边界的 mouseenter/leave 锁存 is-open（点击可切换，兼容触屏）。 */
+   用容器边界的 mouseenter/leave 锁存 is-open（点击可切换，兼容触屏）。
+   封面图就绪前整本隐藏（is-ready），避免加载期间内页先露出来。 */
 const book = document.getElementById("w3-book");
 if (book) {
   book.addEventListener("mouseenter", () => book.classList.add("is-open"));
   book.addEventListener("mouseleave", () => book.classList.remove("is-open"));
   book.addEventListener("click", () => book.classList.toggle("is-open"));
+  const coverImg = book.querySelector(".w3-book-cover-face");
+  const ready = () => book.classList.add("is-ready");
+  if (coverImg && coverImg.complete && coverImg.naturalWidth) ready();
+  else if (coverImg) {
+    coverImg.addEventListener("load", ready);
+    coverImg.addEventListener("error", ready);
+  } else ready();
 }
 
 /* ---------- palette (dark variants of tokens.css lane hues) ---------- */

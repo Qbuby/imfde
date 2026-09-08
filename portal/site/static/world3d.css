@@ -748,7 +748,11 @@
   perspective: 1400px; cursor: pointer; outline: none;
   filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.5));
   animation: w3-book-bob 5.2s ease-in-out infinite;
+  /* 封面就绪前整本隐藏，避免内页先露出来 */
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
+.w3-book.is-ready { opacity: 1; }
 @keyframes w3-book-bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-7px); }

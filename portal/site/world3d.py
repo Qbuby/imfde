@@ -115,7 +115,9 @@ def render_world3d(cur) -> str:
         "动态",
         inner,
         github,
-        extra_head=IMPORT_MAP + '\n<link rel="stylesheet" href="/static/world3d.css"/>',
+        extra_head=IMPORT_MAP
+        + '\n<link rel="preload" as="image" href="/static/icons/book-cover.png"/>'
+        + '\n<link rel="stylesheet" href="/static/world3d.css"/>',
         body_class="world3d-page",
         skip_wrap=True,
         skip_mast=True,
