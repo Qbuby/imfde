@@ -93,6 +93,9 @@ CORE_VENDORS = (
     "glean",
 )
 PRODUCT_STORY_VENDORS = ("intercom", "writer", "cresta", "moveworks", "abridge")
+CORE_VENDOR_TIP = (
+    "Palantir、OpenAI、Harvey、C3.ai、Cognition、Databricks、Anthropic、Sierra、Hebbia、Glean"
+)
 KPI_LABELS = {
     "narrative": "公司自己讲的数字",
     "hero_only": "只讲了一个例子",
@@ -140,7 +143,7 @@ CASE_ZH_FIELDS = (
 DIRTY_FLAGS = frozenset({"leftover_template", "hub_kpi_not_on_page"})
 INDUSTRY_BUCKETS = (
     ("医疗健康", ("health", "hospital", "clinic", "medical", "pharma", "pediatric", "physician", "wellness", "life science", "医疗", "医院", "药房", "儿科", "临床", "医生")),
-    ("金融保险", ("financ", "fintech", "bank", "insur", "credit", "金融", "银行", "保险", "证券", "支付")),
+    ("金融保险", ("financ", "fintech", "bank", "insur", "credit", "mortgage", "neobank", "金融", "银行", "保险", "证券", "信贷")),
     ("法律合规", ("law", "legal", "attorney", "律师", "法律", "合规")),
     ("零售电商", ("retail", "e-commerce", "ecommerce", "commerce", "零售", "电商")),
     ("教育", ("educat", "university", "school", "教育", "大学")),
@@ -251,10 +254,56 @@ def connect():
 
 
 def connect_rw():
-    """可写连接（登录 users/oauth_states 表用）。公开读保持只读 connect()。"""
-    con = sqlite3.connect(str(DB_PATH))
+    """可写连接（登录 users/oauth_states 表、orig_zh 回填用）。公开读保持只读 connect()。"""
+    con = sqlite3.connect(str(DB_PATH), timeout=60)
     con.row_factory = sqlite3.Row
     return con
+
+
+def ensure_orig_zh(con=None) -> None:
+    own = con is None
+    if own:
+        con = connect_rw()
+    con.execute(
+        "CREATE TABLE IF NOT EXISTS orig_zh ("
+        "kind TEXT NOT NULL, ident INTEGER NOT NULL, url TEXT, "
+        "title_zh TEXT, body_zh TEXT NOT NULL, "
+        "PRIMARY KEY (kind, ident))"
+    )
+    if own:
+        con.commit()
+        con.close()
+
+
+def upsert_orig_zh(kind: str, ident: int, url: str, title_zh: str, body_zh: str) -> None:
+    ensure_orig_zh()
+    body = (body_zh or "").strip()
+    if not body:
+        return
+    with connect_rw() as con:
+        con.execute(
+            "INSERT OR REPLACE INTO orig_zh(kind, ident, url, title_zh, body_zh) "
+            "VALUES (?,?,?,?,?)",
+            (kind, int(ident), url or "", (title_zh or "").strip(), body),
+        )
+        con.commit()
+
+
+def load_orig_zh(kind: str, ident: int) -> dict:
+    try:
+        with connect() as con:
+            row = con.execute(
+                "SELECT title_zh, body_zh FROM orig_zh WHERE kind=? AND ident=?",
+                (kind, int(ident)),
+            ).fetchone()
+    except sqlite3.Error:
+        return {}
+    if not row:
+        return {}
+    body = (row["body_zh"] or "").strip()
+    if not body:
+        return {}
+    return {"title": (row["title_zh"] or "").strip(), "body": body}
 
 
 def url_slug(url: str) -> str:
@@ -324,10 +373,17 @@ def find_orig_file(url: str) -> Path | None:
     key = _norm_orig_url(url)
     if not key:
         return None
-    if key in _ORIG_FILE_CACHE:
-        return _ORIG_FILE_CACHE[key]
+    cached = _ORIG_FILE_CACHE.get(key)
+    if cached is not None:
+        try:
+            if cached.is_file():
+                return cached
+        except OSError:
+            pass
+        _ORIG_FILE_CACHE.pop(key, None)
     found = _lookup_orig_file(url, key)
-    _ORIG_FILE_CACHE[key] = found
+    if found:
+        _ORIG_FILE_CACHE[key] = found
     return found
 
 
@@ -378,13 +434,15 @@ def _lookup_orig_file(url: str, key: str) -> Path | None:
 def strip_html(markup: str) -> str:
     text = markup or ""
     text = html.unescape(html.unescape(text))
-    text = re.sub(r"(?is)<script[^>]*>.*?</script>", " ", text)
-    text = re.sub(r"(?is)<style[^>]*>.*?</style>", " ", text)
+    # Quoted attrs may contain '>' (Tailwind arbitrary variants like [&>*]).
+    _tag_attrs = r"(?:\s+(?:[^>\"']|\"[^\"]*\"|'[^']*')*)?"
+    text = re.sub(rf"(?is)<script{_tag_attrs}>.*?</script>", " ", text)
+    text = re.sub(rf"(?is)<style{_tag_attrs}>.*?</style>", " ", text)
     text = re.sub(r"(?is)<br\s*/?>", "\n", text)
     text = re.sub(r"(?is)</p>", "\n", text)
     text = re.sub(r"(?is)</h[1-6]>", "\n", text)
-    text = re.sub(r"(?is)<li[^>]*>", "\n• ", text)
-    text = re.sub(r"(?is)<[^>]+>", " ", text)
+    text = re.sub(rf"(?is)<li{_tag_attrs}>", "\n• ", text)
+    text = re.sub(r"(?is)<(?:[^>\"']|\"[^\"]*\"|'[^']*')+>", " ", text)
     text = html.unescape(text)
     text = re.sub(r"[ \t]+\n", "\n", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
@@ -392,15 +450,46 @@ def strip_html(markup: str) -> str:
     return text.strip()
 
 
+def _drop_article_chrome(chunk: str) -> str:
+    """Drop cookie / related-story / subscribe blocks from an article slice."""
+    text = chunk or ""
+    text = re.sub(
+        r'(?is)<[^>]*(?:id|class)="[^"]*(?:onetrust|cookie-banner|cookie-consent|'
+        r'cookie-notice|consent-banner)[^"]*"[^>]*>.{0,8000}?(?:</div>|</section>|</aside>)',
+        " ",
+        text,
+        count=6,
+    )
+    text = re.sub(
+        r'(?is)<(div|section|aside|form)[^>]*(?:id|class)="[^"]*(?:related-stor|'
+        r'related-post|related-content|newsletter|subscribe-form|email-signup)'
+        r'[^"]*"[^>]*>.{0,8000}?</\1>',
+        " ",
+        text,
+        count=8,
+    )
+    cut = re.search(
+        r"(?is)<(h[1-6]|p|div|section)[^>]{0,160}>\s*"
+        r"(?:Related stor(?:y|ies)|Related posts|Related content|"
+        r"Subscribe to|Sign up for (?:our )?newsletter)\b",
+        text,
+    )
+    if cut and cut.start() > 500:
+        text = text[: cut.start()]
+    return text
+
+
 def extract_article_html(raw: str) -> str:
     """Prefer article body over nav / cookie / related-story chrome."""
     raw = raw or ""
+    chunk = ""
     for cls in (
         "content-body",
         "article-body",
         "entry-content",
         "post-content",
         "article__body",
+        "article--content",
         "js-article",
     ):
         m = re.search(
@@ -408,14 +497,109 @@ def extract_article_html(raw: str) -> str:
             raw,
         )
         if m:
-            return raw[m.end() : m.end() + 40000]
-    m = re.search(r"(?is)<article\b[^>]*>(.*)</article>", raw)
-    if m and len(m.group(1)) > 400:
-        return m.group(1)
-    m = re.search(r"(?is)<main\b[^>]*>(.*)</main>", raw)
-    if m and len(m.group(1)) > 400:
-        return m.group(1)
-    return raw
+            chunk = raw[m.end() : m.end() + 40000]
+            break
+    if not chunk:
+        m = re.search(r"(?is)<article\b[^>]*>(.*)</article>", raw)
+        if m and len(m.group(1)) > 400:
+            chunk = m.group(1)
+    if not chunk:
+        m = re.search(r"(?is)<main\b[^>]*>(.*)</main>", raw)
+        if m and len(m.group(1)) > 400:
+            chunk = m.group(1)
+    if not chunk:
+        m = re.search(r"(?is)<h1\b[^>]*>", raw)
+        if m:
+            tail = raw[m.start() : m.start() + 40000]
+            if len(strip_html(tail)) > 400:
+                chunk = tail
+    if not chunk:
+        chunk = raw
+    return _drop_article_chrome(chunk)
+
+
+def _han_alpha_n(text: str) -> int:
+    return sum(1 for c in text if c.isalpha())
+
+
+def _orig_has_scene(text: str) -> bool:
+    """True if the short leftover still looks like a customer scene, not nav."""
+    t = text or ""
+    if re.search(r'[“"][^”"]{12,}[”"]', t):
+        return True
+    if re.search(r"[「『].{8,}[」』]", t):
+        return True
+    if re.search(
+        r"\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+,\s+"
+        r"(?:CTO|CEO|CFO|COO|CIO|CMO|VP|Director|Head|Manager|"
+        r"Chief|President|Founder|Physician|Nurse|Engineer)\b",
+        t,
+    ):
+        return True
+    if re.search(r"\bIn the \w+(?:\s+\w+){0,5} business\b", t, re.I):
+        return True
+    if re.search(r"(?:现场|客户说|我们在|在一线)", t):
+        return True
+    return False
+
+
+def _orig_body_ok(text: str) -> bool:
+    """JS shells / nav chips are not a saved article body."""
+    blob = (text or "").strip()
+    if not blob:
+        return False
+    if _han_alpha_n(blob) >= 280:
+        return True
+    return _orig_has_scene(blob)
+
+
+_ORIG_TAIL_CHROME = re.compile(
+    r"(?is)(?:^|\n)\s*(?:"
+    r"Related stor(?:y|ies)|Related posts|Related content|"
+    r"More customer stor(?:y|ies)|You may also like|"
+    r"Share this\b|Next stor(?:y|ies)\b|"
+    r"Subscribe to (?:our |the )?(?:newsletter|blog)|"
+    r"Sign up for (?:our )?newsletter"
+    r")\b"
+)
+_ORIG_COOKIE_CHROME = re.compile(
+    r"(?is)\b(?:We use cookies(?: on (?:this |our )?site)?|"
+    r"Accept (?:all )?cookies|Cookie (?:settings|preferences|policy|banner)|"
+    r"Manage cookies|Continue to the site|Skip to (?:main )?content|"
+    r"Notice at Collection|Your Privacy Choices|"
+    r"Exercise Your Privacy Rights)\b[^.!?\n]{0,80}"
+)
+_ORIG_SUBSCRIBE_CHROME = re.compile(
+    r"(?:(?:^|\n)\s*Subscribe to\b[^.!?\n]{0,160}|"
+    r"Subscribe to\b[^.!?\n]{0,100}(?:inbox|newsletter|blog|dispatches)[^.!?\n]{0,80})"
+)
+_ORIG_SHARE_CHROME = re.compile(
+    r"(?is)\bShare this(?:\s+(?:post|article|customer story|story))?\s*:?"
+)
+_ORIG_CSS_JUNK = re.compile(
+    r"(?:(?:sm|md|lg|xl|2xl|3xl):)?(?:\[&[^\]]{0,160}\]|\*:not\([^)]*\)(?::not\([^)]*\))*\]?\S*)"
+)
+_ORIG_CHROME_PARA = re.compile(
+    r"(?is)^(?:Related stor(?:y|ies)|Related posts|Related content|"
+    r"Share this\b|Next stor(?:y|ies)\b|"
+    r"Subscribe to\b|Cookie (?:settings|policy|preferences)|"
+    r"We use cookies|Accept (?:all )?cookies|Continue to the site|"
+    r"Skip to (?:main )?content)\b"
+)
+
+
+def _clip_orig_chrome(text: str) -> str:
+    blob = text or ""
+    m = _ORIG_TAIL_CHROME.search(blob)
+    if m and m.start() > 280:
+        blob = blob[: m.start()]
+    blob = _ORIG_COOKIE_CHROME.sub(" ", blob)
+    blob = _ORIG_SUBSCRIBE_CHROME.sub(" ", blob)
+    blob = _ORIG_SHARE_CHROME.sub(" ", blob)
+    blob = _ORIG_CSS_JUNK.sub(" ", blob)
+    blob = re.sub(r"[ \t]{2,}", " ", blob)
+    blob = re.sub(r"\n{3,}", "\n\n", blob)
+    return blob.strip()
 
 
 def orig_excerpt(url: str, n: int = 900) -> dict:
@@ -438,7 +622,8 @@ def orig_excerpt(url: str, n: int = 900) -> dict:
                 blob = blob.get("html") or blob.get("plain") or ""
             text = strip_html(str(blob))
         if not text:
-            text = trunc(raw, n)
+            text = strip_html(raw)
+        text = _clip_orig_chrome(text)
     else:
         m = re.search(r"<h1[^>]*>(.*?)</h1>", raw, flags=re.I | re.S)
         if m:
@@ -447,20 +632,59 @@ def orig_excerpt(url: str, n: int = 900) -> dict:
         text = re.sub(r"^Local backup of \S+\s*", "", text)
         if title and text.startswith(title):
             text = text[len(title) :].lstrip(" \n")
+        # Drop leading TOC chips ("• short label • short label …").
+        bits = re.split(r"\s*•\s*", text)
+        keep = 0
+        while keep < len(bits) and len(re.sub(r"\s+", " ", bits[keep]).strip()) < 90:
+            keep += 1
+        if keep and keep < len(bits):
+            text = " ".join(bits[keep:]).strip()
+        # Leftover industry chip glued to the first sentence.
+        text = re.sub(
+            r"^(?:[A-Z][A-Za-z]+(?:\s+[a-z]+){0,4}\s+)(?=(?:In|The|For|A|This|Our|When|With)\s)",
+            "",
+            text,
+            count=1,
+        )
         # Drop leftover chrome that still sneaks in.
         for noise in (
             "Continue to the site",
             "Skip to Content",
+            "Skip to main content",
             "Notice at Collection",
             "Your Privacy Choices",
             "Exercise Your Privacy Rights",
         ):
-            if text.startswith(noise) or text.find(noise) == 0:
-                text = text.replace(noise, " ", 1)
+            if text.startswith(noise):
+                text = text[len(noise) :].lstrip(" \n")
         text = re.sub(r"^(?:•\s*)+", "", text).strip()
-    if not text:
+        text = _clip_orig_chrome(text)
+    if not _orig_body_ok(text):
         return {"path": str(path)}
     return {"title": title, "text": trunc(text, n)}
+
+
+def orig_paras(text: str) -> list[str]:
+    """Split backup text into readable paragraphs."""
+    blob = re.sub(r"\n{3,}", "\n\n", (text or "").strip())
+    if not blob:
+        return []
+    if re.search(r"\n\s*\n", blob):
+        paras = [p.strip() for p in re.split(r"\n\s*\n", blob) if p.strip()]
+    else:
+        parts = re.split(r'(?<=[.!?"”])\s+(?=[A-Z“"])', blob)
+        paras, buf = [], ""
+        for sent in parts:
+            sent = sent.strip()
+            if not sent:
+                continue
+            buf = (buf + " " + sent).strip() if buf else sent
+            if len(buf) >= 360:
+                paras.append(buf)
+                buf = ""
+        if buf:
+            paras.append(buf)
+    return [p for p in paras if p and not _ORIG_CHROME_PARA.match(p)]
 
 
 def orig_href(kind, ident, url) -> str:
@@ -543,6 +767,16 @@ def _orig_source_url(kind: str, ident: int) -> str:
         return ""
 
 
+def http_utf8(text: str) -> str:
+    """HTTP request lines are latin-1. Recover UTF-8 keys like 厂商/行业."""
+    if not text:
+        return text
+    try:
+        return text.encode("latin-1").decode("utf-8")
+    except UnicodeError:
+        return text
+
+
 def qs_get(qs, *keys, default=""):
     for key in keys:
         vals = qs.get(key) or []
@@ -567,12 +801,17 @@ def href(path: str, **params) -> str:
     return path + "?" + urlencode(clean, encoding="utf-8", safe="")
 
 
+_PAY_NOT_FINANCE = ("外卖", "网约车", "即时配送", "超级应用")
+
+
 def bucket_of(industry: str | None) -> str:
     s = (industry or "").lower()
     if not s:
         return "其他"
     for name, kws in INDUSTRY_BUCKETS:
         if any(k.lower() in s for k in kws):
+            return name
+        if name == "金融保险" and "支付" in s and not any(b in s for b in _PAY_NOT_FINANCE):
             return name
     return "其他"
 
@@ -655,7 +894,7 @@ def fetch_cases(cur, where="1=1", args=(), order="x.id"):
         "LEFT JOIN customer_zh cz ON cz.customer_id=cu.id "
         "WHERE %s ORDER BY %s" % (CASE_FIELDS, where, order)
     )
-    return attach_case_zh(cur, annotate([dict(r) for r in cur.execute(sql, args)]))
+    return annotate(attach_case_zh(cur, [dict(r) for r in cur.execute(sql, args)]))
 
 
 def evidence_label(value: str | None) -> str:
@@ -682,32 +921,70 @@ def attach_case_zh(cur, rows: list) -> list:
         return rows
     for row in rows:
         z = by_id.get(row.get("id"))
-        if not z:
-            continue
-        en = dict(row.get("_en") or {})
-        if row.get("customer_en") and row.get("customer") != row.get("customer_en"):
-            en["customer"] = row.get("customer_en")
-        for field in CASE_ZH_FIELDS:
-            zh = (z.get(field) or "").strip()
-            if not zh:
-                continue
-            src = row.get(field)
-            if nonempty(src) and src != zh:
-                en[field] = src
-            row[field] = zh
-        if en:
-            row["_en"] = en
+        if z:
+            en = dict(row.get("_en") or {})
+            if row.get("customer_en") and row.get("customer") != row.get("customer_en"):
+                en["customer"] = row.get("customer_en")
+            for field in CASE_ZH_FIELDS:
+                zh = (z.get(field) or "").strip()
+                if not zh:
+                    continue
+                src = row.get(field)
+                if nonempty(src) and src != zh:
+                    en[field] = src
+                row[field] = zh
+            if en:
+                row["_en"] = en
+        row["bucket"] = bucket_of(row.get("industry"))
     return rows
 
 
 def en_archive_html(row: dict, case_id: int) -> str:
-    src = row.get("source_url") or ""
-    oh = orig_href("案例", case_id, src)
-    if oh:
-        return (
-            f'<p class="hint"><a class="orig" href="{esc(oh)}">对照原文（英文存档）</a></p>'
-        )
+    """Back-compat alias. Prefer orig_section on case pages."""
+    return orig_section(row, case_id)
+
+
+def _has_han(text: str) -> bool:
+    return bool(re.search(r"[\u4e00-\u9fff]", text or ""))
+
+
+def _orig_en_field(row: dict, key: str) -> str:
+    en = row.get("_en") or {}
+    val = (en.get(key) or "").strip()
+    if val:
+        return val
+    val = (row.get(key) or "").strip()
+    if val and not _has_han(val):
+        return val
     return ""
+
+
+def orig_zh_html(kind: str, ident: int) -> str:
+    pack = load_orig_zh(kind, ident)
+    if not pack:
+        return ""
+    paras = [
+        f"<p>{esc(chunk).replace(chr(10), '<br/>')}</p>"
+        for chunk in orig_paras(pack["body"])
+    ]
+    heading = pack.get("title") or "原文"
+    return (
+        '<section class="section room-orig" id="原文">'
+        f"<h2>{esc(heading)}</h2>"
+        f"<div class='orig-body'>{''.join(paras)}</div></section>"
+    )
+
+
+def orig_section(row: dict, case_id: int) -> str:
+    """Chinese original on the case page. No outbound orig links."""
+    html = orig_zh_html("案例", case_id)
+    if html:
+        return html
+    return (
+        '<section class="section room-orig" id="原文">'
+        "<h2>原文</h2>"
+        '<p class="note">中文全文还在写入。下面两栏是已经拆过的字段。</p></section>'
+    )
 
 
 def pick_peers(rows, n=3):
@@ -984,7 +1261,7 @@ def load_case(cur, case_id: int):
 def filter_industry(rows, bucket: str):
     if not bucket:
         return rows
-    return [r for r in rows if in_bucket(r.get("industry"), bucket)]
+    return [r for r in rows if (r.get("bucket") or bucket_of(r.get("industry"))) == bucket]
 
 
 def ext_link(url, text) -> str:
@@ -1081,10 +1358,11 @@ def row_link(row, extra="") -> str:
     )
 
 
-def chip(href_val, label, on=False, n=None) -> str:
+def chip(href_val, label, on=False, n=None, title=None) -> str:
     cls = "chip on" if on else "chip"
     extra = f'<span class="n">{int(n)}</span>' if n is not None else ""
-    return f'<a class="{cls}" href="{esc(href_val)}">{esc(label)}{extra}</a>'
+    tip = f' title="{esc(title)}"' if title else ""
+    return f'<a class="{cls}" href="{esc(href_val)}"{tip}>{esc(label)}{extra}</a>'
 
 
 def industry_chips(base, current) -> str:
@@ -1548,6 +1826,88 @@ def room_event_card(event: dict, selected_id, lens: str) -> str:
     )
 
 
+def room_orig_link(event: dict) -> str:
+    """Orig stays on the page. No outbound / archive click."""
+    return ""
+
+
+def clip_open_orig(text: str) -> str:
+    t = (text or "").strip()
+    if not t:
+        return ""
+    t = t.replace("这是公司自己讲的，要打开原文看数字怎么来的。", "这是公司自己讲的数字，不是审计结果。")
+    t = t.replace("这是公司自己讲的，要打开原文看数字怎么来的", "这是公司自己讲的数字，不是审计结果")
+    t = t.replace("要打开原文看数字怎么来的。", "不是审计结果。")
+    t = t.replace("要打开原文看数字怎么来的", "不是审计结果")
+    t = t.replace("打开原文看数字怎么来的。", "不是审计结果。")
+    t = t.replace("打开原文看数字怎么来的", "不是审计结果")
+    t = t.replace("数字要打开原文看。", "数字以这篇为准。")
+    t = t.replace("数字要打开原文看", "数字以这篇为准")
+    t = t.replace("投入数字要打开原文看。", "投入数字以这篇为准。")
+    t = t.replace("投入数字要打开原文看", "投入数字以这篇为准")
+    t = t.replace("要打开原文看。", "")
+    t = t.replace("要打开原文看", "")
+    t = t.replace("打开原文看。", "")
+    t = t.replace("打开原文看", "以这篇为准")
+    t = re.sub(r"[，,]{2,}", "，", t)
+    t = re.sub(r"。。+", "。", t)
+    t = re.sub(r"，。", "。", t)
+    return t.strip(" ，")
+
+
+def orig_pack_for_event(event: dict) -> dict | None:
+    href = event.get("case_href") or ""
+    m = re.fullmatch(r"/案例/(\d+)", href)
+    if m:
+        pack = load_orig_zh("案例", int(m.group(1)))
+        if pack:
+            return pack
+    eid = event.get("id")
+    if eid is None:
+        return None
+    return load_orig_zh("动态", int(eid))
+
+
+def event_article_html(event: dict, take_key: str, *, full_orig: bool = False) -> str:
+    day = event.get("day") or ""
+    label = event.get("doc_label") or ""
+    kicker = " · ".join(x for x in (day_md(day), label) if x)
+    eid = event.get("id")
+    lane = event.get("lane") or ""
+    pack = orig_pack_for_event(event) if full_orig else None
+    if pack:
+        title = pack.get("title") or event.get("title") or ""
+        paras = "".join(
+            f"<p>{esc(chunk).replace(chr(10), '<br/>')}</p>"
+            for chunk in orig_paras(pack["body"])
+        )
+        more = ""
+        href = event.get("case_href") or ""
+        if href:
+            more = f'<p class="room-article-more"><a href="{esc(href)}">看完整案例</a></p>'
+        return (
+            f'<article class="room-article" id="e-{esc(str(eid))}" data-lane="{esc(lane)}">'
+            f'<p class="room-article-k">{esc(kicker)}</p>'
+            f"<h2>{esc(title)}</h2>{paras}{more}</article>"
+        )
+    happened = clip_open_orig(event.get("happened") or "")
+    take = clip_open_orig(event.get(take_key) or "")
+    if take and take == happened:
+        take = ""
+    body = f"<p>{esc(happened)}</p>" if happened else ""
+    take_html = f'<p class="room-article-take">{esc(take)}</p>' if take else ""
+    more = ""
+    href = event.get("case_href") or ""
+    if href:
+        more = f'<p class="room-article-more"><a href="{esc(href)}">看完整案例</a></p>'
+    return (
+        f'<article class="room-article" id="e-{esc(str(eid))}" data-lane="{esc(lane)}">'
+        f'<p class="room-article-k">{esc(kicker)}</p>'
+        f'<h2>{esc(event.get("title") or "")}</h2>'
+        f"{body}{take_html}{more}</article>"
+    )
+
+
 def room_page(
     title: str,
     active: str,
@@ -1560,8 +1920,11 @@ def room_page(
     *,
     lens: str = "boss",
     doc: bool = False,
+    feed: bool = False,
 ) -> str:
     cls = "room room-doc" if doc else "room"
+    if feed:
+        cls = "room room-feed"
     inner = f"""<div class="{cls}" id="room" data-lens="{esc(lens)}">
 {hud}
 <div class="room-stage">{stage}</div>
@@ -1713,8 +2076,8 @@ def render_home(cur) -> str:
         [
             claim_block(
                 "01",
-                "公开材料里的落地，绝大多数不是编制故事",
-                f"<p>{pack['n']} 条交付现场里，原文写了现场编制的只有 <b>{pack['n_fde']}</b> 条（{pct(pack['n_fde'], pack['n'])}）。"
+                "公开材料里的落地，绝大多数没写驻场团队",
+                f"<p>{pack['n']} 条交付现场里，原文写了驻场团队的只有 <b>{pack['n_fde']}</b> 条（{pct(pack['n_fde'], pack['n'])}）。"
                 "能同时满足核心厂商、具名客户、证据 high、有结果的，更窄到 "
                 f"<b>{counts['n_core']}</b> 条。先读这批结构，再决定要不要逐条翻。</p>",
             ),
@@ -1731,7 +2094,7 @@ def render_home(cur) -> str:
                 "条数被产品营销页拉开，不是「谁在做 FDE」的排行",
                 f"<p>厂商密度：{mix_line(top_v, 6)}。"
                 f"Intercom / Writer / Cresta / Moveworks / Abridge 合计 {pack['n_product']} 条；"
-                f"核心厂商 {pack['n_core']} 条。多不等于编制样本。</p>",
+                f"核心厂商 {pack['n_core']} 条。多不等于写了驻场怎么组队。</p>",
             ),
         ]
     )
@@ -1739,11 +2102,11 @@ def render_home(cur) -> str:
 <section class="hero">
   <p class="k">本期观察 · 结构化输出</p>
   <h1>先看这批材料在变什么，逐条翻是另一扇门</h1>
-  <p class="lead">AI 抽出的是整体结构：编制几乎不出现、岗位讨论有时间线、库内条数被产品故事拉开。不是实时资讯，也不是编制咨询。</p>
+  <p class="lead">AI 抽出的是整体结构：驻场团队几乎不出现、岗位讨论有时间线、库内条数被产品故事拉开。不是实时资讯，也不是驻场组队咨询。</p>
   <p class="meta-line">{counts['n_cases']} 条观察 · 发布日从已抓 HTML 回填</p>
   <div class="stats">
     <span><b>{pack['n']}</b> 交付现场</span>
-    <span><b>{pack['n_fde']}</b> / {pack['n']} 原文写了编制</span>
+    <span><b>{pack['n_fde']}</b> / {pack['n']} 原文写了驻场团队</span>
     <span><b>{counts['n_core']}</b> 条可作落地样板</span>
     <span><b>{pack['n_published']}</b> 条客户故事有原文发布日</span>
     <span><b>{len(dated)}</b> 条观点/方法标了日期</span>
@@ -1754,7 +2117,7 @@ def render_home(cur) -> str:
   <article class="door">
     <p class="k">给负责人</p>
     <h2>要实施，先看结构再看样板</h2>
-    <p>编制在原文里有多薄、什么样板算数、结果带什么口径。行业切面改的是这些句子里的数字，不是先铺一墙卡片。</p>
+    <p>驻场团队在原文里有多薄、什么样板算数、结果带什么口径。行业切面改的是这些句子里的数字，不是先铺一墙卡片。</p>
     <a class="go" href="/落地">给负责人看本期</a>
   </article>
   <article class="door">
@@ -1777,35 +2140,35 @@ def render_deploy(cur, qs) -> str:
     deploy = win_events(events, days, lanes=("deploy",))
     gh = world.get("github") or github_url(cur)
     alt = other_windows("/落地", days)
-    selected = (deploy[0] if deploy else company[0] if company else None)
-    sid = selected.get("id") if selected else None
+    empty = not company and not deploy
     co_html = (
-        "".join(room_event_card(e, sid, "boss") for e in company)
+        "".join(event_article_html(e, "enterprise") for e in company)
         or f'<p class="room-empty">这 {days} 天没有新的公司公告。{alt}</p>'
     )
     dp_html = (
-        "".join(room_event_card(e, sid, "boss") for e in deploy)
+        "".join(event_article_html(e, "enterprise") for e in deploy)
         or f'<p class="room-empty">这 {days} 天没有带发布日的客户故事。空着就空着。{alt}</p>'
     )
-    empty = not company and not deploy
     hud = room_hud(
         "负责人",
         gh,
         "给负责人看",
-        "这几天没有新的公司动作" if empty else "点左边一条，右边告诉你对企业意味着什么",
+        "这几天没有新的公司动作" if empty else "这几天公司公开讲过的动作",
         days=days,
         range_base="/落地",
     )
     how = (
         f'<p class="room-how"><b>这 {days} 天公司没发新东西。</b> 要看客户故事，切 30 天或 90 天。</p>'
         if empty
-        else '<p class="room-how"><b>你是要拍板的人。</b> 点左边一条，右边告诉你对企业意味着什么。</p>'
+        else '<p class="room-how"><b>往下读就行。</b> 先看发生了什么、对企业意味着什么。整篇客户故事在案例里。</p>'
     )
     stage = f"""
 {how}
-<div class="room-cols">
-  <div class="room-col" data-lane="company"><h2>公司在做什么</h2>{co_html}</div>
-  <div class="room-col" data-lane="deploy"><h2>客户那边发生了什么</h2>{dp_html}</div>
+<div class="room-feedlist">
+  <h2>公司在做什么</h2>
+  {co_html}
+  <h2>客户那边发生了什么</h2>
+  {dp_html}
 </div>
 """
     payload = {
@@ -1813,7 +2176,6 @@ def render_deploy(cur, qs) -> str:
         "lens": "boss",
         "items": [event_payload(e) for e in company + deploy],
     }
-    panel = ""
     return room_page(
         "给负责人看 · %s" % SITE_NAME,
         "负责人",
@@ -1821,9 +2183,10 @@ def render_deploy(cur, qs) -> str:
         "/落地",
         hud,
         stage,
-        panel,
+        "",
         payload,
         lens="boss",
+        feed=True,
     )
 
 
@@ -1832,41 +2195,21 @@ def render_field(cur, qs) -> str:
     world = load_pace(cur)
     events = world.get("events") or []
     people = win_events(events, days, lanes=("people",))
-    tally = lane_tally(events, days)
     gh = world.get("github") or github_url(cur)
     alt = other_windows("/现场", days)
-    selected = people[0] if people else None
-    sid = selected.get("id") if selected else None
-    ticks = "".join(
-        (
-            f'<button type="button" class="room-tick{" on" if e.get("id")==sid else ""}" '
-            f'data-pick="{esc(str(e.get("id")))}" aria-pressed="{"true" if e.get("id")==sid else "false"}">'
-            f'<time datetime="{esc(e.get("day") or "")}">{esc(day_md(e.get("day") or ""))}</time>'
-            f'<strong>{esc(e.get("title") or "")}</strong>'
-            f'<span>{esc(trunc(e.get("practitioner") or e.get("happened") or "", 110))}</span>'
-            f"</button>"
-        )
-        for e in people
-    ) or f'<p class="room-empty">这 {days} 天没有新的公开评论。{alt}</p>'
+    bits = [event_article_html(e, "practitioner", full_orig=True) for e in people]
+    feed = "".join(bits) or f'<p class="room-empty">这 {days} 天没有新的公开评论。{alt}</p>'
     hud = room_hud(
         "从业者",
         gh,
         "给干活的人看",
-        "点一条评论，听一线怎么讲这份工",
+        "这几天一线公开讲过的话",
         days=days,
         range_base="/现场",
     )
-    jobs_n = tally.get("jobs") or 0
-    jobs_note = (
-        f'<p class="room-weak"><a href="{esc(href("/", 窗=days))}">动态上有 {jobs_n} 条招聘</a>。'
-        "只能说明还在招人，不说明事情已经做成了。</p>"
-        if jobs_n
-        else ""
-    )
     stage = f"""
-<p class="room-how"><b>你在现场干活。</b> 点一条评论，右边听一线怎么讲这份工。</p>
-{jobs_note}
-<div class="room-spine">{ticks}</div>
+<p class="room-how"><b>往下读就行。</b> 原文已译成中文，铺在每条下面。</p>
+<div class="room-feedlist">{feed}</div>
 """
     payload = {"kind": "event", "lens": "field", "items": [event_payload(e) for e in people]}
     return room_page(
@@ -1879,6 +2222,7 @@ def render_field(cur, qs) -> str:
         "",
         payload,
         lens="field",
+        feed=True,
     )
 
 
@@ -1905,6 +2249,9 @@ def render_library(cur, qs) -> str:
             win_ids.add(int(m.group(1)))
     vendors = load_vendors(cur)
     slugs = {v["slug"] for v in vendors}
+    vendor_name_of = {v["slug"]: v["name"] for v in vendors}
+    if vendor and vendor not in slugs and vendor != "核心":
+        vendor = ""
     vendor_filter = CORE_VENDORS if vendor == "核心" else ((vendor,) if vendor in slugs else None)
 
     where = ["x.doc_type='case_study'"]
@@ -1928,6 +2275,8 @@ def render_library(cur, qs) -> str:
         ),
         industry,
     )
+    n_all = len(rows)
+    n_in_window = sum(1 for r in rows if r.get("id") in win_ids)
     if windowed:
         rows = [r for r in rows if r.get("id") in win_ids]
     per = 18
@@ -1942,7 +2291,12 @@ def render_library(cur, qs) -> str:
     q = {"窗": days, "行业": industry, "证据": evidence, "本窗": "1" if windowed else "0"}
     vchips = [
         chip(href("/案例", **q), "全部公司", on=not vendor),
-        chip(href("/案例", 厂商="核心", **q), "主要这几家", on=vendor == "核心"),
+        chip(
+            href("/案例", 厂商="核心", **q),
+            "驻场这十家",
+            on=vendor == "核心",
+            title=CORE_VENDOR_TIP,
+        ),
     ]
     for v in vendors[:8]:
         vchips.append(
@@ -1960,8 +2314,8 @@ def render_library(cur, qs) -> str:
     for name, _kws in INDUSTRY_BUCKETS:
         ind_chips.append(chip(href("/案例", 行业=name, **base), name, on=industry == name))
     win_q = {"窗": days, "厂商": vendor, "行业": industry, "证据": evidence}
-    win_chip = chip(href("/案例", 本窗="1", **win_q), "这段时间的", on=windowed, n=len(win_ids))
-    all_win = chip(href("/案例", 本窗="0", **win_q), "全部", on=not windowed)
+    win_chip = chip(href("/案例", 本窗="1", **win_q), "这段时间的", on=windowed, n=n_in_window)
+    all_win = chip(href("/案例", 本窗="0", **win_q), "全部", on=not windowed, n=n_all)
 
     cards = []
     items = []
@@ -1971,7 +2325,6 @@ def render_library(cur, qs) -> str:
         k = " · ".join(x for x in (vendor_name(r), r.get("bucket")) if x)
         evid = r.get("evidence_quality") or ""
         blurb = trunc(r.get("business_problem") or r.get("measured_outcome"), 110)
-        on = " on" if cards == [] else ""
         tags = []
         if evid:
             tags.append(f"<i>{esc(evidence_label(evid))}</i>")
@@ -1979,10 +2332,13 @@ def render_library(cur, qs) -> str:
             tags.append(f"<i>{esc(kpi_label(r.get('kpi_scope')))}</i>")
         if has_fde_role(r):
             tags.append("<i>写了驻场团队</i>")
+        case_h = href("/案例/%s" % cid, 窗=days)
         cards.append(
-            f'<button type="button" class="room-gcard{on}" data-pick="{esc(str(cid))}">'
-            f'<span class="k">{esc(k)}</span><strong>{esc(title)}</strong>'
-            f'<p>{esc(blurb)}</p><div class="room-tags">{"".join(tags)}</div></button>'
+            f'<article class="room-article">'
+            f'<p class="room-article-k">{esc(k)}</p>'
+            f'<h2><a href="{esc(case_h)}">{esc(title)}</a></h2>'
+            f'<p>{esc(blurb)}</p>'
+            f'<div class="room-tags">{"".join(tags)}</div></article>'
         )
         items.append(
             {
@@ -1993,14 +2349,39 @@ def render_library(cur, qs) -> str:
                 "kpi": kpi_label(r.get("kpi_scope")),
                 "blurb": blurb,
                 "fde": has_fde_role(r),
-                "href": href("/案例/%s" % cid, 窗=days),
+                "href": case_h,
             }
         )
-    grid = "".join(cards) or (
-        f'<p class="room-empty">这 {days} 天没有带发布日的客户故事。空着就空着。</p>'
-        if windowed
-        else '<p class="room-empty">没有匹配的案例。</p>'
-    )
+    if cards:
+        grid = "".join(cards)
+    else:
+        who = []
+        if vendor == "核心":
+            who.append("驻场这十家")
+        elif vendor:
+            who.append(vendor_name_of.get(vendor) or vendor)
+        if industry:
+            who.append(industry)
+        filt = " · ".join(who)
+        if windowed and filt:
+            all_h = href("/案例", 本窗="0", 窗=days, 厂商=vendor, 行业=industry, 证据=evidence)
+            extra_note = ""
+            if vendor in PRODUCT_STORY_VENDORS:
+                vname = vendor_name_of.get(vendor) or vendor
+                extra_note = (
+                    f'「{esc(vname)}」是客服 / 产品故事，不在「驻场这十家」里。'
+                )
+            grid = (
+                f'<p class="room-empty">这 {days} 天里，没有「{esc(filt)}」带发布日的客户故事。'
+                f'<a href="{esc(all_h)}">看库里全部 {n_all} 条</a>'
+                f'{("。" + extra_note) if extra_note else ""}</p>'
+            )
+        elif windowed:
+            grid = f'<p class="room-empty">这 {days} 天没有带发布日的客户故事。空着就空着。</p>'
+        elif filt:
+            grid = f'<p class="room-empty">没有符合「{esc(filt)}」的案例。</p>'
+        else:
+            grid = '<p class="room-empty">没有匹配的案例。</p>'
     page_q = {"窗": days, "厂商": vendor, "行业": industry, "证据": evidence, "本窗": "1" if windowed else "0"}
     prev_h = href("/案例", 页=page - 1, **page_q) if page > 1 else ""
     next_h = href("/案例", 页=page + 1, **page_q) if page < pages else ""
@@ -2014,17 +2395,35 @@ def render_library(cur, qs) -> str:
         "案例",
         gh,
         "案例",
-        "点一张卡片看看，再打开全文",
+        "往下读，点进案例",
         days=days,
         range_base="/案例",
         extra=extra,
     )
+    how = (
+        '<p class="room-how"><b>往下读就行。</b> 默认只看这窗里带发布日的。'
+        "点客户名进全文，中文原文铺在案例页上。</p>"
+    )
+    if vendor in PRODUCT_STORY_VENDORS:
+        vname = vendor_name_of.get(vendor) or vendor
+        how = (
+            f'<p class="room-how"><b>往下读就行。</b> 默认只看这窗里带发布日的。'
+            f'「{esc(vname)}」是客服 / 产品故事，不是驻场那十家。'
+            "点客户名进全文，中文原文铺在案例页上。</p>"
+        )
+    core_hint = ""
+    if vendor == "核心":
+        core_hint = (
+            '<p class="room-how">这十家公开材料里常写驻场团队。'
+            "Intercom / Writer 这类客服产品请点公司名。</p>"
+        )
     stage = f"""
-<p class="room-how"><b>找客户案例。</b> 默认只看这窗里带发布日的。点一张卡片看摘要，再打开全文对照原文。</p>
-<div class="room-filt">{all_win}{win_chip}{''.join(vchips[:6])}</div>
+{how}
+<div class="room-filt">{all_win}{win_chip}{''.join(vchips[:10])}</div>
+{core_hint}
 <div class="room-filt">{''.join(ind_chips)}</div>
 <div class="room-filt">{''.join(evid_chips)}</div>
-<div class="room-grid">{grid}</div>
+<div class="room-feedlist">{grid}</div>
 {pager}
 """
     payload = {"kind": "case", "lens": "boss", "items": items}
@@ -2038,6 +2437,7 @@ def render_library(cur, qs) -> str:
         "",
         payload,
         lens="boss",
+        feed=True,
     )
 
 
@@ -2055,11 +2455,28 @@ def human_anatomy(value) -> str:
     return re.sub(r"[；;]\s*$", "", text).strip()
 
 
-def dl_row(label, value) -> str:
+_INTERVIEW_PREP = re.compile(
+    r"算法题|候选人|准备不了这个岗位|脱颖而出的候选人|面试准备|光刷算法"
+)
+
+
+def case_anatomy_value(row: dict, key: str, orig_body: str) -> str:
+    text = human_anatomy(row.get(key)) if nonempty(row.get(key)) else ""
+    if key == "fde_role":
+        if not (orig_body or "").strip():
+            return ""
+        if _INTERVIEW_PREP.search(text):
+            return ""
+    return text
+
+
+def dl_row(label, value, *, show_empty: bool = False) -> str:
     text = human_anatomy(value) if nonempty(value) else ""
     if text:
         return f"<dt>{esc(label)}</dt><dd>{esc(text).replace(chr(10), '<br/>')}</dd>"
-    return f'<dt>{esc(label)}</dt><dd class="empty">原文未写</dd>'
+    if show_empty:
+        return f'<dt>{esc(label)}</dt><dd class="empty">原文未写</dd>'
+    return ""
 
 
 def render_case(cur, case_id: int, qs) -> str:
@@ -2073,20 +2490,6 @@ def render_case(cur, case_id: int, qs) -> str:
         view = ""
     title = row.get("customer") or row.get("source_title") or "案例"
     k = " · ".join(x for x in (vendor_name(row), row.get("bucket"), row.get("product")) if x)
-    src = row.get("source_url") or ""
-    oh = orig_href("案例", case_id, src)
-    if oh:
-        src_html = (
-            f'<a class="orig" href="{esc(oh)}">'
-            f"对照原文 · {esc(host_of(src) or src)}</a>"
-        )
-    elif src:
-        src_html = (
-            f'<a class="orig" href="{esc(src)}" target="_blank" rel="noopener noreferrer">'
-            f"打开原文 · {esc(host_of(src) or src)}</a>"
-        )
-    else:
-        src_html = "没有原文链接"
     on_d = " on" if view == "落地" else ""
     on_f = " on" if view == "现场" else ""
     flags_html = ""
@@ -2102,24 +2505,32 @@ def render_case(cur, case_id: int, qs) -> str:
                 for f in kept
             ) + "</div>"
     related = ""
-    if row.get("related_questions"):
-        items = []
-        for q in row["related_questions"]:
-            label = q.get("title_zh") or q.get("stem_zh") or q.get("title") or q.get("id")
-            items.append(
-                f'<div class="row">{esc(label)}'
-                f'<span class="s">开放题 · 答案不在此站展示</span></div>'
-            )
-        related = (
-            '<section class="section"><h2>相关开放题</h2>'
-            '<p class="note">附录。面试准备用，不是落地依据。</p>'
-            f'<div class="list">{"".join(items)}</div></section>'
-        )
     quote = ""
     if nonempty(row.get("quote")):
         quote = f'<blockquote class="quote">{esc(row["quote"])}</blockquote>'
     days = qs_window(qs)
-    hud = room_hud("案例", gh, title, "对照原文看完整内容", days=days, range_base=None)
+    hud = room_hud("案例", gh, title, "往下读。先全文，再是拆过的字段。", days=days, range_base=None)
+    orig_html = orig_section(row, case_id)
+    orig_pack = load_orig_zh("案例", case_id)
+    orig_body = (orig_pack.get("body") or "") if orig_pack else ""
+
+    def field(key: str) -> str:
+        return case_anatomy_value(row, key, orig_body)
+
+    meta_bits = []
+    if row.get("kpi_scope"):
+        meta_bits.append(kpi_label(row.get("kpi_scope")))
+    evid = evidence_label(row.get("evidence_quality"))
+    if evid:
+        meta_bits.append(evid)
+    if field("fde_role"):
+        meta_bits.append("原文写了驻场团队")
+    meta_html = (
+        f'<p class="room-subline">{" · ".join(esc(x) for x in meta_bits)}</p>'
+        if meta_bits
+        else ""
+    )
+
     inner = f"""
 <div class="room room-doc" id="room">
 {hud}
@@ -2128,51 +2539,43 @@ def render_case(cur, case_id: int, qs) -> str:
   <a class="room-back" href="{esc(href("/案例", 窗=days))}">← 回案例</a>
   <p class="room-kicker">{esc(k)}</p>
   <h1>{esc(title)}</h1>
-  <div class="room-meta">
-    {src_html}
-    {kpi_span(row.get("kpi_scope"))}
-    <span class="tg">{esc(evidence_label(row.get("evidence_quality")))}</span>
-    {fde_flag(row)}
-    <a class="{ 'on' if view=='落地' else '' }" href="{esc(href("/案例/"+str(case_id), 读法="落地", 窗=days))}">给负责人</a>
-    <a class="{ 'on' if view=='现场' else '' }" href="{esc(href("/案例/"+str(case_id), 读法="现场", 窗=days))}">给现场的人</a>
-  </div>
+  {meta_html}
+  {orig_html}
   <div class="room-pair">
     <section class="room-box{on_d}" id="落地读法">
       <h2>给负责人</h2>
       <dl class="anatomy">
-        {dl_row("要解决什么", row.get("business_problem"))}
-        {dl_row("结果", row.get("measured_outcome"))}
-        {dl_row("这个数字怎么来的", kpi_label(row.get("kpi_scope")))}
-        {dl_row("接了哪些系统", row.get("integration"))}
-        {dl_row("用了什么数据", row.get("data_sources"))}
-        {dl_row("人还管哪一步", row.get("human_in_the_loop"))}
-        {dl_row("多久上线", row.get("time_to_production"))}
-        {dl_row("怎么交给客户", row.get("customer_handoff"))}
-        {dl_row("有没有驻场团队", row.get("fde_role"))}
+        {dl_row("要解决什么", field("business_problem"))}
+        {dl_row("结果", field("measured_outcome"))}
+        {dl_row("接了哪些系统", field("integration"))}
+        {dl_row("用了什么数据", field("data_sources"))}
+        {dl_row("人还管哪一步", field("human_in_the_loop"))}
+        {dl_row("多久上线", field("time_to_production"))}
+        {dl_row("怎么交给客户", field("customer_handoff"))}
+        {dl_row("驻场怎么写的", field("fde_role"))}
       </dl>
     </section>
     <section class="room-box{on_f}" id="现场读法">
       <h2>给现场的人</h2>
       <dl class="anatomy">
-        {dl_row("主要用在哪", row.get("hero_use_case"))}
-        {dl_row("以前怎么干", row.get("existing_workflow"))}
-        {dl_row("卡在哪", row.get("pain_point"))}
-        {dl_row("用了什么模型", row.get("ai_model"))}
-        {dl_row("事情怎么流转", row.get("agent_workflow"))}
-        {dl_row("怎么验收", row.get("evaluation"))}
-        {dl_row("怎么上线", row.get("deployment"))}
-        {dl_row("失败了怎么改", row.get("failure_iteration"))}
-        {dl_row("能不能复用到下一家", row.get("productization"))}
+        {dl_row("主要用在哪", field("hero_use_case"))}
+        {dl_row("以前怎么干", field("existing_workflow"))}
+        {dl_row("卡在哪", field("pain_point"))}
+        {dl_row("用了什么模型", field("ai_model"))}
+        {dl_row("事情怎么流转", field("agent_workflow"))}
+        {dl_row("怎么验收", field("evaluation"))}
+        {dl_row("怎么上线", field("deployment"))}
+        {dl_row("失败了怎么改", field("failure_iteration"))}
+        {dl_row("能不能复用到下一家", field("productization"))}
       </dl>
     </section>
   </div>
   {quote}
-  <section class="section">
+  {"" if not (human_anatomy(row.get("evidence_note") or "") or flags_html) else f'''<section class="section">
     <h2>备注</h2>
-    <p class="note">{esc(human_anatomy(row.get("evidence_note") or "") or "没有补充说明。")}</p>
+    <p class="note">{esc(human_anatomy(row.get("evidence_note") or "") or "")}</p>
     {flags_html}
-  </section>
-  {en_archive_html(row, case_id)}
+  </section>'''}
   {related}
 </div>
 </div>
@@ -2228,19 +2631,6 @@ def render_event(cur, event_id: int) -> str:
     case_href = event.get("case_href") or ""
     job = event.get("info_kind") == "job_posting"
     bits = []
-    if src:
-        oh = event.get("orig_href") or orig_href("动态", event_id, src)
-        host = event.get("host") or host_of(src)
-        if oh:
-            bits.append(
-                f'<a class="orig" href="{esc(oh)}">'
-                f"对照原文 · {esc(host)}</a>"
-            )
-        else:
-            bits.append(
-                f'<a class="orig" href="{esc(src)}" target="_blank" rel="noopener noreferrer">'
-                f"打开原文 · {esc(host)}</a>"
-            )
     if case_href:
         bits.append(f'<a href="{esc(case_href)}">看完整案例</a>')
     extra = (" · ".join(bits)) if bits else ""
@@ -2249,7 +2639,7 @@ def render_event(cur, event_id: int) -> str:
         if job
         else ""
     )
-    orig_block = ""
+    orig_block = orig_zh_html("动态", event_id)
 
     def fluff_why(text):
         t = (text or "").strip()
@@ -2290,8 +2680,12 @@ def render_event(cur, event_id: int) -> str:
         cls = " empty" if not (text or "").strip() else ""
         return f'<section class="section"><h2>{esc(title)}</h2><p class="ev-read{cls}">{esc(body)}</p></section>'
 
-    why_html = "" if fluff_why(event.get("why")) else block("为什么要看", event.get("why"))
-    ent_html = block("对企业意味着什么", event.get("enterprise"))
+    why_html = ""
+    ent_html = (
+        ""
+        if not (event.get("enterprise") or "").strip()
+        else block("对企业意味着什么", event.get("enterprise"))
+    )
     prac_html = (
         ""
         if fluff_prac(event.get("practitioner"))
@@ -2528,11 +2922,11 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urlparse(self.path)
-        path = unquote(parsed.path)
+        path = unquote(http_utf8(parsed.path))
         if path != "/":
             path = path.rstrip("/") or "/"
         path = normalize_path(path)
-        qs = parse_qs(parsed.query, keep_blank_values=False)
+        qs = parse_qs(http_utf8(parsed.query), keep_blank_values=False)
 
         if path == "/favicon.ico":
             self.send_response(204)

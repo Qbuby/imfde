@@ -39,22 +39,22 @@ FDEI_ZH = {
 NODE_BRIEF = {
     "discovery": (
         "先跟一线把现有流程走一遍：谁在做、卡在哪、什么算做成。"
-        "没有可检查的成果定义，就不要谈模型和编制。"
+        "没有可检查的成果定义，就不要谈模型和人手。"
     ),
     "scoping": (
-        "把约束、数据权限、验收标准和第一刀范围写死。"
+        "先写死这一刀做什么、不做什么：谁的数据能碰、什么叫验收通过。"
         "驻场交付的失败，多半是范围没切开，不是模型不够强。"
     ),
     "evaluation": (
-        "上线前先有评测集、风险阈值和人在环内的闸门。"
+        "上线前先有一套真单子能测、错了谁拍板、什么情况必须人看一眼。"
         "数字要分开看：测过的、目标、预测、系统规模，不是同一回事。"
     ),
     "adoption": (
         "嵌进旧流程，而不是另开一个没人打开的窗口。"
-        "一线怕质量下降时，先并行、再替换，并留下可回退的路径。"
+        "一线怕质量掉时，新旧一起跑一阵再换，并留一条能退回去的路。"
     ),
     "data-integration": (
-        "先搞清数据在哪、谁能碰、刷新周期和权限边界。"
+        "先问清数据在哪、谁有钥匙、多久更新一次。"
         "企业现场的硬活往往是接入和权限，不是提示词。"
     ),
     "prototype-iteration": (
@@ -67,49 +67,49 @@ NODE_BRIEF = {
     ),
     "field-productization": (
         "第三个客户开始重复第一个客户的做法时，就该收成产品面，而不是再雇一队人重做。"
-        "现场赢了却收不回去，编制会把公司拖成咨询所。"
+        "现场赢了却收不回去，一直派人会把公司拖成咨询所。"
     ),
     "loop-engineering": (
-        "Agent 要有工具边界、失败恢复和停止条件。"
+        "Agent 能调哪些工具、挂了怎么接着干、什么时候必须停，都要写死。"
         "模糊成功（解决了、没生气、没再开单）不能只用一次点击率来评。"
     ),
     "token-cost-control": (
-        "预算、缓存、路由和「这场对话还值不值得继续烧」要写进方案。"
+        "这轮对话还值不值得继续烧，预算、缓存和走哪套模型，要写进方案。"
         "否则现场一放大，成本先把项目打死。"
     ),
     "enterprise-knowledge-base": (
-        "企业知识库是权限、新鲜度和引用，不只是把文档切片丢进向量库。"
+        "企业知识库要能说清谁能看、新不新、这句话从哪篇来，不是把文档切了丢进向量库。"
         "谁能看哪一份、过期了怎么办，要在发现阶段就问。"
     ),
     "strategic-framing": (
         "先问这是不是一个该用驻场的问题，而不是有模型就上。"
-        "买产品、买驻场、自建编制，在公开材料里不是同一件事。"
+        "买现成产品、买驻场、自己组队，在公开材料里不是同一件事。"
     ),
     "portfolio-prioritization": (
-        "同时有三条线时，用可验证成果和交接成本排序，而不是按演示好看程度排序。"
+        "同时有三条线时，先看哪条能交出可检查的结果、走的时候人能接手，别按演示好不好看排。"
     ),
     "enterprise-architecture": (
-        "驻场系统要落在客户已有的身份、数据和值班体系上。"
+        "驻场系统要接到客户已经在用的登录、数据和值班，不要另起一套。"
         "另起炉灶的平台，现场几乎交不出去。"
     ),
     "governance-risk": (
-        "安全、合规、审计和「模型不能做什么」是范围的一部分，不是上线附录。"
+        "模型不能做什么、出事谁负责、审计怎么查，开工时就要写进范围，别等到上线再补。"
     ),
     "economics-commercial": (
         "驻场能换来成交和留存，也会吃掉毛利。"
-        "公开材料里的编制扩张，要分清是卖方扩编还是买方自己的 FDE 组织。"
+        "公开材料里人变多了，要分清是卖方加人还是买方自己养队伍。"
     ),
     "fde-operating-model": (
-        "编制放在销售、产品还是独立前线，决定人听谁的、赢了归谁。"
-        "库里几乎没有完整组队样本，只能从公开材料里读结构。"
+        "人放在销售、产品还是独立前线，决定听谁的、赢了归谁。"
+        "库里几乎没有完整组队样本，只能从页上已经写明的结构来读。"
     ),
     "change-scale-adoption": (
         "一个现场赢了，不等于能铺到所有事业部。"
-        "规模化靠的是交接、培训和产品化，不是把驻场人数线性加下去。"
+        "铺开靠能交接、能教会下一家、能收成产品，不是把驻场人数一直加下去。"
     ),
     "field-product-strategy": (
         "前线看到的重复痛点，要能改核心产品路线。"
-        "否则 FDE 永远在客户那里补洞，产品没有记忆。"
+        "否则驻场的人永远在客户那里补洞，产品没有记忆。"
     ),
 }
 
@@ -133,10 +133,10 @@ METHOD_NEEDLES = (
 LESSONS_CORE = {
     "discovery": {
         "title": "客户发现",
-        "goal": "90 分钟内交「一页发现简报」。先跟一线把现有流程走一遍：谁在做、卡在哪、什么算做成。",
+        "goal": "把客户来的那一刻写清楚：谁在打电话、门禁锁没锁、什么算帮到忙。不要先谈模型。",
         "deliverable": "一页发现简报",
         "minutes": 90,
-        "show_case_id": SHOW_CASE_ID,
+        "show_case_id": 315,
         "show_fields": (
             ("经营问题", "business_problem"),
             ("旧流程", "existing_workflow"),
@@ -144,8 +144,8 @@ LESSONS_CORE = {
             ("发现方法", "discovery_method"),
         ),
         "show_note": (
-            "公开客户页能读到的发现材料。页面没有自称前线部署（FDE），"
-            "也没有给出上线后的任务可用度百分比——简报里不要编这两个数。"
+            "StoreEase 页上写的是搬家、离婚、身故那种时刻。没有驻场头衔，也没有编上线可用度。"
+            "简报只写页上有的场面，不要补数字。"
         ),
         "steps": (
             (
@@ -203,6 +203,48 @@ LESSONS_CORE = {
                 "不对。干净样本不等于能上生产。",
             ),
         },
+        "mcq": {
+            "aifde:discovery:01": {
+                "stem": "客户希望用 AI 缩短工单处理时间。现场的人 / 你最应该先做什么？",
+                "options": (
+                    "跟随一线人员还原当前工单流程，找出瓶颈、约束和可衡量成果。",
+                    "马上挑一个最强模型做聊天机器人，发现阶段先把选型定下来。",
+                    "先做一个视觉效果完整的演示，用画面说服客户再回头看流程。",
+                    "让客户提供一份功能清单后直接估期，发现阶段不跟一线走现有流程。",
+                ),
+                "ok": 0,
+            },
+            "aifde:discovery:02": {
+                "stem": "业务负责人要求“把审核流程自动化”，但说不清当前成本。最佳下一步是什么？",
+                "options": (
+                    "先承诺一个节省比例，当前成本说不清也写进方案。",
+                    "观察实际审核，建立时长、返工和错误基线。",
+                    "根据行业平均值估算审核成本，不观察本现场的时长和返工。",
+                    "直接生成完整 PRD，把「说不清当前成本」留给后面的人。",
+                ),
+                "ok": 1,
+            },
+            "aifde:discovery:03": {
+                "stem": "高管关注降本，一线用户担心 AI 降低质量。发现阶段应该如何处理？",
+                "options": (
+                    "只采用高管的降本指标，一线的质量担心先不写进成功标准。",
+                    "避免讨论冲突直到上线，发现阶段只记一边的口径。",
+                    "把成本、质量和用户负担共同写入成功标准。",
+                    "先扩大模型上下文，指望质量担心会随模型变大消失。",
+                ),
+                "ok": 2,
+            },
+            "aifde:discovery:04": {
+                "stem": "客户只提供了最顺利的历史案例作为训练和评测样本。现场的人 / 你应该指出什么？",
+                "options": (
+                    "样本越干净越适合生产，顺利案例可以直接当评测集。",
+                    "让模型自己生成全部边界案例，不再向现场要失败样本。",
+                    "只要样本数量多就足够，不区分顺利单和失败单。",
+                    "需要补充常见失败、边界案例和不同用户群的代表性样本。",
+                ),
+                "ok": 3,
+            },
+        },
     }
 }
 
@@ -231,10 +273,7 @@ document.addEventListener("click", function (e) {
 </script>
 """
 
-LEARN_HEAD = (
-    '<link rel="stylesheet" href="/static/learn.css"/>'
-    '<script defer src="/static/learn.js"></script>'
-)
+LEARN_HEAD = ""
 
 
 def load_lessons() -> dict:
@@ -247,7 +286,10 @@ def load_lessons() -> dict:
         "lesson_pack_l2b",
     ):
         try:
-            mod = importlib.import_module(name)
+            if name in sys.modules:
+                mod = importlib.reload(sys.modules[name])
+            else:
+                mod = importlib.import_module(name)
         except ImportError:
             continue
         pack = getattr(mod, "PACK", None) or {}
@@ -454,84 +496,23 @@ def _cycle_nav(topics: list[dict], slug: str) -> tuple[dict | None, dict | None]
     return prev_t, next_t
 
 
-def _payload_node(t: dict, lessons: dict) -> dict:
-    lesson = lessons.get(t["slug"]) or {}
-    cycle = t.get("level") == "L1" and (t.get("sort") or 0) <= CYCLE_MAX_SORT
-    if cycle:
-        group = "cycle"
-    elif t.get("level") == "L1":
-        group = "eng"
-    else:
-        group = "l2"
-    return {
-        "slug": t["slug"],
-        "name": t["name"],
-        "brief": NODE_BRIEF.get(t["slug"]) or "",
-        "ready": t["slug"] in lessons,
-        "href": "/方法/" + t["slug"],
-        "goal": lesson.get("goal") or "",
-        "deliverable": lesson.get("deliverable") or "",
-        "steps": [title for title, _body in lesson.get("steps") or ()],
-        "kind": "cycle" if cycle else "dir",
-        "group": group,
-    }
-
-
-def _learn_data_tag(topics: list[dict], lessons: dict) -> str:
-    payload = [_payload_node(t, lessons) for t in topics]
-    blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
-    return f'<script type="application/json" id="learn-data">{blob}</script>'
-
-
-def _cycle_buttons(nodes: list[dict], current: str | None = None) -> str:
+def _lesson_rows(nodes: list[dict], lessons: dict) -> str:
     parts = []
-    for i, t in enumerate(nodes):
-        ready = t.get("ready") if "ready" in t else _is_complete(t["slug"])
-        on = t["slug"] == current
-        status = "教程" if ready else "还没写成课"
-        cls = "learn-node" + (" on" if on else "") + ("" if ready else " is-stub")
+    for t in nodes:
+        ready = t["slug"] in lessons
+        goal = (lessons.get(t["slug"]) or {}).get("goal") or NODE_BRIEF.get(t["slug"]) or ""
+        go = "读这一课" if ready else "先看目录"
         parts.append(
-            f'<button type="button" class="{cls}" data-node="{S.esc(t["slug"])}" '
-            f'style="--i:{i}" aria-pressed="{"true" if on else "false"}">'
-            f'<b>{S.esc(t["name"])}</b><span>{status}</span></button>'
+            f'<article class="room-article">'
+            f'<p class="room-article-k">{go}</p>'
+            f'<h2><a href="/方法/{S.esc(t["slug"])}">{S.esc(t["name"])}</a></h2>'
+            f"<p>{S.esc(goal)}</p></article>"
         )
     return "".join(parts)
 
 
-def _exit_buttons(nodes: list[dict]) -> str:
-    return "".join(
-        f'<button type="button" class="learn-exit" data-node="{S.esc(t["slug"])}">'
-        f'{S.esc(t["name"])}</button>'
-        for t in nodes
-    )
-
-
-def _hud_nav(gh: str) -> str:
-    links = []
-    for label, path in S.NAV:
-        cls = "on" if label == "学习" else ""
-        aria = ' aria-current="page"' if cls else ""
-        links.append(f'<a class="{cls}" href="{S.esc(path)}"{aria}>{S.esc(label)}</a>')
-    links.append(S.auth_link("/方法"))
-    return "".join(links)
-
-
 def _fdei_appendix(prompts: list[dict], fdei_note: str) -> str:
-    if not prompts:
-        return ""
-    items = "".join(
-        f'<div class="row">{S.esc(p.get("title") or "")}'
-        f'<span class="s">现场题 · 答案不在此站展示</span></div>'
-        for p in prompts
-    )
-    note = fdei_note or "对应题库类目"
-    return f"""
-<details class="fold fdei-app">
-  <summary>附录 · 还会碰到的现场题</summary>
-  <p class="note">只列题干。许可是引用，答案不在此站展示。对应：{S.esc(note)}</p>
-  <div class="list">{items}</div>
-</details>
-"""
+    return ""
 
 
 def _method_list(methods: list[dict]) -> str:
@@ -556,6 +537,32 @@ def _stem_list(stems: list[dict]) -> str:
         for s in stems
     )
     return html or '<p class="empty">这一节点还没有中文练习情景。</p>'
+
+
+def _apply_lesson_mcq(items: list[dict], lesson: dict) -> list[dict]:
+    overlay = lesson.get("mcq") or {}
+    if not overlay:
+        return items
+    for row in items:
+        patch = overlay.get(row.get("id"))
+        if not isinstance(patch, dict):
+            continue
+        stem = (patch.get("stem") or "").strip()
+        if stem:
+            row["stem_zh"] = stem
+        raw_opts = patch.get("options")
+        if raw_opts:
+            opts = [str(x) for x in raw_opts]
+            row["options"] = opts
+            if "ok" in patch:
+                try:
+                    row["ok_idx"] = int(patch["ok"])
+                except (TypeError, ValueError):
+                    row["ok_idx"] = -1
+            else:
+                ans = (patch.get("answer") or "").strip()
+                row["ok_idx"] = opts.index(ans) if ans in opts else -1
+    return items
 
 
 def _mcq_block(items: list[dict], why: dict) -> str:
@@ -597,16 +604,16 @@ def _show_case(cur, lesson: dict) -> str:
         ("卡点", "pain_point"),
         ("发现方法", "discovery_method"),
     )
-    body = "".join(S.dl_row(lab, S.trunc(row.get(key), 280)) for lab, key in fields)
+    body = "".join(S.dl_row(lab, row.get(key)) for lab, key in fields)
     href = S.href("/案例/%s" % cid)
-    note = lesson.get("show_note") or "用库里的字段，不另造 KPI。"
+    note = lesson.get("show_note") or ""
+    note_html = f'<p class="note">{S.esc(note)}</p>' if note else ""
     return f"""
 <article class="learn-show">
-  <p class="k">范例</p>
   <h3><a href="{S.esc(href)}">{S.esc(title)}</a></h3>
-  <p class="note">{S.esc(note)}</p>
+  {note_html}
   <dl class="anatomy">{body}</dl>
-  <p class="hint"><a href="{S.esc(href)}">看完整案例</a> · <a class="orig" href="/原文/案例/{cid}">对照原文</a></p>
+  <p class="hint"><a href="{S.esc(href)}">看完整案例</a></p>
 </article>
 """
 
@@ -614,16 +621,13 @@ def _show_case(cur, lesson: dict) -> str:
 def _learn_strip(l1: list[dict], slug: str, lessons: dict) -> str:
     items = []
     for t in l1:
-        ready = t["slug"] in lessons
-        on = t["slug"] == slug
-        cls = "learn-node" + (" on" if on else "") + ("" if ready else " is-stub")
+        on = " on" if t["slug"] == slug else ""
         cur = ' aria-current="page"' if on else ""
         items.append(
-            f'<button type="button" class="{cls}" data-node="{S.esc(t["slug"])}" '
-            f'aria-pressed="{"true" if on else "false"}"{cur}>'
-            f'{S.esc(t["name"])}</button>'
+            f'<a class="chip{on}" href="/方法/{S.esc(t["slug"])}"{cur}>'
+            f"{S.esc(t['name'])}</a>"
         )
-    return f'<nav class="learn-strip" aria-label="交付循环">{"".join(items)}</nav>'
+    return f'<nav class="room-filt" aria-label="交付循环">{"".join(items)}</nav>'
 
 
 def render_home(cur) -> str:
@@ -635,60 +639,37 @@ def render_home(cur) -> str:
     n_ready = sum(1 for t in l1 if t["slug"] in lessons)
     n_eng = sum(1 for t in extra if t["slug"] in lessons)
     n_l2 = sum(1 for t in l2 if t["slug"] in lessons)
-    inner = f"""
-<div class="learn" id="learn">
-  <header class="learn-hud" role="banner">
-    <a class="learn-brand" href="/world3d" aria-label="{S.esc(S.SITE_NAME)} {S.esc(S.SITE_CLUB)}">
-      {S.brand_lockup()}
-    </a>
-    <div class="learn-hud-tools">
-      <nav class="learn-nav" aria-label="站内导航">{_hud_nav(gh)}</nav>
-    </div>
-  </header>
-  <div class="learn-stage" id="learn-stage">
-    <div class="learn-cycle" role="list">
-      <p class="learn-cycle-core">做事的步骤</p>
-      {_cycle_buttons(l1)}
-    </div>
-    <p class="learn-hint">点一步看说明，再进这一课。这里不是新闻。</p>
-  </div>
-  <aside class="learn-panel" id="learn-panel" hidden aria-label="这一课" aria-live="polite"></aside>
-  <nav class="learn-exits" aria-label="另外还有">
-    <span class="learn-lg-k">另外还有</span>
-    <button type="button" class="learn-exit" data-group="eng">现场会碰到的工程题 · {n_eng}/{len(extra)}</button>
-    <button type="button" class="learn-exit" data-group="l2">组织和生意 · {n_l2}/{len(l2)}</button>
-    <a href="/world3d">回世界动态</a>
-  </nav>
+    hud = S.room_hud("学习", gh, "现场怎么干活", "往下读，点进课")
+    stage = f"""
+<p class="room-how"><b>往下读就行。</b> 点课名进这一课。</p>
+<div class="room-feedlist">
+  <h2>做事的步骤 · {n_ready}/{len(l1)}</h2>
+  {_lesson_rows(l1, lessons)}
+  <h2>现场会碰到的工程题 · {n_eng}/{len(extra)}</h2>
+  {_lesson_rows(extra, lessons)}
+  <h2>组织和生意 · {n_l2}/{len(l2)}</h2>
+  {_lesson_rows(l2, lessons)}
 </div>
-{_learn_data_tag(topics, lessons)}
 """
-    return S.shell(
+    return S.room_page(
         "学习 · %s" % S.SITE_NAME,
-        "方法",
-        inner,
+        "学习",
         gh,
-        extra_head=LEARN_HEAD,
-        body_class="learn-page",
-        skip_wrap=True,
-        skip_mast=True,
-        skip_foot=True,
-        home_css=False,
-        page_path="/方法",
-        tagline=LEARN_TAGLINE,
+        "/方法",
+        hud,
+        stage,
+        "",
+        {"kind": "learn", "items": []},
+        lens="learn",
+        feed=True,
     )
 
 
 def _render_lesson(cur, topic: dict, graph: dict, gh: str, lesson: dict) -> str:
     lessons = load_lessons()
     l1, _, _ = _split_topics(graph["topics"])
-    stems = _aifde_items(cur, topic["id"])
+    stems = _apply_lesson_mcq(_aifde_items(cur, topic["id"]), lesson)
     methods = _match_methods(cur, topic["slug"])
-    fdei_ids = [x["fdei_id"] for x in topic.get("fdei") or []]
-    prompts = _fdei_prompts(cur, fdei_ids)
-    fdei_note = "、".join(
-        FDEI_ZH.get((x["fdei_id"] or "").split(":")[-1], x["fdei_id"])
-        for x in topic.get("fdei") or []
-    )
     prev_t, next_t = _cycle_nav(graph["topics"], topic["slug"])
     steps = "".join(
         f"<li><h3>{S.esc(title)}</h3><p>{S.esc(body)}</p></li>"
@@ -706,12 +687,9 @@ def _render_lesson(cur, topic: dict, graph: dict, gh: str, lesson: dict) -> str:
     title = lesson.get("title") or topic["name"]
     goal = lesson.get("goal") or NODE_BRIEF.get(topic["slug"]) or ""
     deliverable = lesson.get("deliverable") or "一页简报"
-    minutes = int(lesson.get("minutes") or 90)
     tpl = lesson.get("brief_tpl") or ""
     inner = f"""
 {_learn_strip(l1, topic["slug"], lessons)}
-<aside class="learn-panel" id="learn-panel" hidden aria-label="其他节点" aria-live="polite"></aside>
-{_learn_data_tag(graph["topics"], lessons)}
 <section class="desk-lede">
   <p class="k">学习 · 这一课</p>
   <h1>{S.esc(title)}</h1>
@@ -723,26 +701,23 @@ def _render_lesson(cur, topic: dict, graph: dict, gh: str, lesson: dict) -> str:
 </section>
 <section class="section" id="范例">
   <h2>看一个例子</h2>
-  <p class="note">用库里的字段，不另造数字。</p>
   {_show_case(cur, lesson)}
 </section>
 <section class="section" id="练习">
   <h2>练习</h2>
-  <p class="note">四道本地选择题。选完再核对。这不是面试题库。</p>
+  <p class="note">选完再核对。</p>
   {_mcq_block(stems, lesson.get("why") or {})}
 </section>
 <section class="section" id="作业">
   <h2>作业 · {S.esc(deliverable)}</h2>
-  <p class="note">抄到自己的笔记里填。本站不收作业。</p>
+  <p class="note">抄到自己的笔记里填。</p>
   <pre class="brief-tpl">{S.esc(tpl)}</pre>
   <ul class="learn-steps rubric">{rubric}</ul>
 </section>
 <section class="section">
   <h2>延伸阅读</h2>
-  <p class="note">方法文，不是这一窗的行业动态。</p>
   {_method_list(methods)}
 </section>
-{_fdei_appendix(prompts, fdei_note)}
 <p class="hint">{" · ".join(nav)}</p>
 """
     return _shell(
@@ -767,16 +742,10 @@ def render_node(cur, slug: str) -> str:
         return _render_lesson(cur, topic, graph, gh, lesson)
 
     l1, _, _ = _split_topics(graph["topics"])
-    brief = NODE_BRIEF.get(slug) or "这一步要能检查、能交接，而不是只做演示。"
+    brief = NODE_BRIEF.get(slug) or "这一步要能检查、能交给下一个人，别只做演示。"
     methods = _match_methods(cur, slug)
     stems = _aifde_items(cur, topic["id"])
-    fdei_ids = [x["fdei_id"] for x in topic.get("fdei") or []]
-    prompts = _fdei_prompts(cur, fdei_ids)
     prev_t, next_t = _cycle_nav(graph["topics"], slug)
-    fdei_note = "、".join(
-        FDEI_ZH.get((x["fdei_id"] or "").split(":")[-1], x["fdei_id"])
-        for x in topic.get("fdei") or []
-    )
     nav = ['<a href="/方法">回学习</a>']
     if "discovery" in lessons:
         nav.append('<a href="/方法/discovery">先去客户发现这一课</a>')
@@ -786,8 +755,6 @@ def render_node(cur, slug: str) -> str:
         nav.append(f'<a href="/方法/{S.esc(next_t["slug"])}">下一步 · {S.esc(next_t["name"])}</a>')
     inner = f"""
 {_learn_strip(l1, slug, lessons)}
-<aside class="learn-panel" id="learn-panel" hidden aria-label="其他节点" aria-live="polite"></aside>
-{_learn_data_tag(graph["topics"], lessons)}
 <section class="desk-lede">
   <p class="k">学习 · 还没写成课</p>
   <h1>{S.esc(topic["name"])}</h1>
@@ -796,14 +763,12 @@ def render_node(cur, slug: str) -> str:
 </section>
 <section class="section">
   <h2>练习情景</h2>
-  <p class="note">中文情景用来预览这一步会碰到什么。完整练习还没写成课。</p>
   {_stem_list(stems)}
 </section>
 <section class="section">
   <h2>相关阅读</h2>
   {_method_list(methods)}
 </section>
-{_fdei_appendix(prompts, fdei_note)}
 <p class="hint">{" · ".join(nav)}</p>
 """
     return _shell(

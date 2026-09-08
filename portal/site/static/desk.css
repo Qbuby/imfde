@@ -287,6 +287,21 @@ ol.learn-steps, ul.learn-steps {
 .learn-show h3 { margin: 0 0 8px; font-size: 17px; }
 .learn-show h3 a { color: var(--fg); }
 .learn-show .anatomy { margin-top: 10px; }
+.learn-orig {
+  margin: 12px 0 14px;
+  padding: 12px 12px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg, #07141d);
+}
+.learn-orig .k { margin: 0 0 6px; font-size: 11px; letter-spacing: 0.08em; color: var(--acc, #3fc0c0); }
+.learn-orig .orig-kicker { margin: 0 0 8px; font-size: 15px; color: var(--fg); }
+.learn-orig .orig-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--fg-soft);
+}
+.learn-orig .orig-body p { margin: 0 0 10px; }
 .mcq {
   margin: 0 0 12px;
   padding: 14px 16px 12px;

@@ -175,7 +175,7 @@ HAPPENED_ZH = {
 WHY_BY_KIND = {
     "org_announcement": "这是公司自己宣布的组织变化，不是某一家客户的故事。",
     "product_line": "公司把「帮客户落地」写成一条产品线了。",
-    "earnings_letter": "股东信是公司对外讲经营。点名驻场团队，说明他们开始这么对外讲；数字要打开原文看。",
+    "earnings_letter": "股东信是公司对外讲经营。点名驻场团队，说明他们开始这么对外讲；数字以这篇为准。",
     "press_release": "官方新闻稿，用来对同一天的说法。不要单独当成第二条变化。",
     "named_essay": "有名字的人写的评论。先看他主张什么、数字怎么来的、他是谁。",
     "interview": "有日期、有名字的访谈。看现场的人怎么理解这份工作。",
@@ -184,8 +184,8 @@ WHY_BY_KIND = {
     "discussion": "公开讨论。一帖一条；没有日期就不上这条时间线。",
     "methodology": "讲怎么干活的材料。不证明某家客户已经照做。",
     "engineering_blog": "工程团队写怎么组这支队伍。这是做法，不是客户故事。",
-    "job_posting": "官方在招人。只能说明有人在建这支队伍，不说明已经做成了。",
-    "hiring_census": "别人统计的招聘情况。一篇一篇看，不要把岗位列表铺满屏幕。",
+    "job_posting": "",
+    "hiring_census": "",
     "dated_case_study": "",
 }
 
@@ -203,10 +203,10 @@ _HUMAN_PHRASES = (
     ("口径是厂商客户故事里的实测叙述，不是第三方审计。", "这是公司自己讲的客户故事，不是第三方审计。"),
     ("口径是厂商客户故事。", "这是公司自己讲的客户故事。"),
     ("这是厂商客户故事。", "这是公司自己讲的客户故事。"),
-    ("这是厂商叙述，要回原文看口径。", "这是公司自己讲的，要打开原文看数字怎么来的。"),
-    ("CSAT 与解决率是页面叙述，要回原文看口径。", "满意度和解决率是页面上的说法，要打开原文看数字怎么来的。"),
-    ("要回原文看口径。", "要打开原文看数字怎么来的。"),
-    ("要回原文。", "要打开原文看。"),
+    ("这是厂商叙述，要回原文看口径。", "这是公司自己讲的数字，不是审计结果。"),
+    ("CSAT 与解决率是页面叙述，要回原文看口径。", "满意度和解决率是页面上的说法，不是审计结果。"),
+    ("要回原文看口径。", "这是公司自己讲的数字，不是审计结果。"),
+    ("要回原文。", "数字以这篇为准。"),
     ("这是厂商叙述。", "这是公司自己讲的。"),
     ("口径在厂商页上。", "数字写在公司自己的页面上。"),
     ("不能当这家客户的 KPI。", "不能当成这家客户自己测过的结果。"),
@@ -271,7 +271,55 @@ _HUMAN_PHRASES = (
     ("再谈编制", "再谈组这支队伍"),
     ("伙伴侧会出现驻场团队", "合作伙伴那边也会出现驻场团队"),
     ("不能当某一单客户 KPI", "不能当成某一家客户的结果"),
-    ("信里的数字要回原文，不能当某一单客户 KPI。", "信里的数字要打开原文看，不能当成某一家客户的结果。"),
+    ("信里的数字要回原文，不能当某一单客户 KPI。", "信里的数字以这篇为准，不能当成某一家客户的结果。"),
+    ("Forward Deployed 编制", "驻场团队"),
+    ("现场部署编制", "现场部署团队"),
+    ("收成一条编制", "收成一支团队"),
+    ("收成一条驻场团队", "收成一支驻场团队"),
+    ("编制扩张", "团队扩张"),
+    ("FDE 编制扩到", "驻场团队扩到"),
+    ("何时需要编制", "何时需要这支队伍"),
+    ("Q2 业绩口径", "Q2 业绩说法"),
+    ("业绩口径", "业绩说法"),
+    ("要回原文核对口径", "这是公司自己讲的数字，不是审计结果"),
+    ("核对口径", "核对数字怎么来的"),
+    ("伙伴 驻场", "伙伴驻场"),
+    ("的 驻场负责人", "的驻场负责人"),
+    ("成立 驻场工程", "成立驻场工程"),
+    ("成立 驻场", "成立驻场"),
+    ("的 驻场", "的驻场"),
+    ("还是驻场编制", "还是驻场团队"),
+    ("合同价值和编制规模", "合同价值和团队规模"),
+    ("官方编制宣布", "官方组队宣布"),
+    ("编制已经落地", "团队已经建好"),
+    ("某家的编制", "某家的团队"),
+    ("编制已经进买方组织", "这支队伍已经进了买方公司"),
+    ("当编制或交付证明", "当组队或交付证明"),
+    ("还是平台编制", "还是平台团队"),
+    ("编制是否进入对外叙事", "这支队伍有没有写进对外叙事"),
+    ("当长期编制", "当长期团队"),
+    ("编制报价要写清", "报价要写清"),
+    ("不能当成编制已经", "不能当成团队已经"),
+    ("在不增加编制", "在不增加人数"),
+    ("不增加编制", "不增加人数"),
+    ("未增编制", "未增人数"),
+    ("增加编制", "增加人数"),
+    ("减编制", "减人数"),
+    ("现有编制", "现有人数"),
+    ("初级编制", "初级人数"),
+    ("帮助台编制", "帮助台人数"),
+    ("营销编制", "营销人数"),
+    ("IT 编制", "IT 人数"),
+    ("编制持平", "人数持平"),
+    ("编制大体持平", "人数大体持平"),
+    ("编制几乎不增", "人数几乎不增"),
+    ("无编制或", "无人数或"),
+    ("成本或编制", "成本或人数"),
+    ("员工编制", "员工人数"),
+    ("名员工是 Neo 编制", "名员工是 Neo 的人数"),
+    ("Contact 编制", "Contact 的人数"),
+    ("Ivanti 编制", "Ivanti 的人数"),
+    ("SentinelOne 编制", "SentinelOne 的人数"),
 )
 
 
@@ -281,6 +329,13 @@ def humanize_copy(text):
     out = text
     for old, new in _HUMAN_PHRASES:
         out = out.replace(old, new)
+    out = out.replace("驻场 Engineering", "驻场工程").replace("驻场 Engineer", "驻场工程师")
+    if "编制" in out:
+        out = out.replace("编制", "人数")
+    out = re.sub(r" {2,}", " ", out)
+    out = re.sub(r"(?<=[\u4e00-\u9fff：:·，,（(])\s+(?=驻场)", "", out)
+    out = re.sub(r"(?<=驻场)\s+(?=[\u4e00-\u9fff：:·，,）)])", "", out)
+    out = re.sub(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])", "", out)
     return out
 
 
@@ -301,15 +356,25 @@ _GENERIC_WHY = (
     "官方新闻稿，用来对同一天",
     "公司把「帮客户落地」写成",
     "股东信是公司对外讲经营",
+    "官方在招人",
+    "只能说明有人在建这支队伍",
+    "别人统计的招聘情况",
+    "要解决的是",
+    "有名字有日期",
+    "部署证据",
 )
 _GENERIC_PRAC = (
     "Forward Deployed 头衔",
     "驻场工程师这个岗位名",
+    "无 驻场这个岗位名",
+    "无 FDE 头衔",
+    "没写驻场头衔",
     "不是编制样板",
     "不是怎么组团队",
     "不能当成怎么组团队",
     "可核的是客户侧",
     "可核的是客户自己的结果",
+    "部署证据",
 )
 
 
@@ -699,23 +764,79 @@ DEPLOY_COPY = {
 }
 
 
+def _org_name(org: str) -> str:
+    o = (org or "").strip()
+    if not o or o in ("该公司", "未知", "-"):
+        return ""
+    return ENTITY_NAME_ZH.get(o, o)
+
+
+def parse_org_role(title: str, entity_slug: str = "") -> tuple[str, str]:
+    """Company + role from 'OpenAI：招聘…' / 'OpenAI 招聘 FDE' / entity_slug. Never '该公司'."""
+    title = (title or "").strip()
+    slug = (entity_slug or "").strip()
+    mapped = ENTITY_NAME_ZH.get(slug) or ""
+    org, role = "", title
+    if "：" in title:
+        org, role = [p.strip() for p in title.split("：", 1)]
+    else:
+        m = re.match(r"^(.+?)\s*招聘\s*(.*)$", title)
+        if m:
+            org, role = m.group(1).strip(), (m.group(2) or "").strip()
+    org = (org or "").strip()
+    if mapped:
+        if not org or org in ("该公司", slug.replace("-", " ").title(), slug):
+            org = mapped
+        elif org.lower() == mapped.lower() or (
+            len(org) >= 3 and mapped.lower().startswith(org.lower())
+        ):
+            org = mapped
+    if org in ("该公司", "未知", "-"):
+        org = mapped
+    role = (role or title).strip() or "现场工程师"
+    for prefix in (org, mapped):
+        if prefix and role.startswith(prefix):
+            rest = role[len(prefix) :].lstrip("：: ").strip()
+            rest = re.sub(r"^招聘\s*", "", rest).strip()
+            if rest:
+                role = rest
+                break
+    return org, role
+
+
 def job_four(org: str, role: str) -> dict:
-    org = (org or "该公司").strip() or "该公司"
+    org = _org_name(org)
     role = (role or "现场工程师").strip() or "现场工程师"
+    if not org:
+        return {
+            "happened": f"招聘网站上新挂了「{role}」。这是在招人，不是宣布组织已经建成。",
+            "why": "",
+            "enterprise": "这是在招人。一个岗位不等于已经做成，也不等于人已经到位。",
+            "practitioner": f"岗位标题是「{role}」。具体干什么以招聘启事为准。",
+        }
     return {
         "happened": f"{org} 在招聘网站上新挂了「{role}」。这是在招人，不是宣布组织已经建成。",
-        "why": WHY_BY_KIND["job_posting"],
-        "enterprise": f"只能读成 {org} 还在招这个方向的人。一个岗位不等于已经做成，也不等于人已经到位。",
-        "practitioner": f"岗位标题是「{role}」。具体干什么以招聘启事为准。",
+        "why": f"{org} 在招「{role}」。",
+        "enterprise": f"只能读成 {org} 还在招「{role}」。一个岗位不等于已经做成，也不等于人已经到位。",
+        "practitioner": f"{org} 这个岗位标题是「{role}」。具体干什么以招聘启事为准。",
     }
 
 
 def census_four(org: str, n: int) -> dict:
-    org = (org or "该公司").strip() or "该公司"
+    org = _org_name(org)
+    n = int(n or 0)
+    if org:
+        happened = f"{org} 这轮公开招聘里能认出 {n} 个现场相关岗位。这是一篇统计，不是 {n} 件已经发生的事。"
+        enterprise = f"{org} 的名单长短不能读成需求已经满足，也不能当成公司正式宣布。"
+        why = f"这是别人在数 {org} 的招聘帖，不是 {org} 已经把团队建好了。"
+    else:
+        happened = f"这轮公开招聘里能认出 {n} 个现场相关岗位。这是一篇统计，不是 {n} 件已经发生的事。"
+        enterprise = "名单长短不能读成需求已经满足，也不能当成公司正式宣布。"
+        why = ""
     return {
-        "happened": f"{org} 这轮公开招聘里能认出 {n} 个现场相关岗位。这是一篇统计，不是 {n} 件已经发生的事。",
-        "why": WHY_BY_KIND["hiring_census"],
-        "enterprise": "名单长短不能读成需求已经满足，也不能当成公司正式宣布。",
+        "happened": happened,
+        "why": why,
+        "enterprise": enterprise,
         "practitioner": "看招的方向和数量分布，不要把招聘列表当成投简历清单。",
     }
 
@@ -731,13 +852,28 @@ def pack_from_needle(url: str) -> dict:
     return {}
 
 
+SEED_ID_ALIAS = {
+    "plank-census": "plank-fde-census-2026-07-04",
+}
+
+
 def editorial_pack(seed_id: str, info_kind: str, title: str, url: str = "", org: str = "", role: str = "") -> dict:
+    seed_id = SEED_ID_ALIAS.get(seed_id or "", seed_id or "")
     pack = dict(EVENT_COPY.get(seed_id) or {})
     pack.update({k: v for k, v in pack_from_needle(url).items() if v})
+    parsed_org, parsed_role = parse_org_role(title or "", "")
+    org = _org_name(org) or parsed_org
+    role = (role or parsed_role or title or "").strip()
+    if org and role.startswith(org):
+        rest = re.sub(r"^招聘\s*", "", role[len(org) :].lstrip("：: ").strip()).strip()
+        if rest:
+            role = rest
     if info_kind == "job_posting" and not pack.get("enterprise"):
         pack.update(job_four(org, role or title))
     if info_kind == "hiring_census" and not pack.get("enterprise"):
-        pack.update(census_four(org, 0))
+        m = re.search(r"(\d+)\s*个", title or "")
+        if m:
+            pack.update(census_four(org, int(m.group(1))))
     happened = pack.get("happened") or HAPPENED_ZH.get(seed_id) or ((title or "") + "。")
     if info_kind == "dated_case_study":
         why = pack.get("why") or ""
@@ -748,8 +884,6 @@ def editorial_pack(seed_id: str, info_kind: str, title: str, url: str = "", org:
             prac = None
     else:
         why = pack.get("why") or ""
-        if info_kind in ("job_posting", "hiring_census") and not why:
-            why = WHY_BY_KIND.get(info_kind) or ""
         if is_generic_why(why):
             why = ""
         prac = pack.get("practitioner") or None
@@ -1457,12 +1591,62 @@ def copy_for(seed_id: str, info_kind: str, title: str, url: str = "") -> tuple[s
     return pack["happened"], pack["why"], pack["enterprise"], pack["practitioner"]
 
 
+_PRODUCT_STUB_RE = re.compile(
+    r"(?i)intercom(\s+helpdesk)?|helpdesk|messenger|fin ai agent|"
+    r"fin customer agent|fin voice|fin for \w+|operator|procedures|"
+    r"insights|copilot|automation|自动化"
+)
+
+
+def _field_han_count(text: str) -> int:
+    t = _PRODUCT_STUB_RE.sub(" ", text or "")
+    t = re.sub(r"[A-Za-z0-9_+\-/&.,，、]+", " ", t)
+    return len(re.findall(r"[\u4e00-\u9fff]", t))
+
+
+_PRODUCT_TOKEN = (
+    r"(?:helpdesk|messenger|operator|procedures|insights|copilot|自动化|intercom|"
+    r"fin(?:\s+(?:ai|customer|voice))?(?:\s+agent)?|"
+    r"(?:ai|customer)\s+agent|voice|agent)"
+)
+_PRODUCT_LEAD_RE = re.compile(
+    rf"(?is)^(?:intercom|fin)(?:[\s、,/]+{_PRODUCT_TOKEN})*[。.]+\s*"
+)
+
+
+def _strip_product_stub_prefix(text: str) -> str:
+    t = (text or "").strip()
+    if not t:
+        return ""
+    for _ in range(4):
+        nxt = _PRODUCT_LEAD_RE.sub("", t, count=1).strip()
+        if nxt == t:
+            break
+        t = nxt
+    return t
+
+
 def _is_stub_happened(text: str, title: str, title_zh: str) -> bool:
+    """True when happened is a title clone or a product-name stub with no field scene."""
     hap = (text or "").strip()
-    if not hap.endswith("。"):
-        return False
-    head = hap[:-1]
-    return head in ((title or "").strip(), (title_zh or "").strip()) and bool(head)
+    if not hap:
+        return True
+    core = hap[:-1].strip() if hap.endswith("。") else hap
+    titles = {s.strip() for s in ((title or ""), (title_zh or "")) if (s or "").strip()}
+    if core in titles or hap in titles:
+        return True
+    rest = _strip_product_stub_prefix(hap)
+    if not rest:
+        return True
+    rest_core = rest[:-1].strip() if rest.endswith("。") else rest
+    if rest_core in titles or rest in titles:
+        return True
+    field_han = _field_han_count(rest)
+    if field_han <= 4 and _PRODUCT_STUB_RE.search(hap) and (len(rest) <= 96 or field_han == 0):
+        return True
+    if field_han <= 6 and re.search(r"(?i)helpdesk\s*/\s*messenger", rest):
+        return True
+    return False
 
 
 def _has_han(text: str) -> bool:
@@ -1488,6 +1672,104 @@ def _useless_zh(text: str) -> bool:
     return t in ("无", "无。", "—", "-")
 
 
+def _is_company_intro(text: str) -> bool:
+    """Company blurb / interview intro, not a problem sentence. Don't use as why."""
+    t = (text or "").strip()
+    if not t:
+        return True
+    if t.startswith("我们与") or t.startswith("我们和"):
+        return True
+    if "交谈，了解" in t or "交谈，讨论" in t or "问答 请介绍" in t:
+        return True
+    if "客户案例研究" in t[:24]:
+        return True
+    first = t.split("。", 1)[0]
+    if re.search(r"由 .{2,40}创立", first):
+        return True
+    if re.match(r"作为.{2,24}(专家|公司|平台|领导者|零售商|方案)", first):
+        return True
+    if re.search(r"是一家.{0,24}(公司|初创|非营利|零售商|平台|组织|集团)", first):
+        return True
+    if re.search(r"是(一家|一个).{0,24}(零售商|非营利组织|电商平台|金融科技|集团|超级应用)", first):
+        return True
+    if re.search(r"是面向.{0,24}(平台|公司|组织)", first) and "需要" not in first:
+        return True
+    if re.search(r"是推动.{0,16}发展的", first) and "需要" not in first:
+        return True
+    return False
+
+
+def _is_product_blurb(text: str) -> bool:
+    """Vendor product-lead sentence, not a field scene. Prefer business_problem / outcome."""
+    t = (text or "").strip()
+    if not t:
+        return True
+    first = t.split("。", 1)[0]
+    if re.match(r"(?i)intercom\b", first) and re.search(
+        r"(现在位于|提供了开箱|提供了.{0,12}方案|作为客户互动|易于设置|驱动客户支持|客户沟通平台)",
+        first,
+    ):
+        return True
+    if first.startswith("借助 Intercom") or first.startswith("从用 Intercom"):
+        return True
+    if first.startswith("除自有管理工具外"):
+        return True
+    return False
+
+
+def _case_src_ok(cand: str, src_title: str, src_title_zh: str) -> str:
+    cand = (cand or "").strip()
+    if not cand or _useless_zh(cand):
+        return ""
+    stripped = _strip_product_stub_prefix(cand) or cand
+    if _is_stub_happened(stripped, src_title, src_title_zh):
+        return ""
+    if _is_company_intro(stripped) or _is_company_intro(cand):
+        return ""
+    if _is_product_blurb(stripped):
+        return ""
+    if not _has_han(stripped):
+        return ""
+    return stripped
+
+
+_PRAC_SKIP_MARKERS = (
+    "页面未描述 FDE",
+    "页上未描述 FDE",
+    "未描述 FDE",
+    "无 FDE 头衔",
+    "页面未",
+    "页上未描述",
+    "页上无 FDE",
+    "页面无 FDE",
+    "无 FDE/FDSE",
+    "无 驻场这个岗位名",
+    "没写驻场头衔",
+    "没写驻场",
+)
+
+
+def _prac_usable(text: str) -> str:
+    """Keep human scene; drop residual '无 驻场这个岗位名' / no-title notices."""
+    t = (text or "").strip()
+    if not t:
+        return ""
+    t = t.replace("无 驻场这个岗位名。", "").replace("无 驻场这个岗位名", "")
+    t = t.replace("不是 驻场这个岗位名。", "").replace("不是 驻场这个岗位名", "")
+    t = t.replace("没写驻场头衔。", "").replace("没写驻场头衔", "")
+    t = t.replace("无 FDE 头衔。", "").replace("无 FDE 头衔", "")
+    t = t.replace("不是 FDE 头衔。", "").replace("不是 FDE 头衔", "")
+    for mark in _PRAC_SKIP_MARKERS:
+        if mark in t:
+            t = t.split(mark)[0]
+    t = re.sub(r"(页面|页上)$", "", t).strip(" ；;，,")
+    if t and t[-1] not in "。.!？":
+        t += "。"
+    if not t or not _has_han(t) or is_generic_prac(t):
+        return ""
+    return t
+
+
 def dated_case_fields(db, row, pack: dict, title: str) -> tuple[str, str, str, str]:
     """Fill case four-fields from curated pack, else case_zh. Never stamp hygiene templates."""
     cid = row["source_case_id"]
@@ -1495,64 +1777,64 @@ def dated_case_fields(db, row, pack: dict, title: str) -> tuple[str, str, str, s
     if cid:
         zh = db.execute("SELECT * FROM case_zh WHERE case_id=?", (int(cid),)).fetchone()
     title = (title or row["title_zh"] or row["title"] or "").strip()
-    happened = pack.get("happened") or ""
-    if _is_stub_happened(happened, row["title"] or "", row["title_zh"] or "") or not happened:
+    src_title, src_title_zh = row["title"] or "", row["title_zh"] or ""
+    happened = _case_src_ok(pack.get("happened") or "", src_title, src_title_zh)
+    if not happened:
         src = ""
         if zh:
             for key in ("hero_use_case", "business_problem", "measured_outcome"):
-                cand = (zh[key] or "").strip()
-                if cand and not _useless_zh(cand):
-                    src = cand
+                src = _case_src_ok(zh[key] or "", src_title, src_title_zh)
+                if src:
                     break
         if not src:
-            src = row["happened_zh"] or ""
-        if src and not _is_stub_happened(src, row["title"] or "", row["title_zh"] or ""):
+            src = _case_src_ok(row["happened_zh"] or "", src_title, src_title_zh)
+        if src:
             happened = trunc(src, 160)
             if happened and happened[-1] not in "。.!？":
                 happened += "。"
+        else:
+            happened = ""
+    else:
+        happened = trunc(happened, 160)
+        if happened and happened[-1] not in "。.!？":
+            happened += "。"
     why = pack.get("why") or ""
-    if is_generic_why(why):
+    if is_generic_why(why) or "要解决的是" in why or _is_company_intro(why) or _is_product_blurb(why):
         why = ""
     if not why and zh:
         hook = ""
         for key in ("business_problem", "pain_point"):
             cand = (zh[key] or "").strip()
-            if cand and not _useless_zh(cand):
-                hook = _zh_clip(cand, 72)
+            if not cand or _useless_zh(cand):
+                continue
+            clipped = _zh_clip(cand, 72)
+            src = _case_src_ok(clipped, src_title, src_title_zh)
+            if src:
+                hook = src
                 break
         if hook:
-            why = f"{title} 要解决的是：{hook}" if title else hook
+            why = hook
             if not why.endswith("。"):
                 why += "。"
-    if is_generic_why(why) or (why and happened and why.rstrip("。") in happened):
+    if is_generic_why(why) or _is_company_intro(why) or (why and happened and why.rstrip("。") in happened):
         why = ""
     ent = pack.get("enterprise") or ""
     if (not ent or not _has_han(ent)) and zh:
-        mo = (zh["measured_outcome"] or "").strip()
-        if mo and not _useless_zh(mo):
+        mo = _case_src_ok(zh["measured_outcome"] or "", src_title, src_title_zh)
+        if mo:
             ent = trunc(mo, 180)
     if not ent:
         ent = row["enterprise_zh"] or ""
-    prac = pack.get("practitioner") or ""
-    if is_generic_prac(prac):
-        prac = ""
+    prac = _prac_usable(pack.get("practitioner") or "")
     if not prac and zh:
-        fr = (zh["fde_role"] or "").strip()
-        if (
-            fr
-            and not _useless_zh(fr)
-            and not is_generic_prac(fr)
-            and not any(x in fr for x in ("未明确", "页面无 FDE", "未描述 FDE", "无 FDE"))
-        ):
-            prac = trunc(fr, 160)
-        if not prac:
-            hitl = (zh["human_in_the_loop"] or "").strip()
-            if hitl and _has_han(hitl) and not _useless_zh(hitl):
-                hitl = hitl.split("页面未")[0].strip(" ；;")
-                if hitl:
-                    prac = trunc(hitl, 160)
-    if is_generic_prac(prac):
-        prac = ""
+        for key in ("human_in_the_loop", "fde_role"):
+            prac = _prac_usable(zh[key] or "")
+            if prac:
+                prac = trunc(prac, 160)
+                break
+    if not prac:
+        prac = _prac_usable(row["practitioner_zh"] or "")
+    prac = _prac_usable(prac)
     return happened, why, ent, prac
 
 
@@ -2026,13 +2308,12 @@ def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, e
         return "review"
     upsert_source_date(db, url, published, modified, COLLECTED_ON, day or COLLECTED_ON, date_kind if day else "collected", None, None)
     label = title_zh or title or ""
-    org, role = "", label
-    if "：" in label:
-        org, role = label.split("：", 1)
+    org, role = parse_org_role(label, entity_slug or "")
     pack = editorial_pack("", info_kind, label, url=url, org=org, role=role)
     if info_kind == "hiring_census":
         m = re.search(r"(\d+)\s*个", label)
-        pack = census_four(org or entity_slug or "", int(m.group(1)) if m else 0)
+        if m:
+            pack = census_four(org, int(m.group(1)))
     upsert_event(
         db,
         {
@@ -2745,6 +3026,7 @@ def fill_entity_names(db) -> int:
 
 def apply_editorial_copy(db) -> int:
     """Fill happened/why/enterprise/practitioner for existing events. Safe to re-run."""
+    db.execute("PRAGMA busy_timeout=8000")
     seed_by_url = {norm_url(r["url"]): r["id"] for r in db.execute("SELECT id, url FROM world_sources")}
     n = 0
     rows = list(db.execute("SELECT * FROM world_events"))
@@ -2752,13 +3034,12 @@ def apply_editorial_copy(db) -> int:
         url = row["url"] or ""
         seed_id = seed_by_url.get(norm_url(url)) or ""
         title = row["title_zh"] or row["title"] or ""
-        org, role = "", title
-        if "：" in title:
-            org, role = title.split("：", 1)
+        org, role = parse_org_role(title, row["entity_slug"] or "")
         pack = editorial_pack(seed_id, row["info_kind"] or "", title, url=url, org=org, role=role)
         if row["info_kind"] == "hiring_census":
             m = re.search(r"(\d+)\s*个", title)
-            pack = census_four(org or row["entity_slug"] or "", int(m.group(1)) if m else 0)
+            if m:
+                pack = census_four(org, int(m.group(1)))
         happened = pack["happened"]
         old_hap = row["happened_zh"] or ""
         keep_old = (

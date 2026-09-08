@@ -3,6 +3,7 @@
   var panel = document.getElementById("room-panel");
   var dataEl = document.getElementById("room-data");
   if (!root || !panel || !dataEl) return;
+  if (root.classList.contains("room-feed") || root.classList.contains("room-doc")) return;
 
   var data;
   try {
@@ -51,26 +52,110 @@
     );
   }
 
+  /* Whole-paragraph why/prac/ent templates. Unique tails after 要解决的是： stay. */
+  var FLUFF_EXACT = {};
+  [
+    "这是公司自己宣布的组织变化，不是某一家客户的故事",
+    "这是公司自己宣布的组织变化",
+    "公司把「帮客户落地」写成一条产品线了",
+    "股东信是公司对外讲经营。点名驻场团队，说明他们开始这么对外讲；数字要打开原文看",
+    "股东信是公司对外讲经营。点名驻场团队，说明他们开始这么对外讲；数字以这篇为准",
+    "股东信是公司对外讲经营",
+    "官方新闻稿，用来对同一天的说法。不要单独当成第二条变化",
+    "官方新闻稿，用来对同一天的说法",
+    "有名字的人写的评论。先看他主张什么、数字怎么来的、他是谁",
+    "有名字的人写的评论",
+    "有日期、有名字的访谈。看现场的人怎么理解这份工作",
+    "有日期、有名字的访谈",
+    "有日期的演讲。台上的数字不是审计结果",
+    "有日期的演讲",
+    "有日期的一集播客。用来听大家怎么说，不证明某家客户已经照做",
+    "有日期的一集播客",
+    "公开讨论。一帖一条；没有日期就不上这条时间线",
+    "公开讨论。一帖一条",
+    "讲怎么干活的材料。不证明某家客户已经照做",
+    "讲怎么干活的材料",
+    "工程团队写怎么组这支队伍。这是做法，不是客户故事",
+    "工程团队写怎么组这支队伍",
+    "官方在招人。只能说明有人在建这支队伍，不说明已经做成了",
+    "官方在招人。只能说明有人在建这支队伍",
+    "别人统计的招聘情况。一篇一篇看，不要把岗位列表铺满屏幕",
+    "别人统计的招聘情况。一篇一篇看",
+    "原文没有写 Forward Deployed 头衔。可核的是客户侧叙述，不是编制样板",
+    "原文没有写 Forward Deployed 头衔。这条不能当现场样本",
+    "原文没写驻场工程师这个岗位名。能核对的是客户怎么用、结果怎样，不是怎么组团队",
+    "原文没写驻场工程师这个岗位名。这条不能当成现场怎么干活的例子",
+    "原文没写驻场工程师这个岗位名",
+    "原文未明确 FDE 职衔",
+    "无 驻场这个岗位名",
+    "无 FDE 头衔",
+    "不是编制样板",
+    "不是怎么组团队",
+    "不能当成怎么组团队",
+    "可核的是客户侧叙述，不是编制样板",
+    "可核的是客户自己的结果",
+    "可核的是客户侧",
+    "可核的是客户",
+    "还没写出为什么",
+    "这是公开材料",
+    "这是动态层收录",
+    "可作为交付现场样本",
+    "有名字、有日期的客户故事",
+    "有名字、有日期",
+    "有日期、有名字",
+    "具名客户且可作为交付现场样本",
+    "这是在招人。一个岗位不等于已经做成，也不等于人已经到位",
+    "只能读成"
+  ].forEach(function (s) { FLUFF_EXACT[s] = true; });
+  var FLUFF_JOB_ENT = /^只能读成 .+还在招「.+」。一个岗位不等于已经做成，也不等于人已经到位。?$/;
+
+  function fluffNorm(s) {
+    return String(s || "").trim().replace(/[。.\s]+$/g, "");
+  }
+  function fluffHan(s) {
+    var m = String(s || "").match(/[\u4e00-\u9fff]/g);
+    return m ? m.length : 0;
+  }
+  function fluffIntro(s) {
+    var t = String(s || "").trim();
+    if (!t) return true;
+    if (/^我们[与和]/.test(t) || /交谈，(?:了解|讨论)/.test(t) || t.indexOf("问答 请介绍") >= 0) return true;
+    if (t.slice(0, 24).indexOf("客户案例研究") >= 0) return true;
+    var first = t.split("。")[0];
+    return (
+      /由 .{2,40}创立/.test(first) ||
+      /^作为.{2,24}(专家|公司|平台)/.test(first) ||
+      /是一家.{0,24}(公司|初创|非营利|零售商|平台|组织)/.test(first) ||
+      /是(?:一家|一个).{0,20}(零售商|非营利组织|电商平台|金融科技)/.test(first) ||
+      (/是面向.{0,24}(平台|公司|组织)/.test(first) && first.indexOf("需要") < 0) ||
+      (/是推动.{0,16}发展的/.test(first) && first.indexOf("需要") < 0)
+    );
+  }
+  function fluffCopy(text) {
+    var t = String(text || "").trim();
+    if (!t) return true;
+    var n = fluffNorm(t);
+    if (FLUFF_EXACT[n]) return true;
+    if (FLUFF_JOB_ENT.test(t) || FLUFF_JOB_ENT.test(n + "。")) return true;
+    var parts = t.split(/要解决的是[:：]/);
+    if (parts.length > 1) {
+      var after = parts.slice(1).join("要解决的是：").trim();
+      var nHan = fluffHan(after);
+      var specific = after && !fluffIntro(after) && (nHan >= 8 || (nHan >= 6 && /[。！？!?]$/.test(after)));
+      return !specific;
+    }
+    return false;
+  }
+
   function panelEvent(e) {
     var field = lens === "field";
-    var fluffWhy = !e.why || /有名字、有日期|有日期、有名字|具名客户且|可作为交付现场|这是公开材料|有名字的人写的评论|有日期的演讲|有日期的一集播客|公开讨论。一帖一条|讲怎么干活的材料|这是公司自己宣布的组织变化|工程团队写怎么组这支队伍|官方新闻稿，用来对同一天|公司把「帮客户落地」写成|股东信是公司对外讲经营/.test(String(e.why));
-    var fluffPrac = !e.practitioner || /Forward Deployed 头衔|驻场工程师这个岗位名|不是编制样板|不是怎么组团队|可核的是客户/.test(String(e.practitioner));
+    var fluffWhy = fluffCopy(e.why);
+    var fluffPrac = fluffCopy(e.practitioner);
+    var fluffEnt = fluffCopy(e.enterprise);
     var impact = field ? e.practitioner : e.enterprise;
-    var skipImpact = field ? fluffPrac : !impact;
+    var skipImpact = field ? fluffPrac : fluffEnt;
     var h = field ? "对你意味着什么" : "对企业意味着什么";
-    var orig = e.orig_href
-      ? '<a class="room-more ghost" href="' +
-        esc(e.orig_href) +
-        '">对照存下来的原文' +
-        (e.host ? " · " + esc(e.host) : "") +
-        "</a>"
-      : e.url
-        ? '<a class="room-more ghost" href="' +
-          esc(e.url) +
-          '" target="_blank" rel="noopener noreferrer">打开原文' +
-          (e.host ? " · " + esc(e.host) : "") +
-          "</a>"
-        : '<p class="room-note">没有原文链接</p>';
+    var orig = "";
     var go = e.case_href && e.lane === "deploy"
       ? '<a class="room-more" href="' + esc(e.case_href) + '">看完整案例</a>'
       : "";
@@ -93,7 +178,7 @@
       "<h3>发生了什么</h3><p>" +
       esc(e.happened || "还没写出摘要。") +
       "</p>" +
-      (fluffWhy ? "" : "<h3>为什么要看</h3><p>" + esc(e.why) + "</p>") +
+      "" +
       (skipImpact ? "" : "<h3>" + h + "</h3><p>" + esc(impact) + "</p>") +
       (!field && !fluffPrac && e.practitioner
         ? "<h3>对你意味着什么</h3><p>" + esc(e.practitioner) + "</p>"

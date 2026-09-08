@@ -123,70 +123,70 @@ TITLE_MAP = (
     ("openai.com/zh-hans-cn/index/introducing-openai-frontier", "OpenAI 发布 Frontier"),
     ("openai.com/index/introducing-openai-frontier", "OpenAI 发布 Frontier"),
     ("openai.com/business/frontier", "OpenAI Frontier 产品页"),
-    ("cohere.com/blog/forward-deployed-engineers-capability-building", "Cohere：FDE 建能力，不制造依赖"),
-    ("fdeinterviews.com/blog/how-forward-deployed-engineers-work", "FDE 交付生命周期"),
-    ("fdeinterviews.com/blog/day-in-the-life-forward-deployed-engineer", "FDE 的一天"),
-    ("fdeinterviews.com/guide/what-is-a-forward-deployed-engineer", "FDE 是什么"),
-    ("fdeinterviews.com/guide/what-does-a-forward-deployed-engineer-do", "FDE 实际在做什么"),
-    ("fdepod.substack.com/p/fde-101", "FDE 101：何时需要编制"),
-    ("fdepod.substack.com/p/what-it-means-to-be-a-forward-deployed", "FDE 是增长引擎"),
-    ("fde.academy/blog/hire-forward-deployed-engineers", "怎么招 FDE"),
+    ("cohere.com/blog/forward-deployed-engineers-capability-building", "Cohere：驻场建能力，不制造依赖"),
+    ("fdeinterviews.com/blog/how-forward-deployed-engineers-work", "驻场交付生命周期"),
+    ("fdeinterviews.com/blog/day-in-the-life-forward-deployed-engineer", "驻场的一天"),
+    ("fdeinterviews.com/guide/what-is-a-forward-deployed-engineer", "驻场是什么"),
+    ("fdeinterviews.com/guide/what-does-a-forward-deployed-engineer-do", "驻场实际在做什么"),
+    ("fdepod.substack.com/p/fde-101", "驻场入门：何时需要这支队伍"),
+    ("fdepod.substack.com/p/what-it-means-to-be-a-forward-deployed", "驻场是增长引擎"),
+    ("fde.academy/blog/hire-forward-deployed-engineers", "怎么招驻场"),
     ("a16z.com/services-led-growth", "a16z：用毛利换护城河"),
     ("a16z.com/insights-for-enterprise-ai-builders", "a16z：从 Demo 到成交"),
-    ("blog.pragmaticengineer.com/the-pulse-forward-deployed-engineering-heats-up-again", "Pragmatic Engineer：FDE 再次升温"),
-    ("newsletter.pragmaticengineer.com/p/the-pulse-forward-deployed-engineering-887", "Pragmatic Engineer：FDE 再次升温"),
-    ("newsletter.pragmaticengineer.com/p/forward-deployed-engineers", "Pragmatic Engineer：FDE 为何抢手"),
-    ("openai.com/careers/forward-deployed-engineer", "OpenAI 招聘 FDE"),
+    ("blog.pragmaticengineer.com/the-pulse-forward-deployed-engineering-heats-up-again", "Pragmatic Engineer：驻场再次升温"),
+    ("newsletter.pragmaticengineer.com/p/the-pulse-forward-deployed-engineering-887", "Pragmatic Engineer：驻场再次升温"),
+    ("newsletter.pragmaticengineer.com/p/forward-deployed-engineers", "Pragmatic Engineer：驻场为何抢手"),
+    ("openai.com/careers/forward-deployed-engineer", "OpenAI 招聘驻场"),
     ("nabeelqu.co/reflections-on-palantir", "Nabeel：对 Palantir 的反思"),
-    ("barry.ooo/posts/fde-culture", "Barry：FDE 文化"),
-    ("svpg.com/forward-deployed-engineers", "Marty Cagan：前向部署工程师"),
-    ("latent.space/p/forward-deployed-engineers-aiewf", "Natalie Meurer：前向部署工程师"),
+    ("barry.ooo/posts/fde-culture", "Barry：驻场文化"),
+    ("svpg.com/forward-deployed-engineers", "Marty Cagan：驻场工程师"),
+    ("latent.space/p/forward-deployed-engineers-aiewf", "Natalie Meurer：驻场工程师"),
     ("palantir.com/q2-2026-letter", "Palantir 2026 Q2 股东信"),
-    ("aws.amazon.com/blogs/apn/introducing-forward-deployed-engineering", "AWS 宣布伙伴 Forward Deployed Engineering"),
-    ("posthog.com/blog/forward-deployed-engineer", "PostHog：什么是 Forward Deployed Engineer"),
-    ("vannevarlabs.com/blog/forward-deployed-engineering", "Vannevar：怎么建 FDE 组"),
-    ("joinplank.com/fde-job-market", "Plank：FDE 岗位市场普查"),
-    ("databricks.com/blog/forward-deployed-engineering", "Databricks 成立 Forward Deployed Engineering"),
+    ("aws.amazon.com/blogs/apn/introducing-forward-deployed-engineering", "AWS 宣布伙伴驻场工程"),
+    ("posthog.com/blog/forward-deployed-engineer", "PostHog：什么是驻场工程师"),
+    ("vannevarlabs.com/blog/forward-deployed-engineering", "Vannevar：怎么建驻场组"),
+    ("joinplank.com/fde-job-market", "Plank：驻场岗位市场普查"),
+    ("databricks.com/blog/forward-deployed-engineering", "Databricks 成立驻场工程"),
     ("blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company", "Microsoft 发布 Frontier Company"),
     ("anthropic.com/news/enterprise-ai-services-company", "Anthropic 成立企业 AI 服务公司"),
     ("deploy.co/news/the-openai-deployment-company-to-acquire-northslope", "Deployment Company 收购 Northslope"),
-    ("inside-openais-forward-deployed-engineer", "Colin Jarvis：OpenAI 的 FDE 岗位"),
-    ("fde-war-stories-nine-patterns", "FDE 现场的九种套路"),
-    ("fde-exit-options-career-trajectory", "FDE 的退出路径"),
-    ("negotiating-forward-deployed-engineer-offer", "怎么谈 FDE offer"),
-    ("joinplank.com/fde-news/august-2026", "Plank：8 月 FDE 简报"),
-    ("subset-tech-talent-supply-crunch-watch-out", "Ross Wilkers：FDE 人才短缺"),
-    ("8-tactical-insights-from-current-former-forward", "Palantir FDE 的 8 条经验"),
+    ("inside-openais-forward-deployed-engineer", "Colin Jarvis：OpenAI 的驻场岗位"),
+    ("fde-war-stories-nine-patterns", "驻场现场的九种套路"),
+    ("fde-exit-options-career-trajectory", "驻场的退出路径"),
+    ("negotiating-forward-deployed-engineer-offer", "怎么谈驻场 offer"),
+    ("joinplank.com/fde-news/august-2026", "Plank：8 月驻场简报"),
+    ("subset-tech-talent-supply-crunch-watch-out", "Ross Wilkers：驻场人才短缺"),
+    ("8-tactical-insights-from-current-former-forward", "Palantir 驻场的 8 条经验"),
 )
 TITLE_SHORT = (
     ("openai.com/index/openai-launches-the-deployment-company", "OpenAI · 部署公司"),
     ("openai.com/index/introducing-openai-frontier", "OpenAI · Frontier"),
     ("palantir.com/q2-2026-letter", "Palantir · 股东信"),
     ("a2026q2ex991", "Palantir · 业绩稿"),
-    ("databricks.com/blog/forward-deployed-engineering", "Databricks · FDE"),
+    ("databricks.com/blog/forward-deployed-engineering", "Databricks · 驻场"),
     ("microsoft-frontier-company", "微软 · Frontier"),
-    ("introducing-forward-deployed-engineering-for-partners", "AWS · 成立 FDE"),
+    ("introducing-forward-deployed-engineering-for-partners", "AWS · 成立驻场团队"),
     ("forward-deployed-engineers-capability-building", "Cohere · 建能力"),
     ("forward-deployed-engineers-aiewf", "Natalie · 访谈"),
     ("watch?v=Byv311hdoHE", "Natalie · AIEWF"),
-    ("watch?v=KwhgfwOSToQ", "Kevin Bai · FDE 101"),
+    ("watch?v=KwhgfwOSToQ", "Kevin Bai · 驻场入门"),
     ("deploy.co/news/the-openai-deployment-company-to-acquire-northslope", "Deploy Co · Northslope"),
-    ("inside-openais-forward-deployed-engineer", "Colin Jarvis · OpenAI FDE"),
+    ("inside-openais-forward-deployed-engineer", "Colin Jarvis · OpenAI 驻场"),
     ("computerworld.com", "AWS · 访谈"),
     ("joinplank.com/fde-job-market", "Plank · 普查"),
     ("joinplank.com/fde-news/august-2026", "Plank · 8 月简报"),
-    ("how-forward-deployed-engineers-work", "FDE 交付周期"),
-    ("day-in-the-life-forward-deployed-engineer", "FDE 的一天"),
-    ("what-is-a-forward-deployed-engineer", "FDE 是什么"),
-    ("what-does-a-forward-deployed-engineer-do", "FDE 在做什么"),
-    ("fdepod.substack.com/p/fde-101", "FDE 101"),
-    ("hire-forward-deployed-engineers", "怎么招 FDE"),
-    ("fde-war-stories-nine-patterns", "FDE 九种套路"),
-    ("fde-exit-options-career-trajectory", "FDE 退出路径"),
-    ("negotiating-forward-deployed-engineer-offer", "谈 FDE offer"),
+    ("how-forward-deployed-engineers-work", "驻场交付周期"),
+    ("day-in-the-life-forward-deployed-engineer", "驻场的一天"),
+    ("what-is-a-forward-deployed-engineer", "驻场是什么"),
+    ("what-does-a-forward-deployed-engineer-do", "驻场在做什么"),
+    ("fdepod.substack.com/p/fde-101", "驻场入门"),
+    ("hire-forward-deployed-engineers", "怎么招驻场"),
+    ("fde-war-stories-nine-patterns", "驻场九种套路"),
+    ("fde-exit-options-career-trajectory", "驻场退出路径"),
+    ("negotiating-forward-deployed-engineer-offer", "谈驻场 offer"),
     ("subset-tech-talent-supply-crunch-watch-out", "Ross · 人才短缺"),
-    ("8-tactical-insights-from-current-former-forward", "FDE 8 条经验"),
-    ("the-pulse-forward-deployed-engineering", "PE · FDE 升温"),
+    ("8-tactical-insights-from-current-former-forward", "驻场 8 条经验"),
+    ("the-pulse-forward-deployed-engineering", "PE · 驻场升温"),
     ("insights-for-enterprise-ai-builders", "a16z · Demo 到成交"),
 )
 
@@ -197,31 +197,33 @@ def compact_job_role(title: str) -> str:
     t = re.sub(r"Palantir Technologies\s*[-–]\s*", "", t, flags=re.I)
     t = re.sub(r"\s*\(\s*Forward Deployed Engineer\s*\)", "", t, flags=re.I)
     t = re.sub(r"\s*\(\s*FDE\s*\)", "", t, flags=re.I)
-    t = re.sub(r"Engineering Manager,\s*FDE Infrastructure(?:\s*\([^)]+\))?", "FDE 经理, Infra", t, flags=re.I)
-    t = re.sub(r"Engineering Manager,\s*FDE Agentic Platform", "FDE 经理, Agentic", t, flags=re.I)
-    t = re.sub(r"Sr\.\s*Manager,\s*AI Forward Deployed Engineering(?:\s*\(AI-FDE\))?", "AI-FDE 经理", t, flags=re.I)
+    t = re.sub(r"Engineering Manager,\s*FDE Infrastructure(?:\s*\([^)]+\))?", "驻场经理, Infra", t, flags=re.I)
+    t = re.sub(r"Engineering Manager,\s*FDE Agentic Platform", "驻场经理, Agentic", t, flags=re.I)
+    t = re.sub(r"Sr\.\s*Manager,\s*AI Forward Deployed Engineering(?:\s*\(AI-FDE\))?", "资深 AI 驻场经理", t, flags=re.I)
     t = re.sub(r"Manager,\s*Applied AI Engineering", "Applied AI 经理", t, flags=re.I)
-    t = re.sub(r"Sr\.\s*Field Technical Program Manager,\s*FDE", "FDE TPM", t, flags=re.I)
-    t = re.sub(r"Forward Deployed Infrastructure Engineer", "FDE Infra", t, flags=re.I)
-    t = re.sub(r"Forward Deployed Engineer,\s*Infrastructure Specialist", "FDE, Infra", t, flags=re.I)
-    t = re.sub(r"Forward Deployed Engineer,\s*Agentic Platform", "FDE, Agentic", t, flags=re.I)
-    t = re.sub(r"Forward Deployed AI Engineer", "FDE", t, flags=re.I)
-    t = re.sub(r"Forward Deployed Engineer(?!ing)", "FDE", t, flags=re.I)
-    t = re.sub(r"Sr\.\s*AI Engineer\s*[-–]\s*FDE", "Sr. AI FDE", t, flags=re.I)
-    t = re.sub(r"AI Engineer\s*[-–]\s*FDE", "AI FDE", t, flags=re.I)
+    t = re.sub(r"Sr\.\s*Field Technical Program Manager,\s*FDE", "驻场 TPM", t, flags=re.I)
+    t = re.sub(r"Forward Deployed Infrastructure Engineer", "驻场 Infra", t, flags=re.I)
+    t = re.sub(r"Forward Deployed Engineer,\s*Infrastructure Specialist", "驻场, Infra", t, flags=re.I)
+    t = re.sub(r"Forward Deployed Engineer,\s*Agentic Platform", "驻场, Agentic", t, flags=re.I)
+    t = re.sub(r"Forward Deployed AI Engineer", "驻场", t, flags=re.I)
+    t = re.sub(r"Forward Deployed Engineer(?!ing)", "驻场", t, flags=re.I)
+    t = re.sub(r"Sr\.\s*AI Engineer\s*[-–]\s*FDE", "资深 AI 驻场", t, flags=re.I)
+    t = re.sub(r"AI Engineer\s*[-–]\s*FDE", "AI 驻场", t, flags=re.I)
+    t = re.sub(r"\bAI-FDE\b", "AI 驻场", t, flags=re.I)
+    t = re.sub(r"\bFDE\b", "驻场", t, flags=re.I)
     t = re.sub(r"\s*[-–]\s*U\.S\.\s*Federal(?:\s*Sector)?", ", Federal", t, flags=re.I)
     t = re.sub(r",\s*New Grad\s*[-–]\s*(UK|US)\s+Government", ", New Grad", t, flags=re.I)
     t = re.sub(r"\s*\((North America|NORAM|West Coast|Public Sector)\)", "", t, flags=re.I)
     t = re.sub(r"\((\w[\w /+-]*)\)", lambda m: f"（{m.group(1)}）", t)
     t = re.sub(r"\s+（", "（", t)
     t = re.sub(r"\s+", " ", t).strip(" ,-–")
-    return t or "FDE"
+    return t or "驻场"
 
 
 def job_axis_label(ent: str, title: str) -> str:
     role = compact_job_role(title)
     if ent and role.lower().startswith(ent.lower()):
-        role = role[len(ent):].lstrip(" -:–—") or "FDE"
+        role = role[len(ent):].lstrip(" -:–—") or "驻场"
     return f"{ent}：{role}" if ent else role
 
 
@@ -229,36 +231,43 @@ def title_from_url(url: str) -> str:
     blob = (url or "").lower()
     for needle, label in TITLE_MAP:
         if needle.lower() in blob:
-            return label
+            return humanize_title(label)
     return ""
 
 
 def short_title_for(title: str, url: str, lane: str, customer: str) -> str:
     blob = (url or "").lower()
+    out = ""
     for needle, label in TITLE_SHORT:
         if needle.lower() in blob:
-            return label
-    if lane == "deploy" and customer:
-        return customer
-    text = (title or "").strip()
-    if "：" in text:
-        left, right = text.split("：", 1)
-        head = left.split()[0][:12]
-        right = right.strip()
-        right = re.sub(r"^20\d{2}\s*年\s*", "", right)
-        m = re.search(r"[（(]([^）)]+)[）)]\s*$", right)
-        if m and 2 <= len(m.group(1)) <= 16:
-            return f"{head} · {m.group(1)}"
-        if "," in right:
-            tail = right.rsplit(",", 1)[-1].strip()
-            if 2 <= len(tail) <= 16:
-                return f"{head} · {tail}"
-        if len(right) <= 16:
-            return f"{head} · {right}"
-        return f"{head} · {S.trunc(right, 16)}"
-    if len(text) <= 16:
-        return text
-    return S.trunc(text, 16)
+            out = label
+            break
+    if not out and lane == "deploy" and customer:
+        out = customer
+    if not out:
+        text = (title or "").strip()
+        if "：" in text:
+            left, right = text.split("：", 1)
+            head = left.split()[0][:12]
+            right = right.strip()
+            right = re.sub(r"^20\d{2}\s*年\s*", "", right)
+            m = re.search(r"[（(]([^）)]+)[）)]\s*$", right)
+            if m and 2 <= len(m.group(1)) <= 16:
+                out = f"{head} · {m.group(1)}"
+            elif "," in right:
+                tail = right.rsplit(",", 1)[-1].strip()
+                if 2 <= len(tail) <= 16:
+                    out = f"{head} · {tail}"
+            if not out:
+                if len(right) <= 16:
+                    out = f"{head} · {right}"
+                else:
+                    out = f"{head} · {S.trunc(right, 16)}"
+        elif len(text) <= 16:
+            out = text
+        else:
+            out = S.trunc(text, 16)
+    return humanize_title(out)
 
 
 def _snap() -> date:
@@ -331,16 +340,16 @@ def mapped_title(row) -> str:
     blob = source_blob(row)
     for needle, label in TITLE_MAP:
         if needle in blob:
-            return label
+            return humanize_title(label)
     if row.get("customer_named"):
         customer = clean_text(row.get("customer"))
         if customer:
-            return customer
+            return humanize_title(customer)
     raw = clean_text(row.get("source_title"))
     if raw:
-        return S.trunc(raw.split("|")[0].strip(), 44)
+        return humanize_title(S.trunc(raw.split("|")[0].strip(), 44))
     host = source_host(row)
-    return HOST_VOICE.get(host) or host or "未命名来源"
+    return humanize_title(HOST_VOICE.get(host) or host or "未命名来源")
 
 
 def entity_for(row, lane: str) -> tuple[str, str]:
@@ -402,7 +411,7 @@ def explanation_for(row, lane: str) -> dict:
             break
     practitioner = clean_text(row.get("fde_role"))
     if not practitioner and lane == "method":
-        practitioner = "原文在讲这份工作怎么干、招什么样的人。具体职责要打开原文看。"
+        practitioner = "原文在讲这份工作怎么干、招什么样的人。"
     return {
         "happened": happened,
         "why": why,
@@ -699,16 +708,25 @@ def has_han(text: str | None) -> bool:
 
 
 _TITLE_HUMAN = (
+    ("伙伴 Forward Deployed", "伙伴驻场"),
+    ("成立 Forward Deployed", "成立驻场"),
     ("Forward Deployed Engineering", "驻场工程"),
     ("Forward Deployed Engineer", "驻场工程师"),
     ("前向部署工程师", "驻场工程师"),
+    ("8 月 FDE", "8 月驻场"),
     ("FDE 编制", "驻场团队"),
     ("FDE 岗位", "驻场岗位"),
     ("FDE 人才", "驻场人才"),
+    ("FDE 经理", "驻场经理"),
+    ("FDE TPM", "驻场 TPM"),
     ("怎么招 FDE", "怎么招驻场"),
     ("招聘 FDE", "招聘驻场"),
     ("何时需要编制", "何时需要这支队伍"),
     ("FDE 101", "驻场入门"),
+    ("OpenAI FDE", "OpenAI 驻场"),
+    ("Sr. AI FDE", "资深 AI 驻场"),
+    ("AI-FDE", "AI 驻场"),
+    ("AI FDE", "AI 驻场"),
     ("FDE 建能力", "驻场建能力"),
     ("FDE 为何抢手", "驻场为何抢手"),
     ("FDE 再次升温", "驻场再次升温"),
@@ -738,13 +756,19 @@ def humanize_title(text: str | None) -> str:
     out = text or ""
     for old, new in _TITLE_HUMAN:
         out = out.replace(old, new)
+    # Phrase swaps can leave "驻场 Engineering" / spaces next to CJK.
+    out = out.replace("驻场 Engineering", "驻场工程")
+    out = out.replace("驻场 Engineer", "驻场工程师")
+    out = out.replace("伙伴 驻场", "伙伴驻场")
+    out = out.replace("的 驻场负责人", "的驻场负责人")
+    out = out.replace("成立 驻场工程", "成立驻场工程")
+    out = out.replace("成立 驻场", "成立驻场")
+    out = out.replace("驻场 团队", "驻场团队")
+    out = out.replace("Sr. AI 驻场", "资深 AI 驻场")
     out = re.sub(r" {2,}", " ", out)
-    return (
-        out.replace("的 驻场", "的驻场")
-        .replace("驻场 的", "驻场的")
-        .replace("驻场 怎么", "驻场怎么")
-        .replace("： 驻场", "：驻场")
-    )
+    out = re.sub(r"(?<=[\u4e00-\u9fff：:·，,（(])\s+(?=驻场)", "", out)
+    out = re.sub(r"(?<=驻场)\s+(?=[\u4e00-\u9fff：:·，,）)])", "", out)
+    return out
 
 
 _FLUFF_WHY = (
@@ -759,6 +783,8 @@ _FLUFF_WHY = (
     "这是动态层收录",
     "可作为交付现场",
     "这是公司讲的客户故事。条数多不等于",
+    "官方在招人。只能说明",
+    "只能读成",
 )
 _FLUFF_PRAC = (
     "Forward Deployed 头衔",
@@ -767,6 +793,11 @@ _FLUFF_PRAC = (
     "不是怎么组团队",
     "不能当成怎么组团队",
     "可核的是客户",
+)
+_VISIBLE_SWAPS = (
+    ("FDE 编制", "驻场团队"),
+    ("现场编制", "驻场团队"),
+    ("部署编制", "驻场团队"),
 )
 
 
@@ -778,6 +809,25 @@ def fluff_why(text: str | None) -> bool:
 def fluff_prac(text: str | None) -> bool:
     t = (text or "").strip()
     return (not t) or any(m in t for m in _FLUFF_PRAC)
+
+
+def _trim_why_skeleton(text: str) -> str:
+    """Keep unique remainder after `{title} 要解决的是：`; drop a bare skeleton."""
+    t = (text or "").strip()
+    for mark in ("要解决的是：", "要解决的是:"):
+        if mark in t:
+            return t.split(mark, 1)[1].strip()
+    return t
+
+
+def _visible_zh(text: str | None) -> str:
+    """Swap a few leftover org-speak words. Do not invent copy."""
+    out = text or ""
+    if not out:
+        return ""
+    for old, new in _VISIBLE_SWAPS:
+        out = out.replace(old, new)
+    return out
 
 
 def event_from_world(row, case: dict | None, entity_name: str) -> dict:
@@ -829,13 +879,31 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
             title = S.trunc(problem, 42)
     if not has_han(title) and info_kind == "job_posting" and title and "招聘" not in title:
         title = "招聘 " + title
-    title = humanize_title(title)
+    title = _visible_zh(humanize_title(title))
     happened = clean_text(row["happened_zh"]) or ""
     if not has_han(happened):
         happened = problem or title
+    happened = _visible_zh(happened) if happened else ""
     enterprise = clean_text(row["enterprise_zh"] or "")
     if not has_han(enterprise):
         enterprise = outcome
+    enterprise = _visible_zh(enterprise) if enterprise else ""
+    if (enterprise or "").startswith("只能读成"):
+        enterprise = ""
+    why_raw = clean_text(row["why_zh"])
+    if fluff_why(why_raw):
+        why = ""
+    else:
+        why = _visible_zh(_trim_why_skeleton(why_raw))
+        if not why or fluff_why(why):
+            why = ""
+    prac_raw = clean_text(row["practitioner_zh"] or "")
+    if fluff_prac(prac_raw):
+        practitioner = ""
+    else:
+        practitioner = _visible_zh(prac_raw)
+        if not practitioner or fluff_prac(practitioner):
+            practitioner = ""
     href = "/动态/%s" % int(row["id"])
     case_href = (
         ("/案例/%s" % case_id)
@@ -876,9 +944,9 @@ def event_from_world(row, case: dict | None, entity_name: str) -> dict:
         "href": href,
         "case_href": case_href,
         "happened": happened or title,
-        "why": "" if fluff_why(clean_text(row["why_zh"])) else clean_text(row["why_zh"]),
+        "why": why,
         "enterprise": enterprise or outcome,
-        "practitioner": "" if fluff_prac(clean_text(row["practitioner_zh"] or "")) else clean_text(row["practitioner_zh"] or ""),
+        "practitioner": practitioner,
         "entity_key": entity_key,
         "entity_slug": slug,
         "entity_name": name,
@@ -1132,7 +1200,7 @@ def reading_layer(cur, counts) -> str:
           <li>要不要为此组这样一支队伍？库里几乎没有完整组队样本。</li>
           <li>数字能不能当样板？有结果 {n_out} / {n}，交接只写了 {handoff}。</li>
         </ol>
-        <p class="wm-label">三条样板，点进去对照原文</p>
+        <p class="wm-label">三条样板，点进去看中文原文</p>
         <div class="list">{peer_html}</div>
         <p class="wm-go"><a href="/落地">给负责人看</a></p>
       </article>
@@ -1223,7 +1291,7 @@ def render_world(cur) -> str:
       <a href="/world3d"><b>世界动态</b><span>最近发生了什么</span></a>
       <a href="/落地"><b>负责人</b><span>公司在做什么、客户那边发生了什么</span></a>
       <a href="/现场"><b>从业者</b><span>别人怎么讲现场；招聘只是还在招人</span></a>
-      <a href="/案例"><b>案例</b><span>客户故事，对照原文看</span></a>
+      <a href="/案例"><b>案例</b><span>客户故事，中文原文铺在页上</span></a>
       <a href="/方法"><b>学习</b><span>现场怎么干活</span></a>
     </div>
   </nav>

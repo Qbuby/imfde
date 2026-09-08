@@ -1,4 +1,5 @@
 (function () {
+  if (document.body.classList.contains("learn-list")) return;
   var dataEl = document.getElementById("learn-data");
   var panel = document.getElementById("learn-panel");
   if (!dataEl || !panel) return;
