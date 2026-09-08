@@ -27,6 +27,15 @@ const NARROW = matchMedia("(max-width: 767px)").matches;
 const DAY = 86400000;
 const rangeFromUrl = Number(params.get("窗") || params.get("range"));
 
+/* 右侧悬浮手册：封面翻转后指针下的元素会变，纯 :hover 会断链，
+   用容器边界的 mouseenter/leave 锁存 is-open（点击可切换，兼容触屏）。 */
+const book = document.getElementById("w3-book");
+if (book) {
+  book.addEventListener("mouseenter", () => book.classList.add("is-open"));
+  book.addEventListener("mouseleave", () => book.classList.remove("is-open"));
+  book.addEventListener("click", () => book.classList.toggle("is-open"));
+}
+
 /* ---------- palette (dark variants of tokens.css lane hues) ---------- */
 const LANE_COLOR = {
   company: { hi: "#3fc0c0", lo: "#017272" },

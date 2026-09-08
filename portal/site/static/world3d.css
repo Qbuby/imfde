@@ -743,8 +743,8 @@
 
 /* ---------- 右侧悬浮手册：hover 翻页看企微小助手 ---------- */
 .w3-book {
-  position: fixed; right: 26px; top: 50%; z-index: 5;
-  width: 188px; height: 250px; margin-top: -140px;
+  position: fixed; right: 26px; top: 100px; z-index: 5;
+  width: 188px; height: 250px;
   perspective: 1400px; cursor: pointer; outline: none;
   filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.5));
   animation: w3-book-bob 5.2s ease-in-out infinite;
