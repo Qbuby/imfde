@@ -740,3 +740,69 @@
 .w3-rp-body .w3-ai-text h4 { margin: 18px 0 6px; font-size: 14px; color: var(--w3-fg, #dfe9f2); }
 .w3-rp-body .w3-ai-text a { color: var(--w3-accent, #3fc0c0); text-decoration: none; border-bottom: 1px dashed rgba(63,192,192,.4); }
 .w3-rp-body .w3-ai-text a:hover { border-bottom-style: solid; }
+
+/* ---------- 右侧悬浮手册：hover 翻页看企微小助手 ---------- */
+.w3-book {
+  position: fixed; right: 26px; top: 50%; z-index: 5;
+  width: 188px; height: 250px; margin-top: -140px;
+  perspective: 1400px; cursor: pointer; outline: none;
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.5));
+  animation: w3-book-bob 5.2s ease-in-out infinite;
+}
+@keyframes w3-book-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.w3-book::after {
+  content: "微信小助手 · 翻开看看";
+  position: absolute; right: 6px; top: calc(100% + 9px);
+  font-size: 12px; letter-spacing: 0.04em;
+  color: rgba(238, 235, 229, 0.55); white-space: nowrap;
+  transition: opacity 0.4s;
+}
+.w3-book:hover::after { opacity: 0; }
+.w3-book-page {
+  position: absolute; inset: 0; border-radius: 3px 10px 10px 3px;
+  background: linear-gradient(100deg, #ece8db 0%, #fbfaf5 14%);
+  box-shadow: 3px 0 0 #efece2, 5px 0 0 #e3ded1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 11px; padding: 16px 12px 14px 24px; text-align: center;
+}
+.w3-book-page::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 14px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.16), transparent);
+  border-radius: 3px 0 0 3px;
+}
+.w3-book-line { margin: 0; font-size: 14.5px; line-height: 1.6; color: #22303a; font-weight: 600; }
+.w3-book-line b {
+  font-size: 18px; color: #101820; margin: 0 2px;
+  background: linear-gradient(transparent 62%, #ffe14d 62%);
+}
+.w3-book-qr {
+  width: 116px; height: 116px; background: #fff;
+  border: 1px solid #e0dccf; border-radius: 8px;
+}
+.w3-book-cap { margin: 0; font-size: 12px; color: #7b8790; letter-spacing: 0.05em; }
+.w3-book-cover {
+  position: absolute; inset: 0; transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1.05s cubic-bezier(0.22, 0.75, 0.25, 1);
+}
+.w3-book:hover .w3-book-cover,
+.w3-book:focus-within .w3-book-cover,
+.w3-book.is-open .w3-book-cover { transform: rotateY(-157deg); }
+.w3-book-cover-face,
+.w3-book-cover-back {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: 3px 10px 10px 3px;
+}
+.w3-book-cover-face {
+  width: 100%; height: 100%; object-fit: cover;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06), inset 4px 0 10px rgba(0, 0, 0, 0.05);
+}
+.w3-book-cover-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(255deg, #f6f4ec 0%, #e9e5d8 100%);
+  box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.12);
+}
+@media (max-width: 1180px) { .w3-book { display: none; } }
