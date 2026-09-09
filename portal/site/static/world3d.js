@@ -27,14 +27,98 @@ const NARROW = matchMedia("(max-width: 767px)").matches;
 const DAY = 86400000;
 const rangeFromUrl = Number(params.get("窗") || params.get("range"));
 
-/* 右侧悬浮手册：封面翻转后指针下的元素会变，纯 :hover 会断链，
-   用容器边界的 mouseenter/leave 锁存 is-open（点击可切换，兼容触屏）。
-   封面图就绪前整本隐藏（is-ready），避免加载期间内页先露出来。 */
+/* 右侧悬浮手册：可拖动（位置记忆）、可折叠成书签；悬停翻页只认鼠标
+   （pointerenter+pointerType 守卫，触屏合成 enter 不干扰 tap）；触屏/笔 tap
+   切换翻页，键盘回车兜底（拖拽超阈值则不算 tap）。封面就绪前整本隐藏。 */
 const book = document.getElementById("w3-book");
 if (book) {
-  book.addEventListener("mouseenter", () => book.classList.add("is-open"));
-  book.addEventListener("mouseleave", () => book.classList.remove("is-open"));
-  book.addEventListener("click", () => book.classList.toggle("is-open"));
+  const foldBtn = book.querySelector(".w3-book-fold");
+  const setFolded = (v) => {
+    book.classList.toggle("is-folded", v);
+    try { localStorage.setItem("w3-book-folded", v ? "1" : "0"); } catch (_) {}
+  };
+  try { if (localStorage.getItem("w3-book-folded") === "1") book.classList.add("is-folded"); } catch (_) {}
+
+  const clampPos = (x, y) => {
+    const w = book.offsetWidth || 188, h = book.offsetHeight || 250;
+    return [
+      Math.min(Math.max(x, 8), window.innerWidth - w - 8),
+      Math.min(Math.max(y, 60), window.innerHeight - h - 8),
+    ];
+  };
+  try {
+    const saved = JSON.parse(localStorage.getItem("w3-book-pos") || "null");
+    if (saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)) {
+      const [x, y] = clampPos(saved.x, saved.y);
+      book.style.left = x + "px";
+      book.style.top = y + "px";
+      book.style.right = "auto";
+    }
+  } catch (_) {}
+
+  book.addEventListener("pointerenter", (e) => {
+    if (e.pointerType === "mouse") book.classList.add("is-open");
+  });
+  book.addEventListener("pointerleave", (e) => {
+    if (e.pointerType === "mouse" && !drag) book.classList.remove("is-open");
+  });
+
+  /* 拖拽：move/up 挂在 window 上——书本布局移动会让元素级 pointer 捕获
+     隐式丢失（实测 lostpointercapture），window 级监听不受命中测试影响 */
+  let drag = null;
+  const onDragMove = (e) => {
+    if (!drag) return;
+    const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+    if (!drag.moved && Math.hypot(dx, dy) < 6) return;
+    if (!drag.moved) { drag.moved = true; book.classList.add("is-dragging"); book.classList.remove("is-open"); }
+    const [x, y] = clampPos(drag.ox + dx, drag.oy + dy);
+    book.style.left = x + "px";
+    book.style.top = y + "px";
+    book.style.right = "auto";
+  };
+  const onDragEnd = (e) => {
+    if (!drag) return;
+    const moved = drag.moved;
+    drag = null;
+    window.removeEventListener("pointermove", onDragMove);
+    window.removeEventListener("pointerup", onDragEnd);
+    window.removeEventListener("pointercancel", onDragEnd);
+    book.classList.remove("is-dragging");
+    if (moved) {
+      const r = book.getBoundingClientRect();
+      try { localStorage.setItem("w3-book-pos", JSON.stringify({ x: Math.round(r.left), y: Math.round(r.top) })); } catch (_) {}
+    } else if (e.type === "pointerup" && (e.pointerType !== "mouse" || book.classList.contains("is-folded"))) {
+      /* 鼠标由悬停翻页接管（展开态）；书签态与触屏/笔 tap 切换 */
+      if (book.classList.contains("is-folded")) setFolded(false);
+      else book.classList.toggle("is-open");
+    }
+  };
+  book.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0 || drag) return;
+    if (foldBtn && foldBtn.contains(e.target)) return;
+    const r = book.getBoundingClientRect();
+    drag = { sx: e.clientX, sy: e.clientY, ox: r.left, oy: r.top, moved: false };
+    window.addEventListener("pointermove", onDragMove);
+    window.addEventListener("pointerup", onDragEnd);
+    window.addEventListener("pointercancel", onDragEnd);
+  });
+  book.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    if (book.classList.contains("is-folded")) setFolded(false);
+    else book.classList.toggle("is-open");
+  });
+  book.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    if (book.classList.contains("is-folded")) setFolded(false);
+    else book.classList.toggle("is-open");
+  });
+  foldBtn && foldBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setFolded(!book.classList.contains("is-folded"));
+  });
+
   const coverImg = book.querySelector(".w3-book-cover-face");
   const ready = () => book.classList.add("is-ready");
   if (coverImg && coverImg.complete && coverImg.naturalWidth) ready();
