@@ -743,9 +743,13 @@
 
 /* ---------- 右侧悬浮手册：hover 翻页看企微小助手 ---------- */
 .w3-book {
-  position: fixed; right: 26px; top: 100px; z-index: 5;
+  position: fixed; right: 26px; top: 100px;
+  /* 置顶：压过沙盘 CSS2D/CSS3D 标签层（3D 变换下 z-5 会被标签盖住）；
+     仍低于解读报告悬浮块(60)与全屏浮层(120)。面板展开时由 w3-has-sel 规则淡出让位 */
+  z-index: 40;
   width: 188px; height: 250px;
   perspective: 1400px; cursor: pointer; outline: none;
+  user-select: none; -webkit-user-select: none;
   filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.5));
   animation: w3-book-bob 5.2s ease-in-out infinite;
   /* 封面就绪前整本隐藏，避免内页先露出来 */
@@ -792,8 +796,8 @@
   transform-style: preserve-3d;
   transition: transform 1.05s cubic-bezier(0.22, 0.75, 0.25, 1);
 }
-.w3-book:hover .w3-book-cover,
-.w3-book:focus-within .w3-book-cover,
+.w3-book:not(.no-hover):hover .w3-book-cover,
+.w3-book:has(:focus-visible) .w3-book-cover,
 .w3-book.is-open .w3-book-cover { transform: rotateY(-157deg); }
 .w3-book-cover-face,
 .w3-book-cover-back {
@@ -817,6 +821,7 @@
 .w3-book.is-dragging .w3-book-cover { transition: none; }
 .w3-book-fold {
   position: absolute; top: -10px; right: -10px; z-index: 3;
+  appearance: none; -webkit-appearance: none;
   width: 24px; height: 24px; border-radius: 50%;
   border: 1px solid rgba(143, 178, 196, 0.35); background: rgba(7, 19, 30, 0.92);
   color: #8fb2c4; font-size: 13px; line-height: 1; cursor: pointer;

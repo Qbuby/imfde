@@ -57,10 +57,12 @@ if (book) {
   } catch (_) {}
 
   book.addEventListener("pointerenter", (e) => {
-    if (e.pointerType === "mouse") book.classList.add("is-open");
+    if (e.pointerType !== "mouse") return;
+    if (book.dataset.noHover) delete book.dataset.noHover; // 拖完的第一次进入只吞掉；.no-hover 类保留压制 CSS hover，离开时再摘
+    else book.classList.add("is-open");
   });
   book.addEventListener("pointerleave", (e) => {
-    if (e.pointerType === "mouse" && !drag) book.classList.remove("is-open");
+    if (e.pointerType === "mouse" && !drag) { book.classList.remove("is-open", "no-hover"); }
   });
 
   /* 拖拽：move/up 挂在 window 上——书本布局移动会让元素级 pointer 捕获
@@ -85,6 +87,9 @@ if (book) {
     window.removeEventListener("pointercancel", onDragEnd);
     book.classList.remove("is-dragging");
     if (moved) {
+      book.classList.remove("is-open"); // 松手即合上
+      book.classList.add("no-hover");   // 压制 CSS :hover 翻页，直到指针真正离开一次
+      book.dataset.noHover = "1";
       const r = book.getBoundingClientRect();
       try { localStorage.setItem("w3-book-pos", JSON.stringify({ x: Math.round(r.left), y: Math.round(r.top) })); } catch (_) {}
     } else if (e.type === "pointerup" && (e.pointerType !== "mouse" || book.classList.contains("is-folded"))) {
@@ -96,17 +101,12 @@ if (book) {
   book.addEventListener("pointerdown", (e) => {
     if (e.button !== 0 || drag) return;
     if (foldBtn && foldBtn.contains(e.target)) return;
+    e.preventDefault(); // 拖拽不选中页面文字
     const r = book.getBoundingClientRect();
     drag = { sx: e.clientX, sy: e.clientY, ox: r.left, oy: r.top, moved: false };
     window.addEventListener("pointermove", onDragMove);
     window.addEventListener("pointerup", onDragEnd);
     window.addEventListener("pointercancel", onDragEnd);
-  });
-  book.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter" && e.key !== " ") return;
-    e.preventDefault();
-    if (book.classList.contains("is-folded")) setFolded(false);
-    else book.classList.toggle("is-open");
   });
   book.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
