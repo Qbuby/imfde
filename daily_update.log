@@ -493,3 +493,98 @@ OK 案例.html  1268 KB  (cases data 559)
 OK cases.json  559 条
 
 完成。提交 portal/*.html + cases.json 到 git，Vercel 即可直接服务。
+[?? 2026/09/09  0:00:01.99] === daily update start === 
+== snapshot 2026-09-09 since 2026-08-10
+== feeds rss
+  rss fdepod  https://fdepod.substack.com/feed
+    → items=5 fde=4 added=0 already=2 stale=2
+  rss pragmatic-engineer  https://blog.pragmaticengineer.com/feed
+  rss latent-space  https://www.latent.space/feed
+    → items=20 fde=0 added=0 already=0 stale=0
+== feeds youtube
+  youtube ai-engineer-youtube  https://www.youtube.com/@aiDotEngineer
+    → added 0
+== feeds ats census
+  ats palantir-lever  https://jobs.lever.co/palantir
+    → 42 titles folded, dup
+  ats anthropic-greenhouse  https://job-boards.greenhouse.io/anthropic
+  ats databricks-greenhouse  https://job-boards.greenhouse.io/databricks
+    fresh 2026-09-04 Staff Forward Deployed Engineer → axis
+    fresh 2026-09-08 Sr. Forward Deployed Engineer (FDE) - Public Secto → axis
+    → 41 titles folded, dup
+  ats scale-greenhouse  https://job-boards.greenhouse.io/scaleai
+    → 16 titles folded, dup
+  ats xai-greenhouse  https://job-boards.greenhouse.io/xai
+  ats openai-ashby  https://jobs.ashbyhq.com/openai
+    fresh 2026-09-07 Applied AI Engineer, Codex | Tokyo → axis
+    fresh 2026-09-08 Applied AI Engineer, Digital Natives → axis
+    fresh 2026-09-08 Applied AI Engineer, Government → axis
+    fresh 2026-09-08 Forward Deployed Engineer - London (Spanish-speaki → axis
+    → 37 titles folded, dup
+  ats cohere-ashby  https://jobs.ashbyhq.com/cohere
+    → 19 titles folded, dup
+  ats replit-ashby  https://jobs.ashbyhq.com/replit
+    → 1 titles folded, dup
+  ats perplexity-ashby  https://jobs.ashbyhq.com/perplexity
+  ats cursor-ashby  https://jobs.ashbyhq.com/cursor
+    → 5 titles folded, dup
+  ats elevenlabs-ashby  https://jobs.ashbyhq.com/elevenlabs
+    fresh 2026-09-08 Forward Deployed Engineer - Software Engineer - No → axis
+    → 19 titles folded, dup
+== peek list_index (p1–p2, FDE-only, strong date)
+  peek openai-index  https://openai.com/index/
+  peek openai-careers  https://openai.com/careers/
+  peek palantir-newsroom  https://www.palantir.com/newsroom/
+  peek palantir-letters  https://www.palantir.com/newsroom/letters
+  peek palantir-investors  https://investors.palantir.com/
+  peek anthropic-news  https://www.anthropic.com/news
+    candidate https://cdn.sanity.io/images/4zrzovbb/website/96e0eefdefd7319a54e805514c1b1c9a5aa31488-1600x1600.png
+  peek cognition-blog  https://cognition.ai/blog
+  peek databricks-blog  https://www.databricks.com/blog
+    candidate https://www.databricks.com/forward-deployed-engineering
+  peek microsoft-blog  https://blogs.microsoft.com/blog/
+  peek cohere-blog  https://cohere.com/blog
+  peek aws-news  https://aws.amazon.com/blogs/
+  peek fdeinterviews-blog  https://www.fdeinterviews.com/blog
+    candidate https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide
+    candidate https://www.fdeinterviews.com/blog/fde-coding-interview-not-leetcode
+    candidate https://www.fdeinterviews.com/blog/fde-interview-prep-mistakes
+    candidate https://www.fdeinterviews.com/blog/fde-system-design-customer-constraints
+    candidate https://www.fdeinterviews.com/blog/fde-vs-software-engineer-comparison
+    candidate https://www.fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide
+    candidate https://www.fdeinterviews.com/blog/why-forward-deployed-engineering-answer
+    candidate https://www.fdeinterviews.com/blog/break-into-fde-without-faang
+  peek a16z  https://a16z.com/
+  peek svpg  https://www.svpg.com/
+  peek blend360-news  https://www.blend360.com/news
+== case-study hubs (existing vendors, dated only)
+  cs writer-customers  https://writer.com/customers/
+  cs intercom-customers  https://www.intercom.com/customers
+  cs glean-stories  https://www.glean.com/resources/customer-stories
+  cs sierra-customers  https://sierra.ai/customers
+  cs cresta-stories  https://www.cresta.com/customer-stories
+  cs factory-customers  https://factory.ai/customers
+  cs augment-customers  https://www.augmentcode.com/customers
+  cs harvey-customers  https://www.harvey.ai/customers
+  cs devin-customers  https://devin.ai/customers
+  cs moveworks-customers  https://www.moveworks.com/us/en/customers
+  cs sourcegraph-studies  https://sourcegraph.com/case-studies
+  cs cohere-stories  https://cohere.com/customer-stories
+  cs palantir-impact  https://www.palantir.com/impact/
+== editorial copy updated=329
+== increment {"scanned": 25, "fde_hits": 4, "already_in_db": 10, "stale": 12, "added_axis": 7, "collected": 0, "review": 0}
+== done {"n_events": 528, "n_axis": 147, "by_lane_axis": {"company": 10, "deploy": 83, "method": 37, "people": 17}, "n_links": 103}
+快照 2026-09-09 · 事件 45
+[report 7d] 生成并落盘 4579 字，耗时 56s（8eaa012764188691）
+[report 30d] 生成并落盘 4435 字，耗时 57s（01f8ffe8be5995cb）
+[report 90d] 生成并落盘 8837 字，耗时 93s（658d804358d1fc44）
+完成。提交 portal/ai-cache/ 后 push 即随部署分发。
+OK 世界动态.html  96 KB
+OK 落地.html  8 KB
+OK 现场.html  14 KB
+OK 方法.html  8 KB
+OK world3d.html  89 KB
+OK 案例.html  1269 KB  (cases data 559)
+OK cases.json  559 条
+
+完成。提交 portal/*.html + cases.json 到 git，Vercel 即可直接服务。
