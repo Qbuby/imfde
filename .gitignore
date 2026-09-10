@@ -13,3 +13,5 @@ logout_check.png
 scripts/live_logo_check.png
 fde_corpus/
 portal/zh/
+scripts/t_*.png
+scripts/t_mob_*.py

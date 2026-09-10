@@ -820,7 +820,7 @@
   .w3-book {
     display: block;
     width: 44px; height: 62px;
-    right: 12px; top: 76px;
+    right: 12px; top: 12px;
     animation: none;
   }
   .w3-book::after { display: none; }
@@ -886,3 +886,24 @@
 .w3-seo a { color: var(--w3-fg, #dfe9f2); text-decoration: none; border-bottom: 1px solid rgba(143,178,196,.4); }
 .w3-seo a:hover { color: var(--w3-accent, #3fc0c0); }
 .w3-seo time { color: rgba(238,235,229,.55); margin-right: 6px; }
+
+/* ---------- 手机选中实体：强制底部抽屉（高特异性，防其他规则挤占网格） ---------- */
+@media (max-width: 767px) {
+  #w3.w3-has-sel .w3-panel {
+    display: block !important;
+    position: fixed !important;
+    /* 实体标签层带逐帧 transform 会被合成器提层，8 压不住，要抬到常规悬浮层之上 */
+    z-index: 100;
+    left: 0 !important; right: 0 !important; bottom: 0 !important; top: auto !important;
+    width: 100% !important; max-width: none !important;
+    box-sizing: border-box !important;
+    max-height: 62vh;
+    grid-area: auto !important;
+    border-left: 0;
+    border-top: 1px solid var(--w3-line);
+  }
+  #w3.w3-has-sel {
+    grid-template-columns: 100% !important;
+    grid-template-areas: "hud" "stage" "legend" "exits" !important;
+  }
+}

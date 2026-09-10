@@ -365,14 +365,22 @@ function ensureReportBtnFallback() {
   fab.addEventListener("click", () => fbOpenReport(rangeFromUrl || 30));
 }
 
+/* 手机也直接渲染 3D（fitDistance 按 aspect 自适应取景）；WebGL 不可用或
+   初始化失败时自动切文字列表；?flat=1 可手动强制列表视图 */
 if (!webglOK()) {
   showFallback("此设备不支持 WebGL，已切换到平面列表。数据与 3D 沙盘完全一致。");
   ensureReportBtnFallback();
-} else if (NARROW && params.get("force3d") !== "1") {
-  showFallback("屏幕较窄，已切换到平面列表。桌面端可查看 3D 沙盘。");
+} else if (params.get("flat") === "1" || params.get("视图") === "列表") {
+  showFallback("已按你的选择切换到平面列表。");
   ensureReportBtnFallback();
 } else {
-  boot();
+  try {
+    boot();
+  } catch (err) {
+    console.error(err);
+    showFallback("3D 初始化失败，已切换到平面列表。数据与 3D 沙盘完全一致。");
+    ensureReportBtnFallback();
+  }
 }
 
 /* =====================================================================
@@ -397,6 +405,7 @@ function boot() {
   controls.maxPolarAngle = Math.PI * 0.47;
   controls.minPolarAngle = Math.PI * 0.12;
   controls.minDistance = 48;
+  /* 上限随取景走：桌面 fit≈155（320 上限够用），手机竖屏 fit≈754，320 会把相机钳回近景 */
   controls.maxDistance = 320;
   controls.enablePan = true;
   controls.screenSpacePanning = false;
@@ -1118,7 +1127,7 @@ function boot() {
     const D = FRONT_Z - (BASE_Z - 8) + 16;
     const vfov = THREE.MathUtils.degToRad(camera.fov);
     const hfov = 2 * Math.atan(Math.tan(vfov / 2) * camera.aspect);
-    const PAD_PX = 64; // billboard tags may poke out a little
+    const PAD_PX = stage.clientWidth < 700 ? 170 : 64; // 手机上实体标签宽，留白加大才不切边
     const sw = Math.max(stage.clientWidth, 400);
     const usable = Math.max(sw - 2 * PAD_PX, sw * 0.5);
     const byWidth = (W / 2 / Math.tan(hfov / 2)) * (sw / usable) * 1.16; // front edge flares out
@@ -1127,6 +1136,8 @@ function boot() {
   }
   function homeCamera(instant) {
     const dist = fitDistance();
+    /* 窄屏 fit 远大于桌面（320 旧上限会把相机钳回近景），上限随取景抬高一次到位 */
+    controls.maxDistance = Math.max(controls.maxDistance, Math.ceil(dist * 1.4));
     // centre on board + lane-name gutter, not on the board alone
     const target = new THREE.Vector3(-LANE_TEXT_W / 2, 0, (FRONT_Z + BASE_Z) / 2 + 3);
     const pos = new THREE.Vector3(0, dist * 0.7, dist * 0.68).add(target);
@@ -1371,6 +1382,9 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
   }
 
   /* ---------- sizing / loop ---------- */
+  let lastAspect = camera.aspect;
+  let userTouchedControls = false;
+  controls.addEventListener("start", () => { userTouchedControls = true; });
   function resize() {
     const w = stage.clientWidth;
     const h = stage.clientHeight;
@@ -1380,6 +1394,15 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
     groundRenderer.setSize(w, h);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
+    /* 手机/旋屏：初始取景按 aspect=1 算过，宽高比一变就要重新拉远取景，
+       用户一旦自己转过视角就不再打扰；同时取消进行中的飞行动画（否则逐帧覆盖回旧取景） */
+    try {
+      if (!userTouchedControls && Math.abs(camera.aspect - lastAspect) > 0.01) {
+        flight = null;
+        homeCamera(true);
+      }
+    } catch (_) {}
+    lastAspect = camera.aspect;
     managed.forEach((m) => (m.w = 0)); // re-measure labels
     labelsDirty = true;
   }
@@ -1527,6 +1550,11 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
     renderPanel();
   }
   requestAnimationFrame(frame);
+  /* 手机/旋屏：初始取景可能与最终画幅不一致（首帧 aspect 与布局不同步、
+     遗留飞行动画覆盖），按节拍重取景；用户碰过控制器后停手 */
+  [120, 450, 1100].forEach((t) =>
+    setTimeout(() => { if (!userTouchedControls) homeCamera(true); }, t)
+  );
   if (hintEl) setTimeout(() => hintEl.classList.add("w3-hint-fade"), 6000);
   root.dataset.ready = "1";
 }
