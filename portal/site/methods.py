@@ -343,7 +343,7 @@ def _is_complete(slug: str, lessons: dict | None = None) -> bool:
     return slug in (lessons if lessons is not None else load_lessons())
 
 
-def _shell(title: str, inner: str, gh: str, page_path: str, extra_head: str = "") -> str:
+def _shell(title: str, inner: str, gh: str, page_path: str, extra_head: str = "", meta_description: str | None = None) -> str:
     short = title.split(" · ")[0]
     hud = S.room_hud("学习", gh, short, "按步骤做完这一课")
     wrapped = (
@@ -366,6 +366,7 @@ def _shell(title: str, inner: str, gh: str, page_path: str, extra_head: str = ""
         page_path=page_path,
         tagline=LEARN_TAGLINE,
         learn=True,
+        meta_description=meta_description,
     )
 
 
@@ -662,6 +663,7 @@ def render_home(cur) -> str:
         {"kind": "learn", "items": []},
         lens="learn",
         feed=True,
+        meta_description="学习 · 现场怎么干活：FDE 交付循环分步教程、现场工程题、组织与生意，每课给目标、步骤和判断标准。",
     )
 
 
@@ -726,6 +728,7 @@ def _render_lesson(cur, topic: dict, graph: dict, gh: str, lesson: dict) -> str:
         gh,
         "/方法/%s" % topic["slug"],
         extra_head=LEARN_HEAD + MCQ_JS,
+        meta_description=S.trunc("".join(filter(None, (topic.get("name"), "：", goal))), 158) or None,
     )
 
 
@@ -777,4 +780,5 @@ def render_node(cur, slug: str) -> str:
         gh,
         "/方法/%s" % slug,
         extra_head=LEARN_HEAD,
+        meta_description=S.trunc(f"{topic['name']}：{NODE_BRIEF.get(slug, '')}", 158) or None,
     )

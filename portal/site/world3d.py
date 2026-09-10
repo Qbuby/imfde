@@ -33,8 +33,25 @@ def render_world3d(cur) -> str:
         for label, path in S.NAV
     )
     auth_link = S.auth_link("/")
+    # SEO：无 JS 的爬虫（百度/搜狗等）抓不到 3D 画布内容，服务端铺一份真实列表
+    events = data.get("events") or []
+    events_sorted = sorted(
+        (e for e in events if e.get("day")),
+        key=lambda e: e.get("day") or "",
+        reverse=True,
+    )
+    seo_items = "".join(
+        f'<li><time datetime="{S.esc(e.get("day") or "")}">{S.esc(S.day_zh(e.get("day") or ""))}</time> '
+        f'[{S.esc(e.get("doc_label") or e.get("lane") or "")}] '
+        f'<a href="{S.esc(e.get("href") or S.href("/动态/%s" % e["id"]))}">{S.esc(e.get("title") or "")}</a>'
+        f'{(" — " + S.esc(S.trunc(e.get("happened") or e.get("why") or "", 90))) if (e.get("happened") or e.get("why")) else ""}</li>'
+        for e in events_sorted[:30]
+    )
+    seo_counts = data.get("window_counts") or {}
+    n_all = int(((seo_counts.get("90")) or {}).get("total") or len(events))
     inner = f"""
 <div class="w3" id="w3" data-three="{THREE_VERSION}">
+  <h1 class="sr-only">imfde.ai — 全球首个 FDE 实时情报动态沙盘：FDE 公司动作、真实部署、人物观点与方法岗位</h1>
   <header class="w3-hud" role="banner">
     <a class="w3-brand" href="/world3d" aria-label="{S.esc(WORLD_BRAND)} {S.esc(S.SITE_CLUB)}">
       {S.brand_lockup()}
@@ -108,12 +125,29 @@ def render_world3d(cur) -> str:
     <p><a class="w3-fallback-link" href="/平面">打开列表 →</a></p>
     <ol class="w3-fallback-list" id="w3-fallback-list"></ol>
   </section>
+
+  <noscript>
+    <section class="w3-seo">
+      <h2>世界动态 · 最近更新</h2>
+      <p>imfde.ai 持续追踪 FDE（Forward Deployed Engineer）相关的公司动作、真实客户部署、人物观点与方法岗位。本页是 3D 沙盘，你的浏览器未启用脚本，以下是同一批数据的文字版（最近 {len(seo_items)} 条，全库近 90 天 {n_all} 条）。</p>
+      <ol>
+        {seo_items}
+      </ol>
+      <p>
+        <a href="/落地">负责人视图</a> ·
+        <a href="/现场">从业者视图</a> ·
+        <a href="/案例">客户案例目录</a> ·
+        <a href="/方法">FDE 学习手册</a> ·
+        <a href="/平面">平面时间轴</a>
+      </p>
+    </section>
+  </noscript>
 </div>
 {json_tag(data)}
 <script type="module" src="/static/world3d.js"></script>
 """
     return S.shell(
-        "%s · %s" % (S.SITE_CLUB, WORLD_BRAND),
+        "imfde.ai — 全球首个 FDE 实时情报动态沙盘",
         "动态",
         inner,
         github,
@@ -126,4 +160,17 @@ def render_world3d(cur) -> str:
         skip_foot=True,
         home_css=False,
         page_path="/",
+        meta_description=(
+            "imfde.ai 持续追踪 FDE（Forward Deployed Engineer）行业的公司动作、真实客户部署、"
+            "人物观点与方法岗位，以 3D 实时情报沙盘呈现，可按 7/30/90 天窗口查看，"
+            "每条动态可对照原文核读。"
+        ),
+        json_ld={
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": S.SITE_NAME,
+            "url": S.SITE_ORIGIN + "/",
+            "logo": S.abs_url("/static/icons/logo-mark.png"),
+            "description": "全球首个 FDE 实时情报动态沙盘",
+        },
     )

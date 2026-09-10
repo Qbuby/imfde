@@ -121,6 +121,21 @@ async def app(scope, receive, send):  # noqa: ANN001
         await _asgi_send(send, 200, body, "application/json; charset=utf-8")
         return
 
+    # ---- SEO：robots.txt / sitemap.xml ----
+    if path == "/robots.txt":
+        await _asgi_send(send, 200, S.robots_txt().encode("utf-8"), "text/plain; charset=utf-8")
+        return
+    if path == "/sitemap.xml":
+        try:
+            with S.connect() as con:
+                body = S.sitemap_xml(con.cursor())
+        except Exception:
+            import traceback
+            await _asgi_send(send, 500, ("查询失败\n" + traceback.format_exc()).encode("utf-8"), "text/plain; charset=utf-8")
+            return
+        await _asgi_send(send, 200, body.encode("utf-8"), "application/xml; charset=utf-8")
+        return
+
     # ---- 登录/退出（身份识别，不做限权）----
     if path.startswith("/登录") or path == "/退出登录" or path.startswith("/oauth/") or path == "/oauth":
         try:

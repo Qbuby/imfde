@@ -1466,7 +1466,7 @@ def sitemap_xml(cur) -> str:
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ]
     for path, last, prio in urls:
-        loc = esc(abs_url(path))
+        loc = esc(quote(abs_url(path), safe=":/?&=%"))
         lastmod = f"<lastmod>{esc(last)}</lastmod>" if last else ""
         bits.append(f"<url><loc>{loc}</loc>{lastmod}<priority>{prio}</priority></url>")
     bits.append("</urlset>")
@@ -2269,6 +2269,7 @@ def render_deploy(cur, qs) -> str:
         payload,
         lens="boss",
         feed=True,
+        meta_description=f"落地 · 这 {days} 天行业的公司动作与真实部署，从企业视角读：公司在做什么、客户那边发生了什么。点一条看摘要与原文。",
     )
 
 
@@ -2305,6 +2306,7 @@ def render_field(cur, qs) -> str:
         payload,
         lens="field",
         feed=True,
+        meta_description=f"现场 · 这 {days} 天从业者与人物的公开口径：一线怎么讲 FDE 这份工、招聘是不是还在发生。每条附中文原文。",
     )
 
 
@@ -2520,6 +2522,7 @@ def render_library(cur, qs) -> str:
         payload,
         lens="boss",
         feed=True,
+        meta_description=f"案例目录 · 全库 {n_all} 个有出处的客户故事：按厂商、行业、可靠程度筛选，看 AI 怎么真正交付到客户现场，每单可对照原文。",
     )
 
 
@@ -2663,6 +2666,21 @@ def render_case(cur, case_id: int, qs) -> str:
 </div>
 </div>
 """
+    case_desc_parts = [p for p in (
+        (row.get("business_problem") or "").strip(),
+        (row.get("measured_outcome") or "").strip(),
+    ) if p]
+    case_desc = trunc("；".join(case_desc_parts) or f"{title}：{k}。", 158)
+    case_ld = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": esc(title),
+        "description": case_desc,
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": abs_url("/案例/%s" % case_id),
+        "about": {"@type": "Thing", "name": esc(k or "FDE 客户案例")},
+        "author": {"@type": "Organization", "name": SITE_NAME, "url": SITE_ORIGIN + "/"},
+    }
     return shell(
         "%s · %s" % (title, SITE_NAME),
         "案例",
@@ -2675,6 +2693,9 @@ def render_case(cur, case_id: int, qs) -> str:
         skip_foot=True,
         home_css=False,
         page_path="/案例/%s" % case_id,
+        meta_description=case_desc,
+        og_type="article",
+        json_ld=case_ld,
     )
 
 
@@ -2795,6 +2816,11 @@ def render_event(cur, event_id: int) -> str:
         inner,
         gh,
         page_path="/动态/%s" % event_id,
+        meta_description=trunc(
+            (event.get("happened") or event.get("why") or f"{event.get('title') or ''} · {event.get('kicker') or ''}").strip()
+            or "行业动态与人物观点。",
+            158,
+        ),
     )
 
 

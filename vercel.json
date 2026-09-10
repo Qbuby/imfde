@@ -160,6 +160,14 @@
     {
       "source": "/api/world.json",
       "destination": "/api/portal?__path=/api/world.json"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/api/portal?__path=/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/portal?__path=/sitemap.xml"
     }
   ]
 }
