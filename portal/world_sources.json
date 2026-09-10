@@ -1502,7 +1502,7 @@
     "Hiring boards as weak method signals; never explode onto the axis.",
     "Do not fetch until this catalog is accepted and CRAWL_PAUSED is lifted for the dynamics pipeline."
   ],
-  "last_ingest": "2026-09-09T02:33:11Z",
+  "last_ingest": "2026-09-10T02:59:02Z",
   "ats_fresh_policy": {
     "fresh_days": 7,
     "per_board_per_run": 2,

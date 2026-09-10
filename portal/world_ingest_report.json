@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-09T02:33:11Z",
-  "snapshot": "2026-09-09",
-  "since_day": "2026-08-10",
+  "written_at": "2026-09-10T02:59:02Z",
+  "snapshot": "2026-09-10",
+  "since_day": "2026-08-11",
   "increment": {
     "scanned": 25,
     "fde_hits": 4,
     "already_in_db": 10,
     "stale": 12,
-    "added_axis": 7,
+    "added_axis": 8,
     "collected": 0,
     "review": 0
   },
-  "n_events": 528,
-  "n_axis": 147,
+  "n_events": 535,
+  "n_axis": 155,
   "n_review": 0,
-  "new_axis_this_run": 7,
+  "new_axis_this_run": 8,
   "by_lane_axis": {
     "company": 10,
     "deploy": 83,
-    "method": 37,
+    "method": 45,
     "people": 17
   },
-  "n_links": 103,
+  "n_links": 108,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -83,28 +83,29 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 180,
-      "added": 0,
-      "fresh": 7,
+      "jobs": 190,
+      "added": 8,
+      "fresh": 0,
       "details": [
         {
           "id": "palantir-lever",
-          "status": "dup",
+          "status": "axis",
           "n": 42
         },
         {
           "id": "anthropic-greenhouse",
-          "status": "IncompleteRead(6092617 bytes read, 2401130 more expected)"
+          "status": "dup",
+          "n": 8
         },
         {
           "id": "databricks-greenhouse",
-          "status": "dup",
+          "status": "axis",
           "n": 41
         },
         {
           "id": "scale-greenhouse",
-          "status": "dup",
-          "n": 16
+          "status": "axis",
+          "n": 17
         },
         {
           "id": "xai-greenhouse",
@@ -113,17 +114,17 @@
         },
         {
           "id": "openai-ashby",
-          "status": "dup",
-          "n": 37
+          "status": "axis",
+          "n": 38
         },
         {
           "id": "cohere-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 19
         },
         {
           "id": "replit-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 1
         },
         {
@@ -133,12 +134,12 @@
         },
         {
           "id": "cursor-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 5
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "dup",
+          "status": "axis",
           "n": 19
         }
       ]

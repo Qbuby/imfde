@@ -1428,6 +1428,51 @@ def abs_url(path: str = "/") -> str:
     return SITE_ORIGIN + text
 
 
+def robots_txt() -> str:
+    """搜索引擎抓取规则：内容全开放，登录/OAuth 路由不入索引。"""
+    return (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /登录\n"
+        "Disallow: /oauth\n"
+        "Disallow: /退出登录\n"
+        "\n"
+        f"Sitemap: {SITE_ORIGIN}/sitemap.xml\n"
+    )
+
+
+def sitemap_lastmod(cur) -> str:
+    """以最近一条动态的日期为全站 lastmod 口径。"""
+    row = cur.execute("SELECT MAX(day) AS d FROM world_events WHERE day IS NOT NULL").fetchone()
+    return (row["d"] if row and row["d"] else "") or str(SNAPSHOT)
+
+
+def sitemap_xml(cur) -> str:
+    """全站 URL 清单：静态页 + 全部案例/动态详情 + 全部方法课。"""
+    urls: list[tuple[str, str | None, str]] = []  # (path, lastmod, priority)
+    lm = sitemap_lastmod(cur)
+    for p in ("/", "/落地", "/现场", "/案例", "/方法", "/平面"):
+        urls.append((p, lm, "1.0" if p == "/" else "0.8"))
+    for row in cur.execute(
+        "SELECT id, COALESCE(day, '') AS d FROM world_events WHERE day IS NOT NULL ORDER BY day DESC"
+    ):
+        urls.append((f"/动态/{row['id']}", row["d"] or lm, "0.6"))
+    for row in cur.execute("SELECT id FROM cases ORDER BY id"):
+        urls.append((f"/案例/{row['id']}", lm, "0.6"))
+    for row in cur.execute("SELECT slug FROM topics WHERE slug IS NOT NULL AND slug != ''"):
+        urls.append((f"/方法/{row['slug']}", lm, "0.7"))
+    bits = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for path, last, prio in urls:
+        loc = esc(abs_url(path))
+        lastmod = f"<lastmod>{esc(last)}</lastmod>" if last else ""
+        bits.append(f"<url><loc>{loc}</loc>{lastmod}<priority>{prio}</priority></url>")
+    bits.append("</urlset>")
+    return "\n".join(bits)
+
+
 def mast(active: str, gh_url: str = "", tagline: str | None = None) -> str:
     links = []
     for label, path in NAV:
@@ -1481,6 +1526,10 @@ def shell(
     page_path="/",
     tagline: str | None = None,
     learn: bool = False,
+    meta_description: str | None = None,
+    og_type: str = "website",
+    og_image: str | None = None,
+    json_ld: dict | None = None,
 ) -> str:
     css = '<link rel="stylesheet" href="/static/tokens.css"/>'
     if home_css:
@@ -1497,20 +1546,47 @@ def shell(
     else:
         main = f'<div class="wrap" id="main">\n{inner}\n{foot}\n</div>'
     canon = abs_url(page_path)
+    description = meta_description or tagline or SITE_TAGLINE
+    image = og_image or "/static/icons/book-cover.png"
+    if image.startswith("/"):
+        image = abs_url(image)
+    web_ld = json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": SITE_NAME,
+            "alternateName": "imfde.ai",
+            "url": SITE_ORIGIN + "/",
+            "description": SITE_TAGLINE,
+            "inLanguage": "zh-CN",
+        },
+        ensure_ascii=False,
+    )
+    ld_blocks = f'<script type="application/ld+json">{web_ld}</script>'
+    if json_ld:
+        ld_blocks += f'\n<script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>'
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>{esc(title)}</title>
-<meta name="description" content="{esc(tagline or SITE_TAGLINE)}"/>
+<meta name="description" content="{esc(description)}"/>
 <link rel="canonical" href="{esc(canon)}"/>
 <meta property="og:site_name" content="{esc(SITE_NAME)}"/>
+<meta property="og:type" content="{esc(og_type)}"/>
 <meta property="og:title" content="{esc(title)}"/>
-<meta property="og:description" content="{esc(tagline or SITE_TAGLINE)}"/>
+<meta property="og:description" content="{esc(description)}"/>
 <meta property="og:url" content="{esc(canon)}"/>
+<meta property="og:image" content="{esc(image)}"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="{esc(title)}"/>
+<meta name="twitter:description" content="{esc(description)}"/>
+<meta name="twitter:image" content="{esc(image)}"/>
 {css}
 {extra_head}
+{ld_blocks}
 </head>
 <body{body_attr}>
 {skip_html}{mast_html}
@@ -1921,6 +1997,9 @@ def room_page(
     lens: str = "boss",
     doc: bool = False,
     feed: bool = False,
+    meta_description: str | None = None,
+    og_type: str = "website",
+    json_ld: dict | None = None,
 ) -> str:
     cls = "room room-doc" if doc else "room"
     if feed:
@@ -1944,6 +2023,9 @@ def room_page(
         skip_foot=True,
         home_css=False,
         page_path=page_path,
+        meta_description=meta_description,
+        og_type=og_type,
+        json_ld=json_ld,
     )
 
 
@@ -2958,6 +3040,18 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(403, b"forbidden", "text/plain; charset=utf-8")
                 return
             self._send_file(target)
+            return
+        if path == "/robots.txt":
+            self._send(200, robots_txt().encode("utf-8"), "text/plain; charset=utf-8")
+            return
+        if path == "/sitemap.xml":
+            try:
+                with connect() as con:
+                    body = sitemap_xml(con.cursor())
+            except Exception:
+                self._send(500, ("查询失败\n" + traceback.format_exc()).encode("utf-8"), "text/plain; charset=utf-8")
+                return
+            self._send(200, body.encode("utf-8"), "application/xml; charset=utf-8")
             return
         m = re.fullmatch(r"/原文/(动态|案例)/(\d+)", path)
         if m:
