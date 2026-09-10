@@ -902,6 +902,8 @@
     border-left: 0;
     border-top: 1px solid var(--w3-line);
   }
+  /* 报告按钮挂在 body 上（不在 #w3 里），选中阅读时用 body 级开关收起，免得盖抽屉的字 */
+  body.w3-sheet-open #w3-report-fab { display: none !important; }
   #w3.w3-has-sel {
     grid-template-columns: 100% !important;
     grid-template-areas: "hud" "stage" "legend" "exits" !important;

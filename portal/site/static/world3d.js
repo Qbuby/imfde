@@ -1379,6 +1379,8 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
     panel.innerHTML = e ? panelEvent(e) : "";
     panel.scrollTop = 0;
     root.classList.toggle("w3-has-sel", !!e);
+    /* 报告按钮挂在 body 上，选择态收起它得靠 body 级开关（手机抽屉盖字） */
+    document.body.classList.toggle("w3-sheet-open", !!e);
   }
 
   /* ---------- sizing / loop ---------- */
