@@ -33,11 +33,17 @@ const rangeFromUrl = Number(params.get("窗") || params.get("range"));
 const book = document.getElementById("w3-book");
 if (book) {
   const foldBtn = book.querySelector(".w3-book-fold");
+  const MOBILE = matchMedia("(max-width: 1180px)");
   const setFolded = (v) => {
     book.classList.toggle("is-folded", v);
     try { localStorage.setItem("w3-book-folded", v ? "1" : "0"); } catch (_) {}
   };
-  try { if (localStorage.getItem("w3-book-folded") === "1") book.classList.add("is-folded"); } catch (_) {}
+  try {
+    if (MOBILE.matches) book.classList.add("is-folded"); // 手机默认书签态，不占屏
+    else if (localStorage.getItem("w3-book-folded") === "1") book.classList.add("is-folded");
+  } catch (_) {
+    if (MOBILE.matches) book.classList.add("is-folded");
+  }
 
   const clampPos = (x, y) => {
     const w = book.offsetWidth || 188, h = book.offsetHeight || 250;
@@ -93,7 +99,13 @@ if (book) {
       const r = book.getBoundingClientRect();
       try { localStorage.setItem("w3-book-pos", JSON.stringify({ x: Math.round(r.left), y: Math.round(r.top) })); } catch (_) {}
     } else if (e.type === "pointerup" && (e.pointerType !== "mouse" || book.classList.contains("is-folded"))) {
-      /* 鼠标由悬停翻页接管（展开态）；书签态与触屏/笔 tap 切换 */
+      /* 鼠标展开态由悬停翻页接管（书签态与触屏/笔 tap 切换）；
+         手机窄屏：书签⇄内页卡双态切换 */
+      if (MOBILE.matches) {
+        if (book.classList.contains("is-folded")) { setFolded(false); book.classList.add("is-open"); }
+        else { setFolded(true); book.classList.remove("is-open"); }
+        return;
+      }
       if (book.classList.contains("is-folded")) setFolded(false);
       else book.classList.toggle("is-open");
     }
@@ -279,10 +291,86 @@ function syncRooms() {
 }
 syncRooms();
 
+/* ---------- 解读报告（fallback 路径）：手机/WebGL 不可用时也要有，
+   报告条目用真实链接跳转 /动态/<id>，不依赖 3D 场景 ---------- */
+const fallbackReportCache = new Map();
+function fbMdLite(t) {
+  return esc(String(t || ""))
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, txt, href) => {
+      const mId = String(href).match(/\/(?:动态|world_event)\/(\d+)/);
+      const u = mId ? "/动态/" + mId[1] : href;
+      return `<a href="${u}">${txt}</a>`;
+    })
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .split(/\n{2,}/)
+    .map((p) => `<p>${p.replace(/\n/g, "<br/>")}</p>`)
+    .join("");
+}
+function fbOpenReport(range) {
+  let overlay = document.getElementById("w3-report-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "w3-report-overlay";
+    overlay.innerHTML = `
+<div class="w3-rp" role="dialog" aria-label="解读报告">
+  <header class="w3-rp-h">
+    <h2>解读报告</h2>
+    <div class="w3-range" role="radiogroup" aria-label="报告时间窗">
+      <button type="button" data-rp-range="7">7 天</button>
+      <button type="button" data-rp-range="30" class="on">30 天</button>
+      <button type="button" data-rp-range="90">90 天</button>
+    </div>
+    <button type="button" class="w3-rp-x" data-rp-close aria-label="关闭">×</button>
+  </header>
+  <div class="w3-rp-body" id="w3-rp-body"></div>
+</div>`;
+    document.body.appendChild(overlay);
+    overlay.addEventListener("click", (ev) => {
+      const rbtn = ev.target.closest("[data-rp-range]");
+      if (rbtn) { fbOpenReport(Number(rbtn.dataset.rpRange)); return; }
+      if (ev.target.closest("[data-rp-close]") || ev.target === overlay) overlay.hidden = true;
+    });
+  }
+  overlay.hidden = false;
+  overlay.querySelectorAll("[data-rp-range]").forEach((b) => {
+    const on = Number(b.dataset.rpRange) === Number(range);
+    b.classList.toggle("on", on);
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+  const bodyEl = overlay.querySelector("#w3-rp-body");
+  if (fallbackReportCache.has(range)) {
+    bodyEl.innerHTML = `<div class="w3-ai-text">${fbMdLite(fallbackReportCache.get(range).text)}</div>`;
+    return;
+  }
+  bodyEl.innerHTML = '<p class="w3-ai-loading">✦ 生成中…</p>';
+  fetch(`/api/ai-report?range=${range}`)
+    .then((r) => r.json())
+    .then((rep) => {
+      if (!rep || rep.enabled === false) throw new Error(rep.error || "报告不可用");
+      fallbackReportCache.set(range, rep);
+      bodyEl.innerHTML = `<div class="w3-ai-text">${fbMdLite(rep.text)}</div>`;
+    })
+    .catch((err) => {
+      bodyEl.innerHTML = `<p class="w3-ai-err">报告不可用：${esc(String(err.message || err))}</p>`;
+    });
+}
+function ensureReportBtnFallback() {
+  if (document.getElementById("w3-report-fab")) return;
+  const fab = document.createElement("button");
+  fab.id = "w3-report-fab";
+  fab.type = "button";
+  fab.setAttribute("aria-label", "解读报告");
+  fab.innerHTML = '<span class="w3-fab-ico">✦</span><span class="w3-fab-t">解读报告</span>';
+  document.body.appendChild(fab);
+  fab.addEventListener("click", () => fbOpenReport(rangeFromUrl || 30));
+}
+
 if (!webglOK()) {
   showFallback("此设备不支持 WebGL，已切换到平面列表。数据与 3D 沙盘完全一致。");
+  ensureReportBtnFallback();
 } else if (NARROW && params.get("force3d") !== "1") {
   showFallback("屏幕较窄，已切换到平面列表。桌面端可查看 3D 沙盘。");
+  ensureReportBtnFallback();
 } else {
   boot();
 }

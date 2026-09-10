@@ -815,6 +815,28 @@
 }
 @media (max-width: 1180px) { .w3-book { display: none; } }
 
+/* ---------- 手机/窄屏：手册默认书签态，点开显示内页卡片（功能不缺失） ---------- */
+@media (max-width: 1180px) {
+  .w3-book {
+    display: block;
+    width: 44px; height: 62px;
+    right: 12px; top: 76px;
+    animation: none;
+  }
+  .w3-book::after { display: none; }
+  .w3-book:not(.is-folded) {
+    width: 200px; height: auto;
+    padding-bottom: 8px;
+  }
+  .w3-book:not(.is-folded) .w3-book-cover,
+  .w3-book:not(.is-folded) .w3-book-mini { display: none; }
+  .w3-book:not(.is-folded) .w3-book-page {
+    display: flex; position: relative; inset: auto;
+    box-shadow: none; border-radius: 10px;
+  }
+  .w3-book:not(.is-folded) .w3-book-page::before { display: none; }
+}
+
 /* ---------- 手册：可拖动 / 可折叠 ---------- */
 .w3-book { cursor: grab; touch-action: none; }
 .w3-book.is-dragging { cursor: grabbing; animation: none; pointer-events: none; }
