@@ -15,6 +15,10 @@ rem ---- 1. ingest latest data into fde.db ----
 cd /d "%ROOT%\portal"
 "%PY%" ingest_world.py --daily >> "%LOG%" 2>&1
 
+rem ---- 1.5 rebuild fde-public.db from fde.db (production data; fde.db is gitignored) ----
+cd /d "%ROOT%"
+"%PY%" scripts\build_public_db.py >> "%LOG%" 2>&1
+
 rem ---- 2. pregen AI reports (needs AI_API_KEY) ----
 if "%AI_API_KEY%"=="" set "AI_API_KEY=sk-1HMYi1KWNnjWV9TzDQ83aBzp63DOpuWwlq2ALuRMIV1uWAzu"
 set "AI_BASE_URL=https://api.airy.work/v1"
