@@ -53,7 +53,7 @@ def main() -> None:
             print(f"[report {days}d] 窗口内无事件，跳过")
             continue
         t0 = time.time()
-        text = _call_ai(_build_user(events, days))
+        text = _call_ai(_build_user(events, days, snapshot))
         ai_store.save("report", str(days), snapshot, {"text": text, "total": len(events)})
         print(f"[report {days}d] 生成并落盘 {len(text)} 字，耗时 {time.time()-t0:.0f}s（{key}）")
 
@@ -64,7 +64,7 @@ def main() -> None:
                 continue
             try:
                 t0 = time.time()
-                text = _call_ai(_build_user([e], 30))
+                text = _call_ai(_build_user([e], 30, snapshot))
                 ai_store.save("event", ident, snapshot, {"text": text, "title": e.get("title", "")})
                 print(f"[event {ident}] {time.time()-t0:.0f}s")
             except Exception as exc:  # noqa: BLE001

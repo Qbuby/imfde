@@ -74,6 +74,12 @@ def _snapshot_day() -> str:
 SNAPSHOT = _snapshot_day()
 
 
+def window_start(days: int) -> str:
+    """报告窗口起点 = 快照日往前 days 天（ai-report 的 _events_for_range 按此过滤）。"""
+    t = time.mktime(time.strptime(SNAPSHOT, "%Y-%m-%d"))
+    return time.strftime("%Y-%m-%d", time.localtime(t - days * 86400))
+
+
 def day_zh(day: str | None) -> str:
     text = (day or "").strip()
     m = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", text)

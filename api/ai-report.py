@@ -78,8 +78,9 @@ def _event_block(e: dict, idx: int) -> str:
     return "\n".join(lines)
 
 
-def _build_user(events: list, days: int) -> str:
-    parts = [f"时间窗：过去 {days} 天（共 {len(events)} 条上轴事件，快照 {'' }2026-09-02）。", ""]
+def _build_user(events: list, days: int, snapshot: str = "") -> str:
+    snap = (snapshot or "").strip() or "未知"
+    parts = [f"时间窗：过去 {days} 天（共 {len(events)} 条上轴事件，快照 {snap}）。", ""]
     for i, e in enumerate(events, 1):
         parts.append(_event_block(e, i))
     return "\n\n".join(parts)
@@ -139,7 +140,7 @@ def _report(days: int) -> dict:
         _CACHE[days] = out
         return out
 
-    text = _call_ai(_build_user(events, days))
+    text = _call_ai(_build_user(events, days, snapshot))
     out = {"enabled": True, "range": days, "snapshot": snapshot, "total": len(events),
            "text": text, "events": meta}
     # 生成成功 → 立即持久化
