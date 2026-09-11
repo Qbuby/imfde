@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-11T09:06:00Z",
-  "snapshot": "2026-09-11",
-  "since_day": "2026-08-12",
+  "written_at": "2026-09-11T16:06:08Z",
+  "snapshot": "2026-09-12",
+  "since_day": "2026-08-13",
   "increment": {
     "scanned": 1239,
     "fde_hits": 10,
-    "already_in_db": 18,
+    "already_in_db": 15,
     "stale": 19,
-    "added_axis": 13,
+    "added_axis": 16,
     "collected": 0,
-    "review": 0
+    "review": 1
   },
-  "n_events": 545,
-  "n_axis": 166,
-  "n_review": 0,
-  "new_axis_this_run": 13,
+  "n_events": 551,
+  "n_axis": 172,
+  "n_review": 1,
+  "new_axis_this_run": 16,
   "by_lane_axis": {
     "company": 10,
-    "deploy": 87,
-    "method": 52,
+    "deploy": 90,
+    "method": 55,
     "people": 17
   },
-  "n_links": 116,
+  "n_links": 122,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 197,
-      "added": 9,
-      "fresh": 0,
+      "jobs": 199,
+      "added": 10,
+      "fresh": 3,
       "details": [
         {
           "id": "palantir-lever",
@@ -117,13 +117,13 @@
         },
         {
           "id": "anthropic-greenhouse",
-          "status": "dup",
+          "status": "axis",
           "n": 8
         },
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 43
+          "n": 45
         },
         {
           "id": "scale-greenhouse",
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 24,
-    "added": 4,
+    "new_links": 20,
+    "added": 3,
     "no_date": 2,
     "details": [
       {
@@ -186,7 +186,7 @@
       },
       {
         "id": "glean-stories",
-        "new_links": 7,
+        "new_links": 5,
         "added": 2
       },
       {
@@ -224,8 +224,8 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 4,
-        "added": 2
+        "new_links": 2,
+        "added": 1
       },
       {
         "id": "moveworks-customers",

@@ -934,4 +934,112 @@ To https://github.com/Qbuby/imfde.git
 == increment {"scanned": 25, "fde_hits": 4, "already_in_db": 18, "stale": 14, "added_axis": 6, "collected": 0, "review": 0}
 == done {"n_events": 532, "n_axis": 153, "by_lane_axis": {"company": 10, "deploy": 83, "method": 43, "people": 17}, "n_links": 107}
 OK fde-public.db: 682 questions, answers stripped 682, snapshot 2026-09-11
-^C
+^C[?? 2026/09/12  0:00:01.85] === daily update start === 
+== snapshot 2026-09-12 since 2026-08-13
+== feeds rss
+  rss openai-index  https://openai.com/news/rss.xml
+    → items=1189 fde=5 added=0 already=2 stale=3
+  rss microsoft-blog  https://blogs.microsoft.com/feed/
+    → items=10 fde=1 added=0 already=1 stale=0
+  rss fdepod  https://fdepod.substack.com/feed
+    → items=5 fde=4 added=0 already=2 stale=2
+  rss pragmatic-engineer  https://blog.pragmaticengineer.com/feed
+    → items=15 fde=0 added=0 already=0 stale=0
+  rss latent-space  https://www.latent.space/feed
+    → items=20 fde=0 added=0 already=0 stale=0
+== feeds youtube
+  youtube ai-engineer-youtube  https://www.youtube.com/@aiDotEngineer
+    → added 0
+== feeds ats census
+  ats palantir-lever  https://jobs.lever.co/palantir
+    → 42 titles folded, axis
+  ats anthropic-greenhouse  https://job-boards.greenhouse.io/anthropic
+    → 8 titles folded, axis
+  ats databricks-greenhouse  https://job-boards.greenhouse.io/databricks
+    fresh 2026-09-10 Sr. Field Technical Program Manager, Forward Deplo → dup
+    fresh 2026-09-11 Sr. Engagement Manager, Forward Deployed Engineeri → axis
+    fresh 2026-09-11 Sr. Manager, AI Forward Deployed Engineering (FDE) → axis
+    fresh 2026-09-08 Sr. Forward Deployed Engineer (FDE) - Public Secto → dup
+    → 45 titles folded, axis
+  ats scale-greenhouse  https://job-boards.greenhouse.io/scaleai
+    fresh 2026-09-10 Staff Full-Stack Software Engineer, (Forward Deplo → dup
+    fresh 2026-09-10 Senior Full-Stack Software Engineer, (Forward depl → dup
+    → 18 titles folded, axis
+  ats xai-greenhouse  https://job-boards.greenhouse.io/xai
+  ats openai-ashby  https://jobs.ashbyhq.com/openai
+    fresh 2026-09-11 Manager, Applied AI Engineering (Codex) → axis
+    fresh 2026-09-07 Applied AI Engineer, Codex | Tokyo → dup
+    fresh 2026-09-08 Applied AI Engineer, Digital Natives → dup
+    fresh 2026-09-08 Applied AI Engineer, Government → dup
+    → 40 titles folded, axis
+  ats cohere-ashby  https://jobs.ashbyhq.com/cohere
+    fresh 2026-09-10 Forward Deployed Engineer, Infrastructure Speciali → dup
+    → 20 titles folded, axis
+  ats replit-ashby  https://jobs.ashbyhq.com/replit
+    → 1 titles folded, axis
+  ats perplexity-ashby  https://jobs.ashbyhq.com/perplexity
+    fresh 2026-09-10 Member of Technical Staff (Applied AI Engineer, Ag → dup
+    → 1 titles folded, axis
+  ats cursor-ashby  https://jobs.ashbyhq.com/cursor
+    → 5 titles folded, axis
+  ats elevenlabs-ashby  https://jobs.ashbyhq.com/elevenlabs
+    fresh 2026-09-08 Forward Deployed Engineer - Software Engineer - No → dup
+    → 19 titles folded, axis
+== peek list_index (p1–p2, FDE-only, strong date)
+  peek palantir-newsroom  https://www.palantir.com/newsroom/
+  peek palantir-letters  https://www.palantir.com/newsroom/letters
+  peek palantir-investors  https://investors.palantir.com/
+  peek anthropic-news  https://www.anthropic.com/news
+  peek cognition-blog  https://cognition.ai/blog
+  peek databricks-blog  https://www.databricks.com/blog
+    candidate https://www.databricks.com/forward-deployed-engineering
+  peek cohere-blog  https://cohere.com/blog
+  peek aws-news  https://aws.amazon.com/blogs/
+  peek fdeinterviews-blog  https://www.fdeinterviews.com/blog
+    candidate https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide
+    candidate https://www.fdeinterviews.com/blog/fde-coding-interview-not-leetcode
+    candidate https://www.fdeinterviews.com/blog/fde-interview-prep-mistakes
+    candidate https://www.fdeinterviews.com/blog/fde-system-design-customer-constraints
+    candidate https://www.fdeinterviews.com/blog/fde-vs-software-engineer-comparison
+    candidate https://www.fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide
+    candidate https://www.fdeinterviews.com/blog/why-forward-deployed-engineering-answer
+    candidate https://www.fdeinterviews.com/blog/break-into-fde-without-faang
+  peek a16z  https://a16z.com/
+  peek svpg  https://www.svpg.com/
+  peek blend360-news  https://www.blend360.com/news
+== case-study hubs (existing vendors, dated only)
+  cs writer-customers  https://writer.com/customers/
+  cs intercom-customers  https://www.intercom.com/customers
+  cs glean-stories  https://www.glean.com/resources/customer-stories
+    axis 2026-09-11 Huntress
+    axis 2026-09-11 Storable
+  cs sierra-customers  https://sierra.ai/customers
+  cs cresta-stories  https://www.cresta.com/customer-stories
+  cs factory-customers  https://factory.ai/customers
+  cs augment-customers  https://www.augmentcode.com/customers
+  cs harvey-customers  https://www.harvey.ai/customers
+  cs devin-customers  https://devin.ai/customers
+    axis 2026-08-20 Endava
+    review 2026-08-20 Wpp Enterprise Solutions
+  cs moveworks-customers  https://www.moveworks.com/us/en/customers
+  cs sourcegraph-studies  https://sourcegraph.com/case-studies
+  cs cohere-stories  https://cohere.com/customer-stories
+  cs palantir-impact  https://www.palantir.com/impact/
+== editorial copy updated=3
+== increment {"scanned": 1239, "fde_hits": 10, "already_in_db": 15, "stale": 19, "added_axis": 16, "collected": 0, "review": 1}
+== done {"n_events": 551, "n_axis": 172, "by_lane_axis": {"company": 10, "deploy": 90, "method": 55, "people": 17}, "n_links": 122}
+OK fde-public.db: 682 questions, answers stripped 682, snapshot 2026-09-12
+快照 2026-09-12 · 事件 67
+[report 7d] 生成并落盘 6802 字，耗时 76s（8fe95a40ea2fc657）
+[report 30d] 生成并落盘 4639 字，耗时 53s（06d53e90204ac5ad）
+[report 90d] 生成并落盘 5554 字，耗时 57s（2c61b0538cf7fa4b）
+完成。提交 portal/ai-cache/ 后 push 即随部署分发。
+OK 世界动态.html  126 KB
+OK 落地.html  9 KB
+OK 现场.html  15 KB
+OK 方法.html  9 KB
+OK world3d.html  128 KB
+OK 案例.html  1269 KB  (cases data 559)
+OK cases.json  559 条
+
+完成。提交 portal/*.html + cases.json 到 git，Vercel 即可直接服务。
