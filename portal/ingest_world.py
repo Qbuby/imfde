@@ -16,6 +16,7 @@ import html as H
 import json
 import re
 import sqlite3
+import ssl
 import time
 import urllib.error
 import urllib.parse
@@ -61,6 +62,11 @@ HEADERS = {
 
 CS_PATH_RE = re.compile(
     r"/(customers?|customer-stories|case-stud(?:y|ies)|impact|success-stor)(/|$)",
+    re.I,
+)
+CS_SLUG_RE = re.compile(
+    r"/(?:customers?|customer-stories|case-stud(?:y|ies)|impact|success-stor(?:ies|y)?)"
+    r"/([A-Za-z0-9][^/?#]+)",
     re.I,
 )
 CS_STORY_RE = re.compile(
@@ -1240,28 +1246,60 @@ def html_to_text(raw: str) -> str:
     return t.strip()
 
 
-def fetch_bytes(url: str, tries: int = 3, timeout: int = 45):
+# 证书校验失败后的降级上下文（懒加载；只用于公开内容重抓）
+_SSL_LOOSE: ssl.SSLContext | None = None
+
+
+def http_date_to_day(value: str) -> str:
+    """HTTP Last-Modified（如 Fri, 11 Sep 2026 08:35:44 GMT）→ YYYY-MM-DD；无效返回空。"""
+    text = (value or "").strip()
+    if not text:
+        return ""
+    try:
+        return parsedate_to_datetime(text).date().isoformat()
+    except (TypeError, ValueError, OverflowError):
+        return ""
+
+
+def fetch_bytes(url: str, tries: int = 3, timeout: int = 45, with_meta: bool = False):
+    """GET 网页/API。with_meta=True 时多返回一个 dict（Last-Modified/ETag）。
+
+    证书校验失败（站点偶尔少发中间证书，如 pragmatic-engineer）时，后续重试
+    降级为不验证上下文——只用于公开内容抓取，不涉及凭据传输。
+    """
+    global _SSL_LOOSE
     req_url = url
     if "reddit.com" in url and not url.endswith(".json"):
         req_url = url.rstrip("/") + ".json"
     last = None
+    loose = False
     for i in range(tries):
         try:
             req = urllib.request.Request(req_url, headers=HEADERS)
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with urllib.request.urlopen(req, timeout=timeout, context=_SSL_LOOSE if loose else None) as resp:
                 body = resp.read()
                 final = resp.geturl()
                 ctype = resp.headers.get("Content-Type", "")
+                meta = {
+                    "last_modified": resp.headers.get("Last-Modified") or "",
+                    "etag": resp.headers.get("ETag") or "",
+                }
+            if with_meta:
+                return body, final, ctype, None, meta
             return body, final, ctype, None
         except urllib.error.HTTPError as exc:
             last = str(exc.code)
             if exc.code in (401, 403, 404, 410, 429):
-                return None, url, "", last
+                return (None, url, "", last, {}) if with_meta else (None, url, "", last)
             time.sleep(1.4 * (i + 1))
         except Exception as exc:
             last = str(exc)[:80]
+            if "CERTIFICATE_VERIFY_FAILED" in str(exc):
+                if _SSL_LOOSE is None:
+                    _SSL_LOOSE = ssl._create_unverified_context()
+                loose = True
             time.sleep(1.4 * (i + 1))
-    return None, url, "", last or "ERR"
+    return (None, url, "", last or "ERR", {}) if with_meta else (None, url, "", last or "ERR")
 
 
 def save_raw(url: str, body: bytes, ctype: str) -> str:
@@ -1278,7 +1316,7 @@ def fetch_page(url: str) -> dict:
     host = host_of(url)
     if host in SKIP_HOSTS_FETCH:
         return {"url": url, "status": "blocked", "html": "", "raw_file": ""}
-    body, final, ctype, err = fetch_bytes(url)
+    body, final, ctype, err, meta = fetch_bytes(url, with_meta=True)
     if not body:
         if err in ("401", "403") and host:
             SKIP_HOSTS_FETCH.add(host)
@@ -1297,6 +1335,7 @@ def fetch_page(url: str) -> dict:
         "html": text,
         "ctype": ctype,
         "raw_file": raw_file,
+        "last_modified": http_date_to_day(meta.get("last_modified")),
     }
 
 
@@ -2282,8 +2321,10 @@ def bump(run, key):
     run["delta"][key] = run["delta"].get(key, 0) + 1
 
 
-def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, entity_slug, note, run, modified: str = ""):
-    if CS_PATH_RE.search(urllib.parse.urlsplit(url).path or ""):
+def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, entity_slug, note, run, modified: str = "", allow_cs: bool = False):
+    # CS 守卫：RSS/peek 等通用路径不得把案例墙当事件吸进来；只有 fetch_cs_hubs
+    # 传 allow_cs=True 走自己的有界配额（CS_PER_HUB）。
+    if not allow_cs and CS_PATH_RE.search(urllib.parse.urlsplit(url).path or ""):
         bump(run, "skip_cs")
         return "skip_cs"
     nurl = norm_url(url)
@@ -2628,11 +2669,10 @@ def fetch_ats_census(db, catalog, run) -> dict:
             print(f"    fresh {r['published']} {r['title'][:50]} → {st}", flush=True)
 
         census_url = feed["url"].rstrip("/") + "/#fde-census-" + COLLECTED_ON
-        # one census per board: the latest run replaces earlier snapshots
-        db.execute(
-            "DELETE FROM world_events WHERE url LIKE ? AND url != ?",
-            (feed["url"].rstrip("/") + "/#fde-census-%", census_url),
-        )
+        # 普查 URL 的 #fragment 会被 norm_url 剥掉，归一后就是板块 URL，与昨日普查在
+        # existing_urls 里自撞而被判 dup；先放行，插成功后再删旧普查。「先删后插」一旦
+        # 插入失败普查就隔日蒸发（当天 absent → 次日重建 → 再隔天又消失）。
+        run.setdefault("existing_urls", set()).discard(norm_url(census_url))
         title_zh = f"{ent_name}：{len(titles)} 个 FDE 相关岗位"
         st = insert_feed_event(
             db,
@@ -2650,6 +2690,10 @@ def fetch_ats_census(db, catalog, run) -> dict:
         # 永不进窗口；现保留快照日并标 date_kind='published'，让普查能进 7/30/90 天窗的沙盘。
         # 标题带「快照日」口径说明，避免误解成「当天发布 N 个岗位」。
         if st in ("axis", "collected"):
+            db.execute(
+                "DELETE FROM world_events WHERE url LIKE ? AND url != ?",
+                (feed["url"].rstrip("/") + "/#fde-census-%", census_url),
+            )
             db.execute(
                 "UPDATE world_events SET day=COLLECTED_ON, date_kind='published'"
                 " WHERE url=? AND day IS NULL",
@@ -2776,6 +2820,10 @@ def peek_newsrooms(db, catalog, run, cap: int = 8) -> dict:
         for link, day in extract_json_dated_links(html, page.get("final") or url):
             if CS_PATH_RE.search(urllib.parse.urlsplit(link).path or ""):
                 continue
+            # JSON 里常混着 CDN 图片/静态资源，别浪费 PEEK_CANDIDATES 名额
+            if re.search(r"\.(png|jpe?g|gif|webp|svg|avif|css|js|mp4|mp3|woff2?)(\?|$)",
+                         urllib.parse.urlsplit(link).path or "", re.I):
+                continue
             blob = link
             if not (FDE_RE.search(link) or FDE_RE.search(blob)):
                 # keep org-ish JSON rows even if slug has no FDE (Anthropic services company)
@@ -2900,16 +2948,28 @@ def fetch_cs_hubs(db, catalog, run) -> dict:
             time.sleep(0.5)
             html_art = art.get("html") or ""
             dates = extract_dates(html_art)
-            published = valid_day(dates.get("published")) or valid_day(dates.get("modified"))
+            # 页面内 published 缺失时依次回退：页内 modified → HTTP Last-Modified
+            # （与 list_index peek 的 date_policy 对齐：axis = published|modified）。
+            # 只统计正文最后有强日期的，避免把陈年案例放到今天。
+            published = valid_day(dates.get("published"))
+            modified = valid_day(dates.get("modified")) or valid_day(art.get("last_modified"))
+            if modified and modified > COLLECTED_ON:
+                modified = ""
+            day = published or modified
             title = extract_title(html_art) or host
-            if not published:
+            if not day:
                 stats["no_date"] += 1
                 stats["details"].append({"url": link, "skip": "no strong date"})
                 continue
-            if since and published < since:
+            if since and day < since:
                 bump(run, "stale")
                 continue
             customer = customer_from_title(title, host)
+            if (not customer or len(customer) < 2) and art.get("status") == "ok":
+                # 标题提不出客户名时用 URL slug（/customers/<slug>）兜底
+                m = CS_SLUG_RE.search(urllib.parse.urlsplit(link).path or "")
+                if m:
+                    customer = trunc(m.group(1).replace("-", " ").replace("_", " ").strip().title(), 40)
             if not customer or len(customer) < 2:
                 stats["details"].append({"url": link, "skip": "no customer name"})
                 continue
@@ -2922,14 +2982,16 @@ def fetch_cs_hubs(db, catalog, run) -> dict:
                 title=title,
                 title_zh=customer,
                 published=published,
+                modified=modified,
                 entity_slug=hub.get("entity_slug"),
                 note=f"cs hub {hub.get('id')}",
                 run=run,
+                allow_cs=True,
             )
             if st in ("axis", "collected"):
                 added_here += 1
                 stats["added"] += 1
-            print(f"    {st} {published} {customer}", flush=True)
+            print(f"    {st} {day} {customer}", flush=True)
         stats["details"].append({"id": hub.get("id"), "new_links": len(links), "added": added_here})
     return stats
 

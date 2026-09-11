@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-10T02:59:02Z",
-  "snapshot": "2026-09-10",
-  "since_day": "2026-08-11",
+  "written_at": "2026-09-11T09:06:00Z",
+  "snapshot": "2026-09-11",
+  "since_day": "2026-08-12",
   "increment": {
-    "scanned": 25,
-    "fde_hits": 4,
-    "already_in_db": 10,
-    "stale": 12,
-    "added_axis": 8,
+    "scanned": 1239,
+    "fde_hits": 10,
+    "already_in_db": 18,
+    "stale": 19,
+    "added_axis": 13,
     "collected": 0,
     "review": 0
   },
-  "n_events": 535,
-  "n_axis": 155,
+  "n_events": 545,
+  "n_axis": 166,
   "n_review": 0,
-  "new_axis_this_run": 8,
+  "new_axis_this_run": 13,
   "by_lane_axis": {
     "company": 10,
-    "deploy": 83,
-    "method": 45,
+    "deploy": 87,
+    "method": 52,
     "people": 17
   },
-  "n_links": 108,
+  "n_links": 116,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -38,12 +38,30 @@
   "fetch_details": [],
   "feeds": {
     "rss": {
-      "feeds": 3,
-      "hits": 4,
+      "feeds": 5,
+      "hits": 10,
       "added": 0,
-      "already": 2,
-      "stale": 2,
+      "already": 5,
+      "stale": 5,
       "details": [
+        {
+          "id": "openai-index",
+          "status": "ok",
+          "items": 1189,
+          "fde": 5,
+          "added": 0,
+          "already": 2,
+          "stale": 3
+        },
+        {
+          "id": "microsoft-blog",
+          "status": "ok",
+          "items": 10,
+          "fde": 1,
+          "added": 0,
+          "already": 1,
+          "stale": 0
+        },
         {
           "id": "fdepod",
           "status": "ok",
@@ -55,7 +73,12 @@
         },
         {
           "id": "pragmatic-engineer",
-          "status": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl"
+          "status": "ok",
+          "items": 15,
+          "fde": 0,
+          "added": 0,
+          "already": 0,
+          "stale": 0
         },
         {
           "id": "latent-space",
@@ -83,8 +106,8 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 190,
-      "added": 8,
+      "jobs": 197,
+      "added": 9,
       "fresh": 0,
       "details": [
         {
@@ -100,12 +123,12 @@
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 41
+          "n": 43
         },
         {
           "id": "scale-greenhouse",
           "status": "axis",
-          "n": 17
+          "n": 18
         },
         {
           "id": "xai-greenhouse",
@@ -115,12 +138,12 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 38
+          "n": 40
         },
         {
           "id": "cohere-ashby",
           "status": "axis",
-          "n": 19
+          "n": 20
         },
         {
           "id": "replit-ashby",
@@ -129,8 +152,8 @@
         },
         {
           "id": "perplexity-ashby",
-          "status": "ok",
-          "n": 0
+          "status": "axis",
+          "n": 1
         },
         {
           "id": "cursor-ashby",
@@ -147,9 +170,9 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 23,
-    "added": 0,
-    "no_date": 8,
+    "new_links": 24,
+    "added": 4,
+    "no_date": 2,
     "details": [
       {
         "id": "writer-customers",
@@ -162,17 +185,9 @@
         "added": 0
       },
       {
-        "url": "https://www.glean.com/resources/customer-stories/webflow",
-        "skip": "no strong date"
-      },
-      {
-        "url": "https://www.glean.com/resources/customer-stories/databricks",
-        "skip": "no strong date"
-      },
-      {
         "id": "glean-stories",
-        "new_links": 6,
-        "added": 0
+        "new_links": 7,
+        "added": 2
       },
       {
         "id": "sierra-customers",
@@ -203,43 +218,19 @@
         "added": 0
       },
       {
-        "url": "https://www.harvey.ai/en-US/customers/deutsche-telekom-gleiss-lutz-collaboration",
-        "skip": "no strong date"
-      },
-      {
-        "url": "https://www.harvey.ai/en-US/customers/cms",
-        "skip": "no strong date"
-      },
-      {
         "id": "harvey-customers",
         "new_links": 6,
         "added": 0
       },
       {
-        "url": "https://devin.ai/customers/modal",
-        "skip": "no customer name"
-      },
-      {
-        "url": "https://devin.ai/customers/tavrn",
-        "skip": "no customer name"
-      },
-      {
         "id": "devin-customers",
         "new_links": 4,
-        "added": 0
+        "added": 2
       },
       {
         "id": "moveworks-customers",
         "new_links": 0,
         "added": 0
-      },
-      {
-        "url": "https://sourcegraph.com/case-studies/cody-leidos-maximizing-efficiency-heightened-security-ai-race",
-        "skip": "no strong date"
-      },
-      {
-        "url": "https://sourcegraph.com/case-studies/nutanix-fixed-log4j-with-sourcegraph",
-        "skip": "no strong date"
       },
       {
         "id": "sourcegraph-studies",
@@ -259,30 +250,14 @@
     ]
   },
   "peek": {
-    "indexes": 15,
-    "candidates": 26,
+    "indexes": 12,
+    "candidates": 25,
     "added": 0,
     "review": 0,
     "details": [
       {
-        "feed": "openai-index",
-        "status": "403"
-      },
-      {
-        "feed": "openai-careers",
-        "status": "blocked"
-      },
-      {
-        "url": "https://cdn.sanity.io/images/4zrzovbb/website/96e0eefdefd7319a54e805514c1b1c9a5aa31488-1600x1600.png",
-        "skip": "no FDE match"
-      },
-      {
         "url": "https://www.databricks.com/forward-deployed-engineering",
         "skip": "no strong date"
-      },
-      {
-        "feed": "microsoft-blog",
-        "status": "404"
       },
       {
         "url": "https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",

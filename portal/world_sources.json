@@ -403,14 +403,14 @@
   "feeds": [
     {
       "id": "openai-index",
-      "url": "https://openai.com/index/",
+      "url": "https://openai.com/news/rss.xml",
       "host": "openai.com",
       "lane": "company",
       "info_kinds": [
         "org_announcement",
         "product_line"
       ],
-      "fetch_mode": "list_index",
+      "fetch_mode": "rss",
       "status": "watch",
       "priority": 1,
       "entity_slug": "openai",
@@ -426,10 +426,10 @@
         "hiring_board"
       ],
       "fetch_mode": "list_index",
-      "status": "watch",
+      "status": "skip",
       "priority": 2,
       "entity_slug": "openai",
-      "notes": "单条有 publishedAt 才进轴；板本身不当事件"
+      "notes": "openai.com 对脚本抓取整站 403（TLS 指纹拦截）；岗位走 openai-ashby 板"
     },
     {
       "id": "palantir-newsroom",
@@ -566,17 +566,17 @@
     },
     {
       "id": "microsoft-blog",
-      "url": "https://blogs.microsoft.com/blog/",
+      "url": "https://blogs.microsoft.com/feed/",
       "host": "blogs.microsoft.com",
       "lane": "company",
       "info_kinds": [
         "org_announcement"
       ],
-      "fetch_mode": "list_index",
+      "fetch_mode": "rss",
       "status": "watch",
       "priority": 1,
       "entity_slug": "microsoft",
-      "notes": "只要部署编制/Frontier Company；不要每条 Copilot 产品更新"
+      "notes": "旧 /blog/ 页 404；改用官方 RSS。只要部署编制/Frontier Company；不要每条 Copilot 产品更新"
     },
     {
       "id": "cohere-blog",
@@ -1502,7 +1502,7 @@
     "Hiring boards as weak method signals; never explode onto the axis.",
     "Do not fetch until this catalog is accepted and CRAWL_PAUSED is lifted for the dynamics pipeline."
   ],
-  "last_ingest": "2026-09-10T02:59:02Z",
+  "last_ingest": "2026-09-11T09:06:00Z",
   "ats_fresh_policy": {
     "fresh_days": 7,
     "per_board_per_run": 2,

@@ -793,3 +793,145 @@ OK 案例.html  1269 KB  (cases data 559)
 OK cases.json  559 条
 
 完成。提交 portal/*.html + cases.json 到 git，Vercel 即可直接服务。
+warning: in the working copy of 'daily_update.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/site/server.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/a16z.com__home.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/augmentcode.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/augmentcode.com__customers__Pure-storage-scales-2000-engineers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/aws.amazon.com__blogs.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/blend360.com__news.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/cognition.ai__blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/cohere.com__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/cresta.com__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/databricks.com__blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/databricks.com__forward-deployed-engineering.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/devin.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/devin.ai__customers__modal.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/devin.ai__customers__tavrn.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/factory.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__anthropic-forward-deployed-engineer-interview-guide.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__break-into-fde-without-faang.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-coding-interview-not-leetcode.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-interview-prep-mistakes.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-system-design-customer-constraints.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-vs-software-engineer-comparison.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__google-forward-deployed-engineer-interview-guide.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__why-forward-deployed-engineering-answer.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories__databricks.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories__webflow.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__en-US__customers__cms.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__en-US__customers__deutsche-telekom-gleiss-lutz-collaboration.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/intercom.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/moveworks.com__us__en__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/palantir.com__impact.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/palantir.com__newsroom.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/palantir.com__newsroom__letters.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers__chime.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers__gofundme.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies__cody-leidos-maximizing-efficiency-heightened-security-ai-race.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies__nutanix-fixed-log4j-with-sourcegraph.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/svpg.com__home.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/writer.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/youtube.com___aiDotEngineer.html', LF will be replaced by CRLF the next time Git touches it
+[main b05f1d9] daily data refresh 鍛ㄥ洓 2026/09/10 11:01:41.71
+ 59 files changed, 697 insertions(+), 298 deletions(-)
+ create mode 100644 portal/ai-cache/b0e52d3b8c8936b1.json
+ create mode 100644 portal/ai-cache/eac5499b95b4e822.json
+To https://github.com/Qbuby/imfde.git
+   080beb7..b05f1d9  main -> main
+[?? 2026/09/10 11:01:48.71] === daily update done === 
+[?? 2026/09/11 10:51:47.17] === daily update start === 
+== snapshot 2026-09-11 since 2026-08-12
+== feeds rss
+  rss fdepod  https://fdepod.substack.com/feed
+    → items=5 fde=4 added=0 already=2 stale=2
+  rss pragmatic-engineer  https://blog.pragmaticengineer.com/feed
+  rss latent-space  https://www.latent.space/feed
+    → items=20 fde=0 added=0 already=0 stale=0
+== feeds youtube
+  youtube ai-engineer-youtube  https://www.youtube.com/@aiDotEngineer
+== feeds ats census
+  ats palantir-lever  https://jobs.lever.co/palantir
+    → 42 titles folded, dup
+  ats anthropic-greenhouse  https://job-boards.greenhouse.io/anthropic
+    → 8 titles folded, axis
+  ats databricks-greenhouse  https://job-boards.greenhouse.io/databricks
+    fresh 2026-09-04 Staff Forward Deployed Engineer → dup
+    fresh 2026-09-10 Sr. Field Technical Program Manager, Forward Deplo → axis
+    fresh 2026-09-08 Sr. Forward Deployed Engineer (FDE) - Public Secto → dup
+    → 42 titles folded, dup
+  ats scale-greenhouse  https://job-boards.greenhouse.io/scaleai
+    fresh 2026-09-10 Staff Full-Stack Software Engineer, (Forward Deplo → axis
+    fresh 2026-09-10 Senior Full-Stack Software Engineer, (Forward depl → axis
+    → 18 titles folded, dup
+  ats xai-greenhouse  https://job-boards.greenhouse.io/xai
+  ats openai-ashby  https://jobs.ashbyhq.com/openai
+    fresh 2026-09-07 Applied AI Engineer, Codex | Tokyo → dup
+    fresh 2026-09-08 Applied AI Engineer, Digital Natives → dup
+    fresh 2026-09-08 Applied AI Engineer, Government → dup
+    fresh 2026-09-08 Forward Deployed Engineer - London (Spanish-speaki → dup
+    → 39 titles folded, dup
+  ats cohere-ashby  https://jobs.ashbyhq.com/cohere
+    fresh 2026-09-10 Forward Deployed Engineer, Infrastructure Speciali → axis
+    → 20 titles folded, dup
+  ats replit-ashby  https://jobs.ashbyhq.com/replit
+    → 1 titles folded, dup
+  ats perplexity-ashby  https://jobs.ashbyhq.com/perplexity
+    fresh 2026-09-10 Member of Technical Staff (Applied AI Engineer, Ag → axis
+    → 1 titles folded, dup
+  ats cursor-ashby  https://jobs.ashbyhq.com/cursor
+    → 5 titles folded, dup
+  ats elevenlabs-ashby  https://jobs.ashbyhq.com/elevenlabs
+    fresh 2026-09-08 Forward Deployed Engineer - Software Engineer - No → dup
+    → 19 titles folded, dup
+== peek list_index (p1–p2, FDE-only, strong date)
+  peek openai-index  https://openai.com/index/
+  peek openai-careers  https://openai.com/careers/
+  peek palantir-newsroom  https://www.palantir.com/newsroom/
+  peek palantir-letters  https://www.palantir.com/newsroom/letters
+  peek palantir-investors  https://investors.palantir.com/
+  peek anthropic-news  https://www.anthropic.com/news
+    candidate https://cdn.sanity.io/images/4zrzovbb/website/d337d7c546fdeabce5d41ecd2b96ea385bb5f223-2880x1620.jpg
+    candidate https://cdn.sanity.io/images/4zrzovbb/website/96e0eefdefd7319a54e805514c1b1c9a5aa31488-1600x1600.png
+  peek cognition-blog  https://cognition.ai/blog
+  peek databricks-blog  https://www.databricks.com/blog
+    candidate https://www.databricks.com/forward-deployed-engineering
+  peek microsoft-blog  https://blogs.microsoft.com/blog/
+  peek cohere-blog  https://cohere.com/blog
+  peek aws-news  https://aws.amazon.com/blogs/
+  peek fdeinterviews-blog  https://www.fdeinterviews.com/blog
+    candidate https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide
+    candidate https://www.fdeinterviews.com/blog/fde-coding-interview-not-leetcode
+    candidate https://www.fdeinterviews.com/blog/fde-interview-prep-mistakes
+    candidate https://www.fdeinterviews.com/blog/fde-system-design-customer-constraints
+    candidate https://www.fdeinterviews.com/blog/fde-vs-software-engineer-comparison
+    candidate https://www.fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide
+    candidate https://www.fdeinterviews.com/blog/why-forward-deployed-engineering-answer
+    candidate https://www.fdeinterviews.com/blog/break-into-fde-without-faang
+  peek a16z  https://a16z.com/
+  peek svpg  https://www.svpg.com/
+  peek blend360-news  https://www.blend360.com/news
+== case-study hubs (existing vendors, dated only)
+  cs writer-customers  https://writer.com/customers/
+  cs intercom-customers  https://www.intercom.com/customers
+  cs glean-stories  https://www.glean.com/resources/customer-stories
+  cs sierra-customers  https://sierra.ai/customers
+  cs cresta-stories  https://www.cresta.com/customer-stories
+  cs factory-customers  https://factory.ai/customers
+  cs augment-customers  https://www.augmentcode.com/customers
+  cs harvey-customers  https://www.harvey.ai/customers
+  cs devin-customers  https://devin.ai/customers
+  cs moveworks-customers  https://www.moveworks.com/us/en/customers
+  cs sourcegraph-studies  https://sourcegraph.com/case-studies
+  cs cohere-stories  https://cohere.com/customer-stories
+  cs palantir-impact  https://www.palantir.com/impact/
+== editorial copy updated=0
+== increment {"scanned": 25, "fde_hits": 4, "already_in_db": 18, "stale": 14, "added_axis": 6, "collected": 0, "review": 0}
+== done {"n_events": 532, "n_axis": 153, "by_lane_axis": {"company": 10, "deploy": 83, "method": 43, "people": 17}, "n_links": 107}
+OK fde-public.db: 682 questions, answers stripped 682, snapshot 2026-09-11
+^C
