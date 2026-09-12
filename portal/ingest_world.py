@@ -2321,7 +2321,7 @@ def bump(run, key):
     run["delta"][key] = run["delta"].get(key, 0) + 1
 
 
-def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, entity_slug, note, run, modified: str = "", allow_cs: bool = False):
+def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, entity_slug, note, run, modified: str = "", allow_cs: bool = False, happened_zh: str = ""):
     # CS 守卫：RSS/peek 等通用路径不得把案例墙当事件吸进来；只有 fetch_cs_hubs
     # 传 allow_cs=True 走自己的有界配额（CS_PER_HUB）。
     if not allow_cs and CS_PATH_RE.search(urllib.parse.urlsplit(url).path or ""):
@@ -2351,6 +2351,9 @@ def insert_feed_event(db, *, url, lane, info_kind, title, title_zh, published, e
     label = title_zh or title or ""
     org, role = parse_org_role(label, entity_slug or "")
     pack = editorial_pack("", info_kind, label, url=url, org=org, role=role)
+    if happened_zh:
+        # 调用方已备好事实性摘要（如 cs hub 的上新语），压过「标题+句号」的占位兜底
+        pack["happened"] = happened_zh
     if info_kind == "hiring_census":
         m = re.search(r"(\d+)\s*个", label)
         if m:
@@ -2973,6 +2976,14 @@ def fetch_cs_hubs(db, catalog, run) -> dict:
             if not customer or len(customer) < 2:
                 stats["details"].append({"url": link, "skip": "no customer name"})
                 continue
+            # 事实性摘要：厂商上新 + 页面标题 + og:description。不编成效，只说「谁家上了谁的案例」。
+            vendor = (hub.get("entity_slug") or host.split(".")[0]).replace("-", " ").title()
+            desc = meta_content(html_art, "og:description") or meta_content(html_art, "description")
+            desc = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", desc or "")).strip()
+            happened = f"{vendor} 官网发布 {customer} 的客户故事《{trunc(title, 70)}》"
+            if desc and len(desc) >= 40 and desc.lower() != (title or "").lower():
+                happened += f"。页面摘要：{trunc(desc, 110)}"
+            happened += "。"
             ensure_entity(db, hub.get("entity_slug") or host.split(".")[0], hub.get("entity_slug") or host, "org", host)
             st = insert_feed_event(
                 db,
@@ -2987,6 +2998,7 @@ def fetch_cs_hubs(db, catalog, run) -> dict:
                 note=f"cs hub {hub.get('id')}",
                 run=run,
                 allow_cs=True,
+                happened_zh=humanize_copy(happened),
             )
             if st in ("axis", "collected"):
                 added_here += 1
