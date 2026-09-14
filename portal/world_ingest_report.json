@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-14T03:05:08Z",
-  "snapshot": "2026-09-14",
-  "since_day": "2026-08-15",
+  "written_at": "2026-09-14T16:06:42Z",
+  "snapshot": "2026-09-15",
+  "since_day": "2026-08-16",
   "increment": {
-    "scanned": 1242,
+    "scanned": 1243,
     "fde_hits": 11,
-    "already_in_db": 18,
-    "stale": 14,
-    "added_axis": 16,
+    "already_in_db": 19,
+    "stale": 17,
+    "added_axis": 14,
     "collected": 0,
-    "review": 1
+    "review": 0
   },
-  "n_events": 557,
-  "n_axis": 178,
+  "n_events": 561,
+  "n_axis": 182,
   "n_review": 1,
-  "new_axis_this_run": 16,
+  "new_axis_this_run": 14,
   "by_lane_axis": {
     "company": 10,
-    "deploy": 92,
-    "method": 58,
+    "deploy": 95,
+    "method": 59,
     "people": 18
   },
-  "n_links": 124,
+  "n_links": 128,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -40,14 +40,14 @@
     "rss": {
       "feeds": 5,
       "hits": 11,
-      "added": 1,
-      "already": 5,
+      "added": 0,
+      "already": 6,
       "stale": 5,
       "details": [
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1192,
+          "items": 1193,
           "fde": 5,
           "added": 0,
           "already": 2,
@@ -85,8 +85,8 @@
           "status": "ok",
           "items": 20,
           "fde": 1,
-          "added": 1,
-          "already": 0,
+          "added": 0,
+          "already": 1,
           "stale": 0
         }
       ]
@@ -108,7 +108,7 @@
       "boards": 11,
       "jobs": 200,
       "added": 10,
-      "fresh": 0,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 12,
-    "added": 2,
+    "new_links": 10,
+    "added": 3,
     "no_date": 2,
     "details": [
       {
@@ -186,7 +186,7 @@
       },
       {
         "id": "glean-stories",
-        "new_links": 4,
+        "new_links": 2,
         "added": 2
       },
       {
@@ -225,7 +225,7 @@
       {
         "id": "devin-customers",
         "new_links": 1,
-        "added": 0
+        "added": 1
       },
       {
         "id": "moveworks-customers",
@@ -251,31 +251,13 @@
   },
   "peek": {
     "indexes": 12,
-    "candidates": 28,
-    "added": 3,
+    "candidates": 25,
+    "added": 0,
     "review": 0,
     "details": [
       {
         "url": "https://www.databricks.com/forward-deployed-engineering",
         "skip": "no strong date"
-      },
-      {
-        "url": "https://www.fdeinterviews.com/blog/how-long-does-the-forward-deployed-engineer-interview-take",
-        "day": "2026-09-12",
-        "title": "How Long Does the Forward Deployed Engineer…",
-        "status": "axis"
-      },
-      {
-        "url": "https://www.fdeinterviews.com/blog/how-many-companies-hire-forward-deployed-engineers",
-        "day": "2026-09-12",
-        "title": "How Many Companies Hire Forward Deployed En…",
-        "status": "axis"
-      },
-      {
-        "url": "https://www.fdeinterviews.com/blog/how-many-rounds-in-a-forward-deployed-engineer-interview",
-        "day": "2026-09-12",
-        "title": "How Many Rounds Is a Forward Deployed Engin…",
-        "status": "axis"
       },
       {
         "url": "https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
@@ -299,6 +281,21 @@
       },
       {
         "url": "https://www.fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://www.fdeinterviews.com/blog/break-into-fde-without-faang",
         "skip": "stale",
         "day": "2026-06-21"
       }
