@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-16T16:06:12Z",
-  "snapshot": "2026-09-17",
-  "since_day": "2026-08-18",
+  "written_at": "2026-09-17T16:08:22Z",
+  "snapshot": "2026-09-18",
+  "since_day": "2026-08-19",
   "increment": {
-    "scanned": 1245,
+    "scanned": 1256,
     "fde_hits": 11,
-    "already_in_db": 17,
-    "stale": 17,
-    "added_axis": 12,
+    "already_in_db": 13,
+    "stale": 15,
+    "added_axis": 11,
     "collected": 0,
     "review": 0
   },
-  "n_events": 567,
-  "n_axis": 188,
+  "n_events": 569,
+  "n_axis": 190,
   "n_review": 1,
-  "new_axis_this_run": 12,
+  "new_axis_this_run": 11,
   "by_lane_axis": {
     "company": 10,
-    "deploy": 95,
-    "method": 65,
+    "deploy": 96,
+    "method": 66,
     "people": 18
   },
-  "n_links": 134,
+  "n_links": 136,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1195,
+          "items": 1206,
           "fde": 5,
           "added": 0,
           "already": 2,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 207,
-      "added": 10,
-      "fresh": 2,
+      "jobs": 197,
+      "added": 9,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
@@ -117,8 +117,7 @@
         },
         {
           "id": "anthropic-greenhouse",
-          "status": "axis",
-          "n": 8
+          "status": "The read operation timed out"
         },
         {
           "id": "databricks-greenhouse",
@@ -138,7 +137,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 42
+          "n": 41
         },
         {
           "id": "cohere-ashby",
@@ -163,15 +162,15 @@
         {
           "id": "elevenlabs-ashby",
           "status": "axis",
-          "n": 19
+          "n": 18
         }
       ]
     }
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 7,
-    "added": 0,
+    "new_links": 6,
+    "added": 1,
     "no_date": 2,
     "details": [
       {
@@ -214,7 +213,7 @@
       },
       {
         "id": "augment-customers",
-        "new_links": 2,
+        "new_links": 3,
         "added": 0
       },
       {
@@ -224,8 +223,8 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 0,
-        "added": 0
+        "new_links": 1,
+        "added": 1
       },
       {
         "id": "moveworks-customers",
@@ -234,8 +233,7 @@
       },
       {
         "id": "sourcegraph-studies",
-        "new_links": 3,
-        "added": 0
+        "status": "403"
       },
       {
         "id": "cohere-stories",
@@ -260,42 +258,42 @@
         "skip": "no strong date"
       },
       {
-        "url": "https://www.fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
+        "url": "https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
         "skip": "stale",
         "day": "2026-06-21"
       },
       {
-        "url": "https://www.fdeinterviews.com/blog/fde-coding-interview-not-leetcode",
+        "url": "https://fdeinterviews.com/blog/fde-coding-interview-not-leetcode",
         "skip": "stale",
         "day": "2026-06-21"
       },
       {
-        "url": "https://www.fdeinterviews.com/blog/fde-interview-prep-mistakes",
+        "url": "https://fdeinterviews.com/blog/fde-interview-prep-mistakes",
         "skip": "stale",
         "day": "2026-06-21"
       },
       {
-        "url": "https://www.fdeinterviews.com/blog/fde-system-design-customer-constraints",
+        "url": "https://fdeinterviews.com/blog/fde-system-design-customer-constraints",
         "skip": "stale",
         "day": "2026-06-21"
       },
       {
-        "url": "https://www.fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
+        "url": "https://fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
         "skip": "stale",
         "day": "2026-06-21"
       },
       {
-        "url": "https://www.fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
+        "url": "https://fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
         "skip": "stale",
         "day": "2026-06-21"
       },
       {
-        "url": "https://www.fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
+        "url": "https://fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
         "skip": "stale",
         "day": "2026-06-21"
       },
       {
-        "url": "https://www.fdeinterviews.com/blog/break-into-fde-without-faang",
+        "url": "https://fdeinterviews.com/blog/break-into-fde-without-faang",
         "skip": "stale",
         "day": "2026-06-21"
       }
