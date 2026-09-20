@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-19T16:07:11Z",
-  "snapshot": "2026-09-20",
-  "since_day": "2026-08-21",
+  "written_at": "2026-09-20T16:07:53Z",
+  "snapshot": "2026-09-21",
+  "since_day": "2026-08-22",
   "increment": {
     "scanned": 1260,
     "fde_hits": 11,
-    "already_in_db": 9,
-    "stale": 13,
-    "added_axis": 15,
+    "already_in_db": 11,
+    "stale": 17,
+    "added_axis": 14,
     "collected": 0,
     "review": 0
   },
-  "n_events": 575,
-  "n_axis": 196,
+  "n_events": 579,
+  "n_axis": 200,
   "n_review": 1,
-  "new_axis_this_run": 15,
+  "new_axis_this_run": 14,
   "by_lane_axis": {
     "company": 10,
     "deploy": 97,
-    "method": 71,
+    "method": 75,
     "people": 18
   },
-  "n_links": 139,
+  "n_links": 143,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 159,
-      "added": 9,
-      "fresh": 2,
+      "jobs": 202,
+      "added": 10,
+      "fresh": 4,
       "details": [
         {
           "id": "palantir-lever",
@@ -137,7 +137,8 @@
         },
         {
           "id": "openai-ashby",
-          "status": "IncompleteRead(11952704 bytes read, 1640116 more expected)"
+          "status": "axis",
+          "n": 43
         },
         {
           "id": "cohere-ashby",
@@ -169,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 10,
-    "added": 1,
+    "new_links": 9,
+    "added": 0,
     "no_date": 2,
     "details": [
       {
@@ -223,8 +224,8 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 5,
-        "added": 1
+        "new_links": 4,
+        "added": 0
       },
       {
         "id": "moveworks-customers",
@@ -249,31 +250,13 @@
   },
   "peek": {
     "indexes": 12,
-    "candidates": 29,
-    "added": 3,
+    "candidates": 26,
+    "added": 0,
     "review": 0,
     "details": [
       {
         "url": "https://www.databricks.com/forward-deployed-engineering",
         "skip": "no strong date"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/fde-job-description-questions-before-interview",
-        "day": "2026-09-17",
-        "title": "How to evaluate an FDE job description befo…",
-        "status": "axis"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/how-to-run-an-fde-mock-interview",
-        "day": "2026-09-17",
-        "title": "How to run an FDE mock interview that revea…",
-        "status": "axis"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/switch-to-fde-from-software-program-management",
-        "day": "2026-09-17",
-        "title": "How to switch to FDE from software engineer…",
-        "status": "axis"
       },
       {
         "url": "https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
@@ -297,6 +280,21 @@
       },
       {
         "url": "https://fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/break-into-fde-without-faang",
         "skip": "stale",
         "day": "2026-06-21"
       }
