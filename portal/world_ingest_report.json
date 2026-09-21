@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-20T16:07:53Z",
-  "snapshot": "2026-09-21",
-  "since_day": "2026-08-22",
+  "written_at": "2026-09-21T16:06:42Z",
+  "snapshot": "2026-09-22",
+  "since_day": "2026-08-23",
   "increment": {
-    "scanned": 1260,
+    "scanned": 1262,
     "fde_hits": 11,
-    "already_in_db": 11,
-    "stale": 17,
-    "added_axis": 14,
+    "already_in_db": 12,
+    "stale": 19,
+    "added_axis": 10,
     "collected": 0,
     "review": 0
   },
-  "n_events": 579,
-  "n_axis": 200,
+  "n_events": 580,
+  "n_axis": 201,
   "n_review": 1,
-  "new_axis_this_run": 14,
+  "new_axis_this_run": 10,
   "by_lane_axis": {
     "company": 10,
     "deploy": 97,
-    "method": 75,
+    "method": 76,
     "people": 18
   },
-  "n_links": 143,
+  "n_links": 144,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1210,
+          "items": 1211,
           "fde": 5,
           "added": 0,
           "already": 2,
@@ -65,7 +65,7 @@
         {
           "id": "fdepod",
           "status": "ok",
-          "items": 5,
+          "items": 6,
           "fde": 4,
           "added": 0,
           "already": 2,
@@ -106,14 +106,13 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 202,
-      "added": 10,
-      "fresh": 4,
+      "jobs": 158,
+      "added": 9,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
-          "status": "axis",
-          "n": 42
+          "status": "<urlopen error _ssl.c:1015: The handshake operation timed out>"
         },
         {
           "id": "anthropic-greenhouse",
@@ -123,7 +122,7 @@
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 47
+          "n": 46
         },
         {
           "id": "scale-greenhouse",
@@ -163,14 +162,14 @@
         {
           "id": "elevenlabs-ashby",
           "status": "axis",
-          "n": 18
+          "n": 17
         }
       ]
     }
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 9,
+    "new_links": 12,
     "added": 0,
     "no_date": 2,
     "details": [
@@ -234,7 +233,8 @@
       },
       {
         "id": "sourcegraph-studies",
-        "status": "403"
+        "new_links": 3,
+        "added": 0
       },
       {
         "id": "cohere-stories",
