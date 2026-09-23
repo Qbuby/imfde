@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-21T16:06:42Z",
-  "snapshot": "2026-09-22",
-  "since_day": "2026-08-23",
+  "written_at": "2026-09-23T02:03:59Z",
+  "snapshot": "2026-09-23",
+  "since_day": "2026-08-24",
   "increment": {
-    "scanned": 1262,
+    "scanned": 1270,
     "fde_hits": 11,
-    "already_in_db": 12,
+    "already_in_db": 10,
     "stale": 19,
-    "added_axis": 10,
+    "added_axis": 14,
     "collected": 0,
     "review": 0
   },
-  "n_events": 580,
-  "n_axis": 201,
+  "n_events": 584,
+  "n_axis": 205,
   "n_review": 1,
-  "new_axis_this_run": 10,
+  "new_axis_this_run": 14,
   "by_lane_axis": {
     "company": 10,
     "deploy": 97,
-    "method": 76,
+    "method": 80,
     "people": 18
   },
-  "n_links": 144,
+  "n_links": 148,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1211,
+          "items": 1219,
           "fde": 5,
           "added": 0,
           "already": 2,
@@ -106,13 +106,14 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 158,
-      "added": 9,
-      "fresh": 1,
+      "jobs": 208,
+      "added": 10,
+      "fresh": 4,
       "details": [
         {
           "id": "palantir-lever",
-          "status": "<urlopen error _ssl.c:1015: The handshake operation timed out>"
+          "status": "axis",
+          "n": 42
         },
         {
           "id": "anthropic-greenhouse",
@@ -122,12 +123,12 @@
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 46
+          "n": 54
         },
         {
           "id": "scale-greenhouse",
           "status": "axis",
-          "n": 17
+          "n": 16
         },
         {
           "id": "xai-greenhouse",
@@ -137,7 +138,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 43
+          "n": 44
         },
         {
           "id": "cohere-ashby",
