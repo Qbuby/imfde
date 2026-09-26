@@ -1,15 +1,15 @@
 {
-  "snapshot": "2026-09-25",
-  "last_ingest": "2026-09-25T02:03:55Z",
-  "since_day": "2026-09-25",
+  "snapshot": "2026-09-27",
+  "last_ingest": "2026-09-26T16:01:54Z",
+  "since_day": "2026-09-27",
   "last_delta": {
-    "scanned": 1280,
+    "scanned": 1281,
     "fde_hits": 12,
-    "already": 16,
-    "stale": 18,
-    "added_axis": 13,
+    "already": 18,
+    "stale": 19,
+    "added_axis": 10,
     "collected": 0,
     "review": 0
   },
-  "new_axis_this_run": 13
+  "new_axis_this_run": 10
 }
