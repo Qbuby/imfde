@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-27T16:06:31Z",
-  "snapshot": "2026-09-28",
-  "since_day": "2026-08-29",
+  "written_at": "2026-09-28T16:06:34Z",
+  "snapshot": "2026-09-29",
+  "since_day": "2026-08-30",
   "increment": {
     "scanned": 1281,
     "fde_hits": 12,
-    "already_in_db": 18,
+    "already_in_db": 16,
     "stale": 19,
-    "added_axis": 10,
+    "added_axis": 14,
     "collected": 0,
     "review": 0
   },
-  "n_events": 596,
-  "n_axis": 217,
+  "n_events": 600,
+  "n_axis": 221,
   "n_review": 1,
-  "new_axis_this_run": 10,
+  "new_axis_this_run": 14,
   "by_lane_axis": {
     "company": 11,
     "deploy": 98,
-    "method": 90,
+    "method": 94,
     "people": 18
   },
-  "n_links": 160,
+  "n_links": 164,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 209,
+      "jobs": 211,
       "added": 10,
-      "fresh": 0,
+      "fresh": 4,
       "details": [
         {
           "id": "palantir-lever",
@@ -118,7 +118,7 @@
         {
           "id": "anthropic-greenhouse",
           "status": "axis",
-          "n": 9
+          "n": 10
         },
         {
           "id": "databricks-greenhouse",
@@ -158,12 +158,12 @@
         {
           "id": "cursor-ashby",
           "status": "axis",
-          "n": 5
+          "n": 7
         },
         {
           "id": "elevenlabs-ashby",
           "status": "axis",
-          "n": 12
+          "n": 11
         }
       ]
     }
