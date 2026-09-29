@@ -22,7 +22,26 @@
     'ad_user_data': 'denied',
     'ad_personalization': 'denied',
     'analytics_storage': 'denied'
-  });</script><script type="text/javascript" data-cfasync="false" async="">window._vwo_code = window._vwo_code || (function(){
+  });</script><script type="text/javascript" class="optanon-category-C0001" data-ot-ignore="1">(function () {
+  var KEY = 'disableQualifiedChat'
+  function hasDisableCookie () {
+    return document.cookie.split('; ').indexOf(KEY + '=1') !== -1
+  }
+  try {
+    var value = new URLSearchParams(location.search).get(KEY)
+    if (value === '1') {
+      // Session cookie (no max-age): persists across navigations, clears when the browser closes.
+      document.cookie = KEY + '=1; path=/; SameSite=Lax'
+    } else if (value === '0') {
+      document.cookie = KEY + '=; path=/; max-age=0; SameSite=Lax'
+    }
+    if (value === '1' || (value !== '0' && hasDisableCookie())) {
+      var style = document.createElement('style')
+      style.textContent = '#qualified-multimodal-host{display:none!important}'
+      document.head.appendChild(style)
+    }
+  } catch (e) {}
+})()</script><script type="text/javascript" data-cfasync="false" async="">window._vwo_code = window._vwo_code || (function(){
       var _vis_opt_domain = 'www.databricks.com';
       var account_id=326926,
       settings_tolerance=2000,
@@ -58,7 +77,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       site: 'datadoghq.com',
       service: 'www-databricks-com',
       env: 'production',
-      version: 'b7408ad2885ec45fff9fa6a137a2633596e722f8',
+      version: '2c6a4e1465345401ce5eaa625758aa2aefacacf4',
       sessionSampleRate: 100,
       sessionReplaySampleRate: 0,
       trackResources: true,
@@ -102,7 +121,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       site: 'datadoghq.com',
       service: 'www-databricks-com',
       env: 'production',
-      version: 'b7408ad2885ec45fff9fa6a137a2633596e722f8',
+      version: '2c6a4e1465345401ce5eaa625758aa2aefacacf4',
       sessionSampleRate: 100,
       forwardErrorsToLogs: true,
       forwardConsoleLogs: ['error', 'warn'],
@@ -455,5 +474,5 @@ San Francisco, CA 94105<br />
           <script id="gatsby-chunk-mapping" data-ot-ignore="1" class="optanon-category-C0001">
             window.___chunkMapping="{\"app\":[\"/app-af8efef591a9c443874a.js\"],\"component---packages-gatsby-theme-databricks-drupal-src-templates-general-page-js\":[\"/component---packages-gatsby-theme-databricks-drupal-src-templates-general-page-js-4ef350bc13e02f379cb8.js\"],\"component---packages-gatsby-theme-databricks-drupal-src-templates-home-page-js\":[\"/component---packages-gatsby-theme-databricks-drupal-src-templates-home-page-js-3928038619096caca422.js\"],\"component---packages-gatsby-theme-databricks-drupal-src-templates-search-page-js\":[\"/component---packages-gatsby-theme-databricks-drupal-src-templates-search-page-js-b1a5cb2d99438a7a2666.js\"],\"component---packages-gatsby-theme-databricks-drupal-src-templates-solution-accelerators-js\":[\"/component---packages-gatsby-theme-databricks-drupal-src-templates-solution-accelerators-js-891ba633aebe99f116bf.js\"],\"component---packages-gatsby-theme-databricks-drupal-src-templates-try-databricks-alt-js\":[\"/component---packages-gatsby-theme-databricks-drupal-src-templates-try-databricks-alt-js-49cc0a7a69b77ccd6646.js\"],\"component---src-pages-500-js\":[\"/component---src-pages-500-js-64e9b79362272a075345.js\"],\"component---src-pages-discover-mit-infographic-js\":[\"/component---src-pages-discover-mit-infographic-js-226f11c7fe88fde1874c.js\"],\"reactPlayerPreview\":[\"/reactPlayerPreview-a03f543e686221b99f12.js\"],\"reactPlayerYouTube\":[\"/reactPlayerYouTube-bb5ad82d1c80ff36803b.js\"],\"reactPlayerSoundCloud\":[\"/reactPlayerSoundCloud-7e548a0030ebafca2f1f.js\"],\"reactPlayerVimeo\":[\"/reactPlayerVimeo-c1ed0e23ba6ec5b35e66.js\"],\"reactPlayerMux\":[\"/reactPlayerMux-1ef205045ef48dcfd30c.js\"],\"reactPlayerFacebook\":[\"/reactPlayerFacebook-ba377efef99b8773548a.js\"],\"reactPlayerStreamable\":[\"/reactPlayerStreamable-b34ac6e2975b462eb62d.js\"],\"reactPlayerWistia\":[\"/reactPlayerWistia-c93df5eee41ba10a5efd.js\"],\"reactPlayerTwitch\":[\"/reactPlayerTwitch-595792c26f960a249968.js\"],\"reactPlayerDailyMotion\":[\"/reactPlayerDailyMotion-0ae95fdd5227cad3271a.js\"],\"reactPlayerMixcloud\":[\"/reactPlayerMixcloud-a9cbf6681296ea9e8495.js\"],\"reactPlayerVidyard\":[\"/reactPlayerVidyard-567be0f5b0d41d218706.js\"],\"reactPlayerKaltura\":[\"/reactPlayerKaltura-48f4abba65ea46edcd61.js\"],\"reactPlayerFilePlayer\":[\"/reactPlayerFilePlayer-4e97092082efd0678966.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="f0ccc9864b977e1535a2";</script><script src="/en-website-assets/webpack-runtime-f0f1bebdb559b0e56d1c.js" async data-ot-ignore="1" class="optanon-category-C0001"></script><script src="/en-website-assets/stylesafelist.splitCss-47caf5b35fc22acda805.js" async data-ot-ignore="1" class="optanon-category-C0001"></script><script src="/en-website-assets/styles-ac30959183603c0a3ad2.js" async data-ot-ignore="1" class="optanon-category-C0001"></script><script src="/en-website-assets/app-af8efef591a9c443874a.js" async data-ot-ignore="1" class="optanon-category-C0001"></script><!-- slice-end id="_gatsby-scripts-1" --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"b90ab4c0846c4f09b8f847ba17f72dd0","spa":2}' crossorigin="anonymous"></script>
+        <script>window.___webpackCompilationHash="1e57a4b1a44420f2e8dd";</script><script src="/en-website-assets/webpack-runtime-5ace2ee5ff929551405c.js" async data-ot-ignore="1" class="optanon-category-C0001"></script><script src="/en-website-assets/stylesafelist.splitCss-47caf5b35fc22acda805.js" async data-ot-ignore="1" class="optanon-category-C0001"></script><script src="/en-website-assets/styles-ac30959183603c0a3ad2.js" async data-ot-ignore="1" class="optanon-category-C0001"></script><script src="/en-website-assets/app-af8efef591a9c443874a.js" async data-ot-ignore="1" class="optanon-category-C0001"></script><!-- slice-end id="_gatsby-scripts-1" --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"b90ab4c0846c4f09b8f847ba17f72dd0","spa":2}' crossorigin="anonymous"></script>
 </body></html>

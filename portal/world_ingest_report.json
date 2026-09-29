@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-28T16:06:34Z",
-  "snapshot": "2026-09-29",
-  "since_day": "2026-08-30",
+  "written_at": "2026-09-29T16:08:59Z",
+  "snapshot": "2026-09-30",
+  "since_day": "2026-08-31",
   "increment": {
-    "scanned": 1281,
-    "fde_hits": 12,
+    "scanned": 1286,
+    "fde_hits": 10,
     "already_in_db": 16,
     "stale": 19,
-    "added_axis": 14,
+    "added_axis": 12,
     "collected": 0,
     "review": 0
   },
-  "n_events": 600,
-  "n_axis": 221,
+  "n_events": 603,
+  "n_axis": 224,
   "n_review": 1,
-  "new_axis_this_run": 14,
+  "new_axis_this_run": 12,
   "by_lane_axis": {
     "company": 11,
     "deploy": 98,
-    "method": 94,
+    "method": 97,
     "people": 18
   },
-  "n_links": 164,
+  "n_links": 167,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -39,15 +39,15 @@
   "feeds": {
     "rss": {
       "feeds": 5,
-      "hits": 12,
+      "hits": 10,
       "added": 0,
-      "already": 7,
+      "already": 5,
       "stale": 5,
       "details": [
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1230,
+          "items": 1235,
           "fde": 6,
           "added": 0,
           "already": 3,
@@ -57,9 +57,9 @@
           "id": "microsoft-blog",
           "status": "ok",
           "items": 10,
-          "fde": 1,
+          "fde": 0,
           "added": 0,
-          "already": 1,
+          "already": 0,
           "stale": 0
         },
         {
@@ -84,9 +84,9 @@
           "id": "latent-space",
           "status": "ok",
           "items": 20,
-          "fde": 1,
+          "fde": 0,
           "added": 0,
-          "already": 1,
+          "already": 0,
           "stale": 0
         }
       ]
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 211,
-      "added": 10,
-      "fresh": 4,
+      "jobs": 202,
+      "added": 9,
+      "fresh": 3,
       "details": [
         {
           "id": "palantir-lever",
@@ -123,7 +123,7 @@
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 56
+          "n": 57
         },
         {
           "id": "scale-greenhouse",
@@ -138,7 +138,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 47
+          "n": 48
         },
         {
           "id": "cohere-ashby",
@@ -162,8 +162,7 @@
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "axis",
-          "n": 11
+          "status": "<urlopen error _ssl.c:1015: The handshake operation timed out>"
         }
       ]
     }
