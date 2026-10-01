@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-09-29T16:08:59Z",
-  "snapshot": "2026-09-30",
-  "since_day": "2026-08-31",
+  "written_at": "2026-10-01T16:04:06Z",
+  "snapshot": "2026-10-02",
+  "since_day": "2026-09-02",
   "increment": {
-    "scanned": 1286,
+    "scanned": 1291,
     "fde_hits": 10,
-    "already_in_db": 16,
-    "stale": 19,
+    "already_in_db": 20,
+    "stale": 17,
     "added_axis": 12,
     "collected": 0,
     "review": 0
   },
-  "n_events": 603,
-  "n_axis": 224,
-  "n_review": 1,
+  "n_events": 611,
+  "n_axis": 232,
+  "n_review": 3,
   "new_axis_this_run": 12,
   "by_lane_axis": {
     "company": 11,
-    "deploy": 98,
-    "method": 97,
+    "deploy": 100,
+    "method": 103,
     "people": 18
   },
-  "n_links": 167,
+  "n_links": 175,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1235,
+          "items": 1240,
           "fde": 6,
           "added": 0,
           "already": 3,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 202,
-      "added": 9,
-      "fresh": 3,
+      "jobs": 208,
+      "added": 10,
+      "fresh": 0,
       "details": [
         {
           "id": "palantir-lever",
@@ -118,17 +118,17 @@
         {
           "id": "anthropic-greenhouse",
           "status": "axis",
-          "n": 10
+          "n": 11
         },
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 57
+          "n": 58
         },
         {
           "id": "scale-greenhouse",
           "status": "axis",
-          "n": 16
+          "n": 15
         },
         {
           "id": "xai-greenhouse",
@@ -143,7 +143,7 @@
         {
           "id": "cohere-ashby",
           "status": "axis",
-          "n": 19
+          "n": 17
         },
         {
           "id": "replit-ashby",
@@ -162,16 +162,17 @@
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "<urlopen error _ssl.c:1015: The handshake operation timed out>"
+          "status": "axis",
+          "n": 7
         }
       ]
     }
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 12,
-    "added": 0,
-    "no_date": 2,
+    "new_links": 15,
+    "added": 2,
+    "no_date": 3,
     "details": [
       {
         "id": "writer-customers",
@@ -179,8 +180,12 @@
         "added": 0
       },
       {
+        "url": "https://www.intercom.com/customers/atlassian",
+        "skip": "no strong date"
+      },
+      {
         "id": "intercom-customers",
-        "new_links": 0,
+        "new_links": 1,
         "added": 0
       },
       {
@@ -223,8 +228,8 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 4,
-        "added": 0
+        "new_links": 6,
+        "added": 2
       },
       {
         "id": "moveworks-customers",
