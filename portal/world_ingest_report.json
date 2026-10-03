@@ -1,20 +1,20 @@
 {
-  "written_at": "2026-10-01T16:04:06Z",
-  "snapshot": "2026-10-02",
-  "since_day": "2026-09-02",
+  "written_at": "2026-10-03T16:04:23Z",
+  "snapshot": "2026-10-04",
+  "since_day": "2026-09-04",
   "increment": {
-    "scanned": 1291,
+    "scanned": 1296,
     "fde_hits": 10,
-    "already_in_db": 20,
-    "stale": 17,
-    "added_axis": 12,
+    "already_in_db": 18,
+    "stale": 19,
+    "added_axis": 10,
     "collected": 0,
     "review": 0
   },
   "n_events": 611,
   "n_axis": 232,
   "n_review": 3,
-  "new_axis_this_run": 12,
+  "new_axis_this_run": 10,
   "by_lane_axis": {
     "company": 11,
     "deploy": 100,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1240,
+          "items": 1245,
           "fde": 6,
           "added": 0,
           "already": 3,
@@ -106,7 +106,7 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 208,
+      "jobs": 209,
       "added": 10,
       "fresh": 0,
       "details": [
@@ -118,7 +118,7 @@
         {
           "id": "anthropic-greenhouse",
           "status": "axis",
-          "n": 11
+          "n": 10
         },
         {
           "id": "databricks-greenhouse",
@@ -138,7 +138,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 48
+          "n": 50
         },
         {
           "id": "cohere-ashby",
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 15,
-    "added": 2,
+    "new_links": 13,
+    "added": 0,
     "no_date": 3,
     "details": [
       {
@@ -228,8 +228,8 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 6,
-        "added": 2
+        "new_links": 4,
+        "added": 0
       },
       {
         "id": "moveworks-customers",
