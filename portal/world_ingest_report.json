@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-10-03T16:04:23Z",
-  "snapshot": "2026-10-04",
-  "since_day": "2026-09-04",
+  "written_at": "2026-10-04T16:07:08Z",
+  "snapshot": "2026-10-05",
+  "since_day": "2026-09-05",
   "increment": {
     "scanned": 1296,
     "fde_hits": 10,
     "already_in_db": 18,
     "stale": 19,
-    "added_axis": 10,
+    "added_axis": 11,
     "collected": 0,
     "review": 0
   },
-  "n_events": 611,
-  "n_axis": 232,
+  "n_events": 612,
+  "n_axis": 233,
   "n_review": 3,
-  "new_axis_this_run": 10,
+  "new_axis_this_run": 11,
   "by_lane_axis": {
     "company": 11,
     "deploy": 100,
-    "method": 103,
+    "method": 104,
     "people": 18
   },
-  "n_links": 175,
+  "n_links": 176,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 209,
+      "jobs": 210,
       "added": 10,
-      "fresh": 0,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
@@ -163,7 +163,7 @@
         {
           "id": "elevenlabs-ashby",
           "status": "axis",
-          "n": 7
+          "n": 8
         }
       ]
     }
