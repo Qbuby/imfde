@@ -4,18 +4,18 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>imfde.ai — 全球首个 FDE 实时情报动态沙盘</title>
-<meta name="description" content="imfde.ai 持续追踪 FDE（Forward Deployed Engineer）行业的公司动作、真实客户部署、人物观点与方法岗位，以 3D 实时情报沙盘呈现，可按 7/30/90 天窗口查看，每条动态可对照原文核读。"/>
+<meta name="description" content="imfde.ai 持续追踪 FDE（Forward Deployed Engineer）行业的公司动作、真实客户部署、人物观点与方法岗位，以 3D 实时情报沙盘呈现，可按 7/30/90 天窗口查看，每条动态可对照原文核读。首页先给出当期概览与三条关键变化，再进入沙盘探索。"/>
 <link rel="canonical" href="https://imfde.ai/"/>
 <meta property="og:site_name" content="imfde.ai"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="imfde.ai — 全球首个 FDE 实时情报动态沙盘"/>
-<meta property="og:description" content="imfde.ai 持续追踪 FDE（Forward Deployed Engineer）行业的公司动作、真实客户部署、人物观点与方法岗位，以 3D 实时情报沙盘呈现，可按 7/30/90 天窗口查看，每条动态可对照原文核读。"/>
+<meta property="og:description" content="imfde.ai 持续追踪 FDE（Forward Deployed Engineer）行业的公司动作、真实客户部署、人物观点与方法岗位，以 3D 实时情报沙盘呈现，可按 7/30/90 天窗口查看，每条动态可对照原文核读。首页先给出当期概览与三条关键变化，再进入沙盘探索。"/>
 <meta property="og:url" content="https://imfde.ai/"/>
 <meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
 <meta property="og:locale" content="zh_CN"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="imfde.ai — 全球首个 FDE 实时情报动态沙盘"/>
-<meta name="twitter:description" content="imfde.ai 持续追踪 FDE（Forward Deployed Engineer）行业的公司动作、真实客户部署、人物观点与方法岗位，以 3D 实时情报沙盘呈现，可按 7/30/90 天窗口查看，每条动态可对照原文核读。"/>
+<meta name="twitter:description" content="imfde.ai 持续追踪 FDE（Forward Deployed Engineer）行业的公司动作、真实客户部署、人物观点与方法岗位，以 3D 实时情报沙盘呈现，可按 7/30/90 天窗口查看，每条动态可对照原文核读。首页先给出当期概览与三条关键变化，再进入沙盘探索。"/>
 <meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
 <link rel="stylesheet" href="site/static/tokens.css"/>
 <script type="importmap">
@@ -30,7 +30,6 @@
 
 
 <div class="w3" id="w3" data-three="0.185.1">
-  <h1 class="sr-only">imfde.ai — 全球首个 FDE 实时情报动态沙盘：FDE 公司动作、真实部署、人物观点与方法岗位</h1>
   <header class="w3-hud" role="banner">
     <a class="w3-brand" href="world3d.html" aria-label="imfde.ai AI 实战进化社">
       <img class="brand-logo" src="site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span>
@@ -54,6 +53,24 @@
     <canvas id="w3-canvas" tabindex="0" aria-describedby="w3-legend"></canvas>
     <div class="w3-labels w3-labels-3d" id="w3-labels-3d" aria-hidden="true"></div>
     <div class="w3-labels" id="w3-labels" aria-hidden="true"></div>
+    <section class="w3-ov" id="w3-overview" aria-label="本期概览">
+      <div class="w3-ov-card">
+        <p class="w3-ov-k">imfde.ai · FDE 实时情报沙盘</p>
+        <h1 class="w3-title">FDE 行业，正在发生什么</h1>
+        <p class="w3-ov-desc">按 7 / 30 / 90 天三个窗口持续追踪 FDE 行业的<b>公司动作</b>、<b>客户部署</b>、<b>人物观点</b>与<b>招聘动向</b>；沙盘上每个形体都对应一份可核对的原文。</p>
+        <p class="w3-sub" data-w3-lede>点开观察，读事实与影响，再进入落地或方法 · 过去 30 天</p>
+        <div class="w3-ov-stats" id="w3-ov-stats"><div class="w3-ov-stat" data-lane="company"><b>1</b><span>公司</span></div><div class="w3-ov-stat" data-lane="deploy"><b>9</b><span>客户故事</span></div><div class="w3-ov-stat" data-lane="people"><b>1</b><span>人物</span></div><div class="w3-ov-stat" data-lane="method"><b>73</b><span>招聘 / 学习</span></div><div class="w3-ov-stat w3-ov-total"><b>84</b><span>近 30 天全部</span></div></div>
+        <div class="w3-ov-changes" id="w3-ov-changes"><button type="button" class="w3-ov-card-item" data-chain="0"><b class="w3-ov-c-num">1</b><span class="w3-ov-c-body"><strong>窗口内的公司动作是服务商扩编</strong><small>Blend360 给出 2027 年 750 人的扩编目标，这是服务商扩编，不是买方自己的驻场团队。Palantir Q2 股东信已滑出这 30 天，见 90 天窗。</small><span class="w3-ov-c-meta">1 条信号 · 证据链 1 步</span></span><span class="w3-ov-c-go">看证据链 →</span></button><button type="button" class="w3-ov-card-item" data-chain="1"><b class="w3-ov-c-num">2</b><span class="w3-ov-c-body"><strong>有日期的客户故事集中在工程产能和客服</strong><small>窗口内部署轨是 Devin / Writer 的具名客户页。全库交付故事仍是库存营销页居多；只有带发布日的才进窗口。</small><span class="w3-ov-c-meta">5 条信号 · 证据链 5 步</span></span><span class="w3-ov-c-go">看证据链 →</span></button><button type="button" class="w3-ov-card-item" data-chain="2"><b class="w3-ov-c-num">3</b><span class="w3-ov-c-body"><strong>公开讨论的是人手够不够用，以及怎么建能力</strong><small>Washington Technology 写人才供给；Cohere 写建能力、不制造依赖。</small><span class="w3-ov-c-meta">1 条信号 · 证据链 1 步</span></span><span class="w3-ov-c-go">看证据链 →</span></button></div>
+        <div class="w3-ov-foot">
+          <button type="button" class="w3-ov-cta" id="w3-ov-enter" data-ov-enter>进入情报沙盘</button>
+          <p class="w3-ov-note" id="w3-ov-note">资料截止 2026年10月6日 · 全部 84 条</p>
+        </div>
+      </div>
+    </section>
+    <div class="w3-scope" role="group" aria-label="沙盘范围">
+      <button type="button" data-scope="featured" class="on" aria-pressed="true">精选</button>
+      <button type="button" data-scope="all" aria-pressed="false">全部</button>
+    </div>
     <p class="w3-hint" id="w3-hint">拖一拖、滚一滚。点一个点看说明。</p>
   </div>
 
@@ -99,6 +116,7 @@
   </aside>
 
   <section class="w3-fallback" id="w3-fallback" hidden>
+    <h1 class="sr-only">FDE 行业，正在发生什么 — 平面列表</h1>
     <h2>改成列表了</h2>
     <p id="w3-fallback-why">这个屏幕用不了立体图。内容和首页是同一批。</p>
     <p><a class="w3-fallback-link" href="/平面">打开列表 →</a></p>

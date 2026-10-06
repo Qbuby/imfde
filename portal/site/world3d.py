@@ -19,6 +19,45 @@ IMPORT_MAP = """<script type="importmap">
 </script>"""
 
 
+def _ov_stats(data: dict) -> str:
+    """概览层数据摘要：近 30 天各泳道条数 + 总数（prerender 兜底，JS 按 currentRange 重绘）。"""
+    counts = (data.get("window_counts") or {}).get("30") or {}
+    by_lane = counts.get("by_lane") or {}
+    items = "".join(
+        f'<div class="w3-ov-stat" data-lane="{S.esc(l.get("id") or "")}">'
+        f'<b>{int(by_lane.get(l.get("id")) or 0)}</b><span>{S.esc(l.get("zh") or "")}</span></div>'
+        for l in (data.get("lanes") or [])
+    )
+    items += (
+        f'<div class="w3-ov-stat w3-ov-total"><b>{int(counts.get("total") or 0)}</b>'
+        f"<span>近 30 天全部</span></div>"
+    )
+    return items
+
+
+def _ov_changes(data: dict) -> str:
+    """概览层 3 张关键变化卡；chain 为空的卡片去 data-chain 并置 aria-disabled。"""
+    out = []
+    for i, c in enumerate((data.get("changes_by_range") or {}).get("30") or []):
+        chain = c.get("chain") or []
+        n = int(c.get("n") or 0)
+        if chain:
+            attrs = f' data-chain="{i}"'
+            meta = f"{n} 条信号 · 证据链 {len(chain)} 步"
+        else:
+            attrs = ' aria-disabled="true"'
+            meta = "本窗暂无对应信号"
+        out.append(
+            f'<button type="button" class="w3-ov-card-item"{attrs}>'
+            f'<b class="w3-ov-c-num">{S.esc(c.get("num") or str(i + 1))}</b>'
+            f'<span class="w3-ov-c-body"><strong>{S.esc(c.get("title") or "")}</strong>'
+            f"<small>{S.esc(c.get('body') or '')}</small>"
+            f'<span class="w3-ov-c-meta">{S.esc(meta)}</span></span>'
+            f'<span class="w3-ov-c-go">看证据链 →</span></button>'
+        )
+    return "".join(out)
+
+
 def render_world3d(cur) -> str:
     data = load_world(cur)
     github = data.get("github") or ""
@@ -51,7 +90,6 @@ def render_world3d(cur) -> str:
     n_all = int(((seo_counts.get("90")) or {}).get("total") or len(events))
     inner = f"""
 <div class="w3" id="w3" data-three="{THREE_VERSION}">
-  <h1 class="sr-only">imfde.ai — 全球首个 FDE 实时情报动态沙盘：FDE 公司动作、真实部署、人物观点与方法岗位</h1>
   <header class="w3-hud" role="banner">
     <a class="w3-brand" href="/world3d" aria-label="{S.esc(WORLD_BRAND)} {S.esc(S.SITE_CLUB)}">
       {S.brand_lockup()}
@@ -75,6 +113,24 @@ def render_world3d(cur) -> str:
     <canvas id="w3-canvas" tabindex="0" aria-describedby="w3-legend"></canvas>
     <div class="w3-labels w3-labels-3d" id="w3-labels-3d" aria-hidden="true"></div>
     <div class="w3-labels" id="w3-labels" aria-hidden="true"></div>
+    <section class="w3-ov" id="w3-overview" aria-label="本期概览">
+      <div class="w3-ov-card">
+        <p class="w3-ov-k">imfde.ai · FDE 实时情报沙盘</p>
+        <h1 class="w3-title">FDE 行业，正在发生什么</h1>
+        <p class="w3-ov-desc">按 7 / 30 / 90 天三个窗口持续追踪 FDE 行业的<b>公司动作</b>、<b>客户部署</b>、<b>人物观点</b>与<b>招聘动向</b>；沙盘上每个形体都对应一份可核对的原文。</p>
+        <p class="w3-sub" data-w3-lede>点开观察，读事实与影响，再进入落地或方法 · 过去 30 天</p>
+        <div class="w3-ov-stats" id="w3-ov-stats">{_ov_stats(data)}</div>
+        <div class="w3-ov-changes" id="w3-ov-changes">{_ov_changes(data)}</div>
+        <div class="w3-ov-foot">
+          <button type="button" class="w3-ov-cta" id="w3-ov-enter" data-ov-enter>进入情报沙盘</button>
+          <p class="w3-ov-note" id="w3-ov-note">资料截止 {snapshot} · 全部 {n30} 条</p>
+        </div>
+      </div>
+    </section>
+    <div class="w3-scope" role="group" aria-label="沙盘范围">
+      <button type="button" data-scope="featured" class="on" aria-pressed="true">精选</button>
+      <button type="button" data-scope="all" aria-pressed="false">全部</button>
+    </div>
     <p class="w3-hint" id="w3-hint">拖一拖、滚一滚。点一个点看说明。</p>
   </div>
 
@@ -120,6 +176,7 @@ def render_world3d(cur) -> str:
   </aside>
 
   <section class="w3-fallback" id="w3-fallback" hidden>
+    <h1 class="sr-only">FDE 行业，正在发生什么 — 平面列表</h1>
     <h2>改成列表了</h2>
     <p id="w3-fallback-why">这个屏幕用不了立体图。内容和首页是同一批。</p>
     <p><a class="w3-fallback-link" href="/平面">打开列表 →</a></p>
@@ -163,7 +220,7 @@ def render_world3d(cur) -> str:
         meta_description=(
             "imfde.ai 持续追踪 FDE（Forward Deployed Engineer）行业的公司动作、真实客户部署、"
             "人物观点与方法岗位，以 3D 实时情报沙盘呈现，可按 7/30/90 天窗口查看，"
-            "每条动态可对照原文核读。"
+            "每条动态可对照原文核读。首页先给出当期概览与三条关键变化，再进入沙盘探索。"
         ),
         json_ld={
             "@context": "https://schema.org",

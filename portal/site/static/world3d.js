@@ -20,6 +20,9 @@ const panel = document.getElementById("w3-panel");
 const ledeEl = document.querySelector("[data-w3-lede]");
 const hintEl = document.getElementById("w3-hint");
 const fallback = document.getElementById("w3-fallback");
+const ovStatsEl = document.getElementById("w3-ov-stats");
+const ovChangesEl = document.getElementById("w3-ov-changes");
+const ovNoteEl = document.getElementById("w3-ov-note");
 
 const params = new URLSearchParams(location.search);
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -175,6 +178,7 @@ const laneEn = (id) => ((DATA.lanes || []).find((l) => l.id === id) || {}).en ||
 const state = {
   range: [7, 30, 90].includes(rangeFromUrl) ? rangeFromUrl : 30,
   lens: params.get("lens") === "field" ? "field" : "boss",
+  scope: "featured", // 精选沙盘；查看全部 / 深链 / 平面回退切 "all"
   selected: null,
   hovered: null,
   chain: null,
@@ -235,13 +239,150 @@ function inWindow(e, range = state.range) {
   const d = parseDay(e.day);
   return !!d && d >= parseDay(DATA.windows[String(range)]) && d <= parseDay(DATA.snapshot);
 }
-function windowEvents() {
+function windowBase(range = state.range) {
   const all = (DATA.events || [])
-    .filter((e) => inWindow(e))
+    .filter((e) => inWindow(e, range))
     .sort((a, b) => (a.day !== b.day ? (a.day < b.day ? -1 : 1) : a.id - b.id));
   const hasCore = all.some((e) => e.lane === "company" || e.lane === "deploy");
   if (hasCore) return all;
   return all.filter((e) => e.info_kind !== "job_posting");
+}
+function windowEvents() {
+  if (state.scope !== "featured") return windowBase();
+  const f = featuredIds(state.range);
+  const picked = windowBase().filter((e) => f.has(e.id));
+  return picked.length ? picked : windowBase();
+}
+
+/* ---------- 精选节点（scope="featured" 的可见集）----------
+   价值优先单一算法：公司动作全保留；客户故事按信号/证据取前 10；人物前 5；
+   方法类非招聘前 3；招聘类前 2。不足 8 按分回填，超过 24 裁最低分非保护项；
+   本窗三卡证据链 id 与默认节点是保护项（不受桶上限与裁剪约束）。
+   featuredIds 惰性构建（首次 rebuild 早于任何显式预热点），缓存只增不删。 */
+const featuredCache = new Map(); // range -> { list, ids:Set }；DATA 单次加载内不变
+function eventScore(e) {
+  const published = e.date_kind === "published" ? 1 : 0;
+  if (e.lane === "company") return 100 + 10 * published;
+  if (e.lane === "deploy") {
+    let s = 70;
+    if (e.signal === "high") s += 30;
+    else if (e.signal === "mid") s += 18;
+    if (e.case_href) s += 12;
+    if (e.outcome || e.kpi) s += 8;
+    return s + 6 * published;
+  }
+  if (e.lane === "people") {
+    let s = 50;
+    if (e.signal === "high") s += 25;
+    if (e.practitioner || e.why) s += 15;
+    return s + 5 * published;
+  }
+  if (e.info_kind === "job_posting" || e.info_kind === "hiring_census") return 10 + 4 * published;
+  let s = 28;
+  if (e.signal === "high") s += 20;
+  return s + 4 * published;
+}
+function featuredEvents(range) {
+  const base = windowBase(range);
+  const inBase = new Set(base.map((e) => e.id));
+  // 保护集：本窗三卡证据链 + 本窗默认节点 + 全局默认（仅并 base 内存在者）
+  const keep = new Set();
+  const changes = (DATA.changes_by_range || {})[String(range)] || DATA.changes || [];
+  changes.forEach((c) =>
+    (c.chain || []).forEach((n) => {
+      const id = Number(n.id);
+      if (inBase.has(id)) keep.add(id);
+    })
+  );
+  [(DATA.default_by_range || {})[String(range)], DATA.default_id].forEach((v) => {
+    const id = Number(v);
+    if (id && inBase.has(id)) keep.add(id);
+  });
+
+  const isHiring = (e) => e.info_kind === "job_posting" || e.info_kind === "hiring_census";
+  const scored = base.map((e) => ({ e, s: eventScore(e) }));
+  const cmp = (a, b) => b.s - a.s || (a.e.day < b.e.day ? 1 : a.e.day > b.e.day ? -1 : b.e.id - a.e.id);
+  const buckets = { deploy: [], people: [], method: [], hire: [] };
+  scored.forEach((it) => {
+    if (it.e.lane === "company") return; // 公司动作全保留，不进桶
+    const key = isHiring(it.e) ? "hire" : it.e.lane;
+    (buckets[key] || buckets.method).push(it);
+  });
+  Object.values(buckets).forEach((arr) => arr.sort(cmp));
+  const caps = { deploy: 10, people: 5, method: 3, hire: 2 };
+
+  const picked = new Map();
+  scored.forEach(({ e }) => {
+    if (e.lane === "company") picked.set(e.id, e);
+  });
+  Object.keys(buckets).forEach((key) => buckets[key].slice(0, caps[key]).forEach(({ e }) => picked.set(e.id, e)));
+  keep.forEach((id) => picked.set(id, byId[id]));
+
+  // floor：不足 8 时按分回填 base 剩余（7 天窗几乎只有招聘，否则画布空）
+  if (picked.size < 8) {
+    scored.sort(cmp);
+    for (const { e } of scored) {
+      if (picked.size >= 8) break;
+      picked.set(e.id, e);
+    }
+  }
+  // cap：超过 24 时按分升序裁非 company 非保护项至 24
+  if (picked.size > 24) {
+    const removable = [...picked.values()]
+      .filter((e) => e.lane !== "company" && !keep.has(e.id))
+      .sort((a, b) => eventScore(a) - eventScore(b) || (a.day < b.day ? -1 : a.day > b.day ? 1 : a.id - b.id));
+    let excess = picked.size - 24;
+    for (const e of removable) {
+      if (excess <= 0) break;
+      picked.delete(e.id);
+      excess -= 1;
+    }
+  }
+  const list = [...picked.values()].sort((a, b) => (a.day !== b.day ? (a.day < b.day ? -1 : 1) : a.id - b.id));
+  const entry = { list, ids: new Set(list.map((e) => e.id)) };
+  featuredCache.set(range, entry);
+  return entry;
+}
+function featuredIds(range = state.range) {
+  let c = featuredCache.get(range);
+  if (!c) c = featuredEvents(range);
+  return c.ids;
+}
+function featuredCount(range = state.range) {
+  let c = featuredCache.get(range);
+  if (!c) c = featuredEvents(range);
+  return c.list.length;
+}
+/* 证据链点击：把链上 id 并入该窗精选缓存（链节点必须可见），返回是否新增 */
+function ensureFeatured(range, ids) {
+  const c = featuredCache.get(range) || featuredEvents(range);
+  let added = false;
+  ids.forEach((id) => {
+    if (!c.ids.has(id) && byId[id] && inWindow(byId[id], range)) {
+      c.ids.add(id);
+      c.list.push(byId[id]);
+      added = true;
+    }
+  });
+  if (added) c.list.sort((a, b) => (a.day !== b.day ? (a.day < b.day ? -1 : 1) : a.id - b.id));
+  return added;
+}
+/* 变化卡按当前窗取数：优先 changes_by_range，缺则回退 30 天的 changes */
+function currentChanges() {
+  return (DATA.changes_by_range || {})[String(state.range)] || DATA.changes || [];
+}
+/* 链节点在某窗是否可见：inWindow 之外还要过 windowBase 的 job_posting 剔除规则 */
+const coreAtCache = {};
+function coreAt(r) {
+  if (!(r in coreAtCache)) {
+    const by = ((DATA.window_counts || {})[String(r)] || {}).by_lane || {};
+    coreAtCache[r] = !!(by.company || by.deploy);
+  }
+  return coreAtCache[r];
+}
+function visibleAt(id, r) {
+  const e = byId[id];
+  return !!e && inWindow(e, r) && (coreAt(r) || e.info_kind !== "job_posting");
 }
 
 /* Organisations own company/deploy events; people & method group by host,
@@ -267,6 +408,7 @@ function webglOK() {
 }
 
 function showFallback(reason) {
+  state.scope = "all"; // 平面列表恒全量，保持「数据与 3D 沙盘完全一致」
   root.classList.add("w3-flat");
   fallback.hidden = false;
   const why = document.getElementById("w3-fallback-why");
@@ -290,6 +432,47 @@ function syncRooms() {
   });
 }
 syncRooms();
+
+/* ---------- 首屏概览层：按当前窗重绘统计 / 变化卡 / 注脚 ---------- */
+function dayZh(day) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(day || "").trim());
+  return m ? `${Number(m[1])}年${Number(m[2])}月${Number(m[3])}日` : String(day || "");
+}
+function ovStatsHtml(range) {
+  const wc = (DATA.window_counts || {})[String(range)] || {};
+  const by = wc.by_lane || {};
+  const items = (DATA.lanes || []).map(
+    (l) => `<div class="w3-ov-stat" data-lane="${esc(l.id)}"><b>${Number(by[l.id] || 0)}</b><span>${esc(l.zh)}</span></div>`
+  );
+  items.push(`<div class="w3-ov-stat w3-ov-total"><b>${Number(wc.total || 0)}</b><span>近 ${range} 天全部</span></div>`);
+  return items.join("");
+}
+function ovChangesHtml() {
+  return currentChanges()
+    .map((c, i) => {
+      const chain = (c.chain || []).filter((n) => byId[Number(n.id)]);
+      const disabled = !chain.length;
+      const meta = disabled ? "本窗暂无对应信号" : `${c.n} 条信号 · 证据链 ${chain.length} 步`;
+      const attrs = disabled ? ' aria-disabled="true"' : ` data-chain="${i}"`;
+      return `<button type="button" class="w3-ov-card-item"${attrs}><b class="w3-ov-c-num">${esc(c.num)}</b><span class="w3-ov-c-body"><strong>${esc(c.title)}</strong><small>${esc(c.body)}</small><span class="w3-ov-c-meta">${esc(meta)}</span></span><span class="w3-ov-c-go">看证据链 →</span></button>`;
+    })
+    .join("");
+}
+function renderOverview() {
+  if (ovStatsEl) ovStatsEl.innerHTML = ovStatsHtml(state.range);
+  if (ovChangesEl) ovChangesEl.innerHTML = ovChangesHtml();
+  if (ovNoteEl) {
+    const fCount = featuredCount(state.range);
+    const aCount = windowBase().length;
+    const allBtn = fCount < aCount ? ' <button type="button" data-ov-all>查看全部</button>' : "";
+    ovNoteEl.innerHTML = `资料截止 ${esc(dayZh(DATA.snapshot))} · 精选 ${fCount} / 全部 ${aCount} 条${allBtn}`;
+    const allChip = document.querySelector('.w3-scope [data-scope="all"]');
+    if (allChip) allChip.hidden = fCount >= aCount;
+  }
+}
+function enterSandbox() {
+  root.classList.add("w3-play"); // 幂等：收概览、亮范围 chips
+}
 
 /* ---------- 解读报告（fallback 路径）：手机/WebGL 不可用时也要有，
    报告条目用真实链接跳转 /动态/<id>，不依赖 3D 场景 ---------- */
@@ -993,17 +1176,17 @@ function boot() {
         ? canned
         : `点开观察，读事实与影响，再进入落地或方法 · 过去 ${state.range} 天 · ${n} 条`;
     }
-    const titleEl = document.querySelector(".w3-title");
-    if (titleEl) {
-      titleEl.textContent = emptyCore && state.range === 7
-        ? "这 7 天没有新的客户故事，还在招人"
-        : "用真实客户故事，看现场怎么干活";
-    }
     document.querySelectorAll("[data-range]").forEach((b) => {
       const on = Number(b.dataset.range) === state.range;
       b.classList.toggle("on", on);
       b.setAttribute("aria-pressed", on ? "true" : "false");
     });
+    document.querySelectorAll("[data-scope]").forEach((b) => {
+      const on = b.dataset.scope === state.scope;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    renderOverview();
     syncRooms();
   }
 
@@ -1047,6 +1230,10 @@ function boot() {
       state.range = fit;
       rebuild();
     }
+    if (state.scope === "featured" && !featuredIds(state.range).has(id)) {
+      state.scope = "all"; // 面板相关事件/报告跳转指向精选外节点 → 自动切全量
+      rebuild();
+    }
     state.selected = id;
     if (!opts.keepChain) state.chain = null;
     applySelectionStyles();
@@ -1066,15 +1253,20 @@ function boot() {
   }
 
   function showChain(index) {
-    const ch = (DATA.changes || [])[index];
+    const ch = currentChanges()[index];
     if (!ch) return;
     const ids = (ch.chain || []).map((c) => Number(c.id)).filter((id) => byId[id]);
     if (!ids.length) return;
-    const need = Math.max(...ids.map((id) => [7, 30, 90].find((r) => inWindow(byId[id], r)) || 90));
+    // 升窗按「链节点在该窗可见」判定（窗内无 company/deploy 时 job_posting 不渲染，纯 inWindow 会判定过松）
+    const need = Math.max(...ids.map((id) => [7, 30, 90].find((r) => visibleAt(id, r)) || 90));
+    let changed = false;
     if (need > state.range) {
       state.range = need;
-      rebuild();
+      changed = true;
+      history.replaceState(null, "", `?窗=${state.range}`);
     }
+    if (ensureFeatured(state.range, ids)) changed = true;
+    if (changed) rebuild();
     state.chain = ch.chain;
     state.selected = null;
     // light the evidence chain up one item at a time, oldest first
@@ -1210,7 +1402,12 @@ function boot() {
       const r = Number(b.dataset.range);
       if (r === state.range) return;
       state.range = r;
-      const keep = state.selected && inWindow(byId[state.selected]) ? state.selected : null;
+      const keep =
+        state.selected &&
+        inWindow(byId[state.selected]) &&
+        (state.scope !== "featured" || featuredIds(state.range).has(state.selected))
+          ? state.selected
+          : null;
       state.selected = keep;
       state.chain = null;
       rebuild();
@@ -1541,13 +1738,59 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
   }
   ensureFloatBtn();
 
+  /* ---------- 概览层 / 范围 chips：统一委托在 stage 上 ----------
+     .w3-scope 是 #w3-overview 的兄弟节点（绑 overviewEl 收不到 chip 点击）；
+     也不绑 document——面板 .w3-panel 在 stage 外且自带 [data-chain] 委托，绑宽了会双重触发。 */
+  function setScope(scope) {
+    const next = scope === "all" ? "all" : "featured";
+    if (next === state.scope) return;
+    state.scope = next;
+    const keep =
+      state.selected &&
+      inWindow(byId[state.selected]) &&
+      (state.scope !== "featured" || featuredIds(state.range).has(state.selected))
+        ? state.selected
+        : null;
+    state.selected = keep;
+    state.chain = null;
+    rebuild();
+    renderPanel();
+    homeCamera(false);
+    history.replaceState(null, "", `?窗=${state.range}${keep ? "#e=" + keep : ""}`);
+  }
+  function bindOverview() {
+    stage.addEventListener("click", (ev) => {
+      const chainBtn = ev.target.closest("[data-chain]");
+      if (chainBtn) {
+        enterSandbox(); // 先收概览再飞链；链上节点经升窗+ensureFeatured 必然可见
+        showChain(Number(chainBtn.dataset.chain));
+        return;
+      }
+      if (ev.target.closest("[data-ov-all]")) {
+        enterSandbox();
+        setScope("all");
+        return;
+      }
+      if (ev.target.closest("[data-ov-enter]")) {
+        enterSandbox();
+        return;
+      }
+      const scopeBtn = ev.target.closest("[data-scope]");
+      if (scopeBtn) setScope(scopeBtn.dataset.scope);
+    });
+  }
+  bindOverview();
+
   /* ---------- go ---------- */
   rebuild();
   homeCamera(true);
   const hash = /#e=(\d+)/.exec(location.hash);
   const initial = hash ? Number(hash[1]) : null;
-  if (initial && byId[initial]) select(initial, { noFly: true });
-  else {
+  if (initial && byId[initial]) {
+    state.scope = "all"; // 深链直入全量沙盘并跳过概览，保住 hash 优先级
+    enterSandbox();
+    select(initial, { noFly: true });
+  } else {
     state.selected = null;
     renderPanel();
   }
