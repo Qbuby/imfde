@@ -256,8 +256,9 @@ function windowEvents() {
 
 /* ---------- 精选节点（scope="featured" 的可见集）----------
    价值优先单一算法：公司动作全保留；客户故事按信号/证据取前 10；人物前 5；
-   方法类非招聘前 3；招聘类前 2。不足 8 按分回填，超过 24 裁最低分非保护项；
-   本窗三卡证据链 id 与默认节点是保护项（不受桶上限与裁剪约束）。
+   方法类非招聘前 3；招聘类前 2。不足 18 按分回填（弱信号/招聘垫底，默认窗
+   非招聘池不足以成带时由回填补进 18~24 观察带；7 天窗 base 仅 10 条则回填至全量），
+   超过 24 裁最低分非保护项；本窗三卡证据链 id 与默认节点是保护项（不受桶上限与裁剪约束）。
    featuredIds 惰性构建（首次 rebuild 早于任何显式预热点），缓存只增不删。 */
 const featuredCache = new Map(); // range -> { list, ids:Set }；DATA 单次加载内不变
 function eventScore(e) {
@@ -318,11 +319,12 @@ function featuredEvents(range) {
   Object.keys(buckets).forEach((key) => buckets[key].slice(0, caps[key]).forEach(({ e }) => picked.set(e.id, e)));
   keep.forEach((id) => picked.set(id, byId[id]));
 
-  // floor：不足 8 时按分回填 base 剩余（7 天窗几乎只有招聘，否则画布空）
-  if (picked.size < 8) {
+  // floor：不足 18 时按分回填 base 剩余（弱信号/招聘垫底），把默认窗拉进 18~24 观察带；
+  // base 本身不足 18（如 7 天窗 10 条）则回填至全量为止
+  if (picked.size < 18) {
     scored.sort(cmp);
     for (const { e } of scored) {
-      if (picked.size >= 8) break;
+      if (picked.size >= 18) break;
       picked.set(e.id, e);
     }
   }
