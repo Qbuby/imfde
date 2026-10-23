@@ -15,3 +15,5 @@ fde_corpus/
 portal/zh/
 scripts/t_*.png
 scripts/t_mob_*.py
+# Windows 保留设备名：误建后 git add -A 会整体失败（2026-10-06 曾导致日常任务 17 天不提交）
+nul

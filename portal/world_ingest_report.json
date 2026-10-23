@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-10-05T16:06:59Z",
-  "snapshot": "2026-10-06",
-  "since_day": "2026-09-06",
+  "written_at": "2026-10-23T03:52:52Z",
+  "snapshot": "2026-10-23",
+  "since_day": "2026-09-23",
   "increment": {
-    "scanned": 1298,
-    "fde_hits": 10,
+    "scanned": 1369,
+    "fde_hits": 12,
     "already_in_db": 11,
-    "stale": 19,
+    "stale": 18,
     "added_axis": 16,
     "collected": 0,
-    "review": 0
+    "review": 2
   },
-  "n_events": 618,
-  "n_axis": 239,
-  "n_review": 3,
+  "n_events": 669,
+  "n_axis": 290,
+  "n_review": 8,
   "new_axis_this_run": 16,
   "by_lane_axis": {
-    "company": 11,
-    "deploy": 100,
-    "method": 110,
-    "people": 18
+    "company": 12,
+    "deploy": 106,
+    "method": 152,
+    "people": 20
   },
-  "n_links": 182,
+  "n_links": 230,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -39,17 +39,17 @@
   "feeds": {
     "rss": {
       "feeds": 5,
-      "hits": 10,
-      "added": 0,
-      "already": 5,
+      "hits": 12,
+      "added": 1,
+      "already": 6,
       "stale": 5,
       "details": [
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1247,
-          "fde": 6,
-          "added": 0,
+          "items": 1315,
+          "fde": 7,
+          "added": 1,
           "already": 3,
           "stale": 3
         },
@@ -65,10 +65,10 @@
         {
           "id": "fdepod",
           "status": "ok",
-          "items": 6,
-          "fde": 4,
+          "items": 9,
+          "fde": 5,
           "added": 0,
-          "already": 2,
+          "already": 3,
           "stale": 2
         },
         {
@@ -106,19 +106,19 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 206,
-      "added": 10,
+      "jobs": 203,
+      "added": 9,
       "fresh": 6,
       "details": [
         {
           "id": "palantir-lever",
           "status": "axis",
-          "n": 43
+          "n": 39
         },
         {
           "id": "anthropic-greenhouse",
           "status": "axis",
-          "n": 10
+          "n": 14
         },
         {
           "id": "databricks-greenhouse",
@@ -128,7 +128,7 @@
         {
           "id": "scale-greenhouse",
           "status": "axis",
-          "n": 14
+          "n": 13
         },
         {
           "id": "xai-greenhouse",
@@ -138,12 +138,12 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 50
+          "n": 56
         },
         {
           "id": "cohere-ashby",
           "status": "axis",
-          "n": 17
+          "n": 10
         },
         {
           "id": "replit-ashby",
@@ -158,11 +158,11 @@
         {
           "id": "cursor-ashby",
           "status": "axis",
-          "n": 7
+          "n": 6
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "axis",
+          "status": "review",
           "n": 5
         }
       ]
@@ -170,7 +170,7 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 13,
+    "new_links": 14,
     "added": 0,
     "no_date": 3,
     "details": [
@@ -195,7 +195,7 @@
       },
       {
         "id": "sierra-customers",
-        "new_links": 2,
+        "new_links": 3,
         "added": 0
       },
       {

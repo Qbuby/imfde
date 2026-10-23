@@ -31,8 +31,11 @@ cd /d "%ROOT%\portal"
 "%PY%" build_static.py >> "%LOG%" 2>&1
 cd /d "%ROOT%"
 git add -A >> "%LOG%" 2>&1
+if errorlevel 1 echo [ERROR] git add failed - check reserved names (nul) or locks >> "%LOG%"
 git commit -m "daily data refresh %date% %time%" >> "%LOG%" 2>&1
+if errorlevel 1 echo [WARN] git commit skipped or failed >> "%LOG%"
 git push origin main >> "%LOG%" 2>&1
+if errorlevel 1 echo [ERROR] git push failed >> "%LOG%"
 
 echo [%date% %time%] === daily update done === >> "%LOG%"
 endlocal
