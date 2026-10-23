@@ -278,7 +278,7 @@ function eventScore(e) {
     if (e.practitioner || e.why) s += 15;
     return s + 5 * published;
   }
-  if (e.info_kind === "job_posting" || e.info_kind === "hiring_census") return 10 + 4 * published;
+  if (e.info_kind === "job_posting") return 10 + 4 * published;
   let s = 28;
   if (e.signal === "high") s += 20;
   return s + 4 * published;
@@ -300,7 +300,7 @@ function featuredEvents(range) {
     if (id && inBase.has(id)) keep.add(id);
   });
 
-  const isHiring = (e) => e.info_kind === "job_posting" || e.info_kind === "hiring_census";
+  const isHiring = (e) => e.info_kind === "job_posting";
   const scored = base.map((e) => ({ e, s: eventScore(e) }));
   const cmp = (a, b) => b.s - a.s || (a.e.day < b.e.day ? 1 : a.e.day > b.e.day ? -1 : b.e.id - a.e.id);
   const buckets = { deploy: [], people: [], method: [], hire: [] };
@@ -1065,6 +1065,10 @@ function boot() {
   function buildBases(list, xOf, W) {
     clearGroup(basesG);
     const half = W / 2;
+    // 在招数 = 当天岗位普查（统计不是事件，已从事件流摘掉），挂到同名/同 slug 的大本营上
+    const hiring = DATA.hirings || [];
+    const hireBySlug = new Map(hiring.map((h) => [h.slug, h]));
+    const hireByName = new Map(hiring.map((h) => [h.name, h]));
     const groups = new Map();
     list.forEach((e) => {
       const key = baseKeyOf(e);
@@ -1072,11 +1076,47 @@ function boot() {
       if (!groups.has(key)) groups.set(key, { key, name: baseNameOf(e), events: [] });
       groups.get(key).events.push(e);
     });
+    const claimed = new Set();
+    // 1) 先认 slug 完全一致的底座（公司/案例轨的 entity_key 就是 slug）
+    groups.forEach((g) => {
+      const h = hireBySlug.get(g.key);
+      if (h && !claimed.has(h.slug)) {
+        g.hire = h.n;
+        claimed.add(h.slug);
+      }
+    });
+    // 2) 再按名称认领：同名底座可能有多块（岗位轨按 host 分组），选事件最多的那块
+    const byName = new Map();
+    groups.forEach((g) => {
+      if (!byName.has(g.name)) byName.set(g.name, []);
+      byName.get(g.name).push(g);
+    });
+    hireByName.forEach((h, name) => {
+      if (claimed.has(h.slug)) return;
+      const candidates = (byName.get(name) || []).filter((g) => g.hire == null).sort((a, b) => b.events.length - a.events.length);
+      if (candidates.length) {
+        candidates[0].hire = h.n;
+        claimed.add(h.slug);
+      }
+    });
+    const rightEdge = xOf(parseDay(DATA.snapshot));
+    hireBySlug.forEach((h, slug) => {
+      // 没有事件但在招 >=2 的公司也立一块底座（只招 1 个的 Replit/Perplexity 不占位）
+      if (!claimed.has(slug) && h.n >= 2) {
+        groups.set("hire:" + slug, { key: "hire:" + slug, name: h.name, events: [], hire: h.n, x: rightEdge });
+      }
+    });
     // Only organisations, or anyone with 2+ dated items, gets a base.
-    const bases = [...groups.values()].filter((g) => g.events.some((e) => e.lane === "company" || e.lane === "deploy") || g.events.length >= 2);
+    const bases = [...groups.values()].filter(
+      (g) => g.hire || g.events.some((e) => e.lane === "company" || e.lane === "deploy") || g.events.length >= 2,
+    );
     bases.forEach((g) => {
-      const xs = g.events.map((e) => nodes.get(e.id)?.x ?? xOf(parseDay(e.day)));
-      g.x = xs.reduce((a, b) => a + b, 0) / xs.length;
+      if (g.events.length) {
+        const xs = g.events.map((e) => nodes.get(e.id)?.x ?? xOf(parseDay(e.day)));
+        g.x = xs.reduce((a, b) => a + b, 0) / xs.length;
+      } else if (g.x == null) {
+        g.x = rightEdge;
+      }
     });
     bases.sort((a, b) => a.x - b.x || (a.key < b.key ? -1 : 1));
     // deterministic 1-D relax
@@ -1103,12 +1143,16 @@ function boot() {
       edges.position.copy(box.position);
       basesG.add(edges);
 
-      const lbl = label(`<b>${esc(g.name)}</b><small>${g.events.length}</small>`, "w3-lbl-base");
+      const lbl = label(
+        `<b>${esc(g.name)}</b>${g.events.length ? `<small>${g.events.length}</small>` : ""}` +
+          (g.hire ? `<em class="w3-base-hire">在招 ${g.hire}</em>` : ""),
+        "w3-lbl-base",
+      );
       lbl.element.style.pointerEvents = "none";
       lbl.center.set(0.5, 1);
       lbl.position.set(g.x, hb + 0.6, BASE_Z);
       basesG.add(lbl);
-      managed.push({ obj: lbl, id: null, prio: g.events.length >= 2 ? 3 : 0.5, w: 0, h: 0, dy: 0 });
+      managed.push({ obj: lbl, id: null, prio: g.events.length >= 2 ? 3 : g.hire ? 1.5 : 0.5, w: 0, h: 0, dy: 0 });
 
       g.events.forEach((e) => {
         const n = nodes.get(e.id);

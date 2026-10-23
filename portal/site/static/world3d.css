@@ -347,6 +347,18 @@
 }
 .w3-lbl-base b { font-weight: 600; }
 .w3-lbl-base small { font-family: var(--font-mono); font-size: 10px; color: var(--w3-acc); }
+/* 当前在招数（每日岗位普查的汇总，不是日期事件） */
+.w3-lbl-base .w3-base-hire {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 0 5px;
+  border: 1px solid rgba(63, 192, 192, 0.45);
+  border-radius: 999px;
+  color: var(--w3-acc);
+  background: rgba(63, 192, 192, 0.08);
+  white-space: nowrap;
+}
 
 /* ---------- panel ---------- */
 .w3-panel {

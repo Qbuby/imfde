@@ -1025,6 +1025,30 @@ def load_world_from_cases(cur) -> tuple[list[dict], int]:
     return events, eligible
 
 
+def load_hirings(cur) -> list[dict]:
+    """每个招聘板最新一轮普查的「当前在招 FDE 岗位数」。
+
+    普查是当天状态统计，不是日期事件：不进日期轴（world3d 挂在大本营底座上展示）。
+    """
+    latest: dict[str, dict] = {}
+    for row in cur.execute(
+        "SELECT entity_slug, title_zh, day FROM world_events "
+        "WHERE url LIKE '%#fde-census-%' AND day IS NOT NULL ORDER BY day DESC, id DESC"
+    ):
+        slug = (row["entity_slug"] or "").strip()
+        title = row["title_zh"] or ""
+        match = re.search(r"(\d+)\s*个", title)
+        if not slug or not match or slug in latest:
+            continue
+        latest[slug] = {
+            "slug": slug,
+            "name": (title.split("：", 1)[0].strip() or slug),
+            "n": int(match.group(1)),
+            "day": row["day"],
+        }
+    return list(latest.values())
+
+
 def load_world(cur) -> dict:
     counts = S.load_counts(cur)
     studies = S.fetch_cases(cur, "x.doc_type='case_study'", (), "x.id")
@@ -1036,6 +1060,8 @@ def load_world(cur) -> dict:
         events, eligible = load_world_from_cases(cur)
 
     events = [event for event in events if not is_learning_event(event)]
+    # 岗位普查不是「哪天发生了什么」，只是当天在招数：从事件流里摘掉，改走 hirings
+    events = [event for event in events if event.get("doc_type") != "hiring_census"]
     events.sort(key=lambda event: (event.get("day") or "9999-99-99", LANE_ORDER.get(event["lane"], 9), event["id"]))
     collapsed = []
     seen = set()
@@ -1096,6 +1122,7 @@ def load_world(cur) -> dict:
         "github": S.github_url(cur),
         "lanes": [{"id": key, "zh": zh, "en": en} for key, zh, en in LANES],
         "events": events,
+        "hirings": load_hirings(cur),
         "links": build_links(events),
         "changes": changes_by_range.get("30") or [],
         "changes_by_range": changes_by_range,
