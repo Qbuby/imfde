@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-10-23T03:52:52Z",
-  "snapshot": "2026-10-23",
-  "since_day": "2026-09-23",
+  "written_at": "2026-10-23T16:11:45Z",
+  "snapshot": "2026-10-24",
+  "since_day": "2026-09-24",
   "increment": {
-    "scanned": 1369,
+    "scanned": 1370,
     "fde_hits": 12,
-    "already_in_db": 11,
+    "already_in_db": 8,
     "stale": 18,
-    "added_axis": 16,
+    "added_axis": 8,
     "collected": 0,
-    "review": 2
+    "review": 0
   },
-  "n_events": 669,
-  "n_axis": 290,
+  "n_events": 670,
+  "n_axis": 291,
   "n_review": 8,
-  "new_axis_this_run": 16,
+  "new_axis_this_run": 8,
   "by_lane_axis": {
     "company": 12,
-    "deploy": 106,
+    "deploy": 107,
     "method": 152,
     "people": 20
   },
-  "n_links": 230,
+  "n_links": 231,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -40,17 +40,17 @@
     "rss": {
       "feeds": 5,
       "hits": 12,
-      "added": 1,
-      "already": 6,
+      "added": 0,
+      "already": 7,
       "stale": 5,
       "details": [
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1315,
+          "items": 1316,
           "fde": 7,
-          "added": 1,
-          "already": 3,
+          "added": 0,
+          "already": 4,
           "stale": 3
         },
         {
@@ -106,14 +106,13 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 203,
-      "added": 9,
-      "fresh": 6,
+      "jobs": 50,
+      "added": 7,
+      "fresh": 0,
       "details": [
         {
           "id": "palantir-lever",
-          "status": "axis",
-          "n": 39
+          "status": "IncompleteRead(5921820 bytes read, 112285 more expected)"
         },
         {
           "id": "anthropic-greenhouse",
@@ -122,8 +121,7 @@
         },
         {
           "id": "databricks-greenhouse",
-          "status": "axis",
-          "n": 58
+          "status": "IncompleteRead(8047822 bytes read, 1768068 more expected)"
         },
         {
           "id": "scale-greenhouse",
@@ -137,8 +135,7 @@
         },
         {
           "id": "openai-ashby",
-          "status": "axis",
-          "n": 56
+          "status": "IncompleteRead(9486336 bytes read, 3811878 more expected)"
         },
         {
           "id": "cohere-ashby",
@@ -162,7 +159,7 @@
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "review",
+          "status": "axis",
           "n": 5
         }
       ]
@@ -171,7 +168,7 @@
   "cs_hubs": {
     "hubs": 13,
     "new_links": 14,
-    "added": 0,
+    "added": 1,
     "no_date": 3,
     "details": [
       {
@@ -196,7 +193,7 @@
       {
         "id": "sierra-customers",
         "new_links": 3,
-        "added": 0
+        "added": 1
       },
       {
         "id": "cresta-stories",
