@@ -21,9 +21,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ai_store  # noqa: E402
 
-AI_BASE_URL = (os.environ.get("AI_BASE_URL") or "https://api.airy.work/v1").rstrip("/")
+AI_BASE_URL = (os.environ.get("AI_BASE_URL") or "https://api.minimaxi.com/v1").rstrip("/")
 AI_API_KEY = (os.environ.get("AI_API_KEY") or "").strip()
-AI_MODEL = (os.environ.get("AI_MODEL") or "gpt-5.6-luna").strip()
+AI_MODEL = (os.environ.get("AI_MODEL") or "MiniMax-M3.1-Flash").strip()
 
 SYSTEM_PROMPT = """你是 Forward Deployed Engineering（FDE）领域的资深分析师。
 给用户一段「可核对的公开原文材料」（含结构化字段），输出两部分：

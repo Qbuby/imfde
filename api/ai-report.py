@@ -28,9 +28,9 @@ import server as S  # noqa: E402
 from worldview import load_world  # noqa: E402
 import ai_store  # noqa: E402
 
-AI_BASE_URL = (os.environ.get("AI_BASE_URL") or "https://api.airy.work/v1").rstrip("/")
+AI_BASE_URL = (os.environ.get("AI_BASE_URL") or "https://api.minimaxi.com/v1").rstrip("/")
 AI_API_KEY = (os.environ.get("AI_API_KEY") or "").strip()
-AI_MODEL = (os.environ.get("AI_MODEL") or "gpt-5.6-luna").strip()
+AI_MODEL = (os.environ.get("AI_MODEL") or "MiniMax-M3.1-Flash").strip()
 
 _SYSTEM = """你是 Forward Deployed Engineering（FDE）领域的资深分析师。
 给同一个时间窗（7/30/90 天）内的全部上轴事件（每条含结构化原文摘要），
