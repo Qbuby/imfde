@@ -1,20 +1,20 @@
 {
-  "written_at": "2026-10-23T16:11:45Z",
-  "snapshot": "2026-10-24",
-  "since_day": "2026-09-24",
+  "written_at": "2026-10-26T03:02:27Z",
+  "snapshot": "2026-10-26",
+  "since_day": "2026-09-26",
   "increment": {
-    "scanned": 1370,
-    "fde_hits": 12,
-    "already_in_db": 8,
-    "stale": 18,
-    "added_axis": 8,
+    "scanned": 0,
+    "fde_hits": 0,
+    "already_in_db": 0,
+    "stale": 0,
+    "added_axis": 0,
     "collected": 0,
     "review": 0
   },
   "n_events": 670,
   "n_axis": 291,
   "n_review": 8,
-  "new_axis_this_run": 8,
+  "new_axis_this_run": 0,
   "by_lane_axis": {
     "company": 12,
     "deploy": 107,
@@ -39,55 +39,30 @@
   "feeds": {
     "rss": {
       "feeds": 5,
-      "hits": 12,
+      "hits": 0,
       "added": 0,
-      "already": 7,
-      "stale": 5,
+      "already": 0,
+      "stale": 0,
       "details": [
         {
           "id": "openai-index",
-          "status": "ok",
-          "items": 1316,
-          "fde": 7,
-          "added": 0,
-          "already": 4,
-          "stale": 3
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "microsoft-blog",
-          "status": "ok",
-          "items": 10,
-          "fde": 0,
-          "added": 0,
-          "already": 0,
-          "stale": 0
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "fdepod",
-          "status": "ok",
-          "items": 9,
-          "fde": 5,
-          "added": 0,
-          "already": 3,
-          "stale": 2
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "pragmatic-engineer",
-          "status": "ok",
-          "items": 15,
-          "fde": 0,
-          "added": 0,
-          "already": 0,
-          "stale": 0
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "latent-space",
-          "status": "ok",
-          "items": 20,
-          "fde": 0,
-          "added": 0,
-          "already": 0,
-          "stale": 0
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         }
       ]
     },
@@ -98,207 +73,176 @@
       "details": [
         {
           "id": "ai-engineer-youtube",
-          "status": "ok",
-          "atom": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLKPca3kwwd-B59HNr-_lvA",
-          "added": 0
+          "status": "no channel id"
         }
       ]
     },
     "ats": {
       "boards": 11,
-      "jobs": 50,
-      "added": 7,
+      "jobs": 0,
+      "added": 0,
       "fresh": 0,
       "details": [
         {
           "id": "palantir-lever",
-          "status": "IncompleteRead(5921820 bytes read, 112285 more expected)"
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "anthropic-greenhouse",
-          "status": "axis",
-          "n": 14
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "databricks-greenhouse",
-          "status": "IncompleteRead(8047822 bytes read, 1768068 more expected)"
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "scale-greenhouse",
-          "status": "axis",
-          "n": 13
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "xai-greenhouse",
-          "status": "ok",
-          "n": 0
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "openai-ashby",
-          "status": "IncompleteRead(9486336 bytes read, 3811878 more expected)"
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "cohere-ashby",
-          "status": "axis",
-          "n": 10
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "replit-ashby",
-          "status": "axis",
-          "n": 1
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "perplexity-ashby",
-          "status": "axis",
-          "n": 1
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "cursor-ashby",
-          "status": "axis",
-          "n": 6
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "axis",
-          "n": 5
+          "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
         }
       ]
     }
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 14,
-    "added": 1,
-    "no_date": 3,
+    "new_links": 0,
+    "added": 0,
+    "no_date": 0,
     "details": [
       {
         "id": "writer-customers",
-        "new_links": 0,
-        "added": 0
-      },
-      {
-        "url": "https://www.intercom.com/customers/atlassian",
-        "skip": "no strong date"
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "intercom-customers",
-        "new_links": 1,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "glean-stories",
-        "new_links": 0,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "sierra-customers",
-        "new_links": 3,
-        "added": 1
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "cresta-stories",
-        "new_links": 0,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "factory-customers",
-        "new_links": 0,
-        "added": 0
-      },
-      {
-        "url": "https://www.augmentcode.com/customers/Pure-storage-scales-2000-engineers",
-        "skip": "no strong date"
-      },
-      {
-        "url": "https://www.augmentcode.com/customers/quorum",
-        "skip": "no strong date"
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "augment-customers",
-        "new_links": 3,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "harvey-customers",
-        "new_links": 0,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "devin-customers",
-        "new_links": 4,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "moveworks-customers",
-        "new_links": 0,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "sourcegraph-studies",
-        "new_links": 3,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "cohere-stories",
-        "new_links": 0,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
         "id": "palantir-impact",
-        "new_links": 0,
-        "added": 0
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       }
     ]
   },
   "peek": {
     "indexes": 12,
-    "candidates": 26,
+    "candidates": 0,
     "added": 0,
     "review": 0,
     "details": [
       {
-        "url": "https://www.databricks.com/forward-deployed-engineering",
-        "skip": "no strong date"
+        "feed": "palantir-newsroom",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
-        "url": "https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "feed": "palantir-letters",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
-        "url": "https://fdeinterviews.com/blog/fde-coding-interview-not-leetcode",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "feed": "palantir-investors",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
-        "url": "https://fdeinterviews.com/blog/fde-interview-prep-mistakes",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "feed": "anthropic-news",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
-        "url": "https://fdeinterviews.com/blog/fde-system-design-customer-constraints",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "feed": "cognition-blog",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
-        "url": "https://fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "feed": "databricks-blog",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
-        "url": "https://fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "feed": "cohere-blog",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
-        "url": "https://fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "feed": "aws-news",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       },
       {
-        "url": "https://fdeinterviews.com/blog/break-into-fde-without-faang",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "feed": "fdeinterviews-blog",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
+      },
+      {
+        "feed": "a16z",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
+      },
+      {
+        "feed": "svpg",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
+      },
+      {
+        "feed": "blend360-news",
+        "status": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
       }
     ]
   },
