@@ -8274,3 +8274,154 @@ OK 案例.html  1267 KB  (cases data 559)
 OK cases.json  559 条
 
 完成。提交 portal/*.html + cases.json 到 git，Vercel 即可直接服务。
+warning: in the working copy of 'daily_update.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/youtube.com___aiDotEngineer.html', LF will be replaced by CRLF the next time Git touches it
+[main 636be23] daily data refresh 鍛ㄤ竴 2026/10/26 11:02:55.45
+ 8 files changed, 299 insertions(+), 163 deletions(-)
+To https://github.com/Qbuby/imfde.git
+   90f3b4f..636be23  main -> main
+[?? 2026/10/26 11:03:01.58] === daily update done === 
+[?? 2026/10/27 11:01:25.52] === daily update start === 
+== snapshot 2026-10-27 since 2026-09-27
+== feeds rss
+  rss openai-index  https://openai.com/news/rss.xml
+    → items=1325 fde=7 added=0 already=4 stale=3
+  rss microsoft-blog  https://blogs.microsoft.com/feed/
+    → items=10 fde=0 added=0 already=0 stale=0
+  rss fdepod  https://fdepod.substack.com/feed
+    → items=9 fde=5 added=0 already=3 stale=2
+  rss pragmatic-engineer  https://blog.pragmaticengineer.com/feed
+    → items=15 fde=0 added=0 already=0 stale=0
+  rss latent-space  https://www.latent.space/feed
+    → items=20 fde=0 added=0 already=0 stale=0
+== feeds youtube
+  youtube ai-engineer-youtube  https://www.youtube.com/@aiDotEngineer
+    → added 0
+== feeds ats census
+  ats palantir-lever  https://jobs.lever.co/palantir
+    fresh 2026-10-22 Forward Deployed Software Engineer, Internship - W → dup
+    fresh 2026-10-22 Forward Deployed Software Engineer, New Grad - War → dup
+    fresh 2026-10-23 Deployment Strategist - Germany Forward Deployed → axis
+    → 40 titles folded, axis
+  ats anthropic-greenhouse  https://job-boards.greenhouse.io/anthropic
+    → 13 titles folded, axis
+  ats databricks-greenhouse  https://job-boards.greenhouse.io/databricks
+    fresh 2026-10-20 Manager, Forward Deployed Engineering → dup
+    fresh 2026-10-22 Sr. Technical Program Manager, FDE - LATAM → dup
+    fresh 2026-10-26 Forward Deployed Engineering Manager → axis
+    fresh 2026-10-23 Associate Forward Deployed Engineer → axis
+    → 56 titles folded, axis
+  ats scale-greenhouse  https://job-boards.greenhouse.io/scaleai
+    → 13 titles folded, axis
+  ats xai-greenhouse  https://job-boards.greenhouse.io/xai
+  ats openai-ashby  https://jobs.ashbyhq.com/openai
+    fresh 2026-10-22 Applied AI Engineer → dup
+    fresh 2026-10-23 Applied AI Engineer, Digital Natives → axis
+    fresh 2026-10-26 Forward Deployed Engineer (FDE) - AI Infra - SF → axis
+    → 56 titles folded, axis
+  ats cohere-ashby  https://jobs.ashbyhq.com/cohere
+    → 10 titles folded, axis
+  ats replit-ashby  https://jobs.ashbyhq.com/replit
+    → 1 titles folded, axis
+  ats perplexity-ashby  https://jobs.ashbyhq.com/perplexity
+    → 1 titles folded, axis
+  ats cursor-ashby  https://jobs.ashbyhq.com/cursor
+    → 6 titles folded, axis
+  ats elevenlabs-ashby  https://jobs.ashbyhq.com/elevenlabs
+    fresh 2026-10-21 Applied AI Engineer → dup
+    → 5 titles folded, axis
+== peek list_index (p1–p2, FDE-only, strong date)
+  peek palantir-newsroom  https://www.palantir.com/newsroom/
+  peek palantir-letters  https://www.palantir.com/newsroom/letters
+  peek palantir-investors  https://investors.palantir.com/
+  peek anthropic-news  https://www.anthropic.com/news
+  peek cognition-blog  https://cognition.ai/blog
+  peek databricks-blog  https://www.databricks.com/blog
+    candidate https://www.databricks.com/forward-deployed-engineering
+  peek cohere-blog  https://cohere.com/blog
+  peek aws-news  https://aws.amazon.com/blogs/
+  peek fdeinterviews-blog  https://www.fdeinterviews.com/blog
+    candidate https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide
+    candidate https://fdeinterviews.com/blog/fde-coding-interview-not-leetcode
+    candidate https://fdeinterviews.com/blog/fde-interview-prep-mistakes
+    candidate https://fdeinterviews.com/blog/fde-system-design-customer-constraints
+    candidate https://fdeinterviews.com/blog/fde-vs-software-engineer-comparison
+    candidate https://fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide
+    candidate https://fdeinterviews.com/blog/why-forward-deployed-engineering-answer
+    candidate https://fdeinterviews.com/blog/break-into-fde-without-faang
+  peek a16z  https://a16z.com/
+  peek svpg  https://www.svpg.com/
+  peek blend360-news  https://www.blend360.com/news
+== case-study hubs (existing vendors, dated only)
+  cs writer-customers  https://writer.com/customers/
+  cs intercom-customers  https://www.intercom.com/customers
+  cs glean-stories  https://www.glean.com/resources/customer-stories
+  cs sierra-customers  https://sierra.ai/customers
+  cs cresta-stories  https://www.cresta.com/customer-stories
+  cs factory-customers  https://factory.ai/customers
+  cs augment-customers  https://www.augmentcode.com/customers
+  cs harvey-customers  https://www.harvey.ai/customers
+  cs devin-customers  https://devin.ai/customers
+  cs moveworks-customers  https://www.moveworks.com/us/en/customers
+  cs sourcegraph-studies  https://sourcegraph.com/case-studies
+  cs cohere-stories  https://cohere.com/customer-stories
+  cs palantir-impact  https://www.palantir.com/impact/
+== editorial copy updated=0
+== increment {"scanned": 1379, "fde_hits": 12, "already_in_db": 13, "stale": 19, "added_axis": 15, "collected": 0, "review": 0}
+== done {"n_events": 675, "n_axis": 296, "by_lane_axis": {"company": 12, "deploy": 107, "method": 157, "people": 20}, "n_links": 236}
+OK fde-public.db: 682 questions, answers stripped 682, snapshot 2026-10-27
+快照 2026-10-27 · 事件 148
+Traceback (most recent call last):
+  File "D:\program\imfde\scripts\pregen_ai.py", line 77, in <module>
+    main()
+    ~~~~^^
+  File "D:\program\imfde\scripts\pregen_ai.py", line 56, in main
+    text = _call_ai(_build_user(events, days, snapshot))
+  File "D:\program\imfde\api\ai-report.py", line 104, in _call_ai
+    with urllib.request.urlopen(req, timeout=120) as resp:
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\urllib\request.py", line 1367, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\http\client.py", line 1459, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\http\client.py", line 336, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\http\client.py", line 297, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\socket.py", line 723, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\14798\.workbuddy\binaries\python\versions\3.13.12\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+OK 世界动态.html  226 KB
+OK 落地.html  9 KB
+OK 现场.html  4 KB
+OK 方法.html  9 KB
+OK world3d.html  232 KB
+OK 案例.html  1267 KB  (cases data 559)
+OK cases.json  559 条
+
+完成。提交 portal/*.html + cases.json 到 git，Vercel 即可直接服务。
