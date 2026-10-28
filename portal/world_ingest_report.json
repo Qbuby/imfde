@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-10-28T03:05:45Z",
-  "snapshot": "2026-10-28",
-  "since_day": "2026-09-28",
+  "written_at": "2026-10-28T16:11:58Z",
+  "snapshot": "2026-10-29",
+  "since_day": "2026-09-29",
   "increment": {
-    "scanned": 1385,
-    "fde_hits": 12,
-    "already_in_db": 18,
-    "stale": 19,
-    "added_axis": 13,
+    "scanned": 25,
+    "fde_hits": 0,
+    "already_in_db": 10,
+    "stale": 9,
+    "added_axis": 9,
     "collected": 0,
     "review": 0
   },
-  "n_events": 678,
-  "n_axis": 299,
+  "n_events": 680,
+  "n_axis": 301,
   "n_review": 8,
-  "new_axis_this_run": 13,
+  "new_axis_this_run": 9,
   "by_lane_axis": {
     "company": 12,
     "deploy": 109,
-    "method": 158,
+    "method": 160,
     "people": 20
   },
-  "n_links": 239,
+  "n_links": 241,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -39,19 +39,14 @@
   "feeds": {
     "rss": {
       "feeds": 5,
-      "hits": 12,
+      "hits": 0,
       "added": 0,
-      "already": 7,
-      "stale": 5,
+      "already": 0,
+      "stale": 0,
       "details": [
         {
           "id": "openai-index",
-          "status": "ok",
-          "items": 1331,
-          "fde": 7,
-          "added": 0,
-          "already": 4,
-          "stale": 3
+          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
         },
         {
           "id": "microsoft-blog",
@@ -64,12 +59,7 @@
         },
         {
           "id": "fdepod",
-          "status": "ok",
-          "items": 9,
-          "fde": 5,
-          "added": 0,
-          "already": 3,
-          "stale": 2
+          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
         },
         {
           "id": "pragmatic-engineer",
@@ -82,12 +72,7 @@
         },
         {
           "id": "latent-space",
-          "status": "ok",
-          "items": 20,
-          "fde": 0,
-          "added": 0,
-          "already": 0,
-          "stale": 0
+          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
         }
       ]
     },
@@ -98,30 +83,29 @@
       "details": [
         {
           "id": "ai-engineer-youtube",
-          "status": "404"
+          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
         }
       ]
     },
     "ats": {
       "boards": 11,
-      "jobs": 204,
-      "added": 10,
-      "fresh": 1,
+      "jobs": 184,
+      "added": 7,
+      "fresh": 2,
       "details": [
         {
           "id": "palantir-lever",
           "status": "axis",
-          "n": 40
+          "n": 41
         },
         {
           "id": "anthropic-greenhouse",
-          "status": "axis",
-          "n": 13
+          "status": "<urlopen error _ssl.c:1015: The handshake operation timed out>"
         },
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 58
+          "n": 56
         },
         {
           "id": "scale-greenhouse",
@@ -150,8 +134,7 @@
         },
         {
           "id": "perplexity-ashby",
-          "status": "axis",
-          "n": 1
+          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
         },
         {
           "id": "cursor-ashby",
@@ -160,21 +143,21 @@
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "axis",
-          "n": 5
+          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
         }
       ]
     }
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 16,
-    "added": 2,
-    "no_date": 4,
+    "new_links": 7,
+    "added": 0,
+    "no_date": 3,
     "details": [
       {
         "id": "writer-customers",
-        "status": "403"
+        "new_links": 0,
+        "added": 0
       },
       {
         "url": "https://www.intercom.com/customers/atlassian",
@@ -187,8 +170,12 @@
       },
       {
         "id": "glean-stories",
-        "new_links": 2,
-        "added": 2
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "url": "https://sierra.ai/customers/gofundme",
+        "skip": "no strong date"
       },
       {
         "id": "sierra-customers",
@@ -202,36 +189,23 @@
       },
       {
         "id": "factory-customers",
-        "new_links": 0,
-        "added": 0
-      },
-      {
-        "url": "https://www.augmentcode.com/customers/Pure-storage-scales-2000-engineers",
-        "skip": "no strong date"
-      },
-      {
-        "url": "https://www.augmentcode.com/customers/quorum",
-        "skip": "no strong date"
+        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
       },
       {
         "id": "augment-customers",
-        "new_links": 3,
-        "added": 0
+        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
       },
       {
         "id": "harvey-customers",
-        "new_links": 0,
-        "added": 0
+        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
       },
       {
         "id": "devin-customers",
-        "new_links": 4,
-        "added": 0
+        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
       },
       {
         "id": "moveworks-customers",
-        "new_links": 0,
-        "added": 0
+        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
       },
       {
         "id": "sourcegraph-studies",
@@ -249,8 +223,7 @@
       },
       {
         "id": "palantir-impact",
-        "new_links": 0,
-        "added": 0
+        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
       }
     ]
   },
@@ -266,8 +239,7 @@
       },
       {
         "url": "https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "skip": "no FDE match"
       },
       {
         "url": "https://fdeinterviews.com/blog/fde-coding-interview-not-leetcode",
@@ -286,8 +258,7 @@
       },
       {
         "url": "https://fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
-        "skip": "stale",
-        "day": "2026-06-21"
+        "skip": "no FDE match"
       },
       {
         "url": "https://fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
