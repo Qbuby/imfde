@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-10-28T16:11:58Z",
-  "snapshot": "2026-10-29",
-  "since_day": "2026-09-29",
+  "written_at": "2026-10-29T16:04:24Z",
+  "snapshot": "2026-10-30",
+  "since_day": "2026-09-30",
   "increment": {
-    "scanned": 25,
-    "fde_hits": 0,
-    "already_in_db": 10,
-    "stale": 9,
-    "added_axis": 9,
+    "scanned": 1388,
+    "fde_hits": 12,
+    "already_in_db": 12,
+    "stale": 18,
+    "added_axis": 12,
     "collected": 0,
     "review": 0
   },
-  "n_events": 680,
-  "n_axis": 301,
+  "n_events": 683,
+  "n_axis": 304,
   "n_review": 8,
-  "new_axis_this_run": 9,
+  "new_axis_this_run": 12,
   "by_lane_axis": {
     "company": 12,
-    "deploy": 109,
-    "method": 160,
+    "deploy": 110,
+    "method": 162,
     "people": 20
   },
-  "n_links": 241,
+  "n_links": 244,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -39,14 +39,19 @@
   "feeds": {
     "rss": {
       "feeds": 5,
-      "hits": 0,
+      "hits": 12,
       "added": 0,
-      "already": 0,
-      "stale": 0,
+      "already": 7,
+      "stale": 5,
       "details": [
         {
           "id": "openai-index",
-          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+          "status": "ok",
+          "items": 1334,
+          "fde": 7,
+          "added": 0,
+          "already": 4,
+          "stale": 3
         },
         {
           "id": "microsoft-blog",
@@ -59,7 +64,12 @@
         },
         {
           "id": "fdepod",
-          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+          "status": "ok",
+          "items": 9,
+          "fde": 5,
+          "added": 0,
+          "already": 3,
+          "stale": 2
         },
         {
           "id": "pragmatic-engineer",
@@ -72,7 +82,12 @@
         },
         {
           "id": "latent-space",
-          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+          "status": "ok",
+          "items": 20,
+          "fde": 0,
+          "added": 0,
+          "already": 0,
+          "stale": 0
         }
       ]
     },
@@ -83,29 +98,31 @@
       "details": [
         {
           "id": "ai-engineer-youtube",
-          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+          "status": "ok",
+          "atom": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLKPca3kwwd-B59HNr-_lvA",
+          "added": 0
         }
       ]
     },
     "ats": {
       "boards": 11,
-      "jobs": 184,
-      "added": 7,
+      "jobs": 150,
+      "added": 9,
       "fresh": 2,
       "details": [
         {
           "id": "palantir-lever",
           "status": "axis",
-          "n": 41
+          "n": 42
         },
         {
           "id": "anthropic-greenhouse",
-          "status": "<urlopen error _ssl.c:1015: The handshake operation timed out>"
+          "status": "axis",
+          "n": 13
         },
         {
           "id": "databricks-greenhouse",
-          "status": "axis",
-          "n": 56
+          "status": "IncompleteRead(3489235 bytes read, 6411884 more expected)"
         },
         {
           "id": "scale-greenhouse",
@@ -125,7 +142,7 @@
         {
           "id": "cohere-ashby",
           "status": "axis",
-          "n": 10
+          "n": 11
         },
         {
           "id": "replit-ashby",
@@ -134,30 +151,31 @@
         },
         {
           "id": "perplexity-ashby",
-          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+          "status": "axis",
+          "n": 1
         },
         {
           "id": "cursor-ashby",
           "status": "axis",
-          "n": 6
+          "n": 7
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+          "status": "axis",
+          "n": 5
         }
       ]
     }
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 7,
-    "added": 0,
-    "no_date": 3,
+    "new_links": 15,
+    "added": 1,
+    "no_date": 4,
     "details": [
       {
         "id": "writer-customers",
-        "new_links": 0,
-        "added": 0
+        "status": "403"
       },
       {
         "url": "https://www.intercom.com/customers/atlassian",
@@ -174,10 +192,6 @@
         "added": 0
       },
       {
-        "url": "https://sierra.ai/customers/gofundme",
-        "skip": "no strong date"
-      },
-      {
         "id": "sierra-customers",
         "new_links": 2,
         "added": 0
@@ -189,23 +203,36 @@
       },
       {
         "id": "factory-customers",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+        "new_links": 0,
+        "added": 0
+      },
+      {
+        "url": "https://www.augmentcode.com/customers/Pure-storage-scales-2000-engineers",
+        "skip": "no strong date"
+      },
+      {
+        "url": "https://www.augmentcode.com/customers/quorum",
+        "skip": "no strong date"
       },
       {
         "id": "augment-customers",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+        "new_links": 3,
+        "added": 0
       },
       {
         "id": "harvey-customers",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+        "new_links": 0,
+        "added": 0
       },
       {
         "id": "devin-customers",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+        "new_links": 5,
+        "added": 1
       },
       {
         "id": "moveworks-customers",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+        "new_links": 0,
+        "added": 0
       },
       {
         "id": "sourcegraph-studies",
@@ -223,7 +250,8 @@
       },
       {
         "id": "palantir-impact",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+        "new_links": 0,
+        "added": 0
       }
     ]
   },
@@ -239,7 +267,8 @@
       },
       {
         "url": "https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
-        "skip": "no FDE match"
+        "skip": "stale",
+        "day": "2026-06-21"
       },
       {
         "url": "https://fdeinterviews.com/blog/fde-coding-interview-not-leetcode",
@@ -258,7 +287,8 @@
       },
       {
         "url": "https://fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
-        "skip": "no FDE match"
+        "skip": "stale",
+        "day": "2026-06-21"
       },
       {
         "url": "https://fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
