@@ -1,20 +1,20 @@
 {
-  "written_at": "2026-10-29T16:04:24Z",
-  "snapshot": "2026-10-30",
-  "since_day": "2026-09-30",
+  "written_at": "2026-10-30T16:08:29Z",
+  "snapshot": "2026-10-31",
+  "since_day": "2026-10-01",
   "increment": {
-    "scanned": 1388,
+    "scanned": 1392,
     "fde_hits": 12,
-    "already_in_db": 12,
-    "stale": 18,
-    "added_axis": 12,
+    "already_in_db": 10,
+    "stale": 19,
+    "added_axis": 8,
     "collected": 0,
     "review": 0
   },
   "n_events": 683,
   "n_axis": 304,
   "n_review": 8,
-  "new_axis_this_run": 12,
+  "new_axis_this_run": 8,
   "by_lane_axis": {
     "company": 12,
     "deploy": 110,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1334,
+          "items": 1338,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 150,
-      "added": 9,
-      "fresh": 2,
+      "jobs": 93,
+      "added": 8,
+      "fresh": 0,
       "details": [
         {
           "id": "palantir-lever",
@@ -122,7 +122,7 @@
         },
         {
           "id": "databricks-greenhouse",
-          "status": "IncompleteRead(3489235 bytes read, 6411884 more expected)"
+          "status": "IncompleteRead(9296140 bytes read, 594071 more expected)"
         },
         {
           "id": "scale-greenhouse",
@@ -136,8 +136,7 @@
         },
         {
           "id": "openai-ashby",
-          "status": "axis",
-          "n": 57
+          "status": "IncompleteRead(10223508 bytes read, 3336733 more expected)"
         },
         {
           "id": "cohere-ashby",
@@ -169,8 +168,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 15,
-    "added": 1,
+    "new_links": 14,
+    "added": 0,
     "no_date": 4,
     "details": [
       {
@@ -226,8 +225,8 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 5,
-        "added": 1
+        "new_links": 4,
+        "added": 0
       },
       {
         "id": "moveworks-customers",
