@@ -1,20 +1,20 @@
 {
-  "written_at": "2026-10-30T16:08:29Z",
-  "snapshot": "2026-10-31",
-  "since_day": "2026-10-01",
+  "written_at": "2026-11-01T03:42:45Z",
+  "snapshot": "2026-11-01",
+  "since_day": "2026-10-02",
   "increment": {
-    "scanned": 1392,
+    "scanned": 1395,
     "fde_hits": 12,
-    "already_in_db": 10,
+    "already_in_db": 16,
     "stale": 19,
-    "added_axis": 8,
+    "added_axis": 10,
     "collected": 0,
     "review": 0
   },
   "n_events": 683,
   "n_axis": 304,
   "n_review": 8,
-  "new_axis_this_run": 8,
+  "new_axis_this_run": 10,
   "by_lane_axis": {
     "company": 12,
     "deploy": 110,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1338,
+          "items": 1341,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,8 +106,8 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 93,
-      "added": 8,
+      "jobs": 204,
+      "added": 10,
       "fresh": 0,
       "details": [
         {
@@ -122,7 +122,8 @@
         },
         {
           "id": "databricks-greenhouse",
-          "status": "IncompleteRead(9296140 bytes read, 594071 more expected)"
+          "status": "axis",
+          "n": 53
         },
         {
           "id": "scale-greenhouse",
@@ -136,12 +137,13 @@
         },
         {
           "id": "openai-ashby",
-          "status": "IncompleteRead(10223508 bytes read, 3336733 more expected)"
+          "status": "axis",
+          "n": 57
         },
         {
           "id": "cohere-ashby",
           "status": "axis",
-          "n": 11
+          "n": 12
         },
         {
           "id": "replit-ashby",
