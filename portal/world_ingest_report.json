@@ -1,7 +1,7 @@
 {
-  "written_at": "2026-11-01T03:42:45Z",
-  "snapshot": "2026-11-01",
-  "since_day": "2026-10-02",
+  "written_at": "2026-11-01T16:02:54Z",
+  "snapshot": "2026-11-02",
+  "since_day": "2026-10-03",
   "increment": {
     "scanned": 1395,
     "fde_hits": 12,

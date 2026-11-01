@@ -1,7 +1,7 @@
 {
-  "snapshot": "2026-11-01",
-  "last_ingest": "2026-11-01T03:42:45Z",
-  "since_day": "2026-11-01",
+  "snapshot": "2026-11-02",
+  "last_ingest": "2026-11-01T16:02:54Z",
+  "since_day": "2026-11-02",
   "last_delta": {
     "scanned": 1395,
     "fde_hits": 12,
