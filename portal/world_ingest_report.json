@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-01T16:02:54Z",
-  "snapshot": "2026-11-02",
-  "since_day": "2026-10-03",
+  "written_at": "2026-11-02T16:04:39Z",
+  "snapshot": "2026-11-03",
+  "since_day": "2026-10-04",
   "increment": {
-    "scanned": 1395,
+    "scanned": 1396,
     "fde_hits": 12,
-    "already_in_db": 16,
+    "already_in_db": 13,
     "stale": 19,
-    "added_axis": 10,
+    "added_axis": 12,
     "collected": 0,
     "review": 0
   },
-  "n_events": 683,
-  "n_axis": 304,
+  "n_events": 685,
+  "n_axis": 306,
   "n_review": 8,
-  "new_axis_this_run": 10,
+  "new_axis_this_run": 12,
   "by_lane_axis": {
     "company": 12,
     "deploy": 110,
-    "method": 162,
+    "method": 164,
     "people": 20
   },
-  "n_links": 244,
+  "n_links": 246,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1341,
+          "items": 1342,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -108,7 +108,7 @@
       "boards": 11,
       "jobs": 204,
       "added": 10,
-      "fresh": 0,
+      "fresh": 2,
       "details": [
         {
           "id": "palantir-lever",
@@ -176,7 +176,8 @@
     "details": [
       {
         "id": "writer-customers",
-        "status": "403"
+        "new_links": 0,
+        "added": 0
       },
       {
         "url": "https://www.intercom.com/customers/atlassian",
