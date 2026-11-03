@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-02T16:04:39Z",
-  "snapshot": "2026-11-03",
-  "since_day": "2026-10-04",
+  "written_at": "2026-11-03T16:05:20Z",
+  "snapshot": "2026-11-04",
+  "since_day": "2026-10-05",
   "increment": {
-    "scanned": 1396,
+    "scanned": 1403,
     "fde_hits": 12,
-    "already_in_db": 13,
+    "already_in_db": 15,
     "stale": 19,
-    "added_axis": 12,
+    "added_axis": 11,
     "collected": 0,
     "review": 0
   },
-  "n_events": 685,
-  "n_axis": 306,
+  "n_events": 686,
+  "n_axis": 307,
   "n_review": 8,
-  "new_axis_this_run": 12,
+  "new_axis_this_run": 11,
   "by_lane_axis": {
     "company": 12,
     "deploy": 110,
-    "method": 164,
+    "method": 165,
     "people": 20
   },
-  "n_links": 246,
+  "n_links": 247,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1342,
+          "items": 1349,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 204,
+      "jobs": 201,
       "added": 10,
-      "fresh": 2,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
@@ -123,7 +123,7 @@
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 53
+          "n": 51
         },
         {
           "id": "scale-greenhouse",
@@ -138,7 +138,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 57
+          "n": 56
         },
         {
           "id": "cohere-ashby",
