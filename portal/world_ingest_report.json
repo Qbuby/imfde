@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-04T16:03:30Z",
-  "snapshot": "2026-11-05",
-  "since_day": "2026-10-06",
+  "written_at": "2026-11-05T16:04:21Z",
+  "snapshot": "2026-11-06",
+  "since_day": "2026-10-07",
   "increment": {
-    "scanned": 1410,
+    "scanned": 1414,
     "fde_hits": 12,
-    "already_in_db": 12,
+    "already_in_db": 13,
     "stale": 19,
-    "added_axis": 12,
+    "added_axis": 14,
     "collected": 0,
     "review": 0
   },
-  "n_events": 688,
-  "n_axis": 309,
+  "n_events": 692,
+  "n_axis": 313,
   "n_review": 8,
-  "new_axis_this_run": 12,
+  "new_axis_this_run": 14,
   "by_lane_axis": {
     "company": 12,
-    "deploy": 110,
-    "method": 167,
+    "deploy": 111,
+    "method": 170,
     "people": 20
   },
-  "n_links": 249,
+  "n_links": 252,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1356,
+          "items": 1360,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -99,16 +99,16 @@
         {
           "id": "ai-engineer-youtube",
           "status": "ok",
-          "atom": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLKPca3kwwd-B59HNr-_lvA",
+          "atom": "https://www.youtube.com/feeds/videos.xml?channel_id=UCONWr2M0moA8wsGHb3zUn_w",
           "added": 0
         }
       ]
     },
     "ats": {
       "boards": 11,
-      "jobs": 202,
+      "jobs": 210,
       "added": 10,
-      "fresh": 2,
+      "fresh": 3,
       "details": [
         {
           "id": "palantir-lever",
@@ -123,7 +123,7 @@
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 53
+          "n": 58
         },
         {
           "id": "scale-greenhouse",
@@ -138,7 +138,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 56
+          "n": 57
         },
         {
           "id": "cohere-ashby",
@@ -158,7 +158,7 @@
         {
           "id": "cursor-ashby",
           "status": "axis",
-          "n": 7
+          "n": 9
         },
         {
           "id": "elevenlabs-ashby",
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 14,
-    "added": 0,
+    "new_links": 15,
+    "added": 1,
     "no_date": 4,
     "details": [
       {
@@ -200,8 +200,8 @@
       },
       {
         "id": "cresta-stories",
-        "new_links": 0,
-        "added": 0
+        "new_links": 1,
+        "added": 1
       },
       {
         "id": "factory-customers",
