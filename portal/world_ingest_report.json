@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-05T16:04:21Z",
-  "snapshot": "2026-11-06",
-  "since_day": "2026-10-07",
+  "written_at": "2026-11-06T16:02:51Z",
+  "snapshot": "2026-11-07",
+  "since_day": "2026-10-08",
   "increment": {
-    "scanned": 1414,
+    "scanned": 1420,
     "fde_hits": 12,
-    "already_in_db": 13,
-    "stale": 19,
-    "added_axis": 14,
+    "already_in_db": 14,
+    "stale": 18,
+    "added_axis": 16,
     "collected": 0,
-    "review": 0
+    "review": 1
   },
-  "n_events": 692,
-  "n_axis": 313,
-  "n_review": 8,
-  "new_axis_this_run": 14,
+  "n_events": 698,
+  "n_axis": 319,
+  "n_review": 9,
+  "new_axis_this_run": 16,
   "by_lane_axis": {
     "company": 12,
     "deploy": 111,
-    "method": 170,
+    "method": 176,
     "people": 20
   },
-  "n_links": 252,
+  "n_links": 258,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1360,
+          "items": 1366,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 210,
+      "jobs": 216,
       "added": 10,
-      "fresh": 3,
+      "fresh": 6,
       "details": [
         {
           "id": "palantir-lever",
@@ -128,7 +128,7 @@
         {
           "id": "scale-greenhouse",
           "status": "axis",
-          "n": 13
+          "n": 15
         },
         {
           "id": "xai-greenhouse",
@@ -138,7 +138,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 57
+          "n": 61
         },
         {
           "id": "cohere-ashby",
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 15,
-    "added": 1,
+    "new_links": 16,
+    "added": 0,
     "no_date": 4,
     "details": [
       {
@@ -195,13 +195,13 @@
       },
       {
         "id": "sierra-customers",
-        "new_links": 2,
+        "new_links": 4,
         "added": 0
       },
       {
         "id": "cresta-stories",
-        "new_links": 1,
-        "added": 1
+        "new_links": 0,
+        "added": 0
       },
       {
         "id": "factory-customers",
