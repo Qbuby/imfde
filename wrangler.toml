@@ -14,11 +14,13 @@ html_handling = "none"
 # 百分编码路径匹配不可靠，改由 Worker 内解码后映射到对应资产文件）。
 # 同时列出解码与百分编码两种形态，兼容匹配口径差异。
 run_worker_first = true
+# Git 集成部署时关闭 preview URL，避免每次 push 生成额外部署与请求
+preview_urls = false
 
 # 变量（wrangler secret put <NAME> 或 dashboard → Settings → Variables）：
-#   AI_API_KEY             MiniMax 的 Key（必填，报告兜底生成用）
-#   AI_BASE_URL            默认 https://api.minimaxi.com/v1（可不设）
-#   AI_MODEL               默认 MiniMax-M3.1-Flash（可不设）
+#   AI_API_KEY             DeepSeek 的 Key（必填，报告兜底生成用）
+#   AI_BASE_URL            默认 https://api.deepseek.com/v1（可不设）
+#   AI_MODEL               默认 deepseek-flash（可不设）
 #   SECRET_KEY             会话/state 签名密钥（必填，换值会让已登录用户全部掉线）
 #   GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET
 #   GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET
