@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Notion · imfde.ai</title>
+<meta name="description" content="用户想在 Notion 里直接用 Claude 干活，而不是绕一圈多智能体；要团队级协作和审批，不是一个人一个智能体。；头三周建了 18,000 个 Claude 智能体、跑了约 140,000 步。90% 的智能体轮次由自动化触发（不是聊天）。12 小时原型→约 20 分钟。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/15"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Notion · imfde.ai"/>
+<meta property="og:description" content="用户想在 Notion 里直接用 Claude 干活，而不是绕一圈多智能体；要团队级协作和审批，不是一个人一个智能体。；头三周建了 18,000 个 Claude 智能体、跑了约 140,000 步。90% 的智能体轮次由自动化触发（不是聊天）。12 小时原型→约 20 分钟。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/15"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Notion · imfde.ai"/>
+<meta name="twitter:description" content="用户想在 Notion 里直接用 Claude 干活，而不是绕一圈多智能体；要团队级协作和审批，不是一个人一个智能体。；头三周建了 18,000 个 Claude 智能体、跑了约 140,000 步。90% 的智能体轮次由自动化触发（不是聊天）。12 小时原型→约 20 分钟。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Notion", "description": "用户想在 Notion 里直接用 Claude 干活，而不是绕一圈多智能体；要团队级协作和审批，不是一个人一个智能体。；头三周建了 18,000 个 Claude 智能体、跑了约 140,000 步。90% 的智能体轮次由自动化触发（不是聊天）。12 小时原型→约 20 分钟。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/15", "about": {"@type": "Thing", "name": "Anthropic · 软件科技 · Claude"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Notion</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Anthropic · 软件科技 · Claude</p>
+  <h1>Notion</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Notion — Claude Managed Agents 三周建 18,000 个 agent、执行 140,000 步</h2><div class='orig-body'><p>Notion 推出 External Agents 三周后，客户已创建 18,000 个 agent，90% 的 agent 活动通过自动触发运行，而非聊天。</p><p>Notion 用 Claude Managed Agents 搭建了这项功能。产品经理 Eric Liu 接受 Anthropic 采访，谈及 Managed Agents 承担的工作，以及上线后的意外发现。</p><p>Anthropic：External Agents 上线后，用户实际怎么用？</p><p>Eric Liu：我们希望 Notion 成为 agent 和团队的最佳协作平台。核心是让顶级 agent 原生嵌入 Notion，而 Claude 是用户最想用的外部 agent。目前已创建约 18,000 个 Claude agent，执行了约 140,000 步。增长速度超出预期，几乎没做推广。现在很多用户创建 agent 时首选 Claude。</p><p>使用深度也很高。90% 的 Claude 交互都是 Notion 里的自动化：页面触发、Slack 消息触发，或定时运行。用户不是直接聊天，而是用我们封装的自动化流程，这点最受欢迎。</p><p>顶级工作区用它跑多人协作：一个工作区里三四个 agent 每天跑几十个线程，主要靠自动化。忙碌工作被自动化了，比如实验标记清理、分类小任务。</p><p>Anthropic：你们用 Managed Agents 做了什么？</p><p>Liu：你在 Notion 里创建软件积木，随意拼成工作流。比如我们做了一个任务板当调度器。把任务移到“准备开始”，就启动 Claude 会话。Claude 从关联页面、设计系统、API 文档、产品需求文档里抓上下文。就像和同事一起工作。</p><p>好处是不限于单个任务。客户可以同时启动 30 或 40 个任务，平台自动路由给审批人。</p><p>Anthropic：为什么把 Managed Agents 接入 Notion？</p><p>Liu：用户在要 Claude。客户不想层层跳转，只想在 Notion 里直接说：“Claude，帮我做这个网站。”</p><p>Managed Agents 直接调用 API 就能用。我们专注 Notion 原生内容——公司知识。我们的 agent 擅长用 Notion，但不擅长写代码，而 Claude 模型很强。Claude 还能生成 PDF、幻灯片等文件。把信息合成产物的流程，和写代码的流程其实很像，现在正扩展到其他知识工作。</p><p>Anthropic：Notion 为什么选 Claude 品牌？</p><p>Liu：我们的愿景是让 Notion 成为 agent 指挥中心。用户想在 Notion 里用自己喜欢的 agent。Claude 的模型智能和体验值得信任。Managed Agents 的会话流进 Notion 客户端，用户只看到 Claude 在写文件、写页面、更新内容、评论，和同事、其他 agent 一样做事。</p><p>Anthropic：Managed Agents 替你们省掉了哪些工作？</p><p>Liu：长期运行任务的基础设施层很关键。它能持续执行、管记忆、保持高质量输出。我们不用自己搭这些。技能、包、沙箱全现成。沙箱对写代码场景很重要。用户可以连 GitHub，拉代码库跑代码，Managed Agents 的 GitHub 端点很实用。</p><p>Anthropic：多数 agent 工具面向单人单 agent，组织规模化时会出什么问题？</p><p>Liu：规模化部署的核心是协作。现在 agent 还是“一对一”。团队要审批流程、共享知识库，这和我们之前解决的人类协作问题一样。现在是 agent 和人协作，建议编辑、版本历史、共享知识库这些模式同样关键。</p><p>Anthropic：你自己用下来感觉如何？</p><p>Liu：Managed Agents 像我的游乐场。早期原型把 12 小时原型工作压到 20 分钟。全队可以一起迭代。我用任务板工作流做 Notion 新功能时有 30 个任务，全拖到开始，出去吃个零食回来，原型都做好了。然后我@同事，我们在 Notion 里一起改输出。AI 独角戏变成了协作时刻。现在大家看到 Claude 在任务里做事，会点赞或点踩，这是他们熟悉的界面。</p><p>Anthropic：你们部署了一支 agent 军团，每个阶段一个 Claude，主要靠触发运行。怎么保证安全？</p><p>Liu：我们为每个阶段建一个 Claude agent：调查、规划、构建。每个 agent 有各自权限、上下文、自动化。审查 agent 由少数人管，调查 agent 多人可管。每个新建 agent 默认权限锁定，从私有开始，必须显式分享。</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>用户想在 Notion 里直接用 Claude 干活，而不是绕一圈多智能体；要团队级协作和审批，不是一个人一个智能体。</dd>
+        <dt>结果</dt><dd>头三周建了 18,000 个 Claude 智能体、跑了约 140,000 步。90% 的智能体轮次由自动化触发（不是聊天）。12 小时原型→约 20 分钟。头部工作区每天几十条线程、并行 30–40 个任务。</dd>
+        <dt>接了哪些系统</dt><dd>Managed Agents API 原生嵌入产品；会话流从 Managed Agents 流入 Notion 客户端（用户无感）；沙箱 + GitHub endpoint</dd>
+        <dt>用了什么数据</dt><dd>连接页面、design system、API docs、PRD、GitHub repos、skills database</dd>
+        <dt>人还管哪一步</dt><dd>默认 agent 私有、显式共享；细粒度权限（聊天/触发/编辑）；审批流嵌入共享任务板；用户点赞/踩反馈；技能自动维护（PR 合并后 Claude 提炼经验更新技能）</dd>
+        <dt>多久上线</dt><dd>早期原型 12 小时手工→约 20 分钟</dd>
+        <dt>怎么交给客户</dt><dd>Notion 用户自服务创建 agent；PM（Eric Liu）主导</dd>
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>External Agents（Claude 品牌智能体）嵌进 Notion，页面/Slack/定时触发多智能体工作流：调查→规划→构建→审查；清实验标志、分类等。</dd>
+        <dt>以前怎么干</dt><dd>用 Notion 页面/数据库搭任务板当编排器；用户建任务挪到「可以开始」再触发 Claude 会话。</dd>
+        <dt>卡在哪</dt><dd>多数智能体工具按「一对一」设计，缺协作、审批、权限；Notion 自己的智能体不擅长写代码。</dd>
+        <dt>用了什么模型</dt><dd>Claude（通过 Claude Managed Agents 套件）；未指定具体子模型</dd>
+        <dt>事情怎么流转</dt><dd>每阶段独立 agent（调查/规划/构建/审查），各有自身权限与上下文；90% 自动化触发；任务板并行启 30–40 个任务，平台路由至审批人</dd>
+        <dt>怎么验收</dt><dd>用户反馈（赞/踩）；技能自动维护；原型耗时对比</dd>
+        <dt>怎么上线</dt><dd>Claude 品牌 agent 在 Notion 内原生部署（cloud-hosted Managed Agents）</dd>
+        
+        <dt>能不能复用到下一家</dt><dd>三种接入：Claude 品牌 agent、无品牌引擎、内部 agent；‘Notion 作 agent command center’愿景</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">Claude 是人们最想在 Notion 里使用的外部 agent。 — Eric Liu, Product Manager, Notion  |  我们看到 12 小时的原型工作压缩到大约 20 分钟。 — Eric Liu</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Anthropic 官方案例，强量化（18k agents/3 周、140k steps）</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>1Password · imfde.ai</title>
+<meta name="description" content="代码库从两个单体仓库扩到跨多个 GitHub 与 GitLab 实例的 200 多个仓库时，还要让不断壮大的工程组织保持生产力。；页上主角：每位使用 Code Search + Cody 的开发者估计每月节省 7 小时。预计首年节省 3,900 小时工程时间。200+ 仓库。数百名开发者。"/>
+<link rel="canonical" href="https://imfde.ai/案例/336"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="1Password · imfde.ai"/>
+<meta property="og:description" content="代码库从两个单体仓库扩到跨多个 GitHub 与 GitLab 实例的 200 多个仓库时，还要让不断壮大的工程组织保持生产力。；页上主角：每位使用 Code Search + Cody 的开发者估计每月节省 7 小时。预计首年节省 3,900 小时工程时间。200+ 仓库。数百名开发者。"/>
+<meta property="og:url" content="https://imfde.ai/案例/336"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="1Password · imfde.ai"/>
+<meta name="twitter:description" content="代码库从两个单体仓库扩到跨多个 GitHub 与 GitLab 实例的 200 多个仓库时，还要让不断壮大的工程组织保持生产力。；页上主角：每位使用 Code Search + Cody 的开发者估计每月节省 7 小时。预计首年节省 3,900 小时工程时间。200+ 仓库。数百名开发者。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "1Password", "description": "代码库从两个单体仓库扩到跨多个 GitHub 与 GitLab 实例的 200 多个仓库时，还要让不断壮大的工程组织保持生产力。；页上主角：每位使用 Code Search + Cody 的开发者估计每月节省 7 小时。预计首年节省 3,900 小时工程时间。200+ 仓库。数百名开发者。", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/336", "about": {"@type": "Thing", "name": "Sourcegraph · 软件科技"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">1Password</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Sourcegraph · 软件科技</p>
+  <h1>1Password</h1>
+  <p class="room-subline">预估 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>1Password 用 Sourcegraph 在增长中的分布式代码库里提高生产力</h2><div class='orig-body'><p>代码库和工程团队在增长，1Password 开发者用 Code Search 跨多个代码托管查找和导航代码，不必依赖同事。他们也用 Cody 减少创建单元测试和在代码里做程序性变更的苦活。</p><p>过去几年 1Password 显著增长。工程团队长到数百名开发者，代码库从两个单体仓库长到 200 多个仓库，散在多个 GitHub 和 GitLab 实例上。代码蔓延在短时间内给工程组织加了复杂度。代码库增长后，1Password 开发者发现搜代码越来越难，尤其有人需要找自己没亲自干过的代码。代码托管自带的原生搜索解决不了：GitLab 和 GitHub 的原生搜索限于在各自托管里搜仓库，所以如果开发者不完全知道一块代码住在哪，搜索不是有效找法。工程师有时发现问同事指望被指方向更快。1Password 采用 Code Search 来解决这个。有了 Code Search，任何工程师现在能从单一地点跨整份代码库和所有代码托管搜代码。开发者现在在找代码上自给自足，不再在打猎时拖慢别人或自己。</p><p>工程基础团队 Staff Developer James Griffin-Allwood 以前撞过这个问题：「Sourcegraph 之前，如果我不知道一块代码住在哪，我很难找到。我会用 Slack 问人他们是否知道那段代码，或是否知道别人可能知道。」「有很多时候我知道某样东西存在，但我不知道从哪开始。我不知道它定义在哪个仓库，或者它来自 Terraform 还是 Ansible。现在我只去 Code Search，开始搜，加一些过滤，我总能找到它。」</p><p>除了 Code Search，1Password 向整个工程团队推出 Cody——AI 编码助手——帮开发者做日常工作。开发者起初对 AI 让他们更高效的宽泛主张持怀疑，但用上 Cody 后发现它能显著减少特定真实用例的苦活。一个用例是单元测试。Cody 聊天有内置 prompt，为选中的一块代码自动生成单元测试。这功能提高了开发者花时间搭单元测试的可能性，因为它拿走了搭测试用例的摩擦。James：「Cody 拿走单元测试的苦活。对任何函数，Cody 会搭 5 到 10 个测试用例，包括我自己想不到的。单元测试会有一种疲劳是我以前必须克服的，但现在 Cody 可以简单地为我搭测试用例。」「有时，如果该做的事——像写单元测试——太难，人们就不会做。Cody 的价值是让开发者做最好的自己，同时卸下重复任务的负担。」</p><p>团队也用代码 AI 拿走跨代码做程序性编辑的苦活。高级开发者 Benjamin Bruneau 在 1Password 的设计系统团队干活。作为设计系统的一部分，Benjamin 经常在包含 1Password 应用各处使用的标记化值的大型嵌套 JSON 对象模式上干活。改这些大型嵌套 JSON 对象会造出大量乏味工作，主要因为常常不是把一个词换成另一个那么简单。例如，Benjamin 可能想跨几个对象改一个值字段，以反映嵌套对象的主键。他现在能用自然语言 prompt Cody 做这种编辑，Cody 会跨多个对象应用变更。「它给我省了大量时间。没有 Cody，那就只是苦活。」</p><p>1Password 团队也用 Sourcegraph 推进 innersourcing 倡议。工程基础团队一直在倡导这个概念，目标是让公司任何团队的任何开发者都感到舒服，能为任何代码库做贡献、分享代码、复用代码。代码库增长这么快、又存在于多个代码托管上，innersourcing 倡议变得更有挑战。在不熟悉的仓库里找和导航代码对开发者很难。现在有 Code Search，开发者能在单一地点搜整份代码库里不熟悉的代码。这让他们能找到可复用代码，而不必确切知道它长什么样。同时 Cody 帮开发者理解不熟悉的代码做什么，甚至帮他们用不那么熟练的语言写代码。开发者可以拉出代码问 Cody 精确解释它怎么工作，然后用自然语言请 Cody 做变更，即使他们可能不是那种语言的专家。James：「任何人都该感到开放和舒服，能为我们任何代码库做贡献。Cody 和 Code Search 的组合让这成为可能。我怎么找到那东西？Code Search 带我到那。然后，把 Cody 跟编译器一起用，意味着即使我不会那种语言，我也能改代码、修错误。」</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>代码库从两个单体仓库扩到跨多个 GitHub 与 GitLab 实例的 200 多个仓库时，还要让不断壮大的工程组织保持生产力。</dd>
+        <dt>结果</dt><dd>页上主角：每位使用 Code Search + Cody 的开发者估计每月节省 7 小时。预计首年节省 3,900 小时工程时间。200+ 仓库。数百名开发者。</dd>
+        <dt>接了哪些系统</dt><dd>Code Search + Cody 一起用；对开发者不懂的语言，编译器与 Cody 并用。</dd>
+        <dt>用了什么数据</dt><dd>200+ GitHub 与 GitLab 仓库中的代码；设计系统嵌套 JSON token schema。</dd>
+        <dt>人还管哪一步</dt><dd>开发者审查 Cody 生成的测试并应用提示后的 JSON 编辑；内部开源仍需要人的编译器/审查循环。</dd>
+        
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>跨所有托管的 Code Search；Cody 聊天内置提示生成 5–10 个单元测试用例；对嵌套设计系统 JSON 的自然语言编辑；内部开源（查找 + 解释 + 编辑不熟悉的语言）。</dd>
+        <dt>以前怎么干</dt><dd>原生 GitHub/GitLab 搜索限于一个代码托管。不知道代码在哪的工程师在 Slack 上问同事。</dd>
+        <dt>卡在哪</dt><dd>仓库或托管未知时搜索失败（Terraform 对 Ansible）。机构知识成为瓶颈。</dd>
+        <dt>用了什么模型</dt><dd>Sourcegraph Code Search + Cody（页上未点名单个 LLM）。</dd>
+        
+        <dt>怎么验收</dt><dd>页上引用每位开发者估计节省时间以及预计首年工程工时；未描述调查方法。</dd>
+        <dt>怎么上线</dt><dd>Cody 铺到整个工程团队。团队规模：数百名开发者。</dd>
+        <dt>失败了怎么改</dt><dd>原生托管搜索和 Slack 询问无法扩展。开发者起初怀疑 AI 生产力主张，直到 Cody 减少了单元测试苦活。</dd>
+        <dt>能不能复用到下一家</dt><dd>Engineering Foundations 内部开源计划：任何开发者都应能通过 Code Search + Cody 向任何代码库贡献。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">Cody 去掉了单元测试的苦活。对任何函数，Cody 会搭好 5 到 10 个测试用例，包括我自己不会想到的用例。——James Griffin-Allwood，1Password Staff Developer</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Sourcegraph 官方案例（抓取 2026-08-29）。具名 James Griffin-Allwood 与 Benjamin Bruneau。英雄 7 小时/月是「Estimated」；3,900 小时是「Projected」首年——不视为已衡量实际值。</p>
+    <div class='list' style='margin-top:12px'><div class="row">projected<span class="s">Hero 7 hours/month Estimated; 3900 hours Projected first-year (mine_loop_20260829_sourcegraph).</span></div></div>
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

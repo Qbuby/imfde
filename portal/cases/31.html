@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Pearl科技 · imfde.ai</title>
+<meta name="description" content="每周 40 小时手工开发生命周期、知识孤岛，加上本地智能体工作流对 GPU/高内存硬件的门槛，还要把运输管理系统铺开。；每名开发者生产力：约 40 小时交付/周 → 70–100 小时/周（页上：3 倍提升）。Cosmos 后 13 个工作日：完成 728 个 PR（基线期 0 个）。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/31"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Pearl科技 · imfde.ai"/>
+<meta property="og:description" content="每周 40 小时手工开发生命周期、知识孤岛，加上本地智能体工作流对 GPU/高内存硬件的门槛，还要把运输管理系统铺开。；每名开发者生产力：约 40 小时交付/周 → 70–100 小时/周（页上：3 倍提升）。Cosmos 后 13 个工作日：完成 728 个 PR（基线期 0 个）。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/31"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Pearl科技 · imfde.ai"/>
+<meta name="twitter:description" content="每周 40 小时手工开发生命周期、知识孤岛，加上本地智能体工作流对 GPU/高内存硬件的门槛，还要把运输管理系统铺开。；每名开发者生产力：约 40 小时交付/周 → 70–100 小时/周（页上：3 倍提升）。Cosmos 后 13 个工作日：完成 728 个 PR（基线期 0 个）。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Pearl科技", "description": "每周 40 小时手工开发生命周期、知识孤岛，加上本地智能体工作流对 GPU/高内存硬件的门槛，还要把运输管理系统铺开。；每名开发者生产力：约 40 小时交付/周 → 70–100 小时/周（页上：3 倍提升）。Cosmos 后 13 个工作日：完成 728 个 PR（基线期 0 个）。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/31", "about": {"@type": "Thing", "name": "Augment Code · 其他"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Pearl科技</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Augment Code · 其他</p>
+  <h1>Pearl科技</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Pearl Technologies 如何借助 Augment Cosmos 实现 3x 生产力提升</h2><div class='orig-body'><p>Pearl Technologies 从手动交付卡点，切换到云原生 AI-SDLC，再把这套模式推到整个工程组织。</p><p>难题：规模和知识瓶颈<br/>Pearl Technologies 的工程团队超过 100 人，分布在全球各地。他们在扩展 Transportation Management System 时遇到三道坎：</p><p>手动 SDLC 卡壳：开发人员每周只能交付 40 小时。从工单到可上生产的 PR，全靠人工写故事、搭本地环境、反复跑单元测试。</p><p>知识孤岛：知识传递靠同步会议或大段文档，拖慢协作。</p><p>硬件门槛：早期 agentic AI 流程要在本地跑，需要高配 GPU 和大内存，不是每个人都能用。</p><p>“在用 Cosmos 之前，我要是想分享知识，只能约电话或者写一大堆文档传过去。我们在会话共享、工作区和知识延续上都卡住了。”<br/>Gaurav Thakur<br/>Senior Engineer Manager</p><p>解法：转向云原生 AI-SDLC</p><p>Pearl Technologies 试用 Augment Cosmos，把 AI 从简单聊天升级到完整 agent 编排。落地分三条线：</p><p>1. 通过 Azure DevOps 编排 agent<br/>团队用 webhook 把 Cosmos 直接连到 Azure DevOps。改用对话式指令下命令，Cosmos 自动写用户故事、生成代码、跑单元测试，再直接把 PR 推到 GitHub。</p><p>2. 去掉硬件门槛<br/>Cosmos 在云端执行（Daemon/VPC 编排），把 AI agent 的重活从个人笔记本搬到 Augment 的基础设施上。无论本地机器配置如何，全员都能参与 agent 流程。</p><p>3. 专家工作区和会话共享<br/>团队用工作区分隔前端、后端和 DevOps 上下文。更关键的是 Session Sharing：一个开发者做完任务，能立刻把完整上下文交给队友继续。</p><p>前后对比</p><p>指标	使用 Augment Cosmos 前	使用 Augment Cosmos 后<br/>每人生产力	每周交付约 40 小时	每周交付 70–100 小时（3 倍提升）<br/>知识传递	靠人工电话和文档	即时 Session Sharing<br/>基础设施	需要本地高配硬件	云原生执行<br/>13 个工作日产出	0 个 PR（团队停滞）	通过 Cosmos 完成 728 个 PR<br/>运维自动化	100% 人工邮件沟通	60–70% 通过 Email Expert 自动完成</p><p>深入数据（分析师复盘，2026 年 4–7 月）</p><p>指标	Cosmos 前（4 月 3–6 日）	Cosmos 后（4 月 14–30 日）	变化<br/>每日完成 PR	0.0	56.0	+∞（流程解锁）<br/>每日评审 PR	0.0	67.5	+∞<br/>复杂 PR 周期	多天（估算）	当天完成	约 70% 缩短<br/>吞吐效率	N/A	3.2 → 4.7 PR/会话	3 周内 +47%</p><p>关键发现</p><p>吞吐量爆发：基线期 4 月 3–6 日团队 0 PR；采用 Cosmos 后，13 个工作日完成 728 个 PR。效率从 3.2 提升到 4.7 PR/会话，三周内增长 47%。</p><p>周期大幅缩短：原本多天的复杂迁移，现在一天内完成。</p><p>Agent 自主与成功率：2026 年 6–7 月的 21 个 agent 驱动案例中，71% 成功，29% 部分成功，0% 失败。7 个文件变更的中位耗时约 5.5 分钟。一个 agent 用 5 分钟完成 16 个文件的 carrier driver Kafka 集成，这项工作通常需要高级开发人员数小时。</p><p>定性回报：代码更好，零故障。21 个案例均无下游故障。AI 辅助 PR 包含结构化根因分析、详细测试计划和工单关联，评审质量高于人工 PR。</p><p>预估节省：分析师估算，21 个案例中 agent 完成的工作，节省了 73–113 小时高级开发人力。全年推算，可把数千小时从重复劳动和迁移中释放出来，转向高价值架构和产品工作。</p><p>影响：超出工程范围<br/>Cosmos 的成功不只停留在核心工程团队。第一个月内，团队为 Charger Logistics 的运维部门打造了专用 Email Automation Expert，把 60–70% 的人工邮件沟通自动化，让运维团队腾出时间做更高价值的事。</p><p>展望：新运营模式<br/>对 Pearl Technologies 来说，Cosmos 不是工具，而是运营模式的根本转变。他们下一年的目标是把 TMS 内 20–40% 的决策自动化，走向“人在回路”系统，让 AI agent 处理大部分操作动作。</p><p>“工程正在走向 AI 驱动的 SDLC，不管你准备好了没有……”</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>每周 40 小时手工开发生命周期、知识孤岛，加上本地智能体工作流对 GPU/高内存硬件的门槛，还要把运输管理系统铺开。</dd>
+        <dt>结果</dt><dd>每名开发者生产力：约 40 小时交付/周 → 70–100 小时/周（页上：3 倍提升）。Cosmos 后 13 个工作日：完成 728 个 PR（基线期 0 个）。完成 PR/天 0.0 → 56.0；审查 PR/天 0.0 → 67.5；复杂 PR 周期从多日→当日（约减 70%）；吞吐 3.2 → 4.7 PR/会话（3 周内 +47%）。2026 年 6–7 月 21 个片段：71% 成功、29% 部分、0% 失败；下游零损坏；7 文件变更中位数约 5.5 分钟；5 分钟完成 16 文件 Kafka 集成。分析师估计：这 21 个片段省 73–113 小时高级开发劳动。运营：手工邮件对话的 60–80% 被自动化。20–30% 决策自动化是明年目标。</dd>
+        <dt>接了哪些系统</dt><dd>Augment Cosmos；Azure DevOps webhook；GitHub PR；云原生 Daemon/VPC 执行；session 共享。</dd>
+        <dt>用了什么数据</dt><dd>Azure DevOps 工单；代码库上下文；GitHub；运营邮件。</dd>
+        <dt>人还管哪一步</dt><dd>人工审查批准并合并。明年目标：用 HITL 自动化 TMS 决策的 20–30%（目标，不是结果）。</dd>
+        <dt>多久上线</dt><dd>Cosmos 后 13 个工作日完成 728 个 PR。复杂 PR 周期时间多日 → 当日（约 70% 减少）。7 文件变更中位数约 5.5 分钟。</dd>
+        <dt>怎么交给客户</dt><dd>邮件专家用于 Charger Logistics 客户沟通。</dd>
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>Azure DevOps 触发的 Cosmos：写用户故事、生成代码+单元测试、开 GitHub PR。5 分钟完成 16 个文件的承运人-司机 Kafka 集成。面向 Charger Logistics 运营的邮件自动化专家（手工邮件对话的 60–80%）。</dd>
+        <dt>以前怎么干</dt><dd>手工写故事、本地环境搭建、重复单元测试。靠通话或书面材料传知识。用 Azure DevOps webhook 试点 Augment Cosmos。</dd>
+        <dt>卡在哪</dt><dd>每周 40 小时交付上限；会话/工作区/知识接不上；早期智能体要高端本地硬件。Cosmos 前 4 天基线（4 月 3–6 日）完成 0 个 PR。</dd>
+        <dt>用了什么模型</dt><dd>Augment Cosmos（云原生 agent）。成果表上无单一 LLM 名称。</dd>
+        <dt>事情怎么流转</dt><dd>重复循环：接收（约每 3 小时）→ 工单+代码库知识 → 计划/范围/分派 → 构建+单元测试 → 用证据验证 → 人工批准/合并。</dd>
+        <dt>怎么验收</dt><dd>前后对比表。分析师审查 Apr–Jul 2026：4 天前基线 Apr 3–6 vs 3 周后 Apr 14–30；21 个 agent 驱动片段 Jun–Jul 2026。</dd>
+        <dt>怎么上线</dt><dd>全球 100+ 工程师。云原生，使整个团队无论笔记本规格都能运行 agent。首月即有运营邮件专家。</dd>
+        <dt>失败了怎么改</dt><dd>Pre-Cosmos 停滞（4 天基线中 0 个 PR）。硬件依赖阻碍了本地 agent。</dd>
+        <dt>能不能复用到下一家</dt><dd>云原生 AI-SDLC；SOP 和专家指令；工程之外的 Email Automation Expert。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">工程正在走向 AI 驱动的 SDLC，无论你是否准备好。我们现在的重点是写好 SOP 和专家指令，让 Cosmos agent 处理编码。——Gaurav Thakur, Senior Engineering Manager, Pearl Technologies</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Augment Cosmos 官方案例。具名 Gaurav Thakur。第一方表格 + Apr–Jul 2026 分析师审查。量化：3x / 70–100 vs 40 小时；13 天 728 个 PR；56.0 / 67.5 PR/天；约 70% 周期时间；3.2→4.7；21 个片段上 71/29/0；估计 73–113 小时；60–80% 邮件。20–30% 决策自动化是目标。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

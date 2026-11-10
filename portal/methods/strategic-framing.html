@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>战略问题定义 · 方法 · imfde.ai</title>
+<meta name="description" content="战略问题定义：董事会说今年必须有 AI 战略，先锋领航页上却是 700 人一次切不开。这一步先问该不该驻场，把口号拆成一条可证伪的工作流。工具装到桌面上，不等于工作已经改了。"/>
+<link rel="canonical" href="https://imfde.ai/方法/strategic-framing"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="战略问题定义 · 方法 · imfde.ai"/>
+<meta property="og:description" content="战略问题定义：董事会说今年必须有 AI 战略，先锋领航页上却是 700 人一次切不开。这一步先问该不该驻场，把口号拆成一条可证伪的工作流。工具装到桌面上，不等于工作已经改了。"/>
+<meta property="og:url" content="https://imfde.ai/方法/strategic-framing"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="战略问题定义 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="战略问题定义：董事会说今年必须有 AI 战略，先锋领航页上却是 700 人一次切不开。这一步先问该不该驻场，把口号拆成一条可证伪的工作流。工具装到桌面上，不等于工作已经改了。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">战略问题定义</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>战略问题定义</h1>
+  <p class="learn-goal"><b>学习目标</b>：董事会说今年必须有 AI 战略，先锋领航页上却是 700 人一次切不开。这一步先问该不该驻场，把口号拆成一条可证伪的工作流。工具装到桌面上，不等于工作已经改了。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>先问该不该驻场</h3><p>先锋领航 700 人一次切不开，页上是先放狂热者小组去证明——不是先派人驻场，也不是先挑模型。买现成产品、买驻场切开、自己组队，不是同一件事。先问：这是不是一条决策密集、现有产品切不开、值得驻场证明的工作流。</p></li><li><h3>把口号拆成可证伪工作流</h3><p>先锋领航页上写：先流程地图，再 agent——不要铺 1990 年代营销牛径。把企业目标拆成决策密集型工作流、价值池、约束和可证伪假设。发愿景口号、每个部门做聊天机器人、或先买统一模型平台，都还没有可检查的验收。</p></li><li><h3>一次铺 700 人会卡住</h3><p>页上写：700 人组织太大，无法一次转型；先授权狂热者小组去证明。同一项目里降本和增收无法同时优化时，写清经济主目标、保护性指标和最终决策人。不要把两个目标都写进去，也不要让模型来选。</p></li><li><h3>桌面安装数是虚荣指标</h3><p>75 人桌面安装是页上的早期虚荣指标：写作助手在桌面上，CMO 白天听不到它。业务案例若写「员工省时就会变利润」，先问省下的时间如何变成容量、收入或成本动作。模型新旧、数据量、界面好看，都不能代替这条转化机制。</p></li><li><h3>交一页战略问题简报</h3><p>该不该驻场、买什么、拆成哪条可证伪工作流、主目标与决策人、明确不做，写在一页上。战略客户要高价值但偏离产品方向的定制，比较收入、学习价值、机会成本、可复用性和长期支持负担。37 步 / 16 次交接是基线流程地图；「两天对三周」只写狂热者小组。不要补金额或 FDE 头衔。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/376">先锋领航 / Writer</a></h3>
+  <p class="note">董事会说今年必须有 AI 战略，先锋领航页上却是 700 人一次切不开。75 人桌面安装是虚荣指标：工具在桌面上不等于工作已改变。狂热者小组「两天对三周」只写页上口径，不要扩成全组织已达成。</p>
+  <dl class="anatomy"><dt>经营问题</dt><dd>停止铺 1990 年代营销牛径（一封邮件 37 步和 16 次人工交接），并用 agent 重建工作流。</dd><dt>旧流程</dt><dd>2018 年营销技术「技术堆」。早期 Writer 铺开按桌面衡量：75 人有它，但 Kelton 白天听不到它——写作助手，不是工作流。700 人组织太大，无法一次转型。</dd><dt>卡点</dt><dd>桌面上的工具 != 工作已改变。在 700 人上追求完美会卡住进度。</dd><dt>失败与迭代</dt><dd>桌面安装虚荣指标。铺牛径。试图在 700 人上完善变革。</dd></dl>
+  <p class="hint"><a href="/案例/376">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="1" data-yes="对。把企业目标拆成决策密集型工作流、价值池、约束和可证伪假设，不要先买模型。" data-no="不对。先采购统一平台、每个部门做聊天机器人、或先发愿景口号，验收会空。"><p class="k">练习 1 · 高阶</p><p class="mcq-stem">董事会要求“今年必须有 AI 战略”。最好的起点是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>先采购统一模型平台，战略从选型开始。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>把企业目标拆成决策密集型工作流、价值池、约束和可证伪假设。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>要求每个部门做聊天机器人，用覆盖面代替问题定义。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>发布 AI 愿景口号，不拆成可证伪的工作流。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。同一项目无法同时优化降本和增收时，写清经济主目标、保护性指标和最终决策人。" data-no="不对。两个都写进目标、让模型选、或拖到上线后再定，验收会对不上。"><p class="k">练习 2 · 高阶</p><p class="mcq-stem">两个高管分别追求降本和收入增长，同一项目无法同时优化。如何决策？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>明确经济主目标、保护性指标和最终决策人。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>把降本和增收都写进同一项目目标，两边都当主目标。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>让模型选择该优化降本还是增收。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>目标冲突延迟到上线后再定，先把项目做起来。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。要质疑节省时间如何转成容量、收入或成本动作，不能假定「省时=利润」。" data-no="不对。模型新旧、数据量或界面好看，都不能代替转化机制。"><p class="k">练习 3 · 高阶</p><p class="mcq-stem">业务案例依赖“员工节省时间就会变成利润”。应质疑什么？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>先问模型是否最新，新模型就能把省时变成利润。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>先问数据量是否足够大，数据多利润就会来。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>先问界面是否好看，好用就会变成利润。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>节省时间如何转化为容量、收入或成本动作的机制。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。高价值但偏离产品方向的定制，比较收入、学习价值、机会成本、可复用性和长期支持负担。" data-no="不对。只看合同金额、一律拒绝、或先承诺再评估，会把驻场和改产品混成一件事。"><p class="k">练习 4 · 高阶</p><p class="mcq-stem">战略客户提出高价值但偏离产品方向的定制需求。最佳决策框架是什么？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>只看合同金额，高价值定制一律接。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>一律拒绝定制，偏离方向的需求直接挡掉。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>比较收入、学习价值、机会成本、可复用性和长期支持负担。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>先承诺再评估可复用性和支持负担。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页战略问题简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+该不该驻场（买产品 / 买驻场 / 自建）：
+企业目标拆成哪条可证伪工作流：
+价值池与约束：
+经济主目标、保护性指标、最终决策人：
+省时如何转成容量 / 收入 / 成本动作（没有机制就留空）：
+第一刀证明点（不是全组织）：
+偏离产品方向的定制（收入 / 学习 / 机会成本 / 可复用 / 支持负担）：
+虚荣指标（不要当成做成）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>写清该不该驻场，以及买产品 / 买驻场 / 自建如何取舍；口号拆成可证伪工作流；主目标和决策人明确；虚荣指标没有当成做成。</p></li><li><h3>不及格</h3><p>先挑模型或先发愿景口号；一次铺全组织；用桌面安装数当做成；把买产品和买驻场混成一件事。</p></li><li><h3>不要编的数</h3><p>75 人桌面安装是虚荣指标；37 步 / 16 次交接不是 KPI；「两天对三周」只写狂热者小组、页上有的口径。不要补金额、FDE 头衔或上线后百分比。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <div class="list"><a class="row" href="/案例/510">FDE 101：何时需要这支队伍<span class="s">怎么做 · fdepod.substack.com</span></a><a class="row" href="/案例/512">前线部署工程师到底是什么？<span class="s">怎么做 · fourthage.substack.com</span></a><a class="row" href="/案例/515">什么是前线部署工程师（FDE）？| FDEInterviews<span class="s">怎么做 · fdeinterviews.com</span></a></div>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/portfolio-prioritization">下一步 · 组合与优先级</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Intercom · imfde.ai</title>
+<meta name="description" content="Cursor 和其他大模型工具在上下文、一致性、可靠性上翻车之后，要在大型 Ruby/JS 分布式系统上跑智能体驱动的开发。；Marvin：一周内在超过 10 万行的内部应用上合并 200 个 PR；过去数月其生产代码的 90–95% 由 Augment 按其质量标准写；协调智能体之间「每周数百个 PR」。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/28"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Intercom · imfde.ai"/>
+<meta property="og:description" content="Cursor 和其他大模型工具在上下文、一致性、可靠性上翻车之后，要在大型 Ruby/JS 分布式系统上跑智能体驱动的开发。；Marvin：一周内在超过 10 万行的内部应用上合并 200 个 PR；过去数月其生产代码的 90–95% 由 Augment 按其质量标准写；协调智能体之间「每周数百个 PR」。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/28"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Intercom · imfde.ai"/>
+<meta name="twitter:description" content="Cursor 和其他大模型工具在上下文、一致性、可靠性上翻车之后，要在大型 Ruby/JS 分布式系统上跑智能体驱动的开发。；Marvin：一周内在超过 10 万行的内部应用上合并 200 个 PR；过去数月其生产代码的 90–95% 由 Augment 按其质量标准写；协调智能体之间「每周数百个 PR」。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Intercom", "description": "Cursor 和其他大模型工具在上下文、一致性、可靠性上翻车之后，要在大型 Ruby/JS 分布式系统上跑智能体驱动的开发。；Marvin：一周内在超过 10 万行的内部应用上合并 200 个 PR；过去数月其生产代码的 90–95% 由 Augment 按其质量标准写；协调智能体之间「每周数百个 PR」。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/28", "about": {"@type": "Thing", "name": "Augment Code · 其他"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Intercom</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Augment Code · 其他</p>
+  <h1>Intercom</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Intercom 借助 Augment Code 扩展多 agent 工程工作流</h2><div class='orig-body'><p>Intercom 选择 Augment 而非其他工具</p><p>Intercom 发布速度很快。它是领先的 AI 客户服务公司，推出 Fin——表现最佳的客户服务 AI Agent，以及新一代人工支持帮助台。他们的基础设施和产品团队管理大型 Ruby 和 JavaScript 代码库、分布式系统，以及源源不断的高影响力变更。</p><p>但当高级工程师探索 agent 驱动开发时，他们发现现有工具在上下文、一致性和可靠性上都力不从心。尝试过 Cursor 和多种 LLM 编码工具后，Intercom 采用了 Augment Code，以支持并行 agent 工作流，加速大型功能构建，并让工程师有可靠的方式卸载重复的编码细节，同时不牺牲质量。</p><p>Intercom 的复杂系统</p><p>Intercom 工程师处理复杂系统，准确性至关重要，包括：</p><p>大型相互关联的 Ruby 代码库</p><p>需要精确、多文件编辑的基础设施变更</p><p>快速发布文化和高技术标准</p><p>团队工作流和工具偏好的高差异性</p><p>对于 Intercom 的高级产品工程师 Marvin Bitterlich 来说，早期的 AI 编码工具不够可靠：“它们会幻觉、忘记文件，或者直接跑偏。在 agent 工作流出现之前，我根本不用 AI——然后一切都变了。”</p><p>要让 agent 实用，Intercom 最需要的是可靠的上下文管理。</p><p>为什么选择 Augment Code？</p><p>此前，Marvin 先评估了 Cursor 的 agent 模式——立刻遇到了限制。忘记文件、计划不一致、上下文处理差，让真正的工程工作流无法进行。Augment 因其稳定性和上下文保真度立即脱颖而出。</p><p>需求 Augment 优势 Marvin 的看法</p><p>上下文准确性 大型代码库的深度理解 “它就是知道东西在哪里。我自然说话——Augment 就能找到正确的文件。”</p><p>一致的任务执行 Sequential Thinking + 稳定的 agent 计划 “其他工具会失去跟踪。Augment 真的能完成工作。”</p><p>可扩展的 agent 工作流 本地 + 远程 agent，支持 GitHub Issue/PR 集成 “我每周跨协调的 agent 运行数百个 PR。”</p><p>大型系统上手 准确的摘要 + 图表生成 “我自己读的代码少多了——Augment 可靠地串联起各个点。”</p><p>工作流灵活性 支持 VS Code、JetBrains、CLI “我在 VS Code 和 CLI 工作流之间切换，Augment 在两者中都运行良好。”</p><p>转折点：Augment 在小型原型和大型功能构建上都成功了，而其他工具失败了。“如果我必须在 Claude Code 中工作，我仍然总是安装 Augment Context Engine MCP。”</p><p>Marvin Bitterlich<br/>Senior Product Engineer</p><p>结果：在规模上并行 agent 开发</p><p>Marvin 使用 Augment 的本地和远程 agent 来编排复杂的多 PR 工作流：</p><p>规划功能</p><p>拆分成 GitHub issue</p><p>启动远程 agent 并行生成草稿 PR</p><p>审查并合并</p><p>让 Augment 协调合并后的工作</p><p>“我们构建了一个大型内部应用——超过 100,000 行代码。我一周合并了 200 个 PR。Augment 完成了任务，我审查了每一行。”</p><p>高质量代码，一致交付</p><p>过去几个月，Marvin 90–95% 的生产代码由 Augment 编写——质量标准与他为自己设定的相同。“这是我会写的代码。只是我不用自己敲。”</p><p>更快上手不熟悉的系统</p><p>Augment 总结不熟悉的服务，追踪依赖关系，并为团队讨论生成 mermaid 图表。工程师只需阅读关键文件——Augment 处理其余部分。</p><p>更专注的工程时间</p><p>通过卸载细节工作，Marvin 疲劳更少，生产力更高：“我可以在周末项目上工作 12–14 小时，因为 Augment 处理了耗尽精力的部分。我只需审查和指导。”</p><p>Intercom 工程师现在在样板代码上浪费的专注时间更少，更多时间用于解决实际问题。</p><p>面向经验丰富的工程师的工具，而非氛围编码</p><p>Marvin 指出 Augment 在“氛围编码”失败的地方成功：“你仍然需要理解问题。我在脑子里解决它——Augment 处理实现。”</p><p>Marvin 的建议：</p><p>清晰地描述问题（就像和同事说话）</p><p>给出高层次意图，而不是长提示</p><p>只要求 AI 做可能且理解透彻的任务</p><p>使用 agent 做可并行的工作；使用聊天做精确编辑</p><p>结果：真正的工程加速，而非捷径驱动的混乱。</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>Cursor 和其他大模型工具在上下文、一致性、可靠性上翻车之后，要在大型 Ruby/JS 分布式系统上跑智能体驱动的开发。</dd>
+        <dt>结果</dt><dd>Marvin：一周内在超过 10 万行的内部应用上合并 200 个 PR；过去数月其生产代码的 90–95% 由 Augment 按其质量标准写；协调智能体之间「每周数百个 PR」。周末个人备注：可以干 12–14 小时，因为 Augment 处理令人筋疲力尽的部分。未陈述为 Intercom 全公司 KPI。</dd>
+        <dt>接了哪些系统</dt><dd>VS Code、JetBrains、CLI；GitHub Issue/PR；在 Claude Code 中工作时也使用 Augment Context Engine MCP。</dd>
+        <dt>用了什么数据</dt><dd>大型相互连接的 Ruby 代码库；GitHub issues/PR。</dd>
+        <dt>人还管哪一步</dt><dd>Marvin 审查了 200-PR 那一周的每一行。「我在脑子里解决——Augment 处理实现。」不是 vibe coding。</dd>
+        <dt>多久上线</dt><dd>大型内部应用：一周内合并 200 个 PR。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>并行多 PR 功能工厂：计划 → GitHub issues → 远程智能体并行起草 PR → 审查/合并 → Augment 调和。内部应用超过 10 万行。对不熟的服务用 Mermaid 图。</dd>
+        <dt>以前怎么干</dt><dd>试过 Cursor 智能体模式和多种大模型编码工具。Marvin Bitterlich 在智能体工作流到来之前完全不用 AI。团队工具差异大（VS Code、JetBrains、CLI）。</dd>
+        <dt>卡在哪</dt><dd>其他工具会幻觉、忘文件、跑偏、计划不一致。跑不了真正的多文件工程工作流。</dd>
+        <dt>用了什么模型</dt><dd>Augment Code（页面：Context Engine / agents / completions；除非另有注明，无单一模型名）。</dd>
+        <dt>事情怎么流转</dt><dd>本地 + 远程 agent；Sequential Thinking；聊天用于精确编辑，agent 用于可并行工作。</dd>
+        <dt>怎么验收</dt><dd>个人生产代码份额（90–95%）；一周内在 100k+ LOC 内部应用上 200 个 PR；协调 agent 之间「每周数百个 PR」。这些是 Marvin 的数字，不是 Intercom 组织比率。</dd>
+        <dt>怎么上线</dt><dd>Intercom 有 350+ 工程师；故事通过 Senior Product Engineer Marvin Bitterlich 讲述。跨 VS Code、JetBrains、CLI 工作。</dd>
+        <dt>失败了怎么改</dt><dd>Cursor agent mode：忘记文件、计划不一致、上下文差。其他工具产生幻觉。</dd>
+        
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">我们构建了一个大型内部应用——超过 100,000 行代码。我一周合并了 200 个 PR。Augment 完成任务，我审查了每一行。——Marvin Bitterlich, Senior Product Engineer, Intercom</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Augment 官方案例。具名 Marvin Bitterlich。量化数字是该工程师的（200 PR/周；其生产代码的 90–95%；100k+ LOC 应用），不是 Intercom 组织比率。350+ 是公司工程规模。提及 Claude Code + Augment Context Engine MCP。</p>
+    <div class='list' style='margin-top:12px'><div class="row">system_scale_not_kpi<span class="s">350+ is Intercom engineering size; 200 PRs / 90-95 percent are one engineer (mine_loop_20260829_augment).</span></div></div>
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

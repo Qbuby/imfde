@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>治理、安全与合规 · 方法 · imfde.ai</title>
+<meta name="description" content="治理、安全与合规：美国空军页上 ATO、CAC、Cloud One IL-5 是进方案前就要写死的约束。对着这页写模型不能做什么、谁核验建议、剩余风险谁扛。安全不是上线附录。"/>
+<link rel="canonical" href="https://imfde.ai/方法/governance-risk"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="治理、安全与合规 · 方法 · imfde.ai"/>
+<meta property="og:description" content="治理、安全与合规：美国空军页上 ATO、CAC、Cloud One IL-5 是进方案前就要写死的约束。对着这页写模型不能做什么、谁核验建议、剩余风险谁扛。安全不是上线附录。"/>
+<meta property="og:url" content="https://imfde.ai/方法/governance-risk"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="治理、安全与合规 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="治理、安全与合规：美国空军页上 ATO、CAC、Cloud One IL-5 是进方案前就要写死的约束。对着这页写模型不能做什么、谁核验建议、剩余风险谁扛。安全不是上线附录。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">治理、安全与合规</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>治理、安全与合规</h1>
+  <p class="learn-goal"><b>学习目标</b>：美国空军页上 ATO、CAC、Cloud One IL-5 是进方案前就要写死的约束。对着这页写模型不能做什么、谁核验建议、剩余风险谁扛。安全不是上线附录。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>安全合规写进范围，不当附录</h3><p>美国空军页上：授权运行（ATO）、CAC need-to-know、Cloud One IL-5，进入方案前先写死。托管在空军 Cloud One / AWS GovCloud；Web 应用使用国防部通用访问卡认证。不要假定上线后再补，也不要把这些写成「以后再说的安全附录」。</p></li><li><h3>按风险分级，不要逐条审批提示词</h3><p>页上：维修人员核验 AI 建议；具备 need-to-know 的 CAC 用户需授权运行。低风险走自动门禁，高风险变更进人工审查。逐条审批提示词会卡住；取消治理、或只审批模型供应商，边界会空。</p></li><li><h3>剩余风险有明确业务负责人</h3><p>高风险 AI 决策的剩余风险，不能落在个人实施者、最终用户或模型供应商。写清谁拥有业务结果和风险预算。页上无 FDE 头衔；「RSO and C3 AI team」不是 FDE。具名的是 Chris Damani，RSO CBM+ 项目办主任。</p></li><li><h3>可解释对着证据和申诉，不靠思维链</h3><p>合规要「可解释」时，对着决策证据、规则、数据来源和申诉路径，而不是展示隐藏推理。页上：对自由文本维修记录做 NLP，维修人员仍核验建议。数据驻留和影响级别与分类绑定，并在托管、认证、日志和支持访问中强制执行——IL-5 是页上的约束，不要改写成未出现的多国驻留方案。</p></li><li><h3>交一页治理范围</h3><p>约束（ATO / CAC / IL-5）、风险分级、负责人、可解释口径、模型不能做什么，写在一页上。3,110 架飞机 / 16 机型 / 800+ 用户是页上覆盖；2023 年被指定为预测性维修 System of Record。不要编上线后任务可用百分比。GAO 2022 是问题基线，不是 PANDA 成果。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/35">美国空军 / C3 AI</a></h3>
+  <p class="note">美国空军页上 ATO、CAC、Cloud One IL-5 是进方案前就要写死的约束，不是上线附录。3,110 架飞机 / 16 机型 / 800+ 用户是覆盖，不是任务可用 KPI。GAO 2022 是问题基线，不是 PANDA 成果。页上没有上线后百分比，不要编。</p>
+  <dl class="anatomy"><dt>卡点</dt><dd>系统、分系统或部件意外故障；替换件不能马上到位，飞机可能趴窝。任务可用目标通常达不到（GAO）。需要授权运行（ATO），以及空军 Cloud One 上基于 CAC 的按需知悉访问。</dd><dt>集成</dt><dd>C3 AI Platform 与 C3 AI Readiness。空军 Cloud One 由 AWS GovCloud 支撑；IL-5（DoD Impact Level 5）。Web 应用使用国防部通用访问卡（CAC）认证；需授权运行。应用层未点名其他商业厂商。</dd><dt>人在环内</dt><dd>维修人员核验 AI 建议。维修计划人员在计划事件中使用预测。供应链分析师跟进现场经理。领导层规划并部署可用资产。CAC need-to-know 访问。</dd><dt>部署</dt><dd>自 2020 年起参与 CBM+。托管在 Cloud One / AWS GovCloud；ATO 使任何通过核验、具备 need-to-know 的 CAC 用户可用。扩展到监测 16 个机型、3,110 架飞机；8 个应用；800+ 活跃用户。SBA 部署于 B-1B（2022）、C-5 与 KC-135（2023）。预测性机队健康 2023 年投入使用。</dd></dl>
+  <p class="hint"><a href="/案例/35">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="2" data-yes="对。按风险分级：低风险自动门禁，高风险变更进入人工审查。" data-no="不对。逐项审批提示词、取消治理、或只审批模型供应商，都会把边界留空。"><p class="k">练习 1 · 高阶</p><p class="mcq-stem">治理委员会想审批每次提示词修改。更好的治理模式是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>继续逐项审批每次提示词修改。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>取消治理，改提示词不再审查。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>按风险分级，低风险自动门禁，高风险变更进入人工审查。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>只审批模型供应商，提示词变更不再分级。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。剩余风险由拥有业务结果和风险预算的明确负责人承担。" data-no="不对。不能落到实施者个人、最终用户或模型供应商。页上无 FDE 头衔。"><p class="k">练习 2 · 高阶</p><p class="mcq-stem">谁应接受高风险 AI 决策的剩余风险？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>剩余风险由实施的个人承担。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>剩余风险由最终用户承担。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>剩余风险由模型供应商承担。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>拥有业务结果和风险预算的明确负责人。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。可解释性针对决策证据、规则、数据来源和申诉路径，而不是隐藏推理。" data-no="不对。思维链太长、模型不够大、或补截图，都替代不了可审计的证据。"><p class="k">练习 3 · 高阶</p><p class="mcq-stem">合规要求“可解释”，项目团队只展示思维链。问题在哪里？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>可解释性应针对决策证据、规则、数据来源和申诉路径，而非依赖隐藏推理。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>思维链太长所以看起来不可解释，再截短一些。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>模型不够大所以解释不清，先换更大模型。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>再补思维链截图，用展示推理代替申诉路径。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。数据分类与区域或影响级别策略绑定，并在路由、存储、日志和支持访问中强制执行。" data-no="不对。一份全球提示词、让用户自选地区、或只写合同，驻留约束不会落地。"><p class="k">练习 4 · 高阶</p><p class="mcq-stem">如何治理不同国家的数据驻留要求？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>写一份全球提示词，驻留要求写进提示里。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>数据分类与区域策略绑定，并在路由、存储、日志和支持访问中强制执行。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>由用户自己选择数据所在地区。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>只在合同里写驻留条款，路由和存储不强制。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页治理范围</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+页上约束（ATO / CAC need-to-know / Cloud One IL-5）：
+模型不能做什么：
+风险分级（低风险自动门禁 / 高风险人工审查）：
+谁核验建议、谁拥有剩余风险：
+可解释口径（证据 / 规则 / 数据来源 / 申诉路径）：
+数据分类如何绑到托管、认证、日志、支持访问：
+页上覆盖（飞机 / 机型 / 用户，不当任务可用 KPI）：
+页上没有的上线后百分比（留空，不要编）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>ATO / CAC / IL-5 写进范围；风险分级清楚；剩余风险有业务负责人；可解释对着证据、规则、来源和申诉路径。</p></li><li><h3>不及格</h3><p>安全留到上线附录；逐条审批提示词或取消治理；剩余风险推给实施者或供应商；用思维链截图代替可解释。</p></li><li><h3>不要编的数</h3><p>不要编上线后的任务可用百分比。GAO 2022 是问题基线，不是 PANDA 成果。3,110 架飞机 / 16 机型 / 8 个应用 / 800+ 用户只抄页上覆盖。传感器机器学习「proven value」是定性表述。不要补 FDE 头衔。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/enterprise-architecture">上一步 · 企业架构与平台</a> · <a href="/方法/economics-commercial">下一步 · 商业模型与经济性</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

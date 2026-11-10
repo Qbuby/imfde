@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Vega · imfde.ai</title>
+<meta name="description" content="安全团队只能对负担得起摄取的数据做防御；摄取不到的数据成盲点。传统 SIEM 摄取贵（某全球前四大银行额外 600 万美元）。；调查最多快 44 倍、成本降 82%（对比传统 SIEM）。某 Fortune 500：分诊 25 分钟→不到 3 分钟。回收约 67% 分析师时间。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/14"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Vega · imfde.ai"/>
+<meta property="og:description" content="安全团队只能对负担得起摄取的数据做防御；摄取不到的数据成盲点。传统 SIEM 摄取贵（某全球前四大银行额外 600 万美元）。；调查最多快 44 倍、成本降 82%（对比传统 SIEM）。某 Fortune 500：分诊 25 分钟→不到 3 分钟。回收约 67% 分析师时间。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/14"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Vega · imfde.ai"/>
+<meta name="twitter:description" content="安全团队只能对负担得起摄取的数据做防御；摄取不到的数据成盲点。传统 SIEM 摄取贵（某全球前四大银行额外 600 万美元）。；调查最多快 44 倍、成本降 82%（对比传统 SIEM）。某 Fortune 500：分诊 25 分钟→不到 3 分钟。回收约 67% 分析师时间。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Vega", "description": "安全团队只能对负担得起摄取的数据做防御；摄取不到的数据成盲点。传统 SIEM 摄取贵（某全球前四大银行额外 600 万美元）。；调查最多快 44 倍、成本降 82%（对比传统 SIEM）。某 Fortune 500：分诊 25 分钟→不到 3 分钟。回收约 67% 分析师时间。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/14", "about": {"@type": "Thing", "name": "Anthropic · 政府公共 · Claude"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Vega</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Anthropic · 政府公共 · Claude</p>
+  <h1>Vega</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Vega — Claude 驱动 agentic 网络防御：调查快 44 倍、成本降 82%</h2><div class='orig-body'><p>大企业安全数据散在几十个工具和云环境里。</p><p>理论上能全塞进 SIEM，但规模一大就太复杂、太贵。</p><p>团队通常只吃得下能付得起的那部分，剩下的就成了盲区。</p><p>查询、检测、调查都做不全。</p><p>AI 把这个矛盾放大了。</p><p>“AI agent 能看到多少数据，就有多大用处。大多数安全架构要么太零散，要么太慢，撑不起规模化 agentic 网络防御。”</p><p>Eli Rozen，联合创始人兼 CTO</p><p>一家全球前四大银行的 Amazon VPC Flow Logs、AWS CloudTrail、Microsoft 365 遥测数据都没法看，因为塞进老 SIEM 要多花 600 万美元。</p><p>Vega 想做 agentic 网络防御：agent 检测攻击后自动分诊、调查，还能自我优化。</p><p>团队选 Claude 跑生产。</p><p>“作为 AI 原生公司，我们从第一天就用 Claude 这类顶级模型，把它的推理能力定为平台基线。”</p><p>Rozen 说，安全团队要用的推理必须过硬。</p><p>Vega 先用最强的 Claude 模型定准度，再往回压成本和速度，不丢质量。</p><p>关键在于模型范围。</p><p>“Claude 让我们在同一个模型家族里，按需调用 Haiku、Sonnet、Opus 的不同智能层级。”</p><p>最深推理给已确认告警，风险最高；日志分析、摘要这类高量活跑在轻快模型上。</p><p>“客户感受到的是规模下的速度和精准；我们自己感受到的是单位经济能控住，同时保证网络防御工程师在关键处拿到前沿答案。”</p><p>Vega 在 Anthropic 的 Agent Skills 格式上做了扩展，推出 detection skills。</p><p>这是一个开放标准，让网络防御工程师把自己的判断写成 agentic 循环：如何分诊、调查、优化一个检测。</p><p>Vega 把标准放到了 detectionskills.io，方便各平台安全团队把判断编码、分享给社区。</p><p>检测触发后，循环就按这份判断跑。</p><p>分诊技能决定告警是否升级成事件，并附上推理。</p><p>调查技能在人看之前先分析事件：提假设、搜证据、起草带解释的结论和下一步建议。</p><p>优化技能把已批准的结论写回检测，让它下次打得更准。</p><p>每处改动都由工程师签字，判断权还在人手里，重复活却在人来之前就做完了。</p><p>推理通过 Amazon Bedrock 给客户：零数据留存、不用客户数据训练、VPC 端点不走公网、透传定价。</p><p>内部工具和 Claude Code 走直连 Claude API。</p><p>用量上来后，Amazon Bedrock 的跨区推理扛住了峰值，Vega 不用自己扩容。</p><p>Vega 是全球公司，要满足各地合规、隐私、主权要求。</p><p>有客户需要 GDPR 的欧盟数据驻留，Vega 三周内在法兰克福搭起专用控制平面，跑 Amazon Bedrock 欧盟托管的 Claude 模型。</p><p>“作为 AI 原生公司，我们从第一天就用 Claude 这类顶级模型，把它的推理能力定为平台基线。”</p><p>Eli Rozen，联合创始人兼 CTO，Vega</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>安全团队只能对负担得起摄取的数据做防御；摄取不到的数据成盲点。传统 SIEM 摄取贵（某全球前四大银行额外 600 万美元）。</dd>
+        <dt>结果</dt><dd>调查最多快 44 倍、成本降 82%（对比传统 SIEM）。某 Fortune 500：分诊 25 分钟→不到 3 分钟。回收约 67% 分析师时间。10 亿条 CloudTrail 日志 / 17 个区域 41 秒扫完（手工基线 30 分钟）。</dd>
+        <dt>接了哪些系统</dt><dd>推理经 Amazon Bedrock 触达客户（零数据保留、VPC endpoints、pass-through pricing）；直接 Claude API 用于内部工具/Claude Code；基于 Anthropic Agent Skills 格式构建 detection skills</dd>
+        <dt>用了什么数据</dt><dd>Amazon VPC Flow Logs、AWS CloudTrail、Microsoft 365 telemetry；超 1 billion CloudTrail logs 跨 17 AWS regions</dd>
+        <dt>人还管哪一步</dt><dd>工程师对每次变更签字批准；判断仍属工程师，重复工作在到达前完成</dd>
+        <dt>多久上线</dt><dd>EU residency 控制平面 under three weeks</dd>
+        <dt>怎么交给客户</dt><dd>客户经 Bedrock 自服务；Vega 工程团队+CTO 构建优化</dd>
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>智能体网络防御：发现攻击后自己分诊、调查、优化整套环境；Claude 当推理引擎，驱动检测技能循环。</dd>
+        <dt>以前怎么干</dt><dd>大型企业安全数据散落在几十个工具和云上；理论上全量进 SIEM，实际只摄取负担得起的一小部分。</dd>
+        <dt>卡在哪</dt><dd>采样切片把所有盲点一起继承。SOC 只看采样数据，VPC Flow Logs / CloudTrail / M365 遥测看不见。</dd>
+        <dt>用了什么模型</dt><dd>Claude 单模型族：最深推理（确认告警）用 Opus；高容量（日志分析/总结）用 Haiku/Sonnet</dd>
+        <dt>事情怎么流转</dt><dd>Triage skills（是否升级为事件+推理）→ Investigation skills（人工介入前分析、假设、证据、可解释结论）→ Optimization skills（把批准裁决写回检测，下次更准）</dd>
+        <dt>怎么验收</dt><dd>以最强 Claude 模型设准确基线，向后优化成本效率不损质量；生产中严格测质量</dd>
+        <dt>怎么上线</dt><dd>Bedrock 跨区推理吸收负载峰值；GDPR 需求下法兰克福建专用控制平面（Bedrock EU-hosted Claude），不到三周</dd>
+        
+        <dt>能不能复用到下一家</dt><dd>Detection Skills 基于开放 Agent Skills 标准（detectionskills.io）；Bedrock 跨区域推理</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">AI agent 的有效性取决于它们能访问的数据…… — Eli Rozen, Co-founder &amp; CTO, Vega  |  Claude 让我们能在单一模型族内工作……覆盖 Haiku、Sonnet 和 Opus。 — Eli Rozen</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Anthropic 官方案例，强量化（44x、82%、67%）；基于 Bedrock 交付，无 Anthropic FDE</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

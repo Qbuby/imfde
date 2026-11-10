@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>控制 Token 成本 · 方法 · imfde.ai</title>
+<meta name="description" content="控制 Token 成本：Atlassian 高容量自定义 agent 迁到 Gemini Flash，复杂长任务才上 Claude。对着这页写预算、缓存、路由，以及这场对话还值不值得继续烧。单价页上没有就空着。"/>
+<link rel="canonical" href="https://imfde.ai/方法/token-cost-control"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="控制 Token 成本 · 方法 · imfde.ai"/>
+<meta property="og:description" content="控制 Token 成本：Atlassian 高容量自定义 agent 迁到 Gemini Flash，复杂长任务才上 Claude。对着这页写预算、缓存、路由，以及这场对话还值不值得继续烧。单价页上没有就空着。"/>
+<meta property="og:url" content="https://imfde.ai/方法/token-cost-control"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="控制 Token 成本 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="控制 Token 成本：Atlassian 高容量自定义 agent 迁到 Gemini Flash，复杂长任务才上 Claude。对着这页写预算、缓存、路由，以及这场对话还值不值得继续烧。单价页上没有就空着。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">控制 Token 成本</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>控制 Token 成本</h1>
+  <p class="learn-goal"><b>学习目标</b>：Atlassian 高容量自定义 agent 迁到 Gemini Flash，复杂长任务才上 Claude。对着这页写预算、缓存、路由，以及这场对话还值不值得继续烧。单价页上没有就空着。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>按真实任务估预算</h3><p>Atlassian 页上有质量/成本基准和单月 500 万+ agent 规模；规模不是单价，页上也没给单价，不要编。按真实任务估算输入、输出、缓存命中、重试、工具调用和峰值，再设预算阈值。第一张账单没到，也要把预算写上。</p></li><li><h3>稳定前缀放在前面</h3><p>同一份长政策每次都放开头、但前缀不稳定，缓存命中会低。稳定共享前缀保持一致，用户、时间等易变内容放到后面，并监控缓存 Token。页上没写缓存命中率，简报里留空。</p></li><li><h3>按质量门槛做路由</h3><p>Atlassian 页上：高容量自定义 agent 迁到 Gemini Flash，Claude 用于复杂长任务；厂商退役模型时换新版。用已评测的质量与风险门槛做模型路由，只把需要的任务升级。这是路由，不是把「成本降、质量升、延迟优」当公式。</p></li><li><h3>压缩要用完成率验证</h3><p>把回答一律截短，成本下降但 Jira 工单做不成。按任务定义足够的结构和上限，用完成率与质量评测验证压缩没有破坏结果。预算耗尽或质量掉出门槛时停止或降级，把「这场对话还值不值得继续烧」写进方案。</p></li><li><h3>交一页 Token 成本简报</h3><p>任务基线、预算、前缀与缓存、路由门槛、压缩验证、停止条件，写在一页上。页上「成本降、质量升、延迟优」是厂商定性，作业不要当验收公式。没有的单价留空。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/16">Atlassian / Anthropic</a></h3>
+  <p class="note">Atlassian 页上，高容量自定义 agent 迁到 Gemini Flash，复杂长任务才上 Claude。单价、缓存命中率、每任务 Token 页上没写，不要编。「成本降、质量升、延迟优」是厂商定性，不要当公式。</p>
+  <dl class="anatomy"><dt>评测</dt><dd>团队自建评估，按质量/成本基准测模型；Claude 在复杂指令一致性与大上下文上更优</dd><dt>部署</dt><dd>AI 模型网关基于 Gemini Enterprise Agent Platform；高容量自定义 agent 迁到 Gemini Flash；厂商退役模型时无缝换新版</dd><dt>模型</dt><dd>Claude 作基础 agent 模型（Rovo Chat/CLI/Max/Studio 用 Opus 4.8、Sonnet 4.6）；Gemini Flash 作通用客户 agent 默认</dd><dt>测得结果</dt><dd>单月 500 万+ 智能体跑在客户业务工作流上。35 万+ 客户；20+ 产品、数百项 AI 能力。页上称「成本降、质量升、延迟优」三赢。</dd></dl>
+  <p class="hint"><a href="/案例/16">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="1" data-yes="对。按真实任务估算输入、输出、缓存命中、重试、工具调用和峰值，再设预算。" data-no="不对。只用单价乘用户数、等账单或只算系统提示词，预算会对不上。"><p class="k">练习 1 · 进阶</p><p class="mcq-stem">团队要为新 AI 工作流设定月度 Token 预算。最可靠的预测方式是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>只用模型价格乘以用户数，不估输入、重试和峰值。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>按真实任务估算输入、输出、缓存命中、重试、工具调用和峰值，再设置预算阈值。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>等第一张账单再决定预算，上线前不设阈值。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>只计算系统提示词，工具调用和输出不进预算。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。稳定共享前缀保持一致，易变内容放到后面，并监控缓存 Token。" data-no="不对。复制政策、打乱段落或只提高输出上限，缓存命中不会升。"><p class="k">练习 2 · 进阶</p><p class="mcq-stem">同一份长政策每次请求都被放在提示词开头，但缓存命中很低。首先应该检查什么？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>让稳定的共享前缀保持一致，把用户、时间等易变内容放到后面，并监控缓存 Token。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>把政策复制两遍，用重复提高缓存命中。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>随机打乱政策段落，每次前缀都不一样。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>只提高输出上限，不检查前缀是否稳定。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。用已评测的质量与风险门槛做模型路由，只把需要的任务升级。" data-no="不对。无条件用最贵或最便宜、拆更多轮或每天随机选，都不是路由。"><p class="k">练习 3 · 进阶</p><p class="mcq-stem">客服分类任务质量阈值已经通过小模型验证，但团队总是调用最贵模型。最佳改法是什么？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>无条件改用最便宜模型，分类任务也不再测门槛。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>把所有任务拆成更多轮，用轮次代替路由。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>每天随机选择模型，不按质量与风险门槛升级。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>用已评测的质量与风险门槛做模型路由，只把需要的任务升级到更强模型。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。按任务定义足够的结构和上限，用完成率与质量评测验证压缩没有破坏结果。" data-no="不对。一律截得更短、删掉解释或只优化输入，任务会做不成。"><p class="k">练习 4 · 进阶</p><p class="mcq-stem">产品把模型回答限制到 50 Token，成本下降但用户无法完成工作。正确的控制方法是什么？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>永远把输出限制得更短，成本下降就算成功。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>删除所有解释，用更短回复当压缩策略。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>按任务定义足够的结构和上限，并用完成率与质量评测验证压缩没有破坏结果。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>只优化输入 Token，输出截断不再用完成率核对。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页 Token 成本简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+真实任务（输入 / 输出 / 缓存 / 重试 / 工具调用 / 峰值）：
+月度预算阈值（口径：实测 / 目标；页上没写单价就留空）：
+稳定前缀 vs 易变内容：
+缓存 Token 怎么监控：
+质量与风险门槛（何时升级更强模型）：
+这场对话还值不值得继续烧（停止 / 降级）：
+压缩结构与上限（完成率如何验证）：
+页上路由 / 评测口径（只抄）：
+页上没写的单价（留空，不要编）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>按真实任务写了输入 / 输出 / 缓存 / 重试 / 工具调用 / 峰值；稳定前缀与易变内容分开；质量与风险门槛用于路由；压缩用完成率验证；停止或降级写进了方案。</p></li><li><h3>不及格</h3><p>只用单价乘用户数、等账单再定、总调最贵或最便宜模型，一律截短当省钱，或把「成本降、质量升、延迟优」当验收公式。</p></li><li><h3>不要编的数</h3><p>单价、缓存命中率、每任务 Token 页上没写，不要填。「单月 500 万+ agent」是规模陈述；「成本降、质量升、延迟优」是定性。不要补节省金额或 FDE 头衔。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/loop-engineering">上一步 · 闭环工程</a> · <a href="/方法/enterprise-knowledge-base">下一步 · 企业知识库搭建</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

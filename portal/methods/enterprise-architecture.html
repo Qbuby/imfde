@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>企业架构与平台 · 方法 · imfde.ai</title>
+<meta name="description" content="企业架构与平台：联合爱迪生先落到联邦数据映像，五个外部系统已经在消费统一数据。这一步写身份从哪来、数据从哪进、谁值班。另起一套没人值班的平台交不出去。"/>
+<link rel="canonical" href="https://imfde.ai/方法/enterprise-architecture"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="企业架构与平台 · 方法 · imfde.ai"/>
+<meta property="og:description" content="企业架构与平台：联合爱迪生先落到联邦数据映像，五个外部系统已经在消费统一数据。这一步写身份从哪来、数据从哪进、谁值班。另起一套没人值班的平台交不出去。"/>
+<meta property="og:url" content="https://imfde.ai/方法/enterprise-architecture"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="企业架构与平台 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="企业架构与平台：联合爱迪生先落到联邦数据映像，五个外部系统已经在消费统一数据。这一步写身份从哪来、数据从哪进、谁值班。另起一套没人值班的平台交不出去。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">企业架构与平台</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>企业架构与平台</h1>
+  <p class="learn-goal"><b>学习目标</b>：联合爱迪生先落到联邦数据映像，五个外部系统已经在消费统一数据。这一步写身份从哪来、数据从哪进、谁值班。另起一套没人值班的平台交不出去。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>落在客户已有的身份、数据、值班上</h3><p>联合爱迪生页上：13 个源系统、两年历史、5 million 个客户账户，先集成进联邦数据映像，再跑 AMI 分析。不要另起一套没人值班的平台。先写：身份从哪来、数据从哪进、谁值班。不要先全量复制进新库。</p></li><li><h3>统一控制面，业务能力保持可组合</h3><p>企业要统一 AI 平台时，统一身份、数据、评测、审计和运行控制，业务能力保持可组合。不是所有场景同一模型，也不是所有代码放一个仓库。页上：五个外部系统已经消费统一数据。这是落点，不是「禁止外部 API」。</p></li><li><h3>部署形态按数据分类和风险分层</h3><p>业务要本地、云模型质量更高时，按数据分类、风险、任务门槛、成本和退出路径分层。只比榜单、全部本地或全部云端，都交不出去。多模型路由只在任务于质量、延迟、成本或监管上有稳定差异、且路由可评测时才用。页面没有点名云厂商，简报不要补。</p></li><li><h3>部门差异先补数据契约和责任边界</h3><p>共享平台在不同部门表现差，多半缺领域数据契约、检索评测和部门级责任。加大向量库、统一提示词或加 GPU，补不了责任。页上 Ex Machina 是给业务问题负责人的无代码路径，不是已铺全公司的验收。</p></li><li><h3>交一页架构落点</h3><p>身份、数据映像、值班、控制面、分层决策，写在一页上。4 个月内识别 2,300+ 个部署问题，口径是「识别」。$854M+ 是「所识别的」年度客户收益，不是已实现损益，不要写成验收目标。$13B 收入 / 4.4M 客户 / 15,000 员工 / 5.3M 电表是公用事业规模，不是本项目 KPI。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/36">联合爱迪生 / C3 AI</a></h3>
+  <p class="note">联合爱迪生先落到联邦数据映像，五个外部系统已经在消费统一数据。$854M+ 是「所识别的」收益，不是已实现损益。页面没点名源系统品牌或云厂商，不要补。</p>
+  <dl class="anatomy"><dt>数据来源</dt><dd>来自 13 个源系统、覆盖 500 万个客户账户的两年数据；每年集成 180B+ 行。智能电表 / AMI 遥测（5.3M 电表部署；运营目标中的 500 万只电表）。联合团队设计的第三方数据使用要求。页面没有点名 MDMS/CIS 品牌。</dd><dt>集成</dt><dd>C3 AI Platform 和 C3 AI AMI Operations。五个外部系统访问统一数据。Smilowitz 点名 Ex Machina 作为业务负责人的无代码路径。页面没有点名云超大规模厂商。</dd><dt>部署</dt><dd>推出 C3 AI Platform 和 C3 AI AMI Operations，用于约 500 万只智能电表的 AMI 运营和联邦分析数据映像。10 个月项目；13 个源系统；5M 客户账户。</dd><dt>评测</dt><dd>10 个月项目。4 个月内识别 2,300+ 个部署问题。$854M+ 被印为「所识别的年度客户收益」（所识别的，不是已实现的损益科目）。五个外部系统使用统一数据。每年 180B+ 行。</dd></dl>
+  <p class="hint"><a href="/案例/36">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="3" data-yes="对。统一身份、数据、评测、审计和运行控制，业务能力保持可组合。" data-no="不对。所有场景同一模型、禁止外部 API、或所有代码放一个仓库，都不是第一项原则。"><p class="k">练习 1 · 高阶</p><p class="mcq-stem">企业要统一 AI 平台，第一项架构原则应是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>所有场景用同一模型，当作平台已经统一。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>禁止外部 API，用封闭代替控制面。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>所有代码放一个仓库，用仓库结构代替身份和审计。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>统一身份、数据、评测、审计和运行控制，业务能力保持可组合。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。任务在质量、延迟、成本或监管上有稳定差异、且路由可评测时，才用多模型路由。" data-no="不对。供应商越多越好、为了避免选型、或每次随机选，路由无法验收。"><p class="k">练习 2 · 高阶</p><p class="mcq-stem">何时应采用多模型路由？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>供应商越多越好，先接上再谈路由评测。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>为了避免选型，把所有模型都接进路由。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>不同任务在质量、延迟、成本或监管上有稳定差异，且路由可评测。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>每次请求随机选择模型，不按任务差异路由。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。本地还是云，按数据分类、风险、任务门槛、成本和退出路径分层决策。" data-no="不对。只比榜单、全部本地或全部云端，都会把约束留到交付阶段。"><p class="k">练习 3 · 高阶</p><p class="mcq-stem">业务要求本地部署，云模型质量更高。架构委员会如何决策？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>只比较模型榜单，本地还是云看分数。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>按数据分类、风险、任务门槛、成本和退出路径做分层决策。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>全部本地部署，云质量更高也不分层。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>全部上云，数据分类和退出路径后补。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。共享平台部门差异大，先补领域数据契约、检索评测和部门级责任边界。" data-no="不对。更大向量库、统一提示词或更多 GPU，补不了责任。"><p class="k">练习 4 · 高阶</p><p class="mcq-stem">共享 RAG 平台在不同部门表现差异很大。最可能缺什么？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>领域数据契约、检索评测和部门级责任边界。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>换更大向量库，部门差异靠容量消掉。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>全公司统一提示词，表现差的部门一起改。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>加更多 GPU，检索不好就堆算力。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页架构落点</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+落在哪套已有身份 / 数据 / 值班上（不是另起炉灶）：
+源系统与联邦数据映像：
+统一控制面（身份 / 数据 / 评测 / 审计 / 运行）：
+可组合的业务能力：
+分层决策（数据分类 / 风险 / 任务门槛 / 成本 / 退出路径）：
+多模型路由（仅当任务差异稳定且可评测；没有就空着）：
+领域数据契约与部门责任边界：
+所识别 vs 已实现（识别金额不要当验收）：
+明确不做 / 不补的品牌：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>落在客户已有的身份、数据和值班上；控制面与可组合能力分开写；部署形态按数据分类和风险分层；部门差异有数据契约和责任边界。</p></li><li><h3>不及格</h3><p>另起没人值班的平台；所有场景同一模型；只比榜单决定本地或云；或用更大向量库代替数据契约。</p></li><li><h3>不要编的数</h3><p>$854M+ 页上写「所识别的」，禁止当已实现损益或验收目标。2,300+ 是 4 个月内识别的部署问题；10 个月是项目时长。$13B 收入 / 4.4M 客户 / 15,000 员工 / 5.3M 电表是公用事业规模，不是本项目 KPI。不要补 FDE 头衔或未点名的源系统品牌、云厂商。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/portfolio-prioritization">上一步 · 组合与优先级</a> · <a href="/方法/governance-risk">下一步 · 治理、安全与合规</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

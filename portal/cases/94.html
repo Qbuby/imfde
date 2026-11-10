@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Ramp · imfde.ai</title>
+<meta name="description" content="偿还不断增长的技术债（值班缺陷、损坏/不稳定/缓慢测试、N+1、已弃用功能开关），让工程师能继续做产品执行。；主视觉：每周最多合并 80 个 PR；机械任务每月节省 10,000+ 小时。功能开关：一个月 150 个复杂开关；一名工程师引语：过去一个月在开关上节省超过 1,000 工程小时。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/94"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Ramp · imfde.ai"/>
+<meta property="og:description" content="偿还不断增长的技术债（值班缺陷、损坏/不稳定/缓慢测试、N+1、已弃用功能开关），让工程师能继续做产品执行。；主视觉：每周最多合并 80 个 PR；机械任务每月节省 10,000+ 小时。功能开关：一个月 150 个复杂开关；一名工程师引语：过去一个月在开关上节省超过 1,000 工程小时。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/94"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Ramp · imfde.ai"/>
+<meta name="twitter:description" content="偿还不断增长的技术债（值班缺陷、损坏/不稳定/缓慢测试、N+1、已弃用功能开关），让工程师能继续做产品执行。；主视觉：每周最多合并 80 个 PR；机械任务每月节省 10,000+ 小时。功能开关：一个月 150 个复杂开关；一名工程师引语：过去一个月在开关上节省超过 1,000 工程小时。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Ramp", "description": "偿还不断增长的技术债（值班缺陷、损坏/不稳定/缓慢测试、N+1、已弃用功能开关），让工程师能继续做产品执行。；主视觉：每周最多合并 80 个 PR；机械任务每月节省 10,000+ 小时。功能开关：一个月 150 个复杂开关；一名工程师引语：过去一个月在开关上节省超过 1,000 工程小时。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/94", "about": {"@type": "Thing", "name": "Cognition · 金融保险 · Devin"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Ramp</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Cognition · 金融保险 · Devin</p>
+  <h1>Ramp</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Devin 修复数万小时技术债，让工程师聚焦最重要的事：为客户省时省钱</h2><div class='orig-body'><p>Ramp 是一家金融运营平台，帮助公司省时省钱。他们的全平台把企业卡、账单支付、采购、供应商管理、差旅预订、资金管理等功能整合在一起，内置控制和智能，最大化每一美元和每一小时的回报。公司 2019 年成立，是美国增长最快的公司之一，每年为 30,000 多家企业处理数百亿美元的采购。</p><p>随着 Ramp 不断扩张新产品，技术待办事项越积越多。日常维护（处理 on-call bug、修坏掉的测试）和清理任务（修 flaky 测试、优化 N+1 查询）很快就把工程师从产品开发上拉开。</p><p>经过几次尝试，Ramp 发现一小队熟悉 Devin 的工程师就能省下数万工程师小时，每周合并多达 80 个 PR，横跨整个工程组织。</p><p>Ramp 的应用 AI 团队每周用 Devin 解决一项不同的技术债任务，有时直接把工作流嵌入现有的 SDLC。</p><p>他们把用 Devin 解决的问题分成三类：</p><p>Devin 驱动的内部工具（比如功能开关移除工具）</p><p>全自动、事件驱动的任务（比如自动修复 Airflow 错误）</p><p>积压任务（比如修几百个慢测试或 flaky 测试）</p><p>任何代码库变大，重复的清理工作就会增加，通常占工程师 20% 的时间。测试套件里全是未优化的测试，会直接拖慢开发速度。Ramp 的工程师每天都要在本地跑测试，测试套件每快一分钟，一年就能省下几千小时。</p><p>功能开关移除是另一个例子。几百个废弃的功能开关和分叉逻辑让代码变慢、变难读。工程师排查关键 bug 时碰到开关，还得切上下文、查开关管理器、理解代码逻辑，增加大量时间和复杂度。</p><p>Ramp 一次用 Devin 解决一个清理或优化任务。他们通过 Devin 的 API 并行触发多个 Devin，批量返回完成的 PR。</p><p>一个月内移除 150 个复杂功能开关，省下几千小时工程时间。</p><p>“移除一个功能开关可能要好几天。我们以前试过写脚本，但只有 Devin 能彻底移除开关，还能修掉所有影响的测试和其他依赖。上个月光这项就省了 1000 多小时。”</p><p>——Rakesh Nori，Ramp 软件工程师</p><p>移除单个功能开关就很难，尤其是开关影响代码库里各种格式的逻辑。找出所有死代码路径、条件和边界情况并不直观，耗费宝贵时间。Devin 的核心优势是能跑 Ramp 的测试，确认移除功能开关后核心逻辑没变。有时只有跑测试、看堆栈跟踪才能找出所有下游依赖和受影响的测试，传统静态分析很难做到。</p><p>Ramp 因此和 Devin 合作，做了一个低开销、易用的功能开关移除系统：</p><p>Ramp 做了一个主 playbook——一个标准提示，可以程序化附加到重复任务上——协调多个“worker” Devin 并行处理功能开关移除的不同部分。这样就能把 playbook 扩展到高复杂度开关，因为任务可以拆分给多个 worker。</p><p>一个“clean-up” Devin 检查 worker 输出有没有冲突，再把改动合并成一个容易 review 的 PR。</p><p>整个 Devin 工作流被封装成 Ramp 管理后台里的内部工具，任何工程师都能调用。</p><p>示例 worker Devin 提示：</p><p>You are Worker Devin, responsible for removing the feature flag EXAMPLE_FLAG from the codebase. Perform the following changes on `worker-devin/example-flag-1` Your task: - Remove all instances of the feature flag EXAMPLE_FLAG in the file assigned to you. - The feature flag is now `on` in all cases. Ensure the behavior of the code does not change. - Update any associated tests to reflect the changes. Push your changes to your branch.</p><p>现在 Ramp 的工程师只要在内部工具里输入功能开关，Devin 就会在 PR 完成后自动 @ 他。今天 Devin 已经是 Ramp 内部核心工具，能执行以前没有代码代理就做不到的事。</p><p>平均 8 分钟从 bug 到 PR。</p><p>“让 Devin 先看每一份 Airflow 错误，能省很多时间。有一半情况我们可以直接合并 Devin 的 PR，省下好几个小时调试。即使方案不完美，Devin 的改动也几乎总能把我们更快带到正确解。”</p><p>——Peyton McCullough，Ramp 平台工程资深软件工程师</p><p>Ramp 的 Data Platform 是很多内部系统和团队的枢纽，跨职能活动和贡献很多，所以经常出问题。每天早上，平台工程团队醒来都要手动调试几条 Airflow 错误或失败报告。这些错误和关键金融服务直接相关，时间敏感，但代码修复本身通常很简单。最大的痛苦在于先得切上下文、定位 bug 位置。</p><p>早期实验显示有希望后，Ramp 决定用 Devin 自动处理每一次 Airflow 失败的第一遍，减轻平台工程师压力。实现很简单：Ramp 把 Airflow 错误日志拿来，挑出适合 Devin 修的，然后通过 API 触发 Devin 去修。如果 Devin 的修复通过 CI，它就会开 PR 并 @ 对应工程师。</p><p>现在 Ramp 的工程师不用手动调试，只需 review 并批准已经通过 CI 的 Devin PR。即使修复不完全正确，也几乎总在正确方向上，大幅加快修复速度。</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>偿还不断增长的技术债（值班缺陷、损坏/不稳定/缓慢测试、N+1、已弃用功能开关），让工程师能继续做产品执行。</dd>
+        <dt>结果</dt><dd>主视觉：每周最多合并 80 个 PR；机械任务每月节省 10,000+ 小时。功能开关：一个月 150 个复杂开关；一名工程师引语：过去一个月在开关上节省超过 1,000 工程小时。Airflow：Devin 从缺陷到 PR 平均 8 分钟；一半时间原样合并。慢测试：套件本地运行时间减少整整一分钟，每名工程师每天最多拿回 20 分钟开发时间。概览：一支很小的精通 Devin 的团队节省了数万工程师小时。</dd>
+        <dt>接了哪些系统</dt><dd>用 Devin API 触发并行 worker；内部管理工具；CI 作为合并门禁；验证脚本丢弃失败工作，使 PR 从不会嘈杂。</dd>
+        <dt>用了什么数据</dt><dd>代码库；功能开关管理器；Airflow 错误日志；测试套件；未文档化端点。</dd>
+        <dt>人还管哪一步</dt><dd>工程师审查/批准 PR。Applied AI 团队选择每周用例。瓶颈是人工审查带宽，不是智能体并行度。</dd>
+        <dt>多久上线</dt><dd>功能开关系统：一个月移除 150 个复杂开关。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>功能开关移除 Playbook（worker Devin + cleanup Devin + 管理仪表盘工具）；通过 API 对 Airflow 错误做初过；慢测试拆分和带验证脚本的端点文档。</dd>
+        <dt>以前怎么干</dt><dd>机械清理历史上最多占工程时间的 20%。功能开关移除曾尝试脚本化并失败。平台工程师手工调试早晨的 Airflow 错误。</dd>
+        <dt>卡在哪</dt><dd>数百个已弃用开关；100+ 个慢测试；500+ 个未文档化端点。测试套件改进一分钟，会在每天数百/数千次运行中放大。</dd>
+        <dt>用了什么模型</dt><dd>Devin</dd>
+        <dt>事情怎么流转</dt><dd>Playbook 协调 worker Devin 处理文件切片，然后 cleanup Devin 合并成一个 PR。Airflow：过滤说得通的错误 → API 触发 Devin → 若 CI 通过，开 PR 并标记负责人。</dd>
+        <dt>怎么验收</dt><dd>已移除开关；节省小时数；Airflow 从缺陷到 PR 的时间；测试套件运行时间；每周已合并 PR。</dd>
+        <dt>怎么上线</dt><dd>工作流横向用于整个工程组织；任何工程师都可向内部工具提交开关。</dd>
+        <dt>失败了怎么改</dt><dd>脚本化移除功能开关曾经失败。验证脚本之所以存在，是因为有些 Devin 任务无法完成——那些 PR 从不会出现。</dd>
+        <dt>能不能复用到下一家</dt><dd>内部功能开关移除工具；每周 Applied AI 接收跟踪器；针对积压类别的 TDD 风格验证脚本。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">移除一个功能开关可能要花好几天。我们过去试过脚本化，但只有 Devin 能全面移除功能开关，并修复任何破坏性测试或其他依赖。仅过去一个月，这就为我们节省了超过 1000 工程小时。 — Rakesh Nori，软件工程师，Ramp</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Devin 官方客户页。第一方量化：80 个 PR/周；主视觉每月 10,000+ 小时；每月 150 个开关；一个月 1,000+ 开关小时（引语）；Airflow 8 分钟；套件 1 分钟 / 每名工程师每天约 20 分钟。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

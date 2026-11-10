@@ -1394,7 +1394,11 @@ def set_request_cookies(cookies: dict | None) -> None:
 
 
 def auth_link(next_path: str = "/") -> str:
-    """导航栏右侧的登录入口 / 已登录头像。不做限权，仅身份展示。"""
+    """导航栏右侧的登录入口 / 已登录头像。不做限权，仅身份展示。
+
+    路由用 ASCII（/login、/logout）：静态部署时中文路径靠 _redirects 兜底，
+    入口链接本身保持纯 ASCII 让 Worker 路由与 OAuth 回调都简单可靠。
+    """
     import auth as A
 
     user = A.current_user_cookie(_CURRENT_COOKIES)
@@ -1405,10 +1409,10 @@ def auth_link(next_path: str = "/") -> str:
             f'<img class="auth-avatar" src="{avatar}" alt="" referrerpolicy="no-referrer"/>' if avatar else ""
         )
         return (
-            f'<a class="auth-entry on" href="/退出登录?next={esc(next_path)}" title="退出登录">'
+            f'<a class="auth-entry on" href="/logout?next={esc(next_path)}" title="退出登录">'
             f'{avatar_html}<span class="auth-name">{name}</span></a>'
         )
-    return f'<a class="auth-entry" href="/登录?next={esc(next_path)}">登录</a>'
+    return f'<a class="auth-entry" href="/login?next={esc(next_path)}">登录</a>'
 
 
 def brand_wordmark() -> str:
@@ -2970,8 +2974,8 @@ class Handler(BaseHTTPRequestHandler):
         qs = dict(parse_qs(query, keep_blank_values=True))
         cookies = A.parse_cookies(self.headers.get("Cookie", ""))
 
-        # 退出登录
-        if path == "/退出登录":
+        # 退出登录（/logout 与 /退出登录 等价）
+        if path in ("/退出登录", "/logout"):
             nxt = (qs.get("next") or ["/"])[0]
             self.send_response(302)
             self.send_header("Location", nxt)
@@ -2979,16 +2983,22 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
             return
 
-        # /登录 或 /登录/<provider> 或 /oauth/<provider>/callback
-        # 归一化：/oauth/<p>[/callback] → 当作 provider 路由处理，callback 段与中文"回调"均可
+        # /login、/登录 或 /login/<provider> 或 /oauth/<provider>/callback
+        # 归一化：/login、/oauth/<p>[/callback] → 当作 provider 路由处理
         m = re.fullmatch(r"/oauth/([A-Za-z0-9]+)(/callback)?", path)
         if m:
             provider_hit = m.group(1).lower()
             is_callback = bool(m.group(2))
             # 复用统一逻辑：把 path 规范成 /登录/<provider>/回调 或 /登录/<provider>
             parts = ["", "登录", provider_hit] + (["回调"] if is_callback else [])
+        elif path == "/login" or path == "/登录":
+            parts = ["", "登录"]
         else:
-            parts = path.split("/")  # ['', '登录', 'github' ...]
+            m = re.fullmatch(r"/login/([A-Za-z0-9]+)", path)
+            if m:
+                parts = ["", "登录", m.group(1)]
+            else:
+                parts = path.split("/")  # ['', '登录', 'github' ...]
         if len(parts) < 3 or not parts[2]:
             page = A.login_page_html((qs.get("next") or ["/"])[0], A.providers_enabled(), base)
             self._send(200, page.encode("utf-8"), "text/html; charset=utf-8")
@@ -3046,7 +3056,15 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(204)
             self.end_headers()
             return
-        if path.startswith("/登录") or path == "/退出登录" or path.startswith("/oauth/") or path == "/oauth":
+        if (
+            path.startswith("/登录")
+            or path == "/退出登录"
+            or path.startswith("/oauth/")
+            or path == "/oauth"
+            or path == "/login"
+            or path.startswith("/login/")
+            or path == "/logout"
+        ):
             self._handle_auth(path, parsed.query)
             return
         if path == "/static/home.css":

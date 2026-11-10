@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Peek · imfde.ai</title>
+<meta name="description" content="GitHub Copilot 用得不均之后，要把真实工程速度提上来——尤其是测试自动化和样板代码。；测试自动化时间砍 80%；标准化测试现在是数小时而不是数天（正文：2–3 天 → 数小时）。样板任务号称快 10 倍（页上声称）。全新内部应用快速出原型（没有数字形式的搭建时间）。"/>
+<link rel="canonical" href="https://imfde.ai/案例/22"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Peek · imfde.ai"/>
+<meta property="og:description" content="GitHub Copilot 用得不均之后，要把真实工程速度提上来——尤其是测试自动化和样板代码。；测试自动化时间砍 80%；标准化测试现在是数小时而不是数天（正文：2–3 天 → 数小时）。样板任务号称快 10 倍（页上声称）。全新内部应用快速出原型（没有数字形式的搭建时间）。"/>
+<meta property="og:url" content="https://imfde.ai/案例/22"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Peek · imfde.ai"/>
+<meta name="twitter:description" content="GitHub Copilot 用得不均之后，要把真实工程速度提上来——尤其是测试自动化和样板代码。；测试自动化时间砍 80%；标准化测试现在是数小时而不是数天（正文：2–3 天 → 数小时）。样板任务号称快 10 倍（页上声称）。全新内部应用快速出原型（没有数字形式的搭建时间）。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Peek", "description": "GitHub Copilot 用得不均之后，要把真实工程速度提上来——尤其是测试自动化和样板代码。；测试自动化时间砍 80%；标准化测试现在是数小时而不是数天（正文：2–3 天 → 数小时）。样板任务号称快 10 倍（页上声称）。全新内部应用快速出原型（没有数字形式的搭建时间）。", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/22", "about": {"@type": "Thing", "name": "Augment Code · 软件科技"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Peek</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Augment Code · 软件科技</p>
+  <h1>Peek</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Peek 借助 Augment Code 将测试编写时间减少 80%</h2><div class='orig-body'><p>Peek 选 Augment Code 前，先和几家主流 AI 工具做了三周实测。团队用使用数据、问卷和复盘来判断效果。</p><p>Peek 的平台负责体验类预订和后台运营，25 人工程团队同时维护 Ember.js、TypeScript、Elixir 和 Rails。之前用 GitHub Copilot，但效果一般。</p><p>“我们用 Copilot 一年了，没什么感觉。我们想找真正能提升效率的工具。”工程总监 Rachel Larson 说。</p><p>三款工具对比后，Augment Code 在测试自动化和重复代码生成上明显领先。</p><p>“以前写自动化测试要花 2–3 天，现在几小时就搞定。”Larson 说，“对不熟悉仓库或从零写测试的工程师帮助特别大。”</p><p>Peek 的后端有不少老 Ruby 仓库，需要对项目结构有深入理解。Augment Code 能理解代码写法，给出高质量补全。</p><p>“它不只是懂语法，还知道我们实际怎么写代码。”Larson 说。</p><p>团队不需要调模型或写复杂提示，开箱即用。</p><p>“大家只想发代码，不想研究大模型。Augment 让他们直接干活。”</p><p>标准化测试从几天缩短到几小时，测试自动化时间减少 80%。全栈工程师生成重复代码的速度提升 10 倍。新项目原型搭建也更快。</p><p>“没人会说‘我真想写 50 个一模一样的测试’。Augment 把这部分苦活拿走了。”</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>GitHub Copilot 用得不均之后，要把真实工程速度提上来——尤其是测试自动化和样板代码。</dd>
+        <dt>结果</dt><dd>测试自动化时间砍 80%；标准化测试现在是数小时而不是数天（正文：2–3 天 → 数小时）。样板任务号称快 10 倍（页上声称）。全新内部应用快速出原型（没有数字形式的搭建时间）。</dd>
+        
+        <dt>用了什么数据</dt><dd>Peek 仓库，包括遗留 Ruby。</dd>
+        <dt>人还管哪一步</dt><dd>工程总监 Rachel Larson 主持了对比评测；工程师仍负责交付代码。</dd>
+        <dt>多久上线</dt><dd>测试：2–3 天 → 数小时。页面标题：测试编写时间减少 80%。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>标准化自动测试生成；样板代码；全新内部应用原型。</dd>
+        <dt>以前怎么干</dt><dd>Copilot 用了一年，采用情况混杂、不均。给 Peek 仓库写自动测试历来要数天 / 2–3 天。</dd>
+        <dt>卡在哪</dt><dd>Copilot「并没有真正落地」。要能测到的影响，不要只会补全统计。遗留 Ruby 仓库难逛。</dd>
+        <dt>用了什么模型</dt><dd>Augment Code（页面：Context Engine / agents / completions；除非另有注明，无单一模型名）。</dd>
+        <dt>事情怎么流转</dt><dd>开箱即用的补全和测试生成，无需大量 prompt engineering。</dd>
+        <dt>怎么验收</dt><dd>每个工具三周 sprint；使用追踪、调查、回顾；标准化测试用例计时。</dd>
+        <dt>怎么上线</dt><dd>对比评测后选定。约 25 名工程师。</dd>
+        <dt>失败了怎么改</dt><dd>Copilot 用了一年；采用不均。</dd>
+        
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">有了 Augment，以前要花 2–3 天的事只需数小时就完成了。——Rachel Larson, Director of Engineering</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Augment 官方案例。具名 Rachel Larson。量化：80% 测试时间削减；2–3 天 → 数小时；10x 样板（页面）。记录了相对 Copilot 和 Cursor 的对比评测。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

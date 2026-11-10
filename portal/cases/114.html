@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nextdoor · imfde.ai</title>
+<meta name="description" content="知识存在，但在正确时刻、以正确语境找到它的成本过高，因此要用学习闭环（而不只是一次上线）把好奇心变成全公司习惯。；工程智能体：相对手动搜索或联系工程师，生产力 2–3x；参考文档 / mutation 细节任务最高节省 2x 时间。RevOps 地址充实：每 50 个账户从 1–2 小时降至约 5–6 分钟。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/114"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Nextdoor · imfde.ai"/>
+<meta property="og:description" content="知识存在，但在正确时刻、以正确语境找到它的成本过高，因此要用学习闭环（而不只是一次上线）把好奇心变成全公司习惯。；工程智能体：相对手动搜索或联系工程师，生产力 2–3x；参考文档 / mutation 细节任务最高节省 2x 时间。RevOps 地址充实：每 50 个账户从 1–2 小时降至约 5–6 分钟。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/114"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Nextdoor · imfde.ai"/>
+<meta name="twitter:description" content="知识存在，但在正确时刻、以正确语境找到它的成本过高，因此要用学习闭环（而不只是一次上线）把好奇心变成全公司习惯。；工程智能体：相对手动搜索或联系工程师，生产力 2–3x；参考文档 / mutation 细节任务最高节省 2x 时间。RevOps 地址充实：每 50 个账户从 1–2 小时降至约 5–6 分钟。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Nextdoor", "description": "知识存在，但在正确时刻、以正确语境找到它的成本过高，因此要用学习闭环（而不只是一次上线）把好奇心变成全公司习惯。；工程智能体：相对手动搜索或联系工程师，生产力 2–3x；参考文档 / mutation 细节任务最高节省 2x 时间。RevOps 地址充实：每 50 个账户从 1–2 小时降至约 5–6 分钟。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/114", "about": {"@type": "Thing", "name": "Glean · 其他"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Nextdoor</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Glean · 其他</p>
+  <h1>Nextdoor</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Work AI 的人的一面：在 Nextdoor 构建学习闭环</h2><div class='orig-body'><p>Work AI 不是模型和功能就能站住脚。它站住脚，是因为人们在自己的流程里看到价值，然后把这些做法分享出去。</p><p>在 Nextdoor，我们没有只是“上线一个平台”。我们建了一个学习闭环，把最初的好奇变成日常习惯：定期答疑、Slack 里互相分享小技巧、公告里突出小成果、产品里按需给出针对性指引。这个闭环把零散的试用变成了全公司的能力。</p><p>我们的想法是：要想让 AI 持续用下去，就得把它直接接进员工已经在用的系统里，把日常依赖的工具连起来，把智能无缝嵌入，而不是再加一层流程或复杂操作。</p><p>为什么开始</p><p>很多成长中的公司，知识散在各个平台。问题不是缺信息，而是找不到对的时机和上下文。团队在快速扩张，项目推进更快，大家花更多时间追答案，而不是创造价值。</p><p>我们需要让知识可发现、可行动、安全。这就是 Work AI 的切入点：一个智能层，把人跟信息即时连起来，跨系统，不添摩擦，不添新流程。</p><p>从平台到实践：实际发生了什么</p><p>我们把员工日常用的核心系统接进 Glean，让答案和操作集中在一处，而不是八个标签页。目标不是“更多 AI”，而是更少摩擦：一处提问，一处行动，每次都有权限感知的上下文。</p><p>我们用四步轻量动作把 Glean 推开，这些动作几分钟就能上手：</p><p>一个专用的 Slack 支持频道，问题、同事小技巧、成果演示都在这里公开流动。</p><p>现场答疑时间，早期每周一次建立信心，后来每月全公司一次，再加上每周团队自己组织的学习会。</p><p>公司公告里发短消息，激发行动，不用再开会。</p><p>有目的的游戏化，表彰前三名 Agent 构建者、Assistant 重度用户和 Search 采用者，庆祝不同的获胜方式。</p><p>信号，而不是口号：我们怎么知道有效</p><p>我们认为成功的学习闭环应该自己产生数据。我们的确实如此。</p><p>上线早期，数据就显示试点之外的团队也在稳步使用，而且人们从自己常用的地方开始。有些团队 Google Drive 点击和引用最多，有些是 Slack、Confluence 或 Coda。我们把这些当作线索，给每个团队做针对性的内容整理和连接器调整。</p><p>我们还默认推送 Glean Chrome 扩展，让上手更简单。跟着信号走，让采用过程更有人味、更容易接近。人们不用学新系统就能试 AI，只需在原来工作的地方学会问更好的问题。</p><p>Nextdoor 最让人兴奋的用例</p><p>人事：Finn，开放注册向导</p><p>每年开放注册都会让人事团队收到大量重复问题。Finn 是我们为 2026 计划年打造的友好代理，它解释新变化，比较医疗、牙科、视力方案，直接指向 Workday 的正确操作，还会突出员工可能忽略的福利和健康项目。HR 处理的重复工单少了，员工能自信做选择，按时完成。</p><p>销售：即时客户情报，深化互动</p><p>客户经理不用再花几小时拼凑广告主背景。输入一个品牌，销售代理就能从网上拉取最新业务信号，再结合我们内部的历史（campaign 表现、互动、支持上下文），给出 1–5 条可行动的洞察。销售带着及时的谈资和角度去见客户，谈话更有力。</p><p>业务运营：Expert Trust &amp; Safety 分析</p><p>保护用户意味着要快速、一致地审查大量潜在欺诈。我们的 T&amp;S 代理把用户历史、政策链接、类似过往案例和标记行为整理成结构化评估，附带建议操作和证据。分析师保持在环、在控，但现在能处理更多案例，保持更高一致性，把判断力用在最关键的地方。</p><p>产品与开发：按需技术参考</p><p>工程师不用再翻代码或过时文档，直接用自然语言提问，就能拿到从当前代码和技术文档里拉出的已验证答案，没有猜测。</p><p>这个自助能力显著简化了流程，比手动搜索或联系工程师提升 2–3 倍个人生产力。它还减少了工程师的上下文切换，让答案触手可及。</p><p>除了简单查找，代理还能识别最近部署，解释功能实现，揭示代码限制（GQL 之外），在查找参考文档和 mutation 细节这类任务上已实现最高 2 倍时间节省。</p><p>营收运营：RevOps 速度的数据丰富</p><p>RevOps 过去每处理 50 个账号要花 1–2 小时找地址，再手动输入 Salesforce。地址丰富代理直接读 CSV，批量处理，自动查询，约 5–6 分钟输出干净、已验证的文件（或直接推到 Sheets）。时间省了，准确率也上去了。</p><p>背后的打法</p><p>降低首次获胜的摩擦</p><p>SSO、Slack 集成、Chrome 扩展、无代码 Agent 构建器，让大家能马上试想法。不用提 IT 工单，不用等。</p><p>把 AI 带到工作中</p><p>我们把最重要的系统连起来，员工一次搜索、一次引用、随处行动，权限全程受控。</p><p>整理复用，而不是重复造轮子</p><p>Agent 目录、微型工作坊、“Agent Wins”模式，帮助团队复用已验证的做法，而不是从零开始。</p><p>Agent 目录：集中、可搜索的资源，把团队和领域专家、已验证方案连起来，避免 know-how 孤岛，加速协作。</p><p>团队级微型工作坊：聚焦有效工具和方法的演示，快速、相关的学习，带团队特定细节。</p><p>跨职能分享“Agent Wins”：记录案例研究和可复用蓝图，捕捉上下文、步骤和成果，形成活的经验库，推动持续改进。</p><p>结论：接下来和实用 takeaways</p><p>在不久的将来，AI 素养会像数据素养一样平常。每个团队都会有人能构建或指导 Agent……</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>知识存在，但在正确时刻、以正确语境找到它的成本过高，因此要用学习闭环（而不只是一次上线）把好奇心变成全公司习惯。</dd>
+        <dt>结果</dt><dd>工程智能体：相对手动搜索或联系工程师，生产力 2–3x；参考文档 / mutation 细节任务最高节省 2x 时间。RevOps 地址充实：每 50 个账户从 1–2 小时降至约 5–6 分钟。Finn：HR 重复工单减少（未量化）。T&amp;S：更多案件、更高一致性（未量化）。</dd>
+        <dt>接了哪些系统</dt><dd>SSO、Slack、Chrome 扩展、无代码智能体构建器。Workday 操作（Finn）。Salesforce / Google Sheets（RevOps）。智能体目录 + 微型工作坊 + Agent Wins 资料库。</dd>
+        <dt>用了什么数据</dt><dd>Google Drive、Slack、Confluence、Coda（团队特定的点击/引用领先者）。Workday（Finn）。网络商业信号 + 活动/支持历史（销售）。用户历史、政策、类似案例（T&amp;S）。当前代码与技术文档（工程）。电子表格 / Salesforce（RevOps）。</dd>
+        <dt>人还管哪一步</dt><dd>T&amp;S 分析师保持在环。办公答疑、Slack 展示分享、游戏化。智能体目录把团队连接到主题专家。</dd>
+        <dt>多久上线</dt><dd>办公答疑早期每周，随后每月 + 团队主导的每周。无上线日期。页面最后更新 Jan 22, 2026。</dd>
+        <dt>怎么交给客户</dt><dd>Slack 支持频道、办公答疑、公告、产品内指引。</dd>
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>学习闭环加上智能体：Finn（2026 开放参保 / Workday）；销售客户情报智能体（网络 + 内部历史 → 1–5 条洞察）；Trust &amp; Safety 欺诈评估智能体；工程技术参考智能体；RevOps 地址充实智能体（CSV → Salesforce/Sheets）。</dd>
+        <dt>以前怎么干</dt><dd>知识散落在各平台。落地以 Slack 支持频道、办公答疑（先每周，后全公司每月 + 团队主导的每周）、公告更新，以及对顶尖智能体构建者 / Assistant 重度用户 / Search 采用者的游戏化为锚点。Chrome 扩展默认推送。</dd>
+        <dt>卡在哪</dt><dd>随着团队与项目扩张，人们花在追答案上的时间超过创造影响。</dd>
+        <dt>用了什么模型</dt><dd>Glean Search、Assistant、Agent Builder。未给出基础模型名称。</dd>
+        <dt>事情怎么流转</dt><dd>Finn 解释计划年度变更，比较医疗/牙科/视力，并指向 Workday 操作。销售智能体返回 1–5 条定制洞察。T&amp;S 智能体把历史/政策/类似案例汇编成带建议行动的结构化评估；分析师保持掌控。工程智能体根据当前代码/文档作答（最近部署、实现、GQL 之外的限制）。RevOps 智能体从 CSV 批量查询地址，每 50 个账户 5–6 分钟，对比原先 1–2 小时。</dd>
+        <dt>怎么验收</dt><dd>工程自助：相对手动搜索或联系工程师，个人生产力 2–3x；在查找参考文档与 mutation 细节上最高可节省 2x 时间。RevOps：每 50 个账户 1–2 小时 → 约 5–6 分钟。早期上线：试点之后参与保持稳定；连接器组合因团队而异。无全公司采用率 %。</dd>
+        <dt>怎么上线</dt><dd>全公司办公答疑加上团队主导的场次。Chrome 扩展默认开启。分布式「赋能中心」被描述为目标组织设计。</dd>
+        
+        <dt>能不能复用到下一家</dt><dd>智能体目录、微型工作坊、Agent Wins 蓝图，让团队改编而非从零发明。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">Work AI 能落地，靠的不是模型和功能。当人们在自己的工作流里看到价值并分享出去，它才会站住。——Shweta Puri，Nextdoor 营销技术与 AI 运营负责人</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Glean 官方客户故事页（抓取于 2026-08-29，HTTP 200）。company=Glean。反复出现的主视觉标签「每位员工每周节省 1.5+ 小时 / 搜索时间」出现在许多 Glean 故事中，除非叙述本身重述了每周数字，否则不视为客户专属 KPI。官方 customer-stories slug 以 200 重定向到博客 URL；标题仍为「Nextdoor customer story」，中枢将其列为案例研究。点名 Puri（署名）。2–3x / 2x 工程与 1–2h→5–6 分钟 RevOps 为第一方。sitemap 中未作为 /resources/customer-stories/nextdoor 列出（sitemap 列出博客）。</p>
+    <div class='list' style='margin-top:12px'><div class="row">leftover_template<span class="s">Glean hero chip &#x27;1.5+ hours saved / search time saved per employee, weekly&#x27; repeats on many stories and is not treated as a customer-specific KPI (mine_loop_20260829_glean).</span></div></div>
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

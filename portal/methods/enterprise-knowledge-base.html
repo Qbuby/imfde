@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>企业知识库搭建 · 方法 · imfde.ai</title>
+<meta name="description" content="企业知识库搭建：麦卡锡要让角色级文档能在 SharePoint、Teams、Procore 里搜到，人不再把时间花在找已有答案上。这一步写权限、新鲜度、冲突怎么展示来源。不是先把文件切片丢进向量库。"/>
+<link rel="canonical" href="https://imfde.ai/方法/enterprise-knowledge-base"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="企业知识库搭建 · 方法 · imfde.ai"/>
+<meta property="og:description" content="企业知识库搭建：麦卡锡要让角色级文档能在 SharePoint、Teams、Procore 里搜到，人不再把时间花在找已有答案上。这一步写权限、新鲜度、冲突怎么展示来源。不是先把文件切片丢进向量库。"/>
+<meta property="og:url" content="https://imfde.ai/方法/enterprise-knowledge-base"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="企业知识库搭建 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="企业知识库搭建：麦卡锡要让角色级文档能在 SharePoint、Teams、Procore 里搜到，人不再把时间花在找已有答案上。这一步写权限、新鲜度、冲突怎么展示来源。不是先把文件切片丢进向量库。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">企业知识库搭建</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>企业知识库搭建</h1>
+  <p class="learn-goal"><b>学习目标</b>：麦卡锡要让角色级文档能在 SharePoint、Teams、Procore 里搜到，人不再把时间花在找已有答案上。这一步写权限、新鲜度、冲突怎么展示来源。不是先把文件切片丢进向量库。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>先定高价值任务和权限</h3><p>麦卡锡要让角色级文档可在 SharePoint、Teams、Procore 里搜到，人不再把时间花在找已有答案上。先选一个高价值任务，写明受众、权威来源、内容负责人和可衡量成功标准。Policies 智能体使用最多。约 100 million 份文件是数据规模，不是先灌向量库的理由。</p></li><li><h3>冲突要展示来源</h3><p>两份政策打架时，不要静默选一份，也不要编成统一答案。展示冲突与来源版本。麦卡锡页上：发布权限在核验小组。冲突升级给内容负责人，不要让模型平均规则。</p></li><li><h3>权限在索引和检索强制</h3><p>麦卡锡要角色级文档，以及覆盖 Microsoft 技术栈的安全层；知识图谱来自 McCarthy 数据。权限必须随文档或片段在索引中保留，检索时用已认证调用者身份强制过滤。只在前端隐藏文件夹不够。谁能看哪一份，发现阶段就问。</p></li><li><h3>切分保留结构，源变要刷新</h3><p>麦卡锡页上有 REGI 每周摘要、Procedural Update 比较新旧矩阵——新鲜度要能刷新索引，不是切片一次就完。保留文档、标题、章节和表格等结构边界，记录来源定位。页上没有切分长度，不要编。</p></li><li><h3>交一页知识库简报</h3><p>任务、来源、权限、冲突展示、切分、新鲜度、引用，写在一页上。公司端 90%、现场/运营几乎 60%、每名员工每周 2 小时，引用必须写「页上写了」。82K 个问题不要当客户 KPI。材料质量智能体页上写的是目标，不是已完成结果。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/109">麦卡锡控股公司 / Glean</a></h3>
+  <p class="note">麦卡锡页上是工地上的人把时间花在找已有答案上，角色级文档要在 SharePoint、Teams、Procore 里搜到。公司端 90%、现场几乎 60%、每周 2 小时必须写「页上写了」。82K 个问题是页首标签，不要当客户 KPI。「可直接接触 Glean 开发团队」不是驻场头衔。</p>
+  <dl class="anatomy"><dt>经营问题</dt><dd>让 100 million 份文件和角色级文档可在 SharePoint、Teams、Procore 及其他系统中搜索，使现场和公司员工不再把时间花在找已经存在的答案上。</dd><dt>数据来源</dt><dd>约 100 million 份文件；SharePoint、Microsoft Teams、Procore 及其他企业系统。政策、程序、项目记录、材料规格、历史数据。贸易伙伴账单 vs 合同条款（变更单）。与建筑相关的行政令和立法（REGI）。</dd><dt>人在环内</dt><dd>发布权限于核验小组。专家开发高级智能体、维护库、帮人学习、量化 ROI、分享成功（Lewis）。变更单智能体协助人类对应角色。</dd><dt>评测</dt><dd>保守估计：每名员工每周节省两小时。公司端采用很快到 90%；现场/运营在数月内几乎 60%。页首还印智能体评审的业主变更单 $2.7M+；回答 82K 个问题（该标签说明写「search time saved per employee, weekly」— 装饰不匹配）；公司参与 90%。</dd></dl>
+  <p class="hint"><a href="/案例/109">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="0" data-yes="对。先选一个高价值用户任务，写明受众、权威来源、内容负责人和可衡量成功标准。" data-no="不对。先灌向量库、先挑最大数据库或让模型抓全网，权限和验收都会空。"><p class="k">练习 1 · 进阶</p><p class="mcq-stem">企业要搭建内部 AI 知识库，第一步最应该确定什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>选择一个高价值用户任务，明确受众、权威来源、内容负责人和可衡量成功标准。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>先把所有文件嵌入向量库，任务和权限后补。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>先挑最大的向量数据库，用库的规模代替任务定义。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>让模型自行抓取所有网页，权威来源和负责人先不定。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。展示冲突与来源版本，指向政策负责人或既定升级流程，不要编统一答案。" data-no="不对。静默选一份、把规则平均或删掉旧文档不留记录，问责对不上。"><p class="k">练习 2 · 进阶</p><p class="mcq-stem">两份政策文档给出相互矛盾的报销规则。助手该如何回答？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>静默选择看起来更新的一份，不展示冲突来源。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>展示冲突与来源版本，指向政策负责人或既定升级流程，而不是编造统一答案。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>把两份规则平均成一条，编成统一报销答案。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>删除较旧文档且不留记录，冲突从库里消失。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。权限必须随文档或片段在索引中保留，检索时用已认证调用者身份强制过滤。" data-no="不对。只在前端隐藏文件夹、不显示文件名或改成图片，检索仍可能漏出。"><p class="k">练习 3 · 进阶</p><p class="mcq-stem">员工无权查看薪酬文档，但聊天界面在前端隐藏了该文件夹。为什么不够安全？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>前端总会被破解，所以只藏文件夹就够了。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>只要界面不显示文件名，检索就可以不过滤身份。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>权限必须随文档或片段在索引中保留，并在检索时用已认证调用者身份强制过滤。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>把薪酬文档改成图片，用格式代替权限过滤。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。保留文档、标题、章节和表格等结构边界，记录来源定位，用代表性问题评测切分。" data-no="不对。固定切成等长片段、再切更小、让模型猜回结构或只索引标题，表格和章节会散。"><p class="k">练习 4 · 进阶</p><p class="mcq-stem">团队把所有 PDF 固定切成等长片段，导致表格和章节含义被拆散。该如何改进？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>把片段再切得更小，表格散了就再切。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>让模型在回答时猜回章节和表格结构。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>只索引 PDF 标题，正文和表格不进检索。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>保留文档、标题、章节和表格等结构边界，记录来源定位，并用代表性问题评测切分策略。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页知识库简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+高价值任务（受众 / 权威来源 / 内容负责人）：
+可衡量成功标准：
+权限边界（谁能看哪一份；索引如何保留；检索如何强制）：
+冲突怎么展示（来源版本 / 升级给谁；不编统一答案）：
+切分策略（文档 / 标题 / 章节 / 表格；来源定位）：
+新鲜度（源变更如何刷新索引）：
+引用如何核对：
+页上数字（只抄并写「页上写了」）：
+页上没给的数字（留空）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>高价值任务、受众、权威来源、内容负责人和权限先写死；冲突展示来源版本并指向升级路径；索引和检索强制权限；切分保留结构；页上数字带「页上写了」。</p></li><li><h3>不及格</h3><p>先灌向量库、编统一答案、只在前端藏文件夹、固定等长切分，或把 82K / 未标明「页上写了」的 90%/60%/每周 2 小时当自编 KPI。</p></li><li><h3>不要编的数</h3><p>90%/60%、每周 2 小时必须写「页上写了」。82K 个问题是页首标签且说明不匹配，不要当客户 KPI。&gt;40,000 次运行、$2.7M 变更单只能带「页上写了」抄。100 million 份文件 / 约 4,000 名受薪员工是规模，不是本课 KPI。不要补 FDE 头衔或未写的切分长度。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/token-cost-control">上一步 · 控制 Token 成本</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

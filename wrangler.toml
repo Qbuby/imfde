@@ -1,0 +1,28 @@
+name = "imfde"
+main = "worker/index.js"
+compatibility_date = "2025-09-01"
+
+# 静态资产：portal/ 即站点根（world3d.html、events/、methods/ 等，全部由
+# build_static.py 预渲染后随 git 提交）。资产经 ASSETS.fetch 服务时不计 CPU。
+[assets]
+directory = "./portal"
+binding = "ASSETS"
+# 关掉 .html → 无后缀 的 307 规范化，避免与干净 URL 映射打架
+html_handling = "none"
+
+# 这两类路径进 Worker：① 动态端点；② 中文干净 URL（资产层的 _redirects 对
+# 百分编码路径匹配不可靠，改由 Worker 内解码后映射到对应资产文件）。
+# 同时列出解码与百分编码两种形态，兼容匹配口径差异。
+run_worker_first = true
+
+# 变量（wrangler secret put <NAME> 或 dashboard → Settings → Variables）：
+#   AI_API_KEY             MiniMax 的 Key（必填，报告兜底生成用）
+#   AI_BASE_URL            默认 https://api.minimaxi.com/v1（可不设）
+#   AI_MODEL               默认 MiniMax-M3.1-Flash（可不设）
+#   SECRET_KEY             会话/state 签名密钥（必填，换值会让已登录用户全部掉线）
+#   GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET
+#   GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET
+#   WECHAT_APPID / WECHAT_SECRET
+#   IMFOAUTHBASE           可选，OAuth 回调基地址覆盖（默认取请求 origin）
+#
+# 本地开发：.dev.vars 放同名变量（已 gitignore），npx wrangler dev 后访问 :8787。

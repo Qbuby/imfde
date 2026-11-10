@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>变革与规模采用 · 方法 · imfde.ai</title>
+<meta name="description" content="变革与规模采用：阿克伦一个现场赢了，不等于铺到所有专科。对着这页写扩容条件、采用怎么核——页上留存看的是每月有没有在写笔记，不是上过课。不要编分波日历。"/>
+<link rel="canonical" href="https://imfde.ai/方法/change-scale-adoption"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="变革与规模采用 · 方法 · imfde.ai"/>
+<meta property="og:description" content="变革与规模采用：阿克伦一个现场赢了，不等于铺到所有专科。对着这页写扩容条件、采用怎么核——页上留存看的是每月有没有在写笔记，不是上过课。不要编分波日历。"/>
+<meta property="og:url" content="https://imfde.ai/方法/change-scale-adoption"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="变革与规模采用 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="变革与规模采用：阿克伦一个现场赢了，不等于铺到所有专科。对着这页写扩容条件、采用怎么核——页上留存看的是每月有没有在写笔记，不是上过课。不要编分波日历。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">变革与规模采用</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>变革与规模采用</h1>
+  <p class="learn-goal"><b>学习目标</b>：阿克伦一个现场赢了，不等于铺到所有专科。对着这页写扩容条件、采用怎么核——页上留存看的是每月有没有在写笔记，不是上过课。不要编分波日历。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>一个现场赢了，不要铺所有事业部</h3><p>阿克伦页上：以临床医生为中心的实施，覆盖 22 个专科和多种照护场景、语言。一个现场赢了，不等于明天开放所有专科。扩容看容量、风险、支持和部门差异。没有上线日期或分波计划，简报里只写扩容条件，不要编日历波次。</p></li><li><h3>采用指标要有定义，培训完成不算</h3><p>培训完成率高、实际使用低，说明完成培训不是能力或工作流采用证据，要看任务有没有做成。页上的留存定义是「每月至少 30 份笔记」，不是打开过一次，也不是上过课。71% 就诊 / 75,000+ 笔记带「过去一年、近 200 名儿科医生」口径。</p></li><li><h3>差很多时先比流程和约束</h3><p>专科或地区采用差很多，先比流程、激励、语言、法规、领导支持和系统质量，不要统一施压或换掉低采用用户。页上：儿科相对开箱即用的成人文档平台有独特挑战；覆盖多种语言和照护场景。Wolski：平台开箱即有价值，儿科特定反馈带来产品改进。这是差异，不是把失败藏进平均。</p></li><li><h3>统一关键控制，本地化非关键</h3><p>规模化时统一关键控制和结果标准，本地化工作流、语言和非关键规则。完全统一会切不开，全部本地决定会收不回去。页上能读的关键面：儿科医生仍是诊室临床医生；Linked Evidence 可审计；LOS 计算器解释计费路径。技术试点成功但岗位会变时，共同评估任务、控制、技能和人员影响，并把协议写入扩容条件。页上没有工会条款，不要编劳资协议；能写的是「谁还做哪一步」。</p></li><li><h3>交一页规模采用简报</h3><p>已赢现场、扩容条件、采用定义、专科差异、统一与本地化，写在一页上。没有的分波日期留空。90% 全神贯注 / 54% 认知负荷 / 45% 倦怠照页上口径抄，不要外推。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/1">阿克伦儿童医院 / Abridge</a></h3>
+  <p class="note">阿克伦一个现场赢了，不等于铺到所有专科。95% 留存看的是每月至少 30 份笔记，不是上过课。没有上线日期或分波计划，入院/出院是 Rashid 的前瞻，不要编分波。</p>
+  <dl class="anatomy"><dt>部署</dt><dd>以临床医生为中心的实施，覆盖 22 个专科以及多种照护场景、专科和语言。页面未给出上线日期或分波计划。</dd><dt>评测</dt><dd>过去一年近 200 名儿科医生平均将 Abridge 用于 71% 的临床就诊，生成超过 75,000 份笔记。用户留存定义：每月用 Abridge 创建至少 30 份笔记的儿科医生。Pelletier 先分析认知负荷和倦怠数据，再打开医生评论。</dd><dt>测得结果</dt><dd>22 个专科里 95% 的 Abridge 用户留存（每月至少 30 份笔记）。近 200 名儿科医生；71% 的就诊；过去一年超过 75,000 份笔记。看病时能盯着患者的比例升 90%。写病历耗神降 54%。倦怠降 45%。编码/LOS 准不准是定性说法（Watson、Mahesh）。</dd><dt>失败与迭代</dt><dd>Wolski：平台开箱即有价值；儿科特定反馈带来产品改进和信任。Pelletier 起初认为认知负荷和倦怠的改善好得不像真的，直到医生评论证实了它们。</dd></dl>
+  <p class="hint"><a href="/案例/1">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="0" data-yes="对。技术试点成功但岗位会变，要共同评估任务、控制、技能和人员影响，并把协议写入扩容条件。页上没有的劳资条款不要编。" data-no="不对。立即全开、只发 FAQ 或藏自动化比例，扩容会翻。"><p class="k">练习 1 · 高阶</p><p class="mcq-stem">技术试点成功，但岗位会变。下一步是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>共同评估任务变化、控制、技能与人员影响，并把协议纳入扩容条件。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>立即全量上线，岗位变化以后再谈。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>只发布 FAQ，用说明代替共同评估任务变化。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>隐藏自动化比例，让岗位影响看起来更小。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。采用差很多时，先比流程、激励、语言、法规、领导支持和系统质量。" data-no="不对。统一施压、只奖最高地区或换掉低采用用户，看不出差在哪。"><p class="k">练习 2 · 高阶</p><p class="mcq-stem">各地区采用率差异很大。高层应先看什么？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>对低采用地区统一施压，用压力抹平差异。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>比较流程、激励、语言、法规、领导支持和系统质量差异。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>只奖励采用最高的地区，不看流程和约束差在哪。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>换掉低采用用户，用换人代替比较流程差异。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。规模化时统一关键控制和结果，本地化工作流、语言和非关键规则。" data-no="不对。完全统一、全部本地决定或每个用户自定义，会切不开或收不回去。"><p class="k">练习 3 · 高阶</p><p class="mcq-stem">规模化时应保留多少本地配置？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>完全统一工作流和语言，规模化时不允许本地差异。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>全部交给本地决定，关键控制也不统一。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>统一关键控制和结果标准，本地化工作流、语言和非关键规则。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>让每个用户自定义规则，结果标准无法铺开。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。培训完成不是能力和工作流采用证据。阿克伦页上 95% 留存定义为每月≥30 份笔记。" data-no="不对。把完成培训当成功、断定模型差或怪用户，都核不出采用。"><p class="k">练习 4 · 高阶</p><p class="mcq-stem">培训完成率很高，实际使用率很低。说明什么？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>培训完成率高就是成功，使用率低以后再说。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>使用率低说明模型质量一定差，先换模型。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>使用率低说明用户不配合，不观察任务和激励。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>完成培训不是能力或工作流采用证据，需要观察任务和激励。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页规模采用简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+已经赢了的现场 / 专科（不等于全事业部）：
+并行 / 替换 / 回退（页上没有分波日期就空着）：
+岗位与任务变化（谁还做哪一步；页上没有劳资协议就空着）：
+专科 / 地区差异（流程 / 激励 / 语言 / 法规 / 领导支持 / 系统质量）：
+统一的关键控制 vs 可本地化的工作流 / 语言 / 非关键规则：
+采用指标（定义写清；培训完成率不当证据）：
+扩容条件（容量 / 风险 / 支持 / 部门差异）：
+页上有口径的使用数字：
+页上没有的分波日期（留空）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>写清一个现场赢了不等于全铺；采用指标有定义（不是培训完成率）；专科 / 地区差异先比流程和约束；关键控制统一，非关键可本地化；无分波日期不编。</p></li><li><h3>不及格</h3><p>第一个专科达标就全开；用培训完成率当采用；编分波日历；或把低使用率怪给用户。</p></li><li><h3>不要编的数</h3><p>95% 留存必须带「每月≥30 份笔记」定义。71% / 75,000+ 是页上就诊使用，不要改写成自编业务 KPI。90% 全神贯注 / 54% 认知负荷 / 45% 倦怠照页上口径抄，不要外推。无分波日期不要编分波；不要补 FDE 头衔或劳资条款。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <div class="list"><a class="row" href="/案例/509">FDEs：建设能力，而非依赖 | Cohere<span class="s">看法 · cohere.com</span></a></div>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/fde-operating-model">上一步 · 驻场团队怎么挂、听谁的</a> · <a href="/方法/field-product-strategy">下一步 · 现场洞察与产品战略</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

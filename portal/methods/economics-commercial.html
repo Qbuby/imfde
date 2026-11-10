@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>商业模型与经济性 · 方法 · imfde.ai</title>
+<meta name="description" content="商业模型与经济性：壳牌页上是买方开发人员在平台上叠加 IP，不是卖方派人。对着续约和外供写：这笔账是谁的人、毛利怎么回流。没有的报价留空。"/>
+<link rel="canonical" href="https://imfde.ai/方法/economics-commercial"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="商业模型与经济性 · 方法 · imfde.ai"/>
+<meta property="og:description" content="商业模型与经济性：壳牌页上是买方开发人员在平台上叠加 IP，不是卖方派人。对着续约和外供写：这笔账是谁的人、毛利怎么回流。没有的报价留空。"/>
+<meta property="og:url" content="https://imfde.ai/方法/economics-commercial"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="商业模型与经济性 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="商业模型与经济性：壳牌页上是买方开发人员在平台上叠加 IP，不是卖方派人。对着续约和外供写：这笔账是谁的人、毛利怎么回流。没有的报价留空。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">商业模型与经济性</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>商业模型与经济性</h1>
+  <p class="learn-goal"><b>学习目标</b>：壳牌页上是买方开发人员在平台上叠加 IP，不是卖方派人。对着续约和外供写：这笔账是谁的人、毛利怎么回流。没有的报价留空。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>先分开卖方扩编和买方自建</h3><p>壳牌页上：Jeavons 选 C3 做企业应用平台，壳牌开发人员和数据科学家在其上叠加 IP、运营应用。公开材料里有人变多、有人续约，先问：这是卖方加人去驻场，还是买方自己的开发名额在跑平台。不要把买方能力写成卖方驻场团队，也不要反过来。</p></li><li><h3>收入高也要看毛利和回流</h3><p>驻场换成交，也会吃掉毛利。判断是否健康，要算交付毛利、持续支持、复用收益、风险资本和机会成本，不要只看合同总额。壳牌页上能读的是 2021 年 6 月五年续约，以及已验证方案经 OAI 向外提供——复用，不是「驻场越久越好」。库里 72 写 Decagon 持续驻场参与 AOP / 质量评审，那是协作形态，不是健康公式；页上没有毛利数字，不要编。</p></li><li><h3>定制何时记产品研发</h3><p>定制算产品研发，要有证据进入共享产品、并服务多个客户。客户要求、代码进主仓库、销售季度末，都不能单独改记账。壳牌页上：OAI 提供三款 AI 驱动应用，其中包含已在自有运营中规模验证的部分。没有「进入共享产品并服务多个客户」的证据，就仍记服务成本。</p></li><li><h3>数字带口径；没有报价不要编</h3><p>模型便宜但人工复核贵时，先分析失败类型，自动化低风险复核，减少不必要触点。不要只换便宜模型或取消全部复核。高不确定试点按探索、交付、规模化分阶段定价，写明假设和变更。壳牌页上没有试点报价，留空。能抄的是时间线：2018 年选定平台，2021 年五年续约，2022 年预测性维护扩到 10,000 台设备。1–2% LNG / 355 吨二氧化碳只许带「页上写了」和满负荷口径抄，禁止当通用 KPI 模板。</p></li><li><h3>交一页经济性简报</h3><p>卖方还是买方、毛利与回流、定制记账、数字口径，写在一页上。页上没有的驻场人数、毛利率、报价留空。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/34">壳牌 / C3 AI</a></h3>
+  <p class="note">壳牌页上是买方开发人员在平台上叠加 IP，不是卖方派人。1–2% LNG、约 355 吨二氧化碳/天必须带满负荷口径。2021 年五年续约、OAI 外供是商业动作，不是已实现损益。不要补毛利率或头衔。</p>
+  <dl class="anatomy"><dt>经营问题</dt><dd>在数百万壳牌资产、供应链和市场里把企业 AI 铺开，用于工业可靠性、资产优化和完整性管理，同时也把 AI 用在能源转型上。</dd><dt>测得结果</dt><dd>实时生产优化：额外 1–2% 的 LNG 产量；满负荷 LNG 设施约每天减 355 吨 CO2（约每年 13 万吨；页上等同于 28,000 辆美国平均汽车）。预测性维护 2022 年扩到 1 万台设备。超过 100 个 AI 应用处于不同阶段；数据湖有数万亿行；监测数千件工业设备。战略协议续约五年（2021 年 6 月）。</dd><dt>产品化</dt><dd>通过 OAI 提供三款 AI 驱动应用（2021 时间线）。OAI 用合作伙伴主导、领域特定的可靠性方案增强 C3 应用，其中包括壳牌已在自有运营中规模验证的部分。页上有「探索壳牌提供的已验证 OAI 方案」。</dd><dt>交接</dt><dd>Jeavons：选择 C3 AI 作为企业应用平台；利用已经建成的平台和领域专长，并在其上叠加壳牌 IP。壳牌开发人员和数据科学家在平台上开发、部署并运营应用。</dd></dl>
+  <p class="hint"><a href="/案例/34">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="1" data-yes="对。收入高但要长期驻场，要算交付毛利、持续支持、复用收益、风险资本和机会成本。卖方扩编和买方自建不是同一笔账。" data-no="不对。只看合同总额、只看满意度，或把卖方扩编当成买方自己的人，毛利会被吃掉。"><p class="k">练习 1 · 高阶</p><p class="mcq-stem">一个驻场项目收入很高但需要长期派人。如何判断是否健康？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>只看合同总额，长期驻场成本不算进健康判断。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>计算交付毛利、持续支持、复用收益、风险资本和机会成本。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>只看客户满意度，毛利被吃掉也算健康。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>把卖方加人驻场写成买方自己的能力组织，人数一多就当健康。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。定制算产品研发，要有证据进入共享产品并服务多个客户。壳牌页上 OAI 是把已验证方案向外提供。" data-no="不对。客户要求、代码进主仓库或销售季度末，都不能单独把服务成本改记成研发。"><p class="k">练习 2 · 高阶</p><p class="mcq-stem">何时应把定制费用计入产品研发投资而非服务成本？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>当成果有证据进入共享产品并服务多个客户时。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>客户一要求就把定制记成产品研发。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>代码一写进主仓库就改记研发，不管有没有服务多个客户。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>销售季度末把定制改记成研发，方便账面。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。模型便宜但人工复核贵时，分析失败类型，自动化低风险复核，减少不必要触点。" data-no="不对。只换便宜模型、加 token 配额或取消全部复核，单位经济不会自己好。"><p class="k">练习 3 · 高阶</p><p class="mcq-stem">模型成本占收入很低，但人工复核成本很高。单位经济应如何改进？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>只换便宜模型，人工复核触点不动。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>提高 token 配额，用生成额度换掉复核成本。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>取消全部复核，单位经济靠去掉人工。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>分析失败类型，自动化低风险复核并减少不必要触点。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。高不确定试点按探索、交付、规模化分阶段定价，写明假设和变更。页上没有报价就留空，不要编。" data-no="不对。固定低价包全部结果、只按 token 或工时无上限，范围会漂。"><p class="k">练习 4 · 高阶</p><p class="mcq-stem">如何为高不确定性的驻场试点定价？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>固定低价承诺全部结果，不确定也一次包死。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>只按 token 定价，驻场人工和范围变更不计。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>分阶段按探索、交付和规模化里程碑定价，并明确假设与变更。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>完全按工时无上限，试点没有阶段门槛。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页经济性简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+这笔账是卖方扩编还是买方自建能力（分开写）：
+收入从哪来（成交 / 续约 / 外供）：
+交付毛利与持续支持（页上没有就留空）：
+复用收益（是否进入共享产品、服务哪些客户）：
+风险资本与机会成本：
+定制记服务成本还是产品研发（证据：进入共享产品并服务多个客户）：
+人工复核是否吃单位经济（失败类型 / 可自动化的低风险触点）：
+定价阶段（探索 / 交付 / 规模化；假设与变更；页上没有报价就留空）：
+页上有口径的数字（如 LNG / 二氧化碳，写「页上写了」）：
+页上没有的 KPI / 头衔（留空，不要编）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>卖方扩编和买方自建分开写了；健康判断含毛利、支持、复用，不只合同额；定制记研发有「进入共享产品并服务多个客户」的证据；每个数字带口径。</p></li><li><h3>不及格</h3><p>把壳牌开发人员写成卖方 FDE；只看合同或满意度；客户一要求就把定制记成研发；或把 LNG / 二氧化碳当成通用验收公式。</p></li><li><h3>不要编的数</h3><p>1–2% LNG、355 吨二氧化碳/天、130 kt/年、28,000 辆当量、10,000 台设备、100+ 应用、数万亿行数据湖，只能带「页上写了」抄写。五年续约不是已实现损益。不要补毛利率、驻场人数、报价或 FDE 头衔。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <div class="list"><a class="row" href="/案例/511">何谓前线部署工程师<span class="s">怎么做 · fdepod.substack.com</span></a><a class="row" href="/案例/519">用毛利率换护城河：为什么前线部署工程师是初创公司最热岗位 | Andreessen Horowitz<span class="s">看法 · a16z.com</span></a></div>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/governance-risk">上一步 · 治理、安全与合规</a> · <a href="/方法/fde-operating-model">下一步 · 驻场团队怎么挂、听谁的</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

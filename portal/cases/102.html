@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>You.com · imfde.ai</title>
+<meta name="description" content="把多种编程工具整合为单一工程操作系统，统一模型、界面与标准，并覆盖整个软件生命周期。；原本需要数天（也许更久）才能复现的 MCP 超时，在 Droid 拉起 Docker、写测试并找到客户端侧原因后，于当天下午诊断出来。Factory 全天候运行（索引卡：24/7 Missions）。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/102"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="You.com · imfde.ai"/>
+<meta property="og:description" content="把多种编程工具整合为单一工程操作系统，统一模型、界面与标准，并覆盖整个软件生命周期。；原本需要数天（也许更久）才能复现的 MCP 超时，在 Droid 拉起 Docker、写测试并找到客户端侧原因后，于当天下午诊断出来。Factory 全天候运行（索引卡：24/7 Missions）。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/102"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="You.com · imfde.ai"/>
+<meta name="twitter:description" content="把多种编程工具整合为单一工程操作系统，统一模型、界面与标准，并覆盖整个软件生命周期。；原本需要数天（也许更久）才能复现的 MCP 超时，在 Droid 拉起 Docker、写测试并找到客户端侧原因后，于当天下午诊断出来。Factory 全天候运行（索引卡：24/7 Missions）。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "You.com", "description": "把多种编程工具整合为单一工程操作系统，统一模型、界面与标准，并覆盖整个软件生命周期。；原本需要数天（也许更久）才能复现的 MCP 超时，在 Droid 拉起 Docker、写测试并找到客户端侧原因后，于当天下午诊断出来。Factory 全天候运行（索引卡：24/7 Missions）。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/102", "about": {"@type": "Thing", "name": "Factory · 其他"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">You.com</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Factory · 其他</p>
+  <h1>You.com</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>You.com 如何用 Factory 扩展工程</h2><div class='orig-body'><p>You.com 是领先的 AI 搜索基础设施提供商，通过其代理式网络搜索 API 套件，为 AI 代理和 LLM 提供最新、最准确的信息。作为一家 AI 原生公司，它对自身工程团队的要求同样高：必须跟上所交付技术的速度，才能为使用其产品的客户带来更好结果。</p><p>You.com 打造了一个代理式工程组织，自动化贯穿软件开发生命周期的各个阶段。这缩短了从想法到上线的路径，让人类判断只用在真正需要的地方。</p><p>他们想要一个单一平台，既能灵活选择模型，又能在他们熟悉的任何界面上工作，从终端到 IDE。同样重要的是，它必须符合他们自己的标准。这次搜索把他们引向了 Factory。</p><p>You.com 之前同时使用多款编码工具，希望把它们整合成一个工程操作系统：一个统一模型、界面和标准的平台，在其上运行整个软件生命周期。</p><p>工程师想要在其他编码工具里见过的模型选择广度，同时也希望能在自己习惯的界面里工作，不管是终端、IDE 还是桌面应用。Factory 及其 AI 编码代理（称为 Droids）正好提供了这种组合。</p><p>You.com 查看代理轨迹和评估后发现，Droid 更可能真正使用被指向的技能、工具和 MCP 服务器，而不是偏向内置功能。对于一个把标准编码进共享技能的团队，这一点很重要。</p><p>Factory 开放了广泛模型访问，让 You.com 可以把重复工作路由到更便宜的模型，把最强大的模型留给真正需要的地方。</p><p>除了单个任务，You.com 还想要一个能导航大型复杂代码库、把工作一直做到成功的代理。Factory 在长时间、多步骤问题上保持设计目标的能力，让工程团队相信它可以承担真正的工程工作。</p><p>最终做出决定的那一刻，是 You.com 把一份又长又复杂的规格交给 Droid。Droid 没有中途卡住，也没有自说自话，而是把工作一直做到完成，始终把所运行的模型约束在设计目标上。这一个证明点让采用决定变得容易。</p><p>Factory 已成为 You.com 标准工程系统的一部分，自动化贯穿始终：You.com 已把 Factory 设为代码审查的标准环节。Factory 直接嵌入现有审查流程，能在合并前可靠地捕获安全问题、bug 和代码质量问题，并正作为默认审查设置在代码库中 rollout。</p><p>除了审查，You.com 还用 Factory 做研究、调试和复杂的多步骤调查，这些工作以前工程师会拖着不做。模式一致：描述目标，让 Factory 搭建环境并完成前期工作，然后工程师审查输出。</p><p>You.com 没有强制使用单一代理，而是把共享技能目录按简单约定提交到代码库中，让公司标准（包括测试和审查模式）随代码库一起走，而不是绑定在某个工具上。</p><p>工作不再在工程师下班后停止。You.com 让 Factory 全天候运行，任务在后台推进，团队醒来时已经看到完成的工作。</p><p>最早的明显收获是一个棘手的调试问题，Factory 把耗时从几天压缩到一个下午。这类 bug 工程师最怕：MCP 服务器里的超时，横跨应用代码、部署配置和客户端延迟，没有明显罪魁祸首。Droids 从头到尾接手，搜索文档、启动隔离的 Docker 环境、编写测试复现问题，最终把根因定位在 MCP 客户端侧，而不是 You.com 的服务器配置。这让 You.com 能自信地修正集成指南。</p><p>成本纪律对 You.com 也很重要，Factory 的模型灵活性直接体现在用量数据上。通过把每个任务路由到合适的模型，而不是默认用最贵的模型，团队即使是 Factory 重度用户也能保持高产出，同时控制支出。</p><p>更大的转变是 You.com 如何看待自身产能。增长类工作，比如寻找新发布的开源项目并让它们与 You.com 兼容，是必要的但重复的工作，以前会占用团队本想用来发明新东西的时间。You.com 正把这类工作移到 Droid Missions 上。</p><p>Droid Missions 是长时间运行的代理，能在后台自主工作，把多步骤任务从头做到尾。You.com 用 Missions 处理增长工作：每天代理通过 GitHub CLI 研究新发布的开源项目，并按评分标准打分。项目过关后，Mission 克隆仓库并打开 PR，把 You.com 的 API 或 MCP 服务器接入，全部使用受限权限和标签，尊重每个仓库的风格。</p><p>把工作放在 Droid Missions 上运行，意味着工作可以在后台持续执行，而不需要工程师的笔记本一直开着，团队任何人都能监控。效果是团队不再受限于能实际产出的工程量，而是受限于想追求的想法数量。</p><p>这给我们腾出了喘息空间，不用一直追逐下一个热门开源项目。Droid 处理研究和长时间运行的任务，我们有限的时间就能用在计划中的新东西上。</p><p>最初只是想整合工具，结果变成了一种不同的工程运行方式。You.com 现在把 Factory 视为核心工程平台的一部分：审查代码、追查棘手 bug，并越来越多地独立完成整个工作流。每把一份工作移到代理上，团队就拿回时间和注意力，可以花在下一个想法上，而不是下一个杂务上。</p><p>作为 AI 搜索基础设施和代理式网络搜索 API 的行业领导者，You.com 执着于持续改进。Factory 的技术已被证明在提升工程效率方面极有价值，并将继续成为关键驱动力，帮助他们打造能交付下一代强大搜索 API 的软件工厂。</p><p>You.com 把编码工具整合到一个平台上。Factory 现在跨代码库审查代码，并通过 Missions 全天候运行研究、调试和增长工作。</p><p>这给我们腾出了喘息空间，不用一直追逐下一个热门开源项目。</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>把多种编程工具整合为单一工程操作系统，统一模型、界面与标准，并覆盖整个软件生命周期。</dd>
+        <dt>结果</dt><dd>原本需要数天（也许更久）才能复现的 MCP 超时，在 Droid 拉起 Docker、写测试并找到客户端侧原因后，于当天下午诊断出来。Factory 全天候运行（索引卡：24/7 Missions）。页上未公布全组织倍数或采用百分比。</dd>
+        <dt>接了哪些系统</dt><dd>Factory 接入现有代码评审，并正在各仓库作为默认评审配置推广。共享 skills 目录提交进仓库（与工具无关的约定）。经 GitHub CLI 的 Droid Missions 用于增长工作。</dd>
+        <dt>用了什么数据</dt><dd>文档；MCP 客户端/服务器；隔离的 Docker 环境；为复现超时而写的测试。</dd>
+        <dt>人还管哪一步</dt><dd>工程师评审 Factory 输出；人的判断用在真正需要处。团队任何人都可以监控 Missions。共享 skills 随代码库走，而不是绑定单一工具。</dd>
+        <dt>多久上线</dt><dd>页面：MCP 超时从数天压缩到一个下午。未公布全组织上线日期。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>跨栈 MCP 服务器超时：Droids 搜索文档、搭起隔离的 Docker 环境、写测试复现，并把根因定位在 MCP 客户端侧，而非 You.com 的服务器配置。</dd>
+        <dt>以前怎么干</dt><dd>多种编程工具并行；工程师在终端、IDE 和桌面应用中工作；标准编码进共享 skills。</dd>
+        <dt>卡在哪</dt><dd>需要在已有界面上的模型灵活性、更好的指令遵循以便智能体真正使用指向的 skills/工具/MCP 服务器、成本高效的模型路由，以及能端到端导航大型复杂代码库的智能体。</dd>
+        <dt>用了什么模型</dt><dd>Factory Droids / Droid Missions；页面强调模型灵活性，并把机械工作路由到更便宜的模型（无具体模型名）。</dd>
+        <dt>事情怎么流转</dt><dd>跨仓库自动代码评审（合并前的安全、缺陷、代码质量）。研究、调试与多步调查：描述目标，Factory 搭建环境并做跑腿，工程师评审。Missions 全天候运行：每天智能体经 GitHub CLI 研究新发布的开源项目，按量规打分，当项目过线则克隆仓库并开 PR，接入 You.com 的 API 或 MCP 服务器，带限定权限和标签。</dd>
+        <dt>怎么验收</dt><dd>具名调试：搭环境要数天（也许更久）vs Droid 拉起 Docker、写测试并更快诊断。引用用量数据说明经模型路由的成本约束（未公布美元数字）。</dd>
+        <dt>怎么上线</dt><dd>Factory 是 You.com 标准工程系统的一部分：评审代码、追查疑难缺陷，并越来越多地承担整条工作流。智能体 24/7 运行，工程师下线后工作仍继续。</dd>
+        
+        <dt>能不能复用到下一家</dt><dd>共享 skills 目录约定，使测试和评审模式随仓库走。Droid Missions 作为重复性增长工作的模式（开源兼容性 PR）。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">那会花我数天，也许更久。我得搭起整个环境、安装依赖、让 MCP 客户端和服务器通上话，还得复现超时，才能开始调试。相反，Droid 在 Docker 容器里全部拉起，写了测试，诊断问题比我能做到的快得多。——Edward Irby，Senior Software Engineer @ You.com</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Factory 官方案例（2026 年 6 月 16 日）。第一方具名工程师；MCP 超时数天→下午，有具体复现路径。描述了 24/7 Missions；页上无全组织百分比或倍数（索引卡重述 24/7）。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

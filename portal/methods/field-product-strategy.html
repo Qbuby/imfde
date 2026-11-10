@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>现场洞察与产品战略 · 方法 · imfde.ai</title>
+<meta name="description" content="现场洞察与产品战略：壳牌把已在自有运营里验证过的方案向外提供。现场重复的痛点先聚类成可验证假设，再决定改不改核心路线。不要每个现场重做一遍。"/>
+<link rel="canonical" href="https://imfde.ai/方法/field-product-strategy"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="现场洞察与产品战略 · 方法 · imfde.ai"/>
+<meta property="og:description" content="现场洞察与产品战略：壳牌把已在自有运营里验证过的方案向外提供。现场重复的痛点先聚类成可验证假设，再决定改不改核心路线。不要每个现场重做一遍。"/>
+<meta property="og:url" content="https://imfde.ai/方法/field-product-strategy"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="现场洞察与产品战略 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="现场洞察与产品战略：壳牌把已在自有运营里验证过的方案向外提供。现场重复的痛点先聚类成可验证假设，再决定改不改核心路线。不要每个现场重做一遍。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">现场洞察与产品战略</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>现场洞察与产品战略</h1>
+  <p class="learn-goal"><b>学习目标</b>：壳牌把已在自有运营里验证过的方案向外提供。现场重复的痛点先聚类成可验证假设，再决定改不改核心路线。不要每个现场重做一遍。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>重复痛点要能改核心路线</h3><p>壳牌页上要复制并规模化可靠性 / 资产优化 / 完整性方案，并管理数万个能源导向模型。2022 年预测性维护扩到 10,000 台设备，是平台上的规模，不是再雇一队人重做。只在每个现场补洞，产品没有记忆。一个现场的赢，要能回到核心路线，条件是跨客户重复、战略价值高、证据充分，且通用解法优于继续定制。</p></li><li><h3>十个客户的反馈先聚类</h3><p>把反馈按用户任务、根因、细分市场、价值和平台缺口聚类，再写成可验证战略假设。点功能请求次数、让销售投票或合成一份长文档，每个现场还会重做。页上能当聚类材料的是：预测性维护、LNG 实时生产优化、库存 / 闲置，以及经 OAI 外供的三款已验证应用。</p></li><li><h3>已验证的收成产品面，一次性的不要进路线图</h3><p>OAI 用合作伙伴主导、领域特定的可靠性方案增强应用，其中包含壳牌已在自有运营中规模验证的部分。页上有「探索壳牌提供的已验证 OAI 方案」。这是外供，不是每个能源现场再做一遍。Jeavons：没有一家公司能解决世界上的 AI 问题；对一个传统封闭、自己动手的行业，联盟被指出是新的。</p></li><li><h3>现场和遥测打架，先查定义</h3><p>现场说法和产品遥测不一致时，审查样本、定义和盲区，用针对性研究解释差异。不要只信数据、只信客户或取平均。某行业模型反复失败时，给研究的是代表性评测集、失败分类、业务影响和期望能力边界，不是原始投诉或「换更大模型」。页上能抄的评测面：选型前对 Type System 的严格评估；不要发明失败率。</p></li><li><h3>交一页产品战略简报</h3><p>重复点、聚类假设、是否改核心路线、外供的产品面，写在一页上。LNG / 二氧化碳 / 10,000 台设备只能带「页上写了」抄写，禁止当通用 KPI 模板。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/34">壳牌 / C3 AI</a></h3>
+  <p class="note">壳牌把已在自有运营里验证过的方案向外提供。页上写传统行业对软件封闭、自己动手，联盟被指出是新的。1–2% LNG / 355 吨二氧化碳只能带「页上写了」抄，不要当报价。100+ 应用、2018 选平台、2022 扩到 10,000 台设备是时间线。</p>
+  <dl class="anatomy"><dt>产品化</dt><dd>通过 OAI 提供三款 AI 驱动应用（2021 时间线）。OAI 用合作伙伴主导、领域特定的可靠性方案增强 C3 应用，其中包括壳牌已在自有运营中规模验证的部分。页上有「探索壳牌提供的已验证 OAI 方案」。</dd><dt>失败与迭代</dt><dd>OAI 被指出对一个传统上对软件采取封闭、自己动手做法的行业来说是新的。Jeavons：没有一家公司能解决世界上的 AI 问题；联盟对速度至关重要。</dd><dt>部署</dt><dd>2018 年选定 C3.ai 作为战略平台以规模化企业 AI。应用覆盖数百万壳牌资产、供应链和全球市场。2022：AI 预测性维护扩展到 10,000 台设备。OAI 于 2021 年与 Baker Hughes 和 Microsoft 推出；壳牌通过 OAI 提供三款 AI 驱动应用。</dd><dt>卡点</dt><dd>可靠性/资产优化/完整性方案要能复制、能铺开。要管数万个能源向的机器学习模型（模型管理和训练的自动化）。能源市场在变，能源转型要求变得更快。</dd></dl>
+  <p class="hint"><a href="/案例/34">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="0" data-yes="对。十个客户的反馈要按任务、根因、细分、价值和平台缺口聚类，再写成可验证假设。不是每个现场重做。" data-no="不对。点功能请求、让销售投票或合成长文档，每个现场还会重做。"><p class="k">练习 1 · 高阶</p><p class="mcq-stem">如何把十个客户的现场反馈变成产品战略？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>按用户任务、根因、细分市场、价值和平台缺口聚类，再形成可验证战略假设。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>只统计功能请求次数，次数多就进路线图。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>让销售投票决定哪些现场痛点进战略。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>把十份反馈合成一份长文档，不聚类也不验证。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。跨客户重复、战略价值高、证据充分，且通用解法优于继续定制时，才改核心路线。" data-no="不对。一个大客户出现、现场很有信心或媒体在谈，都不够改路线图。"><p class="k">练习 2 · 高阶</p><p class="mcq-stem">一个现场模式何时值得改变核心路线图？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>一个大客户一出现就改核心路线图。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>跨客户重复、战略价值高、证据充分且通用解法优于继续定制时。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>现场的人很有信心时就改核心路线。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>媒体开始讨论时就改核心路线图。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。现场和遥测打架时，审查样本、定义和盲区，用针对性研究解释差异。" data-no="不对。只信数据、只信客户或取平均，缺口会假消失。"><p class="k">练习 3 · 高阶</p><p class="mcq-stem">现场反馈与产品遥测冲突。高层应怎么做？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>只信产品遥测，现场说法一律当噪声。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>只信客户说法，遥测对不上就丢掉。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>审查样本、定义和盲区，用针对性研究解释差异。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>把现场和遥测取平均，差异当没发生。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。某行业反复失败时，给研究提供代表性评测集、失败分类、业务影响和能力边界。" data-no="不对。发原始投诉、停掉该行业或只要更大模型，研究收不到可验证假设。"><p class="k">练习 4 · 高阶</p><p class="mcq-stem">现场发现模型在某行业反复失败。应如何影响研究路线图？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>把原始投诉转发给研究，不附评测集。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>直接停止该行业，失败不再进研究。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>只要求换更大模型，不提供失败分类和能力边界。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>提供代表性评测集、失败分类、业务影响和期望能力边界。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页产品战略简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+重复痛点（跨现场 / 跨客户，不是单点）：
+聚类（任务 / 根因 / 细分 / 价值 / 平台缺口）：
+可验证战略假设：
+何时改核心路线（重复 / 战略价值 / 证据 / 通用解法优于继续定制）：
+现场与遥测不一致时怎么查（样本 / 定义 / 盲区）：
+给研究的材料（评测集 / 失败分类 / 业务影响 / 能力边界）：
+向外提供的已验证方案（不是每个现场重做）：
+页上时间线（只抄并写「页上写了」）：
+页上结果（只抄并写「页上写了」；禁止当通用 KPI）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>写出跨现场重复的痛点；反馈按任务 / 根因 / 细分聚类成可验证假设；改核心路线有证据门槛；已验证方案外供，而不是每个现场重做。</p></li><li><h3>不及格</h3><p>每个现场复制一份；把功能请求次数或销售投票当战略；一个大客户出现就改路线图；或把 LNG 数字当成通用产品 KPI。</p></li><li><h3>不要编的数</h3><p>1–2% LNG、355 吨二氧化碳、10,000 台设备、100+ 应用、三款 OAI 应用只能带「页上写了」抄写，禁止当通用 KPI 模板。不要补 FDE 头衔、失败率或未点名的客户数。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/change-scale-adoption">上一步 · 变革与规模采用</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

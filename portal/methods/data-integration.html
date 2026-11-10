@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>数据与集成 · 方法 · imfde.ai</title>
+<meta name="description" content="数据与集成：联合爱迪生先把 13 个源系统集成进联邦数据映像，再跑电表分析。这一步交来源、主键、谁能碰、刷新和回滚。现场硬活是接入和权限，不是提示词。"/>
+<link rel="canonical" href="https://imfde.ai/方法/data-integration"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="数据与集成 · 方法 · imfde.ai"/>
+<meta property="og:description" content="数据与集成：联合爱迪生先把 13 个源系统集成进联邦数据映像，再跑电表分析。这一步交来源、主键、谁能碰、刷新和回滚。现场硬活是接入和权限，不是提示词。"/>
+<meta property="og:url" content="https://imfde.ai/方法/data-integration"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="数据与集成 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="数据与集成：联合爱迪生先把 13 个源系统集成进联邦数据映像，再跑电表分析。这一步交来源、主键、谁能碰、刷新和回滚。现场硬活是接入和权限，不是提示词。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">数据与集成</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip on" href="/方法/data-integration" aria-current="page">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>数据与集成</h1>
+  <p class="learn-goal"><b>学习目标</b>：联合爱迪生先把 13 个源系统集成进联邦数据映像，再跑电表分析。这一步交来源、主键、谁能碰、刷新和回滚。现场硬活是接入和权限，不是提示词。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>先画来源、主键、刷新和权限</h3><p>联合爱迪生页上：13 个源系统、两年历史、500 万个客户账户，先集成进联邦数据映像，再跑 AMI 分析。电表遥测要进模型前，先画：数据在哪、主键、更新频率、谁能碰、质量责任人。不要先全量复制进向量库。</p></li><li><h3>权威定义写成可测试映射</h3><p>13 个源进同一映像前，让业务负责人确认权威定义，写成可测试的映射。提示词里写两个定义、选记录多的一方、或合并去重，对账会对不上。</p></li><li><h3>量级上去要分批、校验、可回滚</h3><p>页上有每年 180B+ 行、100TB 到 1PB 的电表数据。样本能跑、生产大一个数量级时，上线前补：容量测试、分批迁移、校验账本、断点续跑、回滚。这是系统规模，不是「脚本已在样本上成功」的验收。</p></li><li><h3>没有稳定 ID 就建内部标识</h3><p>电表和账户要对上。上游没有稳定 ID、名称还会变，就建内部稳定标识和匹配置信度，歧义送人工。用名称当主键、每次删重建、或让模型静默合并，身份会对丢。</p></li><li><h3>交一页数据与集成简报</h3><p>来源、主键、刷新、权限、权威定义、映射、分批与回滚，写在一页上。4 个月内识别 2,300+ 个部署问题，口径是「识别」。$854M+ 是「所识别的」年度客户收益，不是已实现损益，不要写成验收目标。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/36">联合爱迪生 / C3 AI</a></h3>
+  <p class="note">联合爱迪生页上是 13 个源系统先集成进联邦数据映像，再跑电表分析。$854M+ 写的是「所识别的」收益，不是已实现损益。页面没点名源系统品牌或云厂商，不要补，也不要写头衔。</p>
+  <dl class="anatomy"><dt>数据来源</dt><dd>来自 13 个源系统、覆盖 500 万个客户账户的两年数据；每年集成 180B+ 行。智能电表 / AMI 遥测（5.3M 电表部署；运营目标中的 500 万只电表）。联合团队设计的第三方数据使用要求。页面没有点名 MDMS/CIS 品牌。</dd><dt>集成</dt><dd>C3 AI Platform 和 C3 AI AMI Operations。五个外部系统访问统一数据。Smilowitz 点名 Ex Machina 作为业务负责人的无代码路径。页面没有点名云超大规模厂商。</dd><dt>旧流程</dt><dd>智能电表部署每年产生 100 TB 到 1 PB 的数据。13 个源系统和两年历史，覆盖 500 万个客户账户，在 AMI 运营分析之前集成到联邦数据映像。页上没点名先前的 AMI 分析供应商。</dd><dt>评测</dt><dd>10 个月项目。4 个月内识别 2,300+ 个部署问题。$854M+ 被印为「所识别的年度客户收益」（所识别的，不是已实现的损益科目）。五个外部系统使用统一数据。每年 180B+ 行。</dd></dl>
+  <p class="hint"><a href="/案例/36">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="1" data-yes="对。先画来源、主键、更新频率、权限和质量责任人，再谈向量库。" data-no="不对。先全量复制、让模型猜字段关系、或只接最大系统，权限和新鲜度会对不上。"><p class="k">练习 1 · 进阶</p><p class="mcq-stem">客户要把 CRM、工单和账单数据交给 AI 使用，第一步应该是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>先全部复制到向量库，来源、主键和权限后补。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>画出数据来源、主键、更新频率、权限和质量责任人。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>直接让模型猜字段关系，不画系统之间的主键。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>只接入数据量最大的系统，权限和刷新周期先不问。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。定义冲突时，让业务负责人确认权威定义，并写成可测试映射。" data-no="不对。提示词里写两个定义、选记录多的一方或合并去重，对账会对不上。"><p class="k">练习 2 · 进阶</p><p class="mcq-stem">两个系统对“活跃客户”的定义不同。应该怎么处理？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>让业务负责人确认权威定义并建立可测试的映射规则。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>在提示词里写两个定义，对账时让模型自己选。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>选记录更多的一方当权威，不找业务负责人确认。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>合并后去重即可，不写可测试的映射规则。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。样本能跑、生产大一百倍时，要容量测试、分批、校验账本、断点续跑和回滚。" data-no="不对。加长超时、一次全量写入或关日志，出事无法交代。"><p class="k">练习 3 · 进阶</p><p class="mcq-stem">数据迁移脚本在样本环境成功，生产数据量大一百倍。上线前最需要补什么？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>加长超时时间，样本能跑就当生产也能跑。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>一次性全量写入，不留分批和回滚。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>关闭日志提高速度，出错后无法校验账本。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>容量测试、分批迁移、校验账本、断点续跑和回滚方案。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。上游没有稳定 ID、名称会变，就建内部稳定标识和匹配置信度，歧义送人工。" data-no="不对。用名称当主键、每次删重建或让模型静默合并，身份会对丢。"><p class="k">练习 4 · 进阶</p><p class="mcq-stem">上游 API 没有稳定 ID，记录名称还会变化。最佳集成策略是什么？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>用名称永久作为主键，名称一变身份就丢。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>每次全量删除重建，历史对应关系清掉。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>建立内部稳定标识和匹配置信度，并将歧义送人工处理。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>让语言模型静默合并重名记录，歧义不送人工。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页数据与集成简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+数据在哪（源系统 / 主键）：
+谁能碰、权限边界：
+刷新周期与质量责任人：
+权威定义与可测试映射：
+量级（样本 vs 生产）与分批 / 校验 / 回滚：
+不稳定 ID 的内部标识与人工歧义：
+系统规模（行数 / 账户，不当业务 KPI）：
+所识别 vs 已实现（识别金额不要当验收）：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>来源、主键、刷新、权限、质量责任人和权威定义映射都有；量级上去有分批、校验、断点续跑和回滚；不稳定 ID 有内部标识和人工歧义。</p></li><li><h3>不及格</h3><p>先灌向量库、定义冲突靠提示词、样本成功就当生产，或用名称当主键让模型静默合并。</p></li><li><h3>不要编的数</h3><p>$854M+ 页上写「所识别的」，禁止当已实现损益或验收目标。2,300+ 是 4 个月内识别的部署问题；10 个月是项目时长。$13B 收入 / 4.4M 客户 / 15,000 员工 / 5.3M 电表是公用事业规模，不是本项目 KPI。不要补 FDE 头衔或未点名的源系统品牌。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/adoption">上一步 · 上线与采用</a> · <a href="/方法/prototype-iteration">下一步 · 原型与迭代</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

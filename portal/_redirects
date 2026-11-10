@@ -1,0 +1,38 @@
+# Cloudflare 静态资产重写表（200 = 内部改写，URL 保持干净）
+# 同时提供解码与百分编码两种写法，兼容 _redirects 的路径匹配口径。
+/ /world3d.html 200
+/index.html /world3d.html 200
+/world3d /world3d.html 200
+/世界动态 /world3d.html 200
+/%E4%B8%96%E7%95%8C%E5%8A%A8%E6%80%81 /world3d.html 200
+/world /world3d.html 200
+/沙盘 /world3d.html 200
+/立体世界 /world3d.html 200
+/平面 /world.html 200
+/%E5%B9%B3%E9%9D%A2 /world.html 200
+/时间轴 /world.html 200
+/落地 /deploy.html 200
+/%E8%90%BD%E5%9C%B0 /deploy.html 200
+/现场 /field.html 200
+/%E7%8E%B0%E5%9C%BA /field.html 200
+/案例 /cases.html 200
+/%E6%A1%88%E4%BE%8B /cases.html 200
+/案例/:id /cases.html?id=:id 200
+/%E6%A1%88%E4%BE%8B/:id /cases.html?id=:id 200
+/cases/:id /cases.html?id=:id 200
+/方法 /methods.html 200
+/%E6%96%B9%E6%B3%95 /methods.html 200
+/方法/:slug /methods/:slug.html 200
+/%E6%96%B9%E6%B3%95/:slug /methods/:slug.html 200
+/动态/:id /events/:id.html 200
+/%E5%8A%A8%E6%80%81/:id /events/:id.html 200
+/动态/:id/* /events/:id.html 200
+/%E5%8A%A8%E6%80%81/:id/* /events/:id.html 200
+/api/world.json /world.json 200
+/static/* /site/static/* 200
+/favicon.ico /site/static/icons/logo-mark.png 200
+# 旧认证入口 → ASCII 路由（Worker 接管 /login 与 /logout）
+/登录 /login 200
+/%E7%99%BB%E5%BD%95 /login 200
+/退出登录 /logout 200
+/%E9%80%80%E5%87%BA%E7%99%BB%E5%BD%95 /logout 200

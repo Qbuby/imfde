@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>评测与安全 · 方法 · imfde.ai</title>
+<meta name="description" content="评测与安全：Oportun 催收现场原来抽几通质检，页上改成每一通都监测。上线前把评测集从哪来、高风险怎么单独设阈值、谁拦谁放写在一页。成交转化没给数就空着。"/>
+<link rel="canonical" href="https://imfde.ai/方法/evaluation"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="评测与安全 · 方法 · imfde.ai"/>
+<meta property="og:description" content="评测与安全：Oportun 催收现场原来抽几通质检，页上改成每一通都监测。上线前把评测集从哪来、高风险怎么单独设阈值、谁拦谁放写在一页。成交转化没给数就空着。"/>
+<meta property="og:url" content="https://imfde.ai/方法/evaluation"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="评测与安全 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="评测与安全：Oportun 催收现场原来抽几通质检，页上改成每一通都监测。上线前把评测集从哪来、高风险怎么单独设阈值、谁拦谁放写在一页。成交转化没给数就空着。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">评测与安全</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip on" href="/方法/evaluation" aria-current="page">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>评测与安全</h1>
+  <p class="learn-goal"><b>学习目标</b>：Oportun 催收现场原来抽几通质检，页上改成每一通都监测。上线前把评测集从哪来、高风险怎么单独设阈值、谁拦谁放写在一页。成交转化没给数就空着。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>用真实案例建评测集</h3><p>Oportun 原来抽几通、按清单打分，反馈要等 2–3 周。页上改成每一通都监测，失败不再靠轶事。用真实通话建评测集，写下质量、风险、业务阈值。不要只用演示没报错当验证。</p></li><li><h3>按风险分层设阈值</h3><p>原来大多数通话没被看到，平均分会盖住少数高风险失败。按风险和场景切开，高风险单独设阈值。删掉高风险样本或掺进普通样本把平均分做绿，闸门是假的。</p></li><li><h3>把人在环闸门写进验收</h3><p>页上写了辅导不再滞后 2–3 周、教练按实时数据行动。把「谁拦、拦什么、多久必须反馈」写成闸门。离线分数好看、任务却更慢，要查端到端时长，不要只追离线准确率。</p></li><li><h3>改了也要版本化回归</h3><p>页上写模型为 Oportun 定制。改提示词不能当场发，用版本化回归对比旧版，过门禁再发布。作者再读一遍、同时改模型和检索、或清掉旧结果，都过不了门。</p></li><li><h3>交一页评测简报</h3><p>评测集来源、分层阈值、人在环闸门、回归门禁、数字口径，写在一页上。页上有的是 100% 监测和去掉 2–3 周滞后；成交转化 / 损益只有定性「实质性」，没有金额或百分比，留空并标明「页上没给数」。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/46">Oportun / Cresta</a></h3>
+  <p class="note">Oportun 页上原来抽几通质检，改成每一通都监测。成交转化没给金额或百分比，催收扩展还是下一步。简报只写页上有的场面，不要补数。</p>
+  <dl class="anatomy"><dt>旧流程</dt><dd>手工抽一小部分通话，按清单打分，数周后才给反馈。销售座席必须记住许多步骤、披露和产品细节。</dd><dt>评测</dt><dd>从抽样转到 100% 互动监测（Mathur）。成交转化率分化，以及若 Q2/Q3 表现像 Q1 则有「有益的损益收益」/「金额是实质性的」（Helwig）——未公布金额或百分比。无拦截率或 CSAT 数字。</dd><dt>人在环内</dt><dd>教练/主管根据实时数据行动（不是 2-3 周滞后）。座席跟随提示。Helwig 谈到团队成员的关键时刻。</dd><dt>测得结果</dt><dd>100% 互动监测取代抽样质检。辅导数据不再滞后 2–3 周。成交转化率出现分化，并有实质性损益收益（Helwig；无金额或百分比）。催收上线是下一步，不是已公布的催收 KPI。</dd></dl>
+  <p class="hint"><a href="/案例/46">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="0" data-yes="对。用真实案例建评测集，写质量、风险、业务阈值，并检查失败类型。" data-no="不对。演示没报错、榜单分数或项目组投票，都不是上线前验证。"><p class="k">练习 1 · 入门</p><p class="mcq-stem">AI 工作流已经能跑通。生产发布前最有价值的验证是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>用真实案例建立评测集，定义质量、风险与业务指标阈值，并检查失败类型。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>确认演示时没有报错，就把工作流当成已验证。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>只比较模型榜单分数，不建本现场的评测集。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>只用演示里最顺利的几条样本当评测集，失败类型先不看。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。平均分会盖住高风险失败。按风险和场景分层，高风险切片单独设阈值。" data-no="不对。只看平均、删高风险样本或掺普通样本，闸门会假绿。"><p class="k">练习 2 · 入门</p><p class="mcq-stem">系统平均准确率很高，但少数高风险病例经常失败。该如何评测？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>继续只看平均分，高风险失败被平均分盖住也当过关。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>按风险和场景分层报告，并为高风险切片设置单独阈值。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>删除高风险样本，让平均准确率保持好看。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>增加随机普通样本稀释失败，把报告做绿再发布。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。离线答得好、任务却更慢，要查端到端时长、交互摩擦、复核和失败恢复。" data-no="不对。只追离线准确率或换更贵模型，解决不了用起来变慢。"><p class="k">练习 3 · 入门</p><p class="mcq-stem">离线答案质量很好，但用户完成任务反而更慢。下一步应该查什么？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>只提升离线准确率，不管任务是不是变慢。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>换一个更贵模型，指望延迟和摩擦会一起消失。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>分析端到端任务指标、交互摩擦、人工复核和失败恢复。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>停止收集遥测，离线分数好看就发布。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。改提示词也要版本化回归，对比旧版并设发布门禁。" data-no="不对。作者再读一遍、同时改模型和检索、或清掉旧结果，都过不了门。"><p class="k">练习 4 · 入门</p><p class="mcq-stem">团队修改提示词后准备立即发布。哪项控制最重要？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>只让作者再读一遍提示词，不对比旧版结果。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>同时修改模型和检索，出了问题无法归因。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>清除旧结果，不留回归对照就发布。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>用版本化回归评测比较新旧版本，并设置发布门禁。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页评测简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+评测集从哪来（真实案例，不是演示）：
+质量阈值（口径：实测 / 目标）：
+风险分层与高风险单独阈值：
+人在环闸门（谁拦、拦什么、反馈时限）：
+端到端任务指标（不只离线准确率）：
+版本化回归与发布门禁：
+页上有口径的数字：
+页上没给的数字（留空，不要编）：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>有真实案例评测集、风险分层阈值、人在环闸门和版本化回归。每个数字都标明实测 / 目标 / 预测 / 系统规模。</p></li><li><h3>不及格</h3><p>只看演示没报错、只看平均分或模型榜单、项目组投票代替阈值，或改提示词不回归就发。</p></li><li><h3>不要编的数</h3><p>成交转化 / 损益页上没给金额或百分比，不要填。催收「每年数百万对话」是下一步，不是已公布的催收 KPI。不要补拦截率、CSAT 或 FDE 头衔。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/scoping">上一步 · 方案范围</a> · <a href="/方法/adoption">下一步 · 上线与采用</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

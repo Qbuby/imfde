@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AngelList · imfde.ai</title>
+<meta name="description" content="2026 年一季度结束前完成 Redshift 到 Snowflake 的迁移，包括把 40+ 个集合里 14,000 张 Metabase 卡片重定向。；比团队在无 Devin 时的预估快 5.2 倍。于 2026 年 3 月 23 日切换，而不是趋势中的 8 月/9 月。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/79"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="AngelList · imfde.ai"/>
+<meta property="og:description" content="2026 年一季度结束前完成 Redshift 到 Snowflake 的迁移，包括把 40+ 个集合里 14,000 张 Metabase 卡片重定向。；比团队在无 Devin 时的预估快 5.2 倍。于 2026 年 3 月 23 日切换，而不是趋势中的 8 月/9 月。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/79"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="AngelList · imfde.ai"/>
+<meta name="twitter:description" content="2026 年一季度结束前完成 Redshift 到 Snowflake 的迁移，包括把 40+ 个集合里 14,000 张 Metabase 卡片重定向。；比团队在无 Devin 时的预估快 5.2 倍。于 2026 年 3 月 23 日切换，而不是趋势中的 8 月/9 月。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AngelList", "description": "2026 年一季度结束前完成 Redshift 到 Snowflake 的迁移，包括把 40+ 个集合里 14,000 张 Metabase 卡片重定向。；比团队在无 Devin 时的预估快 5.2 倍。于 2026 年 3 月 23 日切换，而不是趋势中的 8 月/9 月。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/79", "about": {"@type": "Thing", "name": "Cognition · 金融保险 · Devin"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">AngelList</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Cognition · 金融保险 · Devin</p>
+  <h1>AngelList</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>AngelList 如何用 Devin 把 Redshift 到 Snowflake 的迁移加快 5.2x</h2><div class='orig-body'><p>5.2x faster Redshift → Snowflake migration</p><p>关于公司</p><p>AngelList 是风险投资领域最大的基金管理平台之一，平台上管理着 25,000 只基金和联合投资，资产规模达 171B 美元。</p><p>行业：FinTech</p><p>概览</p><p>到 2025 年底，AngelList 已成长为风险投资领域最大的基金管理平台之一，平台上管理着 25,000 只基金和联合投资，资产规模达 171B 美元。支撑这一增长的 Redshift 分析栈已达到并发上限，查询在负载下排队并超时。</p><p>AngelList 的数据团队决定在 2026 年 Q1 结束前完成 Redshift 到 Snowflake 的迁移。</p><p>到 2026 年 2 月，AngelList 已将数据层和 2000 多个 dbt 模型迁移到 Snowflake。但最难的部分还在后面：迁移 BI 层。</p><p>数据团队需要重新定位、重写并验证 14,000 个 Metabase 卡片（支撑 LP 报告和基金表现仪表盘的图表和指标），这些卡片分布在 40 多个集合中，大多使用 Redshift 特有的 SQL 或 Metabase 的专有查询语言。</p><p>Beau Rothrock 是一名数据工程师，加入 AngelList 仅两个月，就接下了 Metabase 切换工作——迁移的最后阶段。</p><p>“我记得刚开始时，有那么一瞬间真的很害怕，不知道到底该怎么做。我知道自己一个人做不完。”</p><p>Beau Rothrock，AngelList 数据工程师</p><p>如果没有 Devin，Metabase 迁移预计会晚六个月，到 8 月或 9 月完成，还需要额外三到四名工程师。</p><p>有了 Devin，AngelList 在 2026 年 3 月 23 日切换到 Snowflake，比团队预估快了 5.2 倍。</p><p>从把 Devin 当工具到当队友</p><p>在写任何代码前，AngelList 的工程主管 Thibaut 建议 Beau 先用 Devin 梳理问题。</p><p>Beau 把 Devin 对准全部 40 个顶层 Metabase 集合，让它生成项目规格。结果出乎意料。</p><p>Devin 同时跨 AngelList 所有代码库运行，追踪哪些 dbt 模型产生哪些表，哪些表又喂给哪些 Metabase 查询。</p><p>在 IDE 里跨十几个代码库意味着要本地检出每个仓库并不断切换工作区。Devin 能同时把它们全放在范围内。</p><p>“这真的更像有个远程同事，而不是 IDE 里的侧边栏。因为 Devin 能像我一样看透多个仓库，它对如何回答我的问题有更好的上下文。”</p><p>Beau Rothrock，AngelList 数据工程师</p><p>这改变了 Beau 处理项目的方式。</p><p>他原本计划做一个单一的单体工具，按顺序处理卡片。当他把这个思路跑给 Devin 看时，Devin 反对：如果工具在同一个管道里同时卡在大小写、方言和数据问题上，每次失败都会阻塞整个运行，需要 Beau 手动诊断。</p><p>Devin 提出了另一种架构——一套可组合的工具，每一个工具处理迁移的一个步骤。因为每个工具只操作一个 Metabase 集合，工作可以拆分给多个代理并行运行。</p><p>“Devin 其实是提出改进迁移流程的人。我意识到我有了一个很好的搭档。”</p><p>Beau Rothrock，AngelList 数据工程师</p><p>他们一起做了五个工具：</p><p>一个 CLI 管理工具，用于探索 Metabase 集合并映射迁移范围。</p><p>一个克隆工具，用于复制卡片并把它们重新指向 Snowflake。</p><p>一个名称映射工具，用于处理仓库间的大小写不一致——Redshift 把所有未引用的标识符小写，Snowflake 则大写。</p><p>一个修复工具，用于处理 Redshift 和 Snowflake 之间 SQL 方言差异的长尾问题。</p><p>一个验证工具，对两个仓库进行抽样并生成数据对账报告。</p><p>20 个代理并行运行迁移</p><p>工具准备好后，Beau 开始大规模迁移。</p><p>高峰时有 20 个 Devin 代理并行运行——每个代理接一个 Metabase 集合，把它的卡片克隆到 Snowflake，解决方言问题，并用 Redshift 验证结果。</p><p>早期运行暴露了一个瓶颈。</p><p>为了解决 Redshift 和 Snowflake 之间的大小写差异，Devin 需要把每个 Metabase 卡片映射回产生其底层表的 dbt 模型。</p><p>Devin 没有一次性预先计算这个映射，而是为每张卡片重新推导——每次都从头走一遍完整的 dbt 依赖图。</p><p>这种方法能用，但不够快。</p><p>Beau 意识到 dbt 原生会生成项目中每个模型关系的完整依赖图。他让 Devin 把它预先计算成一个查找表，直接引用，而不是每次都重新追踪图。</p><p>完整清单太大，Devin 放不进单个上下文窗口。</p><p>Devin 提出把它分成两层：一个紧凑的顶层图，把每张表映射到它的上游模型；更深层的子图用于 staging 和 marts 层，按需加载。</p><p>血缘追踪从完整的图遍历变成了直接查找——快到 20 个并行代理能在三周内迁移全部 14,000 张卡片。</p><p>一年工作四个月完成</p><p>切换后，AngelList 退役了 Redshift。</p><p>25,000 多只基金的数据层现在运行在为扩展而构建的现代化基础设施上。</p><p>LP 报告、基金表现仪表盘和合规管道全部运行在 Snowflake 上。</p><p>对 Beau 来说，入职四个月就能产生这种影响，是大多数工程师花几年时间才追逐到的。</p><p>他在入职第一个季度就承担了公司级迁移中最难的部分，并把自己的名字和 AngelList 数百人每天都在用的东西联系在一起。</p><p>“能在公司产生真正大的影响，尤其是在入职前三个月——这真的很重要。我们现在让人们能用 Devin 做以前没被授权做的事。想到我跟这件事有关，就觉得特别好。”</p><p>Beau Rothrock，AngelList 数据工程师</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>2026 年一季度结束前完成 Redshift 到 Snowflake 的迁移，包括把 40+ 个集合里 14,000 张 Metabase 卡片重定向。</dd>
+        <dt>结果</dt><dd>比团队在无 Devin 时的预估快 5.2 倍。于 2026 年 3 月 23 日切换，而不是趋势中的 8 月/9 月。40+ 个集合里 14,000 张 Metabase 卡片。切换后 Redshift 退役；25,000+ 只基金的数据层在 Snowflake 上。</dd>
+        <dt>接了哪些系统</dt><dd>五个工具（CLI 管理、克隆、名称映射、SQL 修复、校验）。峰值时每个集合并行 20 个 Devin agent。</dd>
+        <dt>用了什么数据</dt><dd>Metabase 集合/卡片；dbt 模型与依赖图；Redshift 与 Snowflake 数仓。</dd>
+        <dt>人还管哪一步</dt><dd>Beau 负责切换；Devin 提出架构，Beau 发现 dbt manifest 瓶颈并让 Devin 预计算查找表。</dd>
+        <dt>多久上线</dt><dd>三周完成 14,000 张卡片；Snowflake 于 2026 年 3 月 23 日切换。页面：一年的工作在四个月内交付。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>并行把 Metabase 卡片迁到 Snowflake：克隆、重定向、修方言/大小写、对照 Redshift 校验。</dd>
+        <dt>以前怎么干</dt><dd>数据层（2,000+ 个 dbt 模型）到 2026 年 2 月已在 Snowflake。BI 层仍用 Redshift 专用 SQL / Metabase 查询语言。原计划做单一单体顺序卡片处理工具。</dd>
+        <dt>卡在哪</dt><dd>Redshift 并发上限。查询排队并超时。若无 Devin，Metabase 切换趋势是晚六个月（8 月/9 月），还得再加 3–4 名工程师。</dd>
+        <dt>用了什么模型</dt><dd>Devin</dd>
+        <dt>事情怎么流转</dt><dd>每个 agent 选取一个集合，把卡片克隆到 Snowflake，解决方言问题，对照 Redshift 校验。全图遍历过慢后，血缘改为两层 dbt 图查找。</dd>
+        <dt>怎么验收</dt><dd>切换日期对比无 Devin 时的预估时间线；迁了 14,000 张卡片。</dd>
+        <dt>怎么上线</dt><dd>20 个并行 agent；完整 manifest 拆成紧凑的顶层图加上按需子图。</dd>
+        <dt>失败了怎么改</dt><dd>早期运行按卡片重新推导 dbt 血缘，太慢。Devin 随后把过大的 manifest 拆成两层。Devin 也反对 Beau 的单体顺序工具，因为混杂失败会卡住整次运行。</dd>
+        <dt>能不能复用到下一家</dt><dd>一套五个可组合的迁移工具，可按集合复用。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">其实是 Devin 建议了改进这一迁移流程的方法。我意识到自己有了一个很好的伙伴。——Beau Rothrock，AngelList 数据工程师</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Devin 官方客户页。第一方量化：相对预估 5.2×；14,000 张卡片；20 个 agent；2026 年 3 月 23 日切换；$171B AUM / 25,000 只基金是公司规模，不是 Devin 的 KPI。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

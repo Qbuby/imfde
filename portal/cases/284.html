@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>英伟达 · imfde.ai</title>
+<meta name="description" content="复杂、多仓库工程，加上手工端到端机器学习研究循环（找方向、写脚本、跑实验）。；跑端到端 ML 研究工作流速度提升 10 倍；40,000 名 NVIDIA 人可使用 Codex；Python→Rust 重写使代码效率约 20 倍；一个内部播客应用在数小时内完全自动构建并测试。"/>
+<link rel="canonical" href="https://imfde.ai/案例/284"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="英伟达 · imfde.ai"/>
+<meta property="og:description" content="复杂、多仓库工程，加上手工端到端机器学习研究循环（找方向、写脚本、跑实验）。；跑端到端 ML 研究工作流速度提升 10 倍；40,000 名 NVIDIA 人可使用 Codex；Python→Rust 重写使代码效率约 20 倍；一个内部播客应用在数小时内完全自动构建并测试。"/>
+<meta property="og:url" content="https://imfde.ai/案例/284"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="英伟达 · imfde.ai"/>
+<meta name="twitter:description" content="复杂、多仓库工程，加上手工端到端机器学习研究循环（找方向、写脚本、跑实验）。；跑端到端 ML 研究工作流速度提升 10 倍；40,000 名 NVIDIA 人可使用 Codex；Python→Rust 重写使代码效率约 20 倍；一个内部播客应用在数小时内完全自动构建并测试。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "英伟达", "description": "复杂、多仓库工程，加上手工端到端机器学习研究循环（找方向、写脚本、跑实验）。；跑端到端 ML 研究工作流速度提升 10 倍；40,000 名 NVIDIA 人可使用 Codex；Python→Rust 重写使代码效率约 20 倍；一个内部播客应用在数小时内完全自动构建并测试。", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/284", "about": {"@type": "Thing", "name": "OpenAI · 软件科技"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">英伟达</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">OpenAI · 软件科技</p>
+  <h1>英伟达</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>NVIDIA 工程师和研究人员怎样用 Codex 构建</h2><div class='orig-body'><p>团队用 Codex 配 GPT-5.5 交付生产系统，把研究想法变成可跑的实验。页上结果：端到端研究工作流速度提升 10x；40k 名 NVIDIA 员工能用上 Codex。</p><p>在 NVIDIA，工程师把 Codex 当复杂工程的默认工具，也用来跑端到端机器学习实验。Codex 建在 GPT-5.5 上，生产跑在 NVIDIA GB200 和 GB300 基础设施上，能撑更长、更自主的会话——不只执行，还会浮出原 prompt 里没有的问题和想法。</p><p>Senior Software Engineer Dennis Hannusch：「Codex 是我们复杂工程任务的首选工具，有了 GPT-5.5，它能浮出其他模型找不到的程序 bug 和缺口。」「我个人觉得 Codex 配 GPT-5.5 自主得多，少很多手把手。」他已经用 Codex 把一个内部平台从 MVP 做成可上生产的系统。团队还用 Codex 几小时内做出类似 Riverside 的内部播客录制应用。Hannusch：「考虑到隐私约束，采购软件本来要几周。」用带电脑交互的 Codex 桌面应用，系统在构建时自己测了视频和音频录制。「我什么都没做——完全自主构建和测试。」「Codex 彻底改了什么东西值得去建的门槛。」</p><p>对研究团队，Codex 大体自动化了研究闭环：找研究方向、写机器学习实验脚本、在远程机器上跑。AI researcher Shaunak Joshi：「光跑实验就 10x 速度提升，因为它能扛整条端到端机器学习研究工作流。」「GPT-5.5 作为创意搭档是巨大解锁，尤其在知识工作上。」团队把模型指向强化学习等领域的大量论文。Joshi：「GPT-5.5 看起来比竞品更有创意。它帮我沿整条链追踪证据片段，还建议一张想法知识图。」Codex 应用支持 SSH，他不用再操心远程主机登录和配置。Joshi：「如果你有一份性能不行的旧代码库，Codex 很擅长机器翻译。很多人把 Python 仓库交给 GPT-5.5，它改写成 Rust，效率像 20X。」Hannusch：「我们才刚摸到它能做什么的表面。」</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>复杂、多仓库工程，加上手工端到端机器学习研究循环（找方向、写脚本、跑实验）。</dd>
+        <dt>结果</dt><dd>跑端到端 ML 研究工作流速度提升 10 倍；40,000 名 NVIDIA 人可使用 Codex；Python→Rust 重写使代码效率约 20 倍；一个内部播客应用在数小时内完全自动构建并测试。</dd>
+        <dt>接了哪些系统</dt><dd>带计算机交互的 Codex 桌面应用（构建时测试视频/音频）；到远程主机的 SSH 支持；在 NVIDIA GB200/GB300 上生产运行</dd>
+        <dt>用了什么数据</dt><dd>大量相关论文语料（例如强化学习）；机器学习基础设施</dd>
+        <dt>人还管哪一步</dt><dd>工程师审阅拟议变更；系统在长会话中仍以顶尖准确度表现</dd>
+        <dt>多久上线</dt><dd>内部播客录制应用在数小时内拉起（采购本要数周）</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>把内部平台从 MVP 做到可上生产；经 Codex 桌面应用的计算机交互在数小时内拉起内部播客应用；把端到端 ML 研究工作流自动跑起来。</dd>
+        <dt>以前怎么干</dt><dd>手工研究循环和手工采购软件（例如一个播客应用要花数周采购）。</dd>
+        <dt>卡在哪</dt><dd>漫长、多步的研究/工程；很难在长会话里把上下文留住。</dd>
+        <dt>用了什么模型</dt><dd>Codex（GPT-5.5）</dd>
+        <dt>事情怎么流转</dt><dd>一个研究 agent 把模型指向论文语料，编写 ML 实验脚本并在远程机器上运行；把 Python 仓库机器翻译成 Rust（效率约 20 倍）</dd>
+        
+        <dt>怎么上线</dt><dd>Codex 在 NVIDIA GB200/GB300 基础设施上生产使用</dd>
+        
+        <dt>能不能复用到下一家</dt><dd>在 NVIDIA 工程和研究团队中使用</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">「Codex 是我们复杂工程任务的首选工具，有了 GPT-5.5，它浮现出其他模型找不到的程序漏洞和缺口。」——Dennis Hannusch，Senior Software Engineer</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">量化：研究速度 10 倍，4 万用户，效率 20 倍。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

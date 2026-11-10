@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>思科 · imfde.ai</title>
+<meta name="description" content="做出 AI Defense（端到端 AI 安全）和其他此前要数个季度的关键工程；大型 C/C++ 代码库里修缺陷手工要数周。；95%+ 的新 AI 功能由 Codex 编写。Codex-CLI 在大型 C/C++ 代码库上把缺陷解决吞吐提升 10–15 倍。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/287"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="思科 · imfde.ai"/>
+<meta property="og:description" content="做出 AI Defense（端到端 AI 安全）和其他此前要数个季度的关键工程；大型 C/C++ 代码库里修缺陷手工要数周。；95%+ 的新 AI 功能由 Codex 编写。Codex-CLI 在大型 C/C++ 代码库上把缺陷解决吞吐提升 10–15 倍。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/287"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="思科 · imfde.ai"/>
+<meta name="twitter:description" content="做出 AI Defense（端到端 AI 安全）和其他此前要数个季度的关键工程；大型 C/C++ 代码库里修缺陷手工要数周。；95%+ 的新 AI 功能由 Codex 编写。Codex-CLI 在大型 C/C++ 代码库上把缺陷解决吞吐提升 10–15 倍。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "思科", "description": "做出 AI Defense（端到端 AI 安全）和其他此前要数个季度的关键工程；大型 C/C++ 代码库里修缺陷手工要数周。；95%+ 的新 AI 功能由 Codex 编写。Codex-CLI 在大型 C/C++ 代码库上把缺陷解决吞吐提升 10–15 倍。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/287", "about": {"@type": "Thing", "name": "OpenAI · 软件科技"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">思科</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">OpenAI · 软件科技</p>
+  <h1>思科</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Cisco 与 OpenAI 用 Codex 重定义企业工程</h2><div class='orig-body'><p>靠把 Codex 铺开，Cisco 让 AI-native 开发成为企业软件怎么建的核心部分。页上结果：95%+ 的新 AI 功能由 Codex 写；用 Codex CLI 缺陷修复吞吐提升 10-15x；每月节省 1,500+ 工程小时。</p><p>Cisco 几十年在建和运营世界上最复杂、任务关键的软件系统之一。生成式 AI 从实验变成真运营能力后，Cisco 把它嵌进生产工程工作流：海量多仓库系统、偏 C/C++ 的代码库，以及全球企业的安全、合规和治理要求。Cisco 工程领导层成员 Ching Ho：「我很喜欢发现把 Codex 接到 Cisco 企业软件生命周期工作流里的新机会。跟 OpenAI 团队合作让 Codex 对企业生产就绪，也很有收获。」</p><p>AI Defense 是 Cisco 端到端的 AI 安全方案，防 AI 引入的安全和安保风险。团队用 Codex 写了 AI Defense 的大部分，以及几乎每一个正在建的新功能。SVP/GM, AI Software and Platform DJ Sampath：「本来要几个季度才能交到客户手里的功能，压到了数周。」Cisco 也是与 OpenAI Daybreak 倡议合作的领先安全组织之一，该倡议把 OpenAI 模型、Codex 和安全伙伴拉在一起加速网络防御。作为该项目一部分，他们治理了对 GPT-5.5-Cyber（面向网络防御者的模型）的访问。Cisco 还用 Codex 帮建开源工具 Defense Squad，从构想到开发者社区不到一周。</p><p>Codex 吸引人的不是补全，是 agency：跨大型互联仓库推理、在复杂语言里干活、经 CLI 自主 compile-test-fix、待在现有评审和治理框架里。嵌入日常后用在最耗时的工作流：跨仓库构建优化——Codex 分析 15 个以上互联仓库的构建日志和依赖图，构建时间约降 20%，全球环境每月节省超过 1,500 工程小时。规模化缺陷修复（CodeWatch）——用 Codex-CLI 在大规模 C/C++ 代码库上迭代、agentic 执行自动修缺陷，曾经数周的手工现在数小时完成，吞吐 10-15×。框架迁移：Splunk 团队要把多个 UI 从 React 18 迁到 19，Codex 自主处理大量重复改动，数周压到数天。Cisco Splunk 组 Principal Engineer Ryan Brady：「最大收益出现在我们不再把 Codex 当工具、开始当团队一员的时候。我们用 Codex 生成并跟随一份计划文档，评审团队更容易理解过程和生成的代码。」</p><p>今天 Codex 用在 Cisco 多个业务单元。团队越来越问「这次 Codex 跑要多久」而不只按传统工作量估。Cisco Splunk Engineering VP Brad Murphy：「Codex 已经成为我们往后怎么想 AI 辅助开发和运营的有意义的一部分。」</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>做出 AI Defense（端到端 AI 安全）和其他此前要数个季度的关键工程；大型 C/C++ 代码库里修缺陷手工要数周。</dd>
+        <dt>结果</dt><dd>95%+ 的新 AI 功能由 Codex 编写。Codex-CLI 在大型 C/C++ 代码库上把缺陷解决吞吐提升 10–15 倍。跨仓库构建优化把构建时间砍约 20%，每月节省 1,500+ 工程小时。AI Defense 功能从数个季度到数周；Defense Squad 不到一周交付；Splunk React 18→19 迁移从数周压到数天。</dd>
+        <dt>接了哪些系统</dt><dd>带自主编译-测试-修复循环的 Codex CLI；OpenAI 的 Daybreak 举措和对 GPT-5.5-Cyber 的受治理访问；计划文档生成/审阅</dd>
+        <dt>用了什么数据</dt><dd>15+ 个互连仓库的构建日志和依赖图</dd>
+        <dt>人还管哪一步</dt><dd>审阅团队理解流程和生成的代码；工程师集中于设计和校验</dd>
+        <dt>多久上线</dt><dd>AI Defense 功能从数个季度降到数周；Defense Squad 开源工具从构想到社区不到一周；Splunk 迁移数周→数天</dd>
+        <dt>怎么交给客户</dt><dd>Cisco 与 OpenAI 团队合作让 Codex 为企业生产就绪，并从真实生产使用给出反馈，塑造了 Codex 的企业就绪（合规、长时任务、管道集成）。</dd>
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>Codex 写了 AI Defense 的大部分和几乎每一个新 AI 功能；CodeWatch 经 Codex-CLI 自动修缺陷；跨仓库构建优化；Splunk React 18→19 迁移。</dd>
+        <dt>以前怎么干</dt><dd>大型 C/C++ 缺陷修复手工数周；框架迁移手工完成。</dd>
+        <dt>卡在哪</dt><dd>在苛刻、真实的企业环境里把先进技术铺开。</dd>
+        <dt>用了什么模型</dt><dd>Codex（提及 GPT-5.5-Cyber）</dd>
+        <dt>事情怎么流转</dt><dd>Codex 经 CLI 运行迭代、agentic 编译-测试-修复循环；工程师生成并遵循计划文档；跨仓库分析识别低效</dd>
+        
+        <dt>怎么上线</dt><dd>Codex 在多个 Cisco 业务单元使用</dd>
+        
+        <dt>能不能复用到下一家</dt><dd>AI Defense；Defense Squad（开源）；Daybreak 举措</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">「本要数个季度才能交到客户手里的功能降到了数周。」——DJ Sampath，SVP/GM, AI Software and Platform，Cisco</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">量化：95%+，10–15 倍，每月 1,500+ 小时，构建约 20%。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Garner医疗 · imfde.ai</title>
+<meta name="description" content="在受 HIPAA 约束、处理数十亿条医疗索赔记录的平台上，给大胆的 SRE/基础设施活（动态供给、状态漂移检测）做原型，同时人手一年内从 40 增到超过 100。；两天内完成 60 名开发者入职，反馈积极且零 IDE 切换。周末概念验证：约 1 万行生产就绪 Go。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/26"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Garner医疗 · imfde.ai"/>
+<meta property="og:description" content="在受 HIPAA 约束、处理数十亿条医疗索赔记录的平台上，给大胆的 SRE/基础设施活（动态供给、状态漂移检测）做原型，同时人手一年内从 40 增到超过 100。；两天内完成 60 名开发者入职，反馈积极且零 IDE 切换。周末概念验证：约 1 万行生产就绪 Go。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/26"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Garner医疗 · imfde.ai"/>
+<meta name="twitter:description" content="在受 HIPAA 约束、处理数十亿条医疗索赔记录的平台上，给大胆的 SRE/基础设施活（动态供给、状态漂移检测）做原型，同时人手一年内从 40 增到超过 100。；两天内完成 60 名开发者入职，反馈积极且零 IDE 切换。周末概念验证：约 1 万行生产就绪 Go。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Garner医疗", "description": "在受 HIPAA 约束、处理数十亿条医疗索赔记录的平台上，给大胆的 SRE/基础设施活（动态供给、状态漂移检测）做原型，同时人手一年内从 40 增到超过 100。；两天内完成 60 名开发者入职，反馈积极且零 IDE 切换。周末概念验证：约 1 万行生产就绪 Go。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/26", "about": {"@type": "Thing", "name": "Augment Code · 医疗健康"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Garner医疗</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Augment Code · 医疗健康</p>
+  <h1>Garner医疗</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Garner Health 借助 Augment Code 加速结果驱动的护理</h2><div class='orig-body'><p>Garner Health 面对严格的 HIPAA 要求，以及不断增长、日益复杂的数据分析平台，工程团队选择了 Augment Code。他们用它更快地搭建复杂基础设施原型，在全组织范围内执行编码标准，同时让开发者留在自己喜欢的 IDE 里，且不影响合规。</p><p>Garner Health 处理数十亿条医疗理赔记录，根据真实患者结果给医生排名，把更多护理送到全国表现最好的医生手里，扭转医疗成本上升、质量下降的趋势。这个使命带来了繁重的站点可靠性工程（SRE）工作：</p><p>24×7 运行的复杂 ETL 管道。</p><p>快速增长的团队：年初 40 人，年底超过 100 人。</p><p>雄心勃勃的基础设施想法（动态资源调配、状态漂移检测），大到无法在空闲时间里做原型。</p><p>“人脑能同时记住的东西有限，”站点可靠性工程师 Forrest Thomas 说，“系统太大时，你无法同时抓住所有变动部分。”</p><p>Garner Health 评估了 GitHub Copilot、Cursor、Windsurf 等几款 AI 编程工具。Augment Code 在几项技术指标上胜出：</p><p>速度与质量：亚秒级补全，更高保真度的代码。Forrest 说：“Cursor 感觉迟钝，Augment 的回复在我思路还在流动时就到了。”</p><p>安全与合规：客户代码可选不训练、客户托管密钥、Okta SSO。“HIPAA 合规是硬门槛，Augment 通过了。”</p><p>代码库感知：全项目索引和 MCP 集成，提供架构上下文。“它真正理解了我们的 Go 和 Python 仓库。”</p><p>IDE 灵活性：JetBrains、VS Code、Vim 的轻量扩展。“我们不用强迫开发者放弃自己习惯的工具。”</p><p>转折点是一个周末的 POC：Augment 为 Forrest 的动态调配项目生成了约 10 K 行可直接上生产的 Go 代码——这个项目他已经拖了好几年。</p><p>“Augment 从根本上改变了我们开发软件的方式，”Forrest 总结道，“它已经变得不可或缺，不仅提升了生产力，还改善了系统的整体质量和设计。”</p><p>Garner Health 采用 Augment 后获得了明显的技术优势：</p><p>加速开发：开发者能快速从想法进入功能原型，大幅提升团队创新能力。“Augment 让你迅速从构思进入编码心流，”Forrest 解释，“我不用纠结‘该用 for 循环还是 map’这类语言细节，它让我把注意力放在更大的问题上。”</p><p>更高代码标准：Augment 精准的编码辅助减少了人工干预，即使在团队快速扩张时也能保持质量。</p><p>可扩展实践：Augment 帮助扩大后的团队保持一致的编码标准，简化了 onboarding 和协作。Forrest 强调：“借助 Augment 的指南和 MCP 集成，我们可以在组织层面协调编码标准。”</p><p>无缝上线：60 名开发者两天内全部接入，正面反馈且零 IDE 切换。</p><p>“Augment 终于让我专注于设计优雅的系统，而不是纠结导入和样板代码。我再也无法想象没有它的编程生活。”——Forrest Thomas，Garner Health 站点可靠性工程师</p><p>这是一款面向专业软件工程的工具，而不是“氛围编程”。</p><p>“如果你只想按 Tab，就会交付大量自己都不理解的代码，”Forrest 警告。这种“氛围编程”能快速出代码，但之后团队要调试脆弱、不透明的系统。他说：“用 Augment，我从想法直接进入心流。它把整个系统放在上下文中，我就能专注于架构和结果。”</p><p>Forrest 不再与导入或语法搏斗，而是把专业能力用在设计可扩展、可维护的服务上。</p><p>简而言之：氛围编程只是自动化按键；Augment 自动化了繁琐工作，让工程师真正做软件工程——深入思考系统应该如何以及为何这样构建。</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>在受 HIPAA 约束、处理数十亿条医疗索赔记录的平台上，给大胆的 SRE/基础设施活（动态供给、状态漂移检测）做原型，同时人手一年内从 40 增到超过 100。</dd>
+        <dt>结果</dt><dd>两天内完成 60 名开发者入职，反馈积极且零 IDE 切换。周末概念验证：约 1 万行生产就绪 Go。人手 40 → 100+ 是公司增长，不是归功于 Augment 的结果。没有组织速度倍数。</dd>
+        <dt>接了哪些系统</dt><dd>JetBrains、VS Code、Vim；Customer-Managed Keys；Okta SSO；MCP；Augment 指南。</dd>
+        <dt>用了什么数据</dt><dd>Go 和 Python 仓库；经 MCP 的架构上下文。</dd>
+        <dt>人还管哪一步</dt><dd>SRE Forrest Thomas：仍思考架构；警告仅靠 tab 的「vibe coding」会交付你不理解的代码。</dd>
+        <dt>多久上线</dt><dd>为推迟数年的供给项目做周末 POC。两天内完成 60 名开发者推广。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>周末约 1 万行 Go 动态供给概念验证；全组织指南 + MCP 管编码标准。</dd>
+        <dt>以前怎么干</dt><dd>评估过 GitHub Copilot、Cursor 和 Windsurf。全天候 ETL；大系统上的硬件/注意力限制。</dd>
+        <dt>卡在哪</dt><dd>人抓不住每一个活动部件；大想法被推迟数年；HIPAA 是硬门槛。</dd>
+        <dt>用了什么模型</dt><dd>Augment Code（页面：Context Engine / agents / completions；除非另有注明，无单一模型名）。</dd>
+        <dt>事情怎么流转</dt><dd>补全加上指南/MCP，以便标准在组织层面协调。页面将此与「vibe coding」对照。</dd>
+        <dt>怎么验收</dt><dd>对比评测评论（Cursor 感觉迟缓）。推广：两天内 60 名开发者。</dd>
+        <dt>怎么上线</dt><dd>两天内完成 60 名开发者入职；零 IDE 切换。团队 100+（年初为 40）。</dd>
+        <dt>失败了怎么改</dt><dd>在 Forrest 的对比表中，Cursor 被描述为相对 Augment 迟缓。</dd>
+        <dt>能不能复用到下一家</dt><dd>指南 + MCP 用于组织级标准。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">Augment 终于让我专注于设计优雅系统，而不是忙于 import 和样板代码。我无法想象没有它怎么编码。——Forrest Thomas, Site Reliability Engineer, Garner Health</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Augment 官方案例。具名 Forrest Thomas。量化：60 名开发者 / 2 天；≈10K 行周末 POC；40→100+ 是人手背景。HIPAA/CMK/SSO 是选型门槛。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

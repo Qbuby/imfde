@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>MathWorks · imfde.ai</title>
+<meta name="description" content="让数千名工程师搜索、导航并修改一套 40 多年的代码库，它散在 Perforce（分支副本）、GitHub、GitLab，以及包括 C、C++、Java 和 JavaScript 的语言。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/339"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="MathWorks · imfde.ai"/>
+<meta property="og:description" content="让数千名工程师搜索、导航并修改一套 40 多年的代码库，它散在 Perforce（分支副本）、GitHub、GitLab，以及包括 C、C++、Java 和 JavaScript 的语言。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/339"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="MathWorks · imfde.ai"/>
+<meta name="twitter:description" content="让数千名工程师搜索、导航并修改一套 40 多年的代码库，它散在 Perforce（分支副本）、GitHub、GitLab，以及包括 C、C++、Java 和 JavaScript 的语言。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MathWorks", "description": "让数千名工程师搜索、导航并修改一套 40 多年的代码库，它散在 Perforce（分支副本）、GitHub、GitLab，以及包括 C、C++、Java 和 JavaScript 的语言。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/339", "about": {"@type": "Thing", "name": "Sourcegraph · 软件科技"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">MathWorks</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Sourcegraph · 软件科技</p>
+  <h1>MathWorks</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>MathWorks 工程师发现以前要数天的任务现在用 Deep Search 数分钟完成</h2><div class='orig-body'><p>MathWorks 是为设计工程系统开发数学计算软件的领先者。主要以旗舰产品 MATLAB 和 Simulink 知名，全世界科学家、工程师和研究者用它做数据分析、算法开发、仿真和基于模型的设计。数百万工程师使用 MATLAB 和 Simulink 的开发者面对持续且增长的挑战：让数千名工程师能搜索、导航和理解散在多个版本控制系统里的庞大代码库。自 2023 年采用 Sourcegraph 以来，MathWorks 改造了工程师怎么跟代码一起工作，并跨团队加速生产力。</p><p>挑战。MathWorks 的工程环境由 Perforce 里带许多分支副本的大规模代码库、GitHub 和 GitLab 上的额外仓库、以及包括 C、C++、Java、JavaScript 等在内的多种编程语言组成。这种碎片化让高效代码探索变难。自制内部搜索工具只在 Perforce 里工作，缺跨 GitHub 或 GitLab 的索引，逼开发者靠分开的工具、口口相传的知识或资深工程师来回答跨仓库问题。MathWorks 工程团队：「搜索工具散在系统各处，找对的信息耗时且不一致。」缺集中知识库是驱使他们先看 Sourcegraph 的原因。</p><p>MathWorks 开始评估 Sourcegraph 是为了应对根本痛点：统一跨多个版本控制系统的代码搜索，让理解和改动他们 40+ 年的代码库更容易。AI 编码的兴起创造了新机会，但现有 AI 编码工具很难按规模理解公司的大型代码库。Sourcegraph 和 Deep Search 给 MathWorks 工程师一套独特能力：用一个真理解整份代码库的 agentic 编码工具。</p><p>Code Search 方案和上线。MathWorks 2023 年从涉及约 100 名工程师的概念验证开始，选来代表多样工具环境：Perforce、GitHub、GitLab 和各种语言生态。上线迅速规模化，2024 年扩到 1,000+ 名工程师，优先跨版本控制系统的广泛使用，最终到 2025 年 3 月实现所有开发者的组织范围访问。工程采用经现场内部培训、公司特定资源、与 Sourcegraph 产品专家的每周办公时间、以及问答和排障的内部沟通通道支持。口碑也起关键作用。工程师开始在代码评审、结对编程和其他协作活动中分享 Sourcegraph 搜索结果和工作流。</p><p>Code Search 提供立即好处的同时，最近加入的 Deep Search 成为多数工程师称为转型性的功能。它使能跨整份代码库的自然语言查询，给开发者强大上下文和精确结果，匹配他们怎么想排障和发现。工程师现在用 Deep Search 排障生产问题、圈定和理解大型重构、导航代码库不熟悉的模块、定位 API 使用和文档碎片，并与协作者分享到搜索结果的可复用链接。MathWorks 工程团队：「Deep Search 正好是工程师一直期望 AI 增强搜索该有的样子：自然语言、精确、跨我们整份代码库。」</p><p>一个突出用例涉及追查困难的 JavaScript 内存泄漏。传统上，跨多个组件诊断并修好这类问题可能要一名工程师数周。有 Deep Search，一名架构师跨互联模块追踪根因，精确定位最相关文件，并在不到一周内修好所有受影响文件。这一个例子反映更广模式：「以前要数小时或数天的任务现在数分钟发生。」其他工程师在猎 API 文档、排障崩溃报告、或把可复用的搜索驱动洞察建进 UI 元素和行为时，报告了类似的时间节约。</p><p>Sourcegraph 在 MathWorks 的成功不只关于技术；也关于团队之间的协作。从 2023 年到现在，MathWorks 和 Sourcegraph 经 PoC、反馈会和排期接触紧密合作，打磨产品对 MathWorks 独特环境的契合。Sourcegraph 投入时间理解和集成 MathWorks 的本地 Perforce 工作流，并欢迎来自可用性评审和工程团队的反馈。MathWorks 工程团队：「Sourcegraph 愿意理解我们的挑战，包括我们工具的独特方面，造成巨大差别。」往前看，MathWorks 把 Deep Search 和未来 agentic AI 工作流看成持续软件现代化努力的关键使能。「随着我们继续现代化代码库，Sourcegraph 只会变得更必要。」</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>让数千名工程师搜索、导航并修改一套 40 多年的代码库，它散在 Perforce（分支副本）、GitHub、GitLab，以及包括 C、C++、Java 和 JavaScript 的语言。</dd>
+        <dt>结果</dt><dd>到 2024 年 1,000+ 名工程师在 Perforce、GitHub 和 GitLab 上使用 Sourcegraph；到 2025 年 3 月全组织可访问。架构师 JS 内存泄漏修复不到 1 周对照多个星期。页上：「过去要数小时或数天的任务现在在数分钟内发生。」索引卡：用 Deep Search 把过去要几天的任务变成几分钟。</dd>
+        <dt>接了哪些系统</dt><dd>本地 Perforce 集成。内部培训、公司特定资源、每周办公时间、内部问答渠道。搜索链接在代码审查和结对编程中分享。</dd>
+        <dt>用了什么数据</dt><dd>Perforce + GitHub + GitLab；C/C++/Java/JavaScript 等；本地 Perforce 工作流。</dd>
+        <dt>人还管哪一步</dt><dd>工程师仍诊断并应用修复；Deep Search 用于定位文件。与 Sourcegraph 的反馈会与可用性审查。</dd>
+        <dt>多久上线</dt><dd>JS 内存泄漏：传统上跨组件要多个星期；有 Deep Search，一位架构师在不到一周内追踪并修复了所有受影响文件。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>Deep Search 用于生产调试、定重构范围、不熟悉模块、API/文档片段、可分享搜索链接。架构师跨模块追踪 JavaScript 内存泄漏。</dd>
+        <dt>以前怎么干</dt><dd>自研内部搜索只在 Perforce 上工作，不索引 GitHub 或 GitLab。跨仓库问题交给口口相传或高级工程师。</dd>
+        <dt>卡在哪</dt><dd>搜索工具碎片化；现有 AI 编码工具难以理解大型代码库。找信息耗时且不稳定。</dd>
+        <dt>用了什么模型</dt><dd>Sourcegraph Code Search + Deep Search（页上：agent 式 / 自然语言搜索）。无单个 LLM 名。</dd>
+        <dt>事情怎么流转</dt><dd>Deep Search：跨越整个代码库的自然语言查询；结果作为可复用链接分享。</dd>
+        <dt>怎么验收</dt><dd>铺开计数（PoC → 1,000+ → 全组织）。一则计时泄漏修复轶事。定性「数小时或数天现在数分钟」。</dd>
+        <dt>怎么上线</dt><dd>PoC 约 100 名工程师（2023）→ 1,000+ 名工程师（2024）→ 到 2025 年 3 月全组织所有开发者可访问。</dd>
+        <dt>失败了怎么改</dt><dd>内部仅 Perforce 搜索和其他 AI 编码工具无法覆盖多 VCS 代码库。</dd>
+        <dt>能不能复用到下一家</dt><dd>持续合作：PoC、反馈会、排期接触、Perforce 集成工作。路线图：大规模重构、入职、现代化的 agent 式 AI。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">Deep Search 正是工程师一直期望 AI 增强搜索该有的样子：自然语言、精确，并覆盖我们整个代码库。——MathWorks 工程团队</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Sourcegraph 官方案例（抓取 2026-08-29）。铺开约 100（2023）/ 1,000+（2024）/ 全组织 2025 年 3 月。泄漏轶事是一位架构师，&lt;1 周对照多个星期。引言归于「MathWorks engineering team」，不是具名个人。「数小时或数天现在数分钟」是定性。fde_role 留空。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

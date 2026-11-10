@@ -528,7 +528,7 @@ function fbOpenReport(range) {
     return;
   }
   bodyEl.innerHTML = '<p class="w3-ai-loading">✦ 生成中…</p>';
-  fetch(`/api/ai-report?range=${range}`)
+  fetch(`/api/ai-report?range=${range}&snapshot=${encodeURIComponent(DATA.snapshot || "")}`)
     .then((r) => r.json())
     .then((rep) => {
       if (!rep || rep.enabled === false) throw new Error(rep.error || "报告不可用");
@@ -1769,7 +1769,7 @@ ${rel.length ? `<h3>相关事件（${rel.length}）</h3><ul class="w3-p-rel">${r
     }
     bodyEl.innerHTML = '<p class="w3-ai-loading">✦ 生成中…</p>';
     try {
-      const res = await fetch(`/api/ai-report?range=${range}`, { method: range ? "GET" : "GET" });
+      const res = await fetch(`/api/ai-report?range=${range}&snapshot=${encodeURIComponent(DATA.snapshot || "")}`, { method: range ? "GET" : "GET" });
       const rep = await res.json();
       if (!res.ok || !rep.enabled) throw new Error(rep.error || ("HTTP " + res.status));
       reportCache.set(range, rep);

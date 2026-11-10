@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>R1 · imfde.ai</title>
+<meta name="description" content="在 HIPAA 下、跨碎片化病历系统，用对话式患者入口换掉按 1 的语音菜单，覆盖账单、付款和账户问题。；早期测试中 AI 智能体最多解决 40% 的入站来电。改为先问意图再认证后，认证时间下降超过一半。多账户来电者在数秒内得到单一合计余额。"/>
+<link rel="canonical" href="https://imfde.ai/案例/322"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="R1 · imfde.ai"/>
+<meta property="og:description" content="在 HIPAA 下、跨碎片化病历系统，用对话式患者入口换掉按 1 的语音菜单，覆盖账单、付款和账户问题。；早期测试中 AI 智能体最多解决 40% 的入站来电。改为先问意图再认证后，认证时间下降超过一半。多账户来电者在数秒内得到单一合计余额。"/>
+<meta property="og:url" content="https://imfde.ai/案例/322"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="R1 · imfde.ai"/>
+<meta name="twitter:description" content="在 HIPAA 下、跨碎片化病历系统，用对话式患者入口换掉按 1 的语音菜单，覆盖账单、付款和账户问题。；早期测试中 AI 智能体最多解决 40% 的入站来电。改为先问意图再认证后，认证时间下降超过一半。多账户来电者在数秒内得到单一合计余额。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "R1", "description": "在 HIPAA 下、跨碎片化病历系统，用对话式患者入口换掉按 1 的语音菜单，覆盖账单、付款和账户问题。；早期测试中 AI 智能体最多解决 40% 的入站来电。改为先问意图再认证后，认证时间下降超过一半。多账户来电者在数秒内得到单一合计余额。", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/322", "about": {"@type": "Thing", "name": "Sierra · 医疗健康"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">R1</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Sierra · 医疗健康</p>
+  <h1>R1</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>R1 如何把 IVR 抛在后面，为患者建更好的东西</h2><div class='orig-body'><p>本文由 R1 运营 SVP Ana Maria Nicolau 和 Sierra 医疗 Agent Development Lead Miranda Zhao 合写。几十年里，互动语音应答（IVR）是医疗客户服务的万能常数。按 1 账单。按 2 预约。错过一个选项，从头来。它管用。但随着患者预期演进、医疗行政复杂度增长，R1 开始问更难的问题：如果电话本身真能是一次好体验呢？</p><p>R1 坐在提供方、支付方和患者的交叉口，代表全国卫生系统处理收入周期——一切非临床的。患者拿到账单拿起电话时，他们常常在跟 R1 说话，即使以为在跟医院说话。那一刻的体验要紧。传统 IVR 为高效路由通话而建，当时是真的运营工程成就。但世界变了。R1 开始探索用真正对话的东西替换电话树，建一个能在患者所在之处接上、理解他们需要什么、更快带到那里的 AI agent。挑战是真的。患者人群多样，数据散在多套系统：不同电子病历（EMR）、分开的预约平台、分层电话基础设施。不像零售商能看见你最近的购买，R1 在严格 HIPAA 要求下运营，塑造每个设计决定。</p><p>R1 于 2025 年 10 月推出 Phare Revenue Operating System，实时运营智能和工作流编排。AI 使能的联络中心是关键角色。R1 部署 AI agent 处理构成患者问询最高量的电话：查余额、处理付款、设付款计划、账户问题。目标从来不是自动化一切。是把工作规模摆对：需要真人判断和照料的电话拿到正好那些，直截了当需求的患者能很快拿到答案、不用等。最重要的设计决定是让患者主导。不是走规定流程，agent 开场问患者为什么打电话，再从那里跟。感到在被帮助之前先被听见的患者，反应不同。参与上去了。通话更流畅。体验开始感觉不像系统、更像对话。R1 也在 agent 底下的数据基础设施上大量投入。把多套 EMR、预约平台、账户库接上，好让 agent 给完整、准确的答案。跨多条服务线有账户的来电者现在能在数秒内拿到单一加总余额。已核验的患者身份向下游跨部门传递，被转接的来电者不必重新认证。</p><p>认证是最有教益的一章。最初设计先核验患者再处理需要。逻辑上对，实践上意味着患者要等一分多钟对话才能开始。R1 重排体验：先立意图，再认证，一切改善。认证时间下降超过一半。关键学习：核验在基于数字数据、同时确保满足合规要求时效果最好。团队也学到关于信任节奏的重要东西。有些电话 agent 一切都做对了（每个问题准确答了，带患者走完正好需要的），结束时患者仍要求跟人说话。不是因为出错，是因为对 AI 的信任经重复正面体验逐渐建。以前改通话脚本意味着跨多个地点再训数百名支持代表。今天几乎能实时测试、学习、调整。</p><p>结果自己说话。早期测试里 AI agent 已解决最多 40% 的入站电话。患者可以打电话用白话描述需要，比如「我爸告诉我需要拍 X 光」，被正确路由，不必菜单。对多个账户有问题的来电者数秒内拿到清楚、完整的答案。需要人工坐席的患者到达那场对话时已经知情，上下文已立，交接无缝。R1 团队的关键学习：从高频、直截了当的用例开始；在体验层之前投入数据基础设施；像设计其他一切一样仔细设计向人的交接；衡量要紧的东西。自动化率是手段不是目的。患者体验才是目的。</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>在 HIPAA 下、跨碎片化病历系统，用对话式患者入口换掉按 1 的语音菜单，覆盖账单、付款和账户问题。</dd>
+        <dt>结果</dt><dd>早期测试中 AI 智能体最多解决 40% 的入站来电。改为先问意图再认证后，认证时间下降超过一半。多账户来电者在数秒内得到单一合计余额。</dd>
+        <dt>接了哪些系统</dt><dd>Phare Revenue Operating System 中的带 AI 的联络中心；身份复用，使转接来电者不必重新认证。</dd>
+        <dt>用了什么数据</dt><dd>多套 EMR、排程平台、账户数据库；已核验身份向下游传递。</dd>
+        <dt>人还管哪一步</dt><dd>交接设计得与自动化同样仔细；有些患者在 AI 正确解决后仍要求转人工（信任逐步建立）。</dd>
+        
+        <dt>怎么交给客户</dt><dd>Ana Maria Nicolau，R1 运营高级副总裁；Miranda Zhao，Sierra 医疗 Agent Development Lead（Sierra 头衔是 Agent Development Lead，不是 FDE）。</dd>
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>语音 AI 处理最高量问询：余额查询、付款处理、分期计划、账户问题；跨服务线给出单一合计余额。</dd>
+        <dt>以前怎么干</dt><dd>传统语音菜单路由；患者打到 R1 时常常以为自己在跟医院说话。</dd>
+        <dt>卡在哪</dt><dd>患者群体多样；数据散在多套病历/排程/电话栈；身份验证感觉像求助前先等一分钟。</dd>
+        <dt>用了什么模型</dt><dd>Sierra 医疗语音 agent。</dd>
+        <dt>事情怎么流转</dt><dd>开场先问患者为何来电（不是菜单）；先意图、再认证；数字核验；例如路由「我爸说我需要拍 X 光」。</dd>
+        <dt>怎么验收</dt><dd>早期测试中入站来电被解决的份额；重排后的认证时间。</dd>
+        <dt>怎么上线</dt><dd>患者联络中心；已公布早期测试结果。</dd>
+        <dt>失败了怎么改</dt><dd>最初先核验的设计让患者等超过一分钟；改为先意图。过去改一条 IVR 脚本意味着给数百名代表再培训——现在可近实时迭代。</dd>
+        <dt>能不能复用到下一家</dt><dd>联络中心作为统一智能前门；后续还有更多用例。</dd>
+      </dl>
+    </section>
+  </div>
+  
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Sierra 官方客户页，与 R1 合写。第一方：早期测试最多 40% 入站来电被解决；认证时间削减超过一半。Sierra 协作者头衔是 Agent Development Lead, Healthcare——未记为 fde_role。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

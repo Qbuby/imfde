@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nubank · imfde.ai</title>
+<meta name="description" content="把一个历时 8 年、600 万行的集中式 ETL 单体拆成子模块，而不消耗 1,000+ 名工程师约 18 个月。；结果部分：委派给 Devin 的范围内迁移快 8–12x，成本节省超过 20x。概览还写工程小时效率提升 12x，成本节省超过 20x。主视觉：工程时间效率增益 8x，成本节省 20x。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/93"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Nubank · imfde.ai"/>
+<meta property="og:description" content="把一个历时 8 年、600 万行的集中式 ETL 单体拆成子模块，而不消耗 1,000+ 名工程师约 18 个月。；结果部分：委派给 Devin 的范围内迁移快 8–12x，成本节省超过 20x。概览还写工程小时效率提升 12x，成本节省超过 20x。主视觉：工程时间效率增益 8x，成本节省 20x。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/93"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Nubank · imfde.ai"/>
+<meta name="twitter:description" content="把一个历时 8 年、600 万行的集中式 ETL 单体拆成子模块，而不消耗 1,000+ 名工程师约 18 个月。；结果部分：委派给 Devin 的范围内迁移快 8–12x，成本节省超过 20x。概览还写工程小时效率提升 12x，成本节省超过 20x。主视觉：工程时间效率增益 8x，成本节省 20x。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Nubank", "description": "把一个历时 8 年、600 万行的集中式 ETL 单体拆成子模块，而不消耗 1,000+ 名工程师约 18 个月。；结果部分：委派给 Devin 的范围内迁移快 8–12x，成本节省超过 20x。概览还写工程小时效率提升 12x，成本节省超过 20x。主视觉：工程时间效率增益 8x，成本节省 20x。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/93", "about": {"@type": "Thing", "name": "Cognition · 金融保险 · Devin"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Nubank</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Cognition · 金融保险 · Devin</p>
+  <h1>Nubank</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Nubank 如何用 Devin 重构数百万行代码以提升工程效率</h2><div class='orig-body'><p>Nubank 是拉丁美洲最大的金融科技银行，2013 年成立，服务巴西、墨西哥、哥伦比亚超过 1.1 亿客户。</p><p>2023-2024 年，Nubank 启动核心 ETL 迁移，把一个 8 年历史、超过 600 万行代码的单体仓库拆成子模块。</p><p>过去只能靠 1000 多名工程师手动搬迁，预计耗时 18 个月。</p><p>引入 Devin 后，Data、Collections、Risk 等业务单元几周就完成迁移。</p><p>工程师把重复任务交给 Devin，工程时效提升 12 倍，成本节省 20 倍以上。</p><p>Nubank 用历史迁移案例对 Devin 做微调，任务完成率翻倍，单任务耗时从 40 分钟降到 10 分钟。</p><p>Devin 自己写脚本，把多步操作合并成一步，加速数万子任务。</p><p>Jose Carlos Castro 说：工程师只需审阅 Devin 的改动，做小调整即可合并 PR，减少人为错误。</p><p>迁移成本降低 20 倍以上，工程师从枯燥搬迁中解放出来。</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>把一个历时 8 年、600 万行的集中式 ETL 单体拆成子模块，而不消耗 1,000+ 名工程师约 18 个月。</dd>
+        <dt>结果</dt><dd>结果部分：委派给 Devin 的范围内迁移快 8–12x，成本节省超过 20x。概览还写工程小时效率提升 12x，成本节省超过 20x。主视觉：工程时间效率增益 8x，成本节省 20x。微调：任务完成分数翻倍，任务速度 4x（每个子任务约 40 分钟到约 10 分钟）。Data/Collections/Risk 单元在数周内完成，对比数月/数年。</dd>
+        <dt>接了哪些系统</dt><dd>在 Nubank 示例上微调。Devin 为机械步骤构建经典工具/脚本（例如从文件路径得到国家扩展）。</dd>
+        <dt>用了什么数据</dt><dd>单体 ETL 仓库（约 6M LOC）；此前手工迁移示例；评估集。</dd>
+        <dt>人还管哪一步</dt><dd>工程师审查 Devin 的变更、做小调整、合并。引语：不是任务的 100% 由人完成。</dd>
+        <dt>多久上线</dt><dd>2023 年手工起步；上线后数周内采用 Devin。页面未公布日历结束日期。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>定制 ETL 迁移 Devin：移动数据类实现、追踪导入、处理国家扩展（br/co/mx）、并行子任务。</dd>
+        <dt>以前怎么干</dt><dd>2023 年起步时，工程师手工执行迁移。一次数据类移动过于依赖判断，难以脚本化，但体量很大（约 100,000 处实现；依赖链深达 70）。</dd>
+        <dt>卡在哪</dt><dd>业务关键转换变慢；所有权不清；ETL 成为主要规模瓶颈。</dd>
+        <dt>用了什么模型</dt><dd>Devin（在 Nubank 迁移示例上微调）</dd>
+        <dt>事情怎么流转</dt><dd>人管理项目并批准 PR。Devin 运行数万个子任务；在数天工作中学会避开此前的死胡同。</dd>
+        <dt>怎么验收</dt><dd>评估集任务完成率（微调后翻倍）和任务速度（4x；每个子任务约 40 分钟到约 10 分钟）。效率 = 典型工程师小时 vs 提示/审查 Devin 的小时。成本 = Devin 运行成本 vs 工程师时薪。</dd>
+        <dt>怎么上线</dt><dd>Data、Collections 和 Risk 业务单元在数周内验证并完成迁移，而不是数月或数年。公司范围 2023–2024 项目。</dd>
+        <dt>失败了怎么改</dt><dd>最初几周：突出错误和不确定的边界情况；随着 Devin 看到更多示例，可靠性提升。</dd>
+        <dt>能不能复用到下一家</dt><dd>定制 ETL Migration Devin；Devin 为机械步骤编写的脚本；评估工具。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">Devin 提供了一种简便方式来减少迁移所需的工程小时数，更稳定、更少人为错误。工程师不必跨多个文件把整个迁移任务 100% 做完，只需审查 Devin 的变更、做小调整，然后合并 PR。 — Jose Carlos Castro，高级产品经理</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Devin 官方客户页。第一方量化，方法按页面所述（8–12x 小时对比提示+审查；20x Devin 成本对比工程师时薪；微调后速度 4x）。主视觉 8x、正文 12x、结果 8–12x 均出现在页面上；按页面写法记录。20x 不包括提前数月完成的价值。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Pure Storage · imfde.ai</title>
+<meta name="description" content="在 Copilot 对付不了泄漏、段错误、模板和跨领域工作的 210 万行 C++ 代码库（外加 Python/Go）里导航、调试和入职。；超过 13 万次补全被接受进代码库；77% 的聊天驱动建议被落地。入职从数月→数周。210 万行 C++ 是代码库规模，不是 Augment 产出。"/>
+<link rel="canonical" href="https://imfde.ai/案例/30"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Pure Storage · imfde.ai"/>
+<meta property="og:description" content="在 Copilot 对付不了泄漏、段错误、模板和跨领域工作的 210 万行 C++ 代码库（外加 Python/Go）里导航、调试和入职。；超过 13 万次补全被接受进代码库；77% 的聊天驱动建议被落地。入职从数月→数周。210 万行 C++ 是代码库规模，不是 Augment 产出。"/>
+<meta property="og:url" content="https://imfde.ai/案例/30"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Pure Storage · imfde.ai"/>
+<meta name="twitter:description" content="在 Copilot 对付不了泄漏、段错误、模板和跨领域工作的 210 万行 C++ 代码库（外加 Python/Go）里导航、调试和入职。；超过 13 万次补全被接受进代码库；77% 的聊天驱动建议被落地。入职从数月→数周。210 万行 C++ 是代码库规模，不是 Augment 产出。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Pure Storage", "description": "在 Copilot 对付不了泄漏、段错误、模板和跨领域工作的 210 万行 C++ 代码库（外加 Python/Go）里导航、调试和入职。；超过 13 万次补全被接受进代码库；77% 的聊天驱动建议被落地。入职从数月→数周。210 万行 C++ 是代码库规模，不是 Augment 产出。", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/30", "about": {"@type": "Thing", "name": "Augment Code · 其他"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Pure Storage</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Augment Code · 其他</p>
+  <h1>Pure Storage</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Pure Storage 借助 Augment Code 应对复杂的 2.1M 行 C++ 代码库</h2><div class='orig-body'><p>Pure Storage 面对数百万行 C++ 代码库的挑战，借助 Augment 提升开发效率、加快新人上手、简化调试，团队整体生产力明显提高。</p><p>Pure Storage 是一家企业级数据存储解决方案公司，代码库庞大复杂，包含超过 2.1 百万行 C++，还有大量 Python 和 Go 代码。他们先试过 GitHub Copilot，但效果不够理想。</p><p>调试和排错是最大痛点。内存泄漏、段错误、性能瓶颈经常出现。高级软件工程师 Richard Hefner 说：“我曾把整个 React 库从一个 UI 框架换到另一个，同时还要保持能轻松拉取上游改动，这件事特别棘手。” 代码准确性也难保证，细微的数学或逻辑错误容易漏掉。</p><p>Scott Kim 工程师提到代码导航和理解的问题：“C++ 模板让每个代码库都有自己的写法，往往跟熟悉的模式差得很远。” 工程师还得处理不熟悉的技术，比如用新工具包扩展 SQL 项目，找对组件和理解测试宏都很费劲。</p><p>两支工程团队即将合并，新人必须快速上手，但面对海量 C++ 代码和各种约定，学习曲线陡峭。</p><p>Pure Storage 希望找到更智能、上下文感知更强的 AI 编程助手，最终选择了 Augment。</p><p>Augment 对 C++ 模板、内存管理、复杂类依赖的理解更深。Hefner 说：“Augment 明显比其他 AI 更聪明，通常它先给出正确答案，生成的代码质量更高。”</p><p>AI 洞察帮助工程师快速定位运行时问题、内存泄漏和逻辑错误，调试时间大幅缩短。一位开发者说：“Augment 让我轻松找到不熟悉区域的功能。后来我写了一些带很多条件的复杂查询，请它帮忙简化，结果代码更精简、更易读。”</p><p>开发者还能快速定位函数、理解依赖、浏览遗留代码。Kim 说：“Augment 特别有用，我可以问‘这个是干什么的？怎么用的？为什么这么写？’，它都能给出指向正确方向的答案。”</p><p>与 Copilot 不同，Augment 的建议更专业。一位开发者说：“在 Copilot 里，我刚输入‘// This is’，它就会补‘// This is kind of a hack, but ...’，然后对代码一摊手。Augment 不会这样，它的注释建议总是聚焦代码本身，能很好地描述功能。”</p><p>结果显示，超过 130,000 条补全被接受进代码库，77% 的聊天式建议被采纳。Hefner 说：“我一直用 Augment，因为代码质量更高，而且它还在持续进步。”</p><p>调试和导航速度明显加快。Kim 说：“Augment 直接指方向，不用再拿基础问题去问同事。”</p><p>新人上手时间从几个月缩短到几周。</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>在 Copilot 对付不了泄漏、段错误、模板和跨领域工作的 210 万行 C++ 代码库（外加 Python/Go）里导航、调试和入职。</dd>
+        <dt>结果</dt><dd>超过 13 万次补全被接受进代码库；77% 的聊天驱动建议被落地。入职从数月→数周。210 万行 C++ 是代码库规模，不是 Augment 产出。</dd>
+        <dt>接了哪些系统</dt><dd>VS Code、JetBrains、Vim。</dd>
+        <dt>用了什么数据</dt><dd>2.1M 行 C++ 外加 Python 和 Go。</dd>
+        <dt>人还管哪一步</dt><dd>具名 Richard Hefner（Senior Software Engineer）和 Scott Kim（Software Engineer）。</dd>
+        <dt>多久上线</dt><dd>入职时间从数月减至数周。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>在不熟的领域找功能；简化复杂条件查询；对遗留代码问「是什么/怎么做/为什么」；比 Copilot 更高质量的补全（包括注释语气）。</dd>
+        <dt>以前怎么干</dt><dd>最初用 GitHub Copilot。挑战：一边接上游一边做 React UI 框架转换；SQL 工具包扩展；这仓库特有的 C++ 模板惯用法；两个工程团队即将合并。</dd>
+        <dt>卡在哪</dt><dd>内存泄漏、段错误、性能瓶颈；C++ 模板「自己的一套」；单体上的入职障碍。</dd>
+        <dt>用了什么模型</dt><dd>Augment Code（页面：Context Engine / agents / completions；除非另有注明，无单一模型名）。</dd>
+        <dt>事情怎么流转</dt><dd>补全和聊天问答；聊天驱动的建议。</dd>
+        <dt>怎么验收</dt><dd>超过 130,000 次补全被接受进入代码库；77% 的聊天驱动建议被实现。入职数月 → 数周。</dd>
+        <dt>怎么上线</dt><dd>2000+ 工程师组织（页面页头）。补全被接受进入代码库。</dd>
+        <dt>失败了怎么改</dt><dd>Copilot 不足以应对调试、导航和 C++ 深度；Copilot 的注释建议被描述为相对 Augment 不专业。</dd>
+        
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">Augment 肯定比其他 AI 更聪明——它通常比其他的更早做对，并创建更高质量的代码。——Richard Hefner, Senior Software Engineer at Pure Storage</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Augment 官方案例（聚焦 C++ 的 Pure Storage 页面）。具名 Richard Hefner 和 Scott Kim。量化：130,000+ 次被接受补全；77% 聊天建议被实现；入职数月→数周。与较晚的 2,000 工程师 / 3x 速度页面不同。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

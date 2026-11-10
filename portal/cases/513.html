@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>前线部署工程师如何工作：部署生命周期（2026）| FDEInterviews · imfde.ai</title>
+<meta name="description" content="FDE 不是一次性交付而是可重复的八阶段循环：1 发现（找到真实工作流）、2 收敛到最小有价值的切片、3 先用评估定义成功再动手、4 在真实数据上端到端上线、5 与企业环境集成、6 观测系统实际行为、7 学习与迭代、8 产品化（把碎石路铺成高速公路）。前四步让一个真实系统上线，后四步让它可靠、可观测、可复用。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/513"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="前线部署工程师如何工作：部署生命周期（2026）| FDEInterviews · imfde.ai"/>
+<meta property="og:description" content="FDE 不是一次性交付而是可重复的八阶段循环：1 发现（找到真实工作流）、2 收敛到最小有价值的切片、3 先用评估定义成功再动手、4 在真实数据上端到端上线、5 与企业环境集成、6 观测系统实际行为、7 学习与迭代、8 产品化（把碎石路铺成高速公路）。前四步让一个真实系统上线，后四步让它可靠、可观测、可复用。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/513"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="前线部署工程师如何工作：部署生命周期（2026）| FDEInterviews · imfde.ai"/>
+<meta name="twitter:description" content="FDE 不是一次性交付而是可重复的八阶段循环：1 发现（找到真实工作流）、2 收敛到最小有价值的切片、3 先用评估定义成功再动手、4 在真实数据上端到端上线、5 与企业环境集成、6 观测系统实际行为、7 学习与迭代、8 产品化（把碎石路铺成高速公路）。前四步让一个真实系统上线，后四步让它可靠、可观测、可复用。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "前线部署工程师如何工作：部署生命周期（2026）| FDEInterviews", "description": "FDE 不是一次性交付而是可重复的八阶段循环：1 发现（找到真实工作流）、2 收敛到最小有价值的切片、3 先用评估定义成功再动手、4 在真实数据上端到端上线、5 与企业环境集成、6 观测系统实际行为、7 学习与迭代、8 产品化（把碎石路铺成高速公路）。前四步让一个真实系统上线，后四步让它可靠、可观测、可复用。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/513", "about": {"@type": "Thing", "name": "Unknown / anonymous · 其他"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">前线部署工程师如何工作：部署生命周期（2026）| FDEInterviews</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Unknown / anonymous · 其他</p>
+  <h1>前线部署工程师如何工作：部署生命周期（2026）| FDEInterviews</h1>
+  <p class="room-subline">一般</p>
+  <section class="section room-orig" id="原文"><h2>原文</h2><p class="note">中文全文还在写入。下面两栏是已经拆过的字段。</p></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>FDE 不是一次性交付而是可重复的八阶段循环：1 发现（找到真实工作流）、2 收敛到最小有价值的切片、3 先用评估定义成功再动手、4 在真实数据上端到端上线、5 与企业环境集成、6 观测系统实际行为、7 学习与迭代、8 产品化（把碎石路铺成高速公路）。前四步让一个真实系统上线，后四步让它可靠、可观测、可复用。八个阶段里只有两个主要在写代码。通用软件工程师为抽象的「规模化用户」设计；FDE 为一个具体的、环境已知且混乱的客户设计，然后才泛化——这一差异重塑了一切：无法从规格书收集需求（客户往往说不清真问题），无法只靠单元测试验证（系统是概率性的），无法上线就走（价值只在被日常采用时才出现）。</dd>
+        
+        <dt>接了哪些系统</dt><dd>这是让部署沉没、也被通才工程师低估的阶段：接遗留系统；遵循身份与权限，让 AI 只看到该用户有权看到的内容；满足安全、隐私与合规要求；在不完全掌控的环境中构建可靠性。按清单推进：数据访问与质量、身份/角色/权限、安全与审计留痕、可观测性与可靠性。陷阱是能跑的原型永远上不了线，因为它过不了安全评审或无法尊重权限边界。</dd>
+        
+        <dt>人还管哪一步</dt><dd>在高风险环节保留人在回路（human in the loop）；尽早引入，并针对真实环境会产生的脏输入做设计。</dd>
+        <dt>多久上线</dt><dd>好的收敛以天和周计，而不是以季度计。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        
+        
+        
+        
+        
+        <dt>怎么验收</dt><dd>对确定性系统，「能不能用」是一套测试；对 AI 系统，质量在你把它变可测量之前是主观的。所以 FDE 先写评估：一组有代表性的真实输入、好输出的定义、以及自动打分的方式。评估即规格说明（Evaluations become the specification）。没有它，「再优化一下」只是又一个 prompt，你无法判断改动是变好了还是悄悄回退了。先建评估集再建系统，每个改动都以评估为闸门。</dd>
+        <dt>怎么上线</dt><dd>原型跑在样本数据上证明不了任何事。FDE 要在客户真实数据上、端到端接好、带人在回路地交付这条细切片，目标是从炫目的 demo 走到真正被用进日常工作流——价值在此产生，硬问题也在此暴露。陷阱是 demo 从未跨进生产，因为它从未对着真实数据、真实权限、真实延迟构建过。</dd>
+        <dt>失败了怎么改</dt><dd>各阶段的典型陷阱：建了被要求的东西而非真正重要的东西；范围宽到交付不了、或窄到是个没人用的 demo；凭感觉上线、调 prompt 直到 demo 好看然后在真实数据上准确率崩掉；原型永远过不了安全评审或权限边界；黑箱运行直到客户报告「它已经错了两周」；凭直觉而非证据迭代、或无限循环没有停止规则；把每个客户都当成一次性项目、从不铺路，团队卡在重复造同一件东西上。</dd>
+        <dt>能不能复用到下一家</dt><dd>最后一个阶段让 FDE 成为复利生意而非无尽的定制咨询：部署在一家客户跑通后，把定制部分变成可复用产品——共享连接器、加固的评估框架（hardened evaluation harness）、下一次铺开的模板。优秀的 FDE 工作不止于上线，它回流进产品，让下一个客户更快、更便宜地被服务。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">陷阱是凭感觉上线，调 prompt 直到 demo 好看，然后眼看着准确率在真实数据上崩掉。</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">FDEInterviews 编辑部（署名 Lukas Hoffmann，2026-08-08 更新）的八阶段部署生命周期框架，每个阶段给出「陷阱」与面试考察方式，工程细节具体（权限边界、幂等、评估闸门）；但为面向求职者的教学性内容，无真实客户项目与量化业务结果，故记为 methodology。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

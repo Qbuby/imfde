@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Lyft · imfde.ai</title>
+<meta name="description" content="2018 年公司优先的 PHP 单体 → 微服务拆分（10 年来最大一次重构）：核验每一个调用点/引用，重构无文档 API，删除死代码，且不让 2,000+ 个仓库里的消费者掉队。；核验了跨 2,000+ 个仓库的单体→微服务迁移与弃用；未使用的 API 属性从不同仓库的客户端中移除。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/463"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Lyft · imfde.ai"/>
+<meta property="og:description" content="2018 年公司优先的 PHP 单体 → 微服务拆分（10 年来最大一次重构）：核验每一个调用点/引用，重构无文档 API，删除死代码，且不让 2,000+ 个仓库里的消费者掉队。；核验了跨 2,000+ 个仓库的单体→微服务迁移与弃用；未使用的 API 属性从不同仓库的客户端中移除。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/463"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Lyft · imfde.ai"/>
+<meta name="twitter:description" content="2018 年公司优先的 PHP 单体 → 微服务拆分（10 年来最大一次重构）：核验每一个调用点/引用，重构无文档 API，删除死代码，且不让 2,000+ 个仓库里的消费者掉队。；核验了跨 2,000+ 个仓库的单体→微服务迁移与弃用；未使用的 API 属性从不同仓库的客户端中移除。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Lyft", "description": "2018 年公司优先的 PHP 单体 → 微服务拆分（10 年来最大一次重构）：核验每一个调用点/引用，重构无文档 API，删除死代码，且不让 2,000+ 个仓库里的消费者掉队。；核验了跨 2,000+ 个仓库的单体→微服务迁移与弃用；未使用的 API 属性从不同仓库的客户端中移除。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/463", "about": {"@type": "Thing", "name": "Sourcegraph · 其他"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Lyft</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Sourcegraph · 其他</p>
+  <h1>Lyft</h1>
+  <p class="room-subline">公司自己讲的数字 · 一般</p>
+  <section class="section room-orig" id="原文"><h2>Lyft 在从单体迁到微服务时保住生产稳定</h2><div class='orig-body'><p>Sourcegraph 让工程师能重构 API、清技术债，并在 2,000+ 个仓库里核对更新，保证生产稳定，同时加快开发者迭代、支撑持续创新。Lyft 的使命是用世界上最好的交通改善人们的生活。2018 年有超过 30 million 名乘客，Lyft 的生意在长，工程师、仓库和微服务的数量也在长。有效放大并管住一个大工程组织，需要一套精英级开发和实践，保住效率，同时保护和抬升代码质量。「拆解或迁一个服务风险很高，常常涉及几百个仓库的改动，所以准确度要很高。」</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>2018 年公司优先的 PHP 单体 → 微服务拆分（10 年来最大一次重构）：核验每一个调用点/引用，重构无文档 API，删除死代码，且不让 2,000+ 个仓库里的消费者掉队。</dd>
+        <dt>结果</dt><dd>核验了跨 2,000+ 个仓库的单体→微服务迁移与弃用；未使用的 API 属性从不同仓库的客户端中移除。页面：显著降低了对生产稳定的风险。无小时数或百分比数字。</dd>
+        <dt>接了哪些系统</dt><dd>代码搜索用于在部署新微服务前核验规模化迁移与弃用。</dd>
+        <dt>用了什么数据</dt><dd>PHP 单体加上 2,000+ 个仓库 / 微服务。</dd>
+        <dt>人还管哪一步</dt><dd>工程师仍自己做重构；搜索用于核验完整性。</dd>
+        <dt>多久上线</dt><dd>与 2018 年单体拆分绑定（10 年历史上最大一次）。未给出 Sourcegraph 自身的日历。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>找到一个 API 的所有客户端并移除未使用属性；在 2,000+ 个仓库中搜索/重构对已弃用服务、库和 URL 模式的引用。</dd>
+        <dt>以前怎么干</dt><dd>大范围拆分需要在没有正式契约的情况下，跨许多仓库检查无文档 API 的客户端。</dd>
+        <dt>卡在哪</dt><dd>数百个仓库中的高风险变更。未使用的属性活在不同仓库里。首次拆分后仍要持续弃用旧系统。</dd>
+        <dt>用了什么模型</dt><dd>Sourcegraph 代码搜索（未点名 Cody/LLM）。</dd>
+        
+        <dt>怎么验收</dt><dd>定性：生产稳定风险降低；更简单的 API 加快了开发者迭代。无百分比或小时 KPI。</dd>
+        <dt>怎么上线</dt><dd>贯穿 2018 年拆分及后续迁移使用。</dd>
+        <dt>失败了怎么改</dt><dd>没有正式契约的无文档 API 使得没有跨仓库搜索时很难发现客户端。</dd>
+        <dt>能不能复用到下一家</dt><dd>PHP 拆分成功后，同一搜索用于后续弃用。</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">Lyft 团队不断创新并构建新系统，因此必须拆分并迁离旧系统。Sourcegraph 让我们能在 2000+ 个仓库中搜索并重构对已弃用服务、库、URL 模式等的引用，并有信心没有把任何人落下。——Aneesh Agrawal，Software Engineer，Lyft</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Sourcegraph 官方案例（抓取 2026-08-29）。具名 Justin Phillips 和 Aneesh Agrawal。2,000+ 个仓库和 30 million 乘客（2018）在页上。结果为定性（稳定、更简单的 API）。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

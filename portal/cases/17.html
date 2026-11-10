@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cyera · imfde.ai</title>
+<meta name="description" content="非技术员工没有正式 AI 工具，只能自己找。「说不让用 AI 不是策略」，否则人会跑到公司网络外用影子 AI。；约 1,500 名员工里 88% 每周在用 Claude。连 40 个工具 + 7 个自建 MCP 服务器。Ask Claude 分诊从每天 5–6 小时→约 30 分钟。…"/>
+<link rel="canonical" href="https://imfde.ai/案例/17"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Cyera · imfde.ai"/>
+<meta property="og:description" content="非技术员工没有正式 AI 工具，只能自己找。「说不让用 AI 不是策略」，否则人会跑到公司网络外用影子 AI。；约 1,500 名员工里 88% 每周在用 Claude。连 40 个工具 + 7 个自建 MCP 服务器。Ask Claude 分诊从每天 5–6 小时→约 30 分钟。…"/>
+<meta property="og:url" content="https://imfde.ai/案例/17"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Cyera · imfde.ai"/>
+<meta name="twitter:description" content="非技术员工没有正式 AI 工具，只能自己找。「说不让用 AI 不是策略」，否则人会跑到公司网络外用影子 AI。；约 1,500 名员工里 88% 每周在用 Claude。连 40 个工具 + 7 个自建 MCP 服务器。Ask Claude 分诊从每天 5–6 小时→约 30 分钟。…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cyera", "description": "非技术员工没有正式 AI 工具，只能自己找。「说不让用 AI 不是策略」，否则人会跑到公司网络外用影子 AI。；约 1,500 名员工里 88% 每周在用 Claude。连 40 个工具 + 7 个自建 MCP 服务器。Ask Claude 分诊从每天 5–6 小时→约 30 分钟。…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/17", "about": {"@type": "Thing", "name": "Anthropic · 软件科技 · Claude"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">Cyera</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Anthropic · 软件科技 · Claude</p>
+  <h1>Cyera</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>Cyera — Claude Enterprise + Cowork 17 天全公司推广，88% 周活</h2><div class='orig-body'><p>大家都能看到 R&amp;D 用 agentic AI 带来的变化，但自己却拿不到。</p><p>Claude Code 已经在大部分 R&amp;D 团队铺开，工程师们开始教 go-to-market 的同事安装。少数人上手了，大多数人卡在命令行。</p><p>“我花了很多时间教非技术同事怎么进终端，”Cyera 应用 AI 首席技术专家 Joe Tustin 说，“他们能用命令行浏览文件目录，但一到运行命令、通过 API 连 Snowflake 就卡住了。”</p><p>Cyera 的客户已经证明了后果：没有公司 AI 工具，员工会自己找，结果安全团队完全看不见。</p><p>“直接说‘不许用 AI’不是办法，”Tustin 说，“你最后只会得到完全在公司网络之外的影子 AI。要担心影子 AI，就得给员工一个可控的沙箱。”</p><p>答案是 Cowork。</p><p>团队考虑过自己包一层 Claude Code，做成能推送到全员电脑的 App，也看了开源 agentic AI 项目。但这些方案都需要工程师在键盘前操作，界面只对懂 cron job 的人友好，对业务用户几乎没用。</p><p>Cowork 解决了这个问题。</p><p>“我们需要一个通用 agentic 工具，让大家自己处理工作流，”Cyera AI 副总裁 Steve Klementowski 说。</p><p>Tustin 说自己会尽量多测模型，重点看模型能不能在任务中保持上下文、遇到岔路时会不会被干扰带偏。“Claude 能保持上下文、遵循指令，一直是我日常的主力模型。”</p><p>他还强调了模型知识截止日期的重要性：“Claude Opus 5 的训练数据在主流模型里是最新的。模型如果已经知道最近的 API 变更或新库版本，就能省掉解释这一步，避免延误、浪费时间和 token。”</p><p>Cyera 把 Claude 接进了 Slack、Salesforce、Asana、Google Drive、Notion 等几十个系统。</p><p>“我们现在已经连了 40 个工具，还自建了四五个 MCP server，”Tustin 说，“这种集中入口很难复制。”</p><p>上线前团队做了数据映射，明确 Claude 能连哪些系统、哪些含生产数据、如何保持可观测性。他们用自家平台“Cyera on Cyera”梳理了 Snowflake 表权限，并在必要时重新收紧。</p><p>向 1,500 名员工全员开放，把分析能力放到了从未查过 Snowflake 的人面前。Cyera 之前调研过 240 万名员工，发现他们平均只用到被授权数据的 4%，而 agent 能用掉权限允许的所有数据。</p><p>数据工程团队为此建了一个语义层：按部门整理了 40 张带文档的表，并内置了公司特有的定义和惯例。</p><p>经过跨部门领导的简短试点后，Cyera AI 团队在 17 天内把 Cowork 推给了全公司。</p><p>一天的直播演示、每周两次的 office hour、20 场针对具体部门的专场，都加速了采用。数据团队和 RevOps 的紧密配合也确保了工具对各类员工都有实际价值。</p><p>“我们得跟每个要接入的系统和业务负责人反复沟通，搞清楚大家想用它做什么、需要什么数据、Claude 怎么访问，”Tustin 说，“这才是真正打开局面的关键。”</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>非技术员工没有正式 AI 工具，只能自己找。「说不让用 AI 不是策略」，否则人会跑到公司网络外用影子 AI。</dd>
+        <dt>结果</dt><dd>约 1,500 名员工里 88% 每周在用 Claude。连 40 个工具 + 7 个自建 MCP 服务器。Ask Claude 分诊从每天 5–6 小时→约 30 分钟。法律插件 20 个 playbook 预审 NDA。纽约活动注册过夜从 105 到 400+。个人每周省 12 小时。</dd>
+        <dt>接了哪些系统</dt><dd>Claude Enterprise + Cowork；连 40 工具 + 7 自建 MCP server；「Cyera on Cyera」用自身平台映射 Snowflake 表权限</dd>
+        <dt>用了什么数据</dt><dd>Slack、Salesforce、Asana、Google Drive、Notion、Snowflake 语义层（40 张按部门文档化表）、Cyera 知识库</dd>
+        <dt>人还管哪一步</dt><dd>agent 做重复首遍，人审核后才发出；回复草稿供律师/负责人审后发</dd>
+        <dt>多久上线</dt><dd>17 天全公司推广</dd>
+        <dt>怎么交给客户</dt><dd>全公司自服务；VP AI（Steve Klementowski）领导；Principal Technologist（Joe Tustin）做推广与模型测试</dd>
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>Claude Cowork：一个受治理的智能体连 40 个工具（Slack/Salesforce/Asana/GDrive/Notion 等）+ 7 个自建 MCP 服务器；Ask Claude 频道每 30 分钟读知识库起草回复；法律插件用 20 个 playbook 预审 NDA；每人有 Asana 智能体。</dd>
+        <dt>以前怎么干</dt><dd>研发用 Claude Code；其他人没工具，要工程师教用终端连 Snowflake。营销周会审工单超过 1 小时。法律手工审 NDA。数据只有会查 Snowflake 的人能用。</dd>
+        <dt>卡在哪</dt><dd>非技术员工卡在命令行。每件事都要工程师坐在键盘前。接口只服务懂 cron 的人。</dd>
+        <dt>用了什么模型</dt><dd>Claude Enterprise；Claude Cowork；Claude Opus 5（日常）；Claude Code（R&amp;D）</dd>
+        <dt>事情怎么流转</dt><dd>Ask Claude 定时任务每 30 分钟读新消息+知识库起草回复供负责人审；纽约活动前用 Cowork 查 Salesforce 建 3,500 人名单；BDR 用 top-performer 技能建定向名单；法律插件 20 playbook 审 NDA；Klementowski 的私信分诊读 Slack/日历/GDrive/Notion/录音/Snowflake 起草回复</dd>
+        <dt>怎么验收</dt><dd>测尽可能多模型，看线程保持与交叉路口判断；选 Opus 5（训练数据最新）；考虑自建 Claude Code wrapper 对比开源</dd>
+        <dt>怎么上线</dt><dd>简短试点后 17 天全公司推广；全天直播演示 + 每周两次 office hours + 20 场部门专场；与数据/RevOps 紧密合作</dd>
+        
+        <dt>能不能复用到下一家</dt><dd>Claude Cowork 治理 agent + 自建 MCP server；「Cyera on Cyera」权限映射</dd>
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">说 no AI 不是策略。结果就是人们自己用 AI，完全在公司网络之外。——Joe Tustin, Principal Technologist, Applied AI  |  Claude Opus 5 是所有主流模型中训练数据最新的。——Joe Tustin</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Anthropic 官方案例，强量化（88% WAU、17 天、40 工具）；客户侧 AI 团队自己推开，无 Anthropic FDE</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

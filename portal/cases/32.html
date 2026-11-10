@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LendingTree · imfde.ai</title>
+<meta name="description" content="IT 运营（Howard Zeemer）要让别人在 1,200+ 微服务和多云上更快——冲刺规划、云支出报告、调试、单元测试、文档。；前后对比表：单元测试从占开发者时间 30% 变成自动化，工具支出 ROI 1 个月内覆盖全年；冲刺规划经 Jira+Confluence 从 1–2 天 → 数分钟…"/>
+<link rel="canonical" href="https://imfde.ai/案例/32"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="LendingTree · imfde.ai"/>
+<meta property="og:description" content="IT 运营（Howard Zeemer）要让别人在 1,200+ 微服务和多云上更快——冲刺规划、云支出报告、调试、单元测试、文档。；前后对比表：单元测试从占开发者时间 30% 变成自动化，工具支出 ROI 1 个月内覆盖全年；冲刺规划经 Jira+Confluence 从 1–2 天 → 数分钟…"/>
+<meta property="og:url" content="https://imfde.ai/案例/32"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="LendingTree · imfde.ai"/>
+<meta name="twitter:description" content="IT 运营（Howard Zeemer）要让别人在 1,200+ 微服务和多云上更快——冲刺规划、云支出报告、调试、单元测试、文档。；前后对比表：单元测试从占开发者时间 30% 变成自动化，工具支出 ROI 1 个月内覆盖全年；冲刺规划经 Jira+Confluence 从 1–2 天 → 数分钟…"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "LendingTree", "description": "IT 运营（Howard Zeemer）要让别人在 1,200+ 微服务和多云上更快——冲刺规划、云支出报告、调试、单元测试、文档。；前后对比表：单元测试从占开发者时间 30% 变成自动化，工具支出 ROI 1 个月内覆盖全年；冲刺规划经 Jira+Confluence 从 1–2 天 → 数分钟…", "inLanguage": "zh-CN", "mainEntityOfPage": "https://imfde.ai/案例/32", "about": {"@type": "Thing", "name": "Augment Code · 金融保险"}, "author": {"@type": "Organization", "name": "imfde.ai", "url": "https://imfde.ai/"}}</script>
+</head>
+<body class="room-page">
+
+
+<div class="room room-doc" id="room">
+<header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">LendingTree</h1>
+    <p class="room-sub">往下读。先全文，再是拆过的字段。</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地?%E7%AA%97=30">负责人</a><a class="" href="/现场?%E7%AA%97=30">从业者</a><a class="on" href="/案例?%E7%AA%97=30" aria-current="page">案例</a><a class="" href="/方法">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header>
+<div class="room-stage">
+<div class="room-docmain">
+  <a class="room-back" href="/案例?%E7%AA%97=30">← 回案例</a>
+  <p class="room-kicker">Augment Code · 金融保险</p>
+  <h1>LendingTree</h1>
+  <p class="room-subline">公司自己讲的数字 · 比较可靠</p>
+  <section class="section room-orig" id="原文"><h2>LendingTree 使用 Augment Code 提升规划、报告和 DevOps 工作流中的速度</h2><div class='orig-body'><p>LendingTree 的 IT Operations 团队用 Augment Code 减少重复劳动、加快规划、简化复杂流程，从 sprint 规划到云支出分析全覆盖。</p><p>Howard Zeemer 是 IT Operations 总监，他说自己的工作就是“让别人跑得更快”。他的团队负责 LendingTree 的全部基础设施和 DevOps 文化，支撑所有产品和内部服务系统。</p><p>他们管理 1,200 多个微服务，跨多个云平台，遇到几个痛点：</p><p>Sprint 规划和故事生成：要把 Confluence 的简报手动转成 Jira 故事、估算故事点、拆子任务。</p><p>云支出报告：对账账单数据，常需手动导出、用 Excel 透视。</p><p>调试和上下文切换：要理解几十个仓库里分布式服务的交互。</p><p>单元测试覆盖：写和维护测试用例占到开发者 30% 的时间。</p><p>文档和报告：要生成一致、及时更新的文档，横跨工单和流水线。</p><p>之前试过别的 AI 工具，但都需要太多设置和喂上下文。Howard Zeemer 说：“很多工具得花大力气才出结果，投多少出多少。”</p><p>LendingTree 引入 Augment Code，把上下文感知的智能带进日常流程。Zeemer 的团队需要能跨多个工具、理解现有自动化流水线、适应 DevOps 环境的 AI。</p><p>“在用过的所有工具里，Augment 最接近需求，还能发现我没想到的东西。”</p><p>Augment 能无缝吸取多个仓库和 CI/CD 流水线的上下文。Zeemer 说：“我让 Augment ‘用我们的规则建流水线’，它直接接过去跑了，连多看一眼都没。”</p><p>把 Augment 连上 Jira 和 Confluence 后，团队用它来解析规划简报、生成并估算用户故事、创建子任务和 sprint 执行的评分标准。</p><p>“我的 PM 们兴奋坏了。以前要花一天，现在几分钟就完。”</p><p>Augment 还能自动对比 AWS 和 Azure 的支出，按服务给出百分比和金额变化。</p><p>“它告诉我哪个组织支出变化最大、跟什么有关。我还用 Augment 写了个 Azure MCP 来管支出。”</p><p>有一次团队花了好几个小时追一个 WebSocket 权限的 bug，Augment 几分钟就定位并修好了。</p><p>“一个工程师把 Augment 对着代码，它 15 分钟就把问题解决了。”</p><p>Augment 还生成了完整的单元测试，工具一年的费用在一个月内就回本了。</p><p>影响领域	使用前	使用后<br/>单元测试覆盖	占开发者 30% 时间	自动化，工具费用一个月回本<br/>Sprint 规划	每个 sprint 花 1-2 天	通过 Jira + Confluence 集成，几分钟完成<br/>云支出报告	手动 Excel 对账	自动生成摘要和图表<br/>调试	关键 bug 花 2 小时以上	用 Augment 15 分钟搞定<br/>文档	耗时手动	随任务自动生成</p><p>Augment 现在同时服务工程师、PM 和运维人员，把时间还给更有价值的工作。</p><p>“目标很简单：让 AI 干苦活，我们干有意思的事。”</p></div></section>
+  <div class="room-pair">
+    <section class="room-box" id="落地读法">
+      <h2>给负责人</h2>
+      <dl class="anatomy">
+        <dt>要解决什么</dt><dd>IT 运营（Howard Zeemer）要让别人在 1,200+ 微服务和多云上更快——冲刺规划、云支出报告、调试、单元测试、文档。</dd>
+        <dt>结果</dt><dd>前后对比表：单元测试从占开发者时间 30% 变成自动化，工具支出 ROI 1 个月内覆盖全年；冲刺规划经 Jira+Confluence 从 1–2 天 → 数分钟；云支出从手工 Excel 变成自动摘要/图表；关键缺陷调试 2+ 小时 → 15 分钟（WebSocket 权限示例）；文档内联生成。1,200 微服务 / 多云是环境规模，不是 Augment 产出。</dd>
+        <dt>接了哪些系统</dt><dd>JetBrains、VS Code；Jira + Confluence；用于支出的 Azure MCP（用 Augment 编写）。</dd>
+        <dt>用了什么数据</dt><dd>多个仓库、CI/CD、Jira、Confluence、AWS 和 Azure 账单。</dd>
+        <dt>人还管哪一步</dt><dd>Director of IT Operations 加上 PM/工程师/运营人员。</dd>
+        <dt>多久上线</dt><dd>Sprint 规划：每个 sprint 1–2 天 → 数分钟。调试示例：2+ 小时 → 15 分钟。单元测试工具支出：1 个月收回全年 ROI。</dd>
+        
+        
+      </dl>
+    </section>
+    <section class="room-box" id="现场读法">
+      <h2>给现场的人</h2>
+      <dl class="anatomy">
+        <dt>主要用在哪</dt><dd>解析简报 → 故事/估算/子任务。AWS vs Azure 支出对比。WebSocket 权限缺陷：数小时 → 15 分钟。生成单元测试。</dd>
+        <dt>以前怎么干</dt><dd>手工 Confluence→Jira 故事/点数/子任务；电子表格透视云账单；测试吃掉最多 30% 的开发者时间；早期 AI 工具要太多设置/喂上下文。</dd>
+        <dt>卡在哪</dt><dd>规划、支出、调试、测试、文档上的苦活。跨几十个仓库的分布式服务交互。</dd>
+        <dt>用了什么模型</dt><dd>Augment Code（页面：Context Engine / agents / completions；除非另有注明，无单一模型名）。</dd>
+        <dt>事情怎么流转</dt><dd>规划自动化；支出摘要/图表；指向代码的调试；带任务的内联文档。</dd>
+        <dt>怎么验收</dt><dd>页面上的前后对比表。</dd>
+        <dt>怎么上线</dt><dd>页头团队规模 32（IT Operations 故事）。支持工程师、PM 和运营人员。组织工程运行 1,000+ / 1,200 微服务。</dd>
+        <dt>失败了怎么改</dt><dd>早期 AI 工具需要太多设置和上下文喂入。</dd>
+        
+      </dl>
+    </section>
+  </div>
+  <blockquote class="quote">我的 PM 兴奋得不行。以前要花一天的事现在只需数分钟。——Howard Zeemer, Director of IT Operations, LendingTree</blockquote>
+  <section class="section">
+    <h2>备注</h2>
+    <p class="note">Augment 官方案例。具名 Howard Zeemer。第一方前后对比表（30% 测试时间；1–2 天→数分钟；2+ 小时→15 分钟；1 个月工具 ROI）。团队规模 32 是 IT Ops 页头，不是整个 LendingTree 工程。</p>
+    
+  </section>
+  
+</div>
+</div>
+</div>
+
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

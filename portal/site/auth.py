@@ -299,13 +299,13 @@ def login_page_html(next_path: str, providers: dict, base: str) -> str:
     btns = []
     if providers.get("github"):
         btns.append(
-            f'<a class="auth-btn auth-gh" href="{base}/登录/github?next={next_q}">GitHub 登录</a>')
+            f'<a class="auth-btn auth-gh" href="{base}/login/github?next={next_q}">GitHub 登录</a>')
     if providers.get("google"):
         btns.append(
-            f'<a class="auth-btn auth-google" href="{base}/登录/google?next={next_q}">Google 登录</a>')
+            f'<a class="auth-btn auth-google" href="{base}/login/google?next={next_q}">Google 登录</a>')
     if providers.get("wechat"):
         btns.append(
-            f'<a class="auth-btn auth-wechat" href="{base}/登录/wechat?next={next_q}">微信登录</a>')
+            f'<a class="auth-btn auth-wechat" href="{base}/login/wechat?next={next_q}">微信登录</a>')
     if not btns:
         btns.append('<p class="auth-empty">登录渠道未配置（需在部署环境设置 OAuth 凭据环境变量）。</p>')
     return f"""<!DOCTYPE html>

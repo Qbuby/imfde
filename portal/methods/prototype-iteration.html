@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>原型与迭代 · 方法 · imfde.ai</title>
+<meta name="description" content="原型与迭代：1-800-Flowers 用旺季真实交互做 A/B，不是拿演示数据过关。这一步跟一线拿正在发生的单，写下改了流程哪一步。不要先做完演示再找用户。"/>
+<link rel="canonical" href="https://imfde.ai/方法/prototype-iteration"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="原型与迭代 · 方法 · imfde.ai"/>
+<meta property="og:description" content="原型与迭代：1-800-Flowers 用旺季真实交互做 A/B，不是拿演示数据过关。这一步跟一线拿正在发生的单，写下改了流程哪一步。不要先做完演示再找用户。"/>
+<meta property="og:url" content="https://imfde.ai/方法/prototype-iteration"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="原型与迭代 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="原型与迭代：1-800-Flowers 用旺季真实交互做 A/B，不是拿演示数据过关。这一步跟一线拿正在发生的单，写下改了流程哪一步。不要先做完演示再找用户。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">原型与迭代</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip on" href="/方法/prototype-iteration" aria-current="page">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>原型与迭代</h1>
+  <p class="learn-goal"><b>学习目标</b>：1-800-Flowers 用旺季真实交互做 A/B，不是拿演示数据过关。这一步跟一线拿正在发生的单，写下改了流程哪一步。不要先做完演示再找用户。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>用真实工单开短循环</h3><p>1-800-Flowers 页上是 Harry &amp; David 旺季正在发生的单，不是演示数据。跟一线拿这些交互，当场改、当场看。不要先做完演示再找用户。</p></li><li><h3>切最小端到端切片</h3><p>旧自动化 CSAT 低，刚性 IVR 常把措辞不符的人误路由。第一刀只验证最高风险那条：真实路径能不能拦住、慰问和生日的语气对不对。堆功能、追视觉、替换全部旧系统，都不是这一刀。</p></li><li><h3>每次指出改了流程哪一步</h3><p>写下改前的 IVR 树、改后谁用 AOP 定语气、谁看 Watchtower。一次测试里不要同时换模型、提示词和界面；控变量、留版本。</p></li><li><h3>演示数据之后接真实路径</h3><p>客户喜欢人工准备的演示，不算过关。页上 45 天 A/B 接的是旺季真实交互，并记下失败。慰问和生日语气不对时，补证据、置信边界和可逆预览，不要强制自动发送。</p></li><li><h3>交一页迭代记录</h3><p>工单、假设、切片、改了哪一步、一线反馈、下一刀。页上 45 天旺季真实 A/B、拦截 + CSAT 是评测口径；不要另编百分比。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/72">1-800-Flowers.com / Decagon</a></h3>
+  <p class="note">1-800-Flowers 页上是 Harry &amp; David 旺季的真实交互，拿来做 45 天 A/B，不是演示数据过关。CSAT 近 93% 只许带口径抄。页上写持续驻场，未用前线部署头衔。</p>
+  <dl class="anatomy"><dt>经营问题</dt><dd>个性化预期超过现有基础设施，礼品礼宾体验要铺得开。要懂客户为什么买，不只是买了什么。</dd><dt>旧流程</dt><dd>自建自动化 CSAT 低、拦截滞后。刚性 IVR 树常把措辞不符的客户误路由。</dd><dt>失败与迭代</dt><dd>旧自建自动化 CSAT 低/拦截滞后 → 评估后选 Decagon</dd><dt>人在环内</dt><dd>Decagon 团队与客户关怀/品牌/市场干系人共同定义语气与行为；持续驻场参与 AOP/质量评审</dd></dl>
+  <p class="hint"><a href="/案例/72">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="2" data-yes="对。第一个原型用最小端到端切片验证最高风险假设，不是堆功能或做视觉成品。" data-no="不对。功能越多、画面越完整，都不等于假设被验证。"><p class="k">练习 1 · 进阶</p><p class="mcq-stem">第一个原型的主要目标是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>展示尽可能多的功能，用功能清单代替验证假设。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>达到最终视觉质量，把第一刀做成演示成品。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>用最小端到端切片验证最高风险假设。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>替代所有旧系统，第一个原型就铺全流程。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。演示数据是人工准备时，下一步接一条真实数据路径，并记下人工步骤和失败。" data-no="不对。客户喜欢演示不等于试点成功，不要先拍片子或加动画。"><p class="k">练习 2 · 进阶</p><p class="mcq-stem">客户喜欢演示，但演示使用了人工准备的数据。下一步是什么？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>直接宣布试点成功，客户喜欢演示就算过关。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>先制作宣传视频，把演示数据当成已上线。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>增加动画，用观感代替接真实数据。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>接入一条真实数据路径并记录人工步骤与失败。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。一线不敢点发送，就查明不信任来源，补证据、置信边界和可逆预览。" data-no="不对。加长输出、藏模型身份或强制自动发送，都改错了流程里的那一步。"><p class="k">练习 3 · 进阶</p><p class="mcq-stem">用户反馈“结果不错，但我不敢点发送”。该怎么迭代？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>查明不信任来源，展示证据、置信边界和可逆预览。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>提高生成长度，用更长回复换用户去点发送。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>隐藏模型身份，让用户以为是人写的再发送。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>强制自动发送，跳过用户不敢点的那一步。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。一次测里同时换模型、提示词和界面，就无法判断哪步导致结果；要控变量、留版本。" data-no="不对。快不等于能归因。每次迭代都要能指出改了流程哪一步。"><p class="k">练习 4 · 进阶</p><p class="mcq-stem">每次用户测试同时更换模型、提示词和界面。有什么问题？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>同时改三处能更快出结果，失败了再回头拆。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>无法判断哪个变化导致结果，应该控制变量并保留版本。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>模型会记住测试，所以不能控变量。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>界面不应纳入测试，只换模型就能判断哪步有效。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页迭代记录</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+本轮用的真实工单（不是演示数据）：
+当前流程（改之前的步骤 / 系统）：
+最高风险假设：
+最小端到端切片（这一刀验证什么）：
+改了流程的哪一步：
+控变量（这次只改了什么；版本号）：
+一线反馈（谁说的、卡在哪、敢不敢发送）：
+下一刀（真实数据路径 / 证据 / 置信边界 / 可逆预览）：
+页上数字（只抄、带口径；没有就空着）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>用了真实工单；每次迭代能指出改了流程哪一步；切片对着最高风险假设；人工数据之后有真实数据路径。</p></li><li><h3>不及格</h3><p>先做完演示再找用户；一次改模型 + 提示词 + 界面；把客户喜欢演示当成试点成功；或强制自动发送。</p></li><li><h3>不要编的数</h3><p>不要另编拦截率、CSAT、上线后百分比或 FDE 头衔。页上 CSAT 近 93%、45 天 A/B 只能带口径抄。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/data-integration">上一步 · 数据与集成</a> · <a href="/方法/production-engineering">下一步 · 生产工程</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

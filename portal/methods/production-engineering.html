@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>生产工程 · 方法 · imfde.ai</title>
+<meta name="description" content="生产工程：Atlassian 交给客户之后，要能值班、能回滚、能看日志。对着页上已有的网关、路由、热替换写交接。没有的 SLA 不要编。"/>
+<link rel="canonical" href="https://imfde.ai/方法/production-engineering"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="生产工程 · 方法 · imfde.ai"/>
+<meta property="og:description" content="生产工程：Atlassian 交给客户之后，要能值班、能回滚、能看日志。对着页上已有的网关、路由、热替换写交接。没有的 SLA 不要编。"/>
+<meta property="og:url" content="https://imfde.ai/方法/production-engineering"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="生产工程 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="生产工程：Atlassian 交给客户之后，要能值班、能回滚、能看日志。对着页上已有的网关、路由、热替换写交接。没有的 SLA 不要编。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">生产工程</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip on" href="/方法/production-engineering" aria-current="page">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>生产工程</h1>
+  <p class="learn-goal"><b>学习目标</b>：Atlassian 交给客户之后，要能值班、能回滚、能看日志。对着页上已有的网关、路由、热替换写交接。没有的 SLA 不要编。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>先问能不能值班</h3><p>Atlassian 交给客户自服务之后，要能值班、能回滚、能看日志，才叫生产。页上已有网关、路由、热替换——这些比 demo 更能决定是否留下。</p></li><li><h3>写超时、降级、接管、幂等</h3><p>有的把 Jira 工单直接交给 agent，关键路径不能断：超时预算、降级路径、人工接管、幂等重试。写操作失败后状态不明，要查外部事实、用事务或补偿，歧义升级。</p></li><li><h3>监控任务是否做成</h3><p>聊天助手还把活留给人，做成不能只看 API 可用率。质量、任务成功、延迟、成本、高风险失败都要看。</p></li><li><h3>页上已有的平台能力写进步骤</h3><p>有网关、路由、热替换就写进交接，不要发明 SLA。厂商退役模型时换新版——平均质量更高但尾部延迟翻倍时，按任务评估延迟预算，影子或灰度比较，并保留回滚。</p></li><li><h3>交一页生产交接</h3><p>值班人、日志入口、回滚、降级、监控项、谁接管。页上「单月 500 万+ agent」只当规模陈述；「成本降、质量升、延迟优」不当验收公式。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/16">Atlassian / Anthropic</a></h3>
+  <p class="note">Atlassian 交给客户之后，页上已有网关、路由、热替换——对着这些写值班、回滚、日志。「单月 500 万+ agent」是规模陈述，「成本降、质量升、延迟优」是厂商定性，不要当验收公式，也不要发明 SLA。</p>
+  <dl class="anatomy"><dt>部署</dt><dd>AI 模型网关基于 Gemini Enterprise Agent Platform；高容量自定义 agent 迁到 Gemini Flash；厂商退役模型时无缝换新版</dd><dt>评测</dt><dd>团队自建评估，按质量/成本基准测模型；Claude 在复杂指令一致性与大上下文上更优</dd><dt>人在环内</dt><dd>Rovo Max 仅在需 Instagram 账号时由人提供；管理员控制包与网络访问</dd><dt>交接</dt><dd>Atlassian 客户自服务；AI 负责人（Sherif Mansour）主导信任标准与路由策略</dd></dl>
+  <p class="hint"><a href="/案例/16">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="3" data-yes="对。关键业务不能断，先写超时预算、降级、人工接管和幂等重试。" data-no="不对。无限重试、只加实例或把错误藏起来，都不能值班。"><p class="k">练习 1 · 进阶</p><p class="mcq-stem">AI 服务偶发超时，关键业务不能中断。首要设计是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>无限重试，超时后继续打直到业务恢复。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>只增加实例，不写降级和人工接管。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>隐藏错误，关键路径上看不到失败。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>定义超时预算、降级路径、人工接管和幂等重试。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。生产要看质量、任务成功、延迟、成本和高风险失败，不只 API 可用率。" data-no="不对。搜索量、提交次数、在线人数都不能代替任务是否做成。"><p class="k">练习 2 · 进阶</p><p class="mcq-stem">上线后只监控 API 可用率还缺什么？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>补品牌搜索量，用曝光代替任务是否做成。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>补提交次数，有人点过就算生产健康。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>模型质量、任务成功、延迟、成本和高风险失败指标。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>补团队在线人数，有人值班就当任务成功。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。平均质量更高但尾部延迟翻倍时，按任务评估延迟预算，影子或灰度比较，并保留回滚。" data-no="不对。立刻全量替换或只看质量，都不是生产发布。"><p class="k">练习 3 · 进阶</p><p class="mcq-stem">新模型平均质量更高，但尾部延迟翻倍。如何发布？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>立刻全量替换，平均质量更高就切过去。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>按任务评估延迟预算，影子或灰度比较，并保留回滚。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>只看质量，尾部延迟翻倍也发布。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>停止评测，新模型已经更好就不必再比。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。写操作失败后状态不明，要查外部事实、用事务或补偿，歧义升级给人工。" data-no="不对。盲目重放、让模型猜、删审计，都看不了日志也回不去。"><p class="k">练习 4 · 进阶</p><p class="mcq-stem">Agent 写操作失败后状态不明确。应该如何恢复？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>查询外部事实，使用事务/补偿逻辑，并将歧义升级。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>盲目重放写操作，状态不明也再发一次。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>让模型猜测当前状态，不查外部事实。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>删除审计记录，失败痕迹清掉再继续。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页生产交接</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 系统：
+谁值班、怎么看日志：
+怎么回滚：
+超时预算（哪条路径、超时后怎样）：
+降级路径：
+人工接管点：
+幂等怎么保证（写失败后如何查外部事实 / 补偿 / 升级）：
+监控（质量 / 任务成功 / 延迟 / 成本 / 高风险失败）：
+页上已有的网关 / 路由 / 热替换（没有就空着）：
+页上规模陈述（只抄、不当验收公式）：
+明确不发明的 SLA：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>写得出值班、回滚、日志；有超时 / 降级 / 接管 / 幂等；监控覆盖质量、任务成功、延迟、成本、高风险失败；页上已有网关 / 路由 / 热替换写进了步骤。</p></li><li><h3>不及格</h3><p>只有 demo；只监控 API 可用率；立刻全量换模型；或盲目重放写操作。</p></li><li><h3>不要编的数</h3><p>不要发明 SLA、可用率或上线后百分比。页上 500 万+ agent 是规模陈述；「成本降、质量升、延迟优」不当验收公式。不要补 FDE 头衔。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <div class="list"><a class="row" href="/案例/516">前线部署工程师到底做什么？<span class="s">怎么做 · fdeinterviews.com</span></a></div>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/prototype-iteration">上一步 · 原型与迭代</a> · <a href="/方法/field-productization">下一步 · 反馈与产品化</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

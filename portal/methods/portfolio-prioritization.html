@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>组合与优先级 · 方法 · imfde.ai</title>
+<meta name="description" content="组合与优先级：壳牌页上一百多个应用，开发和部署阶段都不一样。同时有几条线时，按能验证什么、交接贵不贵排序，不要按演示好看排。"/>
+<link rel="canonical" href="https://imfde.ai/方法/portfolio-prioritization"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="组合与优先级 · 方法 · imfde.ai"/>
+<meta property="og:description" content="组合与优先级：壳牌页上一百多个应用，开发和部署阶段都不一样。同时有几条线时，按能验证什么、交接贵不贵排序，不要按演示好看排。"/>
+<meta property="og:url" content="https://imfde.ai/方法/portfolio-prioritization"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="组合与优先级 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="组合与优先级：壳牌页上一百多个应用，开发和部署阶段都不一样。同时有几条线时，按能验证什么、交接贵不贵排序，不要按演示好看排。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">组合与优先级</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>组合与优先级</h1>
+  <p class="learn-goal"><b>学习目标</b>：壳牌页上一百多个应用，开发和部署阶段都不一样。同时有几条线时，按能验证什么、交接贵不贵排序，不要按演示好看排。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>按可验证成果和交接成本排序</h3><p>壳牌页上超过 100 个 AI 应用处于开发和部署的不同阶段。同时有几条线时，不要按演示好看排。先问：哪条能验证、交接给谁、扩出去贵不贵。阶段不同，不能用同一把尺子，也不要另编一套通用 KPI。</p></li><li><h3>共享依赖先当共同路径</h3><p>多个试点共用数据平台或模型管理时，先验证容量和所有权再排期。各自承诺日期、让最快团队先上、或重复建设，会把共享路径拆散。页上：2018 年选定 C3.ai 作为战略平台，是为了管理数万个能源导向 ML 模型，并叠上壳牌 IP。</p></li><li><h3>证据弱的用小额探索</h3><p>价值高但证据弱的，小额探索；价值中等但可快速验证的，继续推进。不要把完整团队平均撒下去，也不要把人都押在还没有证据的高价值项上。页上时间线只能带口径抄，不要编「第一个上线应用花了几周」。</p></li><li><h3>达标但人少，先比扩容成本</h3><p>试点持续达标不等于该扩。比较可服务价值、扩容成本和机会成本后再决定。不要只看满意度，也不要因为人少就立刻停。页上写了：实时生产优化额外 1–2% LNG 产量；满负荷设施约 355 tonnes CO2/天减排。引用必须写「页上写了」，禁止当通用 KPI 模板。</p></li><li><h3>交一页组合排序</h3><p>三条线、验证口径、共享依赖、交接成本、扩不扩的理由，写在一页上。定义共享能力和例外门槛，用成本与交付证据推动采用，避免每个部门另起 Agent 平台。100+ 应用、10,000 台设备、五年续约只抄页上口径。OAI 是把已验证方案向外提供。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/34">壳牌 / C3 AI</a></h3>
+  <p class="note">壳牌页上一百多个应用，开发和部署阶段都不一样。1–2% LNG / 355 吨二氧化碳引用必须写「页上写了」，不要编新 KPI。2018 选平台、2021 五年续约、2022 预测性维护扩到 10,000 台设备是时间线。页上无头衔。</p>
+  <dl class="anatomy"><dt>经营问题</dt><dd>在数百万壳牌资产、供应链和市场里把企业 AI 铺开，用于工业可靠性、资产优化和完整性管理，同时也把 AI 用在能源转型上。</dd><dt>部署</dt><dd>2018 年选定 C3.ai 作为战略平台以规模化企业 AI。应用覆盖数百万壳牌资产、供应链和全球市场。2022：AI 预测性维护扩展到 10,000 台设备。OAI 于 2021 年与 Baker Hughes 和 Microsoft 推出；壳牌通过 OAI 提供三款 AI 驱动应用。</dd><dt>产品化</dt><dd>通过 OAI 提供三款 AI 驱动应用（2021 时间线）。OAI 用合作伙伴主导、领域特定的可靠性方案增强 C3 应用，其中包括壳牌已在自有运营中规模验证的部分。页上有「探索壳牌提供的已验证 OAI 方案」。</dd><dt>测得结果</dt><dd>实时生产优化：额外 1–2% 的 LNG 产量；满负荷 LNG 设施约每天减 355 吨 CO2（约每年 13 万吨；页上等同于 28,000 辆美国平均汽车）。预测性维护 2022 年扩到 1 万台设备。超过 100 个 AI 应用处于不同阶段；数据湖有数万亿行；监测数千件工业设备。战略协议续约五年（2021 年 6 月）。</dd></dl>
+  <p class="hint"><a href="/案例/34">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="0" data-yes="对。多个试点共用数据平台时，把平台当共同路径，先验证容量和所有权再排序。" data-no="不对。各自承诺日期、让最快团队先上、或重复建设，会把共享路径拆散。"><p class="k">练习 1 · 高阶</p><p class="mcq-stem">多个试点共享同一数据平台依赖。组合层应如何排期？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>把平台依赖作为共同路径，先验证容量和所有权再排序。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>各试点各自承诺日期，共享平台何时就绪各说各的。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>让最快的团队先上，平台容量后补。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>每个试点重复建设一份数据平台，避免互相等待。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。价值高但证据弱的用小额探索，同时推进可快速验证的项产生确定回报。" data-no="不对。全部押高价值、只做后者、或平均投入完整团队，人手会对不齐。"><p class="k">练习 2 · 高阶</p><p class="mcq-stem">一个项目价值高但证据弱，另一个价值中等但可快速验证。如何配置？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>全部投入证据弱的高价值项目，中等可验证的先停。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>用小额探索验证前者，同时推进后者产生确定回报。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>只做可快速验证的那条，高价值弱证据的完全不探。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>两条都平均投入完整团队，不按证据强弱配人。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。定义共享能力和例外门槛，用成本与交付证据推动采用，避免每个部门另起平台。" data-no="不对。禁止部门实验、指定一个模型、或强行统一所有业务流程，都替不了证据。"><p class="k">练习 3 · 高阶</p><p class="mcq-stem">如何避免每个部门都建立不同 Agent 平台？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>禁止部门实验，用禁令代替共享能力。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>指定一个模型给全公司，用选型代替平台能力。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>定义共享能力和例外门槛，并用成本与交付证据推动采用。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>统一所有业务流程，部门差异一律抹平。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。试点达标但只服务极小人群时，比较可服务价值、扩容成本和机会成本后再决定。" data-no="不对。达标就扩、只看满意度、或因人少立刻停止，都不是组合层决策。"><p class="k">练习 4 · 高阶</p><p class="mcq-stem">某试点持续达标但只服务极小人群。是否扩容？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>只要试点达标就扩，不看服务了多少人。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>只看满意度，人少但分数高就扩。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>因为服务人群小就立即停止，不比较扩容成本。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>比较可服务价值、扩容成本和机会成本后再决定。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页组合排序</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+同时在跑的几条线（阶段不同要分开写）：
+排序依据（可验证成果 / 交接成本，不是演示好看）：
+共享依赖（平台 / 数据 / 所有权，先验证再排期）：
+证据弱的探索（小额，验证什么）：
+可快速验证的项（确定回报）：
+共享能力与例外门槛：
+扩容比较（可服务价值 / 扩容成本 / 机会成本）：
+页上结果（只抄并写「页上写了」）：
+明确不做 / 不编的 KPI：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>按可验证成果和交接成本排序；共享依赖写成共同路径；证据弱的用小额探索；扩容比较了价值和成本。</p></li><li><h3>不及格</h3><p>按演示好看排序；各自承诺日期或重复建设；全部押在无证据的高价值项上；达标就扩或另编 KPI。</p></li><li><h3>不要编的数</h3><p>1–2% LNG、355 吨二氧化碳、10,000 台设备、100+ 应用只能带「页上写了」抄写，禁止当通用 KPI 模板。不要补 FDE 头衔或上线后百分比。页面没有第一个上线应用的日历时长，不要编。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/strategic-framing">上一步 · 战略问题定义</a> · <a href="/方法/enterprise-architecture">下一步 · 企业架构与平台</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>客户发现 · 方法 · imfde.ai</title>
+<meta name="description" content="客户发现：把客户来的那一刻写清楚：谁在打电话、门禁锁没锁、什么算帮到忙。不要先谈模型。"/>
+<link rel="canonical" href="https://imfde.ai/方法/discovery"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="客户发现 · 方法 · imfde.ai"/>
+<meta property="og:description" content="客户发现：把客户来的那一刻写清楚：谁在打电话、门禁锁没锁、什么算帮到忙。不要先谈模型。"/>
+<meta property="og:url" content="https://imfde.ai/方法/discovery"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="客户发现 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="客户发现：把客户来的那一刻写清楚：谁在打电话、门禁锁没锁、什么算帮到忙。不要先谈模型。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">客户发现</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip on" href="/方法/discovery" aria-current="page">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>客户发现</h1>
+  <p class="learn-goal"><b>学习目标</b>：把客户来的那一刻写清楚：谁在打电话、门禁锁没锁、什么算帮到忙。不要先谈模型。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>跟一线走现有流程</h3><p>谁在做每一步、用哪套系统、卡在哪。先问现场怎么干活，不要先问「你们想要什么 AI」。</p></li><li><h3>写下可检查的成果</h3><p>什么叫做成：时长、返工、错误，还是一线负担。说不清当前成本就先量，不要承诺一个节省比例。</p></li><li><h3>把冲突写进成功标准</h3><p>高管要降本、一线怕质量掉——两边都写进去。只听一边，上线会翻。</p></li><li><h3>检查样本是不是只有顺利案例</h3><p>只给最顺的历史单，评测会偏。要补常见失败、边界情况和不同用户群。</p></li><li><h3>交一页发现简报</h3><p>角色、旧流程、卡点、成果定义、数据/权限、明确不做。这一页过了，才进入方案范围。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/315">StoreEase / Sierra</a></h3>
+  <p class="note">StoreEase 页上写的是搬家、离婚、身故那种时刻。没有驻场头衔，也没有编上线可用度。简报只写页上有的场面，不要补数字。</p>
+  <dl class="anatomy"><dt>经营问题</dt><dd>在搬家、离婚、身故等生活事件带来紧急需求时，通过电话、网页和大堂 24/7 服务自助仓储客户——并且能行动（付款、开闸），而不只是说话。</dd><dt>旧流程</dt><dd>服务受现场人手上限：大堂上锁、语音信箱、营业时间错过危机；经理在各站点奔波以对齐员工。</dd><dt>卡点</dt><dd>非工作时间租赁来电死在语音信箱；逾期锁/门禁和付款需要经认证的操作。</dd><dt>发现方法</dt><dd>在 Sierra + EaseOS 动作上构建 Amber；约 30 条旅程；测试出现幻觉后约束工作流。</dd></dl>
+  <p class="hint"><a href="/案例/315">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="0" data-yes="对。先还原工单流程和可衡量成果，模型往后排。" data-no="不对。发现阶段不是挑模型或做演示。"><p class="k">练习 1 · 入门</p><p class="mcq-stem">客户希望用 AI 缩短工单处理时间。现场的人 / 你最应该先做什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>跟随一线人员还原当前工单流程，找出瓶颈、约束和可衡量成果。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>马上挑一个最强模型做聊天机器人，发现阶段先把选型定下来。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>先做一个视觉效果完整的演示，用画面说服客户再回头看流程。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>让客户提供一份功能清单后直接估期，发现阶段不跟一线走现有流程。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。说不清当前成本就先量现场，不要先承诺比例。" data-no="不对。没有基线就承诺节省，验收会空。"><p class="k">练习 2 · 入门</p><p class="mcq-stem">业务负责人要求“把审核流程自动化”，但说不清当前成本。最佳下一步是什么？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>先承诺一个节省比例，当前成本说不清也写进方案。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>观察实际审核，建立时长、返工和错误基线。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>根据行业平均值估算审核成本，不观察本现场的时长和返工。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>直接生成完整 PRD，把「说不清当前成本」留给后面的人。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。降本和质量、一线负担都要写进成功标准。" data-no="不对。只听高管或拖到上线再谈冲突，现场会翻。"><p class="k">练习 3 · 入门</p><p class="mcq-stem">高管关注降本，一线用户担心 AI 降低质量。发现阶段应该如何处理？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>只采用高管的降本指标，一线的质量担心先不写进成功标准。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>避免讨论冲突直到上线，发现阶段只记一边的口径。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>把成本、质量和用户负担共同写入成功标准。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>先扩大模型上下文，指望质量担心会随模型变大消失。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。只有顺利样本，评测会偏；要补失败和边界。" data-no="不对。干净样本不等于能上生产。"><p class="k">练习 4 · 入门</p><p class="mcq-stem">客户只提供了最顺利的历史案例作为训练和评测样本。现场的人 / 你应该指出什么？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>样本越干净越适合生产，顺利案例可以直接当评测集。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>让模型自己生成全部边界案例，不再向现场要失败样本。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>只要样本数量多就足够，不区分顺利单和失败单。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>需要补充常见失败、边界案例和不同用户群的代表性样本。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页发现简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+一线角色（谁在做）：
+现有流程（步骤 / 系统）：
+卡点（可观察，不是口号）：
+现在怎么衡量（时长 / 返工 / 错误 / 负担）：
+做成的定义（可检查）：
+数据在哪、谁能碰：
+这一刀明确不做：
+冲突（谁要什么、谁怕什么）：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>五项都有可观察的内容，不是口号。成果能检查，数据说得清谁能碰。</p></li><li><h3>不及格</h3><p>只有模型选型、只有演示、用行业平均值代替现场基线，或成果不可检查。</p></li><li><h3>不要编的数</h3><p>原文没写的 KPI、头衔、上线后百分比，简报里不要补。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <div class="list"><a class="row" href="/案例/513">前线部署工程师如何工作：部署生命周期（2026）| FDEInterviews<span class="s">怎么做 · fdeinterviews.com</span></a><a class="row" href="/案例/514">前线部署工程师的一天 | FDEInterviews<span class="s">怎么做 · fdeinterviews.com</span></a></div>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/scoping">下一步 · 方案范围</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

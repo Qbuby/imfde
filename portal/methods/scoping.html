@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>方案范围 · 方法 · imfde.ai</title>
+<meta name="description" content="方案范围：先锋领航 700 人一次切不开，页上是先放狂热者小组去证明。对着这页把第一刀写死：切哪条、数据谁能碰、试点怎么验收。范围没切开，不是模型不够强。"/>
+<link rel="canonical" href="https://imfde.ai/方法/scoping"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="方案范围 · 方法 · imfde.ai"/>
+<meta property="og:description" content="方案范围：先锋领航 700 人一次切不开，页上是先放狂热者小组去证明。对着这页把第一刀写死：切哪条、数据谁能碰、试点怎么验收。范围没切开，不是模型不够强。"/>
+<meta property="og:url" content="https://imfde.ai/方法/scoping"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="方案范围 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="方案范围：先锋领航 700 人一次切不开，页上是先放狂热者小组去证明。对着这页把第一刀写死：切哪条、数据谁能碰、试点怎么验收。范围没切开，不是模型不够强。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">方案范围</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip on" href="/方法/scoping" aria-current="page">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>方案范围</h1>
+  <p class="learn-goal"><b>学习目标</b>：先锋领航 700 人一次切不开，页上是先放狂热者小组去证明。对着这页把第一刀写死：切哪条、数据谁能碰、试点怎么验收。范围没切开，不是模型不够强。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>切开第一刀薄垂直切片</h3><p>先锋领航 700 人一次切不开，页上是先放狂热者小组去证明。这一刀对着能切开的那条工作流写：真实集成、能检查的验收，不是无集成的界面原型。</p></li><li><h3>写死约束、数据权限和试点验收</h3><p>页上点名的是品牌指南和顾问-客户偏好。进入试点前先写：谁能碰、人工复核、回退、试点怎么验收。不要假定上线后再补权限。</p></li><li><h3>稳定规则用确定性，模型只管非结构化</h3><p>一封邮件 37 步、16 次交接里，能写成规则的交接不要交给模型去猜。模型管草稿和解释；可审计的步骤用确定性逻辑。不要藏起来等交付再补责任。</p></li><li><h3>高风险输出先当草稿</h3><p>顾问-客户偏好进了个性化，输出还没法保证时，第一版限定为草稿，写明谁批准、何时升级。降温度、页脚免责或加长上下文，都不能代替批准闸门。</p></li><li><h3>交一页范围简报</h3><p>约束、权限、验收、第一刀、明确不做，写在一页上。37 步 / 16 次交接用来看从哪切开，不是验收 KPI。狂热者小组「两天对三周」是页上的证明点，不要扩成全组织已达成的周期承诺。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/376">先锋领航 / Writer</a></h3>
+  <p class="note">先锋领航页上是一封邮件 37 步、16 次交接，700 人一次切不开。75 人桌面安装是虚荣指标：工具在桌面上不等于工作已改变。简报只写页上有的场面，不要补金额或头衔。</p>
+  <dl class="anatomy"><dt>经营问题</dt><dd>停止铺 1990 年代营销牛径（一封邮件 37 步和 16 次人工交接），并用 agent 重建工作流。</dd><dt>旧流程</dt><dd>2018 年营销技术「技术堆」。早期 Writer 铺开按桌面衡量：75 人有它，但 Kelton 白天听不到它——写作助手，不是工作流。700 人组织太大，无法一次转型。</dd><dt>卡点</dt><dd>桌面上的工具 != 工作已改变。在 700 人上追求完美会卡住进度。</dd><dt>人在环内</dt><dd>找到狂热者（约小组，不是 700）。CMO 被告知自己进产品。顾问对个性化资产作出反应。</dd></dl>
+  <p class="hint"><a href="/案例/376">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="1" data-yes="对。试点前先写死数据边界、权限、人工复核、回退和验收。敏感数据不能靠上线后再补。" data-no="不对。先上线再补安全，或只靠更严的提示词 / 更大模型，边界会空。"><p class="k">练习 1 · 入门</p><p class="mcq-stem">原型能处理普通请求，但会接触敏感数据。进入试点前应该怎么做？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>先上线，等出了事故再补数据权限和回退。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>明确数据边界、权限、人工复核、回退路径和试点验收标准。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>只把系统提示词写得更严格，当作敏感数据已经隔离。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>换一个参数更大的模型，用能力代替权限和人工复核。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。可审计的资格规则用确定性逻辑；模型只管非结构化解释。" data-no="不对。资格判断交给模型、让用户重试，或把逻辑藏起来，验收和问责对不上。"><p class="k">练习 2 · 入门</p><p class="mcq-stem">流程中有一条稳定、可审计的资格规则。应该如何实现？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>用确定性规则执行资格判断，让模型处理非结构化解释。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>全部交给语言模型判断资格，规则不再写成可审计逻辑。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>让用户反复重试模型，用多次生成代替资格规则。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>隐藏判断逻辑，资格对错无法在试点里核对。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。一次六个部门会切不开。选一条薄垂直切片，含真实集成和成功指标。" data-no="不对。全盘接受、无集成的界面原型，或让模型自己定范围，第一刀交不出去。"><p class="k">练习 3 · 入门</p><p class="mcq-stem">客户一次要求覆盖六个部门和所有例外流程。最佳范围策略是什么？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>接受全部六个部门和所有例外，用范围显示雄心。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>把范围交给模型决定第一刀切哪里。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>只做没有集成的界面原型，先把画面做完再接系统。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>选择一个有代表性的薄垂直切片，包含真实集成和成功指标。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。高风险且无复核时，第一版只出草稿，写明人工批准和升级路径。" data-no="不对。降温度、页脚免责或加长上下文，都不能代替批准闸门。"><p class="k">练习 4 · 入门</p><p class="mcq-stem">高风险建议无法保证正确，且目前没有人工复核。应该怎样界定第一版？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>降低温度就上线，用生成稳定性代替人工批准。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>把免责声明放在页脚，当作高风险建议已经有人负责。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>限定为草稿建议，并设置明确的人工批准和升级路径。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>扩大上下文窗口，指望模型看全了就不会给错建议。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页范围简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+约束（合规 / 系统 / 人手）：
+数据边界与权限（谁能碰）：
+人工复核与回退路径：
+试点验收（可检查）：
+第一刀薄垂直切片（含真实集成）：
+稳定规则 vs 模型（哪一段确定性）：
+高风险如何限定（草稿 / 批准 / 升级）：
+明确不做：
+基线地图（步骤 / 交接，不当 KPI）：
+虚荣指标（不要当成做成）：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>约束、数据权限、验收和第一刀切片都写死；切片含真实集成；稳定规则与模型分工清楚；高风险有草稿 / 批准 / 升级路径。</p></li><li><h3>不及格</h3><p>一次铺全组织、只有无集成原型、资格规则全交给模型、用桌面安装数当做成，或验收不可检查。</p></li><li><h3>不要编的数</h3><p>37 步 / 16 次交接不是 KPI；75 人桌面安装是虚荣指标；「两天对三周」只写狂热者小组、页上有的口径。不要补金额、FDE 头衔或上线后百分比。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <div class="list"><a class="row" href="/案例/513">前线部署工程师如何工作：部署生命周期（2026）| FDEInterviews<span class="s">怎么做 · fdeinterviews.com</span></a><a class="row" href="/案例/516">前线部署工程师到底做什么？<span class="s">怎么做 · fdeinterviews.com</span></a><a class="row" href="/案例/520">从 Demo 到成交：企业 AI 构建洞察 | Andreessen Horowitz<span class="s">看法 · a16z.com</span></a></div>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/discovery">上一步 · 客户发现</a> · <a href="/方法/evaluation">下一步 · 评测与安全</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

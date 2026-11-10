@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>反馈与产品化 · 方法 · imfde.ai</title>
+<meta name="description" content="反馈与产品化：壳牌第三个现场开始重复第一个现场的做法时，收成产品面。写下可复用核心和脚本所有者。现场赢了却收不回去，一直派人会拖成咨询所。"/>
+<link rel="canonical" href="https://imfde.ai/方法/field-productization"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="反馈与产品化 · 方法 · imfde.ai"/>
+<meta property="og:description" content="反馈与产品化：壳牌第三个现场开始重复第一个现场的做法时，收成产品面。写下可复用核心和脚本所有者。现场赢了却收不回去，一直派人会拖成咨询所。"/>
+<meta property="og:url" content="https://imfde.ai/方法/field-productization"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="反馈与产品化 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="反馈与产品化：壳牌第三个现场开始重复第一个现场的做法时，收成产品面。写下可复用核心和脚本所有者。现场赢了却收不回去，一直派人会拖成咨询所。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">反馈与产品化</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip on" href="/方法/field-productization" aria-current="page">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>反馈与产品化</h1>
+  <p class="learn-goal"><b>学习目标</b>：壳牌第三个现场开始重复第一个现场的做法时，收成产品面。写下可复用核心和脚本所有者。现场赢了却收不回去，一直派人会拖成咨询所。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>第三个客户开始重复时收口</h3><p>壳牌页上一百多个应用，第三个现场开始重复第一个现场的做法时，收成产品面，而不是再雇一队人重做。现场赢了却收不回去，一直派人会把公司拖成咨询所。</p></li><li><h3>比较共同任务和差异</h3><p>预测性维护、LNG 实时生产优化、库存 / 闲置——先比共同任务、差异和约束，判断可复用核心。不要每个能源现场复制一份代码，也不要只服务最大的那一个。</p></li><li><h3>现场脚本要有条件、测试、所有者</h3><p>有效脚本不能只活在个人电脑或群截图里。写下适用条件、测试和所有者，放进可发现的资产库。2022 年预测性维护扩到 10,000 台设备，是平台上的规模，不是人口口相传。</p></li><li><h3>区分一次性例外和产品缺口</h3><p>OAI 是把已在自有运营中规模验证的方案向外提供，不是再雇一队人重做。看频率、跨客户重复、战略契合和维护成本。反馈要落到具体任务、期望、失败、影响和复现证据。</p></li><li><h3>交一页产品化收口</h3><p>重复点、可复用核心、脚本所有者和向外提供的面。页上时间线与 1–2% LNG / 355 吨二氧化碳只能带「页上写了」抄写，禁止当通用 KPI 模板。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/34">壳牌 / C3 AI</a></h3>
+  <p class="note">壳牌第三个现场开始重复第一个现场的做法时，收成产品面：OAI 把已验证方案向外提供。1–2% LNG / 355 吨二氧化碳必须写「页上写了」，不要当通用 KPI。页上无头衔。</p>
+  <dl class="anatomy"><dt>产品化</dt><dd>通过 OAI 提供三款 AI 驱动应用（2021 时间线）。OAI 用合作伙伴主导、领域特定的可靠性方案增强 C3 应用，其中包括壳牌已在自有运营中规模验证的部分。页上有「探索壳牌提供的已验证 OAI 方案」。</dd><dt>失败与迭代</dt><dd>OAI 被指出对一个传统上对软件采取封闭、自己动手做法的行业来说是新的。Jeavons：没有一家公司能解决世界上的 AI 问题；联盟对速度至关重要。</dd><dt>部署</dt><dd>2018 年选定 C3.ai 作为战略平台以规模化企业 AI。应用覆盖数百万壳牌资产、供应链和全球市场。2022：AI 预测性维护扩展到 10,000 台设备。OAI 于 2021 年与 Baker Hughes 和 Microsoft 推出；壳牌通过 OAI 提供三款 AI 驱动应用。</dd><dt>经营问题</dt><dd>在数百万壳牌资产、供应链和市场里把企业 AI 铺开，用于工业可靠性、资产优化和完整性管理，同时也把 AI 用在能源转型上。</dd></dl>
+  <p class="hint"><a href="/案例/34">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="0" data-yes="对。三个客户要相似能力时，先比共同任务、差异和约束，找出可复用核心。" data-no="不对。复制三份代码、只服务最大客户或全部拒绝，都会一直派人、把公司拖成咨询所。"><p class="k">练习 1 · 进阶</p><p class="mcq-stem">三个客户各自请求相似的导出功能。第一步是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>比较共同任务、差异和约束，判断可复用核心。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>复制三份代码，每个客户单独做导出。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>只服务最大客户的导出，其他客户以后再说。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>全部拒绝导出，避免进入产品面。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。现场有效脚本要写下适用条件、测试和所有者，放进可发现的资产库。" data-no="不对。留在个人电脑、截图发群或立刻另起产品，都收不回去。"><p class="k">练习 2 · 进阶</p><p class="mcq-stem">现场团队做了一个有效脚本，但无人知道。最佳动作是什么？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>脚本留在个人电脑，谁需要谁来问。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>记录适用条件、测试和所有者，并放入可发现的共享资产库。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>截图发群，用聊天记录代替适用条件和测试。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>立刻改成独立产品，还没有适用条件和所有者。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。一次性例外和产品缺口，看频率、跨客户重复、战略契合和维护成本。" data-no="不对。只看客户是否坚持或合同金额，会把每个现场做成一次性项目。"><p class="k">练习 3 · 进阶</p><p class="mcq-stem">怎样区分一次性客户例外与产品缺口？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>看客户是否坚持要，坚持就当产品缺口。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>只看合同金额，大单的例外优先进产品。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>结合频率、跨客户重复、战略契合和维护成本评估。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>让销售决定哪些例外要产品化。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。反馈要落到具体任务、期望、观察到的失败、影响和复现证据。" data-no="不对。「客户不满意」加形容词或头衔，收不成产品面。"><p class="k">练习 4 · 进阶</p><p class="mcq-stem">反馈只记录“客户不满意”。缺少什么？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>再补一些形容词，把「不满意」写得更重。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>记下模型发布日期，当作失败原因。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>记下客户职位，高职位反馈直接进产品。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>具体任务、期望、观察到的失败、影响和复现证据。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页产品化收口</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+第一个客户的做法：
+第三个客户重复了什么：
+共同任务：
+差异与约束：
+可复用核心（收成哪块产品面）：
+现场脚本（适用条件 / 测试 / 所有者）：
+一次性例外 vs 产品缺口（频率 / 跨客户 / 战略契合 / 维护成本）：
+反馈证据（任务 / 期望 / 观察到的失败 / 影响 / 如何复现）：
+向外提供的已验证方案（不是再雇一队人）：
+页上时间线（只抄并写「页上写了」）：
+页上结果（只抄并写「页上写了」；禁止当通用 KPI）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>写出第三个客户重复了什么；比较了共同任务与差异；脚本有适用条件 / 测试 / 所有者；反馈落到可复现的任务失败。</p></li><li><h3>不及格</h3><p>每个客户复制一份；脚本只在个人电脑；只看合同金额或「客户坚不坚持」；或反馈只写不满意。</p></li><li><h3>不要编的数</h3><p>1–2% LNG、355 吨二氧化碳、10,000 台设备、100+ 应用只能带「页上写了」抄写，禁止当通用 KPI 模板。不要补 FDE 头衔或上线后百分比。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/production-engineering">上一步 · 生产工程</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

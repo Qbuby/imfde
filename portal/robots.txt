@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /登录
+Disallow: /oauth
+Disallow: /退出登录
+
+Sitemap: https://imfde.ai/sitemap.xml

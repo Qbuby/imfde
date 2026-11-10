@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>闭环工程 · 方法 · imfde.ai</title>
+<meta name="description" content="闭环工程：Atlassian 页上，聊天助手还把活留给人，有的把 Jira 工单直接交给 agent。这一步写清工具边界、失败怎么恢复、何时停。做成不能只看一次点击。"/>
+<link rel="canonical" href="https://imfde.ai/方法/loop-engineering"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="闭环工程 · 方法 · imfde.ai"/>
+<meta property="og:description" content="闭环工程：Atlassian 页上，聊天助手还把活留给人，有的把 Jira 工单直接交给 agent。这一步写清工具边界、失败怎么恢复、何时停。做成不能只看一次点击。"/>
+<meta property="og:url" content="https://imfde.ai/方法/loop-engineering"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="闭环工程 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="闭环工程：Atlassian 页上，聊天助手还把活留给人，有的把 Jira 工单直接交给 agent。这一步写清工具边界、失败怎么恢复、何时停。做成不能只看一次点击。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">闭环工程</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip" href="/方法/adoption">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>闭环工程</h1>
+  <p class="learn-goal"><b>学习目标</b>：Atlassian 页上，聊天助手还把活留给人，有的把 Jira 工单直接交给 agent。这一步写清工具边界、失败怎么恢复、何时停。做成不能只看一次点击。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>定时发现，写入外部状态</h3><p>Atlassian 页上，聊天助手还把活留给人，有的把 Jira 工单直接交给 agent。设置定时发现与分诊，把发现写入工单或状态库，再按优先级调用。信号要落成外部状态，不要停在对话里。</p></li><li><h3>并行任务用独立分支</h3><p>Jira 工单交给 agent 时，并行任务用独立分支和 Git worktree，完成后再审查、合并。共用主目录会互相覆盖。不要轮流写，也不要让一个 Agent 只出建议却不设验收。</p></li><li><h3>约定写成版本化 Skill</h3><p>Rovo Max 取目标而非任务。项目约定、验证步骤和禁止事项写成版本化 Skill，任务匹配时调用。不要每次重新猜规则，也不要把全部旧对话永久附上。</p></li><li><h3>受控 connector 才能推进</h3><p>只会生成 Markdown 报告，Jira 工单推不动。页上：管理员控制包与网络访问；自建 model gateway。通过受控 connector 接入工单、代码托管和通知，才能开 PR、更新任务。工具边界写死，凭证不要放进提示词。失败要能恢复；做成、预算耗尽或需人工判断时停止并升级。</p></li><li><h3>交一页闭环简报</h3><p>信号、外部状态、工具边界、失败恢复、停止条件、并行隔离、Skill、connector，写在一页上。模糊成功不能只用一次点击率来评。页上「单月 500 万+ agent」只当规模陈述，不是闭环做成的验收。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/16">Atlassian / Anthropic</a></h3>
+  <p class="note">Atlassian 页上，聊天助手还把活留给人，有的把 Jira 工单直接交给 agent。「单月 500 万+ agent」是规模陈述，「成本降、质量升、延迟优」是厂商定性，不要当验收公式。页上无头衔，不要补。</p>
+  <dl class="anatomy"><dt>工作流</dt><dd>Rovo Max 取目标而非任务，用 Teamwork Graph 自主工作于受管环境；部分把 Jira ticket 直接交给 Claude-powered agent 执行；Claude Code 内部用于原型/小改动/内部 app</dd><dt>人在环内</dt><dd>Rovo Max 仅在需 Instagram 账号时由人提供；管理员控制包与网络访问</dd><dt>集成</dt><dd>自建 AI 平台：AI model gateway 基于 Gemini Enterprise Agent Platform（主路由），跑在 GKE + Google Cloud GPU/TPU；Claude 用于复杂长任务</dd><dt>评测</dt><dd>团队自建评估，按质量/成本基准测模型；Claude 在复杂指令一致性与大上下文上更优</dd></dl>
+  <p class="hint"><a href="/案例/16">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="2" data-yes="对。设置定时发现与分诊，把发现写入外部状态，再按优先级调用。" data-no="不对。每天手动问、复制给更多模型，或只加长提示词，都构不成闭环。"><p class="k">练习 1 · 进阶</p><p class="mcq-stem">团队每天早上都由工程师手动询问 Agent：“昨天有哪些 CI 问题？”要按闭环思路做出最小改造，最佳做法是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>把同一个问题复制给更多模型，早会多问几遍。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>只要求工程师写更长的系统提示词，继续每天手动问。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>设置定时发现与分诊，把发现写入外部状态，再由后续步骤按优先级调用 Agent。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>等 CI 完全失败后再人工创建任务，发现仍停在对话里。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。并行任务用独立分支和 Git worktree，完成后再审查、合并。" data-no="不对。共用主目录轮流写，或一个只出建议，都会互相覆盖或卡住。"><p class="k">练习 2 · 进阶</p><p class="mcq-stem">一个 Loop 同时派两个 Agent 处理同一仓库：一个修复失败测试，另一个更新依赖。如何避免它们互相覆盖文件？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>让两个 Agent 轮流写入主工作目录，靠错开时间避免覆盖。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>让一个 Agent 只输出建议、不允许编辑，并行任务仍无独立分支。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>要求两个 Agent 使用完全相同的提示词，当作就不会互相覆盖。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>为每个并行任务使用独立分支和 Git worktree，完成后再审查、合并。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="0" data-yes="对。把约定、验证步骤和禁止事项写成版本化 Skill，任务匹配时调用。" data-no="不对。把旧对话永久附上、每次换模型或删掉规则，知识不会积累。"><p class="k">练习 3 · 进阶</p><p class="mcq-stem">夜间修复 Loop 每次运行都重新猜测仓库的测试命令、发布限制和历史事故规则。最能让它随运行积累而不是反复猜测的改进是什么？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>把项目约定、验证步骤和禁止事项写成版本化 Skill，并让 Loop 在任务匹配时调用它。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>把所有旧对话永久附在每次提示后，用上下文代替约定。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>每次运行换一个随机模型，指望换模型就能记住规则。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>删除历史规则以免上下文变长，下次继续猜测试命令。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。通过受控 connector 接入工单、代码托管和通知，才能开 PR、更新任务。" data-no="不对。只写报告、加长提示词或把凭证放进提示词，都推不动真实流程。"><p class="k">练习 4 · 进阶</p><p class="mcq-stem">Loop 已经发现并验证了一个修复，但只能生成 Markdown 报告，无法在真实工程流程中推进。最合适的下一层能力是什么？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>增加更长的代码生成提示词，继续只出 Markdown 报告。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>通过受控的 connector 接入工单、代码托管和通知工具，使 Loop 能创建 PR、更新任务并在 CI 通过后通知负责人。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>让模型把报告写得更正式，仍不接入工单和代码托管。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>把所有外部系统凭证放进提示词，跳过受控 connector。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页闭环简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+信号从哪来（定时发现，写入哪份外部状态）：
+优先级与调用顺序：
+工具边界（能调什么、不能调什么）：
+失败恢复（超时 / 重试 / 补偿）：
+停止条件（做成 / 预算耗尽 / 升级人工）：
+并行任务如何隔离（独立分支 / worktree）：
+版本化 Skill（约定 / 验证 / 禁止事项）：
+受控 connector（工单 / 代码托管 / 通知；谁授权）：
+成功怎么评（不要只用一次点击率）：
+页上有口径的数字（只抄、不当验收）：
+明确不做：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>定时发现写入外部状态；并行任务有独立分支；约定进了版本化 Skill；受控 connector 能推进 PR / 工单；工具边界、失败恢复和停止条件写死；成功标准不是一次点击率。</p></li><li><h3>不及格</h3><p>每天手动问、共用主目录轮流写、只会写报告、把凭证放进提示词，或只用一次点击率评模糊成功。</p></li><li><h3>不要编的数</h3><p>「单月 500 万+ agent」是规模陈述；「成本降、质量升、延迟优」不当验收公式。不要编点击率、PR 合并率、SLA 或 FDE 头衔。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <p class="empty">这一节点还没有挂上方法文。</p>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/token-cost-control">下一步 · 控制 Token 成本</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>

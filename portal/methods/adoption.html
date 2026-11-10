@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>上线与采用 · 方法 · imfde.ai</title>
+<meta name="description" content="上线与采用：阿克伦把环境式文档嵌进就诊记录，儿科医生还在诊室。对着这页写嵌进哪条旧流程、怎么并行和回退、留存按什么核。不要另开一个没人打开的窗口。"/>
+<link rel="canonical" href="https://imfde.ai/方法/adoption"/>
+<meta property="og:site_name" content="imfde.ai"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="上线与采用 · 方法 · imfde.ai"/>
+<meta property="og:description" content="上线与采用：阿克伦把环境式文档嵌进就诊记录，儿科医生还在诊室。对着这页写嵌进哪条旧流程、怎么并行和回退、留存按什么核。不要另开一个没人打开的窗口。"/>
+<meta property="og:url" content="https://imfde.ai/方法/adoption"/>
+<meta property="og:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="上线与采用 · 方法 · imfde.ai"/>
+<meta name="twitter:description" content="上线与采用：阿克伦把环境式文档嵌进就诊记录，儿科医生还在诊室。对着这页写嵌进哪条旧流程、怎么并行和回退、留存按什么核。不要另开一个没人打开的窗口。"/>
+<meta name="twitter:image" content="https://imfde.ai/static/icons/book-cover.png"/>
+<link rel="stylesheet" href="/site/static/tokens.css"/><link rel="stylesheet" href="/site/static/home.css"/><link rel="stylesheet" href="/site/static/desk.css"/>
+<link rel="stylesheet" href="/site/static/room.css"/>
+<script>
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest("[data-mcq-check]");
+  if (!btn) return;
+  var form = btn.closest(".mcq");
+  if (!form) return;
+  var out = form.querySelector(".mcq-result");
+  var picked = form.querySelector("input[type=radio]:checked");
+  if (!picked) {
+    out.hidden = false;
+    out.className = "mcq-result wait";
+    out.textContent = "先选一项。";
+    return;
+  }
+  var ok = picked.value === form.getAttribute("data-ok");
+  out.hidden = false;
+  out.className = "mcq-result " + (ok ? "ok" : "no");
+  out.textContent = ok
+    ? (form.getAttribute("data-yes") || "对。")
+    : (form.getAttribute("data-no") || "不对。先看上面的步骤。");
+});
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "imfde.ai", "alternateName": "imfde.ai", "url": "https://imfde.ai/", "description": "AI 实战进化社 · 在现场里进化", "inLanguage": "zh-CN"}</script>
+</head>
+<body class="room-page desk-page">
+
+<div class="room room-doc" id="room"><header class="room-hud">
+  <a class="room-brand" href="/world3d" aria-label="imfde.ai AI 实战进化社"><img class="brand-logo" src="/site/static/icons/logo-mark.png" alt="imfde.ai"/><span class="brand-mark"><span class="brand-im">im</span><span class="brand-fde">fde</span><span class="brand-tld">.ai</span></span></a>
+  <div class="room-hud-mid">
+    <h1 class="room-title">上线与采用</h1>
+    <p class="room-sub">按步骤做完这一课</p>
+  </div>
+  <div class="room-hud-tools"><nav class="room-nav" aria-label="站内导航"><a class="" href="/world3d">世界动态</a><a class="" href="/落地">负责人</a><a class="" href="/现场">从业者</a><a class="" href="/案例">案例</a><a class="on" href="/方法" aria-current="page">学习</a><a class="auth-entry" href="/login?next=/">登录</a></nav></div>
+</header><div class="room-stage"><div class="room-docmain"><a class="room-back" href="/方法">← 回学习</a>
+<nav class="room-filt" aria-label="交付循环"><a class="chip" href="/方法/discovery">客户发现</a><a class="chip" href="/方法/scoping">方案范围</a><a class="chip" href="/方法/evaluation">评测与安全</a><a class="chip on" href="/方法/adoption" aria-current="page">上线与采用</a><a class="chip" href="/方法/data-integration">数据与集成</a><a class="chip" href="/方法/prototype-iteration">原型与迭代</a><a class="chip" href="/方法/production-engineering">生产工程</a><a class="chip" href="/方法/field-productization">反馈与产品化</a></nav>
+<section class="desk-lede">
+  <p class="k">学习 · 这一课</p>
+  <h1>上线与采用</h1>
+  <p class="learn-goal"><b>学习目标</b>：阿克伦把环境式文档嵌进就诊记录，儿科医生还在诊室。对着这页写嵌进哪条旧流程、怎么并行和回退、留存按什么核。不要另开一个没人打开的窗口。</p>
+</section>
+<section class="section" id="怎么做">
+  <h2>这一步怎么做</h2>
+  <ol class="learn-steps"><li><h3>嵌进旧流程，不要另开窗口</h3><p>阿克伦把环境式文档嵌进就诊记录，儿科医生仍在诊室，而不是另做一套没人打开的笔记工具。跟着真实任务走：谁在哪一步打开、卡在哪。质量达标但没人用，多半是工作流外多了一个窗口。</p></li><li><h3>先并行、再替换，留回退</h3><p>儿科相对成人文档平台有独特挑战。一线怕质量掉时，新旧流程并行，达标再替换，并写清如何回退。不要用「强制关掉旧流程」当采用手段。页上没有分波日期，只写并行 / 替换 / 回退的条件，不要编日历波次。</p></li><li><h3>引导放进流程，配本地 champion</h3><p>采用看的是每月有没有在写笔记，不是打开过一次，也不是读过手册。在就诊流程里放引导、示例和本地 champion，然后看任务是否完成。页上的留存定义是「每月至少 30 份笔记」。</p></li><li><h3>准备好的队列先上，支持未训不扩</h3><p>总体看起来够、某一专科失败集中、支持还没培训，就先限制在准备好的队列，修好再扩。第一个试点达标，也不等于明天开放 22 个专科。</p></li><li><h3>交一页采用简报</h3><p>嵌进哪条旧流程、并行与回退、摩擦、champion、采用指标定义、扩容标准，写在一页上。扩容看容量、风险、支持和专科差异，而不是只看服务器。71% 就诊 / 75,000+ 笔记带「过去一年、近 200 名儿科医生」口径；没有的分波日期留空。</p></li></ol>
+</section>
+<section class="section" id="范例">
+  <h2>看一个例子</h2>
+  
+<article class="learn-show">
+  <h3><a href="/案例/1">阿克伦儿童医院 / Abridge</a></h3>
+  <p class="note">阿克伦页上是儿科医生还在诊室，环境式文档嵌进就诊记录。95% 留存的定义是每月至少 30 份笔记，不是打开过一次。没有上线日期或分波计划，入院/出院是 Rashid 的前瞻，不要编成分波或已完成结果。</p>
+  <dl class="anatomy"><dt>旧流程</dt><dd>儿科医生跨专科、跨语言自己记就诊；看完再做编码和收入周期。页上没点名以前用过哪家自动记病历的供应商。</dd><dt>部署</dt><dd>以临床医生为中心的实施，覆盖 22 个专科以及多种照护场景、专科和语言。页面未给出上线日期或分波计划。</dd><dt>评测</dt><dd>过去一年近 200 名儿科医生平均将 Abridge 用于 71% 的临床就诊，生成超过 75,000 份笔记。用户留存定义：每月用 Abridge 创建至少 30 份笔记的儿科医生。Pelletier 先分析认知负荷和倦怠数据，再打开医生评论。</dd><dt>测得结果</dt><dd>22 个专科里 95% 的 Abridge 用户留存（每月至少 30 份笔记）。近 200 名儿科医生；71% 的就诊；过去一年超过 75,000 份笔记。看病时能盯着患者的比例升 90%。写病历耗神降 54%。倦怠降 45%。编码/LOS 准不准是定性说法（Watson、Mahesh）。</dd></dl>
+  <p class="hint"><a href="/案例/1">看完整案例</a></p>
+</article>
+
+</section>
+<section class="section" id="练习">
+  <h2>练习</h2>
+  <p class="note">选完再核对。</p>
+  <form class="mcq" data-ok="0" data-yes="对。质量达标但没人用，要跟真实任务走一遍，去掉流程摩擦，再用采用指标核。" data-no="不对。怪用户、直接铺全公司、或加更多模型功能，都治不了打不开。"><p class="k">练习 1 · 入门</p><p class="mcq-stem">系统质量达标，但试点团队很少使用。下一步最有效的行动是什么？</p><label class="mcq-opt"><input type="radio" name="q1" value="0"/><span>跟随真实用户完成任务，移除流程摩擦，并用采用指标验证改动。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="1"/><span>把低使用率归因于用户不愿改变，不跟真实任务找摩擦。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="2"/><span>直接扩大到全公司，用铺开代替修流程。</span></label><label class="mcq-opt"><input type="radio" name="q1" value="3"/><span>增加更多模型功能，指望功能多了就会有人用。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="1" data-yes="对。失败集中且支持未训时，先限制在准备好的队列，修好再扩。" data-no="不对。一次全面上线、藏地区指标或降低质量阈值，会把失败放大。"><p class="k">练习 2 · 入门</p><p class="mcq-stem">总体质量 85%，但某一地区失败集中且支持团队尚未培训。如何发布？</p><label class="mcq-opt"><input type="radio" name="q2" value="0"/><span>一次性全面上线，地区失败和支持未训也一起放开。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="1"/><span>先限制在准备充分的队列，修复地区失败并培训支持后再扩大。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="2"/><span>隐藏地区指标，只用总体分数对外汇报。</span></label><label class="mcq-opt"><input type="radio" name="q2" value="3"/><span>降低质量阈值，让失败集中的地区也过关。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="2" data-yes="对。手册没人读就绕过。把引导、示例和本地 champion 嵌进真实工作流，看任务是否完成。" data-no="不对。加长手册、强关旧流程或发营销邮件，都替代不了在流程里带着做。"><p class="k">练习 3 · 入门</p><p class="mcq-stem">用户没有阅读培训手册，持续绕过新系统。最有效的改进是什么？</p><label class="mcq-opt"><input type="radio" name="q3" value="0"/><span>把手册写得更长，用页数代替在流程里带着做。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="1"/><span>强制关闭旧流程，不给并行和回退。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="2"/><span>在真实工作流中加入引导、示例和本地 champion，并观察任务完成。</span></label><label class="mcq-opt"><input type="radio" name="q3" value="3"/><span>增加营销邮件，用宣传代替任务内引导。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form><form class="mcq" data-ok="3" data-yes="对。第一个试点达标，仍用预设扩容标准看容量、风险、支持和部门差异，再分批扩大。" data-no="不对。明天全开、让各部门自行配置或只看 CPU，会把未准备的现场拖垮。"><p class="k">练习 4 · 入门</p><p class="mcq-stem">第一个试点刚达到目标，管理层要求明天开放给所有部门。应该怎么做？</p><label class="mcq-opt"><input type="radio" name="q4" value="0"/><span>立即开放以保持势头，不看容量、风险和支持。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="1"/><span>让每个部门自行配置，不设统一扩容标准。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="2"/><span>只检查服务器 CPU，不看专科差异和支持是否训过。</span></label><label class="mcq-opt"><input type="radio" name="q4" value="3"/><span>用预设扩容标准评估容量、风险、支持和不同部门差异，再分批扩大。</span></label><button type="button" class="mcq-btn" data-mcq-check>核对</button><p class="mcq-result" hidden></p></form>
+</section>
+<section class="section" id="作业">
+  <h2>作业 · 一页采用简报</h2>
+  <p class="note">抄到自己的笔记里填。</p>
+  <pre class="brief-tpl">客户 / 现场：
+嵌进哪条旧流程（不是另开窗口）：
+并行期怎么跑、何时替换、如何回退：
+一线摩擦（谁绕过、卡在哪）：
+引导 / 示例 / 本地 champion：
+采用指标（定义写清，如每月≥N）：
+扩容标准（容量 / 风险 / 支持 / 部门差异）：
+页上有口径的使用数字：
+页上没有的分波日期（留空）：</pre>
+  <ul class="learn-steps rubric"><li><h3>及格</h3><p>嵌进旧流程，写清并行 / 替换 / 回退；采用指标有定义；扩容有预设标准（容量、风险、支持、部门差异）。</p></li><li><h3>不及格</h3><p>另开没人打开的窗口、质量一达标就全开、用手册代替流程内引导，或把低使用率怪给用户。</p></li><li><h3>不要编的数</h3><p>95% 留存必须带「每月≥30 份笔记」定义。71% / 75,000+ 是页上就诊使用，不要改写成自编业务 KPI。90% 全神贯注 / 54% 认知负荷 / 45% 倦怠照页上口径抄，不要外推。无分波日期不要编分波；不要补 FDE 头衔。</p></li></ul>
+</section>
+<section class="section">
+  <h2>延伸阅读</h2>
+  <div class="list"><a class="row" href="/案例/509">FDEs：建设能力，而非依赖 | Cohere<span class="s">看法 · cohere.com</span></a><a class="row" href="/案例/513">前线部署工程师如何工作：部署生命周期（2026）| FDEInterviews<span class="s">怎么做 · fdeinterviews.com</span></a><a class="row" href="/案例/514">前线部署工程师的一天 | FDEInterviews<span class="s">怎么做 · fdeinterviews.com</span></a><a class="row" href="/案例/520">从 Demo 到成交：企业 AI 构建洞察 | Andreessen Horowitz<span class="s">看法 · a16z.com</span></a></div>
+</section>
+<p class="hint"><a href="/方法">回学习</a> · <a href="/方法/evaluation">上一步 · 评测与安全</a> · <a href="/方法/data-integration">下一步 · 数据与集成</a></p>
+</div></div></div>
+
+<script src="/site/static/auth-me.js" defer></script>
+</body>
+</html>
