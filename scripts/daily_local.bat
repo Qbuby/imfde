@@ -20,9 +20,9 @@ cd /d "%ROOT%"
 "%PY%" scripts\build_public_db.py >> "%LOG%" 2>&1
 
 rem ---- 2. pregen AI reports (needs AI_API_KEY) ----
-if "%AI_API_KEY%"=="" set "AI_API_KEY=sk-cp-E-WzUXBmRDAl0oWoirzhnWDaFzTeR3f6rq4oiEREm8GuT2hUwNP1DO3FovG6T43D4P93zVGqTHIsZ9IFOASDViorVhj_kZVbvBZ3-j87GLzflGReaX4oZgU"
-set "AI_BASE_URL=https://api.minimaxi.com/v1"
-set "AI_MODEL=MiniMax-M3.1-Flash"
+if "%AI_API_KEY%"=="" set "AI_API_KEY=sk-70363b8a11fb463c8fe6f25b89f3d845"
+set "AI_BASE_URL=https://api.deepseek.com/v1"
+set "AI_MODEL=deepseek-flash"
 if "%AI_API_KEY%"=="PASTE_MINIMAX_KEY_HERE" (
   echo [WARN] AI_API_KEY not configured - skip AI report pregen >> "%LOG%"
 ) else (
