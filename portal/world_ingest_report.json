@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-09T16:03:48Z",
-  "snapshot": "2026-11-10",
-  "since_day": "2026-10-11",
+  "written_at": "2026-11-10T16:02:58Z",
+  "snapshot": "2026-11-11",
+  "since_day": "2026-10-12",
   "increment": {
-    "scanned": 1422,
+    "scanned": 1429,
     "fde_hits": 12,
-    "already_in_db": 19,
-    "stale": 18,
-    "added_axis": 12,
+    "already_in_db": 15,
+    "stale": 17,
+    "added_axis": 16,
     "collected": 0,
-    "review": 0
+    "review": 5
   },
-  "n_events": 700,
-  "n_axis": 321,
-  "n_review": 9,
-  "new_axis_this_run": 12,
+  "n_events": 708,
+  "n_axis": 329,
+  "n_review": 14,
+  "new_axis_this_run": 16,
   "by_lane_axis": {
     "company": 12,
     "deploy": 112,
-    "method": 177,
+    "method": 185,
     "people": 20
   },
-  "n_links": 260,
+  "n_links": 268,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1368,
+          "items": 1375,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 221,
-      "added": 10,
-      "fresh": 1,
+      "jobs": 219,
+      "added": 8,
+      "fresh": 8,
       "details": [
         {
           "id": "palantir-lever",
@@ -123,12 +123,12 @@
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 58
+          "n": 55
         },
         {
           "id": "scale-greenhouse",
           "status": "axis",
-          "n": 15
+          "n": 14
         },
         {
           "id": "xai-greenhouse",
@@ -138,7 +138,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 67
+          "n": 69
         },
         {
           "id": "cohere-ashby",
@@ -157,12 +157,12 @@
         },
         {
           "id": "cursor-ashby",
-          "status": "axis",
+          "status": "review",
           "n": 9
         },
         {
           "id": "elevenlabs-ashby",
-          "status": "axis",
+          "status": "review",
           "n": 5
         }
       ]
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 17,
-    "added": 1,
+    "new_links": 18,
+    "added": 0,
     "no_date": 4,
     "details": [
       {
@@ -195,7 +195,7 @@
       {
         "id": "sierra-customers",
         "new_links": 5,
-        "added": 1
+        "added": 0
       },
       {
         "id": "cresta-stories",
@@ -227,7 +227,7 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 4,
+        "new_links": 5,
         "added": 0
       },
       {
