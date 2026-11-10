@@ -17,9 +17,6 @@
 /%E7%8E%B0%E5%9C%BA /field.html 200
 /案例 /cases.html 200
 /%E6%A1%88%E4%BE%8B /cases.html 200
-/案例/:id /cases.html?id=:id 200
-/%E6%A1%88%E4%BE%8B/:id /cases.html?id=:id 200
-/cases/:id /cases.html?id=:id 200
 /方法 /methods.html 200
 /%E6%96%B9%E6%B3%95 /methods.html 200
 /方法/:slug /methods/:slug.html 200
