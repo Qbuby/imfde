@@ -127,3 +127,4 @@ footer{max-width:1000px;margin:0 auto;padding:26px;display:flex;justify-content:
 .review-note ul{margin:0;padding-left:18px;font-size:13px;color:var(--soft);line-height:1.85}
 .review-note li{margin-bottom:7px}
 .s-false{color:#8c3b2f}
+.rn-title{font-size:12px;font-weight:700;letter-spacing:.8px;color:var(--green);margin:14px 0 6px!important}

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>imfde 情报 · 第 7 期 · 2026-11-11</title>
-<meta name="description" content="FDE 行业情报第 7 期：本期先报自身管线的两处故障，再报两条外部观察。事实与推断分离，含来源等级、口径、替代解释与下期核对。">
+<title>imfde 情报 · 第 7 期 · 2026-11-12</title>
+<meta name="description" content="FDE 行业情报第 7 期：先报自身管线的两处故障，再报一条招聘分布观察。每条判断含来源等级、口径、替代解释与可判定的下期核对。">
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="intel.css">
 </head>
@@ -18,71 +18,76 @@
 <section class="lead">
   <div class="kicker">FDE 行业情报 · 公开来源</div>
   <h1>本期先报我们自己的两处故障。</h1>
-  <p class="sub">一，部署案例的加工从 8 月 27 日起 <b>100%</b> 停止<span class="q">样本：8-27 起的部署事件 · 窗口 2026-09-01 至 11-05 · 分母 27 · 本期新增</span>，抓取每天在跑，事件每天在进，没有一条被加工成案例。二，库里 <b>478</b> 条部署事件有 <b>366</b> 条没有日期<span class="q">样本：lane=deploy 全量 · 窗口 库内全量 · 分母 478 · 存量</span>——任何按时间窗的统计都必须先说清用的是哪一批。这两件事此前都没对外说过。</p>
+  <p class="sub">一，每日抓取路径上，8 月 26 日之后进来的 30 条部署事件，一条都没写入案例关联<span class="q">样本：2026-08-27 至 11-11 的部署事件 · 分母 30 · 本期新增</span>。二，库里 481 条部署事件有 366 条没有日期，全部来自 9 月 2 日一次批量导入<span class="q">样本：day 为空的部署事件 · 分母 366 · 存量</span>——任何按时间窗的统计都必须先说清用的是哪一批。这两件事此前都没对外说过。</p>
   <div class="ledger-strip">
     <span class="ls-k">本期判断</span>
     <span class="ls-v">3 条 <em>· 1 暂定结论 / 1 观察 / 1 事实</em></span>
-    <a class="ls-link" href="#method">分级依据与来源</a>
+    <a class="ls-link" href="#method">分级依据 / 来源 / 两轮独立复核</a>
   </div>
 </section>
 
 <!-- ========== J1 ========== -->
 <article class="judg" id="j1">
   <div class="j-head"><span class="j-id">J1</span><span class="j-level lvl-concl">暂定结论</span></div>
-  <h2 class="j-line">部署案例的加工自 8 月 27 日起完全停止。</h2>
+  <h2 class="j-line">每日抓取路径上，30 条部署事件零案例关联。</h2>
   <div class="j-marks">
     <span><b>Likelihood</b> 几乎确定</span>
-    <span><b>Confidence</b> 高</span>
+    <span><b>Confidence</b> 中</span>
     <span><b>跨期</b> 首次</span>
   </div>
-  <p class="j-basis"><b>为什么是高置信：</b>这是对自身产出的盘点，样本与窗口可逐行核对；且断点前后形成 2% 对 100% 的对比，不是单点观测。</p>
+  <p class="j-basis"><b>为什么只给中置信：</b>数据可逐行复核，但只覆盖 case_id 这一个字段；不能推断其他加工环节是否也停了。</p>
 
   <div class="zone">
     <div class="zone-k">事实</div>
     <div class="zone-b">
-      <p>8 月 26 日及之前的部署事件共 <b>85</b> 条，其中未关联案例记录的仅 <b>2</b> 条（<b>2%</b>）。<span class="q">样本：day ≤ 2026-08-26 · 窗口：2019-06-11 至 2026-08-26 · 分母：85 · 存量</span></p>
-      <p>8 月 27 日起的部署事件共 <b>27</b> 条，未关联案例记录的 <b>27</b> 条（<b>100%</b>）。<span class="q">样本：day &gt; 2026-08-26 · 窗口：2026-09-01 至 2026-11-05 · 分母：27 · 本期新增</span></p>
-      <p>同期抓取任务持续运行：近 <b>6</b> 次运行扫描 <b>1403–1429</b> 条，每日新增上轴事件 <b>11–16</b> 条。<span class="q">样本：最近 6 次每日任务 · 窗口：2026-11-03 至 11-11 · 分母：6 · 本期新增</span></p>
-      <p>元数据缺陷：库内 <b>478</b> 条部署事件中，<b>366</b> 条 day 字段为空，只有 <b>112</b> 条带日期（85 + 27）。<span class="q">样本：lane=deploy 全量 · 窗口：库内全量 · 分母：478 · 存量</span></p>
-    </div>
+      <p>先分清两条写入路径。库内 <b>481</b> 条部署事件里有 <b>366</b> 条 day 为空，它们全部 collected_on = 2026-09-02、date_kind = collected——是案例库一次性回填出来的（366 条全部带案例关联），不是每日抓取产物。真正能按日核对、走每日抓取路径的是 <b>115</b> 条。<span class="q">样本：lane=deploy 全量 · 窗口：库内全量 · 分母：481 → 115 · 存量</span></p>
+      <p>这条路径上，2026-01-01 至 08-26 共 <b>28</b> 条，未写入案例关联的 <b>2</b> 条（<b>7.1%</b>）。<span class="q">样本：每日抓取 2026 年内 day ≤ 08-26 · 窗口：2026-01-01 至 08-26 · 分母：28 · 存量</span></p>
+      <p>08-27 至 11-11 共 <b>30</b> 条，未写入案例关联的 <b>30</b> 条（<b>100%</b>）。<span class="q">样本：每日抓取 day 在 08-27 至 11-11 · 窗口：2026-08-27 至 11-11 · 分母：30 · 本期新增</span></p>
+      <p><b>关键对照（同一来源、同一路径）：</b>devin.ai 在断点前 13 条里 11 条带案例关联，断点后 11 条里 0 条；sierra.ai 断点前 4 条里 4 条带关联，断点后 6 条里 0 条。<span class="q">样本：两个在断点前就产案例的 host · 窗口：断点前后 · 分母：13/11 与 4/6 · 存量+本期新增</span></p>
+      <p>同期抓取未中断：近 3 次每日任务扫描 <b>1422–1434</b> 条，每次新增上轴事件 <b>12–16</b> 条。<span class="q">样本：最近 3 次每日任务 · 窗口：11-09 至 11-11 · 分母：3 · 本期新增</span></p>
+      <p>08-27 至 08-31 期间库内没有 day 落在该区间的部署事件（<b>0</b> 条），因此断点只能限定在「08-26 之后」，无法精确到某一天；有事件可核对的最早一天是 <b>09-01</b>，实际可观测的中断时长为 71 天。<span class="q">样本：day 在 08-27 至 08-31 · 窗口：2026-08-27 至 08-31 · 分母：0 · 本期新增</span></p></div>
   </div>
 
   <div class="zone">
     <div class="zone-k">判断</div>
     <div class="zone-b">
-      <p>断点前后不是程度差异，是二值翻转：之前 2% 漏关联，之后 100% 漏关联。抓取在同一时期照常运行，因此问题不在采集侧。</p>
-      <p class="infer"><b>这一步是推断：</b>「8-27 起 100% 未关联 + 采集正常」→「加工环节停止」是推理。可确认的是案例字段写入停止；具体原因（管线故障、字段改名、配置变更）未观测。</p>
+      <p>不是「换了来源所以没关联」：devin.ai 和 sierra.ai 在断点前后都在被抓，页面路径没变，只是断点后再没写入过关联。也不是「这期间没有客户案例」——J3 那 5 条落地页都是客户案例页。</p>
+      <p class="infer"><b>这一步是推断：</b>「断点后 100% 未写入 + 采集正常」→「关联写入环节停止」是推理。可确认的只有 case_id 这一个字段自 08-26 之后不再写入；具体原因（管线故障、字段改名、写入目标改到别的表）均未观测。</p>
     </div>
   </div>
 
   <div class="zone">
     <div class="zone-k">假设</div>
     <div class="zone-b">
-      <p><b>A1</b> case_id 由自动化管线填充，不是人工补录。<span class="ifwrong">若错：应改称「人工环节中断」而非「管线停止」，结论成立但归因需改。</span></p>
-      <p><b>A2</b> 这 27 条事件属于本应产出案例的类型。<span class="ifwrong">检查结果为真：27 条中 5 条落地页为 customers / case-studies 路径（见 J3），至少这 5 条本应入库。</span></p>
+      <p><b>A1</b> 这 30 条事件属于本应产出案例关联的类型。<span class="ifwrong">检查结果为真：其中 5 条落地页为 customers / customer-stories 路径（见 J3），至少这 5 条应有关联。</span></p>
+      <p><b>A2</b> case_id 由自动化写入，不是人工补录。<span class="ifwrong">若近期改为人工录入且尚未开始，应称「自动写入停止」而非「加工停止」，方向不变。</span></p>
     </div>
   </div>
 
   <div class="zone">
     <div class="zone-k">替代解释</div>
     <div class="zone-b">
-      <p><b>H2</b> 这期间厂商没发客户案例，采到的是别的类型。<span class="dist"><b>已否：</b>J3 记录的 5 条新事件落地页全部是 customers / customer-stories 路径，属客户案例页。</span></p>
-      <p><b>H3</b> 案例入库改成人工流程，字段空但内容其实有。<span class="dist"><b>已否：</b>按 source_url 反查 cases 表，这 5 条全部未命中，内容确实没入库。</span></p>
+      <p><b>H2</b> 这期间厂商没发客户案例，采到的是别的类型。<span class="dist"><b>已排除一部分：</b>J3 记录的 5 条新事件落地页全部是 customers / customer-stories 路径，属客户案例页。</span></p>
+      <p><b>H3</b> 内容其实进了库，只是关联键换到别的表。<span class="dist"><b>已排除一部分：</b>按 source_url 反查 cases 表，这 5 条全部未命中。但无法排除写进第三张未审查的表，本期未做全库表扫描。</span></p>
+      <p><b>H4</b> 那 366 条无日期记录说明断点后仍有写入，所以「没写入」不成立。<span class="dist"><b>已排除：</b>它们全部来自 2026-09-02 单次回填、date_kind 为 collected，属案例库转事件路径；每日抓取路径上 08-27 之后的 30 条，一条都没有。</span></p>
+      <p><b>H5</b> 断点后新增了采集来源（glean.com、cresta.com 是断点后才出现的 host，贡献 13/30 条），这些新源本身不产案例关联。<span class="dist"><b>部分排除：</b>剩下 17 条来自 devin.ai、sierra.ai 这两个断点前就稳定产关联的老源，它们同样一条没写。新源只能解释 13 条，解释不了全部 30 条。</span></p>
     </div>
   </div>
 
   <div class="zone">
     <div class="zone-k">反证 / 未披露</div>
     <div class="zone-b">
-      <p>8-26 之前也有 2 条未关联（2%），说明历史上有零星漏关联；但 100% 与 2% 的量级差距不是噪声。</p>
-      <p class="muted">未披露：中断原因、是否有修复计划、7 月之前更早时期是否也有同类中断（366 条无日期记录无法按窗核查）。</p>
+      <p>断点前也有 2 条未关联（7.1%），说明历史上存在零星漏写，不是每次采集都成功；但 7.1% 与 100% 不是同一量级。</p>
+      <p class="muted">未披露：停止写入的原因、是否有修复计划、断点的确切日期。</p>
+      <p class="muted">未核：30 条里只验证了 5 条的落地页类型（J3），其余 25 条未读页面；「30 条本应产出关联」是推定，不是逐条核实。</p>
+      <p class="muted">检验上的限制：那 366 条无日期记录<b>不能</b>用来检验本断点——它们没有 day，无法归入任何时间窗；但它们全部来自 2026-09-02 单日批量导入、且 date_kind 为 collected，属案例库导入路径，不是每日抓取路径，因此不构成「断点后仍有写入」的反例。</p>
     </div>
   </div>
 
   <div class="zone next">
     <div class="zone-k">下期核对</div>
     <div class="zone-b">
-      <p><b>谁</b> 本产品每日抓取任务 · <b>何时</b> 2026-11-18 发布前 · <b>看什么</b> 统计 day &gt; 2026-11-11 的部署事件中案例关联数：若仍为 0，确认持续停摆；若恢复，本期结论改为「曾中断 77 天，已恢复」，并补报中断期间漏加工的条数。</p>
+      <p><b>谁</b> 本产品每日抓取任务 · <b>何时</b> 2026-11-19 发布前 · <b>看什么</b> 统计 day 在 11-12 至 11-18 的部署事件共几条、其中几条写入案例关联。若仍为 0，确认持续停摆；若恢复，本期结论改为「08-26 之后至恢复日停写」，并补报期间漏写条数。</p>
     </div>
   </div>
 </article>
@@ -90,29 +95,29 @@
 <!-- ========== J2 ========== -->
 <article class="judg" id="j2">
   <div class="j-head"><span class="j-id">J2</span><span class="j-level lvl-obs">观察</span></div>
-  <h2 class="j-line">近两周新出现的交付管理岗，集中在四家公司。</h2>
+  <h2 class="j-line">窗口内首次出现的 14 个岗位，6 个是管理岗。</h2>
   <div class="j-marks">
     <span><b>Likelihood</b> 可能性偏低</span>
     <span><b>Confidence</b> 低</span>
     <span><b>跨期</b> 首次</span>
   </div>
-  <p class="j-basis"><b>为什么只给观察：</b>只有招聘这一面信号；样本 24 个、覆盖 7 家公司；分类仅凭标题未读 JD。找不到只与本判断相容的证据，按标准不得升级。</p>
+  <p class="j-basis"><b>为什么只给观察：</b>只有招聘这一面信号；样本 23 个去重桶、5 家公司；分类仅凭标题未读 JD。做不到只与本判断相容的诊断性证据，按标准不得升级。</p>
 
   <div class="zone">
     <div class="zone-k">事实</div>
     <div class="zone-b">
-      <p>近 14 天采集 <b>27</b> 条岗位发布，按「公司 × 职级标题」折叠去重后为 <b>24</b> 个。3 组重复是同一岗位在不同日期被重复采集。<span class="q">样本：近 14 天岗位发布 · 窗口：2026-10-29 至 11-11 · 分母：27 → 24 · 本期新增</span></p>
-      <p>24 个中 <b>9</b> 个属管理/交付运营类（Manager / Director / TPM / Strategist / Engagement / Delivery Partner Manager），<b>15</b> 个是工程执行类。<span class="q">样本：去重后的「公司 × 职级」桶 · 同窗口 · 分母：24 · 本期新增</span></p>
-      <p>这 9 个管理岗只分布在 <b>4</b> 家公司：Databricks 4、OpenAI 3、Cursor 1、Anthropic 1。工程岗分布在 <b>7</b> 家公司。<span class="q">样本：9 个管理桶 / 15 个工程桶 · 同窗口 · 分母：24 · 本期新增</span></p>
-      <p>对照存量：当前在招总量 OpenAI 69 / Databricks 55 / Palantir 41 / Scale AI 14 / Anthropic 12 / Cohere 12 / Cursor 9 / ElevenLabs 5。<span class="q">样本：各板最新普查 · 窗口：11-10 至 11-11 · 分母：10 家板块 · 存量</span></p>
+      <p>窗口内采集岗位发布 <b>25</b> 条，按「公司 × 职级标题」折叠去重后为 <b>23</b> 个桶。<span class="q">样本：窗口内岗位发布 · 窗口：10-29 至 11-11 · 分母：25 → 23 · 本期新增</span></p>
+      <p>23 个桶里，首次出现日期落在窗口内的有 <b>14</b> 个：管理类 <b>6</b> 个、工程类 <b>8</b> 个。另 9 个是窗口前已存在的旧岗。<span class="q">样本：23 个去重桶 · 同窗口；首见按该桶在库内最早 day 判定 · 分母：14 / 23 · 本期新增</span></p>
+      <p>6 个新管理岗来自 <b>3</b> 家公司：OpenAI 3、Databricks 2、Anthropic 1。窗口内全部岗位分布在 <b>5</b> 家公司。<span class="q">样本：14 个窗内首见桶 / 23 个全部桶 · 同窗口 · 分母：14 / 23 · 本期新增</span></p>
+      <p>对照存量：各板最新普查在招量 OpenAI 70 / Databricks 55 / Palantir 41 / Scale AI 14 / Anthropic 13 / Cohere 11 / Cursor 9 / ElevenLabs 5 / Perplexity 1 / Replit 1。<span class="q">样本：10 个招聘板最新一次普查 · 窗口：11-11 至 11-12 · 分母：10 板 · 存量</span></p>
     </div>
   </div>
 
   <div class="zone">
     <div class="zone-k">判断</div>
     <div class="zone-b">
-      <p>9 个管理岗集中在 4 家，而 15 个工程岗分散在 7 家。如果只是普遍扩张，管理岗不该这样集中。</p>
-      <p class="infer"><b>这一步是推断：</b>「管理岗集中于少数公司」→「这几家在补交付管理」是推理。另一个同样成立的读法是：这几家规模大、岗位基数大，管理岗自然多。本期数据无法完全区分。</p>
+      <p>6 个新管理岗来自 3 家；8 个新工程岗来自这 5 家中的多数。这是分布事实，不构成「往管理层倾斜」的证据——6 个岗位无论如何只能来自少数几家公司，这是算术必然，不是观察结果。</p>
+      <p class="infer"><b>这一步是推断：</b>「6 个新管理岗来自 3 家」→「这几家在补交付层级」是推理，本期不支持升级：n=14 未做显著性检验，无法与随机分布区分；也未读 JD 确认这些岗是否属 FDE 交付组织。</p>
     </div>
   </div>
 
@@ -120,30 +125,30 @@
     <div class="zone-k">假设</div>
     <div class="zone-b">
       <p><b>A1</b> 岗位标题能代理岗位职能。<span class="ifwrong">「Forward Deployed Strategist」这类混合标题可能被误分类，管理岗实际数量会变。</span></p>
-      <p><b>A2</b> 14 天窗口足以反映结构。<span class="ifwrong">若管理岗招聘周期长、长期在架，任意窗口都会看到它们，就不代表「新增趋势」。</span></p>
+      <p><b>A2</b> 该桶在库内最早出现的日期等于真实首次挂出日期。<span class="ifwrong">若抓取此前未覆盖该板，首见日会晚于真实挂出日，导致「新岗」被高估。</span></p>
     </div>
   </div>
 
   <div class="zone">
     <div class="zone-k">替代解释</div>
     <div class="zone-b">
-      <p><b>H2</b> 管理岗招聘周期长、长期在架，任意窗口都能看到。<span class="dist"><b>如何区分：</b>看首次挂出日期。本期有 3 条在 14 天内重复出现（Databricks TPM、Scale AI Senior Applied AI、Cursor Regional Director），说明至少 3 条不是新挂；其余 6 条首挂日期未查。</span></p>
-      <p><b>H3</b> 这几家基数大，管理岗自然多，与建交付体系无关。<span class="dist"><b>如何区分：</b>用存量归一化——Databricks 存量 55、管理岗 4（7%）；OpenAI 69、3（4%）；Anthropic 12、1（8%）。三家比例接近，不支持「仅因基数大」。</span></p>
+      <p><b>H2</b> 这些管理岗其实早就挂着，只是抓取此前没覆盖到。<span class="dist"><b>已排除一部分：</b>Databricks、OpenAI、Anthropic 三块板在库内均有 9 月前的岗位记录，说明抓取已覆盖。</span></p>
+      <p><b>H3</b> 窗口长度与公司数量限制了观察，6/14 不构成倾向。<span class="dist"><b>本期无法区分：</b>需延长到 30 天窗口重算，或等 3 期窗口累计后再判断。</span></p>
     </div>
   </div>
 
   <div class="zone">
     <div class="zone-k">反证 / 未披露</div>
     <div class="zone-b">
-      <p>15 个执行岗分布在 7 家，说明这些公司同时也在补人力——不能读成「只管交付不管写代码」。</p>
-      <p class="muted">未做：去重键是「公司 × 职级」，不等于真实岗位数（同一职级可能多地多招）；本期未读 JD 正文，分类仅凭标题；未查 6 条管理岗的首次挂出日期。</p>
+      <p>8 个新工程岗同时在出现，说明这些公司仍在补工程执行人力，不能读成「只补管理不补人手」。</p>
+      <p class="muted">未做：去重键是「公司 × 职级标题」，不等于真实岗位数（同一职级可能多地多招）；「首见」依赖库内采集历史；本期未读 JD 正文。</p>
     </div>
   </div>
 
   <div class="zone next">
     <div class="zone-k">下期核对</div>
     <div class="zone-b">
-      <p><b>谁</b> 每日岗位抓取 · <b>何时</b> 下一期 · <b>看什么</b> 下一 14 天窗口：管理岗是否仍集中于同类少数公司；并至少读 3 条 JD 正文确认其归属 FDE 交付组织。</p>
+      <p><b>谁</b> 每日岗位抓取 · <b>何时</b> 2026-11-19 发布前 · <b>看什么</b> 用同样方法统计下一窗口的新管理岗数与来源公司数，并至少读 3 条 JD 正文确认其归属 FDE 交付组织。若仍集中于少数公司，可考虑升级为判断；若分散，本条记为偶发。</p>
     </div>
   </div>
 </article>
@@ -151,7 +156,7 @@
 <!-- ========== J3 ========== -->
 <article class="judg" id="j3">
   <div class="j-head"><span class="j-id">J3</span><span class="j-level lvl-fact">事实</span></div>
-  <h2 class="j-line">本期 5 条客户案例页，一条都没入库。</h2>
+  <h2 class="j-line">窗口内 5 条客户案例页，没有一条进库。</h2>
   <div class="j-marks">
     <span><b>Likelihood</b> 不适用（事实陈述）</span>
     <span><b>Confidence</b> 高</span>
@@ -162,9 +167,9 @@
   <div class="zone">
     <div class="zone-k">事实</div>
     <div class="zone-b">
-      <p>近 14 天采集到 <b>5</b> 条客户案例事件，落地页全部是 customers / customer-stories 路径。<span class="q">样本：近 14 天 lane=deploy · 窗口：2026-10-29 至 11-11 · 分母：5 · 本期新增</span></p>
-      <p>按 source_url 反查 cases 表，<b>5</b> 条全部未入库（<b>0/5</b>）。<span class="q">样本：上述 5 条 URL · 同窗口 · 分母：5 · 本期新增</span></p>
-      <p>近 14 天 42 条事件构成：岗位发布 27、岗位普查 10、客户案例 5、部署成效类 <b>0</b>。<span class="q">样本：近 14 天全部事件 · 同窗口 · 分母：42 · 本期新增</span></p>
+      <p>窗口内采集到 <b>5</b> 条客户案例事件，落地页全部是 customers / customer-stories 路径。<span class="q">样本：窗口内 lane=deploy · 窗口：10-29 至 11-11 · 分母：5 · 本期新增</span></p>
+      <p>按 source_url 反查 cases 表，<b>5</b> 条全部未命中（<b>0/5</b>）。<span class="q">样本：上述 5 条 URL · 同窗口 · 分母：5 · 本期新增</span></p>
+      <p>窗口内全部事件 <b>30</b> 条，构成：岗位发布 25、客户案例 5、部署成效类 <b>0</b>。<span class="q">样本：窗口内全部事件 · 同窗口 · 分母：30 · 本期新增</span></p>
       <p>库内 <b>559</b> 条案例的 measured_outcome 字段：明确写无可量化指标 77、为空 51、只有文字无数字 31、含数字 400。<span class="q">样本：cases 全表 · 窗口：库内全量 · 分母：559 · 存量</span></p>
     </div>
   </div>
@@ -172,22 +177,16 @@
   <div class="zone">
     <div class="zone-k">判断</div>
     <div class="zone-b">
-      <p>本期读不到可核对的成效数字，不是因为我们判断厂商没披露，而是这 5 条页面根本没被加工入库——这是 J1 的直接后果。因此本期无法判断厂商披露率，只能说我们自己没有产出。</p>
+      <p>本期读不到可核对的成效数字，直接原因不是厂商没写，而是这 5 条页面根本没进库。这是 J1 的可见后果之一。</p>
       <p class="infer"><b>这一步是推断：</b>「5 条未入库」可复核；但「入库后是否就有成效数字」未验证，因为没读原文。</p>
     </div>
   </div>
 
   <div class="zone">
-    <div class="zone-k">假设</div>
+    <div class="zone-k">假设 / 替代解释</div>
     <div class="zone-b">
-      <p><b>A1</b> 这 5 条落地页确实含客户与成效描述。<span class="ifwrong">若部分页面只是客户 logo 墙，则「未入库」的损失小于估计。</span></p>
-    </div>
-  </div>
-
-  <div class="zone">
-    <div class="zone-k">替代解释</div>
-    <div class="zone-b">
-      <p><b>H2</b> 厂商这几篇确实没写成效，就算入库也没数字。<span class="dist"><b>如何区分：</b>需要读这 5 篇原文。本期未读，因此无法排除——这也是为什么本条只写「未入库」，不写「厂商未披露」。</span></p>
+      <p><b>A1</b> 这 5 条落地页确实含客户与成效描述。<span class="ifwrong">若部分页面只是客户 logo 墙，则未入库的损失小于估计。</span></p>
+      <p><b>H2</b> 这 5 篇本身没写成效，即使入库也拿不到数字。<span class="dist"><b>本期无法区分：</b>需读原文。因此本条只写「未入库」，不写「厂商未披露」。</span></p>
     </div>
   </div>
 
@@ -202,7 +201,7 @@
   <div class="zone next">
     <div class="zone-k">下期核对</div>
     <div class="zone-b">
-      <p><b>谁</b> 案例抽取与人工复核 · <b>何时</b> 下一期 · <b>看什么</b> 读这 5 篇原文，逐条记录是否给出基线、观察期与复核方式；对已入库的 400 条含数字记录抽 10 条回原文核对分母，测算偏差率。</p>
+      <p><b>谁</b> 案例抽取与人工复核 · <b>何时</b> 2026-11-19 发布前 · <b>看什么</b> 读这 5 篇原文，逐条记录是否给出基线、观察期与复核方式；对已入库的 400 条含数字记录抽 10 条回原文核对分母，测算偏差率。</p>
     </div>
   </div>
 </article>
@@ -210,24 +209,24 @@
 <!-- ========== 台账 ========== -->
 <section class="ledger" id="ledger">
   <h2>判断台账</h2>
-  <p class="lede">第 4–5 期为结构示例，未逐条回填来源链接，因此不按真实兑现计入。第 6 期有一条被本期改判为<b>证伪</b>：原判断把原因归到「厂商不披露」，本期查明是我方加工停摆。改判留痕，不静默替换。</p>
+  <p class="lede">第 4 期为结构示例，未逐条回填来源链接，不按真实兑现计入。第 6 期有一条被本期改判为<b>证伪</b>：原判断把原因归到「厂商不披露」，本期查明是我方案例关联停止写入。改判留痕，不静默替换。</p>
   <div class="ledger-rows">
-    <div class="lr"><span class="lr-p">第 4 期</span><span class="lr-t">FDE 招聘从通用岗向垂直岗扩展</span><span class="lr-s s-part">部分兑现</span><span class="lr-n">后续出现金融服务与区域专岗；岗位数不代理团队规模。</span></div>
-    <div class="lr"><span class="lr-p">第 5 期</span><span class="lr-t">非工程类 FDE 岗位开始出现</span><span class="lr-s s-track">追踪中</span><span class="lr-n">本期 9 个管理岗可作侧证，但集中于 4 家，仍未见到组织披露。</span></div>
-    <div class="lr"><span class="lr-p">第 6 期</span><span class="lr-t">公开案例量化结果比例偏低</span><span class="lr-s s-false">证伪</span><span class="lr-n">原因不是厂商不披露，而是案例加工自 8-27 起停止。原判断归因错误，本期改判。</span></div>
-    <div class="lr"><span class="lr-p">第 7 期</span><span class="lr-t">案例加工自 8-27 起 100% 停止</span><span class="lr-s s-track">追踪中</span><span class="lr-n">下期以案例关联数是否恢复为判据。</span></div>
+    <div class="lr"><span class="lr-p">第 4 期</span><span class="lr-t">FDE 招聘从通用岗向垂直岗扩展</span><span class="lr-s s-part">部分兑现</span><span class="lr-n">结构示例，未回填来源，不计入真实兑现。</span></div>
+    <div class="lr"><span class="lr-p">第 5 期</span><span class="lr-t">非工程类 FDE 岗位开始出现</span><span class="lr-s s-track">追踪中</span><span class="lr-n">本期 6 个新管理岗可作侧证，但样本不足以升级。</span></div>
+    <div class="lr"><span class="lr-p">第 6 期</span><span class="lr-t">公开案例量化结果比例偏低</span><span class="lr-s s-false">证伪</span><span class="lr-n">原因不是厂商不披露，而是案例关联自 08-26 起停止写入。原判断归因错误，本期改判。</span></div>
+    <div class="lr"><span class="lr-p">第 7 期</span><span class="lr-t">案例关联字段自 08-26 后停止写入</span><span class="lr-s s-track">追踪中</span><span class="lr-n">下期以新部署事件的关联数是否恢复为判据。</span></div>
   </div>
 </section>
 
 <!-- ========== 方法与来源 ========== -->
 <section class="method" id="method">
-  <h2>分级依据 / 来源 / 独立复核</h2>
+  <h2>分级依据 / 来源 / 两轮独立复核</h2>
   <div class="m-grid">
     <div>
       <h3>三条判断为什么级别不同</h3>
       <ul>
-        <li><b>暂定结论</b>（J1）：2% 对 100% 构成诊断性对比；两条替代解释 H2/H3 已用数据否掉。</li>
-        <li><b>观察</b>（J2）：只有招聘单面，找不到只与本判断相容的证据；H3 用存量归一化部分排除，H2 未能排除。</li>
+        <li><b>暂定结论</b>（J1）：同年基线 7.1% 对断点后 100%，构成诊断性对比；三条替代解释中两条已用数据排除、一条自行设界。</li>
+        <li><b>观察</b>（J2）：只有招聘单面，找不到只与本判断相容的证据；H3 本期无法区分，故不得升级。</li>
         <li><b>事实</b>（J3）：按 URL 逐条反查，可完全复核。</li>
       </ul>
       <p class="muted">分级依据：<code>docs/standards/03-interpretation.md</code> 第 4 节「解读的三种合法强度」与 ACH 诊断性证据规则。</p>
@@ -237,9 +236,9 @@
       <table class="src">
         <thead><tr><th>ID</th><th>材料</th><th>等级</th><th>获取</th><th>状态</th></tr></thead>
         <tbody>
-          <tr><td>S1</td><td>world_events 部署事件 / 关联 / day 字段</td><td>F6 自有库</td><td>内部</td><td>已核实</td></tr>
-          <tr><td>S2</td><td>world_events 岗位发布</td><td>D2 招聘信号</td><td>内部</td><td>已核实</td></tr>
-          <tr><td>S3</td><td>cases measured_outcome / source_url</td><td>F6 整理字段</td><td>内部</td><td>已核实</td></tr>
+          <tr><td>S1</td><td>world_events（部署事件 / case_id / day / collected_on）</td><td>F6 自有库</td><td>内部</td><td>已核实</td></tr>
+          <tr><td>S2</td><td>world_events（岗位发布）</td><td>D2 招聘信号</td><td>内部</td><td>已核实</td></tr>
+          <tr><td>S3</td><td>cases（source_url / measured_outcome）</td><td>F6 整理字段</td><td>内部</td><td>已核实</td></tr>
           <tr><td>S4</td><td>world_ingest_runs 扫描量</td><td>F6 自有库</td><td>内部</td><td>已核实</td></tr>
           <tr><td>S5</td><td>岗位普查快照</td><td>D2 招聘信号</td><td>内部</td><td>已核实</td></tr>
         </tbody>
@@ -249,16 +248,24 @@
   </div>
 
   <div class="review-note">
-    <h3>本期做过一次独立复核，改了五处</h3>
-    <p>邀请一个未看过本项目的独立读者，只读 L2 分区（不含标题与结论），自行重走推理。它提出的问题被采纳如下：</p>
+    <h3>本期做过两轮独立复核，改了八处</h3>
+    <p>每一轮都请一位没看过本项目、也未读过前稿的读者，只给 L1 或 L2 文本，让其自行重走推理。采纳如下：</p>
+    <p class="rn-title">第一轮</p>
     <ul>
-      <li>J1 原稿用 478 作分母得出「6% 漏关联」，掩盖了「8-27 后 100% 未关联」这个诊断性事实 → <b>已改用 85 / 27 分段对比</b></li>
-      <li>J1「最后一条关联事件」却标分母 449，语义不合 → <b>已改为分段统计</b></li>
-      <li>J2 原稿写「而不是更多人手」，与 15 条执行岗直接冲突 → <b>已删除该表述</b></li>
-      <li>J2 去重键实为「公司 × 职级」，非「岗位」，且未说明公司覆盖 → <b>已补写并给出集中度</b></li>
-      <li>J3 原稿拿存量 400 条谈「本期新案例」，人群错位 → <b>已改为「5 条未入库」</b></li>
+      <li>J1 原稿用 478 作分母得出「6% 漏关联」，掩盖了断点对比 → <b>改为同年分段对比</b></li>
+      <li>J2 原稿写「而不是更多人手」，与 15 条执行岗冲突 → <b>删除该表述</b></li>
+      <li>J2 去重键实为「公司 × 职级」，非「岗位」 → <b>补写并给出公司分布</b></li>
+      <li>J3 原稿拿存量 400 条谈「本期新案例」，人群错位 → <b>改为「5 条未入库」</b></li>
     </ul>
-    <p class="muted">未采纳一项：复核者建议删除 J3 整条。保留理由：「5 条未入库」是可复核事实，且构成 J1 的证据链一环。</p>
+    <p class="rn-title">第二轮</p>
+    <ul>
+      <li>J1「加工完全停止」超出证据，实际只观测到 case_id 一个字段 → <b>标题收窄为「案例关联字段停止写入」，置信度由高降为中</b></li>
+      <li>J1 断点写「8 月 27 日」但 08-27 至 08-31 无数据 → <b>改为「8 月 26 日之后」，并披露该空窗</b></li>
+      <li>J1 两侧密度跨 2019–2026 不可比 → <b>改用 2026 年同年基线（28 条 vs 30 条）</b></li>
+      <li>J2「新出现」「集中」被自身事实否掉，7%/4%/8% 的归一化是假精度 → <b>改为分布事实陈述，删除趋势断言</b></li>
+      <li>未区分「366 条无日期是否同一次故障的产物」 → <b>补充 H4 并用 collected_on 单日导入数据排除</b></li>
+    </ul>
+    <p class="muted">未采纳一项：第二轮建议删除 J3 整条。保留理由：「5 条未入库」是可复核事实，且构成 J1 的独立佐证。</p>
   </div>
 
   <div class="pi-note">
@@ -266,7 +273,7 @@
     <ul>
       <li>没有阅读任何岗位 JD 正文（J2 分类仅凭标题）。</li>
       <li>没有读这 5 条新案例原文，也没对 400 条含数字记录抽样核对分母（J3 的可比性未验证）。</li>
-      <li>没有核查 366 条无日期部署事件的来源，因此无法判断 8-27 之前更早时期是否也有中断。</li>
+      <li>没有做全库表扫描，因此无法排除「内容写进了第三张未审查的表」。</li>
       <li>没有独立客户访谈、合同或项目账本，因此不提供市场报价、平均 ROI、供应商评级。</li>
       <li>没有使用任何绕过付费墙或登录墙获得的材料。</li>
     </ul>
@@ -274,7 +281,7 @@
 </section>
 
 <footer>
-  <div class="f-l"><b>imfde.ai 情报</b><p>第 7 期 · 2026-11-11 · 自有 89 信源</p></div>
+  <div class="f-l"><b>imfde.ai 情报</b><p>第 7 期 · 2026-11-12 发布 · 资料截止 2026-11-11</p></div>
   <div class="f-r"><p>本期判断下期逐条核对；改判必须写明触发信息与旧判断错在哪。</p></div>
 </footer>
 </main>
