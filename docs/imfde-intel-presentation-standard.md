@@ -103,6 +103,8 @@ Sherman Kent 1964 年《Words of Estimative Probability》记录了 NIE 29-51 �
 
 **禁止跨口径汇总**：厂商自述、媒体转述、招聘 JD、结构化整理字段四类数字不得相加、平均或排名。
 
+**市场对照（2026-11-11 实抓）**：FDE Pulse 的 `$185K Median Base` 紧邻 `n=216 disclosed`、`Active FDE Jobs 1261 updated weekly`；FDE Hub 首屏指标紧邻 `Indeed · 2025.4–2026.4`、`LinkedIn · 2023–2025`；Perspective AI 报告写明 `1,500 respondents / 154 companies / Feb–Apr 2026`。**这三家都把口径做成展示元素，不是脚注**。因此 D4 的最小可接受形态是：数字旁直接显示 `n=` 与时间窗；只放在文末「数据来源」页视为未通过。本会话早前 demos 把 559 条案例、69 个岗位等数字裸放在首屏而无口径，按 D4 应退回。
+
 ---
 
 ## 4. 视觉编码：只编码结构，不制造结论
@@ -155,7 +157,7 @@ Sherman Kent 1964 年《Words of Estimative Probability》记录了 NIE 29-51 �
 
 ---
 
-## 7. 展示红线 P1–P8（与内容红线并列，一票否决）
+## 7. 展示红线 P1–P9（与内容红线并列，一票否决）
 
 | 编号 | 红线 | 判定 |
 |---|---|---|
@@ -167,17 +169,20 @@ Sherman Kent 1964 年《Words of Estimative Probability》记录了 NIE 29-51 �
 | P6 | **复述冒充解释**：解释段只是把判断换句话又说一遍 | 是否写了推理链/替代/确定度/推翻条件 |
 | P7 | **无替代解释**：反直觉或低证据判断只给一种解释 | 至少 1 个 + 区分指标 |
 | P8 | **跨期关系缺失**：不写首次/一致/变更，也无下期核对指标 | 查跨期字段 |
+| P9 | **常驻营销指标冒充本期变化**：把「+729% 岗位增幅」「559 条案例」这类长期背景数字放在首屏，却让读者误以为是本期新发现（FDE Hub 首屏四个指标是常驻营销数据，不是本期情报） | 首屏每个数字必须标明「本期新增 / 截至某日的存量 / 常驻背景」三者之一；未标即挂 |
+
+> P9 依据：`.zcode/research-fde-intel.md` 对 FDE Hub 首屏的核查。P1–P9 为 v1.1 版。
 
 ---
 
-## 8. 展示验收（D1–D10，过 P1–P8 后打分）
+## 8. 展示验收（D1–D10，过 P1–P9 后打分）
 
 | # | 检查 | 通过标准 |
 |---|---|---|
 | D1 | 20 秒测试 | 只看 L1 的读者能复述出与情报员一致的意思（复述偏差 = 失败） |
 | D2 | 独立成篇 | 遮住 L2/L3，L1 仍成立且不误导 |
 | D3 | 溯源距离 | 任一句事实 → 来源 ≤1 次点击 |
-| D4 | 口径同屏 | L1 每个数字，同屏可见样本/时间窗/分母 |
+| D4 | 口径同屏 | L1 每个数字，同屏可见 `n=` / 样本 / 时间窗 / 分母；只放文末来源页视为未通过 |
 | D5 | 分区可辨 | 关掉样式（纯文本）仍能分清事实/判断/假设/反证 |
 | D6 | 措辞合规 | 全篇 likelihood 只来自固定词表；confidence 不同句 |
 | D7 | 解释完整 | 推理链 + 替代解释 + 确定度来源 + 推翻条件，四项齐全 |
@@ -216,9 +221,10 @@ Sherman Kent 1964 年《Words of Estimative Probability》记录了 NIE 29-51 �
 
 ## 10. 与验收标准的衔接
 
-- 内容合格看 R1–R9 + C1–C12；**内容合格但展示不合格（P 系列）仍不得发布**。
+- 内容合格看 R1–R10 + C1–C12；**内容合格但展示不合格（P1–P9）仍不得发布**。
 - 评级记录需同时写 `content: A/B/C` 与 `display: 通过/退回`。
-- 连续 3 期「内容 A + 展示通过」才允许开放付费入口。
+- 连续 3 期「内容 A + 展示通过」才允许开放付费入口；付费层必须卖功能（跨期台账/全库检索/来源快照/方法论页四选三），不卖更多同类文章。
+- **连续性的最低成本形态**：即使尚未建台账系统，每期至少有一句公开回指旧判断并说明新信息是否印证（Stratechery 正文 `...it strongly affirms my initial analysis` 是市场实抓到的最低可行做法）。系统可后建，留痕习惯不能等。
 - 本规范与验收标准同版修订；红线只增不减。
 
 ---
@@ -235,3 +241,14 @@ Sherman Kent 1964 年《Words of Estimative Probability》记录了 NIE 29-51 �
 - [arXiv 2102.08180, *Value of Information for Argumentation based Intelligence Analysis*](https://arxiv.org/pdf/2102.08180) — ACH 矩阵的证据×假设一致性标注与诊断性。
 - [*Visualizing versus verbalizing uncertainty in intelligence analysis*, Intelligence and National Security, 2025](https://www.tandfonline.com/doi/abs/10.1080/02684527.2025.2468049) — 视觉编码可降低认知负荷，但目前尚无统一惯例；故本规范要求以文字标签为主。
 - [Threat Intelligence Lab: Writing and Briefing Strategic Intelligence](https://www.threatintelligencelab.com/courses/strategic-cyber-threat-intelligence-risk-scenarios-executive-decisions/executive-communication-governance-and-impact/writing-and-briefing-strategic-intelligence) — 用矩阵比较、区分观察与估计、显式表示不确定性与缺失证据、避免装饰性复杂。
+- [FDE Hub（实抓首屏）](https://fdehub.cc) — 常驻营销指标 vs 本期判断（P9 依据）。
+- [FDE Pulse（实抓首屏与 Brief）](https://fdepulse.com) — `n=216 disclosed` / `updated weekly` 口径同屏（D4 依据）。
+- [Perspective AI《State of FDE 2026》（实抓 methodology）](https://getperspective.ai/blog/state-of-forward-deployed-engineering-2026-survey-report-1500-fdes) — TL;DR、样本口径、厂商立场（R10 依据）。
+- [CB Insights Research（实抓）](https://www.cbinsights.com/research) — `Double-verified, continually refreshed`、报告标题即判断+时间口径。
+- [Forrester Signature Research（实抓）](https://www.forrester.com/research/) — 固定内容类型词表、方法论绑定评级、订阅平台付费切点。
+- [Stratechery（实抓首页）](https://stratechery.com) — 正文回指旧判断，连续性的最低成本形态。
+
+## 修订记录
+
+- v1.0：初版，三层阅读契约 / 版式 / 措辞受控表 / 视觉编码 / 解释四件事 / 跨期展示 / P1–P8 / D1–D10。
+- v1.1（市场维度）：新增 P9 常驻指标冒充本期变化；D4 强化为数字旁强制 `n=` 与时间窗；补「连续性最低成本形态」；付费层必须卖功能；依据补 6 个实抓竞品页面。详见 `.zcode/research-traditional-intel.md`、`.zcode/research-fde-intel.md`、`.zcode/research-page-checks.md`。

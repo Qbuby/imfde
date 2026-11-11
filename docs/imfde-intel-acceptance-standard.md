@@ -61,6 +61,9 @@ imfde 做的是**公开来源的行业情报**：把外部世界发生的事，�
 | R7 | **无证据的锐利**：为制造「价值感」而造矛盾、造冲突、造结论 | 反直觉结论必须有 ≥2 个独立源；否则降级为「观察」 |
 | R8 | **本体越界**：替读者做采购/招聘/组织/成本决定 | 出现方案、任务书、成本测算、决策建议即挂 |
 | R9 | **假连续性**：台账、历史期次、兑现记录是编造或演示数据却按真实呈现 | 每条台账记录必须能回指某期原文与核对日期 |
+| R10 | **利益立场未披露**：厂商发布的、关于其自身产品品类的调查或报告被当作独立行业基准引用（Perspective AI《State of FDE 2026》即典型：报告结论恰好利好它自己的 conversational research 工具） | 凡来源为厂商且结论涉及该厂商所在品类，L1 必须标「厂商自述 / 带利益立场」；否则不得进入判断句 |
+
+> R10 依据：`.zcode/research-fde-intel.md` 对 Perspective AI 报告原文的核查。R1–R10 为 v1.1 版，红线只增不减。
 
 ---
 
@@ -91,6 +94,7 @@ imfde 做的是**公开来源的行业情报**：把外部世界发生的事，�
 - **C 级**：<16 → 退回重做。
 
 **付费层额外门槛**（在 A 级之上）：必须有 ① 跨期核对记录 ② 替代分析 ③ 来源评级表 ④ 改判留痕。缺一不设付费入口。
+**付费层必须卖功能，不卖「更多同类文章」**：跨期台账 / 全库检索 / 来源快照 / 方法论页，四选三方可设付费入口。市场依据：Forrester 付费层是全库检索+框架+分析师访问；FDE Hub 内容全免费、靠 B 端撮合变现；FDE Pulse 数据与 Brief 免费、雇主侧收费——**没有一家把公开新闻摘要锁起来收费**（见两份调研报告）。
 
 **上线门槛**：连续 **3 期**达到 A 级，才允许开放订阅/付费入口；此前只做免费层。这是防止「先卖后补」的硬约束。
 
@@ -181,3 +185,10 @@ review: {by: , date: , result: A/B/C/退回}
 - [MISP admiralty-scale taxonomy](https://github.com/MISP/misp-taxonomies/) — 机器可读的评级词表。
 - [UserSearch: Admiralty Code in OSINT](https://usersearch.com/resources/intel-hub/blog/admiralty-code-osint-source-grading) — F/6 表示「无法判断」而非否定；两轴不可合并打分。
 - [Kelly et al. (2024), *The Effect of Source Reliability and Information Credibility on Judgments of Information Quality in Intelligence Analysis*](https://econpapers.repec.org/article/cupjudgdm/) — 指出专家与新手都可能误用信息评价体系，因此本标准要求「来源码 + 人工复核」双轨，不迷信自动评级。
+- 市场核查（v1.1 新增）：[FDE Hub](https://fdehub.cc)、[FDE Pulse](https://fdepulse.com)、[Perspective AI《State of FDE 2026》](https://getperspective.ai/blog/state-of-forward-deployed-engineering-2026-survey-report-1500-fdes)、[CB Insights Research](https://www.cbinsights.com/research)、[Forrester Signature Research](https://www.forrester.com/research/) — 详见 `.zcode/research-traditional-intel.md` 与 `.zcode/research-fde-intel.md`。
+
+## 修订记录
+
+- v1.0：初版，R1–R9 / C1–C12 / 证据卡 / 情报-工程验收分离。
+- v1.1（市场维度）：新增 R10 利益立场；付费层增加「必须卖功能而非更多文章」门槛；依据补市场实抓页面。
+- 待办（来自展示规范修订）：R1–R10 与 P 系列联合发布检查表尚未合并成单一 checklist 文件。
