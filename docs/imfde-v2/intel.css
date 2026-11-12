@@ -128,3 +128,39 @@ footer{max-width:1000px;margin:0 auto;padding:26px;display:flex;justify-content:
 .review-note li{margin-bottom:7px}
 .s-false{color:#8c3b2f}
 .rn-title{font-size:12px;font-weight:700;letter-spacing:.8px;color:var(--green);margin:14px 0 6px!important}
+
+/* ---- 第 8 期改版：可读优先 ---- */
+.gloss{font-size:13px;color:var(--mut);background:var(--sand);padding:10px 14px;margin:0 0 26px;
+  border-left:2px solid var(--line);line-height:1.8}
+.gloss b{color:var(--soft);font-weight:600}
+.find{padding:34px 0;border-top:1px solid var(--line)}
+.find h2{font-size:clamp(20px,2.4vw,24px);font-weight:600;line-height:1.5;margin:0 0 6px;letter-spacing:-.2px}
+.find .mark{font-size:12px;color:var(--mut);margin:0 0 16px}
+.find .mark b{font-weight:600;color:var(--soft)}
+.find p{font-size:15.5px;color:var(--soft);line-height:1.95;margin:0 0 14px}
+.find p:last-child{margin-bottom:0}
+.find .lead-in{color:var(--ink)}
+.find ul{margin:0 0 14px;padding-left:20px;font-size:15.5px;color:var(--soft);line-height:1.95}
+.find li{margin-bottom:7px}
+.find li b{color:var(--ink)}
+.why{margin-top:26px;padding:20px 22px;background:var(--green-soft);border-left:3px solid var(--green)}
+.why h3{font-size:14px;font-weight:600;margin:0 0 10px;color:var(--green);letter-spacing:.4px}
+.why dl{margin:0;font-size:14.5px;line-height:1.9}
+.why dt{font-weight:600;color:var(--ink);margin-top:10px}
+.why dt:first-child{margin-top:0}
+.why dd{margin:2px 0 0;color:var(--soft)}
+.doubt{padding:30px 0;border-top:1px solid var(--line)}
+.doubt h2{font-size:17px;font-weight:600;margin:0 0 12px}
+.doubt ul{margin:0;padding-left:20px;font-size:14px;color:var(--soft);line-height:1.9}
+.doubt li{margin-bottom:6px}
+.watch{padding:30px 0;border-top:1px solid var(--line)}
+.watch h2{font-size:17px;font-weight:600;margin:0 0 12px}
+.watch ol{margin:0;padding-left:20px;font-size:14.5px;color:var(--soft);line-height:1.9}
+.watch li{margin-bottom:10px}
+.watch b{color:var(--ink)}
+@media(max-width:760px){
+  .find p,.find ul{font-size:15px}
+  .gloss{margin-bottom:20px}
+}
+.sub p{margin:0 0 14px;max-width:720px}
+.sub p:last-child{margin-bottom:0}
