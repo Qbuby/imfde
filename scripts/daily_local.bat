@@ -20,7 +20,8 @@ cd /d "%ROOT%"
 "%PY%" scripts\build_public_db.py >> "%LOG%" 2>&1
 
 rem ---- 2. pregen AI reports (needs AI_API_KEY) ----
-if "%AI_API_KEY%"=="" set "AI_API_KEY=sk-70363b8a11fb463c8fe6f25b89f3d845"
+rem 密钥放在 scriptsi_key.bat（已 gitignore），不要写回本文件
+if "%AI_API_KEY%"=="" if exist "%~dp0ai_key.bat" call "%~dp0ai_key.bat"
 set "AI_BASE_URL=https://api.deepseek.com/v1"
 set "AI_MODEL=deepseek-flash"
 if "%AI_API_KEY%"=="PASTE_MINIMAX_KEY_HERE" (

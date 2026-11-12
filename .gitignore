@@ -19,3 +19,4 @@ scripts/t_mob_*.py
 nul
 .dev.vars
 .wrangler/
+scripts/ai_key.bat

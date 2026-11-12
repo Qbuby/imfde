@@ -10943,3 +10943,74 @@ OK sitemap.xml  105 KB
 OK _redirects
 
 完成。git 提交 portal/ 后，Cloudflare Workers 静态资产直接服务。
+warning: in the working copy of 'daily_update.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/a16z.com__home.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/augmentcode.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/augmentcode.com__customers__Pure-storage-scales-2000-engineers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/aws.amazon.com__blogs.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/blend360.com__news.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/cresta.com__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/databricks.com__blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/databricks.com__forward-deployed-engineering.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/factory.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__anthropic-forward-deployed-engineer-interview-guide.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__break-into-fde-without-faang.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-coding-interview-not-leetcode.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-interview-prep-mistakes.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-system-design-customer-constraints.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__fde-vs-software-engineer-comparison.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__google-forward-deployed-engineer-interview-guide.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/fdeinterviews.com__blog__why-forward-deployed-engineering-answer.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/harvey.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/intercom.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/intercom.com__customers__atlassian.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/moveworks.com__us__en__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers__tilt.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies__cody-leidos-maximizing-efficiency-heightened-security-ai-race.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sourcegraph.com__case-studies__nutanix-fixed-log4j-with-sourcegraph.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/svpg.com__home.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/writer.com__customers.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/youtube.com___aiDotEngineer.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/imfde-v2/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/imfde-v2/intel.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/standards/00-paywall-policy.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/standards/01-content.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/standards/02-display.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/standards/03-interpretation.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/glean.com__resources__customer-stories__leading-fintech-company.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'portal/world_raw/sierra.ai__customers__the-cigna-group.html', LF will be replaced by CRLF the next time Git touches it
+[main fbb47af] daily data refresh 鍛ㄥ洓 2026/11/12  0:07:56.52
+ 68 files changed, 6577 insertions(+), 842 deletions(-)
+ create mode 100644 docs/imfde-v2/index.html
+ create mode 100644 docs/imfde-v2/intel.css
+ create mode 100644 docs/standards/00-paywall-policy.md
+ create mode 100644 docs/standards/01-content.md
+ create mode 100644 docs/standards/02-display.md
+ create mode 100644 docs/standards/03-interpretation.md
+ create mode 100644 portal/ai-cache/25020a7b03a736d4.json
+ create mode 100644 portal/ai-cache/2fc9b7844e473f05.json
+ create mode 100644 portal/ai-cache/96a0cdbf28f24fcd.json
+ create mode 100644 portal/events/1260.html
+ create mode 100644 portal/events/1261.html
+ create mode 100644 portal/events/1262.html
+ create mode 100644 portal/events/1263.html
+ create mode 100644 portal/events/1264.html
+ create mode 100644 portal/events/1265.html
+ create mode 100644 portal/events/1266.html
+ create mode 100644 portal/events/1267.html
+ create mode 100644 portal/events/1268.html
+ create mode 100644 portal/events/1269.html
+ create mode 100644 portal/events/1270.html
+ create mode 100644 portal/events/1271.html
+ create mode 100644 portal/events/1272.html
+ create mode 100644 portal/events/1273.html
+ create mode 100644 portal/events/1274.html
+ create mode 100644 portal/world_raw/glean.com__resources__customer-stories__leading-fintech-company.html
+ create mode 100644 portal/world_raw/sierra.ai__customers__the-cigna-group.html
+To https://github.com/Qbuby/imfde.git
+   afd33e6..fbb47af  main -> main
+[?? 2026/11/12  0:08:02.18] === daily update done === 
