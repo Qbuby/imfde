@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-11T16:05:45Z",
-  "snapshot": "2026-11-12",
-  "since_day": "2026-10-13",
+  "written_at": "2026-11-12T16:07:19Z",
+  "snapshot": "2026-11-13",
+  "since_day": "2026-10-14",
   "increment": {
-    "scanned": 1434,
+    "scanned": 1437,
     "fde_hits": 12,
-    "already_in_db": 21,
-    "stale": 15,
-    "added_axis": 15,
+    "already_in_db": 20,
+    "stale": 17,
+    "added_axis": 11,
     "collected": 0,
     "review": 0
   },
-  "n_events": 713,
-  "n_axis": 334,
+  "n_events": 714,
+  "n_axis": 335,
   "n_review": 14,
-  "new_axis_this_run": 15,
+  "new_axis_this_run": 11,
   "by_lane_axis": {
     "company": 12,
     "deploy": 115,
-    "method": 187,
+    "method": 188,
     "people": 20
   },
-  "n_links": 273,
+  "n_links": 274,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1380,
+          "items": 1383,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 220,
+      "jobs": 222,
       "added": 10,
-      "fresh": 2,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
@@ -138,7 +138,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 70
+          "n": 72
         },
         {
           "id": "cohere-ashby",
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 14,
-    "added": 3,
+    "new_links": 11,
+    "added": 0,
     "no_date": 3,
     "details": [
       {
@@ -190,13 +190,13 @@
       },
       {
         "id": "glean-stories",
-        "new_links": 1,
-        "added": 1
+        "new_links": 0,
+        "added": 0
       },
       {
         "id": "sierra-customers",
-        "new_links": 6,
-        "added": 2
+        "new_links": 4,
+        "added": 0
       },
       {
         "id": "cresta-stories",
