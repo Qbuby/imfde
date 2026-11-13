@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-12T16:07:19Z",
-  "snapshot": "2026-11-13",
-  "since_day": "2026-10-14",
+  "written_at": "2026-11-13T16:03:49Z",
+  "snapshot": "2026-11-14",
+  "since_day": "2026-10-15",
   "increment": {
-    "scanned": 1437,
+    "scanned": 1440,
     "fde_hits": 12,
-    "already_in_db": 20,
+    "already_in_db": 18,
     "stale": 17,
-    "added_axis": 11,
+    "added_axis": 12,
     "collected": 0,
     "review": 0
   },
-  "n_events": 714,
-  "n_axis": 335,
+  "n_events": 716,
+  "n_axis": 337,
   "n_review": 14,
-  "new_axis_this_run": 11,
+  "new_axis_this_run": 12,
   "by_lane_axis": {
     "company": 12,
-    "deploy": 115,
+    "deploy": 117,
     "method": 188,
     "people": 20
   },
-  "n_links": 274,
+  "n_links": 276,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1383,
+          "items": 1386,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,14 +106,14 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 222,
+      "jobs": 218,
       "added": 10,
-      "fresh": 1,
+      "fresh": 0,
       "details": [
         {
           "id": "palantir-lever",
           "status": "axis",
-          "n": 41
+          "n": 40
         },
         {
           "id": "anthropic-greenhouse",
@@ -128,7 +128,7 @@
         {
           "id": "scale-greenhouse",
           "status": "axis",
-          "n": 14
+          "n": 13
         },
         {
           "id": "xai-greenhouse",
@@ -143,7 +143,7 @@
         {
           "id": "cohere-ashby",
           "status": "axis",
-          "n": 11
+          "n": 9
         },
         {
           "id": "replit-ashby",
@@ -170,14 +170,13 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 11,
-    "added": 0,
-    "no_date": 3,
+    "new_links": 19,
+    "added": 2,
+    "no_date": 4,
     "details": [
       {
         "id": "writer-customers",
-        "new_links": 0,
-        "added": 0
+        "status": "403"
       },
       {
         "url": "https://www.intercom.com/customers/atlassian",
@@ -228,7 +227,8 @@
       },
       {
         "id": "devin-customers",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+        "new_links": 7,
+        "added": 2
       },
       {
         "id": "moveworks-customers",
@@ -241,8 +241,13 @@
         "added": 0
       },
       {
+        "url": "https://cohere.com/customer-stories/ada",
+        "skip": "no strong date"
+      },
+      {
         "id": "cohere-stories",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
+        "new_links": 1,
+        "added": 0
       },
       {
         "id": "palantir-impact",
@@ -258,16 +263,8 @@
     "review": 0,
     "details": [
       {
-        "feed": "cognition-blog",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
-      },
-      {
         "url": "https://www.databricks.com/forward-deployed-engineering",
         "skip": "no strong date"
-      },
-      {
-        "feed": "cohere-blog",
-        "status": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of "
       },
       {
         "url": "https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
