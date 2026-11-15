@@ -1,20 +1,20 @@
 {
-  "written_at": "2026-11-14T16:07:43Z",
-  "snapshot": "2026-11-15",
-  "since_day": "2026-10-16",
+  "written_at": "2026-11-15T16:04:36Z",
+  "snapshot": "2026-11-16",
+  "since_day": "2026-10-17",
   "increment": {
     "scanned": 1441,
     "fde_hits": 12,
     "already_in_db": 18,
-    "stale": 17,
-    "added_axis": 11,
+    "stale": 19,
+    "added_axis": 10,
     "collected": 0,
     "review": 0
   },
   "n_events": 718,
   "n_axis": 339,
   "n_review": 14,
-  "new_axis_this_run": 11,
+  "new_axis_this_run": 10,
   "by_lane_axis": {
     "company": 12,
     "deploy": 119,
@@ -106,13 +106,14 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 175,
-      "added": 9,
+      "jobs": 215,
+      "added": 10,
       "fresh": 0,
       "details": [
         {
           "id": "palantir-lever",
-          "status": "IncompleteRead(3415068 bytes read, 2441825 more expected)"
+          "status": "axis",
+          "n": 40
         },
         {
           "id": "anthropic-greenhouse",
@@ -169,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 18,
-    "added": 2,
+    "new_links": 16,
+    "added": 0,
     "no_date": 4,
     "details": [
       {
@@ -193,8 +194,8 @@
       },
       {
         "id": "sierra-customers",
-        "new_links": 5,
-        "added": 1
+        "new_links": 4,
+        "added": 0
       },
       {
         "id": "cresta-stories",
@@ -226,8 +227,8 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 5,
-        "added": 1
+        "new_links": 4,
+        "added": 0
       },
       {
         "id": "moveworks-customers",
