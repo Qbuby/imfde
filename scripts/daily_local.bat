@@ -20,7 +20,7 @@ cd /d "%ROOT%"
 "%PY%" scripts\build_public_db.py >> "%LOG%" 2>&1
 
 rem ---- 2. pregen AI reports (needs AI_API_KEY) ----
-rem 密钥放在 scriptsi_key.bat（已 gitignore），不要写回本文件
+rem 密钥放在 scriptsi_key.bat（已 gitignore），不要写回本文件
 if "%AI_API_KEY%"=="" if exist "%~dp0ai_key.bat" call "%~dp0ai_key.bat"
 set "AI_BASE_URL=https://api.deepseek.com/v1"
 set "AI_MODEL=deepseek-flash"
@@ -39,8 +39,15 @@ git add -A >> "%LOG%" 2>&1
 if errorlevel 1 echo [ERROR] git add failed - check reserved names (nul) or locks >> "%LOG%"
 git commit -m "daily data refresh %date% %time%" >> "%LOG%" 2>&1
 if errorlevel 1 echo [WARN] git commit skipped or failed >> "%LOG%"
-git push origin main >> "%LOG%" 2>&1
-if errorlevel 1 echo [ERROR] git push failed >> "%LOG%"
+rem ---- 4. push 已停用 ----
+rem 本仓库的 Cloudflare Git 集成绑定 Worker 名 "imfde"，而 imfde.ai 的该 Worker
+rem 现归新产品（D:\program\imfde.ai，React Router + D1 作品集）。每次 push 都会
+rem 自动构建旧沙盘并覆盖线上新版（2026-11-20 00:15、15:52 两次实际发生）。
+rem 在 Cloudflare 面板断开该仓库的 Build 之前，这里不 push，只保留本地数据更新。
+rem 需要恢复推送时：删掉下面两行 rem 再执行一次 git push origin main。
+rem git push origin main >> "%LOG%" 2>&1
+rem if errorlevel 1 echo [ERROR] git push failed >> "%LOG%"
+echo [%date% %time%] push disabled: see comment above >> "%LOG%"
 
 echo [%date% %time%] === daily update done === >> "%LOG%"
 endlocal
