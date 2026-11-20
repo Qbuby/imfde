@@ -1,4 +1,8 @@
-name = "imfde"
+# 注意：不要改回 "imfde"。imfde.ai 这个域名与 Worker 名 "imfde" 已经属于
+# 新产品（D:\program\imfde.ai，React Router + D1 的 FDE 作品集）。此仓库的
+# Git 集成会在 push 后自动构建部署，若同名就会把线上新版覆盖成旧版沙盘
+# （2026-11-20 实际发生过一次）。旧沙盘固定用 imfde-sandbox 这个名字。
+name = "imfde-sandbox"
 main = "worker/index.js"
 compatibility_date = "2025-09-01"
 
