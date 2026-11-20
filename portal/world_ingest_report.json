@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-19T16:13:17Z",
-  "snapshot": "2026-11-20",
-  "since_day": "2026-10-21",
+  "written_at": "2026-11-20T16:05:26Z",
+  "snapshot": "2026-11-21",
+  "since_day": "2026-10-22",
   "increment": {
-    "scanned": 1447,
+    "scanned": 1472,
     "fde_hits": 12,
-    "already_in_db": 9,
+    "already_in_db": 15,
     "stale": 19,
     "added_axis": 12,
     "collected": 0,
     "review": 0
   },
-  "n_events": 728,
-  "n_axis": 349,
+  "n_events": 730,
+  "n_axis": 351,
   "n_review": 14,
   "new_axis_this_run": 12,
   "by_lane_axis": {
     "company": 12,
-    "deploy": 119,
-    "method": 198,
+    "deploy": 120,
+    "method": 199,
     "people": 20
   },
-  "n_links": 288,
+  "n_links": 290,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1413,
+          "items": 1418,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -82,7 +82,12 @@
         },
         {
           "id": "latent-space",
-          "status": "<urlopen error _ssl.c:1015: The handshake operation timed out>"
+          "status": "ok",
+          "items": 20,
+          "fde": 0,
+          "added": 0,
+          "already": 0,
+          "stale": 0
         }
       ]
     },
@@ -94,16 +99,16 @@
         {
           "id": "ai-engineer-youtube",
           "status": "ok",
-          "atom": "https://www.youtube.com/feeds/videos.xml?channel_id=UCONWr2M0moA8wsGHb3zUn_w",
+          "atom": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLKPca3kwwd-B59HNr-_lvA",
           "added": 0
         }
       ]
     },
     "ats": {
       "boards": 11,
-      "jobs": 153,
-      "added": 9,
-      "fresh": 3,
+      "jobs": 224,
+      "added": 10,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
@@ -118,7 +123,7 @@
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 58
+          "n": 53
         },
         {
           "id": "scale-greenhouse",
@@ -132,7 +137,8 @@
         },
         {
           "id": "openai-ashby",
-          "status": "IncompleteRead(1032183 bytes read, 12961917 more expected)"
+          "status": "axis",
+          "n": 76
         },
         {
           "id": "cohere-ashby",
@@ -164,13 +170,14 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 16,
-    "added": 0,
+    "new_links": 17,
+    "added": 1,
     "no_date": 4,
     "details": [
       {
         "id": "writer-customers",
-        "status": "403"
+        "new_links": 0,
+        "added": 0
       },
       {
         "url": "https://www.intercom.com/customers/atlassian",
@@ -183,8 +190,8 @@
       },
       {
         "id": "glean-stories",
-        "new_links": 0,
-        "added": 0
+        "new_links": 1,
+        "added": 1
       },
       {
         "id": "sierra-customers",
