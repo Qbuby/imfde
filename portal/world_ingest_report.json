@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-20T16:05:26Z",
-  "snapshot": "2026-11-21",
-  "since_day": "2026-10-22",
+  "written_at": "2026-11-21T16:04:41Z",
+  "snapshot": "2026-11-22",
+  "since_day": "2026-10-23",
   "increment": {
-    "scanned": 1472,
+    "scanned": 1475,
     "fde_hits": 12,
-    "already_in_db": 15,
-    "stale": 19,
+    "already_in_db": 16,
+    "stale": 18,
     "added_axis": 12,
     "collected": 0,
     "review": 0
   },
-  "n_events": 730,
-  "n_axis": 351,
+  "n_events": 732,
+  "n_axis": 353,
   "n_review": 14,
   "new_axis_this_run": 12,
   "by_lane_axis": {
     "company": 12,
     "deploy": 120,
-    "method": 199,
+    "method": 201,
     "people": 20
   },
-  "n_links": 290,
+  "n_links": 291,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1418,
+          "items": 1421,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,7 +106,7 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 224,
+      "jobs": 223,
       "added": 10,
       "fresh": 1,
       "details": [
@@ -118,7 +118,7 @@
         {
           "id": "anthropic-greenhouse",
           "status": "axis",
-          "n": 14
+          "n": 13
         },
         {
           "id": "databricks-greenhouse",
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 17,
-    "added": 1,
+    "new_links": 16,
+    "added": 0,
     "no_date": 4,
     "details": [
       {
@@ -190,8 +190,8 @@
       },
       {
         "id": "glean-stories",
-        "new_links": 1,
-        "added": 1
+        "new_links": 0,
+        "added": 0
       },
       {
         "id": "sierra-customers",
@@ -259,13 +259,19 @@
   },
   "peek": {
     "indexes": 12,
-    "candidates": 26,
-    "added": 0,
+    "candidates": 27,
+    "added": 1,
     "review": 0,
     "details": [
       {
         "url": "https://www.databricks.com/forward-deployed-engineering",
         "skip": "no strong date"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/anthropic-claude-forward-deployed-engineer-learning-path",
+        "day": "2026-11-19",
+        "title": "Anthropic's Claude Forward Deployed Enginee…",
+        "status": "axis"
       },
       {
         "url": "https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
@@ -299,11 +305,6 @@
       },
       {
         "url": "https://fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
-        "skip": "stale",
-        "day": "2026-06-21"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/break-into-fde-without-faang",
         "skip": "stale",
         "day": "2026-06-21"
       }
