@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-22T16:04:30Z",
-  "snapshot": "2026-11-23",
-  "since_day": "2026-10-24",
+  "written_at": "2026-11-23T16:03:58Z",
+  "snapshot": "2026-11-24",
+  "since_day": "2026-10-25",
   "increment": {
-    "scanned": 1475,
+    "scanned": 1476,
     "fde_hits": 12,
-    "already_in_db": 17,
+    "already_in_db": 15,
     "stale": 19,
-    "added_axis": 10,
+    "added_axis": 12,
     "collected": 0,
     "review": 0
   },
-  "n_events": 732,
-  "n_axis": 353,
+  "n_events": 734,
+  "n_axis": 355,
   "n_review": 14,
-  "new_axis_this_run": 10,
+  "new_axis_this_run": 12,
   "by_lane_axis": {
     "company": 12,
     "deploy": 120,
-    "method": 201,
+    "method": 203,
     "people": 20
   },
-  "n_links": 291,
+  "n_links": 293,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1421,
+          "items": 1422,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,14 +106,14 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 222,
+      "jobs": 223,
       "added": 10,
-      "fresh": 0,
+      "fresh": 2,
       "details": [
         {
           "id": "palantir-lever",
           "status": "axis",
-          "n": 40
+          "n": 41
         },
         {
           "id": "anthropic-greenhouse",
