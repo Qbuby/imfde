@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-23T16:03:58Z",
-  "snapshot": "2026-11-24",
-  "since_day": "2026-10-25",
+  "written_at": "2026-11-24T16:05:31Z",
+  "snapshot": "2026-11-25",
+  "since_day": "2026-10-26",
   "increment": {
-    "scanned": 1476,
+    "scanned": 1479,
     "fde_hits": 12,
     "already_in_db": 15,
-    "stale": 19,
-    "added_axis": 12,
+    "stale": 16,
+    "added_axis": 16,
     "collected": 0,
     "review": 0
   },
-  "n_events": 734,
-  "n_axis": 355,
+  "n_events": 740,
+  "n_axis": 361,
   "n_review": 14,
-  "new_axis_this_run": 12,
+  "new_axis_this_run": 16,
   "by_lane_axis": {
     "company": 12,
-    "deploy": 120,
-    "method": 203,
+    "deploy": 122,
+    "method": 207,
     "people": 20
   },
-  "n_links": 293,
+  "n_links": 296,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -47,7 +47,7 @@
         {
           "id": "openai-index",
           "status": "ok",
-          "items": 1422,
+          "items": 1425,
           "fde": 7,
           "added": 0,
           "already": 4,
@@ -106,14 +106,14 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 223,
+      "jobs": 225,
       "added": 10,
-      "fresh": 2,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
           "status": "axis",
-          "n": 41
+          "n": 40
         },
         {
           "id": "anthropic-greenhouse",
@@ -138,7 +138,7 @@
         {
           "id": "openai-ashby",
           "status": "axis",
-          "n": 76
+          "n": 79
         },
         {
           "id": "cohere-ashby",
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 16,
-    "added": 0,
+    "new_links": 18,
+    "added": 2,
     "no_date": 4,
     "details": [
       {
@@ -190,8 +190,8 @@
       },
       {
         "id": "glean-stories",
-        "new_links": 0,
-        "added": 0
+        "new_links": 2,
+        "added": 2
       },
       {
         "id": "sierra-customers",
@@ -259,13 +259,31 @@
   },
   "peek": {
     "indexes": 12,
-    "candidates": 26,
-    "added": 0,
+    "candidates": 29,
+    "added": 3,
     "review": 0,
     "details": [
       {
         "url": "https://www.databricks.com/forward-deployed-engineering",
         "skip": "no strong date"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/ai-engineer-interview-practice-25-fde-problems",
+        "day": "2026-11-24",
+        "title": "25 AI Engineer Interview Practice Problems,…",
+        "status": "axis"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/kv-cache-optimization-techniques-fde-guide",
+        "day": "2026-11-24",
+        "title": "8 KV Cache Optimization Techniques: What an…",
+        "status": "axis"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/karpathy-repositories-learning-path-forward-deployed-engineers",
+        "day": "2026-11-24",
+        "title": "Karpathy's GitHub Repositories: A Practical…",
+        "status": "axis"
       },
       {
         "url": "https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
@@ -289,21 +307,6 @@
       },
       {
         "url": "https://fdeinterviews.com/blog/fde-vs-software-engineer-comparison",
-        "skip": "stale",
-        "day": "2026-06-21"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
-        "skip": "stale",
-        "day": "2026-06-21"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
-        "skip": "stale",
-        "day": "2026-06-21"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/break-into-fde-without-faang",
         "skip": "stale",
         "day": "2026-06-21"
       }
