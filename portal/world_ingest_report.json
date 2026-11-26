@@ -1,9 +1,9 @@
 {
-  "written_at": "2026-11-25T16:06:08Z",
-  "snapshot": "2026-11-26",
-  "since_day": "2026-10-27",
+  "written_at": "2026-11-26T16:07:22Z",
+  "snapshot": "2026-11-27",
+  "since_day": "2026-10-28",
   "increment": {
-    "scanned": 1484,
+    "scanned": 1485,
     "fde_hits": 12,
     "already_in_db": 13,
     "stale": 16,
@@ -11,17 +11,17 @@
     "collected": 0,
     "review": 0
   },
-  "n_events": 745,
-  "n_axis": 366,
+  "n_events": 750,
+  "n_axis": 371,
   "n_review": 14,
   "new_axis_this_run": 15,
   "by_lane_axis": {
     "company": 12,
-    "deploy": 124,
-    "method": 210,
+    "deploy": 126,
+    "method": 213,
     "people": 20
   },
-  "n_links": 300,
+  "n_links": 303,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -65,7 +65,7 @@
         {
           "id": "fdepod",
           "status": "ok",
-          "items": 9,
+          "items": 10,
           "fde": 5,
           "added": 0,
           "already": 3,
@@ -108,7 +108,7 @@
       "boards": 11,
       "jobs": 226,
       "added": 10,
-      "fresh": 2,
+      "fresh": 1,
       "details": [
         {
           "id": "palantir-lever",
@@ -190,13 +190,13 @@
       },
       {
         "id": "glean-stories",
-        "new_links": 0,
-        "added": 0
+        "new_links": 1,
+        "added": 1
       },
       {
         "id": "sierra-customers",
-        "new_links": 6,
-        "added": 2
+        "new_links": 4,
+        "added": 0
       },
       {
         "id": "cresta-stories",
@@ -228,8 +228,8 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 4,
-        "added": 0
+        "new_links": 5,
+        "added": 1
       },
       {
         "id": "moveworks-customers",
@@ -259,8 +259,8 @@
   },
   "peek": {
     "indexes": 12,
-    "candidates": 27,
-    "added": 1,
+    "candidates": 28,
+    "added": 2,
     "review": 0,
     "details": [
       {
@@ -268,9 +268,15 @@
         "skip": "no strong date"
       },
       {
-        "url": "https://fdeinterviews.com/blog/rlm-harness-compositional-generalization-fde-guide",
-        "day": "2026-11-25",
-        "title": "RLM Harnesses and Compositional Generalizat…",
+        "url": "https://fdeinterviews.com/blog/modern-web-guidance-coding-agents-fde-guide",
+        "day": "2026-11-26",
+        "title": "Modern Web Guidance for Coding Agents: A Pr…",
+        "status": "axis"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/n8n-nod-personal-agent-fde-review",
+        "day": "2026-11-26",
+        "title": "n8n Nod Explained: Evaluating a Personal Ag…",
         "status": "axis"
       },
       {
@@ -300,11 +306,6 @@
       },
       {
         "url": "https://fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
-        "skip": "stale",
-        "day": "2026-06-21"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
         "skip": "stale",
         "day": "2026-06-21"
       }
