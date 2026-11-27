@@ -1,27 +1,27 @@
 {
-  "written_at": "2026-11-26T16:07:22Z",
-  "snapshot": "2026-11-27",
-  "since_day": "2026-10-28",
+  "written_at": "2026-11-27T16:05:13Z",
+  "snapshot": "2026-11-28",
+  "since_day": "2026-10-29",
   "increment": {
     "scanned": 1485,
     "fde_hits": 12,
-    "already_in_db": 13,
-    "stale": 16,
-    "added_axis": 15,
+    "already_in_db": 11,
+    "stale": 19,
+    "added_axis": 12,
     "collected": 0,
     "review": 0
   },
-  "n_events": 750,
-  "n_axis": 371,
+  "n_events": 752,
+  "n_axis": 373,
   "n_review": 14,
-  "new_axis_this_run": 15,
+  "new_axis_this_run": 12,
   "by_lane_axis": {
     "company": 12,
     "deploy": 126,
-    "method": 213,
+    "method": 215,
     "people": 20
   },
-  "n_links": 303,
+  "n_links": 305,
   "migrate": {
     "migrated": 0,
     "axis": 0,
@@ -106,9 +106,9 @@
     },
     "ats": {
       "boards": 11,
-      "jobs": 226,
+      "jobs": 227,
       "added": 10,
-      "fresh": 1,
+      "fresh": 2,
       "details": [
         {
           "id": "palantir-lever",
@@ -123,7 +123,7 @@
         {
           "id": "databricks-greenhouse",
           "status": "axis",
-          "n": 53
+          "n": 54
         },
         {
           "id": "scale-greenhouse",
@@ -170,8 +170,8 @@
   },
   "cs_hubs": {
     "hubs": 13,
-    "new_links": 18,
-    "added": 2,
+    "new_links": 16,
+    "added": 0,
     "no_date": 4,
     "details": [
       {
@@ -190,8 +190,8 @@
       },
       {
         "id": "glean-stories",
-        "new_links": 1,
-        "added": 1
+        "new_links": 0,
+        "added": 0
       },
       {
         "id": "sierra-customers",
@@ -228,8 +228,8 @@
       },
       {
         "id": "devin-customers",
-        "new_links": 5,
-        "added": 1
+        "new_links": 4,
+        "added": 0
       },
       {
         "id": "moveworks-customers",
@@ -259,25 +259,13 @@
   },
   "peek": {
     "indexes": 12,
-    "candidates": 28,
-    "added": 2,
+    "candidates": 26,
+    "added": 0,
     "review": 0,
     "details": [
       {
         "url": "https://www.databricks.com/forward-deployed-engineering",
         "skip": "no strong date"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/modern-web-guidance-coding-agents-fde-guide",
-        "day": "2026-11-26",
-        "title": "Modern Web Guidance for Coding Agents: A Pr…",
-        "status": "axis"
-      },
-      {
-        "url": "https://fdeinterviews.com/blog/n8n-nod-personal-agent-fde-review",
-        "day": "2026-11-26",
-        "title": "n8n Nod Explained: Evaluating a Personal Ag…",
-        "status": "axis"
       },
       {
         "url": "https://fdeinterviews.com/blog/anthropic-forward-deployed-engineer-interview-guide",
@@ -306,6 +294,16 @@
       },
       {
         "url": "https://fdeinterviews.com/blog/google-forward-deployed-engineer-interview-guide",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/why-forward-deployed-engineering-answer",
+        "skip": "stale",
+        "day": "2026-06-21"
+      },
+      {
+        "url": "https://fdeinterviews.com/blog/break-into-fde-without-faang",
         "skip": "stale",
         "day": "2026-06-21"
       }
